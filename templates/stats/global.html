@@ -35,7 +35,7 @@ h3 > small {
         {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
         {% else %}
-        <h1><strong>{{navbar-navbar-brand}}</strong>: {{ _('General Statistics') }}</h1>
+        <h1><strong>{{navbar navbar-brand}}</strong>: {{ _('General Statistics') }}</h1>
         <br/>
             <!-- Users Stats CARD -->
             <div id="card" class="row">
