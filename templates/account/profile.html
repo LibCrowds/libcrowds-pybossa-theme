@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% set active_page = "profile" %}
+{% set active_link = "profile" %}
+{% import "account/_helpers.html" as helper %}
+{% import "applications/_helpers.html" as app_helper %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-3">
+        {{ helper.render_account_local_nav(current_user, active_link) }}
+    </div>
+    <div class="col-md-9">
+        <h1><strong>{{current_user.fullname}}</strong></h1>
+        <h2>{{ _('Your Profile') }}</h2>
+        {{ helper.render_user_profile(current_user, upload_method, "settings") }} 
+        <hr>
+        <h2>{{ _('Your Contributions') }}</h2>
+        {% for app in apps_contrib %}
+        <div class="row well well-small">
+            <div class="col-md-3">
+                {{ app_helper.render_app_img-thumbnail(app, upload_method, class='img-polaroid', style='max-width:100px; max-height:100px;') }}
+            </div>
+            <div class="col-md-9">
+                <h2><a href="{{url_for('app.details', short_name=app.short_name)}}">{{app.name}}</a></h2>
+                  <a class="btn btn-primary" href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}</a>
+            </div>
+        </div><!-- end row -->
+        {% endfor %}
+    </div><!-- end col-md-9 -->
+</div>
+{{ app_helper.broken_image() }}
+{% endblock %}
