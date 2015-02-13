@@ -229,16 +229,12 @@ body {
 
 @media (min-width: 768px) {
     .footerbar {
-        float: none;
+        position: absolute;
         text-align: center;
 	bottom: 0;
     }
     
-    .footerbar > li {
-        display: inline;
-    
-    }
-    .footerbar > li > a {
+    .footerbar > ul {
         display: inline-block;
     }
 }
