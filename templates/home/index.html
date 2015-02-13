@@ -6,7 +6,7 @@
   <div class="splash">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-offset-3 col-lg-6 text-center">
               <h1>{{ brand }}</h1>
               <p></p>{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}</p>
           </div>
@@ -18,17 +18,18 @@
       <section class="grey get-started">
         <div class="row">
         <div class="col-lg-12">
-            <ul class="featured">
+            <div class="featured">
                 {% for f in categories_apps['featured'] %}
-                <li><a href={{ url_for('app.details', short_name=f.short_name)}}>
+                <div class="col-md-3">
+                <a href={{ url_for('app.details', short_name=f.short_name)}}>
                     {{ helper.render_app_thumbnail(f, upload_method) }}
                     <h3>{{f.name}}</h3>
                     <span class="label label-info">{{ _('Info') }}</span>
                     </a>
-                </li>
+                    </div>
                 {% endfor %}
-                {% for number in range(18 - categories_apps['featured']|count) %}
-                <li></li>
+                {% for number in range(4 - categories_apps['featured']|count) %}
+                <div class="col-md-3"></div>
                 {% endfor %}
             </ul>
           </div>
@@ -61,9 +62,6 @@
           <div class="col-md-3">
             <div class="app box">
                 <a href="#" class="image" style="background-image:url({{url_for('static',filename='img/placeholder.project.png')}})"></a>
-                <h3>{{ _('Your project') }}</h3>
-                <p>{{ _('could be here!') }}</p>
-                <p><a href="{{url_for('app.new')}}" class="btn btn-xs btn-primary">{{ _('Create a project') }}</a></p>
             </div>
           </div>
           {% endfor %}
