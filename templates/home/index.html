@@ -18,7 +18,7 @@
       <section class="grey get-started">
         <div class="row">
         <div class="col-lg-12">
-        <ul class="featured">
+            <ul class="featured">
                 {% for f in categories_apps['featured'] %}
                 <li><a href={{ url_for('app.details', short_name=f.short_name)}}>
                     {{ helper.render_app_thumbnail(f, upload_method) }}
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 {% endfor %}
-                {% for number in range(4 - categories_apps['featured']|count) %}
+                {% for number in range(18 - categories_apps['featured']|count) %}
                 <li></li>
                 {% endfor %}
             </ul>
@@ -92,7 +92,7 @@
           {% endfor %}
         </ul>
       </section>
-      {% endif %}
+     <!-- {% endif %} -->
 <script>
 $("a[rel=popover]").popover({
         html: true,
