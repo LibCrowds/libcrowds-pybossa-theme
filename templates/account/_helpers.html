@@ -33,7 +33,7 @@
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
 <div class="row">
     <div class="col-md-3">
-        {{ render_user_img-thumbnail(user, upload_method, class="img-polaroid") }}
+        {{ render_user_thumbnail(user, upload_method, class="img-polaroid") }}
     </div>
     <div class="col-md-9">
         <h2><i class="glyphicon glyphicon-user"></i> {{ _('Nick')}}: <small>{{ user.name }}</small></h2>
@@ -79,7 +79,7 @@
 </div>
 {% endmacro %}
 
-{% macro render_user_img-thumbnail(user, upload_method, id, class, style) %}
+{% macro render_user_thumbnail(user, upload_method, id, class, style) %}
     {% if user.info.avatar %}
         {% if upload_method == 'rackspace'%}
         <img id="{{id}}" class="{{class}}" style="{{style}}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 'user');">

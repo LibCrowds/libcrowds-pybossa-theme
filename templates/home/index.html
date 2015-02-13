@@ -13,7 +13,7 @@
             <ul class="featured">
                 {% for f in categories_apps['featured'] %}
                 <li><a href={{ url_for('app.details', short_name=f.short_name)}}>
-                    {{ helper.render_app_img-thumbnail(f, upload_method) }}
+                    {{ helper.render_app_thumbnail(f, upload_method) }}
                     <h3>{{f.name}}</h3>
                     <span class="label label-info">{{ _('Info') }}</span>
                     </a>
@@ -44,8 +44,8 @@
           {% for app in top_apps %}
           <div class="col-md-3">
             <div class="app box">
-                {% if app.info.img-thumbnail %}
-                <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{helper.render_url_img-thumbnail(app, upload_method)}})"></a>
+                {% if app.info.thumbnail %}
+                <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{helper.render_url_thumbnail(app, upload_method)}})"></a>
                 {% else %}
                 <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{url_for('static',filename='img/placeholder.project.png')}})"></a>
                 {% endif %}
@@ -79,7 +79,7 @@
                 <br/>
                 <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
                 " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
-                {{ account_helper.render_user_img-thumbnail(user, upload_method, style="height:90px; width:90px;") }}
+                {{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;") }}
            </a>
            <span class="label label-success">{{user.task_runs}}</span> <small>{{_('Tasks')}}</small>
           </li>

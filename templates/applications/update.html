@@ -12,12 +12,12 @@
     </div>
   <div class="col-md-9">
       <legend><strong>{{app.name}}</strong>: {{_('Update the project')}}</legend>
-      <!-- Update form for project img-thumbnail -->
+      <!-- Update form for project thumbnail -->
       <form method="post" class="form-horizontal" action="{{ url_for('app.update', short_name=app.short_name) }}" enctype="multipart/form-data">
           <fieldset>
               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
               <div>
-              {{ helper.render_app_img-thumbnail(app, upload_method, id="uploadPreview") }}
+              {{ helper.render_app_thumbnail(app, upload_method, id="uploadPreview") }}
               </div>
               {{ render_field(upload_form.avatar, onchange="previewImage()") }}
               {{ upload_form.x1 }}

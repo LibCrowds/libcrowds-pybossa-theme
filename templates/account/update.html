@@ -19,7 +19,7 @@
             <fieldset>
                 <div class="col-md-2 img-polaroid">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                {{ helper.render_user_img-thumbnail(current_user, upload_method)}}
+                {{ helper.render_user_thumbnail(current_user, upload_method)}}
                 </div>
             {{ render_field(upload_form.avatar, onchange="previewImage()") }}
             {{ upload_form.x1 }}
