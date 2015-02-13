@@ -3,14 +3,22 @@
 {% import "account/_helpers.html" as account_helper %}
 
 {% block content %}
-      <div class="banner">
+  <div class="splash">
+      <div class="container">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-lg-12">
               <h1>{{ brand }}</h1>
-              {% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}
+              <p></p>{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}</p>
           </div>
-          <div class="col-md-8">
-            <ul class="featured">
+          </div>
+        </div>
+
+
+          
+      <section class="grey get-started">
+        <div class="row">
+        <div class="col-lg-12">
+        <ul class="featured">
                 {% for f in categories_apps['featured'] %}
                 <li><a href={{ url_for('app.details', short_name=f.short_name)}}>
                     {{ helper.render_app_thumbnail(f, upload_method) }}
@@ -19,24 +27,18 @@
                     </a>
                 </li>
                 {% endfor %}
-                {% for number in range(18 - categories_apps['featured']|count) %}
+                {% for number in range(4 - categories_apps['featured']|count) %}
                 <li></li>
                 {% endfor %}
             </ul>
           </div>
         </div>
-      </div>
-
-      <section class="grey get-started">
-        <div class="row">
-          <div class="col-md-4">
-              <h2><i class="glyphicon glyphicon-play-circle"></i> {{ _('Get Started') }}</h2>
-            <p>{{ _('It\'s really simple to start contributing.') }}</p>
-          </div>
-          <div class="col-md-8">
-              <a href="{{url_for('app.index')}}" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-ok-sign"></i>{{ _(' Start Contributing') }}</a> <a href="{{url_for('app.new')}}" class="btn btn-primary btn-large"><i class="icon-plus-sign"></i> {{ _('Create a Project') }}</a>
-          </div>
       </section>
+      
+      
+      
+      
+      
       
       <section>
         <h2><i class="glyphicon glyphicon-th"></i>{{ _('Most Active Projects') }}</h2>
@@ -68,7 +70,11 @@
         </div>
       </section>
       
-      {% if top_users %}
+      
+      
+      
+      
+     <!-- {% if top_users %} -->
       <section id="top_users" class="grey">
         <h2><i class="glyphicon glyphicon-group"></i>{{ _('Most Active Volunteers') }}</h2>
         <ul class="users">
