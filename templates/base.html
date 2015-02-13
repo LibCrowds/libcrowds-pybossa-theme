@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     {% if brand == title %}
     <title>{{ title }}</title>
@@ -33,6 +34,7 @@
     <!-- Google Custom Search -->
     {% include '_gcs.html' ignore missing %}
   </head>
+
   <body>
   
     {% if not current_user.is_anonymous() %}
@@ -51,51 +53,14 @@
     {% block content %}{% endblock %}
 
     </div> <!-- /container -->
+    
+    
     {% if show_cookies_warning %}
     <div id="cookies_warning">
         <p>Cookies help us deliver our services. By using our services, you agree to our use of cookies. <button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="glyphicon glyphicon-thumbs-up"></i> OK</button> <a class="btn btn-default btn-default btn-xs" href="{{url_for('help.cookies_policy')}}"><i class="icon-info-sign"></i> More info</a></p>
     </div>
     {% endif %}
     <footer>
-    {% if not enforce_privacy %}
-    <div id="footer_links" class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <ul>
-                    <li><strong>{{ _('Resources') }}</strong></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="http://docs.pybossa.com">{{ _('Docs') }}</a></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="{{url_for('help.api')}}">API</a></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="{{url_for('help.tos')}}">{{ _('Terms of Use') }}</a></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="{{url_for('help.cookies_policy')}}">{{ _('Cookies Policy') }}</a></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="{{url_for('stats.index')}}">{{ _('Stats') }}</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <ul>
-                    <li><strong>{{ _('Licenses') }}</strong></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="{{url_for('help.license')}}">{{ _('Overview') }}</a></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="{{url_for('help.license', _anchor='applications')}}">{{ _('Projects') }}</a></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="{{url_for('help.license', _anchor='data')}}">{{ _('Data') }}</a></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="{{url_for('help.license', _anchor='content')}}">{{ _('Content') }}</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <ul>
-                    <li><strong>{{ _('Technologies') }}</strong></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="http://ckan.org">{{ _('CKAN') }}</a></li>
-                    <li><i class="glyphicon glyphicon-link"></i> <a href="http://www.epicollect.net">{{ _('EpiCollect') }}</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <ul>
-                    <li><strong>{{ _('Contact') }}</strong></li>
-                    <li><i class="glyphicon glyphicon-envelope"></i> <a href="mailto:{{contact_email}}">{{ _('Email') }}</a></li>
-                    <li><i class="glyphicon glyphicon-twitter"></i> <a href="http://twitter.com/{{contact_twitter}}">{{ _('Twitter') }}</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    {% endif %}
     {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
     </footer>
     <!-- Le javascript
