@@ -658,6 +658,7 @@ ul.users li a {
     list-style: none;
     width: 100%;
     text-align: center;
+    padding: 0; margin: 0;
   }
 
   #sticky-footer li {
@@ -677,19 +678,20 @@ ul.users li a {
     width: 100%;
     position: absolute;
     bottom: 0;
+    background-color: #080808;
 }
 
-#sticky-footer > footer ul {
+#sticky-footer ul {
     color: rgb(205, 205, 205);
     list-style: none;
     padding:0; margin:0;
 }
 
-#sticky-footer > footer li > a {
+#sticky-footer li > a {
     color: rgb(205, 205, 205);
 }
 
-#sticky-footer > footer li > a:hover {
+#sticky-footer li > a:hover {
     color: rgb(205, 205, 205);
 }
 
