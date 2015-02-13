@@ -6,7 +6,7 @@
 /* Styling */
 /* ======= */
 body {
-  color: #484848;
+  background: url(../img/bl-book-stacks.png); no-repeat center center fixed;
 }
 h1,
 h2,
@@ -324,10 +324,6 @@ body > footer {
 body > footer .container {
   padding-top: 20px;
   padding-bottom: 20px;
-}
-
-.footer-links li {
-    display: inline;
 }
 
 /* Home Page */
@@ -653,6 +649,13 @@ body > footer {
 body > footer ul {
     color: rgb(205, 205, 205);
     list-style: none;
+    width: 100%;
+    text-align: center;
+}
+
+body > footer li {
+  text-align: center;
+  display: inline-block;
 }
 
 body > footer li > a {
