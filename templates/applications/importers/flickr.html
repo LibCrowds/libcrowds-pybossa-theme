@@ -30,7 +30,7 @@
            {% for album in albums %}
                <li class="col-md-4">
                    <h3>{{ album['title'] }}</h3>
-                   <img src="{{ album['img-thumbnail_url'] }}">
+                   <img src="{{ album['thumbnail_url'] }}">
                    <p class="small">{{ album['photos'] }} {{ _('photos') }}</p>
                    <button id="{{ album['id'] }}" class="btn btn-default btn-album">{{ _('Select') }}</button>
                </li>
