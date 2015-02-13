@@ -10,10 +10,6 @@ body {
    padding:0;
    height:100%;
 }
-#container {
-   min-height:100%;
-   position:relative;
-}
 
 body {
   background: url(../img/bl-book-stacks.png); no-repeat center center fixed;
@@ -327,12 +323,14 @@ section.grey:after {
 }
 body > footer,
 html {
+  background-color: #080808;
+}
+
+footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
   height: 80px;
-  background-color: #080808;
 }
 
 body > footer .container {
