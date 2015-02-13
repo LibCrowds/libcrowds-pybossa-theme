@@ -11,40 +11,12 @@
               <p></p>{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}</p>
           </div>
           </div>
-        </div>
-
-
-          
-      <section class="grey get-started">
-        <div class="row">
-        <div class="col-lg-12">
-            <div class="featured">
-                {% for f in categories_apps['featured'] %}
-                <div class="col-md-3">
-                <a href={{ url_for('app.details', short_name=f.short_name)}}>
-                    {{ helper.render_app_thumbnail(f, upload_method) }}
-                    <h3>{{f.name}}</h3>
-                    <span class="label label-info">{{ _('Info') }}</span>
-                    </a>
-                    </div>
-                {% endfor %}
-                {% for number in range(4 - categories_apps['featured']|count) %}
-                <div class="col-md-3"></div>
-                {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </section>
-      
-      
-      
-      
-      
+      </div>      
       
       <section>
-        <h2><i class="glyphicon glyphicon-th"></i>{{ _('Most Active Projects') }}</h2>
+        <h2><i class="glyphicon glyphicon-th"></i>{{ _('Featured Projects') }}</h2>
         <div class="row">
-          {% for app in top_apps %}
+          {% for app in categories_apps['featured'] %}
           <div class="col-md-3">
             <div class="app box">
                 {% if app.info.thumbnail %}
@@ -72,9 +44,9 @@
       
       
       
-     <!-- {% if top_users %} -->
+    {% if top_users %}
       <section id="top_users" class="grey">
-        <h2><i class="glyphicon glyphicon-group"></i>{{ _('Most Active Volunteers') }}</h2>
+        <h2><i class="icon-group"></i>{{ _('Most Active Volunteers') }}</h2>
         <ul class="users">
             {% for user in top_users %}
           <li>
@@ -90,7 +62,7 @@
           {% endfor %}
         </ul>
       </section>
-     <!-- {% endif %} -->
+      {% endif %}
 <script>
 $("a[rel=popover]").popover({
         html: true,
