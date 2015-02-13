@@ -53,7 +53,7 @@
 {% macro render_app_summary(app, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
 <div class="row">
     <div class="col-md-2">
-        {{ render_app_img-thumbnail(app, upload_method, class='img-polaroid') }}
+        {{ render_app_thumbnail(app, upload_method, class='img-polaroid') }}
     </div>
     <div class="col-md-8">
       <ul style="list-style-type: none; font-size: 16px;">
@@ -81,7 +81,7 @@
 {% macro render_app_short_summary(app, upload_method) -%}
 <div class="row well well-small">
     <div class="col-md-3">
-        {{ render_app_img-thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
+        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
     </div>
     <div class="col-md-9">
         <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
@@ -94,7 +94,7 @@
 {% macro render_app_admin_featured(app, upload_method) -%}
 <div class="row well well-small">
     <div class="col-md-3">
-        {{ render_app_img-thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
+        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
     </div>
     <div class="col-md-9">
         <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
@@ -125,7 +125,7 @@
     <h2><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{ app.name }}</a></h2>
     <div class="row">
         <div class="col-md-3">
-            {{ render_app_img-thumbnail(app, upload_method, class='thumbnail', style='max-width:100px; max-height:100px;') }}
+            {{ render_app_thumbnail(app, upload_method, class='thumbnail', style='max-width:100px; max-height:100px;') }}
         </div> <!-- End of col-md-3 -->
         <div id="data" class="col-md-9">
             <p style="margin:0"><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ app.description }}</p>
@@ -185,7 +185,7 @@ function imgError(image) {
 
 {% macro render_app_title(app, upload_method, subtitle=None) %}
 <h1>
-    {{ render_app_img-thumbnail(app, upload_method, class="img-polaroid", style="max-width:60px") }}
+    {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:60px") }}
     {% if subtitle %}
     <strong>{{ app.name }}</strong>: {{subtitle}}</h1>
     {% else %}
@@ -217,7 +217,7 @@ function imgError(image) {
               <ul class="featured">
                   {% for app in apps %}
                   <li><a href={{ url_for('app.details', short_name=app.short_name)}}>
-                      {{ render_app_img-thumbnail(app, upload_method, class='img-polaroid', style="min-height:100px; min-width:100px;")}}
+                      {{ render_app_thumbnail(app, upload_method, class='img-polaroid', style="min-height:100px; min-width:100px;")}}
                       <h3>{{app.name}}</h3>
                       <span class="label label-info">{{ _('Info') }}</span>
                       </a>
@@ -242,7 +242,7 @@ function imgError(image) {
 </div>
 {% endmacro %}
 
-{% macro render_app_img-thumbnail(app, upload_method, id, class, style) %}
+{% macro render_app_thumbnail(app, upload_method, id, class, style) %}
 {% if app.info.container %}
     {% if upload_method == 'rackspace'%}
     <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{ url_for('rackspace', filename=app.info.img-thumbnail, container=app.info.container)}}" style="{{style}}" onerror="imgError(this);">
@@ -256,7 +256,7 @@ function imgError(image) {
 {% endif %}
 {% endmacro %}
 
-{% macro render_url_img-thumbnail(app, upload_method) %}
+{% macro render_url_thumbnail(app, upload_method) %}
 {% if app.info.container %}
     {% if upload_method == 'rackspace'%}
     {{ url_for('rackspace', filename=app.info.img-thumbnail, container=app.info.container)}}"
