@@ -15,14 +15,6 @@ html, body {
    padding-bottom: 100px;
 }
 
-#sticky-footer {
-    height: 100px;
-    width: 100%;
-    background: rgba(255,255,255,0.2);
-    position: absolute;
-    bottom: 0;
-}
-
 body {
   background: url(../img/bl-book-stacks.png); no-repeat center center fixed;
 }
@@ -661,14 +653,14 @@ ul.users li a {
 /* Tablet and above 
 -------------------------*/
 @media (min-width: 767px) {
-  body > footer ul {
+  #sticky-footer ul {
     color: rgb(205, 205, 205);
     list-style: none;
     width: 100%;
     text-align: center;
   }
 
-  body > footer li {
+  #sticky-footer li {
     text-align: center;
     display: inline-block;
   }
@@ -678,23 +670,26 @@ ul.users li a {
   }
 }
   
-
-body > footer {
+#sticky-footer {
     margin-top: 10px;
     padding-bottom: 10px;
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
-body > footer ul {
+#sticky-footer > footer ul {
     color: rgb(205, 205, 205);
     list-style: none;
     padding:0; margin:0;
 }
 
-body > footer li > a {
+#sticky-footer > footer li > a {
     color: rgb(205, 205, 205);
 }
 
-body > footer li > a:hover {
+#sticky-footer > footer li > a:hover {
     color: rgb(205, 205, 205);
 }
 
