@@ -1,19 +1,30 @@
 /* Styling */
 /* ======= */
-html {
-  min-height:100%;
-  position:relative;
+html, body {
+  height:100%;
+  width: 100%;
 }
-body {
-   margin:0;
-   padding:0;
-   height:100%;
-   margin-bottom: 80px;
+
+#body-content {
+   height:auto;
+   min-height: 100%;
+   position:relative;
+}
+
+#main-body-content {
+   padding-bottom: 100px;
+}
+
+#sticky-footer {
+    height: 100px;
+    width: 100%;
+    background: rgba(255,255,255,0.2);
+    position: absolute;
+    bottom: 0;
 }
 
 body {
   background: url(../img/bl-book-stacks.png); no-repeat center center fixed;
-  padding-bottom: 80px;
 }
 h1,
 h2,
@@ -324,13 +335,6 @@ section.grey:after {
 body > footer,
 html {
   background-color: #080808;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 80px;
 }
 
 body > footer .container {
@@ -671,13 +675,13 @@ ul.users li a {
   
   .footerbar {
     display:inline;
-    padding-bottom: 10px;
   }
 }
   
 
 body > footer {
     margin-top: 10px;
+    padding-bottom: 10px;
 }
 
 body > footer ul {
