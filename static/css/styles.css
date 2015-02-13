@@ -1,5 +1,9 @@
 /* Styling */
 /* ======= */
+html {
+  min-height:100%;
+  position:relative;
+}
 html,
 body {
    margin:0;
@@ -669,6 +673,7 @@ ul.users li a {
   
   .footerbar {
     display:inline;
+    padding-bottom: 10px;
   }
 }
   
