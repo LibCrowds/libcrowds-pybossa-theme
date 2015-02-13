@@ -1,12 +1,13 @@
-/*!
- * Sourcing for Good
- * by Sam Smith
- * To be used on top of Bootstrap
- */
 /* Styling */
 /* ======= */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   background: url(../img/bl-book-stacks.png); no-repeat center center fixed;
+  margin-bottom: 80px;
 }
 h1,
 h2,
@@ -93,7 +94,7 @@ a[rel="popover"] {
 .label {
   -webkit-border-radius: 0px;
   border-radius: 0px;
-  background-color: #252525;
+  background-color: #080808;
 }
 .label-info {
   background-color: #4190c2;
@@ -316,11 +317,14 @@ section.grey:after {
 }
 body > footer,
 html {
-  background-color: #252525;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  background-color: #080808;
 }
-body > footer {
-  border-top: 1px solid #686868;
-}
+
 body > footer .container {
   padding-top: 20px;
   padding-bottom: 20px;
