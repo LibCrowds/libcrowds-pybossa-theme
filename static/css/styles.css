@@ -650,13 +650,11 @@ ul.users li a {
     list-style: none;
     width: 100%;
     text-align: center;
-    padding:0; margin:0;
   }
 
   body > footer li {
     text-align: center;
     display: inline-block;
-    padding:0; margin:0;
   }
   
   .footerbar {
@@ -672,6 +670,7 @@ body > footer {
 body > footer ul {
     color: rgb(205, 205, 205);
     list-style: none;
+    padding:0; margin:0;
 }
 
 body > footer li > a {
