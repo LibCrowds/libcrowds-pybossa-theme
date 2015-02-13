@@ -93,7 +93,7 @@ a[rel="popover"] {
 .label {
   -webkit-border-radius: 0px;
   border-radius: 0px;
-  background-color: #7a7a7a;
+  background-color: #252525;
 }
 .label-info {
   background-color: #4190c2;
@@ -316,7 +316,7 @@ section.grey:after {
 }
 body > footer,
 html {
-  background-color: #7a7a7a;
+  background-color: #252525;
 }
 body > footer {
   border-top: 1px solid #686868;
@@ -642,6 +642,29 @@ ul.users li a {
     }
 }
 
+/* Tablet and above 
+-------------------------*/
+@media (min-width: 767px) {
+  body > footer ul {
+    color: rgb(205, 205, 205);
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    padding:0; margin:0;
+  }
+
+  body > footer li {
+    text-align: center;
+    display: inline-block;
+    padding:0; margin:0;
+  }
+  
+  .footerbar {
+    display:inline;
+  }
+}
+  
+
 body > footer {
     margin-top: 10px;
 }
@@ -649,13 +672,6 @@ body > footer {
 body > footer ul {
     color: rgb(205, 205, 205);
     list-style: none;
-    width: 100%;
-    text-align: center;
-}
-
-body > footer li {
-  text-align: center;
-  display: inline-block;
 }
 
 body > footer li > a {
