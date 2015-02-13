@@ -8,17 +8,20 @@
         <div class="row">
           <div class="col-offset-3 col-lg-6 text-center">
               <h1>{{ brand }}</h1>
-              <p>{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}</p>
+              <p id="index-tagline">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
           </div>
           </div>
       </div>
       </div> 
-      <div class="container-fluid">
+      <div class="container-fluid white-bg text-center">
+        <div class="col-md-12">
         <p id="index-main-desc">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua.
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
         </p>
+        <a href="/about" class="btn btn-outline btn-lg">Find out more</a>
+      </div>
       </div>
       <section>
         <h2><i class="glyphicon glyphicon-th"></i>{{ _('Featured Projects') }}</h2>
