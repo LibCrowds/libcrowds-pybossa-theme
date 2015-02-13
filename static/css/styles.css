@@ -226,6 +226,23 @@ body {
 .navbar .navbar-form.form-search .btn [class*=" icon-"] {
   color: #8bbf36;
 }
+
+@media (min-width: 768px) {
+    .footerbar {
+        float: none;
+        text-align: center;
+	bottom: 0;
+    }
+    
+    .footerbar > li {
+        display: inline;
+    
+    }
+    .footerbar > li > a {
+        display: inline-block;
+    }
+}
+
 .banner {
   background-color: #f7f7f7;
   position: relative;
