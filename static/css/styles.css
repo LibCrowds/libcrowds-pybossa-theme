@@ -13,7 +13,6 @@ html, body {
 
 #main-body-content {
    padding-bottom: 100px;
-   background-color: #ffffff;
 }
 
 body {
@@ -697,4 +696,15 @@ ul.users li a {
     color: rgb(205, 205, 205);
 }
 
+
+/* Text styles 
+-------------------------*/
+
+#index-main-desc {
+  font-weight:normal;
+  color:#000000;
+  font-size:28px;
+  text-align:center;
+  font-family:verdana, sans-serif;
+}
 
