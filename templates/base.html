@@ -46,14 +46,11 @@
       {% set active_page = active_page | default('index') -%}
       {% set active_app  = active_app | default('none') -%}
       {% include "_navbar.html" %}
-  
-      <div class="container" style="min-height:400px;">
-  
+    
       {% include "_flash_messages.html" %}
   
       {% block content %}{% endblock %}
-  
-      </div> <!-- /container -->
+
       
       
       {% if show_cookies_warning %}
