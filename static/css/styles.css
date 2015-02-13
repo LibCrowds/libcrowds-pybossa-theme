@@ -13,6 +13,7 @@ html, body {
 
 #main-body-content {
    padding-bottom: 100px;
+   background-color: #ffffff;
 }
 
 body {
@@ -103,7 +104,7 @@ a[rel="popover"] {
 .label {
   -webkit-border-radius: 0px;
   border-radius: 0px;
-  background-color: #080808;
+  background-color: #1A1A1A;
 }
 .label-info {
   background-color: #4190c2;
@@ -326,7 +327,7 @@ section.grey:after {
 }
 body > footer,
 html {
-  background-color: #080808;
+  background-color: #1A1A1A;
 }
 
 body > footer .container {
@@ -672,13 +673,14 @@ ul.users li a {
 }
   
 #sticky-footer {
-    margin-top: 10px;
+    margin-top: 20px;
+    padding-top: 10px;
     padding-bottom: 10px;
     height: 100px;
     width: 100%;
     position: absolute;
     bottom: 0;
-    background-color: #080808;
+    background-color: #1A1A1A;
 }
 
 #sticky-footer ul {
