@@ -1,6 +1,5 @@
  
-<div id="footer_links">
-  <div class="container">
+<div class="container">
     <div class="row center">
       <div class="col-md-offset-3 col-md-3">
         <a href="http://bl.uk/"><img src="{{url_for('static', filename='img/bl-logo.png')}}"></a>
@@ -10,17 +9,15 @@
       </div>
     </div>
   </div>
-   <div class="container">
+</div>
+  <div id="footer_links" class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="center">
-          <ul class="footer-links">
+          <ul>
             <li><i class="glyphicon glyphicon-envelope glyphicon-inverse"></i> <a href="mailto:{{contact_email}}">{{ _('Email') }}</a></li>  
             <li><i class="icon-twitter glyphicon-inverse"></i> <a href="http://twitter.com/{{contact_twitter}}">{{ _('Twitter') }}</a></li>  
             <li><i class="icon-info-sign glyphicon-inverse"></i> <a href="/about">About</a></li>
           </ul>
-        </div>
       </div>
     </div>
-  </div>
 </div>
