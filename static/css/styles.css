@@ -327,7 +327,7 @@ html {
   background-color: #080808;
 }
 
-footer {
+.footer {
   position: absolute;
   bottom: 0;
   width: 100%;
