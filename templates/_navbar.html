@@ -1,23 +1,23 @@
 <div class="navbar navbar-fixed-top navbar-default">
         <div class="container">
           <div class="navbar-header">
-          <a class="btn navbar-btn btn-default" data-toggle="collapse" data-target=".nav-collapse">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="glyphicon glyphicon-bar"></span>
             <span class="glyphicon glyphicon-bar"></span>
             <span class="glyphicon glyphicon-bar"></span>
-          </a>
-          <a class="navbar navbar-brand" href="{{ url_for('home.home') }}"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}"></a>
-          
-          <div class="collapse navbar-collapse">
+          </button>
+          <a href="#" class="navbar-brand" href="{{ url_for('home.home') }}"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}"></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-             <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Community') }}</a></li>
+              <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Community') }}</a></li>
               <li {% if active_page == 'applications' %} class="active" {% endif %}><a href="{{ url_for('app.index') }}">{{ _('Projects') }}</a></li>
-           <li {% if active_page == 'create' %} class="active" {% endif %}><a href="{{ url_for('app.new') }}">{{ _('Create') }}</a></li>
+              <li {% if active_page == 'create' %} class="active" {% endif %}><a href="{{ url_for('app.new') }}">{{ _('Create') }}</a></li>
              <li {% if active_page == 'about' %} class="active" {% endif %}><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li>
          </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
-            <ul class="nav navbar-nav secondary-nav pull-right">
+            <ul class="nav navbar-nav navbar-right">
                 <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon glyphicon glyphicon-user"></i> {{ current_user.name | truncate(6,true) }} <span class="caret"></span></a>  <ul class="dropdown-menu">
                     <li><a href="{{ url_for('account.profile', name=current_user.name) }}"><i class="icon glyphicon glyphicon-user"></i> {{ _('My Profile') }}</a></li>
                     <li><a href="{{ url_for('account.applications', name=current_user.name) }}"><i class="icon glyphicon glyphicon-th-large"></i> {{ _('My Projects') }}</a></li>
@@ -34,11 +34,10 @@
           {% endif %}
 
             {% if current_user.is_anonymous() %}
-            <ul class="nav secondary-nav pull-right navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
               <li><a href="{{ url_for('account.signin') }}"><i class="icon glyphicon glyphicon-white icon-signin"></i> {{ _('Sign in') }}</a></li>
             </ul>
             {% endif %}
           </div><!--/.nav-collapse -->
         </div>
-    </div>
-        </div>
+      </div>
