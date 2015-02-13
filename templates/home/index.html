@@ -11,7 +11,8 @@
               <p>{% include ['custom/front_page_text.html', 'home/_pybossa_text.html'] ignore missing %}</p>
           </div>
           </div>
-      </div>      
+      </div>
+      </div> 
       
       <section>
         <h2><i class="glyphicon glyphicon-th"></i>{{ _('Featured Projects') }}</h2>
@@ -39,10 +40,6 @@
           {% endfor %}
         </div>
       </section>
-      
-      
-      
-      
       
     {% if top_users %}
       <section id="top_users" class="grey">
