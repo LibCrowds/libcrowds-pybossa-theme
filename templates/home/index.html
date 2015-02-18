@@ -1,80 +1,86 @@
 {% extends "base.html" %}
 {% import "applications/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
-
 {% block content %}
-  <div class="splash">
-      <div class="container">
-        <div class="row">
-          <div class="col-offset-3 col-lg-6 text-center">
-              <h1>{{ brand }}</h1>
-              <p id="index-tagline">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
-          </div>
-          </div>
+<div class="splash vcenter">
+   <div class="container">
+    <div class="col-md-12 text-center">
+            <h1>{{ brand }}</h1>
+    </div>
+   </div>
+</div>
+
+<section class="grey">
+      <div class="container container-padded text-center">
+         <div class="col-md-12">
+            <p id="index-main-desc">
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+               incididunt ut labore et dolore magna aliqua.
+               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            </p>
+         </div>
       </div>
-      </div> 
-      <div class="container-fluid white-bg text-center">
+</section>
+
+<section class="white">
+  <div class="container">
+      {% for app in categories_apps['featured'] %}
         <div class="col-md-12">
-        <p id="index-main-desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        </p>
-        <a href="/about" class="btn btn-outline btn-lg">Find out more</a>
-      </div>
-      </div>
-      <section>
-        <h2><i class="glyphicon glyphicon-th"></i>{{ _('Featured Projects') }}</h2>
-        <div class="row">
-          {% for app in categories_apps['featured'] %}
-          <div class="col-md-3">
-            <div class="app box">
-                {% if app.info.thumbnail %}
-                <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{helper.render_url_thumbnail(app, upload_method)}})"></a>
-                {% else %}
-                <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{url_for('static',filename='img/placeholder.project.png')}})"></a>
-                {% endif %}
-                <h3>{{app.name | truncate(20, true)}}</h3>
-                <p>{{app.description | truncate(32, true)}}</p>
-                <p><a href="{{url_for('app.details',short_name=app.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-mini btn-primary">{{ _('Start') }}</a></p>
-            </div>
-          </div>
-          {% endfor %}
-          {% for i in range(4-top_apps|count)%}
-          <div class="col-md-3">
-            <div class="app box">
-                <a href="#" class="image" style="background-image:url({{url_for('static',filename='img/placeholder.project.png')}})"></a>
-            </div>
-          </div>
-          {% endfor %}
+      <div class="row">
+        <div class="col-md-6">
         </div>
-      </section>
-    {% if top_users %}
-      <section id="top_users" class="grey">
-        <h2><i class="icon-group"></i>{{ _('Most Active Volunteers') }}</h2>
+        <div class="col-md-6">
+          <div class="app box">
+            {% if app.info.thumbnail %}
+            <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{helper.render_url_thumbnail(app, upload_method)}})"></a>
+            {% else %}
+            <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{url_for('static',filename='img/placeholder.project.png')}})"></a>
+            {% endif %}
+            <h3>{{app.name | truncate(20, true)}}</h3>
+            <p>{{app.description | truncate(32, true)}}</p>
+            <p><a href="{{url_for('app.details',short_name=app.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-mini btn-primary">{{ _('Start') }}</a></p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      </div>
+      {% endfor %}
+  </div>
+</section>
+
+{% if top_users %}
+<section id="top_users" class="white">
+   <div class="container">
+    <div class="col-md-12">
+      <div class="row text-center">
+        <h2>{{ _('Most Active Volunteers') }}</h2>
+      </div>
         <ul class="users">
-            {% for user in top_users %}
-          <li>
-          <a href="{{url_for('account.profile', name=user.name)}}" data-content="
-                <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}} 
-                <br/>
-                <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
-                " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
-                {{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;") }}
-           </a>
-           <span class="label label-success">{{user.task_runs}}</span> <small>{{_('Tasks')}}</small>
-          </li>
-          {% endfor %}
-        </ul>
-      </section>
-      {% endif %}
+        {% for user in top_users %}
+<li>
+<a href="{{url_for('account.profile', name=user.name)}}" data-content="
+   <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}} 
+   <br/>
+   <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
+   " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
+{{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;") }}
+</a>
+<span class="label label-success">{{user.task_runs}}</span> <small>{{_('Tasks')}}</small>
+</li>
+{% endfor %}
+</ul>
+</div>
+</div>
+</section>
+{% endif %}
+
 <script>
-$("a[rel=popover]").popover({
-        html: true,
-        animation: true,
-        trigger: 'hover',
-        placement: 'top'
-                });
+   $("a[rel=popover]").popover({
+           html: true,
+           animation: true,
+           trigger: 'hover',
+           placement: 'top'
+                   });
 </script>
 {{ helper.broken_image() }}
 {% endblock %}
