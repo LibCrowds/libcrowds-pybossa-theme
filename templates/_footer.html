@@ -1,22 +1,28 @@
  
 <div class="container">
     <div class="row center">
-      <div class="col-md-offset-3 col-md-3">
+      
+      <div class="col-sm-3 vcenter sticky-footer-col">
         <a href="http://bl.uk/"><img class="img-responsive center-block" src="{{url_for('static', filename='img/bl-logo.png')}}"></a>
       </div>
-      <div class="col-md-3">
-        <a href="http://pybossa.com/"><img class="img-responsive center-block" src="{{url_for('static', filename='img/pybossa.png')}}"></a>
-      </div>
-    </div>
-    <div id="footer_links">
+      
+      <div class="col-sm-6 vcenter sticky-footer-col">
+      {% if not enforce_privacy %}
       <div class="row">
-        <div class="col-md-12 footerbar">
+        <div id="footer_links">
             <ul>
               <li><i class="glyphicon glyphicon-envelope glyphicon-inverse"></i> <a href="mailto:{{contact_email}}">{{ _('Email') }}</a></li>  
               <li><i class="icon-twitter glyphicon-inverse"></i> <a href="http://twitter.com/{{contact_twitter}}">{{ _('Twitter') }}</a></li>  
               <li><i class="icon-info-sign glyphicon-inverse"></i> <a href="/about">About</a></li>
             </ul>
-        </div>
       </div>
   </div>
+    {% endif %}
+    </div>
+      
+      <div class="col-sm-3 vcenter sticky-footer-col">
+        <a href="http://pybossa.com/"><img class="img-responsive center-block" src="{{url_for('static', filename='img/pybossa.png')}}"></a>
+      </div>
+      
+    </div>
 </div>
