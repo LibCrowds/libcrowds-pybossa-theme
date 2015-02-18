@@ -46,30 +46,34 @@
       {% set active_page = active_page | default('index') -%}
       {% set active_app  = active_app | default('none') -%}
       {% include "_navbar.html" %}
-    
+  
+      <div class="container-fluid" style="min-height:400px;">
       {% include "_flash_messages.html" %}
   
       {% block content %}{% endblock %}
-
       
       
       {% if show_cookies_warning %}
-      <div id="cookies_warning">
-          <p>Cookies help us deliver our services. By using our services, you agree to our use of cookies. <button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="glyphicon glyphicon-thumbs-up"></i> OK</button> <a class="btn btn-default btn-default btn-xs" href="{{url_for('help.cookies_policy')}}"><i class="icon-info-sign"></i> More info</a></p>
-      </div>
+      <div id="cookies_warning" class="container">
+        <div class="col-md-12 text-center">
+          <p>Cookies help us deliver our services. By using our services, you agree to our use of cookies. <button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="glyphicon glyphicon-thumbs-up"></i> OK</button> <a class="btn btn-success btn-xs" href="{{url_for('help.cookies_policy')}}"><i class="icon-info-sign"></i> More info</a></p>
+        </div>
+        </div>
       {% endif %}
       
     </div>
-    <footer id="sticky-footer">
+  </div>
+      
+  <footer id="sticky-footer">
     {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
-    </footer>
-    </div>
+  </footer>
+</div>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script>
-      {% include 'cookies.js' %}
-    </script>
+<script>
+  {% include 'cookies.js' %}
+</script>
   
 </body>
 </html>
