@@ -1,40 +1,49 @@
 <div class="container container-main">
-    <div class="row">
-        <div class="col-md-11">
-            <h1>{{ _('About') }}</h1>
-            <p>
-            {{ _('PyBossa is a free, open-source crowd-sourcing and micro-tasking platform. It enables people to create and run projects that utilise online assistance in performing tasks that require human cognition such as image classification, transcription, geocoding and more. PyBossa is there to help researchers, civic hackers and developers to create projects where anyone around the world with some time, interest and an internet connection can contribute.') }}</p>
-
-            <p>
-            {{ _('PyBossa is different to existing efforts:') }}
-            <ul>
-                <li>{{ _("It's a 100%% open-source") }}</li>
-                <li>{{ _('Unlike, say, “mechanical turk” style projects, PyBossa is not designed to handle payment or money — it is designed to support volunteer-driven projects.') }}
-                </li>
-                <li>{{ _("It's designed as a platform and framework for developing deploying crowd-sourcing and microtasking project rather than being a crowd-sourcing project itself. Individual crowd-sourcing projects are written as simple snippets of Javascript and HTML which are then deployed on a PyBossa instance (such as") }}  <a href="http://crowdcrafting.org">CrowdCrafting.org</a>). {{ _('This way one can easily develop custom projects while using the PyBossa platform to store your data, manage users, and handle workflow') }}.</li>
-            </ul> 
-            </p>
-
-            <p>
-            {{ _('You can read more about the architecture in the') }} <a href="http://docs.pybossa.com/">{{ _('PyBossa Documentation') }}</a> {{ _('and follow the') }} <a href="http://docs.pybossa.com/en/latest/user/tutorial.html">{{ _('step-by-step tutorial to create your own projects') }}.</a>.
-            </p>
-
-            <h1>{{ _('Statistics') }}</h1>
-            <p>
-           {{ _(' PyBossa provides individual statistics for every project in the system, as well as a') }} <a href="{{url_for('stats.index')}}">{{ _('general overview about the system like total number of users, tasks, etc') }}</a>. 
-            </p>
-            <a href="{{url_for('stats.index')}}" class="btn btn-primary"><i class="glyphicon glyphicon-dashboard"></i> {{ _('Check the global statistics') }}</a>
-
-            <h1 id="contact">{{ _('Contact information') }}</h1>
-            <ul>
-                <li>{{ _('For more info, send us an e-mail to: ') }}<a href="mailto:info@pybossa.com">info@pybossa.com</a> or <a class="btn" href="http://twitter.com/pybossa"><i class="glyphicon glyphicon-twitter"></i>{{ _('Follow us on Twitter!') }}</a></li>
-                <li>{{ _('E-mail list: ') }}<a href="http://lists.okfn.org/mailman/listinfo/okfn-labs">okfn-labs@lists.okfn.org</a>.</li>                
-                <li><p>{{ _('Report any bug, issue or improvement:') }} 
-                    <a class="btn" href="http://github.com/PyBossa/pybossa/issues">
-                        <i class="glyphicon glyphicon-github"></i>{{ _('Github Issues') }}
-                    </a>
-                    </li>            
-            </ul>
+    <section class="white">
+        <div class="row">
+            <div class="col-md-11">
+                <h1>{{ _('About') }}</h1>
+                
+                <p>{{ brand }} is a crowd-sourcing platform with the ultimate goal of making important research material more
+                easily accesible to a worldwide audience.</p>
+                    
+                <p>Each project at {{ brand }} contains a collection of tasks related to a specific area of research. These tasks
+                require human intelligence and are not things that can be accurately processed by computers. While
+                each individual task can usually be completed quickly, the collections of tasks are often vast. The only
+                feasible way to complete such a number of tasks within a reasonable length of time is via widespread user
+                contributions.</p>
+                    
+                <p>By participating you will have a direct impact on helping future research by anyone interested in the diverse 
+                collections available at the British Library.</p>
+            </div>
         </div>
-    </div>
+    </section>
+                   
+    <section class="grey">
+        <div class="row">
+            <div class="col-md-11">
+                <h1>{{ _('Technology') }}</h1>
+                
+                <p>{{ brand }} is built on top of <a href="http://docs.pybossa.com/"> PyBossa </a>, an open-source framework for
+                crowd-sourcing projects. Individual applications are written in HTML and Javascript, with some also making use of
+                PHP.</p>
+            </div>
+        </div>
+    </section>
+                
+    <section class="white">
+        <div class="row">
+            <div class="col-md-11">
+                <h1 id="contact">{{ _('Contact information') }}</h1>
+                <ul>
+                    <li>Email: <a href="mailto:info@pybossa.com">info@pybossa.com</a></li>
+                    <li><p>{{ _('Report any bugs, issues or improvements:') }} 
+                        <a class="btn btn-xs" href="https://github.com/alexandermendes/BL-pybossa-theme/issues">
+                            <i class="glyphicon glyphicon-github"></i>{{ _('Github Issues') }}
+                        </a>
+                        </li>            
+                </ul>
+            </div>
+        </div>
+    </section>
 </div>
