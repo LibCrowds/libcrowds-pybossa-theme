@@ -11,14 +11,14 @@
    </div>
 </div>
 
-<section class="grey">
+<section class="mid-grey">
       <div class="container container-padded text-center">
          <div class="col-md-12">
-            <p id="index-main-desc">
-               {{ brand }} is a crowd-sourcing platform focused on the retroconversion of the
-               British Library's printed and card catalogues. By participating
-               you will have a direct impact on making a diverse range of research materials
-               available to search freely online.
+          <h1>Crowd-sourcing from the British Library</h1>
+            <p class="lead">
+               {{ brand }} is a crowd-sourcing platform focused on making important research materials 
+               more easily accessible and readily available. By participating you will have a direct impact 
+               on future research conducted using the diverse collections held at the British Library.
             </p>
          </div>
       </div>
@@ -52,10 +52,10 @@
 
 {% if top_users %}
 <section id="top_users" class="white">
-   <div class="container">
+   <div class="container container-padded">
     <div class="col-md-12">
       <div class="row text-center">
-        <h2>{{ _('Most Active Volunteers') }}</h2>
+        <h3>{{ _('Most Active Volunteers') }}</h3>
       </div>
         <ul class="users">
         {% for user in top_users %}
