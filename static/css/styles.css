@@ -5,6 +5,7 @@
    height:auto;
    min-height: 100%;
    position:relative;
+   color: #404040;
 }
 
 #main-body-content {
@@ -87,7 +88,6 @@ html {
   width: 100%;
 }
 body {
-  padding-top: 80px;
   font-size: 13px;
   background-color: #ffffff;
   height:100%;
@@ -104,64 +104,110 @@ body {
   padding-bottom: 50px;
 }
 
-.navbar {
-  margin-bottom: 0px;
-  background-color: #FFFFFF;
-  border-color: #FAFAFA;
-}
-
-.navbar-fixed-top .navbar-inner,
-.navbar-inner {
-  background-color:rgba(0, 0, 0, 0.8);
+.navbar-fixed-top {
+  padding-top: 30px;
+  padding-bottom: 25px;
+  background-color: rgba(255,255,255,0);
   filter: none;
   border: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  color: #000000;
   font-size: 14px;
+  -webkit-transition: background-color 700ms 0s, padding-top 1s 0s, padding-bottom 1s 0s;
+    -moz-transition: background-color 700ms 0s, padding-top 1s 0s, padding-bottom 1s 0s;
+    -ms-transition: background-color 700ms 0s, padding-top 1s 0s, padding-bottom 1s 0s;
+    -o-transition: background-color 700ms 0s, padding-top 1s 0s, padding-bottom 1s 0s;
+    transition: background-color 700ms 0s, padding-top 1s 0s, padding-bottom 1s 0s;
+    z-index: 100;
 }
-.navbar .brand {
-  padding: 20px 20px 0px 0px;
-  margin: 0px;
-  color: #000000;
-  text-shadow: none;
-}
-.navbar .nav > li > a {
+
+.navbar-fixed-top.opaque {
   padding-top: 10px;
   padding-bottom: 10px;
-  margin: 20px 3px 20px 0px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  color: #383A3A;Ê
-  text-shadow: none;
+  background-color: rgba(255,255,255,1);
+  border-bottom: 2px solid #eeeeee;
 }
+
+.navbar-brand {
+  padding: 0px 15px;
+  margin: 0px;
+}
+
+.navbar .nav > li > a {
+  padding-bottom: 15px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  color: #ffffff;Ê
+  text-shadow: none;
+  -webkit-transition: color 700ms 0s;
+    -moz-transition: color 700ms 0s;
+    -ms-transition: color 700ms 0s;
+    -o-transition: color 700ms 0s;
+    transition: color 700ms 0s;
+}
+
+.navbar.opaque .nav > li > a {
+  color: #404040;
+}
+
+.nav-link a:after {
+position: absolute;
+left: 0;
+bottom: 0;
+width: 100%;
+height: 2px;
+background-color: #D00000;
+content: '';
+opacity: 0;
+-webkit-transition: opacity .2s;
+-moz-transition: opacity .2s;
+-ms-transition: opacity .2s;
+-o-transition: opacity .2s;
+transition: opacity .2s;
+-webkit-transition: -webkit-transform .2s;
+-moz-transition: -moz-transform .2s;
+-ms-transition: -ms-transform .2s;
+-o-transition: -o-transform .2s;
+transition: transform .2s;
+-webkit-transform: translateY(10px);
+-moz-transform: translateY(10px);
+-ms-transform: translateY(10px);
+-o-transform: translateY(10px);
+transform: translateY(10px);
+}
+
+.nav-link .active a:after {
+opacity: 1;
+transform: none;
+}
+
+.nav-link:hover a:after {
+opacity: 1;
+transform: none;
+}
+
 .navbar .nav > li > a:hover,
 .navbar .nav > li > a:focus {
-  background-color:rgba(0, 0, 0, 0.6);
-  color: #FFFFFF;
+  color: #D00000;
 }
-.navbar .nav > .active > a,
-.navbar .nav > .active > a:hover,
-.navbar .nav > .active > a:focus {
-  background-color:rgba(0, 0, 0, 0.6);
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  color: #FFFFFF;
-}
+
 .nav .dropdown-toggle .caret,
 .nav .dropdown-toggle:hover .caret {
   border-bottom-color: #000000;
   border-top-color: #000;
 }
+
 .dropdown-menu {
 	top:54px;
 }
+
 .navbar .nav > li > a .icon {
   font-size: 22px;
   vertical-align: top;
 }
+
 .navbar .btn-navbar {
   background-color: #8bbf36;
   background-image: none;
@@ -170,39 +216,6 @@ body {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
-.navbar .btn-navbar:hover,
-.navbar .btn-navbar:active,
-.navbar .btn-navbar.active,
-.navbar .btn-navbar.disabled,
-.navbar .btn-navbar[disabled] {
-  background-color: #a2d058;
-}
-.navbar .btn-navbar .icon-bar {
-  background-color: #6e972b;
-}
-.navbar .navbar-form.form-search .search-query {
-  border: none;
-  width: 90px;
-}
-.navbar .navbar-form.form-search {
-  padding-top: 20px;
-}
-.navbar .navbar-form.form-search .search-query:focus {
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), inset 0 0 4px rgba(139, 191, 54, 0.6);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), inset 0 0 4px rgba(139, 191, 54, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), inset 0 0 4px rgba(139, 191, 54, 0.6);
-}
-.navbar .navbar-form.form-search .btn {
-  padding: 4px 10px 4px 8px;
-  background-image: none;
-  background-color: #FFF;
-  border: none;
-}
-.navbar .navbar-form.form-search .btn [class^="icon-"],
-.navbar .navbar-form.form-search .btn [class*=" icon-"] {
-  color: #8bbf36;
-}
-
 
 .banner {
   background-color: #f7f7f7;
@@ -235,10 +248,10 @@ section.grey {
 section.grey,
 section.grey:before,
 section.grey:after {
-  background-color: #eeeeee;
+  background-color: #FAFAFA;
   border-top-width: 1px;
   border-top-style: solid;
-  border-top-color: #d9d9d9;
+  border-top-color: #FAFAFA;
 }
 section.grey:before,
 section.grey:after {
@@ -712,7 +725,7 @@ ul.users li a {
 }
 
 .grey-bg {
-  background-color: #EAF1F1;
+  background-color: #FAFAFA;
 }
 
 
@@ -1445,24 +1458,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: #2B9884;
   border-color: #2B9884;
 }
-.navbar .btn-default {
-  background-color: transparent;
-  border:2px solid #2B9884;
-  font-weight:600;
-  font-size:13px;
-  color:#2B9884;
-  padding: 10px 15px 10px;
-}
-.navbar .btn-default:hover,
-.navbar .btn-default:focus {
-  background-color: #2B9884;
-  color:#fff;
-}
-.navbar .btn-default:active,
-.navbar .btn-default.active {
-  background-color: #2B9884;
-  border-color: #2B9884;
-}
+
 .btn-primary {
   background-color:rgba(255,255,255,.6);
   border:2px solid #EE7147;
@@ -1575,7 +1571,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 
 .splash {
-  min-height: 400px;
+  min-height: 750px;
+  max-height: 960px;
   background-image:url(../img/bl-book-stacks.png);
   background-size:cover;
   background-attachment:fixed;
