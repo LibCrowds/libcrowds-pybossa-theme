@@ -232,7 +232,6 @@ transform: none;
   background-color: #f7f7f7;
   top: 0;
   bottom: 0;
-  width: 9999px;
 }
 .banner:before {
   right: 100%;
@@ -259,7 +258,6 @@ section.grey:after {
   position: absolute;
   top: -1px;
   bottom: -1px;
-  width: 9999px;
 }
 section.grey:before {
   right: 100%;
@@ -285,7 +283,6 @@ section.white:after {
   position: absolute;
   top: -1px;
   bottom: -1px;
-  width: 9999px;
 }
 section.white:before {
   right: 100%;
