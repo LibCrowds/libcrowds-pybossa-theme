@@ -100,8 +100,8 @@ body {
 }
 
 .container-padded {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 .navbar-fixed-top {
@@ -178,7 +178,7 @@ transition: transform .2s;
 transform: translateY(10px);
 }
 
-.nav-link .active a:after {
+.nav-link.active a:after {
 opacity: 1;
 transform: none;
 }
