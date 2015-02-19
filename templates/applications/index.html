@@ -5,6 +5,7 @@
 
 {% block content %}
 <script src="{{url_for('static', filename='js/vendor/isotope.pkgd.min.js')}}"></script>
+<div class="container container-padded">
 <div class="row">
     <div class="col-md-3">
             <ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
@@ -58,6 +59,7 @@
             <h2>{{_('Sorry, there are no published projects for this category yet')}}</h2>
         {% endif %}
     </div>
+</div>
 </div>
 {{ helper.broken_image() }}
 <script>
