@@ -2,9 +2,9 @@
         <div class="container">
           <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="glyphicon glyphicon-bar"></span>
-            <span class="glyphicon glyphicon-bar"></span>
-            <span class="glyphicon glyphicon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="{{ url_for('home.home') }}"><img src="{{url_for('static',filename='img/' + logo)}}" alt="{{brand}}"></a>
           </div>
@@ -34,7 +34,7 @@
 
             {% if current_user.is_anonymous() %}
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="{{ url_for('account.signin') }}"><i class="icon glyphicon glyphicon-white icon-signin"></i> {{ _('Sign in') }}</a></li>
+              <li class="nav-link"><a href="{{ url_for('account.signin') }}">{{ _('Sign in') }}</a></li>
             </ul>
             {% endif %}
           </div><!--/.nav-collapse -->
