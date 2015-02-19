@@ -10,9 +10,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Community') }}</a></li>
-              <li {% if active_page == 'applications' %} class="active" {% endif %}><a href="{{ url_for('app.index') }}">{{ _('Projects') }}</a></li>
-             <li {% if active_page == 'about' %} class="active" {% endif %}><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li>
+              <li class="nav-link {% if active_page == 'community' %} active{% endif %}"><a href="{{ url_for('account.index')}}">{{ _('Community') }}</a></li>
+              <li class="nav-link {% if active_page == 'applications' %} active{% endif %}"><a href="{{ url_for('app.index') }}">{{ _('Projects') }}</a></li>
+             <li class="nav-link {% if active_page == 'about' %} active{% endif %}"><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li>
          </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
