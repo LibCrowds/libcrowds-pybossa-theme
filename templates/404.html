@@ -2,17 +2,19 @@
 {% set active_page = "support" %}
 
 {% block content %}
-<div class="row">
-    <h1>Page not found!</h1>
-    <p class="lead">We're sorry, but we can't find the page that you're looking for.</p>
-    <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg" style="display:none;"> 
-        <i class="glyphicon glyphicon-home"></i>
-        Go Home
-    </a>
-    <a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()" style="display:none;"> 
-        <i class="glyphicon glyphicon-arrow-left"></i>
-        Go Back</a>
-</div>
+    <div class="container container-main">
+        <div class="row">
+            <h1>Page not found!</h1>
+            <p class="lead">We're sorry, but we can't find the page that you're looking for.</p>
+            <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg" style="display:none;"> 
+                <i class="glyphicon glyphicon-home"></i>
+                Go Home
+            </a>
+            <a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()" style="display:none;"> 
+                <i class="glyphicon glyphicon-arrow-left"></i>
+                Go Back</a>
+        </div>
+    </div>
 <script>
     console.log(history.length);
     if (history.length > 1) {
