@@ -2,21 +2,23 @@
 {% set active_page = "support" %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <h1>Ooops, Something's broken</h1>
-        <p class="lead">It looks as though there's a problem with our system.</p>
-        <p class="lead">We will try to fix it as soon as we can.</p>
-
-        <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg" style="display:none;"> 
-            <i class="glyphicon glyphicon-home"></i>
-            Go Home
-        </a>
-        <a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()" style="display:none;"> 
-            <i class="glyphicon glyphicon-arrow-left"></i>
-            Go Back</a>
+    <div class="container container-main">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Ooops, Something's broken</h1>
+                <p class="lead">It looks as though there's a problem with our system.</p>
+                <p class="lead">We will try to fix it as soon as we can.</p>
+        
+                <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg" style="display:none;"> 
+                    <i class="glyphicon glyphicon-home"></i>
+                    Go Home
+                </a>
+                <a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()" style="display:none;"> 
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                    Go Back</a>
+            </div>
+        </div>
     </div>
-</div>
 <script>
     console.log(history.length);
     if (history.length > 1) {
