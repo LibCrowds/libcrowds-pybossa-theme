@@ -100,8 +100,13 @@ body {
 }
 
 .container-padded {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.container-main {
+  padding-top: 120px;
+  padding-bottom: 50px;
 }
 
 .navbar-fixed-top {
@@ -146,6 +151,7 @@ body {
     -ms-transition: color 700ms 0s;
     -o-transition: color 700ms 0s;
     transition: color 700ms 0s;
+    background-color: #ffffff;
 }
 
 .navbar.opaque .nav > li > a {
@@ -191,6 +197,7 @@ transform: none;
 .navbar .nav > li > a:hover,
 .navbar .nav > li > a:focus {
   color: #D00000;
+  background-color: #ffffff;
 }
 
 .nav .dropdown-toggle .caret,
