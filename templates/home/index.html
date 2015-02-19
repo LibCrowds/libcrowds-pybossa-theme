@@ -2,6 +2,7 @@
 {% import "applications/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
 {% block content %}
+
 <div class="splash vcenter">
    <div class="container">
     <div class="col-md-12 text-center">
@@ -75,6 +76,7 @@
 </section>
 {% endif %}
 
+<span id="homepage-flag" style="display: none"></span>
 <script>
    $("a[rel=popover]").popover({
            html: true,
