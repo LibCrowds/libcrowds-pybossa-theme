@@ -1,42 +1,42 @@
 {% macro render_field(field, addon, prepend, tooltip, label_text) %}
-    <div class="control-group {% if field.errors %} error {% endif %}">
-        {{ render_label(field, tooltip, label_text) }}
-        <div class="controls">
-            {% if addon %}
-            <div class="{% if prepend %}input-group{%else%}input-group{%endif%}">
-                {% if prepend %}
-                <span class="input-group-addon">{{addon|safe}}</span>
-                {{field(**kwargs)}}
+        <div class="form-group {% if field.errors %} has-error {% endif %}">
+            {{ render_label(field, tooltip, label_text) }}
+                {% if addon %}
+                <div class="{% if prepend %}input-group{%else%}input-group{%endif%}">
+                    {% if prepend %}
+                        <span class="input-group-addon">{{addon|safe}}</span>
+                        {{field(**kwargs)}}
+                    {% else %}
+                        {{field(**kwargs)}}
+                        <span class="input-group-addon">{{addon|safe}}</span>
+                    {% endif %}
+                </div>
                 {% else %}
-                {{field(**kwargs)}}
-                <span class="input-group-addon">{{addon|safe}}</span>
-                {% endif %}
-            </div>
-            {% else %}
-                {{field(**kwargs)}}
+                    {{field(**kwargs)}}
                 {% endif %}
             {% if field.errors %}
                 {% for error in field.errors %}
-                <span class="help-inline">{{ error }}</span>
+                    <span class="help-block"><small>{{ error }}</small></span>
                 {% endfor %}
+            {% else %}
+                <span><small>&nbsp;</small></span>
             {% endif %}
         </div>
-    </div>
 {% endmacro %}
 
 
 {% macro render_label(field, tooltip, text) %}
     {% if tooltip and text %}
-    {{ field.label(class="control-label", style='width:148px', text=text) }}
-    <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
-        &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
-    {% elif tooltip and not text %}
-    {{ field.label(class="control-label", style='width:148px') }}
-    <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
-        &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
+        {{ field.label(class="sr-only", style='width:148px', text=text) }}
+        <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
+            &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
+        {% elif tooltip and not text %}
+        {{ field.label(class="sr-only", style='width:148px') }}
+        <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
+            &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
     {% elif not tooltip and text %}
-    {{ field.label(class="control-label", text=text) }}
+        {{ field.label(class="sr-only", text=text) }}
     {% else %}
-    {{ field.label(class="control-label") }}
+        {{ field.label(class="sr-only") }}
     {% endif %}
 {% endmacro %}
