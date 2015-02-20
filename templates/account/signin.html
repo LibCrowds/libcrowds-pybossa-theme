@@ -1,60 +1,62 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container-padded">
-    <div class="container container-padded">
-      <p style="padding-top:5px;">
-      <p style="padding-top:5px;">
-      <span class="label label-warning"><i class="glyphicon glyphicon-bullhorn"></i> {{ _('Note') }}</span>
-          {{ _('By click the') }} <strong>{{ _('Sign in button') }}</strong> {{ _('below you are agreeing to
-          the') }} <a href={{url_for('help.tos')}}>{{ _('terms of use') }}</a> {{ _('and') }}
-          <a href={{data_use | safe}}>{{ _('data') }}</a>.
-      </p>
+    <div class="container container-main">
+      
       {% if next is not none%}
-        {% if auth.twitter %}
-        <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-info"><i class="glyphicon glyphicon-twitter"></i> {{ _('Sign in with Twitter') }}</a>
-        {% endif %}
-        {% if auth.facebook %}
-        <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-primary"><i class="glyphicon glyphicon-facebook"></i> {{ _('Sign in with Facebook') }}</a>
-        {% endif %}
-        {% if auth.google %}
-        <a href="{{ url_for('google.login') }}" class="btn btn-warning"><i class="glyphicon glyphicon-google-plus"></i> {{ _('Sign in with Google') }}</a>
-        {% endif %}
-      {% else %}
-        {% if auth.twitter %}
-        <a href="{{ url_for('twitter.login') }}" class="btn btn-info"><i class="glyphicon glyphicon-twitter"></i> {{ _('Sign in with Twitter') }}</a>
-        {% endif %}
-        {% if auth.facebook %}
-        <a href="{{ url_for('facebook.login') }}" class="btn btn-primary"><i class="glyphicon glyphicon-facebook"></i> {{ _('Sign in with Facebook') }}</a>
-        {% endif %}
-        {% if auth.google %}
-        <a href="{{ url_for('google.login') }}" class="btn btn-warning"><i class="glyphicon glyphicon-google-plus"></i> {{ _('Sign in with Google') }}</a>
+          {% if auth.twitter %}
+          <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-info"><i class="glyphicon glyphicon-twitter"></i> {{ _('Sign in with Twitter') }}</a>
+          {% endif %}
+          {% if auth.facebook %}
+          <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-primary"><i class="glyphicon glyphicon-facebook"></i> {{ _('Sign in with Facebook') }}</a>
+          {% endif %}
+          {% if auth.google %}
+          <a href="{{ url_for('google.login') }}" class="btn btn-danger"><i class="glyphicon glyphicon-google-plus"></i> {{ _('Sign in with Google') }}</a>
+          {% endif %}
+        {% else %}
+          {% if auth.twitter %}
+          <a href="{{ url_for('twitter.login') }}" class="btn btn-info"><i class="glyphicon glyphicon-twitter"></i> {{ _('Sign in with Twitter') }}</a>
+          {% endif %}
+          {% if auth.facebook %}
+          <a href="{{ url_for('facebook.login') }}" class="btn btn-primary"><i class="glyphicon glyphicon-facebook"></i> {{ _('Sign in with Facebook') }}</a>
+          {% endif %}
+          {% if auth.google %}
+          <a href="{{ url_for('google.login') }}" class="btn btn-danger"><i class="glyphicon glyphicon-google-plus"></i> {{ _('Sign in with Google') }}</a>
         {% endif %}
       {% endif %}
       <hr>
       
       {% from "_formhelpers.html" import render_field %}
-        <form id="signin" method="post" class="form-horizontal" action="">
-          {{ form.hidden_tag() }}
-          {% if auth.twitter or auth.facebook%}
-          <legend>{{ _('Or Sign in with your PyBossa account') }}</legend>
-          {% else %}
-          <legend>{{ _('Sign in with your PyBossa account') }}</legend>
-          {% endif %}
-            {{ render_field(form.email, placeholder="") }}
-            {{ render_field(form.password, placeholder="") }}
-          <div class="form-actions">
-            <input type="submit" value="{{ _('Sign in') }}" class="btn btn-success" />
-            <input type="reset" value="{{ _('Cancel') }}" class="btn btn-primary" />
-          </div>
-        </form>
       
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+              <form id="signin" method="post" role="form" action="">
+                {{ form.hidden_tag() }}
+                <h4 class="text-center">Or Sign in with your BL Crowds account</h4>
+                
+                {{ render_field(form.email, placeholder="Email", class="form-control") }}
+                {{ render_field(form.password, placeholder="Password", class="form-control") }}
+                  <a href="{{ url_for('account.forgot_password') }}" class="btn btn-link pull-left remove-padding-left">{{ _('Forgotten password') }}</a>  
+                  <div class="pull-right" role="group">
+                    <input type="reset" value="Cancel" class="btn btn-default" />
+                    <input type="submit" value="Sign in" class="btn btn-success" />
+                  </div>
+              </form>
+              <div class="padding-top">
+                <p class="text-center muted">
+                    {{ _('By clicking the') }} <strong>{{ _('Sign in') }}</strong> {{ _('button you are agreeing to
+                    our') }} <a href={{url_for('help.tos')}}>{{ _('terms of use') }}</a>.
+                </p>
+              </div>
+              <hr>
+            </div>
+      
+      <br>
+      <br>
       <div class="row">
-          <div class="col-md-12" style="text-align:center">
-              <a href="{{ url_for('account.register') }}" class="btn btn-success"><i class="icon glyphicon glyphicon-white icon-user"></i>{{ _(' Create a new account') }}</a>
-              <a href="{{ url_for('account.forgot_password') }}" class="btn btn-success">{{ _('Forgotten password') }}</a>
+          <div class="col-md-12 text-center">
+              <a href="{{ url_for('account.register') }}" class="btn btn-primary"><i class="icon glyphicon glyphicon-white icon-user"></i>{{ _(' Create a new account') }}</a>
           </div>
       </div>
-    </div>
-  </div>
+            
+      </div>
 {% endblock %}
