@@ -15,7 +15,7 @@
   font-weight: 300;  
 }
 
-.h1, .h2, .h3, h1, h2, h3 {
+.h1, .h2, .h3, .h4, h1, h2, h3, h4 {
   margin-bottom: 25px;
 }
 
@@ -71,6 +71,19 @@ input[type="color"]:focus,
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(139, 191, 54, 0.6);
 }
 
+.remove-padding-left {
+  padding-left: 0px;
+}
+
+.padding-top {
+  padding-top: 80px;
+}
+
+.form-control {
+  padding: 12px 15px;
+  height: auto;
+}
+
 /* Layout */
 /* ====== */
 html {
@@ -96,6 +109,11 @@ body {
 
 .container-padded {
   padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.container-main {
+  padding-top: 100px;
   padding-bottom: 50px;
 }
 
@@ -798,6 +816,10 @@ p.lead {
   font-size:28px;
 }
 
+p.muted {
+  color: #7e7e7e;
+}
+
 /* Background colors
 -------------------------*/
 
@@ -1021,4 +1043,3 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
-
