@@ -1,4 +1,4 @@
-    <div class="alert-messages">
+    <div class="alert-messages" {% if active_page == 'index' %} style="position: fixed; z-index: 1;"{% endif %}>
 
     {% with messages = get_flashed_messages(with_categories=True) %}
     {%if messages %}
