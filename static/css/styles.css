@@ -153,8 +153,8 @@ body {
 }
 
 .navbar-nav>li {
-  padding: 0px 20px 0px 20px; 
-}
+    padding: 0px 20px;
+  }
 
 .navbar .nav > li > a {
   -webkit-border-radius: 0px;
@@ -647,6 +647,7 @@ ul.users li a {
 
 /* Sidebar nav */
 .bs-docs-sidenav {
+  z-index: 99;
   padding: 0;
   width: 220px;
   background-color: #fff;
@@ -703,7 +704,7 @@ ul.users li a {
   opacity: 1;
 }
 .bs-docs-sidenav.affix {
-  top: auto;
+  top: 100px;
 }
 .bs-docs-sidenav.affix-bottom {
   position: absolute;
@@ -717,7 +718,7 @@ ul.users li a {
     width: 220px;
   }
   .bs-docs-sidenav.affix {
-    top: auto;
+    top: 100px;
   }
   .big-modal {
       width: 1000px;
@@ -732,17 +733,21 @@ ul.users li a {
   /* When affixed, space properly */
   .bs-docs-sidenav {
     top: 0;
-    width: 220px;
+    width: 180px;
     margin-top: 0px;
     margin-right: 0;
   }
   .bs-docs-sidenav.affix {
-    top: auto;
+    top: 100px;
   }
   .big-modal {
       width: 800px;
       margin-left:-400px;
       margin-top: -60%;
+  }
+  
+  .navbar-nav>li {
+    padding: 0px 10px;
   }
 }
 
@@ -755,7 +760,7 @@ ul.users li a {
     margin-top: 0px;
   }
   .bs-docs-sidenav.affix {
-    top: auto;
+    top: 100px;
   }
   .big-modal {
       width: 600px;
@@ -773,9 +778,18 @@ ul.users li a {
     margin-bottom: 20px;
   }
   .bs-docs-sidenav.affix {
-    position: static;
-    width: auto;
-    top: auto;
+    top: 0px;
+  }
+  
+  .affix {
+    position: relative;
+  }
+  
+  .xs-center {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;  
   }
 }
 

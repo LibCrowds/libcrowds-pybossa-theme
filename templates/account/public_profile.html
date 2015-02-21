@@ -5,27 +5,35 @@
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-        {{ privacy.render_lock_page() }}
-        {% else %}
-        <section id="user-data">
-            <h1><strong>{{user.fullname}}</strong></h1>
-            {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
-        </section>
-        {% if apps_created %}
-        <section id="created-apps" style="margin-top:10px;">
-            {{render_grid_apps(apps_created, "Created Projects", upload_method)}}
-        </section>
-        {% endif %}
-        {% if apps %}
-        <section id="contributed-apps" style="margin-top:10px;">
-            {{render_grid_apps(apps, "Contributions", upload_method)}}
-        </section>
-        {% endif %}
-        {% endif %}
-    </div>
-</div>
+    <section="mid-grey">
+    <div class="container-main">
+        <div class="container">
+                <div class="col-xs-12 xs-center">
+                    {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+                    {{ privacy.render_lock_page() }}
+                    {% else %}
+                    <section id="user-data">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h1>{{user.fullname}}</h1>
+                            </div>
+                        </div>
+                        {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
+                    </section>
+                    {% if apps_created %}
+                    <section id="created-apps" style="margin-top:10px;">
+                        {{render_grid_apps(apps_created, "Created Projects", upload_method)}}
+                    </section>
+                    {% endif %}
+                    {% if apps %}
+                    <section id="contributed-apps" style="margin-top:10px;">
+                        {{render_grid_apps(apps, "Contributions", upload_method)}}
+                    </section>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
 {{ broken_image() }}
 {% endblock %}
