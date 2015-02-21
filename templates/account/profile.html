@@ -6,28 +6,39 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col-md-3">
-        {{ helper.render_account_local_nav(current_user, active_link) }}
+<section class="mid-grey">
+    <div class="container-main">
+        <div class="container">
+            {{ helper.render_account_local_nav(current_user, active_link) }}
+        </div>
+    
+    
+        <div class="container">
+            <div class="col-sm-offset-3 col-sm-9  xs-center">
+                <h1>{{current_user.fullname}}</h1>
+                {{ helper.render_user_profile(current_user, upload_method, "settings") }} 
+            </div>
+        </div>
+            
+        <section class="white">
+            <div class="container">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <h2>{{ _('Your Contributions') }}</h2>
+                    {% for app in apps_contrib %}
+                    <div class="row well well-small">
+                        <div class="col-md-6">
+                            {{ app_helper.render_app_thumbnail(app, upload_method, class='img-polaroid img-responsive xs-center', style='max-width:100px; max-height:100px;') }}
+                        </div>
+                        <div class="col-md-6">
+                            <h2><a href="{{url_for('app.details', short_name=app.short_name)}}">{{app.name}}</a></h2>
+                              <a class="btn btn-primary" href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>  
+        </section>
+        {{ app_helper.broken_image() }}
     </div>
-    <div class="col-md-9">
-        <h1><strong>{{current_user.fullname}}</strong></h1>
-        <h2>{{ _('Your Profile') }}</h2>
-        {{ helper.render_user_profile(current_user, upload_method, "settings") }} 
-        <hr>
-        <h2>{{ _('Your Contributions') }}</h2>
-        {% for app in apps_contrib %}
-        <div class="row well well-small">
-            <div class="col-md-3">
-                {{ app_helper.render_app_thumbnail(app, upload_method, class='img-polaroid', style='max-width:100px; max-height:100px;') }}
-            </div>
-            <div class="col-md-9">
-                <h2><a href="{{url_for('app.details', short_name=app.short_name)}}">{{app.name}}</a></h2>
-                  <a class="btn btn-primary" href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}</a>
-            </div>
-        </div><!-- end row -->
-        {% endfor %}
-    </div><!-- end col-md-9 -->
-</div>
-{{ app_helper.broken_image() }}
+</section>
 {% endblock %}
