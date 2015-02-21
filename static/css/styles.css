@@ -79,6 +79,10 @@ input[type="color"]:focus,
   padding-top: 80px;
 }
 
+.padding-bottom {
+  padding-top: 50px;
+}
+
 .form-control {
   padding: 12px 15px;
   height: auto;
@@ -1107,4 +1111,19 @@ justify-content: center;
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
+}
+
+/**
+ * Images
+ */
+
+.img-polaroid {
+  margin-bottom: 50px;
+  border: 6px solid white;
+  /* -webkit-transform: scale(1.25); */
+  -moz-transform: scale(1.25);
+  position: relative;
+  z-index: 5;
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.5);
+  -moz-box-shadow: 0 3px 6px rgba(0,0,0,.5);
 }
