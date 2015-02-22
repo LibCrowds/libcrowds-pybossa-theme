@@ -14,11 +14,13 @@ $(window).scroll(function() {
             $('.navbar-fixed-top').addClass('opaque');
             $('.dropdown-menu').addClass('opaque');
             $('.navbar-default').addClass('opaque');
+            $('#navbar-logo').attr('src', $('#logo-black').attr('data-src'));
         } else {
             $('.navbar').removeClass('opaque');
             $('.navbar-fixed-top').removeClass('opaque');
             $('.dropdown-menu').removeClass('opaque');
             $('.navbar-default').removeClass('opaque');
+            $('#navbar-logo').attr('src', $('#logo-white').attr('data-src'));
         }
     }
 });
