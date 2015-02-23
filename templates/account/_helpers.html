@@ -32,50 +32,72 @@
 
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
 <div class="row">
-    <div class="col-sm-6">
-        {{ render_user_thumbnail(user, upload_method, class="img-polaroid img-responsive xs-center") }}
+    <div class="col-sm-6 col-xs-12 text-center margin-bottom">
+        {{ render_user_thumbnail(user, upload_method, class="img-circle profile-image img-responsive center-block") }}
+        <h1>{{user.fullname}}</h1>
     </div>
-    <div class="col-sm-6 col-xs-12">
-        <h3><i class="glyphicon glyphicon-user"></i> {{ _('Username')}}: <small>{{ user.name }}</small></h3>
-        {% if private %}
-        <h3><i class="glyphicon glyphicon-envelope"></i> {{_('E-mail')}}: <small>{{ user.email_addr }}</small></h3>
-            {% if (user.valid_email == False) %}
-              {% if (user.confirmation_email_sent == False) %}
-              <a href="{{ url_for('account.confirm_email')}}" class="btn btn-sm">Validate email</a>
-              {% else %}
-              <a href="#" class="btn btn-sm disabled">Email sent for validation</a>
-              {% endif %}
-            {% endif %}
-            
-        {% endif %}
-        {% if user.rank %}
-        <h3><i class="fa fa-trophy"></i> {{ _('Rank')}}: <small>
+    <div class="col-sm-6 col-xs-12 white-rounded">
+        
+        <div class="row">
+            <div class="col-xs-6 text-center">
+                {% if user.rank %}
+                <i class="fa fa-trophy fa-4x"></i>
+                <p>{{ _('Rank')}} </p>
+                <p>
                 {% if private %}
-                <a href="{{url_for('leaderboard.index')}}">
+                    <a href="{{url_for('leaderboard.index')}}">
                 {% endif %}
                 {% if not settings %}
-                {{ user.rank }} {{_('of')}} {{user.total}}
+                    {{ user.rank }} {{_('of')}} {{user.total}}
                 {% else %}
-                {{ user.rank }}
+                    {{ user.rank }}
                 {% endif %}
                 {% if private %}</a>{% endif %}
-        </small></h3>
+                </p>
+                {% else %}
+                    <i class="fa fa-trophy fa-4x"></i>
+                    <p>{{ _('Rank') }}</p>
+                    <p class="score">{{ _('0') }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="col-xs-6 text-center">
+                {% if user.score %}
+                    <i class="fa fa-tasks fa-4x"></i>
+                    <p>{{ _('Tasks') }}</p>
+                    <p class="score">{{user.score}}</p>
+                {% else %}
+                    <i class="fa fa-tasks fa-4x"></i>
+                    <p>{{ _('Tasks') }}</p>
+                    <p class="score">0</p>  
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+            
+        <div class="text-center">
+            <p><i class="fa fa-user"></i> {{ _('Username')}}: {{ user.name }}</p>
+            {% if private %}
+            <p><i class="fa fa-envelope"></i> {{_('E-mail')}}: {{ user.email_addr }}</p>
+                {% if (user.valid_email == False) %}
+                  {% if (user.confirmation_email_sent == False) %}
+                  <a href="{{ url_for('account.confirm_email')}}" class="btn btn-sm">Validate email</a>
+                  {% else %}
+                  <a href="#" class="btn btn-sm disabled">Email sent for validation</a>
+                  {% endif %}
+                {% endif %}
+                
+            {% endif %}
+            
         
-        {% else %}
-        <h3><i class="fa fa-trophy"></i> {{ _('Rank') }}: <small>{{ _('None') }}</small></h3>
-    {% endif %}
-    
-        {% if user.score %}
-        <h3><i class="glyphicon glyphicon-tasks"></i> {{ _('Tasks') }}: <small>{{user.score}}</small></h3>
-        {% else %}
-         <h3><i class="glyphicon glyphicon-tasks"></i> {{ _('Tasks') }}: <small>0</small></h3>   
-        {% endif %}
+            
+            
+            <p><i class="fa fa-clock-o"></i> {{ _('Joined') }}: {{ user.created[0:10]}}</p>
         
-        <h3><i class="glyphicon glyphicon-time"></i> {{ _('Joined') }}: <small>{{ user.created[0:10]}}</small></h3>
-    
-        {% if private and not settings %}
-        <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-primary"><i class="icon glyphicon glyphicon-user"></i> {{ _('Edit your profile') }}</a>
+            {% if private %}
+            <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-primary btn-sm"><i class="fa fa-user"></i> {{ _('Edit') }}</a>
         {% endif %}
+        </div>
     </div>
 </div>
 {% endmacro %}

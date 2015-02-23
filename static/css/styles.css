@@ -80,12 +80,23 @@ input[type="color"]:focus,
 }
 
 .padding-bottom {
-  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.margin-bottom {
+  margin-bottom: 50px;
 }
 
 .form-control {
   padding: 12px 15px;
   height: auto;
+}
+
+div.white-rounded {
+    background-color: #FFFFFF;
+    border: 1px solid #F0F2F1;
+    padding: 20px 30px;
+    border-radius: 15px;
 }
 
 /* Layout */
@@ -236,6 +247,8 @@ transform: none;
   color: #666666;
 }
 
+
+.dropdown-menu>li>a:focus,
 .dropdown-menu .nav-link a:hover,
 .nav .open>ul>li>a:hover,
 .nav .open>a:hover,
@@ -246,7 +259,7 @@ transform: none;
 
 .dropdown-menu {
   top: 63px;
-  background-color: rgba(255,255,255,0);
+  background-color: rgba(0,0,0,0.5);
 }
 
 .dropdown-menu .nav-link {
@@ -827,7 +840,9 @@ ul.users li a {
 }
 }
 
-
+/*
+ * Footer
+ */
   
 #sticky-footer {
     margin-top: 20px;
@@ -869,7 +884,12 @@ p.muted {
   color: #7e7e7e;
 }
 
-/* Background colors
+p.score {
+  margin-top: -20px;
+  font-size: 28px;
+}
+
+/* Background colours
 -------------------------*/
 
 .white-bg {
@@ -879,6 +899,19 @@ p.muted {
 .grey-bg {
   background-color: #FAFAFA;
 }
+
+/*
+ * Icon Colours
+ */
+
+i.fa-trophy {
+  color: #FFC041;
+}
+
+i.fa-tasks {
+  color: #15b592;
+}
+
 
 
 /**
@@ -946,8 +979,8 @@ p.muted {
 }
 
 .btn-default {
-  color:#EBEBEB;
-  border:2px solid #EBEBEB;
+  color:#ADADAD;
+  border:2px solid #ADADAD;
 }
 
 
@@ -957,12 +990,12 @@ p.muted {
 .btn-default.active,
 .open .dropdown-toggle.btn-default {
   color: #FFFFFF;
-  background-color: #ebebeb;
-  border-color: #adadad;
+  background-color: #ADADAD;
+  border-color: #888D88;
 }
 
-.btn-DEFAULT .badge {
-  color: #EBEBEB;
+.btn-default .badge {
+  color: #ADADAD;
   background-color: #ffffff;
 }
 
@@ -1126,4 +1159,8 @@ justify-content: center;
   z-index: 5;
   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.5);
   -moz-box-shadow: 0 3px 6px rgba(0,0,0,.5);
+}
+
+.profile-image {
+  max-height: 300px;
 }
