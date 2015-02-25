@@ -40,3 +40,101 @@
         {{ field.label(class="sr-only") }}
     {% endif %}
 {% endmacro %}
+
+{% macro render_field_horizontal(field, addon, prepend, tooltip, label_text) %}
+        <div class="form-group vcenter {% if field.errors %} has-error {% endif %}">
+            {{ render_label_horizontal(field, tooltip, label_text) }}
+                {% if addon %}
+                <div class="{% if prepend %}input-group{%else%}input-group{%endif%}">
+                    {% if prepend %}
+                        <div class="col-xs-9 remove-padding">
+                            <span class="input-group-addon">{{addon|safe}}</span>
+                            {{field(**kwargs)}}
+                        </div>
+                    {% else %}
+                        <div class="col-xs-9 remove-padding">
+                            {{field(**kwargs)}}
+                            <span class="input-group-addon">{{addon|safe}}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                {% else %}
+                    <div class="col-xs-9 remove-padding">
+                        {{field(**kwargs)}}
+                    </div>
+                {% endif %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <span class="help-block"><small>{{ error }}</small></span>
+                {% endfor %}
+            {% else %}
+                <span><small>&nbsp;</small></span>
+            {% endif %}
+        </div>
+{% endmacro %}
+
+
+{% macro render_label_horizontal(field, tooltip, text) %}
+    {% if tooltip and text %}
+        {{ field.label(class="col-xs-3 control-label", style='width:148px', text=text) }}
+        <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
+            &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
+        {% elif tooltip and not text %}
+        {{ field.label(class="col-xs-3 control-label", style='width:148px') }}
+        <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
+            &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
+    {% elif not tooltip and text %}
+        {{ field.label(class="col-xs-3 control-label", text=text) }}
+    {% else %}
+        {{ field.label(class="col-xs-3 control-label") }}
+    {% endif %}
+{% endmacro %}
+
+{% macro render_field_horizontal_checkbox(field, addon, prepend, tooltip, label_text) %}
+        <div class="form-group vcenter {% if field.errors %} has-error {% endif %}">
+            {{ render_label_horizontal_checkbox(field, tooltip, label_text) }}
+                {% if addon %}
+                <div class="{% if prepend %}input-group{%else%}input-group{%endif%}">
+                    {% if prepend %}
+                        <div class="col-xs-9 remove-padding">
+                            <span class="input-group-addon">{{addon|safe}}</span>
+                            {{field(**kwargs)}}
+                        </div>
+                    {% else %}
+                        <div class="col-xs-9 remove-padding">
+                            {{field(**kwargs)}}
+                            <span class="input-group-addon">{{addon|safe}}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                {% else %}
+                    <div class="col-xs-9 remove-padding">
+                        {{field(**kwargs)}}
+                    </div>
+                {% endif %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <span class="help-block"><small>{{ error }}</small></span>
+                {% endfor %}
+            {% else %}
+                <span><small>&nbsp;</small></span>
+            {% endif %}
+        </div>
+{% endmacro %}
+
+
+{% macro render_label_horizontal_checkbox(field, tooltip, text) %}
+    {% if tooltip and text %}
+        {{ field.label(class="col-xs-3 control-label checkbox", style='width:148px', text=text) }}
+        <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
+            &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
+        {% elif tooltip and not text %}
+        {{ field.label(class="col-xs-3 control-label checkbox", style='width:148px') }}
+        <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
+            &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
+    {% elif not tooltip and text %}
+        {{ field.label(class="col-xs-3 control-label checkbox", text=text) }}
+    {% else %}
+        {{ field.label(class="col-xs-3 control-label checkbox") }}
+    {% endif %}
+{% endmacro %}

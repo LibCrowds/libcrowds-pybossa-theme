@@ -6,91 +6,101 @@
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
+{% from "_formhelpers.html" import render_field_horizontal %}
+{% from "_formhelpers.html" import render_field_horizontal_checkbox %}
+
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
 
-<div class="row">
-    <div class="col-md-3">
-        {{ helper.render_account_local_nav(current_user, active_link) }}
-    </div>
-    <div class="col-md-9">
-        <h1><strong>{{current_user.fullname}}</strong>: {{ _('Update your profile') }}</h1>
-        <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
-            <fieldset>
-                <div class="col-md-2 img-polaroid">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                {{ helper.render_user_thumbnail(current_user, upload_method)}}
+<div class="loading-overlay"><div class="loading-text vcenter">Loading...</div></div>
+<div class="container-padded remove-padding-bottom">
+    <section class="mid-grey">
+        <div class="container padding-top">
+            <div class="row margin-bottom">
+                <div class="col-sm-6 col-xs-12 text-center">
+                    <form method="post" role="form" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
+                        <fieldset>
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                            <div class="center-block img-overlay-container">
+                                {{ helper.render_user_thumbnail(current_user, upload_method, class="img-circle profile-image img-responsive center-block")}}
+                                <div class="img-overlay img-circle edit-profile-image">
+                                    <i class="fa fa-pencil-square-o fa-4x"></i>
+                                    <span>Edit</span>
+                                </div>
+                            </div>
+                            <br>
+                            {%if not user.info.avatar%}
+                                <div class="row">
+                                    <div class="col-xs-6 col-xs-offset-3 alert alert-info">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        Click above to choose your avatar.
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <h1>{{current_user.fullname}}</h1>
+                            {{ render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
+                            {{ upload_form.x1 }}
+                            {{ upload_form.y1 }}
+                            {{ upload_form.x2 }}
+                            {{ upload_form.y2 }}
+                            <div id="modal" class="modal fade">
+                                <div class="modal-dialog img-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img id="uploadPreview">
+                                        </div>
+                                        
+                                        <div class="modal-footer">
+                                            <div class="form-actions text-center">
+                                                <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-lg" />{{ _('Upload') }}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
-            {{ render_field(upload_form.avatar, onchange="previewImage()") }}
-            {{ upload_form.x1 }}
-            {{ upload_form.y1 }}
-            {{ upload_form.x2 }}
-            {{ upload_form.y2 }}
-            <img id="uploadPreview">
-            <div class="form-actions">
-                <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-lg" />{{ _('Upload') }}</button>
-            </div>
-            </fieldset>
-        </form>
-        <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
-            <fieldset>
-                <h2 {% if form.errors %}name="profile"{%endif%}>Your profile</h2>
-            {{ form.id }}
-            {{ form.hidden_tag() }}
-            {{ render_field(form.fullname, placeholder= _('my full name') ) }}
-            {{ render_field(form.name, placeholder= _('myusername') ) }}
-            {{ render_field(form.email_addr, placeholder= _('hello@mywebsite.org') ) }}
-            {{ render_field(form.locale) }}
-            {{ render_field(form.privacy_mode) }}
-            <div class="form-actions">
-                <button type="submit" name='btn' value="Profile" class="btn btn-primary btn-lg" />{{ _('Save the changes') }}</button>
-              <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn">{{ _('Cancel') }}</a>
-            </div>
-            </fieldset>
-        </form>
-
-        {% if show_passwd_form %}
-        <h2 {% if password_form.errors %} name="password" {%endif%}>{{ _('Change your Password') }}</h2>
-        <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
-            <fieldset>
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                {{ password_form.id }}
-                {{ password_form.hidden_tag() }}
-                {{ render_field(password_form.current_password) }}
-                {{ render_field(password_form.new_password) }}
-                {{ render_field(password_form.confirm) }}
-                <div class="form-actions">
-                    <button type="submit" name="btn" value="Password" class="btn btn-primary btn-lg">{{ _('Save the Changes')}}</button>
-                    <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn">{{ _('Cancel') }}</a>
+            
+                <div class="col-sm-6 col-xs-12 white-rounded">
+                
+                    <form method="post" role="form" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                        <fieldset>
+                            <h2 {% if form.errors %}name="profile"{%endif%}>Update your profile</h2>
+                            {{ form.id }}
+                            {{ form.hidden_tag() }}
+                            {{ render_field_horizontal(form.fullname, placeholder= _('Full name'), class="form-control" ) }}
+                            {{ render_field_horizontal(form.name, placeholder= _('Username'), class="form-control" ) }}
+                            {{ render_field_horizontal(form.email_addr, placeholder= _('Email'), class="form-control" ) }}
+                            {{ render_field_horizontal_checkbox(form.privacy_mode, class="form-control") }}
+                            <div class="pull-right form-actions" role="group">
+                                <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
+                                <button type="submit" name="btn" value="Profile" class="btn btn-success" />{{ _('Save') }}</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                <hr>
+                    {% if show_passwd_form %}
+                    <h2 {% if password_form.errors %} name="password" {%endif%}>{{ _('Change your Password') }}</h2>
+                    <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                        <fieldset>
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                            {{ password_form.id }}
+                            {{ password_form.hidden_tag() }}
+                            {{ render_field(password_form.current_password, placeholder= _('Current password'), class="form-control") }}
+                            {{ render_field(password_form.new_password, placeholder= _('New password'), class="form-control") }}
+                            {{ render_field(password_form.confirm, placeholder= _('Confirm new password'), class="form-control") }}
+                            <div class="pull-right form-actions" role="group">
+                                <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
+                                <button type="submit" name="btn" value="Password" class="btn btn-success" />{{ _('Save') }}</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                    {% endif %}
                 </div>
-            </fieldset>
-        </form>
-        {% endif %}
-
-        <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
-            <hr>
-            <h2>External Services</h2>
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-            {{ render_field(external_form.ckan_api) }}
-            <div class="form-actions">
-                <button type="submit" name='btn' value="External" class="btn btn-primary btn-lg" />{{ _('Save the changes') }}</button>
-              <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn">{{ _('Cancel') }}</a>
             </div>
-            </fieldset>
-        </form>
-        <hr>
-        <form class="form-horizontal" method="post" action="{{ url_for('account.reset_api_key', name=current_user.name)}}">
-        <fieldset>
-        <h3><strong>{{ _('Do you want to reset your personal API Key?') }}</strong></h3>
-            <div class="form-actions">
-              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-              <button type="submit" class="btn btn-sm" value="Reset">Reset</button>
-              <a href="{{ url_for('account.profile', name=current_user.name) }}" class="btn btn-lg btn-primary">{{ _('No, do not reset the API key!') }}</a>
-            </div>
-        </fieldset>
-        </form>
-        <hr>
-    </div>
+        </div>
+    </section>
 </div>
 <script src="{{url_for('static', filename='js/image_crop.js')}}" type="text/javascript"></script>
 {{ broken_image() }}

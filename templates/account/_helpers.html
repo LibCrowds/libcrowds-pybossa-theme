@@ -31,9 +31,9 @@
 
 
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
-<div class="row">
-    <div class="col-sm-6 col-xs-12 text-center margin-bottom">
-        {{ render_user_thumbnail(user, upload_method, class="img-circle profile-image img-responsive center-block") }}
+<div class="row margin-bottom">
+    <div class="col-sm-6 col-xs-12 text-center">
+            {{ render_user_thumbnail(user, upload_method, class="img-circle profile-image img-responsive center-block") }}
         <h1>{{user.fullname}}</h1>
     </div>
     <div class="col-sm-6 col-xs-12 white-rounded">
@@ -95,7 +95,7 @@
             <p><i class="fa fa-clock-o"></i> {{ _('Joined') }}: {{ user.created[0:10]}}</p>
         
             {% if private %}
-            <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-primary btn-sm"><i class="fa fa-user"></i> {{ _('Edit') }}</a>
+            <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-default btn-sm"><i class="fa fa-user"></i> {{ _('Edit') }}</a>
         {% endif %}
         </div>
     </div>
