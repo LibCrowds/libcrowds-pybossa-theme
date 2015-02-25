@@ -30,6 +30,8 @@
     <script type="text/javascript" src="{{url_for('static', filename='vendor/jquery-2.1.3.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='vendor/bootstrap-3.3.2/js/bootstrap.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='vendor/modernizr.min.js')}}"></script>
+    <script>{% include 'scripts.js' %}</script>
+    
     <!-- Google Analytics or similar solutions -->
     {% include '_ga.html' ignore missing %}
     <!-- Google Custom Search -->
@@ -74,7 +76,6 @@
       <!-- Placed at the end of the document so the pages load faster -->
   <script>
     {% include 'cookies.js' %}
-    {% include 'scripts.js' %}
   </script>
   
 </body>
