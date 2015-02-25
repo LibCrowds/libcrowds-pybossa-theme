@@ -1,4 +1,4 @@
-<div class="navbar navbar-fixed-top navbar-default">
+<div class="navbar opaque navbar-fixed-top navbar-default">
         <div class="container">
           <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -20,9 +20,9 @@
           {% if current_user.is_authenticated() %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-link"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon glyphicon glyphicon-user"></i> {{ current_user.name | truncate(6,true) }} <span class="caret"></span></a>  <ul class="dropdown-menu">
-                    <li class="nav-link"><a href="{{ url_for('account.profile', name=current_user.name) }}"><i class="icon glyphicon glyphicon-user"></i> {{ _('My Profile') }}</a></li>
-                    <li class="nav-link"><a href="{{ url_for('account.applications', name=current_user.name) }}"><i class="icon glyphicon glyphicon-th-large"></i> {{ _('My Projects') }}</a></li>
-                    <li class="nav-link"><a href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="icon glyphicon glyphicon-cog"></i> {{ _('My Settings') }}</a></li>
+                    <li class="nav-link"><a href="{{ url_for('account.profile', name=current_user.name) }}"><i class="icon glyphicon glyphicon-user"></i> {{ _('Profile') }}</a></li>
+                    <li class="nav-link"><a href="{{ url_for('account.applications', name=current_user.name) }}"><i class="icon glyphicon glyphicon-th-large"></i> {{ _('Projects') }}</a></li>
+                    <li class="nav-link"><a href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="icon glyphicon glyphicon-cog"></i> {{ _('Settings') }}</a></li>
                     {% if current_user.admin == 1 %}
                     <li class="divider"></li>
                     <li class="nav-link"><a href="{{ url_for('admin.index') }}"><i class="icon glyphicon glyphicon-cog"></i> {{ _('Admin Site') }}</a></li>
