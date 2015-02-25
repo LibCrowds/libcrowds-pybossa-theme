@@ -5,6 +5,12 @@ $(function() {
         $('.dropdown-menu').addClass('opaque');
         $('.navbar-default').addClass('opaque');
     }
+    
+    $('.edit-profile-image').on( "click", function() {
+        console.log('something clicked');
+        $('#avatar').click();
+    });
+    
 });
 
 $(window).scroll(function() {
@@ -24,3 +30,5 @@ $(window).scroll(function() {
         }
     }
 });
+
+

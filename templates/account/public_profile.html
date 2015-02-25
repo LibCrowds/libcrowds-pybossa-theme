@@ -5,9 +5,8 @@
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
-    
 
-<div class="container-padded">
+<div class="container-padded remove-padding-bottom">
     <section class="mid-grey">
         <div class="container padding-top">
                 {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}

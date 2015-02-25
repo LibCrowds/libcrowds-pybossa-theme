@@ -5,6 +5,7 @@
 {% import "applications/_helpers.html" as app_helper %}
 
 {% block content %}
+    <div class="container-main">
 <div class="row">
     <div class="col-md-3">
         {{ helper.render_account_local_nav(current_user, active_link) }}
@@ -25,10 +26,11 @@
             {% endfor %}
             {% endif %}
         {% else %}
-            <h2>{{ _('You have not created a project') }}</h2>
-            <a href="{{url_for('app.new')}}" class="btn btn-primary">{{ _('Create a Project') }}</a>
+            <h2>{{ _('You have not created any projects') }}</h2>
+            <a href="{{url_for('app.new')}}" class="btn btn-primary">{{ _('Get started') }}</a>
         {% endif %}
     </div>
 </div>
+    </div>
 {{ app_helper.broken_image() }}
 {% endblock %}
