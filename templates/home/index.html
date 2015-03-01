@@ -11,10 +11,10 @@
    </div>
 </div>
 
-<section class="mid-grey">
+<section class="mid-grey pattern-brushed box-shadow-grey">
       <div class="container container-padded text-center">
-         <div class="col-md-12">
-          <h1>Crowd-sourcing from the British Library</h1>
+         <div class="col-sm-offset-2 col-sm-8">
+          <h1 class="inset-text-grey">Crowd-sourcing from the British Library</h1>
             <p class="lead">
                {{ brand }} is a crowd-sourcing platform focused on making important research materials 
                more easily accessible and readily available. By participating you will have a direct impact 
@@ -24,7 +24,7 @@
       </div>
 </section>
 
-<section class="white">
+<section class="white pattern-white-wall-2x">
   <div class="container">
       {% for app in categories_apps['featured'] %}
         <div class="col-md-12">
@@ -51,7 +51,7 @@
 </section>
 
 {% if top_users %}
-<section id="top_users" class="white">
+<section id="top_users" class="white pattern-white-wall-2x">
    <div class="container container-padded">
     <div class="col-md-12">
       <div class="row text-center">
@@ -65,7 +65,7 @@
    <br/>
    <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
    " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
-{{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;") }}
+{{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;", class="img-circle") }}
 </a>
 <span class="label label-success">{{user.task_runs}}</span> <small>{{_('Tasks')}}</small>
 </li>

@@ -14,7 +14,7 @@
 
 <div class="loading-overlay"><div class="loading-text vcenter">Loading...</div></div>
 <div class="container-padded remove-padding-bottom">
-    <section class="mid-grey">
+    <section class="mid-grey pattern-brushed">
         <div class="container padding-top">
             <div class="row margin-bottom">
                 <div class="col-sm-6 col-xs-12 text-center">
@@ -22,7 +22,9 @@
                         <fieldset>
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             <div class="center-block img-overlay-container">
-                                {{ helper.render_user_thumbnail(current_user, upload_method, class="img-circle profile-image img-responsive center-block")}}
+                                <div class="shadow shadow-circle">
+                                    {{ helper.render_user_thumbnail(current_user, upload_method, class="img-circle profile-image img-responsive center-block")}}
+                                </div>
                                 <div class="img-overlay img-circle edit-profile-image">
                                     <i class="fa fa-pencil-square-o fa-4x"></i>
                                     <span>Edit</span>
@@ -37,7 +39,7 @@
                                     </div>
                                 </div>
                             {% endif %}
-                            <h1>{{current_user.fullname}}</h1>
+                            <h1 class="inset-text-grey">{{current_user.fullname}}</h1>
                             {{ render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
                             {{ upload_form.x1 }}
                             {{ upload_form.y1 }}
@@ -62,7 +64,7 @@
                     </form>
                 </div>
             
-                <div class="col-sm-6 col-xs-12 white-rounded">
+                <div class="col-sm-6 col-xs-12 white-rounded inset-shadow">
                 
                     <form method="post" role="form" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         <fieldset>
@@ -79,7 +81,7 @@
                             </div>
                         </fieldset>
                     </form>
-                <hr>
+                <hr class="extra-margins">
                     {% if show_passwd_form %}
                     <h2 {% if password_form.errors %} name="password" {%endif%}>{{ _('Change your Password') }}</h2>
                     <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
