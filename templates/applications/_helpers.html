@@ -121,31 +121,41 @@
 
 
 {% macro show_app(app, active_cat, current_user, upload_method) %}
-<div class="project-item row {{class}} well">
-    <h2><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{ app.name }}</a></h2>
-    <div class="row">
-        <div class="col-md-3">
-            {{ render_app_thumbnail(app, upload_method, class='thumbnail', style='max-width:100px; max-height:100px;') }}
-        </div> <!-- End of col-md-3 -->
-        <div id="data" class="col-md-9">
-            <p style="margin:0"><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ app.description }}</p>
-            <p style="margin:0"><strong><i class="glyphicon glyphicon-ok"></i> {{ _('Creation Date') }}</strong>: <span class="date">{{ app.created[0:10] }}</span></p>
-            {% if app.last_activity_raw != None %}
-            <p style="margin:0"><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: {{ app.last_activity}}</p>
-            <span class="activity" style="display:none;">{{app.last_activity_raw}}</span>
-            {% endif %}
-            <p style="margin:0"><strong><i class="glyphicon glyphicon-cogs"></i> {{ _('Overall progress') }}</strong>: <span class="progress">{{ app.overall_progress | round | int }}</span>% completed</p>
-            {% if app.owner == current_user.fullname %}
-            <p style="margin:0"><strong><i class="glyphicon glyphicon-user"></i> {{ _('Created by') }}</strong>: {{ _('Me') }}</p>
-            {% else %}
-            <p style="margin:0"><strong><i class="glyphicon glyphicon-user"></i> {{ _('Created by') }}</strong>: {{ app.owner }}</p>
-            {% endif %}
-            {% if active_cat != "draft" %}
-            <p style="margin:0"><a class="btn btn-primary" href="{{ url_for('app.presenter', short_name = app.short_name) }}"><i class="icon glyphicon glyphicon-white icon-ok"></i> {{ _('Try it!') }}</a></p>
-            {% endif %}
-        </div> <!-- end of id=data class=col-md-8 -->
-    </div> <!--end of class=row -->
-</div><!-- end of class=row -->
+<div class="container container-padded">
+    <div class="row project-summary">
+        <div class="img-polaroid col-md-4 col-xs-12">
+            <a href="{{ url_for('app.presenter', short_name = app.short_name) }}" title="{{ app.short_name }}">
+                {{ render_app_thumbnail(app, upload_method, class='img-project img-responsive') }}
+            </a>
+        </div>
+        
+        <div id="data" class="col-md-3 col-xs-10 col-xs-offset-1 col-sm-offset-0 text-center-xs">
+            <h2><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{ app.name }}</a></h2>
+            <p>{{ app.description }}</p>
+        </div>
+        
+            
+            <div class="col-sm-1 col-sm-offset-1 col-xs-2">
+                <div class="meter inset-shadow pull-right-sm"><span data-progress="{{ app.overall_progress | round | int }}" data-app="{{app.short_name}}"><span><span></span></span></div>
+            </div>
+        
+            <div class="col-md-3 col-xs-10" id="show-app-stats">
+                <div class="white-rounded inset-shadow">
+                    <span class="vcenter"><i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs" id="{{app.short_name}}Complete">Completed: 0%</div></span>
+                    <hr class="no-margins">
+                    <span class="vcenter"><i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs">Tasks: {{app.n_tasks}}</div></span>
+                    <hr class="no-margins">
+                    <span class="vcenter"><i class="fa fa-users fa-2x"></i><div class="padding-left-xs">Volunteers: {{ app.n_volunteers}}</div></span>
+                </div>
+                <div class="text-center padding-top-sm">
+                    {% if active_cat != "draft" %}
+                        <p><a class="btn btn-danger" href="{{ url_for('app.presenter', short_name = app.short_name) }}">{{ _('Start Contributing') }}</a></p>
+                    {% endif %}
+                </div>
+            </div>
+            
+    </div>
+</div>
 {%- endmacro %}
 
 {% macro broken_image() %}
@@ -194,42 +204,41 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_overall_progress(app, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
-<div class="row">
-    <div class="col-md-1"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
-    <h2><strong> {{_('Overall progress')}}</strong>: {{ overall_progress | round | int }}% {{_('completed')}}
-        {% if show_contribute_btn %}
-        <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-thumbs-up" style="color:white;"></i> {{ _('Start Contributing Now!') }}</a>
-        {% elif show_n_tasks %}
-        <span class="pull-right"><strong>{{n_tasks}}</strong> {{_('Tasks')}}</span>
-        {% endif %}
-
-    </h2>
+<div class="container padding-top">
+    <div class="row">
+        <div class="col-md-1"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
+        <h2><strong> {{_('Overall progress')}}</strong>: {{ overall_progress | round | int }}% {{_('completed')}}
+            {% if show_contribute_btn %}
+                <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-thumbs-up" style="color:white;"></i> {{ _('Start Contributing Now!') }}</a>
+            {% elif show_n_tasks %}
+                <span class="pull-right"><strong>{{n_tasks}}</strong> {{_('Tasks')}}</span>
+            {% endif %}
+        </h2>
+    </div>
 </div>
 {% endmacro %}
 
 {% macro render_grid_apps(apps, title, upload_method) %}
-    <div class="banner">
-        <div class="row">
-            <div class="col-md-4">
-                <h1>{{title}}</h1>
-            </div>
-            <div class="col-md-8">
+    <div class="container container-padded">
+        <div class="row text-center">
+            <h1>{{title}}</h1>
+        </div>
+            <div class="col-xs-12">
               <ul class="featured">
                   {% for app in apps %}
-                  <li><a href={{ url_for('app.details', short_name=app.short_name)}}>
-                      {{ render_app_thumbnail(app, upload_method, class='img-polaroid', style="min-height:100px; min-width:100px;")}}
-                      <h3>{{app.name}}</h3>
-                      <span class="label label-info">{{ _('Info') }}</span>
-                      </a>
+                  <li><div class="img-polaroid">
+                            <a href={{ url_for('app.details', short_name=app.short_name)}} title="{{app.name}}">
+                                {{ render_app_thumbnail(app, upload_method, class='img-project img-responsive') }}
+                            </a>
+                        </div>
                   </li>
                   {% endfor %}
                   {% for number in range(18 - apps |count) %}
-                  <li></li>
+                    <li></li>
                   {% endfor %}
               </ul>
             </div>
         </div>
-    </div>
 {% endmacro %}
 
 {% macro render_loading(text) %}
