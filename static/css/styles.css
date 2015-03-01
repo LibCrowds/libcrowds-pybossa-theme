@@ -1,6 +1,7 @@
 /* Styling */
 /* ======= */
 
+
 .pull-down {
   align-items: flex-end;
   display: flex;
@@ -8,10 +9,10 @@
 }
 
 a {
-  color: #f4645f;
+  color: #BA0000;
 }
 a:focus, a:hover {
-  color: #BA0000;	
+  color: #D00000;	
   text-decoration: none;
 }
 #body-content {
@@ -21,11 +22,12 @@ a:focus, a:hover {
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-  font-weight: 300;  
+  font-weight: 300;
 }
 
 .h1, .h2, .h3, .h4, h1, h2, h3, h4 {
   margin-bottom: 25px;
+  color: #666;
 }
 
 p {
@@ -594,8 +596,8 @@ ul.users li {
 }
 ul.users li a {
   display: block;
-  border: solid 4px #FFF;
   margin-bottom: 5px;
+  margin-right: 20px;
 }
 
 /* Cookies banner */
@@ -984,6 +986,12 @@ p.score {
   color: #777777;
 }
 
+.inset-text-mid-grey {
+  text-shadow: #EDEDED 0.5px 0.5px 0px;
+  font-weight: 300;
+  color: #545454;
+}
+
 .inset-text-dark-grey {
   text-shadow: #A6A6A6 0.5px 0.5px 0px;
   font-weight: 300;
@@ -995,6 +1003,15 @@ color: #f4645f;
 text-shadow: #F9F9F9 0.5px 0.5px 0px;
 /* font-weight: 400; */
 color: #797979;
+}
+
+.pattern-white-wall-2x h1,
+.pattern-white-wall-2x h2,
+.pattern-white-wall-2x h3,
+.pattern-white-wall h1,
+.pattern-white-wall h2,
+.pattern-white-wall h3 {
+  color: #696969
 }
 
 /* Background colours
@@ -1026,6 +1043,12 @@ i.fa-tasks {
 
 i.fa-check-square-o {
   color: #15b592;
+}
+
+h1 i,
+h2 i,
+h3 i {
+  padding-right: 10px;
 }
 
 
@@ -1389,6 +1412,42 @@ display: flex;
   z-index: 5;
 }
 
+/* Rotate all even images 2 degrees */
+ul.polaroids li:nth-child(even) a {
+  -webkit-transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+}
+ 
+/* Don't rotate every third image, but offset its position */
+ul.polaroids li:nth-child(3n) a {
+  -webkit-transform: none;
+  -moz-transform: none;
+  position: relative;
+  top: -5px;
+}
+ 
+/* Rotate every fifth image by 5 degrees and offset it */
+ul.polaroids li:nth-child(5n) a {
+  -webkit-transform: rotate(5deg);
+  -moz-transform: rotate(5deg);
+  position: relative;
+  right: 5px;
+}
+ 
+/* Keep default rotate for every eighth, but offset it */
+ul.polaroids li:nth-child(8n) a {
+  position: relative;
+  top: 8px;
+  right: 5px;
+}
+ 
+/* Keep default rotate for every eleventh, but offset it */
+ul.polaroids li:nth-child(11n) a {
+  position: relative;
+  top: 3px;
+  left: -5px;
+}
+
 .img-project {
   max-width: 150px;
   max-height: 150px;
@@ -1624,6 +1683,7 @@ display: flex;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
   -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  z-index: 1;
 }
 
 /**
@@ -1712,4 +1772,20 @@ display: flex;
     flex: 1 0 0;
 
     overflow: auto;
+}
+
+/*
+ * Table
+ */
+
+thead {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+background-color: rgba(0,0,0,0.05);
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+background-color: rgba(255,255,255,1);
 }
