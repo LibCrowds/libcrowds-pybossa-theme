@@ -6,18 +6,18 @@
 
 {% block content %}
 
-<div class="container-padded">
-    <section class="mid-grey">
+<div class="container-padded  remove-padding-bottom">
+    <section class="pattern-brushed box-shadow-grey">
         <div class="container padding-top">
             {{ helper.render_user_profile(current_user, upload_method, "settings") }} 
         </div>
     </section>
     
-    <section class="white">
+    <section  class="white pattern-white-wall-2x">
         <div class="container container-padded">
             <div class="text-center">
                 <h2>{{ _('Your Contributions') }}</h2>
-            {% if apps %}
+            {% if apps_contrib %}
                     {% for app in apps_contrib %}
                     
                     
