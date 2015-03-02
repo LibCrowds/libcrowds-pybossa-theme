@@ -25,10 +25,10 @@
     var appStats = {{appStats|safe}};
 </script>
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-sm-3">
         {{helper.render_app_local_nav(app, 'stats', current_user)}}
     </div>
-    <div class="col-md-9">
+    <div class="col-sm-9">
         {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
         {{ privacy.render_lock_page() }}
         {% else %}
@@ -46,12 +46,12 @@
 
             <!-- Hour Stats CARD -->
             <div id="card" class="row">
-                <div class="col-md-12  well">
-                    <h2>{{_('Distribution of Answers per Hour')}}</h2>
-                    <div id="hourStats" style="margin:0;height:500px;">
+                <div class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
+                    <h2 class="inset-text-grey">{{_('Distribution of Answers per Hour')}}</h2>
+                    <div id="hourStats" style="margin:20px;height:500px;">
                     </div>
                     <script>
-                    (function(){
+                   $(window).on("resize", function () {
                     function answersPerHour(obj) {
                         return (parseInt(obj.y) + " answers were submitted at " + parseInt(obj.x) + " hours");
                     }
@@ -59,6 +59,7 @@
                     function hours(obj) {
                         return (parseInt(obj) + ":00");
                     }
+                    
                     var container = document.getElementById('hourStats');
                     var graph = Flotr.draw(container, [{data: appStats.hourStats[1]['values'], label:appStats.hourStats[1]['label']},{ data:appStats.hourStats[2]['values'],label:appStats.hourStats[2]['label'] }], {
                         bubbles : {show: true, baseRadius:5},
@@ -68,7 +69,7 @@
                         HtmlText: false,
                         legend  : {postion: 'nw'}
                     });
-                    })();
+                    }).resize();
                     </script>
                 </div>
             </div>
@@ -76,11 +77,11 @@
 
             <!-- Day Stats Total CARD -->
             <div id="card" class="row">
-                <div  class="col-md-12  well">
-                    <h2>{{_('Completed Tasks in the last 15 days')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
-                    <div id="dayStatsTotal" style="margin:0;height:500px;"></div>
+                <div  class="col-sm-12  pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
+                    <h2 class="inset-text-grey">{{_('Completed Tasks in the last 15 days')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
+                    <div id="dayStatsTotal" style="margin:20px;height:500px;"></div>
                     <script>
-                    (function(){
+                   $(window).on("resize", function () {
                     function date(obj) {
                         var d = new Date(parseInt( obj ));
                         var year = d.getFullYear();
@@ -138,7 +139,7 @@
                         Flotr.EventAdapter.observe(dayStatsTotalContainer, 'flotr:click', function() {
                             drawGraph();
                         });
-                    })();
+                    }).resize();
                     </script>
                 </div>
             </div>
@@ -147,11 +148,11 @@
 
             <!-- Day Stats CARD -->
             <div id="card" class="row">
-                <div  class="col-md-12  well">
-                    <h2>{{_('Answers per day')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
-                    <div id="dayStats" style="margin:0;height:500px;"></div>
+                <div  class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
+                    <h2 class="inset-text-grey">{{_('Answers per day')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
+                    <div id="dayStats" style="margin:20px;height:500px;"></div>
                     <script>
-                    (function(){
+                   $(window).on("resize", function () {
                     function date(obj) {
                         var d = new Date(parseInt( obj ));
                         var year = d.getFullYear();
@@ -208,7 +209,7 @@
                         Flotr.EventAdapter.observe(dayStatsContainer, 'flotr:click', function() {
                             drawGraph();
                         });
-                    })();
+                    }).resize();
                     </script>
                 </div>
             </div>
@@ -217,10 +218,10 @@
 
             <!-- Number of answers CARD -->
             <div id="card" class="row">
-                <div id="dist-answers" class="col-md-12  well">
-                    <h2>{{_('Distribution of Answers')}}</h2>
+                <div id="dist-answers" class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
+                    <h2 class="inset-text-grey">{{_('Distribution of Answers')}}</h2>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <table class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -239,10 +240,10 @@
                             </table>
 
                         </div>
-                        <div id="userAnsStats" class="col-md-4" style="height: 250px; width:250px;">
+                        <div id="userAnsStats" class="col-sm-4" style="height: 250px; width:250px;">
                         </div>
                         <script>
-                        (function(){
+                       $(window).on("resize", function () {
                         var container = document.getElementById('userAnsStats');
                         var graph = Flotr.draw(container, [
                             {data:[appStats.userStats['values'][0]['value']], label:appStats.userStats['values'][0]['label']},
@@ -255,7 +256,7 @@
                             yaxis   : {showLabels: false},
                             legend  : {postion: 'nw'}
                         });
-                        })();
+                        }).resize();
                         </script>
                     </div>
                 </div>
@@ -264,10 +265,10 @@
 
             <!-- Anon User Stats CARD -->
             <div id="card" class="row">
-                <div id="dist-anon" class="col-md-12  well">
-                    <h2>{{_('Details about Anonymous Users')}}</h2>
+                <div id="dist-anon" class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
+                    <h2 class="inset-text-grey">{{_('Details about Anonymous Users')}}</h2>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <p><i class="glyphicon glyphicon-group"></i> <strong>{{userStats.anonymous.users}} </strong> {{_('anonymous users have')}} <strong>{{_('participated')}}</strong></p>
                             {% if userStats.anonymous.top5 and userStats.geo %}
                             <h3>Top 5 users</h3>
@@ -291,10 +292,10 @@
                             </table>
                             {% endif %}
                         </div>
-                        <div id="userAnonStats" class="col-md-12"  style='height:400px'>
+                        <div id="userAnonStats" class="col-sm-12"  style='height:400px'>
                         </div>
                         <script>
-                        (function(){
+                       $(window).on("resize", function () {
                         var container = document.getElementById('userAnonStats');
                         var graph = Flotr.draw(container, [
                             {data:[[0, appStats.userAnonStats['top5'][0]['tasks'] ]],  label:'{{_('User')}} 1'},
@@ -310,18 +311,18 @@
                             yaxis   : {showLabels: false},
                             legend  : {postion: 'se'}
                         });
-                        })();
+                        }).resize();
                         </script>
                     </div>
                     {% if userStats.geo %}
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <div id="map" style="height:250px;"></div>
                             <p class="note">{{_('This page includes GeoLite data created by MaxMind, available from')}}
                             <a href="http://www.maxmind.com">http://www.maxmind.com</a></p>
                         </div>
                         <script>
-                            (function(){
+                           $(window).on("resize", function () {
                             var map = L.map('map');
                             map.fitWorld();
                             map.setZoom(1);
@@ -345,7 +346,7 @@
                                 }
                             }
                             map.addLayer(markers);
-                            })();
+                            }).resize();
                         </script>
                     </div>
                     {% endif %}
@@ -355,10 +356,10 @@
 
             <!-- Auth User Stats CARD -->
             <div id="card" class="row">
-                <div id="dist-auth" class="col-md-12  well">
-                    <h2>{{_('Details about Authenticated Users')}}</h2>
+                <div id="dist-auth" class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
+                    <h2 class="inset-text-grey">{{_('Details about Authenticated Users')}}</h2>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <p><i class="glyphicon glyphicon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
                             {% if userStats.authenticated.top5 %}
                             <h3>{{_('Top 5 users')}}</h3>
@@ -380,10 +381,10 @@
                             </table>
                             {% endif %}
                         </div>
-                        <div id="userAuthStats" class="col-md-12" style='height:400px'>
+                        <div id="userAuthStats" class="col-sm-12" style='height:400px'>
                         </div>
                         <script>
-                        (function(){
+                       $(window).on("resize", function () {
                         var container = document.getElementById('userAuthStats');
                         var graph = Flotr.draw(container, [
                             {data:[[0, appStats.userAuthStats['top5'][0]['tasks'] ]],  label:appStats.userAuthStats['top5'][0]['fullname']},
@@ -399,7 +400,7 @@
                             yaxis   : {showLabels: false},
                             legend  : {postion: 'nw'}
                         });
-                        })();
+                        }).resize();
                         </script>
                     </div>
                 </div>

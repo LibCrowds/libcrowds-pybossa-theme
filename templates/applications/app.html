@@ -10,11 +10,11 @@
             
                 <div class="row">
                     {% if app %}
-                    <div class="col-md-3">
+                    <div class="col-sm-3">
                         {{ helper.render_app_local_nav(app, 'info', current_user) }}
                     </div>
                     <!-- Project -->
-                    <div class="col-md-9" style="min-height:400px">
+                    <div class="col-sm-9" style="min-height:400px">
                         {{ helper.render_app_title(app, upload_method) }}
                         <hr>
                         {{ helper.render_overall_progress(app, n_tasks, overall_progress) }}
