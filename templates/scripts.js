@@ -75,8 +75,8 @@ function animateCounter (elem) {
 
 function formatDate(str) {
     var date = str.substring(0,10);
-    var arr = str.split("-");
-    var ret = arr[2] + '-' + arr[1] + "-"; + arr[0]
+    var arr = date.split("-");
+    var ret = arr[2] + '-' + arr[1] + "-" + arr[0];
     return ret;
 }
 
