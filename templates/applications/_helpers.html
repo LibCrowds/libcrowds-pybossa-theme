@@ -79,10 +79,10 @@
 
 {% macro render_app_short_summary(app, upload_method) -%}
 <div class="row well well-small">
-    <div class="col-md-3">
+    <div class="col-sm-3">
         {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
     </div>
-    <div class="col-md-9">
+    <div class="col-sm-9">
         <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
         <p>{{ app['description'] }}</p>
         <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-wrench"></i> {{ _('Settings') }}</a>
@@ -92,10 +92,10 @@
 
 {% macro render_app_admin_featured(app, upload_method) -%}
 <div class="row well well-small">
-    <div class="col-md-3">
+    <div class="col-sm-3">
         {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
     </div>
-    <div class="col-md-9">
+    <div class="col-sm-9">
         <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
         <p>{{ app['description'] }}</p>
         <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-wrench"></i> {{ _('Settings') }}</a>
@@ -148,7 +148,7 @@
                 <div class="meter inset-shadow pull-right"><span data-progress="{{ app.overall_progress | round | int }}" data-app="{{app.short_name}}"><span><span></span></span></div>
             </div>
         
-            <div class="col-md-3 hidden-sm hidden-xs" id="show-app-stats">
+            <div class="col-sm-3 hidden-sm hidden-xs" id="show-app-stats">
                 <div class="white-rounded inset-shadow">
                     <span class="vcenter"><i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs" id="{{app.short_name}}Complete">Completed: 0%</div></span>
                     <hr class="no-margins">

@@ -5,27 +5,31 @@
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-<div class="row">
-    <div class="col-md-3">
-        {{ helper.render_app_local_nav(app, 'tasks', current_user)}}
-    </div>
-    <div class="col-md-9">
-        {{ helper.render_app_title(app, subtitle=_('Setup task autoimporter'))}}
+    <div class="container-padded">
+        <div class="container container-padded">
         <div class="row">
-            <div class="col-md-12">
-                <p class="lead">{{_('Use one of the following available')}}
-                <strong>{{_('importers')}}</strong> {{_('to setup as the autoimporter')}}</p>
+            <div class="col-sm-3">
+                {{ helper.render_app_local_nav(app, 'tasks', current_user)}}
+            </div>
+            <div class="col-sm-9">
+                {{ helper.render_app_title(app, subtitle=_('Setup task autoimporter'))}}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="lead">{{_('Use one of the following available')}}
+                        <strong>{{_('importers')}}</strong> {{_('to setup as the autoimporter')}}</p>
+                    </div>
+                </div>
+                {% for row in available_importers|batch(2) %}
+                <div class="row">
+                    {% for importer in row %}
+                    <div class="col-sm-6">
+                        {% include importer %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
             </div>
         </div>
-        {% for row in available_importers|batch(2) %}
-        <div class="row">
-            {% for importer in row %}
-            <div class="col-md-6">
-                {% include importer %}
-            </div>
-            {% endfor %}
-        </div>
-        {% endfor %}
     </div>
 </div>
 {% endblock %}

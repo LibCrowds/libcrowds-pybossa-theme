@@ -5,43 +5,47 @@
 
 {% block content %}
 {% if app %}
+            <div class="container-padded">
+        <div class="container container-padded">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 {{ helper.render_app_local_nav(app, 'tasks', current_user) }}
             </div>
-            <div class="col-md-9">
+            <div class="col-sm-9">
                 {{ helper.render_app_title(app, subtitle=_('Task Settings'))}}
                 <hr>
                 <div class="row">
-                    <div id="task_scheduler" class="col-md-6 well">
+                    <div id="task_scheduler" class="col-sm-6 well">
                         <h2><i class="glyphicon glyphicon-filter"></i> {{_('Task Scheduler')}}</h2>
                         <p>{{_('Change how the tasks are delivered to volunteers')}}</p>
                         <a href="{{url_for('app.task_scheduler', short_name=app.short_name)}}" class="btn btn-primary">{{_('Scheduler')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
-                    <div id="task_priority" class="col-md-6 well">
+                    <div id="task_priority" class="col-sm-6 well">
                         <h2><i class="glyphicon glyphicon-sort-by-order-alt"></i> {{_('Task Priority')}}</h2>
                         <p>{{_('Change the priority of the tasks')}}</p>
                         <a href="{{url_for('app.task_priority', short_name=app.short_name)}}" class="btn btn-primary">{{_('Priority')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
                 <div class="row">
-                    <div id="task_delete" class="col-md-6 well">
+                    <div id="task_delete" class="col-sm-6 well">
                         <h2><i class="glyphicon glyphicon-remove"></i> {{_('Delete Tasks')}}</h2>
                         <p>{{_('Delete all the tasks and associated answers')}}</p>
                         <a href="{{url_for('app.delete_tasks', short_name=app.short_name)}}" class="btn btn-primary">{{_('Delete')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
-                    <div id="task_redundancy" class="col-md-6 well">
+                    <div id="task_redundancy" class="col-sm-6 well">
                         <h2><i class="glyphicon glyphicon-repeat"></i> {{_('Task Redundancy')}}</h2>
                         <p>{{_('Change the redundancy level for the tasks')}}</p>
                         <a href="{{url_for('app.task_n_answers', short_name=app.short_name)}}" class="btn btn-primary">{{_('Redundancy')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
-            </div><!-- col-md-9 -->
+            </div><!-- col-sm-9 -->
         </div>
 {% else %}
   <div class="page-header">
       <h1>{{_('Sorry! This project does not exist.')}}.</h1>
   </div>
 {% endif %}
+        </div>
+            </div>
 {{ helper.knob() }}
 {% endblock %}

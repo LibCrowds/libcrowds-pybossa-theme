@@ -5,11 +5,13 @@
 
 {% block content %}
 {% if app %}
+    <div class="container-padded">
+        <div class="container container-padded">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 {{ helper.render_app_local_nav(app, 'tasks', current_user) }}
             </div>
-            <div class="col-md-9">
+            <div class="col-sm-9">
                 {{ helper.render_app_title(app, upload_method, subtitle=_('Browse tasks')) }}
                 <hr>
                 <p>{{_('This page shows all the available tasks for this project')}}.</p> 
@@ -24,7 +26,7 @@
                 {% for t in tasks %}
                 {% set task_pct = t.pct_status*100 %}
                 <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-sm-3">
                             {% if task_pct >= 100 %}
                             {{_('Task')}} <span class="label label-success">#{{ t.id }}</span>
                             {% else %}
@@ -41,7 +43,7 @@
                                 <div class="bar" style="width:{{ task_pct }}%;"></div>
                         </div>
                         {% endif %}
-                        <div class="col-md-4">
+                        <div class="col-sm-4">
                         {% if task_pct >= 100 %}
                             <a id="fulldownload" class="btn btn-success" href="{{ url_for('app.export', 
                                 short_name=app.short_name,
@@ -57,7 +59,7 @@
                         </div>
                 </div>
                 {% endfor %}
-            </div><!-- col-md-9 -->
+            </div><!-- col-sm-9 -->
         </div>
                 {{ helper.render_pagination(pagination, _('Tasks')) }}
 {% else %}
@@ -65,6 +67,8 @@
       <h1>{{_('Sorry! This project does not exist.')}}.</h1>
   </div>
 {% endif %}
+        </div>
+    </div>
 <script>
     $("a[rel=tooltip]").tooltip();
 </script>

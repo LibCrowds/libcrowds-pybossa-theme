@@ -6,11 +6,13 @@
 
 {% block content %}
 {% if app %}
+            <div class="container-padded">
+        <div class="container container-padded">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 {{ helper.render_app_local_nav(app, 'tasks', current_user) }}
             </div>
-            <div class="col-md-9">
+            <div class="col-sm-9">
                 {{ helper.render_app_title(app, subtitle=_('Task Scheduler'))}}
                 <p>{{_('You can choose from the following schedulers')}}:</p>
                 <ul>
@@ -36,13 +38,15 @@
                         </div>
                     </fieldset>
                 </form>
-            </div><!-- col-md-9 -->
+            </div><!-- col-sm-9 -->
         </div>
 {% else %}
   <div class="page-header">
       <h1>{{_('Sorry! This project does not exist.')}}.</h1>
   </div>
 {% endif %}
+</div>
+                    </div>
 {{ helper.broken_image() }}
 {{ helper.knob() }}
 {% endblock %}

@@ -90,6 +90,10 @@ input[type="color"]:focus,
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(139, 191, 54, 0.6);
 }
 
+input[type="checkbox"] {
+  width: auto;
+}
+
 .remove-padding {
   padding: 0px !important;
 }
@@ -1712,7 +1716,6 @@ ul.polaroids .polaroid img {
 }
 
 .shadow-circle {
-  display: inline-block;
   border-top: 1px solid #ECEDED;
   border-radius: 50%;
 }
