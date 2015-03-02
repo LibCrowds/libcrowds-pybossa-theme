@@ -1,6 +1,14 @@
 /* Styling */
 /* ======= */
 
+.project-desc {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.project-polaroid {
+  padding-top: 20px;
+}
 
 .pull-down {
   align-items: flex-end;
@@ -99,6 +107,14 @@ input[type="color"]:focus,
 
 .padding-top-sm {
   padding-top: 40px;
+}
+
+.padding-top-xs {
+  padding-top: 20px;
+}
+
+.margin-top-xs {
+  margin-top: 10px;
 }
 
 .padding-bottom {
@@ -333,10 +349,11 @@ transform: none;
 }
 
 .nav-tabs>li>a {
-  color: #3F3F3F;
-  border: 1px solid #3F3F3F;
+  color: #2D2D2D;
+  font-weight: 400;
   border-radius: 10px 10px 0 0;
-  background-image: url(../img/patterns/brushed_alu_dark.png);
+  background-image: url(../img/patterns/grey_carbon.png);
+  text-shadow: #D2D2D2 0.5px 0.5px 0px;
 }
 
 .nav-tabs>li>a:hover,
@@ -346,7 +363,10 @@ transform: none;
 }
 
 .nav-tabs>li.active>a {
-  background-image: url(../img/patterns/brushed_alu.png);
+  background-image: url(../img/patterns/white_carbon.png);
+  color: #454545;
+  text-shadow: #E8E8E8 0.5px 0.5px 0px;
+  font-weight: 300;
 }
 
 .banner {
@@ -723,31 +743,22 @@ ul.users li a {
   padding: 0;
   width: 220px;
   background-color: #fff;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
-     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
-          box-shadow: 0 1px 4px rgba(0,0,0,.065);
 }
+
 .bs-docs-sidenav > li > a {
+  color: #666;
   display: block;
   width: 190px;
   margin: 0 0 -1px;
-  padding: 8px 14px;
-  border: 1px solid #e5e5e5;
+  padding: 10px 14px;
+  -webkit-border-radius: 6px 6px 6px 6px;
+     -moz-border-radius: 6px 6px 6px 6px;
+          border-radius: 6px 6px 6px 6px;
 }
-.bs-docs-sidenav > li:first-child > a {
-  -webkit-border-radius: 6px 6px 0 0;
-     -moz-border-radius: 6px 6px 0 0;
-          border-radius: 6px 6px 0 0;
-}
-.bs-docs-sidenav > li:last-child > a {
-  -webkit-border-radius: 0 0 6px 6px;
-     -moz-border-radius: 0 0 6px 6px;
-          border-radius: 0 0 6px 6px;
-}
+
 .bs-docs-sidenav > .active > a {
+  background-color: #D00000;
+  color: #ffffff;
   position: relative;
   z-index: 2;
   padding: 9px 15px;
@@ -757,6 +768,11 @@ ul.users li a {
      -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
           box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
 }
+
+.bs-docs-sidenav .nav-link.active a:after {
+  opacity: 0;
+}
+
 /* Chevrons */
 .bs-docs-sidenav .icon-chevron-right {
   float: right;
@@ -950,16 +966,6 @@ ul.users li a {
     text-decoration:none;
 }
 
-#contributed-apps ul {
-    list-style: none;
-    padding:0; margin:0;
-}
-
-#created-apps ul {
-    list-style: none;
-    padding:0; margin:0;
-}
-
 /* Text styles 
 -------------------------*/
 
@@ -1079,6 +1085,20 @@ h3 i {
 .btn-padded {
 margin-top: 10px;
 margin-bottom: 10px;
+}
+
+#btn-group-cookies {
+  position: relative;
+  display: flex;
+  vertical-align: middle;
+  justify-content: center;
+}
+
+@media (min-width: 992px) {
+  #btn-group-cookies {
+    padding-left: 10px;
+    display: inline-block;
+  }
 }
 
 .btn-default,
@@ -1381,11 +1401,12 @@ display: flex;
   transform: none;
 }
 
-.img-polaroid a:after {
+ul.polaroids a.polaroid:after {
   content: attr(title);
 }
 
-.img-polaroid a {
+ul.polaroids a.polaroid {
+  list-style: none;
   word-wrap: break-word;
   background: #fff;
   display: inline;
@@ -1405,69 +1426,48 @@ display: flex;
   -moz-transform: rotate(-2deg);
 }
 
-.img-polaroid a:hover {
+ul.polaroids a.polaroid:hover {
   -webkit-transform: scale(1.25);
   -moz-transform: scale(1.25);
   position: relative;
   z-index: 5;
 }
 
-/* Rotate all even images 2 degrees */
 ul.polaroids li:nth-child(even) a {
   -webkit-transform: rotate(2deg);
   -moz-transform: rotate(2deg);
 }
  
-/* Don't rotate every third image, but offset its position */
-ul.polaroids li:nth-child(3n) a {
+ul.polaroids .polaroid li:nth-child(3n) a {
   -webkit-transform: none;
   -moz-transform: none;
   position: relative;
   top: -5px;
 }
  
-/* Rotate every fifth image by 5 degrees and offset it */
-ul.polaroids li:nth-child(5n) a {
+ul.polaroids .polaroid li:nth-child(5n) a {
   -webkit-transform: rotate(5deg);
   -moz-transform: rotate(5deg);
   position: relative;
   right: 5px;
 }
  
-/* Keep default rotate for every eighth, but offset it */
-ul.polaroids li:nth-child(8n) a {
+ul.polaroids .polaroid li:nth-child(8n) a {
   position: relative;
   top: 8px;
   right: 5px;
 }
  
-/* Keep default rotate for every eleventh, but offset it */
-ul.polaroids li:nth-child(11n) a {
+ul.polaroids .polaroid li:nth-child(11n) a {
   position: relative;
   top: 3px;
   left: -5px;
 }
 
-.img-project {
+ul.polaroids .polaroid img {
   max-width: 150px;
   max-height: 150px;
-}
-
-@media (min-width: 992px) {
-  .img-project {
-    max-width: 200px;
-    max-height: 200px;
-  }
-  
-  .img-polaroid a{
-    width: 220px;
-  }
-}
-
-@media (max-width: 767px) {
-  .img-polaroid a {
-    display: none;
-  }
+  margin-bottom: 10px;
 }
 
 .jcrop-holder div {
@@ -1509,6 +1509,15 @@ ul.polaroids li:nth-child(11n) a {
 /**
  * Patterns
  */
+
+
+.pattern-micro-carbon-2x {
+  background-image: url(../img/patterns/micro_carbon_@2X.png.png);
+}
+
+.pattern-micro-carbon {
+  background-image: url(../img/patterns/micro_carbon.png.png);
+}
 
 .pattern-binding-dark-2x {
   background-image: url(../img/patterns/binding_dark_@2X.png);
@@ -1593,6 +1602,10 @@ ul.polaroids li:nth-child(11n) a {
 
 .pattern-white-carbon{
   background-image: url(../img/patterns/white_carbon.png);
+}
+
+.pattern-grey-carbon{
+  background-image: url(../img/patterns/grey_carbon.png);
 }
 
 .pattern-white-wall {
@@ -1697,16 +1710,16 @@ ul.polaroids li:nth-child(11n) a {
   background: #fff;
   -moz-border-radius-topright: 10px;
   -moz-border-radius-topleft: 10px;
-  -moz-border-radius-bottomright: 5px;
-  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
   -webkit-border-top-right-radius: 10px;
   -webkit-border-top-left-radius: 10px;
-  -webkit-border-bottom-right-radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
   padding: 3px;
   align-items: flex-end;
   display: flex;
@@ -1717,17 +1730,17 @@ ul.polaroids li:nth-child(11n) a {
   display: block;
   width: 50px !important;
   -webkit-border-top-right-radius: 10px;
-  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 10px;
   -moz-border-radius-topright: 10px;
-  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomright: 10px;
   border-top-right-radius: 10px;
-  border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 10px;
   -webkit-border-top-left-radius: 10px;
-  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 10px;
   -moz-border-radius-topleft: 10px;
-  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomleft: 10px;
   border-top-left-radius: 10px;
-  border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 10px;
   background-color: rgb(127,247,127);
   background-image: -webkit-gradient(
 			  linear,

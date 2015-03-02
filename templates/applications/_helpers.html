@@ -33,20 +33,19 @@
 
 {% macro render_app_local_nav(app, active_link, current_user) -%}
 <ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
-    <li {% if active_link=="info"%}class="active"{% endif %}><a href="{{url_for('app.details', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Info')}}</a></li>
-    <li {% if active_link=="contribute"%}class="active"{% endif %}><a href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Contribute')}}</a></li>
-    <li {% if active_link=="tasks"%}class="active"{% endif %}><a href="{{url_for('app.tasks', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Tasks')}}</a></li>
-    <li {% if active_link=="stats"%}class="active"{% endif %}><a href="{{url_for('app.show_stats', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Statistics')}}</a></li>
+    <li class="nav-link{% if active_link=="info"%} active{% endif %}"><a href="{{url_for('app.details', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Info')}}</a></li>
+    <li class="nav-link{% if active_link=="contribute"%} active{% endif %}"><a href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Contribute')}}</a></li>
+    <li class="nav-link{% if active_link=="tasks"%} active{% endif %}"><a href="{{url_for('app.tasks', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Tasks')}}</a></li>
+    <li class="nav-link{% if active_link=="stats"%} active{% endif %}"><a href="{{url_for('app.show_stats', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Statistics')}}</a></li>
     {% if ( current_user.is_authenticated() and current_user.id == app.owner_id ) or current_user.admin %}
-    <li {% if active_link=="settings"%}class="active"{% endif %}><a href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Settings')}}</a></li>
+    <li class="nav-link{% if active_link=="settings"%} active{% endif %}"><a href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Settings')}}</a></li>
     {% endif %}
     {% if ( current_user.is_authenticated() and current_user.id == app.owner_id
     and current_user.pro) or current_user.admin %}
-    <li {% if active_link=="auditlog"%}class="active"{% endif %}><a
+    <li class="nav-link{% if active_link=="auditlog"%} active{% endif %}"><a
         href="{{url_for('app.auditlog', short_name=app.short_name)}}"><i
     class="glyphicon glyphicon-chevron-right"></i> {{_('Audit Logs')}}</a></li>
     {% endif %}
-    <li {% if active_link=="blog"%}class="active"{% endif %}><a href="{{url_for('app.show_blogposts', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Blog')}}</a></li>
 </ul>
 {% endmacro %}
 
@@ -121,25 +120,35 @@
 
 
 {% macro show_app(app, active_cat, current_user, upload_method) %}
+
 <div class="container container-padded">
     <div class="row project-summary">
-        <div class="img-polaroid col-md-4 col-xs-12">
-            <a href="{{ url_for('app.presenter', short_name = app.short_name) }}" title="{{ app.short_name }}">
-                {{ render_app_thumbnail(app, upload_method, class='img-project img-responsive') }}
-            </a>
+        <div class="col-md-8 col-xs-10 col-xs-offset-1 col-md-offset-0 white-rounded inset-shadow project-desc">
+                <div class="col-sm-6 col-xs-12 hidden-sm hidden-xs project-polaroid">
+                    <li>
+                        <a  class="polaroid" href="{{ url_for('app.presenter', short_name = app.short_name) }}" title="{{ app.name }}">
+                            {{ render_app_thumbnail(app, upload_method) }}
+                        </a>
+                    </li>
+                </div>
+                
+                <div id="data" class="col-sm-6 col-xs-10 col-xs-offset-1 col-sm-offset-0">
+                    <h2><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{ app.name }}</a></h2>
+                    <p>{{ app.description }}</p>
+                </div>
         </div>
         
-        <div id="data" class="col-md-3 col-xs-10 col-xs-offset-1 col-sm-offset-0 text-center-xs">
-            <h2><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{ app.name }}</a></h2>
-            <p>{{ app.description }}</p>
+        <div class="row hidden-md hidden-lg text-center">
+        {% if active_cat != "draft" %}
+            <p><a class="btn btn-danger margin-top-xs" href="{{ url_for('app.presenter', short_name = app.short_name) }}">{{ _('Start Contributing') }}</a></p>
+        {% endif %}
         </div>
         
-            
-            <div class="col-sm-1 col-sm-offset-1 col-xs-2">
-                <div class="meter inset-shadow pull-right-sm"><span data-progress="{{ app.overall_progress | round | int }}" data-app="{{app.short_name}}"><span><span></span></span></div>
+            <div class="col-md-1 hidden-sm hidden-xs">
+                <div class="meter inset-shadow pull-right"><span data-progress="{{ app.overall_progress | round | int }}" data-app="{{app.short_name}}"><span><span></span></span></div>
             </div>
         
-            <div class="col-md-3 col-xs-10" id="show-app-stats">
+            <div class="col-md-3 hidden-sm hidden-xs" id="show-app-stats">
                 <div class="white-rounded inset-shadow">
                     <span class="vcenter"><i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs" id="{{app.short_name}}Complete">Completed: 0%</div></span>
                     <hr class="no-margins">
@@ -204,18 +213,20 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_overall_progress(app, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
-<div class="container padding-top">
     <div class="row">
-        <div class="col-md-1"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
-        <h2><strong> {{_('Overall progress')}}</strong>: {{ overall_progress | round | int }}% {{_('completed')}}
+        <div class="col-md-8 vcenter">
+            <div class="col-md-1"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
+            <h3><strong> {{_('Overall progress')}}</strong>: {{ overall_progress | round | int }}% {{_('completed')}}</h3>
+        </div>
+        <div class="col-md-4">
             {% if show_contribute_btn %}
-                <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-thumbs-up" style="color:white;"></i> {{ _('Start Contributing Now!') }}</a>
+                <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-danger pull-right"> {{ _('Start Contributing Now!') }}</a>
             {% elif show_n_tasks %}
                 <span class="pull-right"><strong>{{n_tasks}}</strong> {{_('Tasks')}}</span>
             {% endif %}
-        </h2>
+        </div>
+        
     </div>
-</div>
 {% endmacro %}
 
 {% macro render_grid_apps(apps, title, upload_method) %}
@@ -226,15 +237,11 @@ function imgError(image) {
             <div class="col-xs-12">
               <ul class="featured polaroids">
                   {% for app in apps %}
-                  <li><div class="img-polaroid">
-                            <a href={{ url_for('app.details', short_name=app.short_name)}} title="{{app.name}}">
-                                {{ render_app_thumbnail(app, upload_method, class='img-project img-responsive') }}
+                  <li>
+                            <a class="polaroid" href={{ url_for('app.details', short_name=app.short_name)}} title="{{app.name}}">
+                                {{ render_app_thumbnail(app, upload_method) }}
                             </a>
-                        </div>
                   </li>
-                  {% endfor %}
-                  {% for number in range(18 - apps |count) %}
-                    <li></li>
                   {% endfor %}
               </ul>
             </div>
