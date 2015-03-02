@@ -5,6 +5,9 @@
 
 {% block content %}
 {% if app %}
+        <div class="container-padded  remove-padding-bottom">
+        <section class="white">
+            <div class="container container-padded">
         <div class="row">
             <div class="col-md-3">
                 {{ helper.render_app_local_nav(app, 'tasks', current_user) }}
@@ -73,6 +76,10 @@
                 {% endif %}
             </div><!-- col-md-9 -->
         </div>
+        
+            </div>
+        </section>
+    </div>
 {% else %}
   <div class="page-header">
       <h1>{{_('Sorry! This project does not exist.')}}.</h1>

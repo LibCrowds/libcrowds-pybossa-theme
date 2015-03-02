@@ -5,6 +5,10 @@
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
+     <div class="container-padded  remove-padding-bottom">
+        <section class="white">
+            <div class="container container-padded">
+                
 <!-- Leaflet maps -->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
  <!--[if lte IE 8]>
@@ -404,5 +408,8 @@
             {%endif%}
         </div>
 </div>
+    </div>
+        </section>
+    </div>
 {{ helper.broken_image() }}
 {% endblock %}
