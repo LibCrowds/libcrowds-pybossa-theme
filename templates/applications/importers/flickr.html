@@ -6,13 +6,15 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
+    <div class="container-padded">
+        <div class="container container-padded">
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-sm-3">
         {{ helper.render_app_local_nav(app, 'tasks', current_user)}}
     </div>
 
 
-   <div class="col-md-9">
+   <div class="col-sm-9">
        <h1><strong>{{app.name}}</strong>: {{_('Import tasks')}}</h1>
        <h2>{{_('From a Flickr Album')}}
            {% if albums %}
@@ -55,6 +57,8 @@
         {% endif %}
     </div>
 </div>
+        </div>
+    </div>
 <script>
     $("#submit").off('click').on('click', function(){
         $("#loading").show();

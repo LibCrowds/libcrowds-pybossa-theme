@@ -6,7 +6,7 @@
 
 <div class="alert alert-danger">
     <strong>Error!</strong> This task does not belong to {{app.short_name}}.
-        <a class="btn small btn-primary" href={{url_for('app.presenter', short_name=app.short_name)}}> <i class="icon glyphicon glyphicon-random"></i> Try with another one</a>
+        <a class="btn-sm btn-primary" href={{url_for('app.presenter', short_name=app.short_name)}}> <i class="icon glyphicon glyphicon-random"></i> Try with another one</a>
 </div>
 
 {% endblock %}
