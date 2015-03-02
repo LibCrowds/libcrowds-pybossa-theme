@@ -117,6 +117,10 @@ input[type="color"]:focus,
   margin-top: 10px;
 }
 
+.margin-bottom {
+  margin-bottom: 40px;
+}
+
 .padding-bottom {
   padding-bottom: 50px;
 }
@@ -681,6 +685,10 @@ ul.users li a {
   .banner .featured li a:hover img {
     width: 118px;
   }
+  
+  text-center-sm {
+    text-align: center;
+  }
 }
 
 @media (max-width: 767px) {
@@ -748,12 +756,12 @@ ul.users li a {
 .bs-docs-sidenav > li > a {
   color: #666;
   display: block;
-  width: 190px;
   margin: 0 0 -1px;
   padding: 10px 14px;
   -webkit-border-radius: 6px 6px 6px 6px;
      -moz-border-radius: 6px 6px 6px 6px;
           border-radius: 6px 6px 6px 6px;
+  transition: color 100ms;
 }
 
 .bs-docs-sidenav > .active > a {
@@ -782,7 +790,13 @@ ul.users li a {
 }
 .bs-docs-sidenav > li > a:hover {
   background-color: rgba(255,255,255,0);
+  color: #BA0000;
 }
+.bs-docs-sidenav > .active > a:hover {
+  background-color: #D00000;
+  color: #fff;
+}
+
 .bs-docs-sidenav a:hover .icon-chevron-right {
   opacity: .5;
 }
@@ -1087,6 +1101,28 @@ margin-top: 10px;
 margin-bottom: 10px;
 }
 
+.btn-circle {
+width: 70px;
+height: 70px;
+padding: 10px 16px;
+font-size: 24px;
+line-height: 2;
+border-radius: 35px;
+color: #fff;
+border: 2px solid #fff;
+background-color: rgba(0,0,0,0.1);
+box-shadow: 0px 0px 30px rgba(0,0,0,0.8);
+}
+
+btn-circle:hover,
+.btn-circle:focus,
+.btn-circle:active,
+.btn-circle.active,
+.open .dropdown-toggle.btn-primary {
+  color: #FAFAFA;
+  background-position: 0 -15px;
+}
+
 #btn-group-cookies {
   position: relative;
   display: flex;
@@ -1098,6 +1134,10 @@ margin-bottom: 10px;
   #btn-group-cookies {
     padding-left: 10px;
     display: inline-block;
+  }
+  
+  .pull-right-md {
+    float: right; 
   }
 }
 
@@ -1267,9 +1307,11 @@ margin-bottom: 10px;
 .splash {
   background-image:url(../img/bl-above.jpg);
   background-size:cover;
-  background-attachment:fixed;
+  background-position: center;
   color:#fff;
   text-align:center;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .splash h1{
@@ -1281,6 +1323,10 @@ margin-bottom: 10px;
   .splash {
     min-height: 750px;
     max-height: 960px;
+  }
+  
+  .splash .btn-circle {
+    margin-top: 300px;
   }
   
   .splash h1{
@@ -1298,19 +1344,28 @@ margin-bottom: 10px;
   .splash h1{
     font-size: 4em;
     text-shadow: 0 1px 0 black;
-}
+  }
+  
+  .splash .btn-circle {
+    margin-top: 400px;
+  }
+  
 }
 
 @media (max-width: 767px) {
   .splash {
     margin-top: 60px;
     min-height: 200px;
-    max-height: 300px;
+    max-height: 200px;
   }
   
   .splash h1{
     font-size: 3em;
     text-shadow: 0 1px 0 black;
+  }
+  
+  .splash .btn-circle {
+    display: none;
   }
   
   text-center-xs {
@@ -1329,6 +1384,19 @@ display: flex;
 -webkit-flex-align: center;
 -ms-flex-align: center;
 -webkit-align-items: center;
+}
+
+@media (min-width: 992px) {
+  .vcenter-md {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+  }
 }
 
 .hcenter {
@@ -1697,6 +1765,10 @@ ul.polaroids .polaroid img {
   -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
   -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
   z-index: 1;
+}
+
+.border-radius-sm{
+  border-radius: 6px;
 }
 
 /**

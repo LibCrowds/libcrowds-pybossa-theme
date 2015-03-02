@@ -1,6 +1,5 @@
 $(function() {
     if ($("#homepage-flag").length > 0) {
-        console.log('homepage recognised');
         $('.navbar').removeClass('opaque');
         $('.dropdown-menu').removeClass('opaque');
     }
@@ -14,6 +13,15 @@ $(function() {
     });
     
     animateProgress();
+    
+    $('.anchor-btn').click(function(evt) {
+        console.log('clicked');
+        evt.preventDefault();
+        var anchor = $(this).attr('href');
+         $('html, body').animate({
+            scrollTop: $(anchor).offset().top
+        }, 1000);
+    });
     
 });
 
@@ -63,7 +71,6 @@ function animateProgress() {
 function animateCounter (elem) {
   var $counter = $('#' + $(elem).attr('data-app') + 'Complete');
   var progress = $(elem).attr('data-progress');
-  console.log(progress);
   jQuery({ Counter: 0 }).animate({ Counter: progress }, {
     duration: 1500,
     easing: 'swing',
