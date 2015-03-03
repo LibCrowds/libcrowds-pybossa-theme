@@ -95,31 +95,25 @@
 {% endmacro %}
 
 {% macro render_app_admin_featured(app, upload_method) -%}
-<div class="row well well-small">
-    <div class="col-sm-3">
-        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
-    </div>
-    <div class="col-sm-9">
-        <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
-        <p>{{ app['description'] }}</p>
-        <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-wrench"></i> {{ _('Settings') }}</a>
+<tr>
+        <td><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></td>
+        <td>{{ app['short_name'] }}</td>
         {% if app.featured %}
-        <button id="appBtnDel{{app.id}}" class="btn btn-danger" onclick="del({{app.id}})">
-                <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
-        </button>
-        <button id="appBtnAdd{{app.id}}" class="btn btn-danger" onclick="add({{app.id}})" style="display:none;">
-                <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
-        </button>
+            <td><button id="appBtnDel{{app.id}}" class="btn" onclick="del({{app.id}})">
+                    <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
+            </button>
+            <button id="appBtnAdd{{app.id}}" class="btn" onclick="add({{app.id}})" style="display:none;">
+                    <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
+            </button></td>
         {% else %}
-        <button id="appBtnAdd{{app.id}}" class="btn btn-danger" onclick="add({{app.id}})">
-                <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
-        </button>
-        <button id="appBtnDel{{app.id}}" class="btn btn-danger" onclick="del({{app.id}})" style="display:none;">
-                <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
-        </button>
+            <td><button id="appBtnAdd{{app.id}}" class="btn" onclick="add({{app.id}})">
+                    <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured') }}
+            </button>
+            <button id="appBtnDel{{app.id}}" class="btn" onclick="del({{app.id}})" style="display:none;">
+                    <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured') }}
+            </button></td>
         {% endif %}
-    </div>
-</div>
+    </tr>
 {% endmacro %}
 
 
@@ -131,7 +125,7 @@
             <div class="white-rounded inset-shadow project-desc">
                 <div class="col-sm-6 col-xs-12 hidden-sm hidden-xs project-polaroid">
                     <li>
-                        <a  class="polaroid" href="{{ url_for('app.presenter', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
+                        <a  class="polaroid" href="{{ url_for('app.details', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
                             {{ render_app_thumbnail(app, upload_method) }}
                         </a>
                     </li>

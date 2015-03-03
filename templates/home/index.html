@@ -25,34 +25,16 @@
       </div>
 </section>
 
-<section class="white pattern-white-wall-2x">
-  <div class="container">
+<section class="white pattern-white-wall">
+  <div class="container container-padded">
       {% for app in categories_apps['featured'] %}
-        <div class="col-sm-12">
-      <div class="row">
-        <div class="col-sm-6">
-        </div>
-        <div class="col-sm-6">
-          <div class="app box">
-            {% if app.info.thumbnail %}
-            <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{helper.render_url_thumbnail(app, upload_method)}})"></a>
-            {% else %}
-            <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{url_for('static',filename='img/placeholder.project.png')}})"></a>
-            {% endif %}
-            <h3>{{app.name | truncate(20, true)}}</h3>
-            <p>{{app.description | truncate(32, true)}}</p>
-            <p><a href="{{url_for('app.details',short_name=app.short_name)}}" class="btn btn-xs btn-info">Info</a> <a href="{{url_for('app.presenter',short_name=app.short_name)}}" class="btn btn-mini btn-primary">{{ _('Start') }}</a></p>
-          </div>
-        </div>
-      </div>
-      <hr />
-      </div>
+        {{ helper.show_app(app, "featured", current_user, upload_method) }}
       {% endfor %}
   </div>
 </section>
 
 {% if top_users %}
-<section id="top_users" class="white pattern-white-wall-2x">
+<section id="top_users" class="white pattern-white-wall">
    <div class="container container-padded">
     <div class="col-sm-12">
       <div class="row text-center">
