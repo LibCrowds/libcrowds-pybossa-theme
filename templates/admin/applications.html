@@ -5,30 +5,42 @@
 {% from "applications/_helpers.html" import render_app_admin_featured, broken_image %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-3">
-        {{ render_account_local_nav(current_user, active_link) }}
-    </div>
-    <div class="col-md-9">
-        <h1><strong>{{ _('Admin Site') }} :</strong> {{ _('Manage featured projects') }}</h1>
-    {% include "admin/js/featured_apps.js" %}
-        <ul class="nav nav-tabs">
-            {% for c in categories %}
-            <li {% if loop.first %}class="active"{% endif %}>
-            <a href="#{{c.short_name}}" data-toggle="tab">{{c.name}}</a>
-            </li>
-            {% endfor %}
-        </ul>
-        <div class="tab-content">
-            {% for c in categories %}
-            <div {% if loop.first %}class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="{{c.short_name}}">
-                {% for app in apps[c.short_name] %}
-                {{ render_app_admin_featured(app, upload_method) }}
-                {% endfor %}
+    <div class="container-padded">
+        <div class="container container-padded">
+            <div class="row">
+                <div class="col-sm-3">
+                    {{ render_account_local_nav(current_user, active_link) }}
+                </div>
+                <div class="col-sm-9">
+                    <h1><strong>{{ _('Admin') }} :</strong> {{ _('Manage featured projects') }}</h1>
+                {% include "admin/js/featured_apps.js" %}
+                    <ul class="nav nav-pills">
+                        {% for c in categories %}
+                        <li {% if loop.first %}class="active"{% endif %}>
+                            <a href="#{{c.short_name}}" data-toggle="tab">{{c.name}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tab-content">
+                        <table class="table table-stripped table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Project</th>
+                                    <th>Category</th>
+                                    <th>Featured</th>
+                                </tr>
+                            </thead>
+                        {% for c in categories %}
+                        <div {% if loop.first %}class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="{{c.short_name}}">
+                            {% for app in apps[c.short_name] %}
+                                {{ render_app_admin_featured(app, upload_method) }}
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-            {% endfor %}
         </div>
     </div>
-</div>
 {{ broken_image() }}
 {% endblock %}

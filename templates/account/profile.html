@@ -13,29 +13,16 @@
         </div>
     </section>
     
-    <section  class="white pattern-white-wall-2x">
+    <section  class="white pattern-white-wall">
         <div class="container container-padded">
             <div class="text-center">
                 <h2>{{ _('Your Contributions') }}</h2>
             {% if apps_contrib %}
+                <ul class="polaroids">
                     {% for app in apps_contrib %}
-                    
-                    
-                <div class="row well well-small">
-                    <div class="col-md-6">
-                            {{ app_helper.render_app_thumbnail(app, upload_method) }}
-                        </div>
-                    <div class="col-md-6">
-                        <h2>
-                            <a href="{{url_for('app.details', short_name=app.short_name)}}">{{app.name}}</a>
-                        </h2>
-                        <a class="btn btn-primary" href="{{url_for('app.presenter', short_name=app.short_name)}}">
-                            <i class="glyphicon glyphicon-thumbs-up"></i> {{ _('Contribute!') }}
-                            
-                        </a>
-                    </div>
-                </div>
-                {% endfor %}
+                        {{ helper.show_app(app, "", current_user, upload_method) }}
+                    {% endfor %}
+                </ul>
             {% else %}
             
                     

@@ -5,34 +5,37 @@
 {% from "admin/_helpers.html" import render_admin_user %}
 
 {% block content %}
-
-<div class="row">
-    <div class="col-md-3">
-        {{ render_account_local_nav(current_user, active_link) }}
-    </div>
-    <div class="col-md-9">
-        <h1><strong>{{ _('Admin Site') }}:</strong> {{ _('Manage Admin Users') }}</h1>
-        {% from "_formhelpers.html" import render_field %}
-        <form class="form-search" method="POST">
-        {{ form.hidden_tag() }}
-        <div class="input-group">
-        <input id="user" name="user" type="text" class="input-lg search-query" placeholder={{ _('Try with the full name or nick') }}>
-        <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i> {{ _('Search') }}</button>
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-3">
+                {{ render_account_local_nav(current_user, active_link) }}
+            </div>
+            <div class="col-sm-9">
+                <h1><strong>{{ _('Admin') }}:</strong> {{ _('Manage Admin Users') }}</h1>
+                {% from "_formhelpers.html" import render_field %}
+                <form class="form-search" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="input-group">
+                <input id="user" name="user" type="text" class="input-lg search-query" placeholder={{ _('Try with the full name or nick') }}>
+                <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i> {{ _('Search') }}</button>
+                </div>
+                </form>
+                {% if found %}
+                <h2>{{ _('Found Users') }}</h2>
+                {% for user in found %}
+                {{ render_admin_user(user) }}
+                {% endfor %}
+                {% endif %}
+        
+                {% if users %}
+                <h1>{{ _('Current Users with Admin privileges') }}</h1>
+                {% for user in users %}
+                {{ render_admin_user(user) }}
+                {% endfor %}
+                {% endif %}
+            </div>
         </div>
-        </form>
-        {% if found %}
-        <h2>{{ _('Found Users') }}</h2>
-        {% for user in found %}
-        {{ render_admin_user(user) }}
-        {% endfor %}
-        {% endif %}
-
-        {% if users %}
-        <h1>{{ _('Current Users with Admin privileges') }}</h1>
-        {% for user in users %}
-        {{ render_admin_user(user) }}
-        {% endfor %}
-        {% endif %}
     </div>
 </div>
 {% endblock %}

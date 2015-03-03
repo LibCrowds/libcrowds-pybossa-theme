@@ -14,19 +14,21 @@
             <div class="col-sm-9" style="min-height:400px">
                 {{ helper.render_app_title(app, upload_method) }}
                 {% if logs %}
-                <table class="table">
+                <table class="table table-stripped table-condensed table-hover">
+                    <thead>
                     <tr>
-                        <td>When</td>
-                        <td>Who</td>
-                        <td>Source</td>
-                        <td>Action</td>
-                        <td>Attribute</td>
-                        <td>Old Value</td>
-                        <td>New Value</td>
+                        <th>When</th>
+                        <th>Who</th>
+                        <th>Source</th>
+                        <th>Action</th>
+                        <th>Attribute</th>
+                        <th>Old Value</th>
+                        <th>New Value</th>
                     </tr>
+                    </thead>
                 {% for log in logs | sort(reverse=True, attribute='created') %}
                     <tr>
-                        <td>{{log.created}}</td>
+                        <td><span class="format-date" data-date="{{log.created}}"></span></td>
                         <td>{% if current_user.name == log.user_name%}You{%else%}{{log.user_name}}{%endif%}</td>
                         <td>{{log.caller}}</td>
                         <td>{{log.action}}</td>
@@ -38,13 +40,13 @@
                 {% endfor %}
                 </table>
                 {% else %}
-                    <h1>{{ _('Sorry! No logs so far.') }}</h1>
+                    <h1>{{ _('No logs so far.') }}</h1>
                 {% endif %}
-                <hr>
+                
             </div>
             {% else %}
             <div class="page-header">
-                <h1>{{ _('Sorry! This project does not exist.') }}</h1>
+                <h1>{{ _('This project does not exist.') }}</h1>
             </div>
             {% endif %}
         </div>
