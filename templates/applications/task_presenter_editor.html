@@ -15,24 +15,22 @@
         width: 100%;
         height: 320px;
     }
-    .CodeMirror {
-        width: 700px;
-      }
 </style>
-<div class="container-main">
-    <section class="white">
+<div class="container-padded remove-padding-bottom">
+    <section class="white padding-top-xs">
         <div class="row">
             <div class="col-xs-12">
+                
                 <!-- Task Presenter Editor -->
                 <form class="form-inline" method="post" action="{{ url_for('app.task_presenter_editor', short_name=app.short_name) }}">
                     {{ form.hidden_tag() }}
                     <fieldset>
-                        {{ render_field(form.editor)}}
-                        <div class="form-actions">
-                            <input type="submit" value={{ _('Update the project task presenter') }} class="btn btn-danger" />
-                            <a href="#" class="btn btn-preview" value="preview">{{ _('Preview the task presenter') }}</a>
-                            <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn">{{ _('Cancel') }}</a>
+                        <div id="code-btns" role="group" class="btn-group">
+                            <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn btn-code">{{ _('Cancel') }}</a>
+                            <a href="#" class="btn btn-preview btn-code" value="preview">{{ _('Preview') }}</a>
+                            <input type="submit" value={{ _('Update the project task presenter') }} class="btn btn-code" />
                         </div>
+                        {{ render_field(form.editor)}}
                     </fieldset>
                 </form>
             </div>
@@ -63,6 +61,8 @@
         mode:'text/html',
         lineNumbers: true,
         autofocus: true,
+        lineWrapping: true,
+        scrollbarStyle: null,
     });
 
     function updatePreview() {
