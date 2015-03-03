@@ -1,6 +1,11 @@
 /* Styling */
 /* ======= */
 
+ul {
+  -webkit-padding-start: 0px;
+  list-style: none;
+}
+
 .project-desc {
   height: 300px;
   overflow-y: auto;
@@ -371,6 +376,41 @@ transform: none;
   background-image: none;
   border-color: #516f20 #516f20 #6e972b;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.nav-pills {
+  padding-bottom: 7px;
+}
+
+.nav-pills a {
+  color: #fff;
+}
+
+.nav-pills>li {
+  padding: 3px;
+}
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+  background-color: #D00000;
+}
+
+.nav-pills>li>a,
+.nav-pills>li>a:focus,
+.nav-pills>li>a:hover {
+  background-color: #D00000;
+}
+
+.nav-pills>li>a:focus, .nav-pills>li>a:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #404040;
+}
+
+.nav-pills>li>a {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
 }
 
 .nav-tabs {
@@ -787,6 +827,7 @@ ul.users li a {
      -moz-border-radius: 6px 6px 6px 6px;
           border-radius: 6px 6px 6px 6px;
   transition: color 100ms;
+  -webkit-transition: color 100ms;
 }
 
 .bs-docs-sidenav > .active > a {
@@ -922,6 +963,7 @@ ul.users li a {
     #cookies_warning {
         padding: 2px 10px 2px;
     }
+    
   
 }
 
@@ -937,6 +979,21 @@ ul.users li a {
 
   .img-dialog {
     width: 500px;
+  }
+  
+  .pull-right-sm {
+    float: right; 
+  }
+  
+  .vcenter-sm {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
   }
   
   .pull-right-sm {
@@ -991,6 +1048,7 @@ ul.users li a {
 #sticky-footer li > a {
     color: #7B7B7B;
     transition: color 100ms;
+    -webkit-transition: color 100ms;
 }
 
 #sticky-footer li > a:hover {
@@ -1108,6 +1166,10 @@ h3 i {
 /**
  * Buttons
  ------------------------*/
+
+.btn-inverse{
+  padding: 0px 0px;  
+}
 
 .btn-lg {
   padding: 10px 16px;
@@ -1500,7 +1562,7 @@ display: flex;
 }
 
 ul.polaroids a.polaroid:after {
-  content: attr(title);
+  content: attr(data-polaroid-title);
 }
 
 ul.polaroids a.polaroid {
@@ -1522,6 +1584,14 @@ ul.polaroids a.polaroid {
   -webkit-transform: rotate(-2deg);
   -webkit-transition: -webkit-transform .15s linear;
   -moz-transform: rotate(-2deg);
+}
+
+ul.polaroids a.polaroid.polaroid-sm {
+  width: 120px;
+}
+
+ul.polaroids .polaroid-sm img {
+  height: 100px;
 }
 
 ul.polaroids a.polaroid:hover {

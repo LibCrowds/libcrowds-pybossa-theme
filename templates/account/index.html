@@ -5,44 +5,46 @@
 {% from "applications/_helpers.html" import broken_image %}
 
 {% block content %}
-
-<div class="row">
-  <div class="col-md-9 col-md-offset-2">
-      {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-        {{ privacy.render_lock_page() }}
-      {% else %}
-      <h1>{{ _('Community') }} <small>{{total}} {{ _('registered users') }}</small><a class="pull-right btn btn-primary" href="{{url_for('leaderboard.index')}}"><i class="fa fa-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a></h1>
-      {% if accounts %}
-      <ul class="thumbnails">
-      {% for account in accounts %}
-          <li>
-              <a href="{{url_for('account.profile', name=account.name)}}" class="img-thumbnail" rel='popover' title="<strong>{{account['fullname']}}</strong>" data-content="
-                      <ul style='list-style-type:none; margin-left:0px;'>
-                        <li><strong><i class='glyphicon glyphicon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
-                        <li><strong><i class='glyphicon glyphicon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
-                        {% if account.apps %}
-                        <li><strong><i class='glyphicon glyphicon-certificate'></i> Owner of</strong>
-                          <ul style='list-style-type:none'>
-                              {% for app in account.apps %}
-                              <li><i class='glyphicon glyphicon-chevron-right'></i> {{ app.name | truncate(18, true)}}</li>
-                              {% endfor %}
-                          </ul>
-                        </li>
-                        {% endif %}
-                      </ul>
-                      ">
-                    {{ helper.render_user_thumbnail(account, upload_method, style="height:90px; width:90px;") }}
-            </a>
-          </li>
-          {% endfor %}
-      </ul>
-    {% endif %}
-    <div class="col-md-9">
-        {% if pagination.pages > 1 %}
-            {{ helper.render_pagination(pagination) }}
+<div class="container-padded">
+  <div class="container container-padded">
+    <div class="row">
+      <div class="col-sm-9 col-sm-offset-2">
+          {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+            {{ privacy.render_lock_page() }}
+          {% else %}
+          <div class="row vcenter-sm">
+            <div class="col-md-8 col-xs-12 xs-center">
+              <h1>{{ _('Community') }} <h4 class="padding-left-xs">{{total}} {{ _('registered users') }}</h4>
+            </div>
+            <div class="col-md-4 col-xs-12 text-center">
+              <a class="pull-right-sm btn btn-danger" href="{{url_for('leaderboard.index')}}">{{ _('View Leaderboard') }}</a></h1>
+            </div>
+          </div>
+          <hr>
+          {% if accounts %}
+          <ul class="polaroids">
+          {% for account in accounts %}
+              <li>
+                <a href="{{url_for('account.profile', name=account.name)}}" class="polaroid polaroid-sm" rel="popover" title="{{account.name}}" data-polaroid-title="{{account.name}}" data-html="true" data-content="
+                <ul>
+                  <li><strong><i class='glyphicon glyphicon-calendar'></i> Joined</strong>: <span class='format-date' data-date='{{account['created']}}'></span></li>
+              <li><strong><i class='glyphicon glyphicon-tasks'></i>Tasks Completed</strong>: {{ account.task_runs }}</li>
+          </ul>
+          ">
+                  {{ helper.render_user_thumbnail(account, upload_method) }}
+                </a>
+              </li>
+              {% endfor %}
+          </ul>
         {% endif %}
+        <div class="col-sm-9">
+            {% if pagination.pages > 1 %}
+                {{ helper.render_pagination(pagination) }}
+            {% endif %}
+        </div>
+        {% endif %}
+      </div>
     </div>
-    {% endif %}
   </div>
 </div>
 

@@ -19,7 +19,7 @@
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-link"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon glyphicon glyphicon-user"></i> {{ current_user.name | truncate(6,true) }} <span class="caret"></span></a>
+                <li class="nav-link"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon glyphicon glyphicon-user"></i> {{ current_user.name | truncate(10,true) }} <span class="caret"></span></a>
                   <ul class="dropdown-menu opaque">
                     <li class="nav-link"><a href="{{ url_for('account.profile', name=current_user.name) }}"><i class="icon glyphicon glyphicon-user"></i> {{ _('Profile') }}</a></li>
                     <li class="nav-link"><a href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="icon glyphicon glyphicon-cog"></i> {{ _('Settings') }}</a></li>
