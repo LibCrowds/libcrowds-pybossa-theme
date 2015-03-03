@@ -19,12 +19,9 @@
         width: 700px;
       }
 </style>
-<div class="container-padded">
-    <div class="container container-padded">
+<div class="container-main">
+    <section class="white">
         <div class="row">
-            <div class="col-sm-3">
-                {{ helper.render_app_local_nav(app, 'tasks', current_user) }}
-            </div>
             <div class="col-sm-9">
                 <!-- Task Presenter Editor -->
                 <h1><strong>{{app.name}}</strong>: {{ _('Task Presenter Editor') }} <a class="btn btn-lg pull-right" href="http://docs.pybossa.com/en/latest/overview.html#task-presenter"><i class="glyphicon glyphicon-book"></i> {{ _('Help') }}</a></h1>
@@ -53,8 +50,7 @@
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">{{ _('Close') }}</button>
             </div>
-        </div>
-    </div>
+    </section>
 </div>
 <script>
     var delay;

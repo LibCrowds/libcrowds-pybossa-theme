@@ -51,18 +51,18 @@
 
 {% macro render_app_summary(app, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-sm-6">
         {{ render_app_thumbnail(app, upload_method, class='img-polaroid') }}
     </div>
-    <div class="col-md-8">
+    <div class="col-sm-6 padding-top-xs">
       <ul style="list-style-type: none; font-size: 16px;">
         {% if current_user.id == app.owner_id %}
         <li><strong><i class="glyphicon glyphicon-cog"></i> {{ _('ID') }}</strong>: {{ app.id }}</li>
         {% endif %}
         <li><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ app['description'] }}</li>
-        <li><strong><i class="glyphicon glyphicon-ok"></i> {{ _('Creation Date') }}</strong>: {{ app.created[0:10] }}</li>
-        <li><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: {{ last_activity}}</li>
-        <li><strong><i class="glyphicon glyphicon-cogs"></i> {{ _('Overall progress') }}</strong>: {{ overall_progress | round | int }}% {{ _('completed') }}</li>
+        <li><strong><i class="fa fa-magic"></i> {{ _('Created') }}</strong>: <span class="format-date" data-date="{{app.created}}"></span></li>
+        <li><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: <span class="format-date" data-date="{{last_activity}}"></span></li>
+        <li><strong><i class="fa fa-check-square-o"></i> {{ _('Overall progress') }}</strong>: {{ overall_progress | round | int }}% {{ _('completed') }}</li>
         <li><strong><i class="glyphicon glyphicon-tasks"></i> <a href="{{url_for('app.tasks',short_name=app.short_name)}}">{{ _('Tasks') }}</strong></a> ({{ n_tasks }})</li>
         {% if not current_user.is_anonymous() %}
         <li>{% if app.hidden == 1 %}
@@ -78,14 +78,18 @@
 {% endmacro %}
 
 {% macro render_app_short_summary(app, upload_method) -%}
-<div class="row well well-small">
-    <div class="col-sm-3">
-        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:100px") }}
-    </div>
-    <div class="col-sm-9">
-        <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
-        <p>{{ app['description'] }}</p>
-        <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-wrench"></i> {{ _('Settings') }}</a>
+<div class="col-sm-6 col-xs-12">
+    <div class="well">
+        <div class="col-sm-3 col-xs-12">
+            <div class="shadow">
+                {{ render_app_thumbnail(app, upload_method, class="img-responsive", style="max-width:100px") }}
+            </div>
+        </div>
+        <div class="col-sm-9 col-xs-12">
+            <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
+            <p>{{ app['short_name'] }}</p>
+            <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-wrench"></i> {{ _('Settings') }}</a>
+        </div>
     </div>
 </div>
 {% endmacro %}
@@ -123,10 +127,11 @@
 
 <div class="container container-padded">
     <div class="row project-summary">
-        <div class="col-md-8 col-xs-10 col-xs-offset-1 col-md-offset-0 white-rounded inset-shadow project-desc">
+        <div class="col-md-8 col-xs-12">
+            <div class="white-rounded inset-shadow project-desc">
                 <div class="col-sm-6 col-xs-12 hidden-sm hidden-xs project-polaroid">
                     <li>
-                        <a  class="polaroid" href="{{ url_for('app.presenter', short_name = app.short_name) }}" title="{{ app.name }}">
+                        <a  class="polaroid" href="{{ url_for('app.presenter', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
                             {{ render_app_thumbnail(app, upload_method) }}
                         </a>
                     </li>
@@ -136,6 +141,7 @@
                     <h2><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{ app.name }}</a></h2>
                     <p>{{ app.description }}</p>
                 </div>
+            </div>
         </div>
         
         <div class="row hidden-md hidden-lg text-center">
@@ -238,7 +244,7 @@ function imgError(image) {
               <ul class="featured polaroids">
                   {% for app in apps %}
                   <li>
-                            <a class="polaroid" href={{ url_for('app.details', short_name=app.short_name)}} title="{{app.name}}">
+                            <a class="polaroid" href={{ url_for('app.details', short_name=app.short_name)}} data-polaroid-title="{{app.name}}">
                                 {{ render_app_thumbnail(app, upload_method) }}
                             </a>
                   </li>
