@@ -2,38 +2,40 @@
 {% set active_page = "create" %}
 {% set active_link  = "applications" %}
 {% import "account/_helpers.html" as helper %}
+{% import "applications/_helpers.html" as app_helper %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
     <div class="container-padded">
         <div class="container container-padded">
-        <div id="app-form" class="row"> 
-            <div class="col-sm-3">
-                {{ helper.render_account_local_nav(current_user, active_link) }}
+            {% if current_user.admin == 1 %}
+            <div id="app-form" class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                    <h4 class="text-center">{{ _('Create a new project') }}</h4>
+                    <form role="form" method="post" action="{{ url_for('app.new')}}" enctype="multipart/form-data"}}>
+                    {{ form.hidden_tag() }}
+                    <fieldset>
+                        {{ render_field(form.name, placeholder=_('Name'), class="form-control") }}
+                        {{ render_field(form.short_name, placeholder=_('Tagline'), label_text=_('Project slug:'), class="form-control") }}
+                        {{ render_field(form.long_description, rows="13", placeholder=_('Long description: &#13;&#10;
+                            · Describe the purpose of the project and what it aims to achieve.                                                   
+                            · Explain how the project works and how volunteers can help.                                                       
+                            · Highlight the reasons why volunteers contributions are essential. &#13;&#10;                                                          
+                        You can use HTML tags to format your description.'), class="form-control") }}
+                        <div class="pull-right" role="group">
+                            <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+                            <input type="submit" value="Create" class="btn btn-success" />
+                        </div>
+                    </fieldset>
+                </form>
+                </div>
             </div>
-            <div class="col-sm-9">
-                <h1><strong>{{ _('Project') }}</strong>: {{ _('Create a new project') }}</h1>
-                <form class="form-horizontal" method="post" action="{{ url_for('app.new')}}" enctype="multipart/form-data"}}>
-                {{ form.hidden_tag() }}
-                <fieldset>
-                    {{ render_field(form.name, class_="col-md-4", placeholder=_('The name of the project')) }}
-                    {{ render_field(form.short_name, class_="col-md-4", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
-                    {{ render_field(form.long_description, class_="col-md-4", rows="13", placeholder=_('Explain your project                                                             
-                        · Why? Why you are creating this project, what you want to achieve with it                                                             
-                        · How? Explain how your project works                                                             
-                        · How you can help: Explain to the volunteers how they can help and contribute to the goal of your project                                                             
-                        · Will you help make a difference? Explain to the volunteers why their contribution is essential and how the result of your project can help change things!                                                             
-                    (you can use Markdown to give format to your description!)')) }}
-                    <div class="form-actions">
-                        <input type="submit" value={{_('Create the project')}} class="btn btn-danger" />
-                        <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn">{{_('Cancel')}}</a>
-                    </div>
-                </fieldset>
-            </form>
-            </div>
+            {% else %}
+                {{ app_helper.render_app_restricted() }}
+            {% endif %}
         </div>
-                </div>
-                </div>
+    </div>
+                
 <script>
     $("span[rel='tooltip']").tooltip();
     $("i[rel='tooltip']").tooltip();

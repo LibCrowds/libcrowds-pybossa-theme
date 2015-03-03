@@ -22,11 +22,11 @@
                 <li class="nav-link"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon glyphicon glyphicon-user"></i> {{ current_user.name | truncate(6,true) }} <span class="caret"></span></a>
                   <ul class="dropdown-menu opaque">
                     <li class="nav-link"><a href="{{ url_for('account.profile', name=current_user.name) }}"><i class="icon glyphicon glyphicon-user"></i> {{ _('Profile') }}</a></li>
-                    <li class="nav-link"><a href="{{ url_for('account.applications', name=current_user.name) }}"><i class="icon glyphicon glyphicon-th-large"></i> {{ _('Projects') }}</a></li>
                     <li class="nav-link"><a href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="icon glyphicon glyphicon-cog"></i> {{ _('Settings') }}</a></li>
                     {% if current_user.admin == 1 %}
                     <li class="divider"></li>
-                    <li class="nav-link"><a href="{{ url_for('admin.index') }}"><i class="icon glyphicon glyphicon-cog"></i> {{ _('Admin Site') }}</a></li>
+                    <li class="nav-link"><a href="{{ url_for('admin.index') }}"><i class="icon glyphicon glyphicon-cog"></i> {{ _('Admin') }}</a></li>
+                    <li class="nav-link"><a href="{{ url_for('account.applications', name=current_user.name) }}"><i class="icon glyphicon glyphicon-th-large"></i> {{ _('Projects') }}</a></li>
                     {% endif %}
                     <li class="divider"></li>
                   <li class="nav-link"><a href="{{ url_for('account.signout') }}"><i class="icon glyphicon glyphicon-off"></i> {{ _('Sign Out') }}</a></li>

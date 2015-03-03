@@ -285,3 +285,16 @@ function imgError(image) {
 {{url_for('static', filename='img/placeholder.project.png')}}"
 {% endif %}
 {% endmacro %}
+
+{% macro render_app_restricted() -%}
+    <h1>Area restricted</h1>
+        <p class="lead">Sorry, the creation and administration of applications is currently restricted.</p>
+        <p class="lead">For access to this area please request admin rights.</p>
+                <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg"> 
+                    <i class="glyphicon glyphicon-home"></i>
+                    Go Home
+                </a>
+                <a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()"> 
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                    Go Back</a>
+{% endmacro %}

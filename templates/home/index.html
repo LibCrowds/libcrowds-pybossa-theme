@@ -4,8 +4,8 @@
 {% block content %}
 
 <div class="splash vcenter">
-   <div class="container">
-    <div class="col-md-12 text-center">
+   <div class="container container-max-height">
+    <div class="col-sm-12 pull-down-center">
             <a href="#intro" class="btn btn-circle anchor-btn"><i class="fa fa-chevron-down"></i></a>
     </div>
    </div>
@@ -28,11 +28,11 @@
 <section class="white pattern-white-wall-2x">
   <div class="container">
       {% for app in categories_apps['featured'] %}
-        <div class="col-md-12">
+        <div class="col-sm-12">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
           <div class="app box">
             {% if app.info.thumbnail %}
             <a href="{{url_for('app.details', short_name=app.short_name)}}" class="image" style="background-image:url({{helper.render_url_thumbnail(app, upload_method)}})"></a>
@@ -54,7 +54,7 @@
 {% if top_users %}
 <section id="top_users" class="white pattern-white-wall-2x">
    <div class="container container-padded">
-    <div class="col-md-12">
+    <div class="col-sm-12">
       <div class="row text-center">
         <h3>{{ _('Most Active Volunteers') }}</h3>
       </div>
@@ -75,6 +75,9 @@
 {% endfor %}
 </ul>
 </div>
+    <div class="col-sm-12 text-center padding-top-xs">
+      <a class="btn btn-danger" href="{{url_for('leaderboard.index')}}">View Leaderboard</a>
+    </div>
 </div>
 </section>
 {% endif %}
