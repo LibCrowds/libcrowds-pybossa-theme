@@ -46,8 +46,9 @@
 
             <!-- Hour Stats CARD -->
             <div id="card" class="row">
-                <div class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
-                    <h2 class="inset-text-grey">{{_('Distribution of Answers per Hour')}}</h2>
+                <div class="white-rounded-panel pattern-brushed box-shadow-grey  margin-bottom">
+                    <h2 class="inset-text-grey-header">{{_('Distribution of Answers per Hour')}}</h2>
+                    <div class="col-xs-12">
                     <div id="hourStats" style="margin:20px;height:500px;">
                     </div>
                     <script>
@@ -73,12 +74,14 @@
                     </script>
                 </div>
             </div>
+                </div>
             <!-- END Hour Stats CARD -->
 
             <!-- Day Stats Total CARD -->
             <div id="card" class="row">
-                <div  class="col-sm-12  pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
-                    <h2 class="inset-text-grey">{{_('Completed Tasks in the last 15 days')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
+                <div class="white-rounded-panel pattern-brushed box-shadow-grey  margin-bottom">
+                    <h2 class="inset-text-grey-header">{{_('Completed Tasks in the last 15 days')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
+                    <div class="col-sm-12">
                     <div id="dayStatsTotal" style="margin:20px;height:500px;"></div>
                     <script>
                    $(window).on("resize", function () {
@@ -143,13 +146,15 @@
                     </script>
                 </div>
             </div>
+            </div>
             <!-- END Day Stats CARD -->
 
 
             <!-- Day Stats CARD -->
             <div id="card" class="row">
-                <div  class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
-                    <h2 class="inset-text-grey">{{_('Answers per day')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
+                <div  class="white-rounded-panel pattern-brushed box-shadow-grey  margin-bottom">
+                    <h2 class="inset-text-grey-header">{{_('Answers per day')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
+                    <div class="col-xs-12">
                     <div id="dayStats" style="margin:20px;height:500px;"></div>
                     <script>
                    $(window).on("resize", function () {
@@ -213,13 +218,15 @@
                     </script>
                 </div>
             </div>
+                </div>
             <!-- END Day Stats CARD -->
 
 
             <!-- Number of answers CARD -->
             <div id="card" class="row">
-                <div id="dist-answers" class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
-                    <h2 class="inset-text-grey">{{_('Distribution of Answers')}}</h2>
+                <div id="dist-answers" class="white-rounded-panel pattern-brushed box-shadow-grey  margin-bottom">
+                    <h2 class="inset-text-grey-header">{{_('Distribution of Answers')}}</h2>
+                    <div class="col-xs-12">
                     <div class="row">
                         <div class="col-sm-6">
                             <table class="table table-hover table-bordered table-striped">
@@ -261,12 +268,14 @@
                     </div>
                 </div>
             </div>
+                    </div>
             <!-- END Number of Answers Stats CARD -->
 
             <!-- Anon User Stats CARD -->
             <div id="card" class="row">
-                <div id="dist-anon" class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
-                    <h2 class="inset-text-grey">{{_('Details about Anonymous Users')}}</h2>
+                <div id="dist-anon" class="white-rounded-panel pattern-brushed box-shadow-grey  margin-bottom">
+                    <h2 class="inset-text-grey-header">{{_('Details about Anonymous Users')}}</h2>
+                    <div class="col-xs-12">
                     <div class="row">
                         <div class="col-sm-12">
                             <p><i class="glyphicon glyphicon-group"></i> <strong>{{userStats.anonymous.users}} </strong> {{_('anonymous users have')}} <strong>{{_('participated')}}</strong></p>
@@ -352,12 +361,14 @@
                     {% endif %}
                 </div>
             </div>
+                </div>
             <!-- END Anon User Stats CARD -->
 
             <!-- Auth User Stats CARD -->
             <div id="card" class="row">
-                <div id="dist-auth" class="col-sm-12 pattern-brushed box-shadow-grey border-radius-sm margin-bottom">
-                    <h2 class="inset-text-grey">{{_('Details about Authenticated Users')}}</h2>
+                <div id="dist-auth" class="white-rounded-panel pattern-brushed box-shadow-grey  margin-bottom">
+                    <h2 class="inset-text-grey-header">{{_('Details about Authenticated Users')}}</h2>
+                    <div class="col-xs-12">
                     <div class="row">
                         <div class="col-sm-12">
                             <p><i class="glyphicon glyphicon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
@@ -405,6 +416,7 @@
                     </div>
                 </div>
             </div>
+                </div>
             <!-- END Auth User Stats CARD -->
             {%endif%}
         </div>
