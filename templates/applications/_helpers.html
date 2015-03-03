@@ -103,11 +103,11 @@
         <button id="appBtnDel{{app.id}}" class="btn btn-danger" onclick="del({{app.id}})">
                 <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
         </button>
-        <button id="appBtnAdd{{app.id}}" class="btn btn-primary" onclick="add({{app.id}})" style="display:none;">
+        <button id="appBtnAdd{{app.id}}" class="btn btn-danger" onclick="add({{app.id}})" style="display:none;">
                 <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
         </button>
         {% else %}
-        <button id="appBtnAdd{{app.id}}" class="btn btn-primary" onclick="add({{app.id}})">
+        <button id="appBtnAdd{{app.id}}" class="btn btn-danger" onclick="add({{app.id}})">
                 <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
         </button>
         <button id="appBtnDel{{app.id}}" class="btn btn-danger" onclick="del({{app.id}})" style="display:none;">

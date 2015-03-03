@@ -27,7 +27,7 @@
                       {{ upload_form.x2 }}
                       {{ upload_form.y2 }}
                   <div class="form-actions">
-                    <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-lg">{{ _('Upload') }}</button>
+                    <button type="submit" name='btn' value="Upload" class="btn btn-danger btn-lg">{{ _('Upload') }}</button>
                   </div>
                   </fieldset>
               </form>
@@ -46,7 +46,7 @@
                 {{ render_field(form.webhook) }}
                 {{ render_field(form.hidden, tooltip=_('Do you want to hide your project?')) }}
                 <div class="form-actions">
-                  <button type="submit" name='btn' value="Save the changes" class="btn btn-primary">{{_('Save the changes')}}</button>
+                  <button type="submit" name='btn' value="Save the changes" class="btn btn-danger">{{_('Save the changes')}}</button>
                   <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
                 </div>
               </fieldset>
