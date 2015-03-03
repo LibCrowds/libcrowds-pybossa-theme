@@ -10,17 +10,19 @@
         <div class="container container-padded">
             {% if current_user.admin == 1 %}
             <div id="app-form" class="row">
-                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                     <h4 class="text-center">{{ _('Create a new project') }}</h4>
                     <form role="form" method="post" action="{{ url_for('app.new')}}" enctype="multipart/form-data"}}>
                     {{ form.hidden_tag() }}
                     <fieldset>
                         {{ render_field(form.name, placeholder=_('Name'), class="form-control") }}
                         {{ render_field(form.short_name, placeholder=_('Tagline'), label_text=_('Project slug:'), class="form-control") }}
-                        {{ render_field(form.long_description, rows="13", placeholder=_('Long description: &#13;&#10;
-                            · Describe the purpose of the project and what it aims to achieve.                                                   
-                            · Explain how the project works and how volunteers can help.                                                       
-                            · Highlight the reasons why volunteers contributions are essential. &#13;&#10;                                                          
+                        {{ render_field(form.long_description, rows="13", placeholder=_('Long description:
+                        
+                        · Describe the purpose of the project and what it aims to achieve.
+                        · Explain how the project works and how volunteers can help.
+                        · Highlight the reasons why volunteers contributions are essential.
+                        
                         You can use HTML tags to format your description.'), class="form-control") }}
                         <div class="pull-right" role="group">
                             <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">{{_('Cancel')}}</a>
