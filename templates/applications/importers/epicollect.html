@@ -24,7 +24,7 @@
           placeholder=_('The name of the public EpiCollect Plus project')) }}
           {{ render_field(form.epicollect_form, class_="input-block-level", placeholder=_('The name of the project\'s form')) }}
           <div class="form-actions">
-            <input type="submit" value="{{_('Import')}}" class="btn btn-primary" />
+            <input type="submit" value="{{_('Import')}}" class="btn btn-danger" />
             <a href="{{ url_for('app.settings', short_name=app.short_name) }}" class="btn">{{_('Cancel')}}</a>
           </div>
         </fieldset>

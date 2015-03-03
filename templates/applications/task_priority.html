@@ -29,7 +29,7 @@
                         placeholder=_('Comma separated Task.IDs i.e.: 3, 532, 100'))}}
                         {{ render_field(form.priority_0, class_="col-md-4", placeholder=_('Priority value between 0.0 and 1.0'))}}
                         <div class="form-actions">
-                            <input type="submit" value={{_('Change Priority')}} class="btn btn-primary" />
+                            <input type="submit" value={{_('Change Priority')}} class="btn btn-danger" />
                             <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
                         </div>
                     </fieldset>
