@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% set active_page = "profile" %}
-{% set active_link = "admin" %}
+{% set active_link = "administrators" %}
 {% from "admin/_helpers.html" import render_admin_user %}
 {% from "admin/_helpers.html" import render_admin_local_nav %}
 
@@ -31,7 +31,7 @@
                 {% endif %}
         
                 
-                <h1>{{ _('Current Users with Admin privileges') }}</h1>
+                <h2 class="padding-top">{{ _('Current Users with Admin privileges') }}</h2>
                 {% for user in users %}
                 {{ render_admin_user(user) }}
                 {% endfor %}

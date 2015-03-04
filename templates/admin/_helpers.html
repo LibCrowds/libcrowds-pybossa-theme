@@ -23,11 +23,10 @@
 
 {% macro render_admin_local_nav(current_user, active_link) -%}
 <ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
-    <li>{{active_link}}</li>
-    <li {% if active_link==""%}class="active"{% endif %}><a href="{{url_for('admin.featured')}}"><i class="glyphicon glyphicon-chevron-right"></i>Featured</a></li>
-    <li {% if active_link==""%}class="active"{% endif %}><a href="{{url_for('admin.categories')}}"><i class="glyphicon glyphicon-chevron-right"></i>Categories</a></li>
-    <li {% if active_link==""%}class="active"{% endif %}><a href="{{url_for('admin.users')}}"><i class="glyphicon glyphicon-chevron-right"></i>Administrators</a></li>
-    <li {% if active_link==""%}class="active"{% endif %}><a href="{{url_for('admin.export_users')}}"><i class="glyphicon glyphicon-chevron-right"></i>Users</a></li>
-    <li {% if active_link==""%}class="active"{% endif %}><a href="{{url_for('rq_dashboard.overview')}}"><i class="glyphicon glyphicon-chevron-right"></i>Background Jobs</a></li>
+    <li {% if active_link=="featured"%}class="active"{% endif %}><a href="{{url_for('admin.featured')}}"><i class="glyphicon glyphicon-chevron-right"></i>Featured</a></li>
+    <li {% if active_link=="categories"%}class="active"{% endif %}><a href="{{url_for('admin.categories')}}"><i class="glyphicon glyphicon-chevron-right"></i>Categories</a></li>
+    <li {% if active_link=="administrators"%}class="active"{% endif %}><a href="{{url_for('admin.users')}}"><i class="glyphicon glyphicon-chevron-right"></i>Administrators</a></li>
+    <li><a href="{{url_for('admin.export_users', format='csv')}}"><i class="glyphicon glyphicon-chevron-right"></i>Export Users (CSV)</a></li>
+    <li><a href="{{url_for('rq_dashboard.overview')}}"><i class="glyphicon glyphicon-chevron-right"></i>Background Jobs</a></li>
 </ul>
 {% endmacro %}
