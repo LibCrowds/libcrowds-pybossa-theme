@@ -26,15 +26,18 @@ $(function() {
     }).resize();
     
     if ($(".set-main-bg").length > 0) {
-        $('#main-body-content').addClass($(".set-main-bg").attr('data-bg'));
+        $('body').addClass($(".set-main-bg").attr('data-bg'));
     }
     
-    $('#code-btns').attr('padding-left', $('.CodeMirror-gutter').style.width);
-
+    if( $('#code-btns').length ) {
+        $('#code-btns').attr('padding-left', $('.CodeMirror-gutter').style.width);
+    }
+    
 });
 
 $(window).scroll(function() {
     if ($("#homepage-flag").length > 0) {
+        //$(".splash-overlay").css('background', 'none');
         if($(this).scrollTop() > 100) {
             $('.navbar').addClass('opaque');
             $('.dropdown-menu').addClass('opaque');
