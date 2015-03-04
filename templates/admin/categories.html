@@ -1,26 +1,26 @@
 {% extends "base.html" %}
 {% set active_page = "profile" %}
 {% set active_link = "admin" %}
-{% from "account/_helpers.html" import render_account_local_nav %}
+{% from "admin/_helpers.html" import render_admin_local_nav %}
 
 {% block content %}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-3">
-                {{ render_account_local_nav(current_user, active_link) }}
+                {{ render_admin_local_nav(current_user, active_link) }}
             </div>
             <div id="categories" class="col-sm-9">
                 <h1><strong>{{ _('Admin') }}:</strong> {{ _('Manage Categories') }}</h1>
                 <div class="row">
                     <div id="add" class="col-sm-12">
                         {% from "_formhelpers.html" import render_field %}
-                        <form class="form-horizontal" method="POST" action="{{url_for('admin.categories')}}">
+                        <form role="form" method="POST" action="{{url_for('admin.categories')}}">
                             {{form.hidden_tag()}}
                             <fieldset>
-                            {{ render_field(form.name, placeholder= _('Category name')) }}
-                            {{ render_field(form.description, placeholder= _('Category description')) }}
-                            <div class="form-actions">
+                            {{ render_field(form.name, placeholder= _('Category name'), class="form-control") }}
+                            {{ render_field(form.description, placeholder= _('Category description'), class="form-control") }}
+                            <div class="pull-right" role="group">
                                 <button type="submit" class="btn btn-danger">{{_('Add Category')}}</button>
                             </div>
                             </fieldset>
@@ -28,12 +28,12 @@
                     </div>
                 </div>
                 {% if categories %}
-                <h1>{{_('List of Available Categories')}}</h1>
+                <h2 class="padding-top">{{_('Current Categories')}}</h2>
                 <hr>
                 {% for c in categories %}
-                <div class="row">
+                <div class="row vcenter">
                     <div class="col-sm-5">
-                        <h2>{{c.name}} <small>({{ n_apps_per_category[c.short_name]}} apps)</small></h2>
+                        <h3>{{c.name}} <small>({{ n_apps_per_category[c.short_name]}} apps)</small></h3>
                     </div>
                     <div class="col-sm-6">
                         <div class="btn-group">

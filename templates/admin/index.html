@@ -1,14 +1,14 @@
 {% extends "/base.html" %}
 {% set active_page = "admin" %}
 {% set active_link = "admin" %}
-{% import "admin/_helpers.html" as admin_helper %}
+{% from "admin/_helpers.html" import render_admin_local_nav %}
 
 {% block content %}
     <div class="container-padded">
     <div class="container container-padded">
     <div class="row">
         <div class="col-sm-3">
-                    {{ admin_helper.render_account_local_nav(current_user, active_link) }}
+                    {{ render_admin_local_nav(current_user, active_link) }}
                 </div>
         <div class="col-sm-9">
             <h1><strong>Admin Options</strong></h1>

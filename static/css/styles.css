@@ -1243,6 +1243,12 @@ box-shadow: 0px 0px 30px rgba(0,0,0,0.8);
   }
 }
 
+.input-group-btn .form-control.search-button {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-bottom: 10px;
+}
+
 .btn-default,
 .btn-primary,
 .btn-secondary,
