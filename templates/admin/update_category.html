@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% set active_page = "profile" %}
-{% set active_link = "admin" %}
+{% set active_link = "categories" %}
 {% from "admin/_helpers.html" import render_admin_local_nav %}
 
 {% block content %}
@@ -8,7 +8,7 @@
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-3">
-                {{ render_account_admin_nav(current_user, active_link) }}
+                {{ render_admin_local_nav(current_user, active_link) }}
             </div>
             <div class="col-sm-9">
                 <h1><strong>{{ _('Admin') }}:</strong> {{title}}</h1>

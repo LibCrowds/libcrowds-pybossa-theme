@@ -5,77 +5,88 @@
 
 {% block content %}
     <div class="container-padded">
-    <div class="container container-padded">
-    <div class="row">
-        <div class="col-sm-3">
+        <div class="container container-padded">
+            <div class="row">
+                
+                <div class="col-sm-3">
                     {{ render_admin_local_nav(current_user, active_link) }}
                 </div>
-        <div class="col-sm-9">
-            <h1><strong>Admin Options</strong></h1>
-            <div class="row">
-                <div id="projects" class="col-sm-6">
-                                <div class="well">
-                    <h2><i class="glyphicon glyphicon-star"></i> {{_('Projects')}}</h2>
-                    <p>{{_('Manage or create projects')}}</p>
-                    <a href="{{ url_for('account.applications', name=current_user.name) }}" class="btn btn-danger">
-                        {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
-                    </a>
+                
+                <div class="col-sm-9">
+                    <h1><strong>Admin Options</strong></h1>
+                    
+                    <div class="row">
+                        <div id="projects" class="col-sm-6">
+                            <div class="well">
+                                <h2><i class="glyphicon glyphicon-star"></i> {{_('Projects')}}</h2>
+                                <p>{{_('Manage or create projects')}}</p>
+                                <a href="{{ url_for('account.applications', name=current_user.name) }}" class="btn btn-danger btn-dash">
+                                    {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div id="featured-apps" class="col-sm-6">
+                            <div class="well">
+                                <h2><i class="glyphicon glyphicon-star"></i> {{_('Featured')}}</h2>
+                                <p>{{_('Manage the projects to be shown on the home page')}}</p>
+                                <a href="{{url_for('admin.featured')}}" class="btn btn-danger btn-dash">
+                                    {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>         
+                    </div>
+                    
+                    <div class="row">
+                        <div id="categories" class="col-sm-6">
+                            <div class="well">
+                                <h2><i class="glyphicon glyphicon-check"></i> {{_('Categories')}}</h2>
+                                <p>{{_('Manage project categories')}}</p>
+                                <a href="{{url_for('admin.categories')}}" class="btn btn-danger btn-dash">
+                                    {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                                        
+                        <div id="users" class="col-sm-6">
+                            <div class="well">
+                                <h2><i class="glyphicon glyphicon-user"></i> {{_('Administrators')}}</h2>
+                                <p>{{_('Manage administrators')}}</p>
+                                <a href="{{url_for('admin.users')}}" class="btn btn-danger btn-dash">
+                                    {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
+                                </a>
+                            </div>       
+                        </div>
+                    </div>
+                                        
+                    <div class="row">
+                        <div id="users-list" class="col-sm-6">
+                            <div class="well">
+                                <h2><i class="glyphicon glyphicon-list"></i> {{_('Users')}}</h2>
+                                <p>{{_('Export a list of all current users')}}</p>
+                                <div class="btn-dash">
+                                    <a href="{{url_for('admin.export_users', format='json')}}" class="btn btn-danger">
+                                        {{ _('JSON') }}
+                                    </a>
+                                    <a href="{{url_for('admin.export_users', format='csv')}}" class="btn btn-danger">
+                                        {{ _('CSV') }}
+                                    </a>
                                 </div>
-                </div>
-                <div id="featured-apps" class="col-sm-6">
-                                <div class="well">
-                    <h2><i class="glyphicon glyphicon-star"></i> {{_('Featured')}}</h2>
-                    <p>{{_('Manage the projects to be shown on the home page')}}</p>
-                    <a href="{{url_for('admin.featured')}}" class="btn btn-danger">
-                        {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
-                    </a>
-                                </div>
-                </div>
-                <div id="categories" class="col-sm-6">
-                                <div class="well">
-                    <h2><i class="glyphicon glyphicon-check"></i> {{_('Categories')}}</h2>
-                    <p>{{_('Manage project categories')}}</p>
-                    <a href="{{url_for('admin.categories')}}" class="btn btn-danger">
-                        {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
-                    </a>
-                                </div>
-                </div>
-            </div>
-            <div class="row">
-                <div id="users" class="col-sm-6">
-                                <div class="well">
-                    <h2><i class="glyphicon glyphicon-user"></i> {{_('Administrators')}}</h2>
-                    <p>{{_('Manage administrators')}}</p>
-                    <a href="{{url_for('admin.users')}}" class="btn btn-danger">
-                        {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
-                    </a>
-                                </div>
-                </div>
-                <div id="users-list" class="col-sm-6">
-                                <div class="well">
-                    <h2><i class="glyphicon glyphicon-list"></i> {{_('Users')}}</h2>
-                    <p>{{_('Export a list of all current users')}}</p>
-                    <a href="{{url_for('admin.export_users', format='json')}}" class="btn btn-danger">
-                        {{ _('JSON') }}
-                    </a>
-                    <a href="{{url_for('admin.export_users', format='csv')}}" class="btn btn-danger">
-                        {{ _('CSV') }}
-                    </a>
-                                </div>
-                </div>
-            </div>
-            <div class="row">
-                <div id="dashboard" class="col-sm-6">
-                                <div class="well">
-                    <h2><i class="glyphicon glyphicon-dashboard"></i> {{_('Background Jobs')}}</h2>
-                    <p>{{_('Monitor background jobs')}}</p>
-                    <a href="{{url_for('rq_dashboard.overview')}}" class="btn btn-danger">
-                        {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
-                    </a>
-                                </div>
+                            </div>
+                        </div>
+                                
+                        <div id="dashboard" class="col-sm-6">
+                            <div class="well">
+                                <h2><i class="glyphicon glyphicon-dashboard"></i> {{_('Background Jobs')}}</h2>
+                                <p>{{_('Monitor background jobs')}}</p>
+                                <a href="{{url_for('rq_dashboard.overview')}}" class="btn btn-danger btn-dash">
+                                    {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
