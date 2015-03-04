@@ -11,12 +11,12 @@ ul {
 }
 
 .project-desc {
-  height: 310px;
+  height: 350px;
   overflow-y: auto;
 }
 
 .project-polaroid {
-  padding-top: 20px;
+  padding-top: 30px;
 }
 
 .pull-down {
@@ -48,7 +48,7 @@ a:focus, a:hover {
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .h1, .h2, .h3, .h4, h1, h2, h3, h4 {
@@ -185,7 +185,7 @@ div.white-rounded-panel {
 }
 
 #show-app-stats {
-  height: 310px;
+  height: 350px;
 }
 
 /* Layout */
@@ -1067,6 +1067,14 @@ ul.users li a {
 /* Text styles 
 -------------------------*/
 
+
+@media (min-width: 768px) {
+  .lead {
+    font-size: 1.2em;
+    font-weight: 200;
+  }
+}
+
 .remove-colour {
   color: #404040 !important;  
 }
@@ -1204,16 +1212,47 @@ margin-bottom: 10px;
 }
 
 .btn-circle {
-width: 70px;
-height: 70px;
-padding: 10px 16px;
-font-size: 24px;
-line-height: 2;
-border-radius: 35px;
-color: #fff;
-border: 2px solid #fff;
-background-color: rgba(0,0,0,0.1);
-box-shadow: 0px 0px 30px rgba(0,0,0,0.8);
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  display: block;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  font-weight: 200;
+  font-size: 18px;
+  color: #fff;
+  text-transform:uppercase;
+}
+
+.btn-circle a {
+  color: #fff;
+  display: inline-block;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  -webkit-transition: -webkit-transform .4s;
+  -moz-transition: -moz-transform .4splashs;
+  -ms-transition: -ms-transform .4s;
+  -o-transition: -o-transform .4s;
+  transition: transform .4s;
+  -webkit-transform: translateY(-90px);
+  -moz-transform: translateY(-90px);
+  -ms-transform: translateY(-90px);
+  -o-transform: translateY(-90px);
+  transform: translateY(-90px);
+}
+
+.btn-circle a div {
+  height: 90px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.btn-circle:hover a {
+  transform: none;
 }
 
 .btn-circle:hover,
@@ -1423,22 +1462,21 @@ box-shadow: 0px 0px 30px rgba(0,0,0,0.8);
 }
 
 .splash h1{
-  font-size: 4em;
-  text-shadow: 0 1px 0 black;
+  font-size: 38px;
+  text-shadow: none;
+  color: #fff;
+  font-weight: 200;
 }
 
-@media (min-width: 992px) {
-  .splash {
-  }
-  
-  .splash .btn-circle {
-    margin-top: 300px;
-  }
-  
-  .splash h1{
-    font-size: 4em;
-    text-shadow: 0 1px 0 black;
-}
+.splash-overlay {
+  background: rgba(0,0,0,.5);
+  -webkit-transition: background 1s;
+    -moz-transition: background 1s;
+    -ms-transition: background 1s;
+    -o-transition: background 1s;
+    transition: background 1s;
+    width: 100%;
+    height: 100%;
 }
 
 @media (min-width: 768px) and (max-width: 991px)  {
@@ -1446,16 +1484,6 @@ box-shadow: 0px 0px 30px rgba(0,0,0,0.8);
     min-height: 550px;
     max-height: 650px;
   }
-  
-  .splash h1{
-    font-size: 4em;
-    text-shadow: 0 1px 0 black;
-  }
-  
-  .splash .btn-circle {
-    margin-top: 400px;
-  }
-  
 }
 
 @media (max-width: 767px) {
@@ -1466,8 +1494,7 @@ box-shadow: 0px 0px 30px rgba(0,0,0,0.8);
   }
   
   .splash h1{
-    font-size: 3em;
-    text-shadow: 0 1px 0 black;
+    display: none;
   }
   
   .splash .btn-circle {
@@ -1589,7 +1616,7 @@ ul.polaroids a.polaroid {
   width: 170px;
   padding: 10px 10px 11px;
   text-align: center;
-  font-family: "Marker Felt",sans-serif;
+  font-family: 'Permanent Marker', cursive;
   text-decoration: none;
   color: #333;
   font-size: 18px;
@@ -1922,7 +1949,7 @@ border-top: 1px solid rgba(223,223,223,0.5);
  */
 
 .meter {
-  height: 310px;
+  height: 350px;
   width: 50px;
   position: relative;
   background: #fff;
