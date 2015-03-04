@@ -13,7 +13,7 @@
             <i class="glyphicon glyphicon-remove"></i>
             {{ _('Remove from admin group') }}</a>
         {% else %}
-        <a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-primary">
+        <a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-danger">
             <i class="glyphicon glyphicon-plus"></i>
             {{ _('Add to admin group') }}</a>
         {% endif %}
