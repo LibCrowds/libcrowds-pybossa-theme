@@ -13,9 +13,18 @@
         <div class="col-sm-9">
             <h1><strong>Admin Options</strong></h1>
             <div class="row">
+                <div id="projects" class="col-sm-6">
+                                <div class="well">
+                    <h2><i class="glyphicon glyphicon-star"></i> {{_('Projects')}}</h2>
+                    <p>{{_('Manage or create projects')}}</p>
+                    <a href="{{ url_for('account.applications', name=current_user.name) }}" class="btn btn-danger">
+                        {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
+                    </a>
+                                </div>
+                </div>
                 <div id="featured-apps" class="col-sm-6">
                                 <div class="well">
-                    <h2><i class="glyphicon glyphicon-star"></i> {{_('Featured Projects')}}</h2>
+                    <h2><i class="glyphicon glyphicon-star"></i> {{_('Featured')}}</h2>
                     <p>{{_('Manage the projects to be shown on the home page')}}</p>
                     <a href="{{url_for('admin.featured')}}" class="btn btn-danger">
                         {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
@@ -59,7 +68,7 @@
                 <div id="dashboard" class="col-sm-6">
                                 <div class="well">
                     <h2><i class="glyphicon glyphicon-dashboard"></i> {{_('Background Jobs')}}</h2>
-                    <p>{{_('Monitor the background jobs')}}</p>
+                    <p>{{_('Monitor background jobs')}}</p>
                     <a href="{{url_for('rq_dashboard.overview')}}" class="btn btn-danger">
                         {{ _('Manage') }} <i class="glyphicon glyphicon-chevron-right"></i>
                     </a>
