@@ -12,7 +12,7 @@
 </div>
 
 <a id="intro"></a>
-<section class="mid-grey pattern-brushed box-shadow-grey">
+<section class="mid-grey pattern-brushed box-shadow-grey-bottom">
       <div class="container container-padded text-center">
          <div class="col-sm-offset-2 col-sm-8">
           <h1 class="inset-text-grey">Crowd-sourcing from the British Library</h1>
@@ -25,20 +25,25 @@
       </div>
 </section>
 
-<section class="white pattern-white-wall">
-  <div class="container container-padded">
+ {% if categories_apps['featured'] %}
+<section class="white pattern-white-wall box-shadow-white-bottom">
+  <div class="row text-center padding-top">
+        <h2>{{ _('Featured Projects') }}</h2>
+      </div>
+  <ul class="polaroids">
       {% for app in categories_apps['featured'] %}
         {{ helper.show_app(app, "featured", current_user, upload_method) }}
       {% endfor %}
-  </div>
+  </ul>
 </section>
+{% endif %}
 
 {% if top_users %}
-<section id="top_users" class="white pattern-white-wall">
+<section id="top_users" class="container-padded">
    <div class="container container-padded">
     <div class="col-sm-12">
-      <div class="row text-center">
-        <h3>{{ _('Most Active Volunteers') }}</h3>
+      <div class="row text-center padding-bottom-sm">
+        <h2>{{ _('Most Active Volunteers') }}</h2>
       </div>
         <ul class="users">
         {% for user in top_users %}

@@ -29,6 +29,8 @@ $(function() {
         $('#main-body-content').addClass($(".set-main-bg").attr('data-bg'));
     }
     
+    $('#code-btns').attr('padding-left', $('CodeMirror-gutter').style.width);
+
 });
 
 $(window).scroll(function() {

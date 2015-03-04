@@ -13,14 +13,14 @@
         </div>
     </section>
     
-    <section  class="white pattern-white-wall">
+    <section  class="white pattern-white-wall inset-shadow-top">
         <div class="container container-padded">
-            <div class="text-center">
-                <h2>{{ _('Your Contributions') }}</h2>
+            <div class="padding-top-sm">
+                <h2 class="text-center">{{ _('Your Contributions') }}</h2>
             {% if apps_contrib %}
                 <ul class="polaroids">
                     {% for app in apps_contrib %}
-                        {{ helper.show_app(app, "", current_user, upload_method) }}
+                        {{ app_helper.show_app(app, "featured", current_user, upload_method) }}
                     {% endfor %}
                 </ul>
             {% else %}

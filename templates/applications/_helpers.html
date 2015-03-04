@@ -122,7 +122,7 @@
 <div class="container container-padded">
     <div class="row project-summary">
         <div class="col-md-8 col-xs-12">
-            <div class="white-rounded inset-shadow project-desc">
+            <div class="white-rounded inset-shadow-white project-desc">
                 <div class="col-sm-6 col-xs-12 hidden-sm hidden-xs project-polaroid">
                     <li>
                         <a  class="polaroid" href="{{ url_for('app.details', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
@@ -145,11 +145,11 @@
         </div>
         
             <div class="col-md-1 hidden-sm hidden-xs">
-                <div class="meter inset-shadow pull-right"><span data-progress="{{ app.overall_progress | round | int }}" data-app="{{app.short_name}}"><span><span></span></span></div>
+                <div class="meter inset-shadow-white pull-right"><span data-progress="{{ app.overall_progress | round | int }}" data-app="{{app.short_name}}"><span><span></span></span></div>
             </div>
         
             <div class="col-sm-3 hidden-sm hidden-xs" id="show-app-stats">
-                <div class="white-rounded inset-shadow">
+                <div class="white-rounded inset-shadow-white">
                     <span class="vcenter"><i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs" id="{{app.short_name}}Complete">Completed: 0%</div></span>
                     <hr class="no-margins">
                     <span class="vcenter"><i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs">Tasks: {{app.n_tasks}}</div></span>
