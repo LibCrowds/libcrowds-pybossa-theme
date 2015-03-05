@@ -8,11 +8,11 @@
     <div class="container text-center padding-top">
       <h1>Crowd-sourcing from the British Library</h1>
         <div class="col-sm-12">
-            <div class="btn btn-circle anchor-btn">
-             <a href="#intro">
-                  <div><i class="fa fa-angle-double-down fa-3x padding-top-xs"></i></div>
-                  <div><br>Get<br>Started</div>
-             </a>
+            <div data-anchor="#intro" class="btn btn-circle anchor-btn">
+              <a>
+                   <div><i class="fa fa-angle-double-down fa-3x padding-top-xs"></i></div>
+                   <div><br>Get<br>Started</div>
+              </a>
             </div>
         </div>
     </div>
@@ -29,14 +29,14 @@
                more readily available to a wider audience. By participating you will have a direct impact 
                on future research conducted using the diverse collections held at the British Library.
             </p>
-            <a href="" class="btn btn-default">Find Out More</a>
+            <a href="{{ url_for('home.about')}}" class="btn btn-default">Find Out More</a>
          </div>
       </div>
 </section>
 
  {% if categories_apps['featured'] %}
 <section class="white pattern-white-wall box-shadow-white-bottom padding-bottom">
-  <div class="row text-center padding-top">
+  <div class="row text-center padding-top-sm">
         <h2>{{ _('Featured Projects') }}</h2>
       </div>
   <ul class="polaroids">

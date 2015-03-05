@@ -99,19 +99,19 @@
         <td><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></td>
         <td>{{ app['short_name'] }}</td>
         {% if app.featured %}
-            <td><button id="appBtnDel{{app.id}}" class="btn" onclick="del({{app.id}})">
+            <td><a id="appBtnDel{{app.id}}" class="btn btn-inverse" onclick="del({{app.id}})">
                     <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
-            </button>
-            <button id="appBtnAdd{{app.id}}" class="btn" onclick="add({{app.id}})" style="display:none;">
+            </a>
+            <a id="appBtnAdd{{app.id}}" class="btn btn-inverse" onclick="add({{app.id}})" style="display:none;">
                     <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
-            </button></td>
+            </a></td>
         {% else %}
-            <td><button id="appBtnAdd{{app.id}}" class="btn" onclick="add({{app.id}})">
+            <td><a id="appBtnAdd{{app.id}}" class="btn btn-inverse" onclick="add({{app.id}})">
                     <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured') }}
-            </button>
-            <button id="appBtnDel{{app.id}}" class="btn" onclick="del({{app.id}})" style="display:none;">
+            </a>
+            <a id="appBtnDel{{app.id}}" class="btn btn-inverse" onclick="del({{app.id}})" style="display:none;">
                     <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured') }}
-            </button></td>
+            </a></td>
         {% endif %}
     </tr>
 {% endmacro %}
@@ -203,13 +203,16 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_app_title(app, upload_method, subtitle=None) %}
-<h1>
-    {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:60px") }}
+<h1 class="vcenter">
+    <div class="shadow margin-right-xs">
+        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:60px") }}
+    </div>
     {% if subtitle %}
     <strong>{{ app.name }}</strong>: {{subtitle}}</h1>
     {% else %}
     <strong>{{ app.name }}</strong></h1>
-    {% endif %}
+{% endif %}
+<hr>
 {% endmacro %}
 
 {% macro render_overall_progress(app, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
@@ -227,6 +230,7 @@ function imgError(image) {
         </div>
         
     </div>
+    <hr>
 {% endmacro %}
 
 {% macro render_grid_apps(apps, title, upload_method) %}

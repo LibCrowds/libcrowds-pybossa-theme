@@ -14,15 +14,12 @@
                         {{ helper.render_app_local_nav(app, 'info', current_user) }}
                     </div>
                     <!-- Project -->
-                    <div class="col-sm-9" style="min-height:400px">
+                    <div class="col-sm-9">
                         {{ helper.render_app_title(app, upload_method) }}
-                        <hr>
                         {{ helper.render_overall_progress(app, n_tasks, overall_progress) }}
                         {% if app.long_description %}
-                        <hr>
                             {{ app.long_description | e | markdown }}
                         {% endif %}
-                        <hr>
                         <div id="ckan" style="display:none">
                             <h2>Data repository: {{ ckan_name | default('CKAN server') }}</h2>
                             <p><i class="glyphicon glyphicon-bar-chart" style="font-size:16px;"></i> <a href="{{ckan_url}}/dataset/{{app.short_name}}">Preview the data</a>

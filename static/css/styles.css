@@ -85,6 +85,15 @@ a[rel="popover"] {
 .label-success {
   background-color: #CC0000;
 }
+
+.label-danger {
+  background-color: #BA0000;  
+}
+
+.label-default {
+  background-color: #ADADAD;
+}
+
 input:focus,
 textarea:focus,
 textarea:focus,
@@ -139,6 +148,10 @@ input[type="checkbox"] {
   margin-top: 10px;
 }
 
+.margin-right-xs {
+  margin-right: 10px;
+}
+
 .margin-bottom {
   margin-bottom: 40px;
 }
@@ -173,7 +186,6 @@ div.white-rounded {
     background-color: #FFFFFF;
     padding: 20px 30px;
     border-radius: 15px;
-    border: 1px solid rgba(223,223,223,0.5);
 }
 
 div.white-rounded-panel {
@@ -400,18 +412,29 @@ transform: none;
 
 .nav-pills>li.active>a,
 .nav-pills>li.active>a:focus,
-.nav-pills>li.active>a:hover {
-  background-color: #D00000;
-}
-
+.nav-pills>li.active>a:hover,
 .nav-pills>li>a,
 .nav-pills>li>a:focus,
 .nav-pills>li>a:hover {
   background-color: #D00000;
 }
 
-.nav-pills>li>a:focus, .nav-pills>li>a:hover {
+.nav-pills.nav-pills-dark>li.active>a,
+.nav-pills.nav-pills-dark>li.active>a:focus,
+.nav-pills.nav-pills-dark>li.active>a:hover {
+  background-color: rgba(0,0,0,0.75);
+  color: #fff;
+}
+
+.nav-pills>li>a:focus,
+.nav-pills>li>a:hover {
   background-color: rgba(255, 255, 255, 0.7);
+  color: #404040;
+}
+
+.nav-pills.nav-pills-dark>li>a:focus,
+.nav-pills.nav-pills-dark>li>a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
   color: #404040;
 }
 
@@ -419,6 +442,14 @@ transform: none;
   background-color: rgba(255, 255, 255, 0.1);
   transition: background-color 0.5s;
   -webkit-transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+}
+
+.nav-pills.nav-pills-dark>li>a {
+background-color: rgba(0, 0, 0, 0.1);
+color: #696969;
 }
 
 .nav-tabs {
@@ -826,6 +857,10 @@ ul.users li a {
   background-color: #fff;
 }
 
+.bs-docs-sidenav li.nav-link {
+  margin-bottom: 5px;
+}
+
 .bs-docs-sidenav > li > a {
   color: #666;
   display: block;
@@ -836,6 +871,9 @@ ul.users li a {
           border-radius: 6px 6px 6px 6px;
   transition: color 100ms;
   -webkit-transition: color 100ms;
+  -ms-transition: color 100ms;
+  -moz-transition: color 100ms;
+  -o-transition: color 100ms;
 }
 
 .bs-docs-sidenav > .active > a {
@@ -1057,6 +1095,9 @@ ul.users li a {
     color: #7B7B7B;
     transition: color 100ms;
     -webkit-transition: color 100ms;
+    -ms-transition: color 100ms;
+    -moz-transition: color 100ms;
+    -o-transition: color 100ms;
 }
 
 #sticky-footer li > a:hover {
@@ -1245,7 +1286,7 @@ margin-bottom: 10px;
 }
 
 .btn-circle a div {
-  height: 90px;
+  height: 87px;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 300;
@@ -1301,7 +1342,10 @@ margin-bottom: 10px;
 	font-size:15px;
 	font-weight:600;
 	transition: background-color .3s, color .5s;
-	-webkit-transition: background-color .3s, color .5s; /* Safari */
+	-webkit-transition: background-color .3s, color .5s;
+	-moz-transition: background-color .3s, color .5s;
+	-ms-transition: background-color .3s, color .5s;
+	-o-transition: background-color .3s, color .5s;
 }
 .btn:active,
 .btn.active {
@@ -1622,9 +1666,16 @@ ul.polaroids a.polaroid {
   font-size: 18px;
   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
   -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
-  -webkit-transform: rotate(-2deg);
   -webkit-transition: -webkit-transform .15s linear;
+  -moz-transition: -moz-transform .15s linear;
+  -ms-transition: -ms-transform .15s linear;
+  -o-transition: -o-transform .15s linear;
+  transition: transform .15s linear;
   -moz-transform: rotate(-2deg);
+  -webkit-transform: rotate(-2deg);
+  -ms-transform: rotate(-2deg);
+  -o-transform: rotate(-2deg);
+  transform: rotate(-2deg);
 }
 
 ul.polaroids a.polaroid.polaroid-sm {
@@ -1677,6 +1728,7 @@ ul.polaroids .polaroid img {
   max-width: 150px;
   max-height: 150px;
   margin-bottom: 10px;
+  border: 1px solid #DDDDDD;
 }
 
 .jcrop-holder div {
@@ -1829,6 +1881,11 @@ ul.polaroids .polaroid img {
  * Shadows
  */
 
+.shadow-inline {
+  display: inline-block;
+  position: relative;
+}
+
 .shadow
 {
     display:block;
@@ -1969,6 +2026,10 @@ border-top: 1px solid rgba(223,223,223,0.5);
   align-items: flex-end;
   display: flex;
   justify-content: flex-end;
+}
+
+.progress-bar {
+  background-color: rgb(43,194,83);
 }
 
 .meter > span {
@@ -2112,7 +2173,7 @@ background-color: rgba(255,255,255,1);
 
 #code-btns {
   background-color: #F7F7F7;
-  padding-left: 34px;
+  padding-left: 30px;
   border-bottom: 1px solid #DDDDDD;
   position: fixed;
   width: 100%;
@@ -2126,6 +2187,10 @@ background-color: rgba(255,255,255,1);
   background-color: rgba(255,255,255,0.5);
   color: #BA0000;
   transition: background-color 0.25s;
+  -webkit-transition: background-color 0.25s;
+  -moz-transition: background-color 0.25s;
+  -ms-transition: background-color 0.25s;
+  -o-transition: background-color 0.25s;
 }
 
 .btn-code:hover,
@@ -2140,9 +2205,12 @@ background-color: rgba(255,255,255,1);
   -moz-filter: grayscale(100%);
   -ms-filter: grayscale(100%);
   -o-filter: grayscale(100%);
+  filter: grayscale(100%);
   -webkit-transition: .5s ease-in-out;
   -moz-transition: .5s ease-in-out;
-  -0-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  -ms-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
 }
 
 .web-badge:hover{
