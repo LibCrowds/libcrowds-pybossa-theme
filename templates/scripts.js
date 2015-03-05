@@ -14,9 +14,9 @@ $(function() {
     
     $('.anchor-btn').click(function(evt) {
         evt.preventDefault();
-        var anchor = $(this).attr('href');
+        var anchor = $(this).attr('data-anchor');
          $('html, body').animate({
-            scrollTop: $(anchor).offset().top - 20
+            scrollTop: $(anchor).offset().top - 40
         }, 1000);
     });
     
