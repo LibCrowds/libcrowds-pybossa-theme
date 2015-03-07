@@ -5,50 +5,47 @@
 
 {% block content %}
 {{ helper.render_loading(text=loading_text) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-3" style="padding: 8px 0;">
-                {{ helper.render_app_local_nav(app, "tasks", current_user) }}
-            </div>
-            <div id="body" class="col-sm-9" style="min-height:400px;">
-                {{ helper.render_app_title(app, upload_method, subtitle=_('Export All Tasks and Task Runs'))}}
-                <p>{{ _('You can export and download') }} <strong>{{ _('all the available') }}</strong> {{ _('Tasks and Task Runs (the submitted answers by the users) in CSV or JSON formats.') }}</p>
-                <div class="row">
-                    <div id="csv" class="col-sm-6 well">
-                        <h2>{{_('Export in CSV format')}}</h2>
-                        <a href={{url_for('app.export_to', short_name=app.short_name, type='task', format='csv')}} rel="nofollow" class="btn btn-lg" download>{{ _('Tasks') }}</a>
-                        <a href={{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}} rel="nofollow" class="btn btn-lg" download>{{ _('Task Runs') }}</a>
-                    </div>
-                    <div id="json" class="col-sm-6 well">
-                        <h2>{{_('Export in JSON format')}}</h2>
-                        <a href={{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}} rel="nofollow" class="btn btn-lg" download>{{ _('Tasks') }}</a>
-                        <a href={{url_for('app.export_to', short_name=app.short_name, type='task_run', format='json')}} rel="nofollow" class="btn btn-lg" download>{{ _('Task Runs') }}</a>
-        
+        {{ helper.render_app_local_nav(app, 'auditlog', current_user) }}
+            <div class="container-padded">
+                <div class="container container-padded">
+                    <div class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                        {{ helper.render_app_title(app, upload_method, subtitle=_('Export All Tasks and Task Runs'))}}
+                        <p>{{ _('You can export and download') }} <strong>{{ _('all the available') }}</strong> {{ _('Tasks and Task Runs (the submitted answers by the users) in CSV or JSON formats.') }}</p>
+                        <div class="row">
+                            <div id="csv" class="col-sm-6 well">
+                                <h2>{{_('Export in CSV format')}}</h2>
+                                <a href={{url_for('app.export_to', short_name=app.short_name, type='task', format='csv')}} rel="nofollow" class="btn btn-lg" download>{{ _('Tasks') }}</a>
+                                <a href={{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}} rel="nofollow" class="btn btn-lg" download>{{ _('Task Runs') }}</a>
+                            </div>
+                            <div id="json" class="col-sm-6 well">
+                                <h2>{{_('Export in JSON format')}}</h2>
+                                <a href={{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}} rel="nofollow" class="btn btn-lg" download>{{ _('Tasks') }}</a>
+                                <a href={{url_for('app.export_to', short_name=app.short_name, type='task_run', format='json')}} rel="nofollow" class="btn btn-lg" download>{{ _('Task Runs') }}</a>
+                
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% if current_user.is_authenticated() and app.owner_id == current_user.id %}
+                            <div id="ckan" class="col-sm-6 well">
+                                {% if ckan_name %}
+                                <h2>Export to the {{ckan_name}}</h2>
+                                {% else %}
+                                <h2>Export to a CKAN server</h2>
+                                {% endif %}
+                                <p><span class="label label-danger"><i class="glyphicon glyphicon-bullhorn"></i> IMPORTANT</span> This export option stills in beta mode and may fail in the CKAN server. If you get an error, please send an e-mail to info@pybossa.com</p>
+                                {% if current_user.ckan_api %}
+                                <a id="ckan_task" href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='ckan')}}" rel="nofollow" class="btn btn-lg">{{_('Tasks')}}</a>
+                                <a id="ckan_task_run" href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='ckan')}}" rel="nofollow" class="btn btn-lg">{{_('Task Runs')}}</a>
+                                {% else %}
+                                <p id="ckan_warning">You don't have a Datahub.io API key in your {{BRAND}} account. Please,  <a href="http://datahub.io/user/register">create an account</a> and copy/paste the API key in your profile in order to use this exporter.</p>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    {% if current_user.is_authenticated() and app.owner_id == current_user.id %}
-                    <div id="ckan" class="col-sm-6 well">
-                        {% if ckan_name %}
-                        <h2>Export to the {{ckan_name}}</h2>
-                        {% else %}
-                        <h2>Export to a CKAN server</h2>
-                        {% endif %}
-                        <p><span class="label label-danger"><i class="glyphicon glyphicon-bullhorn"></i> IMPORTANT</span> This export option stills in beta mode and may fail in the CKAN server. If you get an error, please send an e-mail to info@pybossa.com</p>
-                        {% if current_user.ckan_api %}
-                        <a id="ckan_task" href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='ckan')}}" rel="nofollow" class="btn btn-lg">{{_('Tasks')}}</a>
-                        <a id="ckan_task_run" href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='ckan')}}" rel="nofollow" class="btn btn-lg">{{_('Task Runs')}}</a>
-                        {% else %}
-                        <p id="ckan_warning">You don't have a Datahub.io API key in your {{BRAND}} account. Please,  <a href="http://datahub.io/user/register">create an account</a> and copy/paste the API key in your profile in order to use this exporter.</p>
-                        {% endif %}
-                    </div>
-                    {% endif %}
-                </div>
             </div>
-        </div>
-    </div>
-</div>
 
 <script>
     $("#ckan > a").off('click').on('click', function(){

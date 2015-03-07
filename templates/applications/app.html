@@ -4,17 +4,16 @@
 {% import "applications/_helpers.html" as helper %}
 
 {% block content %}
+    
+    {% if app %}
+    {{ helper.render_app_local_nav(app, 'info', current_user) }}
     <div class="container-padded  remove-padding-bottom">
         <section class="white">
             <div class="container container-padded">
             
                 <div class="row">
-                    {% if app %}
-                    <div class="col-sm-3">
-                        {{ helper.render_app_local_nav(app, 'info', current_user) }}
-                    </div>
                     <!-- Project -->
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 col-sm-offset-3">
                         {{ helper.render_app_title(app, upload_method) }}
                         {{ helper.render_overall_progress(app, n_tasks, overall_progress) }}
                         {% if app.long_description %}
@@ -27,15 +26,21 @@
                             <p id="ckan_license" style="display:none"><strong>Data License</strong>: <span id="ckan_license_value"></span></p>
                         </div>
                     </div>
-                    {% else %}
-                    <div class="page-header">
-                        <h1>{{ _('Sorry! This project does not exist.') }}</h1>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
         </section>
     </div>
+    {% else %}
+        <div class="container-padded  remove-padding-bottom">
+            <section class="white">
+                <div class="container container-padded">
+                    <div class="page-header">
+                        <h1>{{ _('Sorry! This project does not exist.') }}</h1>
+                    </div>
+                </div>
+            </section>
+        </div>
+    {% endif %}
 <script>
     var url = "{{ckan_url}}/api/3/action/package_show";
     $.get(url, {id: '{{ckan_pkg_name}}'}, function(data){

@@ -9,9 +9,35 @@
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
-                <h1>You searched for {{query}}</h1>
+                <h1>Search the OCLC database</h1>
+                <h4>This page can be used to test requests to and responses received from the OCLC database</h4>
+                <hr>
+                {% from "_formhelpers.html" import render_field %}
+                <form id="oclc-form" role="form" method="POST" action="{{url_for('oclc.search')}}" {% if apiString %}hidden{% endif %}>
+                    {{form.hidden_tag()}}
+                    <fieldset>
+                        {{ render_field(form.query, placeholder= _('Query'), class="form-control", required="true") }}
+                        {{ render_field(form.reqFields, placeholder= _('Required fields (comma seperated)'), class="form-control") }}
+                        {{ render_field(form.startPos, placeholder= _('Starting position'), class="form-control", type="number") }}
+                        {{ render_field(form.maxRecords, placeholder= _('Maximum records'), class="form-control", type="number") }}
+                        {{ render_field(form.format, class="form-control") }}
+                        <div class="pull-right" role="group">
+                            <button type="submit" class="btn btn-danger">{{_('Search')}}</button>
+                        </div>
+                    </fieldset>
+                </form>
+                {% if apiString %}
+                    <div id="oclc-results">
+                        <a href="#" id="search-oclc-again" class="btn btn-danger pull-right">Search Again</a>
+                        <h3>API query<strong></strong></h3>
+                        <textarea rows="3" class="form-control readonly-select" onclick="this.focus();this.select()" readonly>{{apiString}}</textarea>
+                        <h3>Example Result:</h3>
+                        {{record}}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+<script src="{{url_for('static', filename='js/vkbeautify.js')}}" type="text/javascript"></script>
 {% endblock %}

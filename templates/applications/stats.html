@@ -5,10 +5,6 @@
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
-     <div class="container-padded  remove-padding-bottom">
-        <section class="white">
-            <div class="container container-padded">
-                
 <!-- Leaflet maps -->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
  <!--[if lte IE 8]>
@@ -24,6 +20,9 @@
 <script>
     var appStats = {{appStats|safe}};
 </script>
+     <div class="container-padded  remove-padding-bottom">
+        <section class="white">
+            <div class="container container-padded">
 <div class="row">
     <div class="col-sm-3">
         {{helper.render_app_local_nav(app, 'stats', current_user)}}
@@ -39,7 +38,7 @@
             <div class="row">
                 <div class="alert alert-info">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>{{_('Important')}}:</strong> {{_('Data have been')}} <strong>{{_('anonymized')}}!</strong>
+                    <strong>{{_('Important')}}:</strong> {{_('Data has been')}} <strong>{{_('anonymized')}}!</strong>
                 </div>
             </div>
             {% endif %}

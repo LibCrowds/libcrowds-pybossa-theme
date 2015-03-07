@@ -7,32 +7,30 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
-    <div class="container-padded">
-        <div class="container container-padded">
-<div class="row">
-    <div class="col-sm-3">
-        {{ helper.render_app_local_nav(app, 'tasks', current_user)}}
-    </div>
-    <div class="col-sm-9">
-        <h1><strong>{{app.name}}</strong>: {{_('Import tasks')}}</h1>
-        {% if form %}
-        <h2>{{_('From a Google Docs Spreadsheet')}}</h2>
-      <form class="form-horizontal" method="post" action="{{ url_for(target, short_name=app.short_name) }}">
-        <fieldset>
-        {{ form.hidden_tag() }}
-        <span class="help-block"> {{ _('Please provide a URL to a Google Drive Spreadsheet with data for') }} {{ active_app }}. <br/> {{ _('For more information, please look at') }} <a href="http://docs.pybossa.com/en/latest/user/overview.html#importing-the-tasks-via-the-built-in-csv-task-creator" target="_blank">{{ _('the documentation') }}.</a></span>
-          {{ render_field(form.googledocs_url, class_="input-block-level", placeholder="The URL of the Google Docs Spreadsheet") }}
-          <div class="form-actions">
-              <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-danger" />
-              <a href="{{ url_for('app.settings', short_name=app.short_name) }}" class="btn">{{_('Cancel')}}</a>
-          </div>
-        </fieldset>
-      </form>
-      {% endif %}
-    </div>
-</div>
-        </div>
-    </div>
+        {{ helper.render_app_local_nav(app, 'auditlog', current_user) }}
+            <div class="container-padded">
+                <div class="container container-padded">
+                    <div class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <h1><strong>{{app.name}}</strong>: {{_('Import tasks')}}</h1>
+                            {% if form %}
+                            <h2>{{_('From a Google Docs Spreadsheet')}}</h2>
+                          <form role="form" method="post" action="{{ url_for(target, short_name=app.short_name) }}">
+                            <fieldset>
+                            {{ form.hidden_tag() }}
+                            <span class="help-block"> {{ _('Please provide a URL to a Google Drive Spreadsheet with data for') }} {{ active_app }}. <br/> {{ _('For more information, please look at') }} <a href="http://docs.pybossa.com/en/latest/user/overview.html#importing-the-tasks-via-the-built-in-csv-task-creator" target="_blank">{{ _('the documentation') }}.</a></span>
+                              {{ render_field(form.googledocs_url, class_="input-block-level form-control", placeholder="The URL of the Google Docs Spreadsheet") }}
+                              <div class="pull-right" role="group">
+                                  <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-danger" />
+                                  <a href="{{ url_for('app.settings', short_name=app.short_name) }}" class="btn btn-default">{{_('Cancel')}}</a>
+                              </div>
+                            </fieldset>
+                          </form>
+                          {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
 <script>
     $("#submit").off('click').on('click', function(){
         $("#loading").show();
