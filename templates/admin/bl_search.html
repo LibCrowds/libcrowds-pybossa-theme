@@ -17,9 +17,9 @@
                     {{form.hidden_tag()}}
                     <fieldset>
                         {{ render_field(form.query, placeholder= _('Query'), class="form-control", required="true") }}
-                        {{ render_field(form.reqFields, placeholder= _('Required fields (comma seperated)'), class="form-control") }}
                         {{ render_field(form.startPos, placeholder= _('Starting position'), class="form-control", type="number") }}
                         {{ render_field(form.maxRecords, placeholder= _('Maximum records'), class="form-control", type="number") }}
+                        {{ render_field(form.format, class="form-control inline-radio") }}
                         <div class="pull-right" role="group">
                             <button type="submit" class="btn btn-danger">{{_('Search')}}</button>
                         </div>
