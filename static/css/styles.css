@@ -1,9 +1,9 @@
 /* Styling */
 /* ======= */
 
-.readonly-select {
+.form-control[readonly].readonly-select {
   cursor: pointer;
-  color: #fff;
+  background-color: #fff;
 }
 
 .inline-block {
