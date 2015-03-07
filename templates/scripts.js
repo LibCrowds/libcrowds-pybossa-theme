@@ -33,11 +33,13 @@ $(function() {
         $('#code-btns').attr('padding-left', $('.CodeMirror-gutter').style.width);
     }
     
-    $('#search-oclc-again').click(function(evt) {
+    $('#search-catalogue-again').click(function(evt) {
         evt.preventDefault();
-        $('#oclc-results').slideUp();
-        $('#oclc-form').slideDown();
+        $('#catalogue-results').slideUp();
+        $('#catalogue-form').slideDown();
     });
+    
+    updateXML();
     
 });
 
@@ -100,5 +102,8 @@ function formatDate(str) {
     return ret;
 }
 
-
-
+function updateXML() {
+    var text = vkbeautify.xml($('#xml2').html());
+    var expr = new RegExp("\n","g")
+    $('#xml').html(text.replace(expr,'<br>'));
+}

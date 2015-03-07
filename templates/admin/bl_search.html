@@ -9,11 +9,11 @@
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
-                <h1>Search the OCLC database</h1>
-                <h4>This page can be used to test requests to and responses received from the OCLC database</h4>
+                <h1>Search the British Library database</h1>
+                <h4>This page can be used to test requests to and responses received from the British Library database</h4>
                 <hr>
                 {% from "_formhelpers.html" import render_field %}
-                <form id="catalogue-form" role="form" method="POST" action="{{url_for('oclc.search')}}" {% if apiString %}hidden{% endif %}>
+                <form id="catalogue-form" role="form" method="POST" action="{{url_for('bl.search')}}" {% if apiString %}hidden{% endif %}>
                     {{form.hidden_tag()}}
                     <fieldset>
                         {{ render_field(form.query, placeholder= _('Query'), class="form-control", required="true") }}
