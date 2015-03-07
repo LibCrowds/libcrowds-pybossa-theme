@@ -33,6 +33,12 @@ $(function() {
         $('#code-btns').attr('padding-left', $('.CodeMirror-gutter').style.width);
     }
     
+    $('#search-oclc-again').click(function(evt) {
+        evt.preventDefault();
+        $('#oclc-results').slideUp();
+        $('#oclc-form').slideDown();
+    });
+    
 });
 
 $(window).scroll(function() {

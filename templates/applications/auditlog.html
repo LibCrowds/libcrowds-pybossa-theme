@@ -4,54 +4,60 @@
 {% import "applications/_helpers.html" as helper %}
 
 {% block content %}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            {% if app %}
-            <div class="col-sm-3">
-                {{ helper.render_app_local_nav(app, 'auditlog', current_user) }}
-            </div>
-            <div class="col-sm-9" style="min-height:400px">
-                {{ helper.render_app_title(app, upload_method) }}
-                {% if logs %}
-                <table class="table table-stripped table-condensed table-hover">
-                    <thead>
-                    <tr>
-                        <th>When</th>
-                        <th>Who</th>
-                        <th>Source</th>
-                        <th>Action</th>
-                        <th>Attribute</th>
-                        <th>Old Value</th>
-                        <th>New Value</th>
-                    </tr>
-                    </thead>
-                {% for log in logs | sort(reverse=True, attribute='created') %}
-                    <tr>
-                        <td><span class="format-date" data-date="{{log.created}}"></span></td>
-                        <td>{% if current_user.name == log.user_name%}You{%else%}{{log.user_name}}{%endif%}</td>
-                        <td>{{log.caller}}</td>
-                        <td>{{log.action}}</td>
-                        <td>{{log.attribute}}</td>
-                        <td>{{(log.old_value or "Nothing")|truncate(30)}}</td>
-                        <td>{{(log.new_value or "Nothing")|truncate(30)}}</td>
-                    </tr>
-        
-                {% endfor %}
-                </table>
-                {% else %}
-                    <h1>{{ _('No logs so far.') }}</h1>
-                {% endif %}
+
+    {% if app %}
+        {{ helper.render_app_local_nav(app, 'auditlog', current_user) }}
+            <div class="container-padded">
+                <div class="container container-padded">
+                    <div class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                        {{ helper.render_app_title(app, upload_method) }}
+                        {% if logs %}
+                        <table class="table table-stripped table-condensed table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th>When</th>
+                                <th>Who</th>
+                                <th class="hidden-sm hidden-xs">Source</th>
+                                <th>Action</th>
+                                <th>Attribute</th>
+                                <th class="hidden-sm hidden-xs">Old Value</th>
+                                <th class="hidden-sm hidden-xs">New Value</th>
+                            </tr>
+                            </thead>
+                        {% for log in logs | sort(reverse=True, attribute='created') %}
+                            <tr>
+                                <td><span class="format-date" data-date="{{log.created}}"></span></td>
+                                <td>{% if current_user.name == log.user_name%}You{%else%}{{log.user_name}}{%endif%}</td>
+                                <td class="hidden-sm hidden-xs">{{log.caller}}</td>
+                                <td>{{log.action}}</td>
+                                <td>{{log.attribute}}</td>
+                                <td class="hidden-sm hidden-xs">{{(log.old_value or "Nothing")|truncate(30)}}</td>
+                                <td class="hidden-sm hidden-xs">{{(log.new_value or "Nothing")|truncate(30)}}</td>
+                            </tr>
                 
+                        {% endfor %}
+                        </table>
+                        {% else %}
+                            <h1>{{ _('No logs so far.') }}</h1>
+                        {% endif %}
+                        
+                    </div>
+                </div>
             </div>
             {% else %}
-            <div class="page-header">
-                <h1>{{ _('This project does not exist.') }}</h1>
+            <div class="container-padded">
+                <div class="container container-padded">
+                    <div class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <div class="page-header">
+                                <h1>{{ _('This project does not exist.') }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endif %}
-        </div>
-    </div>
-</div>
 {{ helper.broken_image() }}
 {{ helper.knob() }}
 {% endblock %}

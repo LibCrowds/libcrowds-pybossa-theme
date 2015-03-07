@@ -1,6 +1,11 @@
 /* Styling */
 /* ======= */
 
+.readonly-select {
+  cursor: pointer;
+  color: #fff;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -117,6 +122,15 @@ input[type="color"]:focus,
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(139, 191, 54, 0.6);
 }
 
+.inline-radio li {
+  display: inline-block;
+  padding-right: 20px;
+}
+
+textarea {
+    resize: none;
+}
+
 input[type="checkbox"] {
   width: auto;
 }
@@ -175,6 +189,9 @@ input[type="checkbox"] {
 .form-control {
   padding: 12px 15px;
   height: auto;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .form-horizontal .form-group {	
@@ -854,7 +871,11 @@ ul.users li a {
   z-index: 99;
   padding: 0;
   width: 220px;
-  background-color: #fff;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.bs-docs-sidenav.affix li:first-child {
+  padding-top: 50px;
 }
 
 .bs-docs-sidenav li.nav-link {
@@ -862,13 +883,14 @@ ul.users li a {
 }
 
 .bs-docs-sidenav > li > a {
-  color: #666;
+  color: #A0A0A0;
   display: block;
   margin: 0 0 -1px;
   padding: 10px 14px;
-  -webkit-border-radius: 6px 6px 6px 6px;
-     -moz-border-radius: 6px 6px 6px 6px;
-          border-radius: 6px 6px 6px 6px;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
   transition: color 100ms;
   -webkit-transition: color 100ms;
   -ms-transition: color 100ms;
@@ -877,8 +899,8 @@ ul.users li a {
 }
 
 .bs-docs-sidenav > .active > a {
-  background-color: #D00000;
-  color: #ffffff;
+  background-color: #BA0000;
+  color: #F7F7F7;
   position: relative;
   z-index: 2;
   padding: 9px 15px;
@@ -893,6 +915,10 @@ ul.users li a {
   opacity: 0;
 }
 
+.bs-docs-sidenav .nav-link a:after {
+  background-color: #BA0000;
+}
+
 /* Chevrons */
 .bs-docs-sidenav .icon-chevron-right {
   float: right;
@@ -900,12 +926,15 @@ ul.users li a {
   margin-right: -6px;
   opacity: .25;
 }
-.bs-docs-sidenav > li > a:hover {
+.bs-docs-sidenav > li > a:hover,
+.bs-docs-sidenav > li > a:focus {
   background-color: rgba(255,255,255,0);
   color: #BA0000;
 }
-.bs-docs-sidenav > .active > a:hover {
-  background-color: #D00000;
+
+.bs-docs-sidenav > .active > a:hover,
+.bs-docs-sidenav > .active > a:focus {
+  background-color: #BA0000;
   color: #fff;
 }
 
@@ -917,9 +946,12 @@ ul.users li a {
     font-size:18px;
   opacity: 1;
 }
+
 .bs-docs-sidenav.affix {
-  top: 100px;
+    top: 70px;
+    height: 100%;
 }
+
 .bs-docs-sidenav.affix-bottom {
   position: absolute;
   top: auto;
@@ -931,9 +963,7 @@ ul.users li a {
   .bs-docs-sidenav {
     width: 220px;
   }
-  .bs-docs-sidenav.affix {
-    top: 100px;
-  }
+  
   .big-modal {
       width: 1000px;
       margin-left:-500px;
@@ -951,9 +981,7 @@ ul.users li a {
     margin-top: 0px;
     margin-right: 0;
   }
-  .bs-docs-sidenav.affix {
-    top: 100px;
-  }
+  
   .big-modal {
       width: 800px;
       margin-left:-400px;
@@ -973,9 +1001,7 @@ ul.users li a {
     width: 166px;
     margin-top: 0px;
   }
-  .bs-docs-sidenav.affix {
-    top: 100px;
-  }
+  
   .big-modal {
       width: 600px;
       margin-left:-300px;
@@ -992,9 +1018,10 @@ ul.users li a {
     width: auto;
     margin-bottom: 20px;
   }
-  .bs-docs-sidenav.affix {
-    top: 0px;
-  }
+  
+.bs-docs-sidenav.affix li:first-child {
+  padding-top: 30px;
+}
   
   .affix {
     position: relative;
@@ -1071,6 +1098,7 @@ ul.users li a {
     background-color: #FAFAFA;
     font-family: sans-serif;
     font-size: 12px;
+    z-index: 100;
 }
 
 #sticky-footer ul {
@@ -1730,6 +1758,11 @@ ul.polaroids .polaroid img {
   margin-bottom: 10px;
   border: 1px solid #DDDDDD;
 }
+
+img.grey-border{
+  border: 1px solid #DDDDDD;
+}
+
 
 .jcrop-holder div {
     -webkit-border-radius: 50% !important;
