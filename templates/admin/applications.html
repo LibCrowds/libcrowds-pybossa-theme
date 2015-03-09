@@ -5,13 +5,11 @@
 {% from "applications/_helpers.html" import render_app_admin_featured, broken_image %}
 
 {% block content %}
+    {{ render_admin_local_nav(current_user, active_link) }}
     <div class="container-padded">
         <div class="container container-padded">
             <div class="row">
-                <div class="col-sm-3">
-                    {{ render_admin_local_nav(current_user, active_link) }}
-                </div>
-                <div class="col-sm-9">
+                <div class="col-sm-9 col-sm-offset-3">
                     <h1><strong>{{ _('Admin') }} :</strong> {{ _('Featured projects') }}</h1>
                 {% include "admin/js/featured_apps.js" %}
                     <ul class="nav nav-pills nav-pills-dark">

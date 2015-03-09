@@ -6,13 +6,11 @@
 
 {% block content %}
 {% if app %}
-            <div class="container-padded">
-        <div class="container container-padded">
+{{ render_admin_local_nav(current_user, active_link) }}
+<div class="container-padded">
+    <div class="container container-padded">
         <div class="row">
-            <div class="col-sm-3">
-                {{ helper.render_app_local_nav(app, 'tasks', current_user) }}
-            </div>
-            <div class="col-sm-9">
+            <div class="col-sm-9 col-sm-offset-3">
                 {{ helper.render_app_title(app, subtitle=_('Task Scheduler'))}}
                 <p>{{_('You can choose from the following schedulers')}}:</p>
                 <ul>
