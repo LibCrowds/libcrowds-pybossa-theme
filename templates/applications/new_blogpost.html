@@ -5,13 +5,11 @@
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
+{{ helper.render_app_local_nav(app, 'blog', current_user) }}
     <div class="container-padded">
         <div class="container container-padded">
         <div id="app-form" class="row"> 
-            <div class="col-sm-3">
-                {{ helper.render_app_local_nav(app, 'blog', current_user) }}
-            </div>
-            <div class="col-sm-9">
+            <div class="col-sm-9 col-sm-offset-3">
                 {{ helper.render_app_title(app) }}
                 <h2>{{ _('Write a new blog post for ad') }} {{ app.name }}</h2>
             <form class="form-horizontal" method="post" action="{{ url_for('app.new_blogpost', short_name=app.short_name) }}">
