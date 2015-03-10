@@ -35,14 +35,13 @@
                 {% if apiString %}
                     <div class="row vcenter-sm">
                         <div class="col-sm-10 col-xs-12 vcenter-sm">
-                            <h4>{{count}}</h4>
+                            <h4>{{count}} results returned</h4>
                         </div>
                         <div class="col-sm-2 col-xs-12">
                                 <a href="#" id="search-catalogue-again" class="btn btn-danger pull-right-sm">Search Again</a>
                         </div>
                     </div>
                     <div id="catalogue-results" class="padding-top-xs">
-                        <a href="#" id="search-catalogue-again" class="btn btn-danger pull-right">Search Again</a>
                         <h3>API query<strong></strong></h3>
                         <textarea rows="3" class="form-control readonly-select" onclick="this.focus();this.select()" readonly>{{apiString}}</textarea>
                         <h3 class="padding-top-sm">Example Result:</h3>
