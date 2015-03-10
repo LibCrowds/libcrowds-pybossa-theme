@@ -11,7 +11,14 @@
             <div class="row">
                 <div class="col-sm-9 col-sm-offset-3">
                     {% if current_user.admin == 1 %}
-                        <h1><strong>{{ current_user.fullname }}'s</strong>: {{ _('Projects') }}</h1><a href"#" class="btn btn-danger pull-right">Create Project</a>
+                        <div class="row vcenter-sm">
+                            <div class="col-sm-9 col-xs-12 vcenter-sm">
+                                <h1><strong>{{ current_user.fullname }}'s</strong>: {{ _('Projects') }}</h1>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                    <a href="#" class="btn btn-inverse pull-right-sm" id="catalogue-help">Create a project</a>
+                            </div>
+                        </div>
                         {% if apps_published or apps_draft %}
                             {% if apps_published %}
                             <h2>{{ _('Published') }}</h2>

@@ -6,7 +6,7 @@
 {% from "_formhelpers.html" import render_field %}
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
-{{ render_admin_local_nav(current_user, active_link) }}
+{{ render_app_local_nav(current_user, active_link) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
