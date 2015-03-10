@@ -1054,6 +1054,11 @@ ul.users li a {
     padding: 2px 10px 2px;
   }
   
+  .alert-messages {
+    width: 90%;
+    margin-left: 5%;
+  }
+  
 }
 
 /* Tablet and above 
