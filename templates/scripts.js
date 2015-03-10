@@ -103,7 +103,9 @@ function formatDate(str) {
 }
 
 function updateXML() {
-    var text = vkbeautify.xml($('#xml2').html());
-    var expr = new RegExp("\n","g")
-    $('#xml').html(text.replace(expr,'<br>'));
+    if ($("#xml").length > 0) {
+        var text = vkbeautify.xml($('#xml2').html());
+        var expr = new RegExp("\n","g")
+        $('#xml').html(text.replace(expr,'<br>'));
+    }
 }

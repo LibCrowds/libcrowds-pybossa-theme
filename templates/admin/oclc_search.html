@@ -8,8 +8,15 @@
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                <h1>Search the OCLC database</h1>
+            <div class="col-sm-9 col-sm-offset-3 text-center-xs">
+                <div class="row vcenter-sm">
+                    <div class="col-sm-10 col-xs-12 vcenter-sm">
+                        <h1 class="">Search the OCLC database</h1>
+                    </div>
+                    <div class="col-sm-2 col-xs-12">
+                            <a href="#" class="btn btn-inverse pull-right-sm" id="catalogue-help"><i class="fa fa-book"></i> Help</a>
+                    </div>
+                </div>
                 <h4>This page can be used to test requests to and responses received from the OCLC database</h4>
                 <hr>
                 {% from "_formhelpers.html" import render_field %}
@@ -26,7 +33,15 @@
                     </fieldset>
                 </form>
                 {% if apiString %}
-                    <div id="catalogue-results">
+                    <div class="row vcenter-sm">
+                        <div class="col-sm-10 col-xs-12 vcenter-sm">
+                            <h4>{{count}}</h4>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                                <a href="#" id="search-catalogue-again" class="btn btn-danger pull-right-sm">Search Again</a>
+                        </div>
+                    </div>
+                    <div id="catalogue-results" class="padding-top-xs">
                         <a href="#" id="search-catalogue-again" class="btn btn-danger pull-right">Search Again</a>
                         <h3>API query<strong></strong></h3>
                         <textarea rows="3" class="form-control readonly-select" onclick="this.focus();this.select()" readonly>{{apiString}}</textarea>
