@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% set active_menu = "admin" %}
 {% set active_page = "profile" %}
 {% set active_link = "administrators" %}
 {% from "admin/_helpers.html" import render_admin_user %}
-{% from "admin/_helpers.html" import render_admin_local_nav %}
+{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    {{ render_admin_local_nav(current_user, active_link) }}
+    {{ render_local_nav(current_user, active_link, active_menu, active_app) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
@@ -22,16 +23,26 @@
                 </div>
                 </form>
                 {% if found %}
-                <h2>{{ _('Found Users') }}</h2>
-                {% for user in found %}
-                {{ render_admin_user(user) }}
-                {% endfor %}
+                <h2>{{ _('Results') }}</h2>
+                <table class="table table-stripped table-condensed table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Joined</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                            {% for user in found %}
+                                {{ render_admin_user(user) }}
+                            {% endfor %}
+                        
                 {% endif %}
         
                 
-                <h2 class="padding-top">{{ _('Current Users with Admin privileges') }}</h2>
+                <h2 class="padding-top-sm">{{ _('Current Administrators') }}</h2>
                 {% for user in users %}
-                {{ render_admin_user(user) }}
+                    {{ render_admin_user(user) }}
                 {% endfor %}
                 
             </div>

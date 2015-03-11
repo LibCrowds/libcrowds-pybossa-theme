@@ -1,16 +1,15 @@
 {% extends "base.html" %}
-{% set active_page = "profile" %}
-{% set active_link = "applications" %}
 {% import "account/_helpers.html" as helper %}
 {% import "applications/_helpers.html" as app_helper %}
+{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    {{ render_admin_local_nav(current_user, active_link) }}
+    {{ render_local_nav(current_user, "applications", "project" }}
     <div class="container-padded">
         <div class="container container-padded">
             <div class="row">
                 <div class="col-sm-9 col-sm-offset-3">
-                    {% if current_user.admin == 1 %}
+                    {% if current_user.admin %}
                         <div class="row vcenter-sm">
                             <div class="col-sm-9 col-xs-12 vcenter-sm">
                                 <h1><strong>{{ current_user.fullname }}'s</strong>: {{ _('Projects') }}</h1>

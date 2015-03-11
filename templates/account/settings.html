@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% set active_page = "profile" %}
-{% set active_link = "settings" %}
 {% import "account/_helpers.html" as helper %}
+{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    {{ helper.render_account_local_nav(current_user, active_link) }} 
+    {{ helper.render_local_nav(current_user, "settings", "admin") }} 
     <div class="container-main">
 <div class="row">
     <div class="col-md-9 col-sm-offset-3">

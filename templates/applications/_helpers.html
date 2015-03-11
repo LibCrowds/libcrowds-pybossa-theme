@@ -31,23 +31,6 @@
   </div>
 {% endmacro %}
 
-{% macro render_app_local_nav(app, active_link, current_user) -%}
-<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
-    <li class="nav-link{% if active_link=="info"%} active{% endif %}"><a href="{{url_for('app.details', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Info')}}</a></li>
-    <li class="nav-link{% if active_link=="contribute"%} active{% endif %}"><a href="{{url_for('app.presenter', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Contribute')}}</a></li>
-    <li class="nav-link{% if active_link=="tasks"%} active{% endif %}"><a href="{{url_for('app.tasks', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Tasks')}}</a></li>
-    <li class="nav-link{% if active_link=="stats"%} active{% endif %}"><a href="{{url_for('app.show_stats', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Statistics')}}</a></li>
-    {% if ( current_user.is_authenticated() and current_user.id == app.owner_id ) or current_user.admin %}
-    <li class="nav-link{% if active_link=="settings"%} active{% endif %}"><a href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{_('Settings')}}</a></li>
-    {% endif %}
-    {% if ( current_user.is_authenticated() and current_user.id == app.owner_id and current_user.pro) or current_user.admin %}
-    <li class="nav-link{% if active_link=="auditlog"%} active{% endif %}"><a
-        href="{{url_for('app.auditlog', short_name=app.short_name)}}"><i
-    class="glyphicon glyphicon-chevron-right"></i> {{_('Audit Logs')}}</a></li>
-    {% endif %}
-</ul>
-{% endmacro %}
-
 {% macro render_app_summary(app, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
 <div class="row">
     <div class="col-sm-6">
@@ -60,7 +43,7 @@
         {% endif %}
         <li><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ app['description'] }}</li>
         <li><strong><i class="fa fa-magic"></i> {{ _('Created') }}</strong>: <span class="format-date" data-date="{{app.created}}"></span></li>
-        <li><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: <span class="format-date" data-date="{{last_activity}}"></span></li>
+        <li><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: <span class="format-date" data-date="{{app.last_activity}}"></span></li>
         <li><strong><i class="fa fa-check-square-o remove-colour"></i> {{ _('Overall progress') }}</strong>: {{ overall_progress | round | int }}% {{ _('completed') }}</li>
         <li><strong><i class="glyphicon glyphicon-tasks"></i> <a href="{{url_for('app.tasks',short_name=app.short_name)}}">{{ _('Tasks') }}</strong></a> ({{ n_tasks }})</li>
         {% if not current_user.is_anonymous() %}
@@ -77,20 +60,11 @@
 {% endmacro %}
 
 {% macro render_app_short_summary(app, upload_method) -%}
-<div class="col-sm-6 col-xs-12">
-    <div class="well">
-        <div class="col-sm-3 col-xs-12">
-            <div class="shadow">
-                {{ render_app_thumbnail(app, upload_method, class="img-responsive", style="max-width:100px") }}
-            </div>
-        </div>
-        <div class="col-sm-9 col-xs-12">
-            <h2><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></h2>
-            <p>{{ app['short_name'] }}</p>
-            <a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}"><i class="glyphicon glyphicon-wrench"></i> {{ _('Settings') }}</a>
-        </div>
-    </div>
-</div>
+<tr>
+    <td><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></td>
+    <td><span class="format-date" data-date="{{app.created}}"></span></td>
+    <td><a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}">{{ _('Open') }}</a></td>
+</tr>
 {% endmacro %}
 
 {% macro render_app_admin_featured(app, upload_method) -%}

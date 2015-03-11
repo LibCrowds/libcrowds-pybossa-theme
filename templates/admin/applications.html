@@ -1,11 +1,10 @@
 {% extends "/base.html" %}
 {% set active_page = "profile" %}
-{% set active_link = "featured" %}
-{% from "admin/_helpers.html" import render_admin_local_nav %}
+{% from "admin/_helpers.html" import render_local_nav %}
 {% from "applications/_helpers.html" import render_app_admin_featured, broken_image %}
 
 {% block content %}
-    {{ render_admin_local_nav(current_user, active_link) }}
+    {{ render_local_nav(current_user, "featured", "admin") }}
     <div class="container-padded">
         <div class="container container-padded">
             <div class="row">

@@ -1,10 +1,9 @@
 {% extends "base.html" %}
-{% set active_page = "profile" %}
-{% set active_link = "categories" %}
-{% from "admin/_helpers.html" import render_admin_local_nav %}
+{% set active_page = "oclcsearch" %}
+{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-{{ render_admin_local_nav(current_user, active_link) }}
+{{ render_local_nav(current_user, "catalogue", "admin") }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
