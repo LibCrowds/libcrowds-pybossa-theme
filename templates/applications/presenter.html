@@ -10,6 +10,7 @@
             });
 </script>
 <script src="{{url_for('static', filename="js/pybossa/pybossa.js")}}" type="text/javascript"></script>
+<div id="api-key" data-key="{{current_user.api_key}}"></div>
     <div class="container-padded">
         <div class="container container-padded">
         {% if invite_new_volunteers %}
