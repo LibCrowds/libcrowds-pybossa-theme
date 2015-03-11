@@ -1,13 +1,12 @@
-
 {% extends "/base.html" %}
 {% set active_page = "applications" %}
-{% set active_app  = app.short_name %}
 {% import "applications/_helpers.html" as helper %}
+{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
-        {{ helper.render_app_local_nav(app, 'auditlog', current_user) }}
+        {{ render_local_nav(current_user, 'tasks', 'project', app.short_name) }}
             <div class="container-padded">
                 <div class="container container-padded">
                     <div class="row">

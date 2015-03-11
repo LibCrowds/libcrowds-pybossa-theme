@@ -162,6 +162,10 @@ input[type="checkbox"] {
   padding-bottom: 0px !important;
 }
 
+.remove-padding-top {
+  padding-top: 0 !important;
+}
+
 .padding-top {
   padding-top: 80px;
 }
@@ -365,7 +369,8 @@ opacity: 1;
 transform: none;
 }
 
-.nav-link:hover a:after {
+.navbar-fixed-top .nav-link:hover a:first-child:after,
+.navbar-fixed-top .nav-link:focus a:first-child:after {
 opacity: 1;
 transform: none;
 }
@@ -893,11 +898,15 @@ ul.users li a {
   padding-top: 40px;
 }
 
+.bs-docs-sidenav.affix .nav-stacked li:first-child {
+  padding-top: 10px;
+}
+
 .bs-docs-sidenav li.nav-link {
   margin-bottom: 5px;
 }
 
-.bs-docs-sidenav > li > a {
+.bs-docs-sidenav li > a {
   color: #A0A0A0;
   display: block;
   margin: 0 0 -1px;
@@ -926,45 +935,77 @@ ul.users li a {
           box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
 }
 
+
 .bs-docs-sidenav .nav-link.active a:after {
   opacity: 0;
 }
 
 .bs-docs-sidenav .nav-link a:after {
+  bottom: 0;
+  right: 0;
+  left: initial;
   background-color: #BA0000;
+  height: 100%;
+  width: 2px;
+  content: '';
+  opacity: 0;
+  -webkit-transition: opacity .2s;
+  -moz-transition: opacity .2s;
+  -ms-transition: opacity .2s;
+  -o-transition: opacity .2s;
+  transition: opacity .2s;
+  -webkit-transition: -webkit-transform .2s;
+  -moz-transition: -moz-transform .2s;
+  -ms-transition: -ms-transform .2s;
+  -o-transition: -o-transform .2s;
+  transition: transform .2s;
+  webkit-transform: translateX(-5px);
+  -moz-transform: translateX(-5px);
+  -ms-transform: translateX(-5px);
+  -o-transform: translateX(-5px);
+  transform: translateX(-5px);
 }
 
-/* Chevrons */
-.bs-docs-sidenav .icon-chevron-right {
-  float: right;
-  margin-top: 2px;
-  margin-right: -6px;
-  opacity: .25;
-}
-.bs-docs-sidenav > li > a:hover,
-.bs-docs-sidenav > li > a:focus {
-  background-color: rgba(255,255,255,0);
-  color: #BA0000;
+.bs-docs-sidenav .nav-link:hover > a:first-child:after,
+.bs-docs-sidenav .nav-link:focus > a:first-child:after {
+  opacity: 1;
+  transform: none;
 }
 
-.bs-docs-sidenav > .active > a:hover,
-.bs-docs-sidenav > .active > a:focus {
-  background-color: #BA0000;
+
+.bs-docs-sidenav .nav-stacked li > a:hover,
+.bs-docs-sidenav .nav-stacked li > a:focus {
+  background-color: rgba(255,255,255,0.7);
+  color: #404040;
+}
+
+.bs-docs-sidenav a.active:hover i,
+.bs-docs-sidenav a.active:focus i,
+.bs-docs-sidenav>li>a.active i {
   color: #fff;
 }
 
-.bs-docs-sidenav a:hover .icon-chevron-right {
-  opacity: .5;
+.bs-docs-sidenav>li>a:hover i {
+  color: #BA0000;
 }
-.bs-docs-sidenav .active .icon-chevron-right,
-.bs-docs-sidenav .active a:hover .icon-chevron-right {
-  font-size:18px;
-  opacity: 1;
+
+.bs-docs-sidenav>li>a:hover,
+.bs-docs-sidenav>li>a:focus {
+  background: rgba(255,255,255,0);
+}
+
+.bs-docs-sidenav a.active,
+.bs-docs-sidenav a.active:focus,
+.bs-docs-sidenav a.active:hover {
+  background-color: #BA0000;
+  color: #fff;
 }
 
 .bs-docs-sidenav.affix {
     top: 70px;
     height: 100%;
+    font-size: 14px;
+    overflow: scroll;
 }
 
 .bs-docs-sidenav.affix-bottom {
@@ -972,6 +1013,25 @@ ul.users li a {
   top: auto;
   bottom: 270px;
 }
+
+.nav-list .nav-stacked {
+  background: rgba(255,255,255,0.8);
+}
+
+.nav-stacked .divider {
+  height: 1px;
+  margin: 9px 9px;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+
+
+.nav-stacked li > a {
+  color: #888;
+  padding: 2px 18px 2px
+}
+
 /* Desktop large
 ------------------------- */
 @media (min-width: 1200px) {
@@ -1059,6 +1119,10 @@ ul.users li a {
     margin-left: 5%;
   }
   
+  .splash-overlay {
+    background: rgba(0,0,0,0)
+  }
+  
 }
 
 /* Tablet and above 
@@ -1095,6 +1159,10 @@ ul.users li a {
   
   .pull-right-sm {
     float: right; 
+  }
+  
+  .splash-overlay {
+    background: rgba(0,0,0,.5);
   }
 
 }
@@ -1389,6 +1457,7 @@ margin-bottom: 10px;
 .btn-info,
 .btn-warning,
 .btn-danger {
+  text-shadow: initial;
   background-color: #ffffff;
 	border-radius:3px;
 	text-transform:uppercase;
@@ -1566,7 +1635,6 @@ margin-bottom: 10px;
 }
 
 .splash-overlay {
-  background: rgba(0,0,0,.5);
   -webkit-transition: background 1s;
     -moz-transition: background 1s;
     -ms-transition: background 1s;
@@ -1977,6 +2045,13 @@ img.grey-border{
 
 .shadow-circle::before {
   border-radius: 50%;  
+}
+
+.nav-stacked.inset-shadow {
+  -moz-box-shadow: inset 0px 1px 2px 1px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0px 1px 2px 1px rgba(0,0,0,0.1);
+  box-shadow: inset 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(145, 145, 145, 0.5);
 }
 
 .inset-shadow {

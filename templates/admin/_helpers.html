@@ -1,34 +1,57 @@
 {% import "account/_helpers.html" as helper %}
 
 {% macro render_admin_user(user) %}
-<div class="row well well-small">
-    <div class="col-md-2">
-        {{ helper.render_user_thumbnail(user, upload_method, style="height:100px; width:100px;")}}
-    </div>
-    <div class="col-md-10">
-        <h2>{{user.fullname}} <small>(nick: {{user.name}})</small></h2>
-        <h3>Member since: {{user.created[0:10]}}</h3>
-        {% if user.admin %}
-        <a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-danger">
+<tr>
+    <td>{{user.fullname}}</td>
+    <td>{{user.name}}</td>
+    <td><span class="format-date" data-date="{{user.created}}"></span></td>
+    {% if user.admin %}
+        <td><a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
             <i class="glyphicon glyphicon-remove"></i>
-            {{ _('Remove from admin group') }}</a>
+            {{ _(' Remove from admin group') }}</a></td>
         {% else %}
-        <a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-danger">
+        <td><a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-inverse">
             <i class="glyphicon glyphicon-plus"></i>
-            {{ _('Add to admin group') }}</a>
+            {{ _(' Add to admin group') }}</a></td>
         {% endif %}
-    </div>
-</div>
+</tr>
 {% endmacro %}
 
-{% macro render_admin_local_nav(current_user, active_link) -%}
+{% macro render_local_nav(current_user, active_link, active_menu, active_app) %}
+{{app}}
 <ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
-    <li {% if active_link=="admin"%}class="active"{% endif %}><a href="{{url_for('admin.index')}}"><i class="glyphicon glyphicon-chevron-right"></i>Dashboard</a></li>
-    <li {% if active_link=="applications"%}class="active"{% endif %}><a href="{{ url_for('account.applications', name=current_user.name) }}"><i class="glyphicon glyphicon-chevron-right"></i>Projects</a></li>
-    <li {% if active_link=="featured"%}class="active"{% endif %}><a href="{{url_for('admin.featured')}}"><i class="glyphicon glyphicon-chevron-right"></i>Featured</a></li>
-    <li {% if active_link=="categories"%}class="active"{% endif %}><a href="{{url_for('admin.categories')}}"><i class="glyphicon glyphicon-chevron-right"></i>Categories</a></li>
-    <li {% if active_link=="administrators"%}class="active"{% endif %}><a href="{{url_for('admin.users')}}"><i class="glyphicon glyphicon-chevron-right"></i>Administrators</a></li>
-    <li><a href="{{url_for('admin.export_users', format='csv')}}"><i class="glyphicon glyphicon-chevron-right"></i>Export Users (CSV)</a></li>
-    <li><a href="{{url_for('rq_dashboard.overview')}}"><i class="glyphicon glyphicon-chevron-right"></i>Background Jobs</a></li>
+{% if current_user.admin %}
+<li class="nav-link">
+    <a href="#" id="admin-options">Admin Options<i class="fa fa-angle-down pull-right"></i></a>
+    <ul class="nav nav-stacked inset-shadow remove-padding-top" id="admin-menu" hidden>
+        <li class="nav-link"><a href="{{url_for('admin.index')}}">Dashboard</a></li>
+        <li class="nav-link"><a href="{{url_for('admin.featured')}}">Featured</a></li>
+        <li class="nav-link"><a href="{{url_for('admin.categories')}}">Categories</a></li>
+        <li class="nav-link"><a href="{{url_for('admin.users')}}">Administrators</a></li>
+        <li class="nav-link"><a href="{{url_for('admin.export_users', format='csv')}}">Export Users (CSV)</a></li>
+        <li class="nav-link"><a href="{{url_for('rq_dashboard.overview')}}">Background Jobs</a></li>
+    </ul>
+</li>
+{% endif %}
+{% if active_menu=="project" %}
+    {% if current_user.admin %}
+    <li class="nav-link">
+        <a href="#" id="project-options">Project Options<i class="fa fa-angle-down pull-right"></i></a>
+        <ul class="nav nav-stacked inset-shadow remove-padding-top" id="project-menu" hidden>
+            <li class="nav-link"><a href="{{url_for('app.new')}}">New</a></li>
+            <li class="nav-link"><a href="{{ url_for('account.applications', name=current_user.name) }}">Open</a></li>
+            {% if active_app != "none" and active_app != "" %}
+                <li class="divider"></li>
+                <li class="nav-link"><a href="{{url_for('app.tasks', short_name=active_app)}}">{{_('Tasks')}}</a></li>
+                <li class="nav-link"><a href="{{url_for('app.settings', short_name=active_app)}}"> {{_('Settings')}}</a></li>
+                <li class="nav-link"><a href="{{url_for('app.auditlog', short_name=active_app)}}">{{_('Audit Logs')}}</a></li>
+            {% endif %}
+        </ul>
+    </li>
+    {% endif %}
+    <li class="nav-link{% if active_link=="info"%} active{% endif %}"><a href="{{url_for('app.details', short_name=active_app)}}">{{_('Info')}}</a></li>
+    <li class="nav-link{% if active_link=="contribute"%} active{% endif %}"><a href="{{url_for('app.presenter', short_name=active_app)}}"> {{_('Contribute')}}</a></li>
+    <li class="nav-link{% if active_link=="statistics"%} active{% endif %}"><a href="{{url_for('app.show_stats', short_name=active_app)}}"> {{_('Statistics')}}</a></li>
+{% endif %}
 </ul>
 {% endmacro %}

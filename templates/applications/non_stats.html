@@ -1,15 +1,20 @@
 {% extends "/base.html" %}
+{% set active_menu = "projects" %}
 {% set active_page = "applications" %}
-{% set active_app  = "all" %}
 {% import "applications/_helpers.html" as helper %}
+{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    {{helper.render_app_local_nav(app, 'stats', current_user)}}
-<div class="row">
-    <div class="col-sm-9 col-sm-offset-3">
-        {{helper.render_app_title(app, upload_method, subtitle='Statistics') }}
-        <span class="alert alert-warning"><strong>Ooops</strong> Sorry, the project does not have tasks to process and show some statistics</span>
-    </div>
-</div>
+    {{ render_local_nav(current_user, active_link, active_menu, app.short_name) }}
+        <div class="container-padded">
+            <div class="container container-padded">
+                <div class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        {{helper.render_app_title(app, upload_method, subtitle='Statistics') }}
+                        <h3>Sorry, there are no statistics for this project yet</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
 {{ helper.broken_image() }}
 {% endblock %}

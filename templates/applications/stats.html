@@ -1,8 +1,8 @@
 {% extends "/base.html" %}
 {% set active_page = "applications" %}
-{% set active_app  = "all" %}
 {% import "applications/_helpers.html" as helper %}
 {% import "privacy/locked.html" as privacy %}
+{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 <!-- Leaflet maps -->
@@ -21,7 +21,7 @@
     var appStats = {{appStats|safe}};
 </script>
 
-{{ render_app_local_nav(current_user, active_link) }}
+{{ render_local_nav(current_user, "statistics", "project", app.short_name) }}
      <div class="container-padded  remove-padding-bottom">
         <section class="white">
             <div class="container container-padded">

@@ -1,16 +1,19 @@
 {% extends "/base.html" %}
+{% set active_menu = "project" %}
 {% set active_page = "create" %}
-{% set active_link  = "applications" %}
+{% set active_link  = "newapp" %}
 {% import "account/_helpers.html" as helper %}
 {% import "applications/_helpers.html" as app_helper %}
+{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-    <div class="container-padded">
-        <div class="container container-padded">
-            {% if current_user.admin == 1 %}
-            <div id="app-form" class="row">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        {{ render_local_nav(current_user, active_link, active_menu) }}
+<div class="container-padded">
+    <div class="container container-padded">
+        {% if current_user.admin %}
+        <div id="app-form" class="row">
+            <div class="col-sm-9 col-sm-offset-3">
                     <h4 class="text-center">{{ _('Create a new project') }}</h4>
                     <form role="form" method="post" action="{{ url_for('app.new')}}" enctype="multipart/form-data"}}>
                     {{ form.hidden_tag() }}
