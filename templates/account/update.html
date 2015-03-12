@@ -64,7 +64,7 @@
             
                 <div class="col-sm-6 col-xs-12 white-rounded inset-shadow">
                 
-                    <form method="post" role="form" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                    <form method="post" role="form" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         <fieldset>
                             <h2 {% if form.errors %}name="profile"{%endif%}>Update your profile</h2>
                             {{ form.id }}
@@ -73,6 +73,7 @@
                             {{ form_helper.render_field_horizontal(form.name, placeholder= _('Username'), class="form-control" ) }}
                             {{ form_helper.render_field_horizontal(form.email_addr, placeholder= _('Email'), class="form-control" ) }}
                             {{ form_helper.render_field_horizontal_checkbox(form.privacy_mode, class="form-control") }}
+                            <select class="form-control hidden" id="locale" name="locale"><option selected="" value="en">English</option></select>
                             <div class="pull-right form-actions" role="group">
                                 <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
                                 <button type="submit" name="btn" value="Profile" class="btn btn-success" />{{ _('Save') }}</button>
