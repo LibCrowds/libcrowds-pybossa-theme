@@ -1,7 +1,5 @@
 {% extends "/base.html" %}
-{% set active_menu = "project" %}
 {% set active_page = "applications" %}
-{% set active_app = app.short_name %}
 {% import "applications/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 
@@ -9,7 +7,7 @@
 {% from "_formhelpers.html" import render_field %}
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
-{{ render_local_nav(current_user, active_link, active_menu, app.short_name) }}
+{{ render_local_nav(current_user, "tasks", app.short_name) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
@@ -19,17 +17,33 @@
               <form method="post" class="form-horizontal" action="{{ url_for('app.update', short_name=app.short_name) }}" enctype="multipart/form-data">
                   <fieldset>
                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                      <div>
-                      {{ helper.render_app_thumbnail(app, upload_method, id="uploadPreview") }}
-                      </div>
+                        <div class="col-sm-6 col-xs-12 hidden-xs project-polaroid">
+                            <li>
+                                <a  class="polaroid" href="{{ url_for('app.details', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
+                                    {{ render_app_thumbnail(app, upload_method) }}
+                                </a>
+                            </li>
+                        </div>
                       {{ render_field(upload_form.avatar, onchange="previewImage()") }}
                       {{ upload_form.x1 }}
                       {{ upload_form.y1 }}
                       {{ upload_form.x2 }}
                       {{ upload_form.y2 }}
-                  <div class="form-actions">
-                    <button type="submit" name='btn' value="Upload" class="btn btn-danger btn-lg">{{ _('Upload') }}</button>
-                  </div>
+                      <div id="modal" class="modal fade">
+                        <div class="modal-dialog img-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <img id="uploadPreview">
+                                </div>
+                                
+                                <div class="modal-footer">
+                                    <div class="form-actions text-center">
+                                        <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-lg" />{{ _('Upload') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                   </fieldset>
               </form>
         
@@ -37,15 +51,15 @@
             <form class="form-horizontal" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}">
               <fieldset>
                 {{ form.hidden_tag() }}
-                {{ render_field(form.name, class_="form-control", placeholder=_('The name of the project')) }}
-                {{ render_field(form.short_name, class_="form-control", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
-                {{ render_field(form.description, class_="form-control", placeholder=_('Give some details about the project')) }}
-                {{ render_field(form.long_description, class_="form-control", placeholder=_('Explain the project (use Markdown!)')) }}
-                {{ render_field(form.category_id, class_="form-control") }}
-                {{ render_field(form.allow_anonymous_contributors, class_="form-control") }}
-                {{ render_field(form.password, class_="form-control") }}
-                {{ render_field(form.webhook, class_="form-control") }}
-                {{ render_field(form.hidden, tooltip=_('Do you want to hide your project?'), class_="form-control") }}
+                {{ render_field_horizontal(form.name, class="form-control", placeholder=_('Name')) }}
+                {{ render_field_horizontal(form.short_name, class="form-control", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
+                {{ render_field_horizontal(form.description, class="form-control", placeholder=_('Short description')) }}
+                {{ render_field_horizontal(form.long_description, class="form-control", placeholder=_('Long description)) }}
+                {{ render_field_horizontal(form.category_id, class="form-control") }}
+                {{ render_field_horizontal(form.allow_anonymous_contributors, class="form-control") }}
+                {{ render_field_horizontal(form.password, class="form-control") }}
+                {{ render_field_horizontal(form.webhook, class="form-control") }}
+                {{ render_field_horizontal(form.hidden, tooltip=_('Do you want to hide your project?'), class="form-control") }}
                 <div class="form-actions">
                   <button type="submit" name='btn' value="Save the changes" class="btn btn-danger">{{_('Save the changes')}}</button>
                   <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>

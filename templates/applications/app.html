@@ -1,5 +1,4 @@
 {% extends "/base.html" %}
-{% set active_menu = "project" %}
 {% set active_page = "applications" %}
 {% import "applications/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
@@ -7,7 +6,7 @@
 {% block content %}
     
     {% if app %}
-    {{ render_local_nav(current_user, 'info', active_menu, app.short_name) }}
+    {{ render_local_nav(current_user, "info", app.short_name) }}
     <div class="container-padded  remove-padding-bottom">
         <section class="white">
             <div class="container container-padded">
