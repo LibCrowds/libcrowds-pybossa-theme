@@ -2383,3 +2383,9 @@ record {
     from { -webkit-transform: rotate(0deg);}
     to { -webkit-transform: rotate(360deg);}
 }
+
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    padding-top: 13px;
+  }
+}
