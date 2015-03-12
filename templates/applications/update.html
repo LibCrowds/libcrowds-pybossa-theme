@@ -2,9 +2,8 @@
 {% set active_page = "applications" %}
 {% import "applications/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
-
+{% import "_formhelpers.html" as form_helper %}
 {% block content %}
-{% from "_formhelpers.html" import render_field %}
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
 {{ render_local_nav(current_user, "tasks", app.short_name) }}
@@ -20,11 +19,11 @@
                         <div class="col-sm-6 col-xs-12 hidden-xs project-polaroid">
                             <li>
                                 <a  class="polaroid" href="{{ url_for('app.details', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
-                                    {{ render_app_thumbnail(app, upload_method) }}
+                                    {{ helper.render_app_thumbnail(app, upload_method) }}
                                 </a>
                             </li>
                         </div>
-                      {{ render_field(upload_form.avatar, onchange="previewImage()") }}
+                      {{ form_helper.render_field(upload_form.avatar, onchange="previewImage()") }}
                       {{ upload_form.x1 }}
                       {{ upload_form.y1 }}
                       {{ upload_form.x2 }}
@@ -52,15 +51,15 @@
               <fieldset>
                 {{ form.hidden_tag() }}
                 
-                {{ render_field_horizontal(form.name, class="form-control", placeholder=_('Name')) }}
-                {{ render_field_horizontal(form.short_name, class="form-control", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
-                {{ render_field_horizontal(form.description, class="form-control", placeholder=_('Short description')) }}
-                {{ render_field_horizontal(form.long_description, class="form-control", placeholder=_('Long description')) }}
-                {{ render_field_horizontal(form.category_id, class="form-control") }}
-                {{ render_field_horizontal(form.allow_anonymous_contributors, class="form-control") }}
-                {{ render_field_horizontal(form.password, class="form-control") }}
-                {{ render_field_horizontal(form.webhook, class="form-control") }}
-                {{ render_field_horizontal(form.hidden, class="form-control") }}
+                {{ form_helper.render_field_horizontal(form.name, class="form-control", placeholder=_('Name')) }}
+                {{ form_helper.render_field_horizontal(form.short_name, class="form-control", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
+                {{ form_helper.render_field_horizontal(form.description, class="form-control", placeholder=_('Short description')) }}
+                {{ form_helper.render_field_horizontal(form.long_description, class="form-control", placeholder=_('Long description')) }}
+                {{ form_helper.render_field_horizontal(form.category_id, class="form-control") }}
+                {{ form_helper.render_field_horizontal(form.allow_anonymous_contributors, class="form-control") }}
+                {{ form_helper.render_field_horizontal(form.password, class="form-control") }}
+                {{ form_helper.render_field_horizontal(form.webhook, class="form-control") }}
+                {{ form_helper.render_field_horizontal(form.hidden, class="form-control") }}
                 <div class="form-actions">
                   <button type="submit" name="btn" value="Save the changes" class="btn btn-danger">{{_('Save the changes')}}</button>
                   <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
