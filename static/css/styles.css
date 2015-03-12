@@ -16,12 +16,12 @@ ul {
 }
 
 .project-desc {
-  height: 350px;
+  height: 300px;
   overflow-y: auto;
 }
 
 .project-polaroid {
-  padding-top: 30px;
+  padding-top: 25px;
 }
 
 .pull-down {
@@ -113,6 +113,10 @@ a[rel="popover"] {
 
 .label-default {
   background-color: #ADADAD;
+}
+
+input[type=checkbox] {
+  -webkit-appearance: checkbox;
 }
 
 input:focus,
@@ -234,7 +238,7 @@ div.white-rounded-panel {
 }
 
 #show-app-stats {
-  height: 350px;
+  height: 300px;
 }
 
 /* Layout */
@@ -251,7 +255,7 @@ body {
   height:100%;
   width: 100%;
   font-family: 'Source Sans Pro', sans-serif;
-  color: #404040; 
+  color: #666666; 
 }
 
 hr.extra-margins {
@@ -994,9 +998,9 @@ ul.users li a {
   background: rgba(255,255,255,0);
 }
 
-.bs-docs-sidenav a.active,
-.bs-docs-sidenav a.active:focus,
-.bs-docs-sidenav a.active:hover {
+.bs-docs-sidenav>li.nav-link>a.active:hover,
+.bs-docs-sidenav>li.nav-link>a.active:focus,
+.bs-docs-sidenav>li.nav-link>a.active {
   background-color: #BA0000;
   color: #fff;
 }
@@ -1781,13 +1785,13 @@ ul.polaroids a.polaroid {
   display: inline;
   float: left;
   margin: 0 0 27px 30px;
-  width: 170px;
-  padding: 10px 10px 11px;
+  width: 140px;
+  padding: 10px 7px 11px;
   text-align: center;
   font-family: 'Permanent Marker', cursive;
   text-decoration: none;
   color: #333;
-  font-size: 18px;
+  font-size: 14px;
   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
   -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
   -webkit-transition: -webkit-transform .15s linear;
@@ -1849,8 +1853,8 @@ ul.polaroids .polaroid li:nth-child(11n) a {
 }
 
 ul.polaroids .polaroid img {
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 120px;
+  max-height: 120px;
   margin-bottom: 10px;
   border: 1px solid #DDDDDD;
 }
@@ -2141,7 +2145,7 @@ border-top: 1px solid rgba(223,223,223,0.5);
  */
 
 .meter {
-  height: 350px;
+  height: 300px;
   width: 50px;
   position: relative;
   background: #fff;
@@ -2353,4 +2357,19 @@ background-color: rgba(255,255,255,1);
   -moz-filter: grayscale(0%);
   -ms-filter: grayscale(0%);
   -o-filter: grayscale(0%);
+}
+
+record p {
+  margin: 0px 0px 0px 0px;
+}
+
+record {
+  border-top: 1px solid #EFEFEF;
+  display: block;
+  padding-top: 20px;
+}
+
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
 }

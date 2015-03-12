@@ -96,16 +96,21 @@
     <div class="row project-summary padding-bottom">
         <div class="col-md-8 col-xs-12">
             <div class="white-rounded inset-shadow-white project-desc">
-                <div class="col-sm-6 col-xs-12 hidden-sm hidden-xs project-polaroid">
+                <div class="col-sm-6 col-xs-12 hidden-xs project-polaroid">
                     <li>
                         <a  class="polaroid" href="{{ url_for('app.details', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
                             {{ render_app_thumbnail(app, upload_method) }}
                         </a>
                     </li>
                 </div>
+                <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg">
+                    <div class="shadow shadow-inline">
+                        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:150px") }}
+                    </div>
+                </div>
                 
                 <div id="data" class="col-sm-6 col-xs-10 col-xs-offset-1 col-sm-offset-0">
-                    <h2><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{ app.name }}</a></h2>
+                    <h2 class="text-center-xs"><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{ app.name }}</a></h2>
                     <p>{{ app.description }}</p>
                 </div>
             </div>
@@ -113,7 +118,7 @@
         
         <div class="row hidden-md hidden-lg text-center">
         {% if active_cat != "draft" %}
-            <p><a class="btn btn-danger margin-top-xs" href="{{ url_for('app.presenter', short_name = app.short_name) }}">{{ _('Start Contributing') }}</a></p>
+            <p><a class="btn btn-danger margin-top-xs" href="{{ url_for('app.presenter', short_name = app.short_name) }}">{{ _('Contribute') }}</a></p>
         {% endif %}
         </div>
         
@@ -131,7 +136,7 @@
                 </div>
                 <div class="text-center padding-top-sm">
                     {% if active_cat != "draft" %}
-                        <p><a class="btn btn-danger" href="{{ url_for('app.presenter', short_name = app.short_name) }}">{{ _('Start Contributing') }}</a></p>
+                        <p><a class="btn btn-danger" href="{{ url_for('app.presenter', short_name = app.short_name) }}">{{ _('Contribute') }}</a></p>
                     {% endif %}
                 </div>
             </div>
@@ -196,7 +201,7 @@ function imgError(image) {
         </div>
         <div class="col-md-4 col-xs-12 text-center">
             {% if show_contribute_btn %}
-                <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-danger pull-right"> {{ _('Start Contributing') }}</a>
+                <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-danger pull-right"> {{ _('Contribute') }}</a>
             {% elif show_n_tasks %}
                 <span class="pull-right-md"><strong>{{n_tasks}}</strong> {{_('Tasks')}}</span>
             {% endif %}
@@ -229,7 +234,7 @@ function imgError(image) {
 <div class="row">
     <div class="col-md-12">
         <div id="loading" class="alert alert-info" style="display:none;">
-            <img src="{{url_for('static', filename='img/loading.gif')}}"/> {{text}}
+            <span class="glyphicon glyphicon-refresh spinning"></span> {{text}}
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@
     global = global || {};
     // Preview image before uploading
     function _previewImage(){
-        $('#modal').modal('show');
+        
         var oFReader = new FileReader();
         oFReader.readAsDataURL(document.getElementById("avatar").files[0]);
         
@@ -39,7 +39,7 @@
                         });
                     });
             });
-            
+            $('#modal').modal('show');
         };
     }
 
@@ -61,11 +61,12 @@ $('#modal').on('hidden.bs.modal', function () {
 });
 
 $('#modal').on('shown.bs.modal', function (e) {
-    previewImage();
-    $('.loading-overlay').hide();
+    $("#loading").hide();
 });
 
 function loadPreview() {
-    $('.loading-overlay').fadeIn( 300 );
-    previewImage();
+    if(typeof document.getElementById("avatar").files[0] != 'undefined') {
+        $("#loading").show();
+        previewImage();
+    }
 }

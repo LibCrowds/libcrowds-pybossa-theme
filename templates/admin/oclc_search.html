@@ -3,7 +3,7 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-{{ render_local_nav(current_user, "catalogue", "admin") }}
+{{ render_local_nav(current_user, "catalogue") }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
@@ -13,7 +13,52 @@
                         <h1 class="">Search the OCLC database</h1>
                     </div>
                     <div class="col-sm-2 col-xs-12">
-                            <a href="#" class="btn btn-inverse pull-right-sm" id="catalogue-help"><i class="fa fa-book"></i> Help</a>
+                            <a href="#" class="btn btn-inverse pull-right-sm" data-toggle="modal" data-target="#helpmodal"><i class="fa fa-book"></i> Help</a>
+                    </div>
+                </div>
+                <div id="helpmodal" role="dialog" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="text-center">Catalogue Seach Help</h3>
+                            </div>
+                            <div class="modal-body">
+                                <h4>Queries should be formed according to a variation of the CCL protocol, for example:</h4>
+
+                                    <p><strong>Title:</strong>
+                                    (1,4)=”Hard Times”</p> 
+                                    
+                                    <p><strong>Year of Publication:</strong>
+                                    (1,31)=”1984”</p><br>
+                                    
+                                    
+                                    <h4>Boolean operators can also be used, such as:</h4>
+                                    
+                                    <p><strong>Author and ISBN:</strong>
+                                     (1,1018)=“Pan Books”and(1,7)=” 9780671746063”</p><br>
+                                    
+                                    
+                                    <p>This syntax has to be exact, with any errors producing appropriate error messages, or possibly just a
+                                    lack of results. You can use this page to test your queries before including them in any projects.</p>
+                                    
+                                    <p>Searches can also be made directly via the API. You will be provided with an API string once you make
+                                    a successful search via this page. Results can be returned in XML, JSON and HTML format, with the latter
+                                    being intended primarily for uses within projects on the LibCrowds platform.</p>
+                                    
+                                    <p>The <a href="https://www.oclc.org/support/services/z3950/documentation/searchtips.en.html">OCLC documentation</a>
+                                    contains more information and the codes for each field.</p>
+                                    
+                                    <p>Note that a result count can also be returned via:<br>
+                                    http://www.libcrowds.com/api/catalogue/oclc/count?query=&lt;query&gt;</p>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <div class="pull-right">
+                                    <button type="submit" name='btn' value="Upload" data-dismiss="modal" class="btn btn-success btn-lg" />Ok</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <h4>This page can be used to test requests to and responses received from the OCLC database</h4>
@@ -51,6 +96,7 @@
         </div>
     </div>
 </div>
+
 <script type="text/xml" id="xml2">{{record}}</script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 {% endblock %}

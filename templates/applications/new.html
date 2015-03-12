@@ -1,14 +1,12 @@
 {% extends "/base.html" %}
-{% set active_menu = "project" %}
 {% set active_page = "create" %}
-{% set active_link  = "newapp" %}
 {% import "account/_helpers.html" as helper %}
 {% import "applications/_helpers.html" as app_helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-        {{ render_local_nav(current_user, active_link, active_menu) }}
+        {{ render_local_nav(current_user, "newapp") }}
 <div class="container-padded">
     <div class="container container-padded">
         {% if current_user.admin %}

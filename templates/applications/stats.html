@@ -21,7 +21,7 @@
     var appStats = {{appStats|safe}};
 </script>
 
-{{ render_local_nav(current_user, "statistics", "project", app.short_name) }}
+{{ render_local_nav(current_user, "statistics", app.short_name) }}
      <div class="container-padded  remove-padding-bottom">
         <section class="white">
             <div class="container container-padded">
@@ -301,25 +301,27 @@
                         </div>
                         <div id="userAnonStats" class="col-sm-12"  style='height:400px'>
                         </div>
-                        <script>
-                       $(window).on("resize", function () {
-                        var container = document.getElementById('userAnonStats');
-                        var graph = Flotr.draw(container, [
-                            {data:[[0, appStats.userAnonStats['top5'][0]['tasks'] ]],  label:'{{_('User')}} 1'},
-                            {data:[[0, appStats.userAnonStats['top5'][1]['tasks'] ]],  label:'{{_('User')}} 2'}, 
-                            {data:[[0, appStats.userAnonStats['top5'][2]['tasks'] ]],  label:'{{_('User')}} 3'}, 
-                            {data:[[0, appStats.userAnonStats['top5'][3]['tasks'] ]],  label:'{{_('User')}} 4'}, 
-                            {data:[[0, appStats.userAnonStats['top5'][4]['tasks'] ]],  label:'{{_('User')}} 5'}], 
-                            {
-                            pie     : {show: true, explode: 5},
-                            grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-                            HtmlText: false,
-                            xaxis   : {showLabels: false},
-                            yaxis   : {showLabels: false},
-                            legend  : {postion: 'se'}
-                        });
-                        }).resize();
-                        </script>
+                        {% if userStats.anonymous.users > 0 %}
+                            <script>
+                           $(window).on("resize", function () {
+                            var container = document.getElementById('userAnonStats');
+                            var graph = Flotr.draw(container, [
+                                {data:[[0, appStats.userAnonStats['top5'][0]['tasks'] ]],  label:'{{_('User')}} 1'},
+                                {data:[[0, appStats.userAnonStats['top5'][1]['tasks'] ]],  label:'{{_('User')}} 2'}, 
+                                {data:[[0, appStats.userAnonStats['top5'][2]['tasks'] ]],  label:'{{_('User')}} 3'}, 
+                                {data:[[0, appStats.userAnonStats['top5'][3]['tasks'] ]],  label:'{{_('User')}} 4'}, 
+                                {data:[[0, appStats.userAnonStats['top5'][4]['tasks'] ]],  label:'{{_('User')}} 5'}], 
+                                {
+                                pie     : {show: true, explode: 5},
+                                grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
+                                HtmlText: false,
+                                xaxis   : {showLabels: false},
+                                yaxis   : {showLabels: false},
+                                legend  : {postion: 'se'}
+                            });
+                            }).resize();
+                            </script>
+                        {% endif %}
                     </div>
                     {% if userStats.geo %}
                     <div class="row">
@@ -392,25 +394,27 @@
                         </div>
                         <div id="userAuthStats" class="col-sm-12" style='height:400px'>
                         </div>
-                        <script>
-                       $(window).on("resize", function () {
-                        var container = document.getElementById('userAuthStats');
-                        var graph = Flotr.draw(container, [
-                            {data:[[0, appStats.userAuthStats['top5'][0]['tasks'] ]],  label:appStats.userAuthStats['top5'][0]['fullname']},
-                            {data:[[0, appStats.userAuthStats['top5'][1]['tasks'] ]],  label:appStats.userAuthStats['top5'][1]['fullname']}, 
-                            {data:[[0, appStats.userAuthStats['top5'][2]['tasks'] ]],  label:appStats.userAuthStats['top5'][2]['fullname']}, 
-                            {data:[[0, appStats.userAuthStats['top5'][3]['tasks'] ]],  label:appStats.userAuthStats['top5'][3]['fullname']}, 
-                            {data:[[0, appStats.userAuthStats['top5'][4]['tasks'] ]],  label:appStats.userAuthStats['top5'][4]['fullname']}], 
-                            {
-                            pie     : {show: true, explode: 5},
-                            grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-                            HtmlText: false,
-                            xaxis   : {showLabels: false},
-                            yaxis   : {showLabels: false},
-                            legend  : {postion: 'nw'}
-                        });
-                        }).resize();
-                        </script>
+                        {% if userStats.authenticated.users > 0 %}
+                            <script>
+                           $(window).on("resize", function () {
+                            var container = document.getElementById('userAuthStats');
+                            var graph = Flotr.draw(container, [
+                                {data:[[0, appStats.userAuthStats['top5'][0]['tasks'] ]],  label:appStats.userAuthStats['top5'][0]['fullname']},
+                                {data:[[0, appStats.userAuthStats['top5'][1]['tasks'] ]],  label:appStats.userAuthStats['top5'][1]['fullname']}, 
+                                {data:[[0, appStats.userAuthStats['top5'][2]['tasks'] ]],  label:appStats.userAuthStats['top5'][2]['fullname']}, 
+                                {data:[[0, appStats.userAuthStats['top5'][3]['tasks'] ]],  label:appStats.userAuthStats['top5'][3]['fullname']}, 
+                                {data:[[0, appStats.userAuthStats['top5'][4]['tasks'] ]],  label:appStats.userAuthStats['top5'][4]['fullname']}], 
+                                {
+                                pie     : {show: true, explode: 5},
+                                grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
+                                HtmlText: false,
+                                xaxis   : {showLabels: false},
+                                yaxis   : {showLabels: false},
+                                legend  : {postion: 'nw'}
+                            });
+                            }).resize();
+                            </script>
+                        {% endif %}
                     </div>
                 </div>
             </div>
