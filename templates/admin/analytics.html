@@ -26,15 +26,15 @@
 (function(w,d,s,g,js,fs){
   g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
   js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
-  js.src='https://apis.google.com/js/platform.js';
+  js.src="{{url_for('static', filename='js/vendor/platform.js')}}";
   fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
 }(window,document,'script'));
 </script>
-<script src="url_for('static', filename='js/vendor/Chart.js-master/Chart.min.js"></script>
-<script src="js/vendor/moment.min.js"></script>
-<script src="js/vendor/embed-api/view-selector2.js"></script>
-<script src="js/vendor/embed-api/date-range-selector.js"></script>
-<script src="js/vendor/embed-api/active-users.js"></script>
+<script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/vendor/moment.js')}}"></script>
+<script src="{{url_for('static', filename='js/vendor/embed-api/view-selector2.js')}}"></script>
+<script src="{{url_for('static', filename='js/vendor/embed-api/date-range-selector.js')}}"></script>
+<script src="{{url_for('static', filename='js/vendor/embed-api/active-users.js')}}"></script>
 <script>
 
 // == NOTE ==
