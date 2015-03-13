@@ -5,6 +5,3 @@ We notice you signed up for {{config.BRAND}} some time ago, but never contribute
 Cheers!
 
 {{ config.BRAND }} Team
-
-***
-Follow us: [Twitter](http://twitter.com/pybossa), [Google+](https://plus.google.com/115359083217638640334/posts)

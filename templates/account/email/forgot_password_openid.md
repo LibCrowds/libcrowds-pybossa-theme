@@ -1,6 +1,6 @@
 Hello {{ user.fullname }},
 
-We received a request to recover your password for {{ config.BRAND }}.
+We received a request to reset your {{ config.BRAND }} password.
 
 If you did not request this, please ignore this email.
 
@@ -11,5 +11,3 @@ account, please contact {{ account_name }}.
 Regards,
 {{ config.BRAND }} Team
 
-***
-Follow us: [Twitter](http://twitter.com/pybossa), [Google+](https://plus.google.com/115359083217638640334/posts)

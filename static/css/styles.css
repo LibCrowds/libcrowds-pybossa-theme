@@ -999,9 +999,9 @@ ul.users li a {
   background: rgba(255,255,255,0);
 }
 
-.bs-docs-sidenav>li.nav-link>a.active:hover,
-.bs-docs-sidenav>li.nav-link>a.active:focus,
-.bs-docs-sidenav>li.nav-link>a.active {
+.bs-docs-sidenav>li.nav-link.active>a:hover,
+.bs-docs-sidenav>li.nav-link.active>a:focus,
+.bs-docs-sidenav>li.nav-link.active>a {
   background-color: #BA0000;
   color: #fff;
 }

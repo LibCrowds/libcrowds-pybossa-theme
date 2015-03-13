@@ -1,6 +1,6 @@
 Hello {{ user['fullname'] }},
 
-You have updated your email's account in {{ config.BRAND }}.
+You have updated your email address at {{ config.BRAND }}.
 
 To verify that you are the owner of this e-mail address, please visit the URL below:
 
@@ -12,5 +12,3 @@ Regards,
 
 {{ config.BRAND }} Team
 
-***
-Follow us: [Twitter](http://twitter.com/pybossa), [Google+](https://plus.google.com/115359083217638640334/posts)
