@@ -4,9 +4,6 @@
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
-        <div class="container-padded  remove-padding-bottom">
-        <section class="white">
-            <div class="container container-padded">
 <!-- Leaflet maps -->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
  <!--[if lte IE 8]>
@@ -23,189 +20,175 @@
 <script src="{{url_for('static', filename='js/stats/flotr2.min.js')}}" type="text/javascript"></script>
 <script src="{{url_for('static', filename='js/stats/leaflet.markercluster.js')}}" type="text/javascript"></script>
 
-<style>
-h3 {
-    font-size: 20px;
-}
-
-h3 > small {
-    font-size: 20px;
-}
-</style>
-
+<div class="container-padded remove-padding-bottom">
+    <section class="white">
+        <div class="container container-padded">
 <div class="row">
-    <div class="col-md-12">
-        {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-        {{ privacy.render_lock_page() }}
-        {% else %}
-        <h1><strong>{{brand}}</strong>: {{ _('General Statistics') }}</h1>
-        <br/>
-            <!-- Users Stats CARD -->
-            <div id="card" class="row">
-                <div id="userStats" class="col-md-12 well">
-                    <h2>Users</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>{{ _('Anonymous users') }}: <small>{{stats.n_anon}}</small></h3>
-                            <h3>{{ _('Authenticated users') }}: <small>{{stats.n_auth}}</small></h3>
-                            <h3>{{ _('Total') }}: {{stats.n_total_users}}</h3>
-                            <a class="btn btn-primary btn-lg" href="{{url_for('leaderboard.index')}}"><i class="fa fa-trophy" style="color:white"></i> {{ _('Leaderboard') }}</a>
-                            {% if top5_users_24_hours %}
-                            <hr>
-                            <h4><i class="glyphicon glyphicon-group"></i> {{ _('Top 5 Users in the last 24 hours') }}</h4>
-                                <ol>
-                                {% for user in top5_users_24_hours %}
-                                <li><a href="{{url_for('account.profile', name=user.name)}}" >{{user.fullname}}</a> {{ _('with') }} {{user.n_answers}} {{ _('contributed answers') }}</li>
-                                {% endfor %}
-                                </ol>
-                            {% else %}
-                            <hr>
-                            <h4>{{ _('No active users in the last 24 hours') }}</h4>
-                            {% endif %}
-                        </div>
-                        <div id="users" class="col-md-6" style="height:400px;"></div>
-                        <script>
-                        (function(){
-                            var data = {{users|safe}};
-                            var container = document.getElementById('users');
-                            var graph = Flotr.draw(container, [
-                                {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}], 
-                                {
-                                pie     : {show: true, explode: 2},
-                                grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-                                HtmlText: false,
-                                xaxis   : {showLabels: false},
-                                yaxis   : {showLabels: false},
-                                legend  : {position: 'se'}
-                            });
-                        })();
-                        </script>
-                    </div>
-                </div>
-            </div>
-            <!-- END Users Stats CARD -->
-
-            <!-- Project Stats CARD -->
-            <div id="card" class="row">
-                <div id="appStats" class="col-md-12 well">
-                    <h2>{{ _('Projects') }}</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>{{ _('Published Projects') }}: <small>{{stats.n_published_apps}}</small></h3>
-                            <h3>{{ _('Draft Projects') }}: <small>{{stats.n_draft_apps}}</small></h3>
-                            <h3>{{ _('Total') }}: {{stats.n_total_apps}}</h3>
-                            {% if top5_apps_24_hours %}
-                            <hr>
-                            <h4><i class="glyphicon glyphicon-th-large"></i> {{ _('Top 5 projects in the last 24 hours') }}</h4>
-                                <ol>
-                                {% for app in top5_apps_24_hours %}
-                                <li><a href="{{url_for('app.details', short_name=app.short_name)}}">{{app.name}}</a></li>
-                                {% endfor %}
-                                </ol>
-                            {% else %}
-                            <hr>
-                            <h4>{{ _('No active project in the last 24 hours') }}</h4>
-                            {% endif %}
-                        </div>
-                        <div id="apps" class="col-md-6" style="height:400px;"></div>
-                     <script>
-                        (function(){
-                            var data = {{apps|safe}};
-                            var container = document.getElementById('apps');
-                            var graph = Flotr.draw(container, [
-                                {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}], 
-                                {
-                                pie     : {show: true, explode: 2},
-                                grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-                                HtmlText: false,
-                                xaxis   : {showLabels: false},
-                                yaxis   : {showLabels: false},
-                                legend  : {position: 'se'}
-                            });
-                        })();
-                        
-                        </script>
-                    </div>
-                </div>
-            </div>
-            <!-- END Users Stats CARD -->
-
-            <!-- Projects Task and TaskRuns CARD -->
-            <div id="card" class="row">
-                <div id="taskStats" class="col-md-12 well">
-                    <h2>{{ _('Tasks and Answers') }}</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>{{ _('Number of Tasks') }}: <small>{{stats.n_tasks}}</small></h3>
-                            <h3>{{ _('Number of Task Runs') }}: <small>{{stats.n_task_runs}}</small></h3>
-                        </div>
-                        <div id="tasks" class="col-md-6" style="height:400px;"></div>
-                     <script>
-                        (function(){
-                            var data = {{tasks|safe}};
-                            var container = document.getElementById('tasks');
-                            var graph = Flotr.draw(container, [
-                                {data:[data['values'][0]['value']], label:data['values'][0]['label']},
-                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}], 
-                                {
-                                bars : {show: true},
-                                grid    : {verticalLines: true, horizontalLines: true},
-                                xaxis   : {showLabels: false, autoscale: true, autoscaleMargin:1},
-                                yaxis   : {showLabels: true, min:0, autoscaleMargin:1},
-                                legend  : {position: 'ne'}
-                            });
-                        })();
-                        
-                        </script>
-                    </div>
-                </div>
-            </div>
-            <!-- END Users Stats CARD -->
-            <!-- START Anonymous Users Map CARD -->
-            {% if show_locs %}
-            <div id="card" class="row">
-                <div class="col-md-12 well">
-                    <h2>{{ _('Anonymous Volunteers') }}</h2>
-                    <div id="map" style="height:250px;"></div>
-                    <p class="note">{{_('This page includes GeoLite data created by MaxMind, available from')}}
-                    <a href="http://www.maxmind.com">http://www.maxmind.com</a></p>
-                </div>
-                <script>
-                    (function(){
-                    var map = L.map('map');
-                    map.fitWorld();
-                    map.setZoom(1);
-                    var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                    L.tileLayer(url, 
-                        {
-                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                        maxZoom: 18,
-                        minZoom:1
-                        }).addTo(map);
-
-                    var i = 0;
-                    var locations = {{locs|safe}};
-                    var l = locations.length;
-                    var markers = new L.MarkerClusterGroup();
-                    for (i;i<l;i++) {
-                        if (locations[i].loc != null) {
-                            var lat = parseFloat(locations[i].loc.latitude);
-                            var lng = parseFloat(locations[i].loc.longitude);
-                            markers.addLayer(L.marker([lat,lng]));
-                        }
-                    }
-                    map.addLayer(markers);
-                    })();
-                </script>
-            </div>
-            {% endif %}
-            <!-- END Anonymous Users Map CARD -->
-        {% endif %} 
+    {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+    {{ privacy.render_lock_page() }}
+    {% else %}
+    <div class="col-sm-4 white-rounded">
+        <canvas id="users" class="col-md-3" style="max-height:400px;"></canvas>
     </div>
 </div>
+            
 </div>
-        </section>
+</section>
     </div>
+        <script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.js')}}"></script>
+<script>
+Chart.defaults.global = {
+    // Boolean - Whether to animate the chart
+    animation: true,
+
+    // Number - Number of animation steps
+    animationSteps: 60,
+
+    // String - Animation easing effect
+    animationEasing: "easeOutQuart",
+
+    // Boolean - If we should show the scale at all
+    showScale: true,
+
+    // Boolean - If we want to override with a hard coded scale
+    scaleOverride: false,
+
+    // ** Required if scaleOverride is true **
+    // Number - The number of steps in a hard coded scale
+    scaleSteps: null,
+    // Number - The value jump in the hard coded scale
+    scaleStepWidth: null,
+    // Number - The scale starting value
+    scaleStartValue: null,
+
+    // String - Colour of the scale line
+    scaleLineColor: "rgba(0,0,0,.1)",
+
+    // Number - Pixel width of the scale line
+    scaleLineWidth: 1,
+
+    // Boolean - Whether to show labels on the scale
+    scaleShowLabels: true,
+
+    // Interpolated JS string - can access value
+    scaleLabel: "<%=value%>",
+
+    // Boolean - Whether the scale should stick to integers, not floats even if drawing space is there
+    scaleIntegersOnly: true,
+
+    // Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+    scaleBeginAtZero: false,
+
+    // String - Scale label font declaration for the scale label
+    scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+    // Number - Scale label font size in pixels
+    scaleFontSize: 12,
+
+    // String - Scale label font weight style
+    scaleFontStyle: "normal",
+
+    // String - Scale label font colour
+    scaleFontColor: "#666",
+
+    // Boolean - whether or not the chart should be responsive and resize when the browser does.
+    responsive: true,
+
+    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+    maintainAspectRatio: true,
+
+    // Boolean - Determines whether to draw tooltips on the canvas or not
+    showTooltips: true,
+
+    // Function - Determines whether to execute the customTooltips function instead of drawing the built in tooltips (See [Advanced - External Tooltips](#advanced-usage-custom-tooltips))
+    customTooltips: false,
+
+    // Array - Array of string names to attach tooltip events
+    tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+
+    // String - Tooltip background colour
+    tooltipFillColor: "rgba(0,0,0,0.8)",
+
+    // String - Tooltip label font declaration for the scale label
+    tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+    // Number - Tooltip label font size in pixels
+    tooltipFontSize: 14,
+
+    // String - Tooltip font weight style
+    tooltipFontStyle: "normal",
+
+    // String - Tooltip label font colour
+    tooltipFontColor: "#fff",
+
+    // String - Tooltip title font declaration for the scale label
+    tooltipTitleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+    // Number - Tooltip title font size in pixels
+    tooltipTitleFontSize: 14,
+
+    // String - Tooltip title font weight style
+    tooltipTitleFontStyle: "bold",
+
+    // String - Tooltip title font colour
+    tooltipTitleFontColor: "#fff",
+
+    // Number - pixel width of padding around tooltip text
+    tooltipYPadding: 6,
+
+    // Number - pixel width of padding around tooltip text
+    tooltipXPadding: 6,
+
+    // Number - Size of the caret on the tooltip
+    tooltipCaretSize: 8,
+
+    // Number - Pixel radius of the tooltip border
+    tooltipCornerRadius: 6,
+
+    // Number - Pixel offset from point x to tooltip edge
+    tooltipXOffset: 10,
+
+    // Function - Will fire on animation progression.
+    onAnimationProgress: function(){},
+
+    // Function - Will fire on animation completion.
+    onAnimationComplete: function(){},
+    
+    //String - A legend template
+    legendTemplate : '<ul>'
+                  +'<% for (var i=0; i<datasets.length; i++) { %>'
+                    +'<li>'
+                    +'<span style=\"background-color:<%=datasets[i].lineColor%>\"></span>'
+                    +'<% if (datasets[i].label) { %><%= datasets[i].label %><% } %>'
+                  +'</li>'
+                +'<% } %>'
+              +'</ul>'
+}
+</script>
+    <script>
+    (function(){
+        
+        //User proportions chart
+        var userData = {{users|safe}};
+        console.log(userData);
+        console.log(userData['values'][0]['label']);
+        var data = [
+        {
+            value: userData['values'][0]['value'][1],
+            color:"#637b85",
+            label: userData['values'][0]['label']
+        },
+        {
+            value : userData['values'][1]['value'][1],
+            color : "#2c9c69",
+            label: userData['values'][1]['label']
+        }
+        ];
+        var canvas = $("#users");
+        var ctx = canvas.getContext("2d");
+        new Chart(ctx).Doughnut(data);
+        var legend = lineChart.generateLegend();
+        $('#users').append(legend);
+    })();
+</script>
 {% endblock %}
