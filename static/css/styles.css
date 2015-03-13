@@ -153,6 +153,7 @@ textarea {
 
 input[type="checkbox"] {
   width: auto;
+  margin-top: 19px;
 }
 
 .remove-padding {
