@@ -253,7 +253,7 @@ html {
 body {
   font-weight: lighter;
   background-color: #ffffff;
-  height:100%;
+  min-height:800px;
   width: 100%;
   font-family: 'Source Sans Pro', sans-serif;
   color: #666666; 
@@ -2360,7 +2360,8 @@ background-color: rgba(255,255,255,1);
   -o-filter: grayscale(0%);
 }
 
-record p {
+record p,
+.chart p {
   margin: 0px 0px 0px 0px;
 }
 
@@ -2389,4 +2390,32 @@ record {
   .form-horizontal .control-label {
     padding-top: 13px;
   }
+}
+
+
+.doughnut-legend li span {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  float: left;
+  margin-top: 4px;
+  margin-right: 8px;
+}
+
+.doughnut-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  margin-top : 20px;
+
+}
+
+.doughnut-legend li {
+  margin-bottom : 4px;
+}
+
+.doughnut-legend li:first-letter {
+  text-transform: capitalize;
 }
