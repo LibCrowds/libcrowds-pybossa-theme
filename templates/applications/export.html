@@ -28,6 +28,17 @@
                         </div>
                         <div class="row">
                             {% if current_user.is_authenticated() and app.owner_id == current_user.id %}
+                                <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                                <hr>
+                                <h2>External Services</h2>
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                {{ render_field(external_form.ckan_api) }}
+                                <div class="form-actions">
+                                    <button type="submit" name='btn' value="External" class="btn btn-primary btn-large" />{{ _('Save the changes') }}</button>
+                                  <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn">{{ _('Cancel') }}</a>
+                                </div>
+                                </fieldset>
+                            </form>
                             <div id="ckan" class="col-sm-6 well">
                                 {% if ckan_name %}
                                 <h2>Export to the {{ckan_name}}</h2>

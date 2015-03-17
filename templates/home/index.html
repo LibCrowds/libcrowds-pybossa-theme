@@ -58,9 +58,9 @@
         {% for user in top_users %}
 <li>
 <a href="{{url_for('account.profile', name=user.name)}}" data-content="
-   <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}} 
+   <strong>{{_('Joined')}}:</strong> <span class="format-date" data-date="{{user.created}}">
    <br/>
-   <strong>{{_('Submitted Tasks')}}:</strong> {{user.task_runs}}
+   <strong>{{_('Tasks')}}:</strong> {{user.task_runs}}
    " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
    <div class="shadow shadow-circle">
 {{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;", class="img-circle") }}
