@@ -58,7 +58,7 @@
         {% for user in top_users %}
 <li>
 <a href="{{url_for('account.profile', name=user.name)}}" data-content="
-   <strong>{{_('Joined')}}:</strong> <span class="format-date" data-date="{{user.created}}">
+   <strong>{{_('Joined')}}:</strong> <span class="format-date" data-date="{{user.created}}"
    <br/>
    <strong>{{_('Tasks')}}:</strong> {{user.task_runs}}
    " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
