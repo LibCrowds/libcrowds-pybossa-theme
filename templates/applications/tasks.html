@@ -11,84 +11,93 @@
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
-                        {{ helper.render_app_title(app, upload_method, subtitle=_('Tasks'))}}
-                        {{ helper.render_overall_progress(app, n_tasks, overall_progress, show_contribute_btn=False, show_n_tasks=True) }}
+                        <h1 class="inset-text-grey"><strong>Project Options</strong></h1>
                         {% if app.owner_id == current_user.id or (current_user.is_authenticated() and current_user.admin)%}
                         <div class="row">
                             <div id="import_tasks" class="col-sm-4">
-                                <div class="well text-center">
+                                <a href="{{url_for('app.import_task', short_name=app.short_name)}}" rel="nofollow">
+                                <div class="well  ">
                                         <i class="fa fa-upload fa-3x"></i> 
-                                        <h3>{{_('Import Tasks')}}</h3>
-                                        <a href="{{url_for('app.import_task', short_name=app.short_name)}}" class="btn btn-danger btn-dash">{{_('Import')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
-                            
+                                        <h3 class="margin-bottom-xs">{{_('Import Tasks')}}</h3>
                                 </div>
+                                </a>
                             </div>
                             <div id="export_tasks" class="col-sm-4">
-                                <div class="well">
-                                        <h2><i class="glyphicon glyphicon-download"></i> {{_('Export Tasks')}}</h2>
-                                        <p>{{_('Export tasks to JSON, CSV or a CKAN server')}}</p>
-                                        <a href="{{url_for('app.export_to', short_name=app.short_name)}}" rel="nofollow" class="btn btn-danger btn-dash">{{_('Export')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
-                                </div>
+                                <a href="{{url_for('app.export_to', short_name=app.short_name)}}" rel="nofollow">
+                                        <div class="well  ">
+                                                <i class="fa fa-download fa-3x"></i>
+                                                <h3 class="margin-bottom-xs"> {{_('Export Tasks')}}</h3>
+                                        </div>
+                                </a>
                             </div>
-                        
-                            <div id="task_presenter" class="col-sm-4">
-                                <div class="well">
-                                        <h2><i class="glyphicon glyphicon-edit"></i> {{_('Task Presenter')}}</h2>
-                                        <p>{{_('Edit the task presenter')}}</p>
-                                        <a href="{{url_for('app.task_presenter_editor', short_name=app.short_name)}}" class="btn btn-danger btn-dash">{{_('Editor')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
-                                    </div>
+                            
+                            <div id="autoimport_tasks" class="col-sm-4">
+                                <a href="{{url_for('app.setup_autoimporter', short_name=app.short_name)}}" rel="nofollow">
+                                        <div class="well  ">
+                                                <i class="fa fa-cogs fa-3x"></i>
+                                                <h3 class="margin-bottom-xs"> {{_('Auto-import Tasks')}}</h3>
+                                        </div>
+                                </a>
                             </div>
                         </div>
                         <div class="row">
-                            <div id="task_settings" class="col-sm-4">
-                                <div class="well">
-                                        <h2><i class="glyphicon glyphicon-cog"></i> {{_('Settings')}}</h2>
-                                        <p>{{_('Configure the task scheduler, redundancy, etc.')}}</p>
-                                        <a href="{{url_for('app.task_settings',
-                                            short_name=app.short_name)}}" class="btn
-                                            btn-danger btn-dash">{{_('Settings')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
+                            <div id="task_presenter" class="col-sm-4">
+                                <a href="{{url_for('app.task_presenter_editor', short_name=app.short_name)}}" rel="nofollow">
+                                    <div class="well">
+                                        <i class="fa fa-edit fa-3x"></i>
+                                        <h3 class="margin-bottom-xs"> {{_('Task Presenter')}}</h3>
                                     </div>
+                                </a>
                             </div>
                         
                             <div id="task_browse" class="col-sm-4">
+                                <a href="{{url_for('app.tasks_browse', short_name=app.short_name)}}" rel="nofollow">
                                 <div class="well">
-                                        <h2><i class="glyphicon glyphicon-road"></i> {{_('Browse')}}</h2>
-                                        <p>{{_('Check the status of the tasks')}}</p>
-                                        <a href="{{url_for('app.tasks_browse',
-                                            short_name=app.short_name)}}" class="btn btn-danger btn-dash">{{_('Browse')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
+                                        <i class="fa fa-list-alt fa-3x"></i>
+                                        <h3 class="margin-bottom-xs"> {{_('Browse Tasks')}}</h3>
                                     </div>
+                                </a>
                             </div>
-                        {% if current_user.pro or current_user.admin %}
-                            <div id="autoimport_tasks" class="col-sm-4">
-                                <div class="well">
-                                        <h2><i class="glyphicon glyphicon-upload"></i> {{_('Auto-import Tasks')}}</h2>
-                                        <p>{{_('Import tasks regularly and automatically')}}</p>
-                                        <a href="{{url_for('app.setup_autoimporter', short_name=app.short_name)}}" class="btn btn-danger btn-dash">{{_('Setup')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
-                                </div>
-                                </div>
-                        {% endif %}
-                     
-                        {% else %}
+                            
+                            <div id="task_delete" class="col-sm-4">
+                                <a href="{{url_for('app.delete_tasks', short_name=app.short_name)}}" rel="nofollow">
+                                    <div class="well">
+                                        <i class="fa fa-trash-o fa-3x"></i>
+                                        <h3 class="margin-bottom-xs">{{_('Delete Tasks')}}</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                         <div class="row">
-                            <div id="task_browse" class="col-sm-6">
-                                <div class="well">
-                                        <h2><i class="glyphicon glyphicon-road"></i> {{_('Browse')}}</h2>
-                                        <p>{{_('Check the status of the tasks')}}</p>
-                                        <a href="{{url_for('app.tasks_browse',
-                                            short_name=app.short_name)}}" class="btn btn-danger btn-dash">{{_('Browse')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
+                            <div id="task_redundancy" class="col-sm-4">
+                                <a href="{{url_for('app.task_n_answers', short_name=app.short_name)}}" rel="nofollow">
+                                    <div class="well">
+                                        <i class="fa fa-repeat fa-3x"></i>
+                                        <h3 class="margin-bottom-xs"> {{_('Task Redundancy')}}</h3>
                                     </div>
-                            </div>
-                            <div id="export_tasks" class="col-sm-6">
-                                <div class="well">
-                                        <h2><i class="glyphicon glyphicon-download"></i> {{_('Export Tasks')}}</h2>
-                                        <p>{{_('Export tasks to JSON, CSV or a CKAN server')}}</p>
-                                        <a href="{{url_for('app.export_to', short_name=app.short_name)}}" rel="nofollow" class="btn btn-danger btn-dash">{{_('Export')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
-                                    </div>
+                                </a>
                             </div>
                         
-                        {% endif %}
+                            <div id="task_priority" class="col-sm-4">
+                                <a href="{{url_for('app.task_priority', short_name=app.short_name)}}" rel="nofollow">
+                                <div class="well">
+                                        <i class="fa fa-sort-numeric-asc fa-3x"></i>
+                                        <h3 class="margin-bottom-xs"> {{_('Task Priority')}}</h3>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <div id="task_scheduler" class="col-sm-4">
+                                <a href="{{url_for('app.task_scheduler', short_name=app.short_name)}}" rel="nofollow">
+                                    <div class="well">
+                                        <i class="fa fa-filter fa-3x"></i>
+                                        <h3 class="margin-bottom-xs">{{_('Task Scheduler')}}</h3>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div><!-- col-sm-9 -->
+                        {% endif %}
+                    </div>
                 </div>
         
         </div>

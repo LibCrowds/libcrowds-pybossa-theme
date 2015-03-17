@@ -28,7 +28,7 @@
         <li class="nav-link"><a href="{{url_for('admin.featured')}}">Featured</a></li>
         <li class="nav-link"><a href="{{url_for('admin.categories')}}">Categories</a></li>
         <li class="nav-link"><a href="{{url_for('admin.users')}}">Administrators</a></li>
-        <li class="nav-link"><a href="{{url_for('admin.export_users', format='csv')}}">Export Users (CSV)</a></li>
+        <li class="nav-link"><a href="{{url_for('admin.export_users', format='csv')}}">Export Users</a></li>
         <li class="nav-link"><a href="{{url_for('rq_dashboard.overview')}}">Background Jobs</a></li>
     </ul>
 </li>
@@ -42,8 +42,8 @@
             {% if active_app %}
                 <li class="divider"></li>
                 <li class="nav-link"><a href="{{url_for('app.tasks', short_name=active_app)}}">{{_('Dashboard')}}</a></li>
-                <li class="nav-link"><a href="{{url_for('app.task_presenter_editor', short_name=active_app)}}">{{_('Edit Code')}}</a></li>
-                <li class="nav-link"><a href="{{url_for('app.settings', short_name=active_app)}}"> {{_('Edit Details')}}</a></li>
+                <li class="nav-link"><a href="{{url_for('app.task_presenter_editor', short_name=active_app)}}">{{_('Code Editor')}}</a></li>
+                <li class="nav-link"><a href="{{url_for('app.update', short_name=active_app)}}"> {{_('Project Details')}}</a></li>
                 <li class="nav-link"><a href="{{url_for('app.auditlog', short_name=active_app)}}">{{_('Audit Logs')}}</a></li>
             {% endif %}
         </ul>

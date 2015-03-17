@@ -12,8 +12,6 @@
             <!-- Project -->
             <div class="col-sm-9 col-sm-offset-3 xs-center">
                 <h1><strong>{{ app.name }}</strong>: {{ _('Settings') }}</h1>
-                {{ helper.render_app_summary(app, n_tasks, overall_progress, last_activity, current_user, upload_method) }}
-                <h2 class="padding-top-sm">{{ _('Project Settings') }}</h2>
                 <div class="btn-group">
                     <a class="btn" href="{{ url_for('app.update', short_name = app.short_name) }}"><i class="glyphicon glyphicon-edit icon-white"></i> {{ _('Edit the project details') }}</a>
                     <a class="btn" href="{{ url_for('app.task_settings', short_name = app.short_name) }}"><i class="glyphicon glyphicon-wrench icon-white"></i> {{ _('Task Settings') }}</a>
