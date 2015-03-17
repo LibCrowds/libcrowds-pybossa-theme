@@ -61,7 +61,7 @@
 
 {% macro render_app_short_summary(app, upload_method) -%}
 <tr>
-    <td><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></td>
+    <td><a href="{{url_for('app.tasks', short_name=app.short_name)}}">{{app.name}}</a></td>
     <td><span class="format-date" data-date="{{app.created}}"></span></td>
     <td><a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}">{{ _('Open') }}</a></td>
 </tr>
