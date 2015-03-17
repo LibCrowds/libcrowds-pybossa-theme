@@ -181,10 +181,7 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_app_title(app, upload_method, subtitle=None) %}
-<h1 class="vcenter">
-    <div class="shadow margin-right-xs">
-        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:60px") }}
-    </div>
+<h1 class="vcenter inset-text-grey">
     {% if subtitle %}
     <strong>{{ app.name }}</strong>: {{subtitle}}</h1>
     {% else %}
