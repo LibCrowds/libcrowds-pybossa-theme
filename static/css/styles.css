@@ -1,7 +1,7 @@
 .form-control[readonly].readonly-select{cursor:pointer;background-color:#fff}
 .inline-block{display:inline-block}
 ul{-webkit-padding-start:0;list-style:none}
-.project-desc{height:300px;overflow-y:auto}
+.project-desc{overflow-y:auto}
 .project-polaroid{padding-top:25px}
 .pull-down{align-items:flex-end;display:flex;justify-content:flex-end}
 .pull-down-center{align-items:flex-end;display:flex;justify-content:flex-end;height:100%;width:50%;padding-bottom:25px}
@@ -151,6 +151,7 @@ body{padding-top:0}
 text-center-sm{text-align:center}
 }
 @media (max-width: 767px) {
+.project-desc{height: 400px;}
 .navbar .container{width:auto!important}
 .navbar-default .navbar-nav>.active>a,.navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>.active>a:hover{background-color:#D00000}
 .navbar.opaque .nav > li.active > a{color:#fff}
@@ -195,6 +196,7 @@ body > footer .container{padding-left:20px;padding-right:20px}
 @media (min-width: 768px) and (max-width: 991px) {
 .bs-docs-sidenav{width:166px;margin-top:0}
 .big-modal{width:600px;margin-left:-300px;margin-top:-60%}
+.project-desc{height:300px}
 }
 @media (max-width: 767px) {
 .bs-docs-sidenav{width:auto;margin-bottom:20px}
@@ -349,7 +351,7 @@ img.grey-border{border:1px solid #DDD}
 .pattern-grey-carbon{background-image:url(../img/patterns/grey_carbon.png)}
 .pattern-white-wall{background-image:url(../img/patterns/white_wall_hash.png)}
 .pattern-white-wall-2x{background-image:url(../img/patterns/white_wall_hash_@2X.png)}
-.shadow-inline{display:inline-block;position:relative}
+.shadow.shadow-inline{display:inline-block;position:relative}
 .shadow{display:block;position:relative}
 .shadow img{display:block}
 .shadow::before{display:block;content:'';position:absolute;width:100%;height:100%;-moz-box-shadow:inset 0 0 3px 1px rgba(0,0,0,0.2);-webkit-box-shadow:inset 0 0 3px 1px rgba(0,0,0,0.2);box-shadow:inset 0 0 3px 1px rgba(0,0,0,0.2)}

@@ -229,31 +229,36 @@ $(function(){
         $answers = {{task_runs_daily|safe}}['days'];
         $completed = {{tasks_completed_daily|safe}}['days'];
         
+        $answerTasks = {{task_runs_daily|safe}}['tasks'];
+        $completedTasks = {{tasks_completed_daily|safe}}['tasks'];
+        
         var compiledDates = $answers.concat($completed);
         compiledDates.sort(function(a, b){
             return new Date(a) - new Date(b);
         });
         
         var sortedDates = [];
+        var sortedDatesFull = [];
         $.each(compiledDates, function(i, date){
             var dateObj = new Date(date);
-            if($.inArray($.datepicker.formatDate('dd M', dateObj), sortedDates) === -1) {
+            if($.inArray($.datepicker.formatDate('dd M y', dateObj), sortedDatesFull) === -1) {
                 sortedDates.push($.datepicker.formatDate('dd M', dateObj));
+                sortedDatesFull.push($.datepicker.formatDate('dd M y', dateObj));
             }
         });
         
         var answerData = [];
         var completedData = [];
         
-        $.each(sortedDates, function(i, date){
+        $.each(sortedDatesFull, function(i, date){
             var dateObj = new Date(date);
-            if($.inArray($.datepicker.formatDate('dd M', dateObj), $answers)!==-1) {
-                answerData.push({{task_runs_daily|safe}}['tasks'][i]);
+            if($.inArray(date, $answers)!==-1) {
+                answerData.push($answerTasks.shift());
             } else {
                 answerData.push(0);
             }
-            if($.inArray($.datepicker.formatDate('dd M', dateObj), $completed)!==-1) {
-                completedData.push({{tasks_completed_daily|safe}}['tasks'][i]);
+            if($.inArray(date, $completed)!==-1) {
+                completedData.push($completedTasks.shift());
             } else {
                 completedData.push(0);
             }
@@ -293,8 +298,14 @@ $(function(){
         
         //Volunteers per day
         var usersDailyData = {{users_daily|safe}};
+        var usersDays = [];
+        
+        $.each(usersDailyData['days'], function(i, date){
+            usersDays.push($.datepicker.formatDate('dd M', new Date(date)));
+        });
+        
         var data = {
-            labels: usersDailyData['days'],
+            labels: usersDays,
             datasets: [
                 {
                     label: "Volunteers per Day",
