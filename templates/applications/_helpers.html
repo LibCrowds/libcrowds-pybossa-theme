@@ -62,7 +62,7 @@
 {% macro render_app_short_summary(app, upload_method) -%}
 <tr>
     <td><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></td>
-    <td><span class="format-date" data-date="{{app.created}}"></span></td>
+    <td><span class="format-date" data-date="{{app.created}"></span></td>
     <td><a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}">{{ _('Open') }}</a></td>
 </tr>
 {% endmacro %}
@@ -99,11 +99,11 @@
                 <div class="col-sm-6 col-xs-12 hidden-xs project-polaroid">
                     <li>
                         <a  class="polaroid" href="{{ url_for('app.details', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
-                            {{ render_app_thumbnail(app, upload_method) }}
+                            {{ render_app_thumbnail(app, upload_method, class='img-polaroid') }}
                         </a>
                     </li>
                 </div>
-                <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg">
+                <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg padding-top-xs">
                     <div class="shadow shadow-inline">
                         {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:150px") }}
                     </div>

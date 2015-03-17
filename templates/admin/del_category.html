@@ -15,7 +15,7 @@
                     <strong>{{ _('Warning!') }}</strong> {{ _('Deleting the category will remove all associated projects. This operation cannot be undone.') }}
                 </div>
                 <h2>{{_('Delete Category')}}: {{category.name}}?</h2>
-                <form method="POST" role="form" action="{{url_for('oclc.del_category', id=category.id)}}">
+                <form method="POST" role="form" action="{{url_for('admin.del_category', id=category.id)}}">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     <input class="btn btn-danger" type="submit"  value="Yes"></input>
                     <a class="btn btn-success" href="{{url_for('admin.categories')}}">No, do not delete it</a>

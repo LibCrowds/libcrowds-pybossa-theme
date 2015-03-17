@@ -29,7 +29,7 @@
               <li>
                 <a href="{{url_for('account.profile', name=account.name)}}" class="polaroid polaroid-sm" rel="popover" title="{{account.name}}" data-polaroid-title="{{account.name}}" data-html="true" data-content="
                 <ul>
-                  <li><strong><i class='glyphicon glyphicon-calendar'></i> Joined</strong>: <span class='format-date' data-date='{{account['created']}}'></span></li>
+                  <li><strong><i class='glyphicon glyphicon-calendar'></i> Joined</strong>: {{account['created'][0:10]}}</li>
               <li><strong><i class='glyphicon glyphicon-tasks'></i> Answers</strong>: {{ account.task_runs }}</li>
           </ul>
           ">
