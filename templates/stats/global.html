@@ -1,5 +1,5 @@
 {% extends "/base.html" %}
-{% set active_page = "leaderboard" %}
+{% set active_page = "globalstats" %}
 {% set active_app  = "all" %}
 {% import "privacy/locked.html" as privacy %}
 
@@ -17,14 +17,22 @@
 <link href="{{url_for('static', filename='css/stats/stats.css')}}" rel="stylesheet" type="text/css">
 <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
 <script src="{{url_for('static', filename='js/stats/leaflet.markercluster.js')}}" type="text/javascript"></script>
-<div class="container container-padded">
+<div class="container container-main">
     {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
                 {{ privacy.render_lock_page() }}
             {% else %}
-            <div class="row container-padded">
+            <div class="row padding-bottom-sm">
+                <div class="col-xs-12">
+                    <div class="white-rounded">
+                        <h3 class="text-center"><span class="check-plural" data-num="{{stats.n_total_users}}" data-noun="volunteer"></span> have participated in <span class="check-plural" data-num="{{stats.n_published_apps}}" data-noun="project"></span>, submitted <span class="check-plural" data-num="{{stats.n_task_runs}}" data-noun="answer"></span> and completed <span class="check-plural" data-num="{{stats.n_tasks_completed}}" data-noun="task"></span></h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row padding-bottom-sm">
                 <div class="col-xs-12">
                     <div class="white-rounded chart">
-                        <h4 class="text-center padding-bottom-sm">Tasks Completed per Day</h4>
+                        <h4 class="text-center padding-bottom-sm">Answers Submitted and Tasks Completed per Day</h4>
                         <div id="task-date-chart">
                             <canvas id="task-date" style="max-height:300px;"></canvas>
                         </div>
@@ -32,24 +40,78 @@
                 </div>
             </div>
             
-            <div class="row">
-                <div class="col-sm-4 col-xs-12">
+            <div class="row padding-bottom-sm">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="white-rounded chart-inline">
+                        <h4 class="text-center padding-bottom-sm">Top Volunteers This Week</h4>
+                        <div id="top-users-chart">
+                            <canvas id="top-users" width="500" height="500"></canvas>
+                            <div id="top-users-legend" class="padding-top-sm legend">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
                     <div class="white-rounded chart">
-                        <h4 class="text-center padding-bottom-sm">Proportion of Authenticated Users</h4>
-                        <div id="user-chart">
-                            <canvas id="users" width="500" height="300"></canvas>
-                            <div id="users-legend" class="padding-top-sm">
+                        <h4 class="text-center padding-bottom-sm">Top Projects This Week</h4>
+                        <div id="top-projects-chart">
+                            <canvas id="top-projects" width="500" height="500"></canvas>
+                            <div id="top-projects-legend" class="padding-top-sm legend">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="row container-padded">
+            <div class="row padding-bottom-sm">
+                <div class="col-sm-4 col-xs-12">
+                    <div class="white-rounded chart">
+                        <h4 class="text-center padding-bottom-sm">Proportion of Authenticated Users</h4>
+                        <div id="user-chart">
+                            <canvas id="users" width="500" height="500"></canvas>
+                            <div id="users-legend" class="padding-top-sm legend">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="white-rounded chart">
+                        <h4 class="text-center padding-bottom-sm">Total Daily Activity</h4>
+                        <div id="dow-chart">
+                            <canvas id="dow" width="500" height="500"></canvas>
+                            <div id="dow-legend" class="padding-top-sm legend">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="white-rounded chart">
+                        <h4 class="text-center padding-bottom-sm">Status of Tasks</h4>
+                        <div id="task-status-chart">
+                            <canvas id="task-status" width="500" height="500"></canvas>
+                            <div id="task-status-legend" class="padding-top-sm legend">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row padding-bottom-sm">
+                <div class="col-xs-12">
+                    <div class="white-rounded chart">
+                        <h4 class="text-center padding-bottom-sm">Active Volunteers per Day</h4>
+                        <div id="users-daily-chart">
+                            <canvas id="users-daily" style="max-height:300px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row padding-bottom-sm">
                 <div class="col-xs-12">
                     <div class="white-rounded text-center chart">
                         <h4 class=" padding-bottom-sm">Locations of Anonymous Users</h4>
-                        <div id="map" style="height:300px;"></div>
+                        <div id="map" style="height:480px;"></div>
                     </div>
                 </div>
             </div>  
@@ -57,202 +119,28 @@
 </div>
 <script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.js')}}"></script>
 <script>
-Chart.defaults.global = {
-    // Boolean - Whether to animate the chart
-    animation: true,
-
-    // Number - Number of animation steps
-    animationSteps: 60,
-
-    // String - Animation easing effect
-    animationEasing: "easeOutQuart",
-
-    // Boolean - If we should show the scale at all
-    showScale: true,
-
-    // Boolean - If we want to override with a hard coded scale
-    scaleOverride: false,
-
-    // ** Required if scaleOverride is true **
-    // Number - The number of steps in a hard coded scale
-    scaleSteps: null,
-    // Number - The value jump in the hard coded scale
-    scaleStepWidth: null,
-    // Number - The scale starting value
-    scaleStartValue: null,
-
-    // String - Colour of the scale line
-    scaleLineColor: "rgba(0,0,0,.1)",
-
-    // Number - Pixel width of the scale line
-    scaleLineWidth: 1,
-
-    // Boolean - Whether to show labels on the scale
-    scaleShowLabels: true,
-
-    // Interpolated JS string - can access value
-    scaleLabel: "<%=value%>",
-
-    // Boolean - Whether the scale should stick to integers, not floats even if drawing space is there
-    scaleIntegersOnly: true,
-
-    // Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-    scaleBeginAtZero: false,
-
-    // String - Scale label font declaration for the scale label
-    scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-
-    // Number - Scale label font size in pixels
-    scaleFontSize: 12,
-
-    // String - Scale label font weight style
-    scaleFontStyle: "normal",
-
-    // String - Scale label font colour
-    scaleFontColor: "#666",
-
-    // Boolean - whether or not the chart should be responsive and resize when the browser does.
-    responsive: true,
-
-    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-    maintainAspectRatio: true,
-
-    // Boolean - Determines whether to draw tooltips on the canvas or not
-    showTooltips: true,
-
-    // Function - Determines whether to execute the customTooltips function instead of drawing the built in tooltips (See [Advanced - External Tooltips](#advanced-usage-custom-tooltips))
-    customTooltips: false,
-
-    // Array - Array of string names to attach tooltip events
-    tooltipEvents: ["mousemove", "touchstart", "touchmove"],
-
-    // String - Tooltip background colour
-    tooltipFillColor: "rgba(0,0,0,0.8)",
-
-    // String - Tooltip label font declaration for the scale label
-    tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-
-    // Number - Tooltip label font size in pixels
-    tooltipFontSize: 14,
-
-    // String - Tooltip font weight style
-    tooltipFontStyle: "normal",
-
-    // String - Tooltip label font colour
-    tooltipFontColor: "#fff",
-
-    // String - Tooltip title font declaration for the scale label
-    tooltipTitleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-
-    // Number - Tooltip title font size in pixels
-    tooltipTitleFontSize: 14,
-
-    // String - Tooltip title font weight style
-    tooltipTitleFontStyle: "bold",
-
-    // String - Tooltip title font colour
-    tooltipTitleFontColor: "#fff",
-
-    // Number - pixel width of padding around tooltip text
-    tooltipYPadding: 6,
-
-    // Number - pixel width of padding around tooltip text
-    tooltipXPadding: 6,
-
-    // Number - Size of the caret on the tooltip
-    tooltipCaretSize: 8,
-
-    // Number - Pixel radius of the tooltip border
-    tooltipCornerRadius: 6,
-
-    // Number - Pixel offset from point x to tooltip edge
-    tooltipXOffset: 10,
-
-    // Function - Will fire on animation progression.
-    onAnimationProgress: function(){},
-
-    // Function - Will fire on animation completion.
-    onAnimationComplete: function(){},
-    
-    //Boolean - Whether we should show a stroke on each segment
-    segmentShowStroke : true,
-
-    //String - The colour of each segment stroke
-    segmentStrokeColor : "#fff",
-    
-    tooltipTemplate: "<%%><%=label%><%%>",
-
-    //Number - The width of each segment stroke
-    segmentStrokeWidth : 2,
-
-    //Number - The percentage of the chart that we cut out of the middle
-    percentageInnerCutout : 50, // This is 0 for Pie charts
-
-    //Boolean - Whether we animate the rotation of the Doughnut
-    animateRotate : true,
-
-    //Boolean - Whether we animate scaling the Doughnut from the centre
-    animateScale : false,
-
-    //String - A legend template
-    legendTemplate : '<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++)\u007D%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label)\u007D%><%=segments[i].label%\u007B<%}%></li><%\u007B%></ul>'
-}
-
+Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOutQuart",showScale:true,scaleOverride:false,scaleSteps:null,scaleStepWidth:null,scaleStartValue:null,scaleLineColor:"rgba(0,0,0,.1)",scaleLineWidth:1,scaleShowLabels:true,scaleLabel:"<%=value%>",scaleIntegersOnly:true,scaleBeginAtZero:false,scaleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",scaleFontSize:12,scaleFontStyle:"normal",scaleFontColor:"#666",responsive:true,maintainAspectRatio:true,showTooltips:true,customTooltips:false,tooltipEvents:["mousemove","touchstart","touchmove"],tooltipFillColor:"rgba(0,0,0,0.8)",tooltipFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipFontSize:14,tooltipFontStyle:"normal",tooltipFontColor:"#fff",tooltipTitleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipTitleFontSize:14,tooltipTitleFontStyle:"bold",tooltipTitleFontColor:"#fff",tooltipYPadding:6,tooltipXPadding:6,tooltipCaretSize:8,tooltipCornerRadius:6,tooltipXOffset:10,onAnimationProgress:function(){},onAnimationComplete:function(){},segmentShowStroke:true,segmentStrokeColor:"#fff",tooltipTemplate:"<%%><%=label%><%%>",segmentStrokeWidth:2,percentageInnerCutout:50,animateRotate:true,animateScale:false,legendTemplate:'<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++)\u007D%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label)\u007D%><%=segments[i].label%\u007B<%}%></li><%\u007B%></ul>'}
 </script>
     <script>
-    $(function(){
-        
-        //User proportions chart
-        var userData = {{users|safe}};
-        var data = [
-        {
-            value: userData['values'][0]['value'][1],
-            color: "rgba(151,187,205,1)",
-            highlight: "rgba(151,187,205,0.8)",
-            label: userData['values'][0]['label'] + ": " + userData['values'][0]['value'][1]
-        },
-        {
-            value : userData['values'][1]['value'][1],
-            color:"#BA0000",
-            highlight: "#D00000",
-            label: userData['values'][1]['label'] + ": " + userData['values'][1]['value'][1]
+    
+$(function(){
+    $('.check-plural').each(function() {
+        var ret = $(this).attr('data-num') + ' ' + $(this).attr('data-noun');
+        if (parseInt($(this).attr('data-num')) > 1) {
+            ret += 's';
         }
-        ];
-        var canvas = document.getElementById("users");
-        var ctx = canvas.getContext("2d");
-        var myDoughnut = new Chart(ctx).Doughnut(data);
-        var legendHolder = document.getElementById('users-legend')
-      // Include a html legend template after the module doughnut itself
-      var helpers = Chart.helpers;
-      helpers.each(legendHolder.firstChild.childNodes, function(legendNode, index){
-          helpers.addEvent(legendNode, 'mouseover', function(){
-              var activeSegment = myDoughnut.segments[index];
-              activeSegment.save();
-              activeSegment.fillColor = activeSegment.highlightColor;
-              myDoughnut.showTooltip([activeSegment]);
-              activeSegment.restore();
-          });
-      });
-      helpers.addEvent(legendHolder.firstChild, 'mouseout', function(){
-          myDoughnut.draw();
-      });
-      canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
-          
-
-          myDoughnut.generateLegend();
-          document.getElementById('users-legend').innerHTML = myDoughnut.generateLegend();
+        $(this).text(ret);
     });
-    (function(){
-        var map = L.map('map');
+    
+    //Locations map
+        var map = L.map('map', {scrollWheelZoom: false, minZoom:1});
         map.fitWorld();
-        map.setZoom(1);
+        map.setZoom(2);
         var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
         L.tileLayer(url, 
             {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> &mdash; <a href="http://www.maxmind.com">MaxMind</a>',
-            scrollWheelZoom: false,
-            maxZoom: 18,
-            minZoom:1
+            maxZoom: 18
             }).addTo(map);
     
         var i = 0;
@@ -267,34 +155,292 @@ Chart.defaults.global = {
             }
         }
         map.addLayer(markers);
-    })();
     
-$(function(){
-    $(window).on("resize", function () {
-            var taskDateData = {{task_run_dates|safe}};
-            var data = {
-                labels: taskDateData['days'],
-                datasets: [
-                    {
-                        label: "Tasks Completed per Day",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: taskDateData['tasks']
-                    }
-                ]
-            };
+    //User proportions chart
+        var userData = {{users|safe}};
+        var total = {{stats.n_total_users|safe}};
+        var label1 = userData['values'][0]['label'] + " : " + Math.round(userData['values'][0]['value'][1]/total*100) + "% (" + userData['values'][0]['value'][1] + " user";
+        if (userData['values'][0]['value'][1] != 1) {
+            label1 += "s"
+        }
+        label1 += ")";
+        var label2 = userData['values'][1]['label'] + " : " + Math.round(userData['values'][1]['value'][1]/total*100) + "% (" + userData['values'][1]['value'][1] + " user";
+        if (userData['values'][1]['value'][1] != 1) {
+            label2 += "s"
+        }
+        label2 += ")";
+        var data = [
+        {
+            value: userData['values'][0]['value'][1],
+            color: "rgba(151,187,205,1)",
+            highlight: "rgba(151,187,205,0.8)",
+            label: label1
+        },
+        {
+            value : userData['values'][1]['value'][1],
+            color:"#BA0000",
+            highlight: "#D00000",
+            label: label2
+        }
+        ];
+        var canvas = document.getElementById("users");
+        var ctx = canvas.getContext("2d");
+        var usersChart = new Chart(ctx).Doughnut(data);
+        var legendHolder = document.getElementById('users-legend')
+        canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
+        usersChart.generateLegend();
+        document.getElementById('users-legend').innerHTML = usersChart.generateLegend();
+        
+        //Task status
+        var completed = {{stats.n_tasks_completed|safe}};
+        var ongoing = {{stats.n_tasks_ongoing|safe}};
+        var total = ongoing + completed;
+        var label1 = "Ongoing : " + Math.round(ongoing/total*100) + "% (" + ongoing + " task";
+        if (userData['values'][1]['value'][1] != 1) {
+            label1 += "s"
+        }
+        label1 += ")";
+        var label2 = "Completed : " + Math.round(completed/total*100) + "% (" + completed + " task";
+        if (completed != 1) {
+            label2 += "s"
+        }
+        label2 += ")";
+        var data = [
+        {
+            value: ongoing,
+            color: "rgba(151,187,205,1)",
+            highlight: "rgba(151,187,205,0.8)",
+            label: label1
+        },
+        {
+            value : completed,
+            color:"#BA0000",
+            highlight: "#D00000",
+            label: label2
+        }
+        ];
+        var canvas = document.getElementById("task-status");
+        var ctx = canvas.getContext("2d");
+        var taskStatusChart = new Chart(ctx).Doughnut(data);
+        var legendHolder = document.getElementById('task-status-legend')
+        canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
+        taskStatusChart.generateLegend();
+        document.getElementById('task-status-legend').innerHTML = taskStatusChart.generateLegend();
+          
+        //Tasks completed per day
+        $answers = {{task_runs_daily|safe}}['days'];
+        $completed = {{tasks_completed_daily|safe}}['days'];
+        
+        var compiledDates = $answers.concat($completed);
+        compiledDates.sort(function(a, b){
+            return new Date(a) - new Date(b);
+        });
+        
+        var sortedDates = [];
+        $.each(compiledDates, function(i, date){
+            var dateObj = new Date(date);
+            if($.inArray($.datepicker.formatDate('dd M', dateObj), sortedDates) === -1) {
+                sortedDates.push($.datepicker.formatDate('dd M', dateObj));
+            }
+        });
+        
+        var answerData = [];
+        var completedData = [];
+        
+        $.each(sortedDates, function(i, date){
+            var dateObj = new Date(date);
+            if($.inArray($.datepicker.formatDate('dd M', dateObj), $answers)!==-1) {
+                answerData.push({{task_runs_daily|safe}}['tasks'][i]);
+            } else {
+                answerData.push(0);
+            }
+            if($.inArray($.datepicker.formatDate('dd M', dateObj), $completed)!==-1) {
+                completedData.push({{tasks_completed_daily|safe}}['tasks'][i]);
+            } else {
+                completedData.push(0);
+            }
+        });
+        var data = {
+            labels: sortedDates,
+            datasets: [
+                {
+                    label: "answer",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: answerData
+                },
+                {
+                    label: "completed task",
+                    fillColor: "rgba(150,150,150,0.2)",
+                    strokeColor: "rgba(150,150,150,1)",
+                    pointColor: "rgba(150,150,150,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(150,150,150,1)",
+                    data: completedData
+                }
+            ]
+        };
         $("#task-date").attr("width", $('#task-date-chart').width());
         $("#task-date").attr("height", 300);
         var ctx = $("#task-date")[0].getContext("2d");
-        var opts = {tooltipTemplate: "<%%><%=label%>: <%=value%> tasks<%%>"};
+        var opts = {populateSparseData:true, multiTooltipTemplate: " <%=value%> <%=datasetLabel%><%if(value != 1)\u007B%>s<%}%>"};
         var taskDateChart = new Chart(ctx).Line(data, opts);
         taskDateChart.draw();
-        Chart.defaults.global.animation = false;
-    }).resize();
+        
+        
+        //Volunteers per day
+        var usersDailyData = {{users_daily|safe}};
+        var data = {
+            labels: usersDailyData['days'],
+            datasets: [
+                {
+                    label: "Volunteers per Day",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: usersDailyData['users']
+                }
+            ]
+        };
+        $("#users-daily").attr("width", $('#users-daily-chart').width());
+        $("#users-daily").attr("height", 300);
+        var ctx = $("#users-daily")[0].getContext("2d");
+        var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>volunteers<%}else\u007B%>volunteer<%}%>"};
+        var usersDailyChart = new Chart(ctx).Line(data, opts);
+        usersDailyChart.draw();
+        
+        //Top users this week
+        var users = [];
+        var tasks = [];
+        {% for user in top5_users_1_week %}
+            users.push('{{user.name}}');
+            tasks.push(parseInt({{user.n_answers}}));
+        {% endfor %}
+        var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+        var data = {
+            labels: users,
+            datasets: [
+                {
+                    label: "Top 5 Users This Week",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    highlightFill: "rgba(151,187,205,0.1)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: tasks
+                }
+            ]
+        };
+        $("#top-users").attr("width", $('#top-users-chart').width());
+        $("#top-users").attr("height", 300);
+        var ctx = $("#top-users")[0].getContext("2d");
+        var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+        var topUsersChart = new Chart(ctx).Bar(data, opts);
+        topUsersChart.draw();
+        topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
+        topUsersChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
+        topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
+        topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
+        topUsersChart.update();
+        
+        //Daily Activity
+        $dow = {{completion_days|safe}}['dow'];
+        $auth = {{completion_days|safe}}['auth'];
+        $anon = {{completion_days|safe}}['anon'];
+        
+        var authData = [];
+        var anonData = [];
+        var authSum = 0;
+        var anonSum = 0;
+        
+        for (i = 1; i <= 7; i++) {
+            if($.inArray(i, $dow) !== -1) {
+                $authVal = $auth.shift();
+                $anonVal = $anon.shift();
+                authSum += $authVal;
+                anonSum += $anonVal;
+                authData.push($authVal);
+                anonData.push($anonVal);
+            } else {
+                authData.push(0);
+                anonData.push(0);
+            }
+        }
+        
+        var data = {
+            labels: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+            datasets: [
+                {
+                    label: "Authenticated (" + authSum + " total answers)",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: authData
+                },
+                {
+                    label: "Anonymous (" + anonSum + " total answers)",
+                    fillColor: "rgba(150,150,150,0.2)",
+                    strokeColor: "rgba(150,150,150,1)",
+                    pointColor: "rgba(150,150,150,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(150,150,150,1)",
+                    data: anonData
+                }
+            ]
+        };
+        var ctx = $("#dow")[0].getContext("2d");
+        var opts = {populateSparseData:true, multiTooltipTemplate: " <%=value%> answer<%if(value != 1)\u007B%>s<%}%>"};
+        var dowChart = new Chart(ctx).Radar(data, opts);
+        var dowLegendHolder = document.getElementById('dow-legend')
+        canvas.parentNode.parentNode.appendChild(dowLegendHolder.firstChild);
+        dowChart.generateLegend();
+        document.getElementById('dow-legend').innerHTML = dowChart.generateLegend();
+        dowChart.draw();
+        
+        //Top 5 projects this week
+        var projects = [];
+        var tasks = [];
+        {% for app in top5_apps_1_week %}
+            projects.push('{{app.name}}');
+            tasks.push(parseInt({{app.n_answers}}));
+        {% endfor %}
+        var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+        var data = {
+            labels: projects,
+            datasets: [
+                {
+                    label: "Top 5 Projects This Week",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    highlightFill: "rgba(151,187,205,0.1)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: tasks
+                }
+            ]
+        };
+        $("#top-projects").attr("width", $('#top-projects-chart').width());
+        $("#top-projects").attr("height", 300);
+        var ctx = $("#top-projects")[0].getContext("2d");
+        var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+        var topProjectsChart = new Chart(ctx).Bar(data, opts);
+        topProjectsChart.draw();
+        topProjectsChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
+        topProjectsChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
+        topProjectsChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,5)";
+        topProjectsChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
+        topProjectsChart.update();
+        
 });
 </script>
 {% endblock %}
