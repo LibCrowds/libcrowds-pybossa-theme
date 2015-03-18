@@ -51,7 +51,7 @@
 <section id="top_users">
    <div class="container container-padded">
     <div class="col-sm-12 text-center">
-      <div class="row text-center padding-bottom-sm">
+      <div class="row text-center">
         <h2>{{ _('Most Active Volunteers') }}</h2>
       </div>
         <ul class="users">
@@ -60,13 +60,13 @@
           <a href="{{url_for('account.profile', name=user.name)}}" data-content="
              <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}} 
              <br/>
-             <strong>{{_('Tasks')}}:</strong> {{user.task_runs}}
+             <strong>{{_('Answers')}}:</strong> {{user.task_runs}}
              " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
              <div class="shadow shadow-circle">
           {{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;", class="img-circle") }}
              </div>
           </a>
-          <span class="label label-success">{{user.task_runs}}</span> <small> {{_('Tasks')}}</small>
+          <p class="label label-success">{{user.task_runs}}</p> <p><small> {{_('Tasks')}}</small></p>
           </li>
           {% endfor %}
 </ul>

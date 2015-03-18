@@ -132,7 +132,7 @@ body > footer .container{padding-top:20px;padding-bottom:20px}
 .get-started .span4 p:first-of-type{margin-top:-10px}
 .get-started .span8 .btn{margin:18px 0 18px 10px}
 ul.users{margin:0 auto;display:table;}
-ul.users li{display:inline-block;margin:0 0 35px 3px;float:none;}
+ul.users li{display:inline-block;margin:25px 0 0px 3px;float:none;}
 ul.users li a{display:block;margin-bottom:5px;margin-right:10px;margin-left:10px}
 #cookies_warning{position:fixed;color:#ddd;min-height:30px;position:fixed;left:0;bottom:0;width:100%;z-index:99999;padding:6px 20px 4px;background-color:rgba(70,70,70,0.9);text-align:left}
 #cookies_warning > p{margin-top:8px}
@@ -206,9 +206,7 @@ body > footer .container{padding-left:20px;padding-right:20px}
 .splash-overlay{background:rgba(0,0,0,0)}
 }
 @media (min-width: 768px) {
-.flickr-thumbnails img{bottom: 70px;position: absolute;}
-.flickr-thumbnails p{bottom: 30px;position: absolute;}
-.flickr-thumbnails button{bottom: 70px;position: absolute;}
+.flickr-thumbnails h4, .flickr-thumbnails .h4{text-overflow:ellipsis;}
 body{font-size:16px}
 .sticky-footer-col{height:100px;padding-top:0}
 .img-dialog{width:500px}
@@ -390,7 +388,7 @@ thead{background:rgba(0,0,0,0.15)}
 .btn-code{border-radius:0;border-left:1px solid #DDD;border-right:1px solid #DDD;background-color:rgba(255,255,255,0.5);color:#BA0000;transition:background-color .25s;-webkit-transition:background-color .25s;-moz-transition:background-color .25s;-ms-transition:background-color .25s;-o-transition:background-color .25s}
 .btn-code:hover,.btn-code:focus{background-color:rgba(0,0,0,0.05)}
 .web-badge{max-height:100px;max-height:100px;-webkit-filter:grayscale(100%);-moz-filter:grayscale(100%);-ms-filter:grayscale(100%);-o-filter:grayscale(100%);filter:grayscale(100%);-webkit-transition:.5s ease-in-out;-moz-transition:.5s ease-in-out;-o-transition:.5s ease-in-out;-ms-transition:.5s ease-in-out;transition:.5s ease-in-out}
-.web-badge:hover{-webkit-filter:grayscale(0%);-moz-filter:grayscale(0%);-ms-filter:grayscale(0%);-o-filter:grayscale(0%)}
+.web-badge:hover{-webkit-filter:grayscale(0%);-moz-filter:grayscale(0%);-ms-filter:grayscale(0%);-o-filter:grayscale(0%);filter:grayscale(0%)}
 record p,.chart p{margin:0}
 record{border-top:1px solid #EFEFEF;display:block;padding-top:20px}
 .glyphicon.spinning{animation:spin 1s infinite linear;-webkit-animation:spin2 1s infinite linear}
