@@ -387,7 +387,7 @@ thead{background:rgba(0,0,0,0.15)}
 #code-btns{background-color:#F7F7F7;padding-left:30px;border-bottom:1px solid #DDD;position:fixed;width:100%;z-index:5}
 .btn-code{border-radius:0;border-left:1px solid #DDD;border-right:1px solid #DDD;background-color:rgba(255,255,255,0.5);color:#BA0000;transition:background-color .25s;-webkit-transition:background-color .25s;-moz-transition:background-color .25s;-ms-transition:background-color .25s;-o-transition:background-color .25s}
 .btn-code:hover,.btn-code:focus{background-color:rgba(0,0,0,0.05)}
-.web-badge{max-height:100px;max-height:100px;-webkit-filter:grayscale(100%);-moz-filter:grayscale(100%);-ms-filter:grayscale(100%);-o-filter:grayscale(100%);filter:grayscale(100%);-webkit-transition:.5s ease-in-out;-moz-transition:.5s ease-in-out;-o-transition:.5s ease-in-out;-ms-transition:.5s ease-in-out;transition:.5s ease-in-out}
+.web-badge{max-height:100px;-webkit-filter:grayscale(100%);-moz-filter:grayscale(100%);-ms-filter:grayscale(100%);-o-filter:grayscale(100%);filter:grayscale(100%);-webkit-transition:.5s ease-in-out;-moz-transition:.5s ease-in-out;-o-transition:.5s ease-in-out;-ms-transition:.5s ease-in-out;transition:.5s ease-in-out}
 .web-badge:hover{-webkit-filter:grayscale(0%);-moz-filter:grayscale(0%);-ms-filter:grayscale(0%);-o-filter:grayscale(0%);filter:grayscale(0%)}
 record p,.chart p{margin:0}
 record{border-top:1px solid #EFEFEF;display:block;padding-top:20px}
@@ -403,6 +403,7 @@ to{-webkit-transform:rotate(360deg)}
 @media (min-width: 768px) {
 .form-horizontal .control-label{padding-top:13px}
 }
+img#navbar-logo {height: 90%;}
 .legend li span{display:block;width:14px;height:14px;border-radius:7px;float:left;margin-top:4px;margin-right:8px}
 .legend{list-style:none;margin:0;padding:0;font-size:14px;margin-top:20px}
 .legend li{margin-bottom:4px}
