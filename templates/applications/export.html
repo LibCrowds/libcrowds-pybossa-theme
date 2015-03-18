@@ -24,19 +24,19 @@
                                     </div>
                                 </a>
                             </div>
-                            <div id="json-task" class="col-sm-3">
-                                <a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}}" rel="nofollow">
-                                    <div class="well">
-                                        <i class="fa fa-file-code-o fa-4x"></i> 
-                                        <h3  class="margin-bottom-xs">{{_('Tasks (JSON)')}}</h3>
-                                    </div>
-                                </a>
-                            </div>
                             <div id="users-list" class="col-sm-3">
                                 <a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-file-excel-o fa-4x"></i> 
                                         <h3  class="margin-bottom-xs">{{_('Answers (CSV)')}}</h3>
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="json-task" class="col-sm-3">
+                                <a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}}" rel="nofollow">
+                                    <div class="well">
+                                        <i class="fa fa-file-code-o fa-4x"></i> 
+                                        <h3  class="margin-bottom-xs">{{_('Tasks (JSON)')}}</h3>
                                     </div>
                                 </a>
                             </div>
