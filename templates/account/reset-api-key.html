@@ -6,6 +6,7 @@
 {% block content %}
 <div class="row">
     <div class="col-md-9 col-sm-offset-3">
+        {% include "_flash_messages.html" %}
         <h1><strong>{{current_user.fullname}}</strong>: {{ _(' Reset API Key') }}</h1>
         <div class="alert alert-warning">
             <strong>{{ _('Note') }}</strong>{{ _(' If you reset the API key, you will need to use the new generated key for any API call.') }}

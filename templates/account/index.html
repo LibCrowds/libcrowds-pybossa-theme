@@ -9,7 +9,8 @@
 <div class="container-padded">
   <div class="container container-padded">
     <div class="row">
-      <div class="col-sm-10 col-sm-offset-2">
+      <div class="col-sm-10 col-sm-offset-1">
+        {% include "_flash_messages.html" %}
           {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
             {{ privacy.render_lock_page() }}
           {% else %}

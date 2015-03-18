@@ -9,6 +9,7 @@
 <div class="container-padded  remove-padding-bottom">
     <section>
         <div class="container container-main">
+            {% include "_flash_messages.html" %}
             <div class="row">
                 <div class="col-md-12 white-rounded inset-shadow">
                     {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}

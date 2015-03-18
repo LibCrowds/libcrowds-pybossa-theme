@@ -11,12 +11,13 @@
                 <div class="container container-padded">
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-3">
+                            {% include "_flash_messages.html" %}
                         {{ helper.render_app_title(app, upload_method, subtitle=_('Export Tasks'))}}
                         {{ helper.render_loading("Exporting data, this may take a while, please wait...") }}
                         <h3 class="text-inset-grey">Export Raw Data</h3>
                         <div class="row">
                             
-                            <div id="csv-task" class="col-sm-3">
+                            <div id="csv-task" class="col-sm-6 col-md-3">
                                 <a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='csv')}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-file-excel-o fa-4x"></i> 
@@ -24,7 +25,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div id="users-list" class="col-sm-3">
+                            <div id="users-list" class="col-sm-6 col-md-3">
                                 <a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-file-excel-o fa-4x"></i> 
@@ -32,15 +33,15 @@
                                     </div>
                                 </a>
                             </div>
-                            <div id="json-task" class="col-sm-3">
+                            <div id="json-task" class="col-sm-6 col-md-3">
                                 <a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}}" rel="nofollow">
                                     <div class="well">
-                                        <i class="fa fa-file-code-o fa-4x"></i> 
+                                        <i class="fa fa-file-code fa-4x"></i> 
                                         <h3  class="margin-bottom-xs">{{_('Tasks (JSON)')}}</h3>
                                     </div>
                                 </a>
                             </div>
-                            <div id="users-list" class="col-sm-3">
+                            <div id="users-list" class="col-sm-6 col-md-3">
                                 <a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='json')}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-file-code-o fa-4x"></i> 

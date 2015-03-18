@@ -2,7 +2,7 @@
 {% import "applications/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
 {% block content %}
-
+{% include "_flash_messages_floating.html" %}
 <div class="splash">
   <div class="splash-overlay vcenter hcenter">
     <div class="container text-center padding-top">
@@ -71,7 +71,7 @@
           {% endfor %}
 </ul>
 </div>
-    <div class="col-sm-12 text-center padding-top-xs">
+    <div class="col-sm-12 text-center padding-top-xs text-center">
       <a class="btn btn-danger" href="{{url_for('leaderboard.index')}}">View Leaderboard</a>
     </div>
 </div>
