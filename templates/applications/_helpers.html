@@ -72,14 +72,14 @@
         <td><a href="{{url_for('app.tasks', short_name=app.short_name)}}">{{app.name}}</a></td>
         <td>{{ app['short_name'] }}</td>
         {% if app.featured %}
-            <td><a id="appBtnDel{{app.id}}" class="btn btn-inverse" onclick="del({{app.id}})">
+            <td style="text-align:center;"><a id="appBtnDel{{app.id}}" class="btn btn-inverse" onclick="del({{app.id}})">
                     <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove') }}
             </a>
             <a id="appBtnAdd{{app.id}}" class="btn btn-inverse" onclick="add({{app.id}})" style="display:none;">
                     <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
             </a></td>
         {% else %}
-            <td><a id="appBtnAdd{{app.id}}" class="btn btn-inverse" onclick="add({{app.id}})">
+            <td style="text-align:center;"><a id="appBtnAdd{{app.id}}" class="btn btn-inverse" onclick="add({{app.id}})">
                     <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
             </a>
             <a id="appBtnDel{{app.id}}" class="btn btn-inverse" onclick="del({{app.id}})" style="display:none;">
@@ -94,8 +94,8 @@
 
 <div class="container container-padded">
     <div class="row project-summary padding-bottom">
-        <div class="col-md-8 col-xs-12">
-            <div class="white-rounded inset-shadow-white project-desc same-size">
+        <div class="col-md-8 col-xs-12 same-size">
+            <div class="white-rounded inset-shadow-white project-desc">
                 <div class="col-sm-6 col-xs-12 hidden-xs project-polaroid">
                     <li>
                         <a  class="polaroid" href="{{ url_for('app.details', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
@@ -122,8 +122,8 @@
         {% endif %}
         </div>
         
-            <div class="col-md-1 hidden-sm hidden-xs">
-                <div class="meter inset-shadow-white pull-right same-size"><span data-progress="{{ app.overall_progress | round | int }}" data-app="{{app.short_name}}"><span><span></span></span></div>
+            <div class="col-md-1 hidden-sm hidden-xs same-size">
+                <div class="meter inset-shadow-white pull-right"><span data-progress="{{ app.overall_progress | round | int }}" data-app="{{app.short_name}}"><span><span></span></span></div>
             </div>
         
             <div class="col-sm-3 hidden-sm hidden-xs same-size" id="show-app-stats">

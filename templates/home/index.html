@@ -35,7 +35,7 @@
 </section>
 
  {% if categories_apps['featured'] %}
-<section class="white pattern-white-wall box-shadow-white-bottom padding-bottom">
+<section class="white pattern-white-wall box-shadow-white-bottom">
   <div class="row text-center padding-top-sm">
         <h2>{{ _('Featured Projects') }}</h2>
       </div>
@@ -50,7 +50,7 @@
 {% if top_users %}
 <section id="top_users">
    <div class="container container-padded">
-    <div class="col-sm-12">
+    <div class="col-sm-12 text-center">
       <div class="row text-center padding-bottom-sm">
         <h2>{{ _('Most Active Volunteers') }}</h2>
       </div>
@@ -66,7 +66,7 @@
           {{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;", class="img-circle") }}
              </div>
           </a>
-          <span class="label label-success">{{user.task_runs}}</span> <small>{{_('Tasks')}}</small>
+          <span class="label label-success">{{user.task_runs}}</span> <small> {{_('Tasks')}}</small>
           </li>
           {% endfor %}
 </ul>

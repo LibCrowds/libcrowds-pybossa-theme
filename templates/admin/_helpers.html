@@ -3,16 +3,14 @@
 {% macro render_admin_user(user) %}
 <tr>
     <td>{{user.fullname}}</td>
-    <td>{{user.name}}</td>
-    <td><span class="format-date" data-date="{{user.created}}"></span></td>
+    <td class="hidden-xs">{{user.name}}</td>
+    <td class="hidden-xs" style="text-align:center;"><span class="format-date" data-date="{{user.created}}"></span></td>
     {% if user.admin %}
-        <td><a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
-            <i class="glyphicon glyphicon-remove"></i>
-            {{ _(' Remove from admin group') }}</a></td>
+        <td style="text-align:center;"><a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
+            <i class="glyphicon glyphicon-remove"></i> {{ _(' Revoke admin rights') }}</a></td>
         {% else %}
         <td><a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-inverse">
-            <i class="glyphicon glyphicon-plus"></i>
-            {{ _(' Add to admin group') }}</a></td>
+            <i class="glyphicon glyphicon-plus"></i> {{ _(' Grant admin rights') }}</a></td>
         {% endif %}
 </tr>
 {% endmacro %}

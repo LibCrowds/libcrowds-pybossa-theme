@@ -27,23 +27,33 @@
                     <thead>
                         <tr>
                             <th>Username</th>
-                            <th>Full Name</th>
-                            <th>Joined</th>
-                            <th>Action</th>
+                            <th class="hidden-xs">Full Name</th>
+                            <th class="hidden-xs" style="text-align:center;">Joined</th>
+                            <th style="text-align:center;">Action</th>
                         </tr>
                     </thead>
-                            {% for user in found %}
-                                {{ render_admin_user(user) }}
-                            {% endfor %}
+                
+                {% for user in found %}
+                    {{ render_admin_user(user) }}
+                {% endfor %}
+                </table>
                         
                 {% endif %}
         
-                
+                <table class="table table-stripped table-condensed table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th class="hidden-xs">Full Name</th>
+                            <th class="hidden-xs" style="text-align:center;">Joined</th>
+                            <th style="text-align:center;">Action</th>
+                        </tr>
+                    </thead>
                 <h2 class="padding-top-sm">{{ _('Current Administrators') }}</h2>
                 {% for user in users %}
                     {{ render_admin_user(user) }}
                 {% endfor %}
-                
+                </table>
             </div>
         </div>
     </div>
