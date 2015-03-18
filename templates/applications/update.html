@@ -62,7 +62,7 @@
                 {{ form_helper.render_field_horizontal(form.hidden, class="form-control") }}
                 <div class="form-actions">
                   <button type="submit" name="btn" value="Save the changes" class="btn btn-danger">{{_('Save the changes')}}</button>
-                  <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
+                  <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
                 </div>
               </fieldset>
             </form>

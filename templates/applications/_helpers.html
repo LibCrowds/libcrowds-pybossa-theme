@@ -63,27 +63,27 @@
 <tr>
     <td><a href="{{url_for('app.tasks', short_name=app.short_name)}}">{{app.name}}</a></td>
     <td><span class="format-date" data-date="{{app.created}}"></span></td>
-    <td><a class="btn btn-inverse" href="{{url_for('app.settings', short_name=app.short_name)}}">{{ _('Open') }}</a></td>
+    <td><a class="btn btn-inverse" href="{{url_for('app.tasks', short_name=app.short_name)}}">{{ _('Open') }}</a></td>
 </tr>
 {% endmacro %}
 
 {% macro render_app_admin_featured(app, upload_method) -%}
 <tr>
-        <td><a href="{{url_for('app.settings', short_name=app.short_name)}}">{{app.name}}</a></td>
+        <td><a href="{{url_for('app.tasks', short_name=app.short_name)}}">{{app.name}}</a></td>
         <td>{{ app['short_name'] }}</td>
         {% if app.featured %}
             <td><a id="appBtnDel{{app.id}}" class="btn btn-inverse" onclick="del({{app.id}})">
-                    <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured!') }}
+                    <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove') }}
             </a>
             <a id="appBtnAdd{{app.id}}" class="btn btn-inverse" onclick="add({{app.id}})" style="display:none;">
-                    <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured!') }}
+                    <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
             </a></td>
         {% else %}
             <td><a id="appBtnAdd{{app.id}}" class="btn btn-inverse" onclick="add({{app.id}})">
-                    <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add to Featured') }}
+                    <i id="app{{app.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
             </a>
             <a id="appBtnDel{{app.id}}" class="btn btn-inverse" onclick="del({{app.id}})" style="display:none;">
-                    <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove from Featured') }}
+                    <i id="app{{app.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove') }}
             </a></td>
         {% endif %}
     </tr>
