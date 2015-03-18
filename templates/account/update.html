@@ -13,6 +13,7 @@
     <section class="mid-grey pattern-brushed padding-bottom-sm">
         <div class="container padding-top">
             <div class="row margin-bottom">
+                {% include "_flash_messages.html" %}
                 <div class="col-sm-6 col-xs-12 text-center">
                     <form method="post" role="form" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
                         <fieldset>

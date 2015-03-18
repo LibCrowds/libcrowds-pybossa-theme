@@ -6,6 +6,7 @@
 {% block content %}
     {{ helper.render_local_nav(current_user, "settings") }} 
     <div class="container-main">
+        {% include "_flash_messages.html" %}
 <div class="row">
     <div class="col-md-9 col-sm-offset-3">
         <h1><strong>{{_('User')}}</strong>: {{ user.fullname }}</h1>

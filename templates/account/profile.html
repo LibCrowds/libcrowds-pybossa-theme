@@ -9,6 +9,7 @@
 <div class="container-padded  remove-padding-bottom">
     <section class="pattern-brushed box-shadow-grey">
         <div class="container padding-top">
+            {% include "_flash_messages.html" %}
             {{ helper.render_user_profile(current_user, upload_method, "settings") }} 
         </div>
     </section>

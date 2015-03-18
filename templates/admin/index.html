@@ -9,10 +9,10 @@
         <div class="container container-padded">
             <div class="row">
                 <div class="col-sm-9 col-sm-offset-3">
+                    {% include "_flash_messages.html" %}
                     <h1 class="inset-text-grey"><strong>Admin Options</strong></h1>
                     
-                    <div class="row">
-                        <div id="projects" class="col-sm-4">
+                        <div id="projects" class="col-sm-6 col-md-4">
                             <a href="{{ url_for('account.applications', name=current_user.name) }}" rel="nofollow">
                             <div class="well">
                                 <i class="fa fa-folder-open fa-4x"></i>
@@ -21,7 +21,7 @@
                             </a>
                         </div>
                     
-                        <div id="featured-apps" class="col-sm-4">
+                        <div id="featured-apps" class="col-sm-6 col-md-4">
                             <a href="{{url_for('admin.featured')}}" rel="nofollow">
                             <div class="well">
                                 <i class="fa fa-star fa-4x"></i>
@@ -30,7 +30,7 @@
                             </a>
                         </div>         
                     
-                        <div id="categories" class="col-sm-4">
+                        <div id="categories" class="col-sm-6 col-md-4">
                             <a href="{{url_for('admin.categories')}}" rel="nofollow">
                             <div class="well">
                                 <i class="fa fa-check fa-4x"></i>
@@ -39,11 +39,7 @@
                             </a>
                         </div>
                     
-                    </div>
-                    
-                    <div class="row">
-                        
-                        <div id="users" class="col-sm-4">
+                        <div id="users" class="col-sm-6 col-md-4">
                             <a href="{{url_for('admin.users')}}" rel="nofollow">
                             <div class="well">
                                 <i class="fa fa-user fa-4x"></i>
@@ -52,7 +48,7 @@
                             </a>
                         </div>
                         
-                        <div id="users-list" class="col-sm-4">
+                        <div id="users-list" class="col-sm-6 col-md-4">
                             <a href="{{url_for('admin.export_users', format='csv')}}" rel="nofollow">
                                 <div class="well">
                                     <i class="fa fa-list fa-4x"></i> 
@@ -61,7 +57,7 @@
                             </a>
                         </div>
                                 
-                        <div id="dashboard" class="col-sm-4">
+                        <div id="dashboard" class="col-sm-6 col-md-4">
                             <a href="{{url_for('rq_dashboard.overview')}}" rel="nofollow">
                             <div class="well">
                                 <i class="fa fa-dashboard fa-4x"></i>
@@ -69,7 +65,6 @@
                             </div>
                             </a>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

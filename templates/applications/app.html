@@ -14,6 +14,7 @@
                 <div class="row">
                     <!-- Project -->
                     <div class="col-sm-9 col-sm-offset-3">
+                        {% include "_flash_messages.html" %}
                         {{ helper.render_app_title(app, upload_method) }}
                         {{ helper.render_overall_progress(app, n_tasks, overall_progress) }}
                         {% if app.long_description %}

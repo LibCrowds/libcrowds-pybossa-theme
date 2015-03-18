@@ -20,7 +20,7 @@
     <section class="white padding-top-xs">
         <div class="row">
             <div class="col-xs-12">
-                
+                {% include "_flash_messages_floating.html" %}
                 <!-- Task Presenter Editor -->
                 <form class="form-inline" method="post" action="{{ url_for('app.task_presenter_editor', short_name=app.short_name) }}">
                     {{ form.hidden_tag() }}

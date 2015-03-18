@@ -9,6 +9,7 @@
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
+                {% include "_flash_messages.html" %}
                 <h1><strong>{{ _('Admin') }}:</strong> {{ _('Manage Administrators') }}</h1>
                 {% from "_formhelpers.html" import render_field %}
                 <form class="form-search" method="POST">

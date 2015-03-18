@@ -8,6 +8,7 @@
     <div class="container container-padded">
         <div class="row">
             <div id="categories" class="col-sm-9 col-sm-offset-3">
+                {% include "_flash_messages.html" %}
                 <h1><strong>{{ _('Admin') }}:</strong> {{ _('Manage Categories') }}</h1>
                 <hr>
                 <div class="row">
@@ -27,15 +28,15 @@
                     </div>
                 </div>
                 {% if categories %}
-                <h2 class="padding-top">{{_('Current Categories')}}</h2>
+                <h2 class="padding-top-xs">{{_('Current Categories')}}</h2>
                 <hr>
                 {% for c in categories %}
                 <div class="row vcenter hcenter">
-                    <div class="col-sm-5">
+                    <div class="col-sm-6">
                         <h3>{{c.name}} <small>({{ n_apps_per_category[c.short_name]}} apps)</small></h3>
                     </div>
                     <div class="col-sm-6">
-                        <div class="btn-group">
+                        <div class="btn-group pull-right">
                             <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn"><i class="glyphicon glyphicon-edit"></i> {{_('Edit Category')}}</a>
                             {% if n_apps_per_category[c.short_name] == 0 and (categories | count > 1) %}
                             <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn"><i class="glyphicon glyphicon-trash"></i> {{_('Delete Category')}}</a>
