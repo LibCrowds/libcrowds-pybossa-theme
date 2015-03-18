@@ -14,26 +14,25 @@
           {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
             {{ privacy.render_lock_page() }}
           {% else %}
-          <div class="row vcenter-sm">
+          <div class="row vcenter-sm hcenter">
             <div class="col-md-8 col-xs-12 xs-center">
               <h1>{{ _('Community') }} <h4>{{total}} {{ _('registered users') }}</h4>
               <small>Active volunteers are shown below</small>
             </div>
-            <div class="col-md-4 col-xs-12 padding-top-xs">
+            <div class="col-md-4 col-xs-12 padding-top-xs text-center">
               <a class="pull-right-sm btn btn-danger" href="{{url_for('leaderboard.index')}}">{{ _('View Leaderboard') }}</a></h1>
             </div>
           </div>
           <hr>
           {% if accounts %}
-          <ul class="polaroids">
+          <ul class="polaroids users">
           {% for account in accounts %}
               <li>
                 <a href="{{url_for('account.profile', name=account.name)}}" class="polaroid polaroid-sm" rel="popover" title="{{account.name}}" data-polaroid-title="{{account.name}}" data-html="true" data-content="
-                <ul>
-                  <li><strong><i class='glyphicon glyphicon-calendar'></i> Joined</strong>: {{account['created'][0:10]}}</li>
-              <li><strong><i class='glyphicon glyphicon-tasks'></i> Answers</strong>: {{ account.task_runs }}</li>
-          </ul>
-          ">
+             <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}} 
+             <br/>
+             <strong>{{_('Answers')}}:</strong> {{user.task_runs}}
+             " rel="popover" data-original-title="<strong>{{user.fullname}}</strong>">
                   {{ helper.render_user_thumbnail(account, upload_method) }}
                 </a>
               </li>
