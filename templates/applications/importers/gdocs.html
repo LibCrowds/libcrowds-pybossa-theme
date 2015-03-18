@@ -25,8 +25,6 @@
                           <form role="form" method="post" action="{{ url_for(target, short_name=app.short_name) }}">
                             <fieldset>
                             {{ form.hidden_tag() }}
-                            
-                            <span class="help-block"> {{ _('Please provide a URL to a Google Drive Spreadsheet with data for') }} {{ active_app }}. <br/> {{ _('For more information, please look at') }} <a href="http://docs.pybossa.com/en/latest/user/overview.html#importing-the-tasks-via-the-built-in-csv-task-creator" target="_blank">{{ _('the documentation') }}.</a></span>
                               {{ render_field(form.googledocs_url, class_="input-block-level form-control", placeholder="The URL of the Google Docs Spreadsheet") }}
                               <div class="pull-right" role="group">
                                 <a href="{{ url_for('app.settings', short_name=app.short_name) }}" class="btn btn-default">{{_('Cancel')}}</a>
