@@ -2,6 +2,7 @@
 {% set active_page = "applications" %}
 {% set active_app  = app.short_name %}
 {% import "applications/_helpers.html" as helper %}
+{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
