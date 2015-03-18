@@ -189,7 +189,6 @@ body > footer .container{padding-left:20px;padding-right:20px}
 .big-modal{width:1000px;margin-left:-500px}
 }
 @media (max-width: 991px) {
-.well h3, .well .h3{font-size: 1em}
 .bs-docs-sidenav{top:0;width:180px;margin-top:0;margin-right:0}
 .big-modal{width:800px;margin-left:-400px;margin-top:-60%}
 .navbar-nav>li{padding:0 10px}
@@ -287,6 +286,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .splash h1{font-size:2em;text-shadow:none;color:#fff;font-weight:200}
 .splash-overlay{-webkit-transition:background 1s;-moz-transition:background 1s;-ms-transition:background 1s;-o-transition:background 1s;transition:background 1s;width:100%;height:100%}
 @media (min-width: 768px) and (max-width: 991px) {
+.well h3, .well .h3{font-size: 1em}
 .splash{min-height:550px;max-height:650px}
 }
 @media (max-width: 767px) {
