@@ -26,7 +26,7 @@
                     {{ form.hidden_tag() }}
                     <fieldset>
                         <div id="code-btns" role="group" class="btn-group">
-                            <a href="{{url_for('app.settings', short_name=app.short_name)}}" class="btn btn-code">{{ _('Cancel') }}</a>
+                            <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn btn-code">{{ _('Cancel') }}</a>
                             <a href="#" class="btn btn-preview btn-code" value="preview">Preview</a>
                             <input type="submit" value={{ _('Update') }} class="btn btn-code" />
                         </div>

@@ -19,7 +19,7 @@
                                 <div class="pull-right" role="group">
                                     <button type="submit" name='btn' class="btn btn-default" value="Yes">{{_('Yes')}}</button>
                                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                                    <a href="{{ url_for('app.settings', short_name = app.short_name) }}"
+                                    <a href="{{ url_for('app.tasks', short_name = app.short_name) }}"
                                     class="btn btn-danger">{{_('No, do not delete anything!')}}</a>
                                 </div>
                             </form>
