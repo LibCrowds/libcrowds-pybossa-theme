@@ -191,14 +191,14 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_overall_progress(app, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
-    <div class="row vcenter-md">
-        <div class="col-md-8 col-xs-12 vcenter">
+    <div class="row vcenter-md hcenter">
+        <div class="col-md-8 col-xs-12 vcenter-sm text-center-xs">
             <div class="col-sm-2"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
             <h3><strong> {{_('Overall progress')}}</strong>: {{ overall_progress | round | int }}% {{_('completed')}}</h3>
         </div>
         <div class="col-md-4 col-xs-12 text-center">
             {% if show_contribute_btn %}
-                <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-danger pull-right"> {{ _('Contribute') }}</a>
+                <a href="{{ url_for('app.presenter', short_name=app.short_name)}}" class="btn btn-danger pull-right-md"> {{ _('Contribute') }}</a>
             {% elif show_n_tasks %}
                 <span class="pull-right-md"><strong>{{n_tasks}}</strong> {{_('Tasks')}}</span>
             {% endif %}

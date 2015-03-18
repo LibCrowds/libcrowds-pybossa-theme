@@ -12,12 +12,12 @@
                 <div class="row">
                     <div class="col-sm-9 col-sm-offset-3">
                     {% if current_user.admin == 1 %}
-                        <div class="row vcenter">
-                            <div class="col-md-8 col-xs-12 vcenter">
+                        <div class="row vcenter hcenter">
+                            <div class="col-md-8 col-xs-12">
                                 <h1><strong>Admin</strong>: {{ _('Projects') }}</h1>
                             </div>
     
-                            <div class="col-md-4 col-xs-12 text-center">            
+                            <div class="col-md-4 col-xs-12">            
                                 <a href="{{url_for('app.new')}}" class="btn btn-danger pull-right">Create a Project</a>
                             </div>
                         </div>
