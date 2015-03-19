@@ -13,23 +13,18 @@
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
                 {{ helper.render_app_title(app, subtitle=_('Task Priority'))}}
-                <p>{{_('You can change the')}}
-                <strong>{{_('priority')}}</strong> {{_('of one or more tasks,
-                providing a list of task IDs separated by commas. The lowest
-                priority is')}} <span class="badge badge-warning">0.0</span>
-                {{_('and the highest priority is')}} <span class="badge badge-info">1.0</span>.</p>
-                <p><span class="label label-info"><i class="glyphicon glyphicon-bullhorn"></i>
-                    {{_('Important')}}</span> {{_('The priority value is only
-                respected by the')}} <strong>{{_('default scheduler')}}</strong>.</p>
+                
+                <p>Set the <strong>{{_('priority')}}</strong> of one or more tasks by providing a list of task IDs below.</p>
+                <p>The lowest priority is <span class="label label-danger">0.0</span> and the highest is <span class="label label-danger">1.0</span>.</p>
+                <p>This priority value is only respected by the')}} <strong>{{_('default scheduler')}}</strong>.</p>
                 <form id="task_priority" class="form-horizontal" method="post" action="{{ url_for('app.task_priority', short_name=app.short_name) }}">
                     {{ form.hidden_tag() }}
                     <fieldset>
-                        {{ render_field(form.task_ids, class_="col-md-4",
-                        placeholder=_('Comma separated Task.IDs i.e.: 3, 532, 100'))}}
-                        {{ render_field(form.priority_0, class_="col-md-4", placeholder=_('Priority value between 0.0 and 1.0'))}}
-                        <div class="form-actions">
-                            <input type="submit" value={{_('Change Priority')}} class="btn btn-danger" />
-                            <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
+                        {{ render_field(form.task_ids, class_="form-control", placeholder=_('Comma separated task IDs (e.g. 3, 532, 100)'))}}
+                        {{ render_field(form.priority_0, class_="form-control", placeholder=_('Priority between 0.0 and 1.0'))}}
+                        <div class="pull-right" role="group">
+                            <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+                            <input type="submit" value="Set Priority" class="btn btn-danger" />
                         </div>
                     </fieldset>
                 </form>

@@ -19,7 +19,7 @@ h1 [class^="icon-"],h2 [class^="icon-"],h3 [class^="icon-"],h4 [class^="icon-"],
 a[rel="popover"]{cursor:pointer}
 .label{-webkit-border-radius:0;border-radius:0;background-color:#1A1A1A}
 .label-info{background-color:#4190c2}
-.label-success{background-color:#C00}
+.label-success{background-color:#398439}
 .label-danger{background-color:#BA0000}
 .label-default{background-color:#ADADAD}
 input[type=checkbox]{-webkit-appearance:checkbox}
@@ -31,6 +31,7 @@ input[type="checkbox"]{width:auto;margin-top:19px}
 .remove-padding-left{padding-left:0!important}
 .remove-padding-bottom{padding-bottom:0!important}
 .remove-padding-top{padding-top:0!important}
+.remove-margin-bottom{margin-bottom:0!important}
 .padding-top{padding-top:80px}
 .padding-top-sm{padding-top:40px}
 .padding-top-xs{padding-top:20px}
@@ -248,7 +249,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .btn-sm{padding:5px 10px;font-size:12px;line-height:1.5;border-radius:3px}
 .btn-xs{padding:1px 5px;font-size:12px;line-height:1;border-radius:3px}
 .btn-padded{margin-top:10px;margin-bottom:10px}
-.btn-circle{width:90px;height:90px;margin:0 auto;border-radius:50%;border:1px solid #fff;display:block;cursor:pointer;position:relative;overflow:hidden;font-weight:200;font-size:18px;color:#fff;text-transform:uppercase}
+.btn-circle{z-index:1;width:90px;height:90px;margin:0 auto;border-radius:50%;border:1px solid #fff;display:block;cursor:pointer;position:relative;overflow:hidden;font-weight:200;font-size:18px;color:#fff;text-transform:uppercase}
 .btn-circle a{color:#fff;display:inline-block;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transition:-webkit-transform .4s;-moz-transition:-moz-transform .4splashs;-ms-transition:-ms-transform .4s;-o-transition:-o-transform .4s;transition:transform .4s;-webkit-transform:translateY(-90px);-moz-transform:translateY(-90px);-ms-transform:translateY(-90px);-o-transform:translateY(-90px);transform:translateY(-90px)}
 .btn-circle a div{height:87px;text-transform:uppercase;font-size:14px;font-weight:300}
 .btn-circle:hover a{transform:none}
@@ -408,4 +409,5 @@ img#navbar-logo {height: 90%;}
 .legend{list-style:none;margin:0;padding:0;font-size:14px;margin-top:20px}
 .legend li{margin-bottom:4px}
 .legend li:first-letter{text-transform:capitalize}
+.pagination-centered {width: 100%;text-align: center;align-items: center;justify-content: center;}
 @media (max-width:991px){.navbar-header{float:none}.navbar-toggle{display:block}.navbar-collapse{border-top:1px solid transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.navbar-collapse.collapse{display:none!important}.navbar-nav{float:none!important;margin:7.5px -15px}.navbar-nav>li{float:none}.navbar-nav>li>a{padding-top:10px;padding-bottom:10px}.navbar-text{float:none;margin:15px 0}.navbar-collapse.collapse.in{display:block!important}.collapsing{overflow:hidden!important}}
