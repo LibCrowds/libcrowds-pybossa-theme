@@ -14,7 +14,7 @@
                 {% include "_flash_messages.html" %}
                 {{ helper.render_app_title(app, subtitle=_('Task Scheduler'))}}
                 <p>{{_('You can choose from the following schedulers')}}:</p>
-                <ul>
+                <ul class="padding-bottom-sm">
                     <li><strong>{{_('Default')}}</strong> {{_('or')}}
                     <strong>{{_('Depth First')}}</strong>: returns the first task that has not been completed.</li>
                     <li><strong>{{_('Breadth First')}}</strong>: returns a task with the least number of answers.</li>

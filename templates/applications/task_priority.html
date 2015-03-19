@@ -15,8 +15,8 @@
                 {{ helper.render_app_title(app, subtitle=_('Task Priority'))}}
                 
                 <p>Set the <strong>{{_('priority')}}</strong> of one or more tasks by providing a list of task IDs below.</p>
-                <p>The lowest priority is <span class="label label-danger">0.0</span> and the highest is <span class="label label-danger">1.0</span>.</p>
-                <p>This priority value is only respected by the')}} <strong>{{_('default scheduler')}}</strong>.</p>
+                <p>The lowest priority is <span class="label label-danger">0.0</span> and the highest is <span class="label label-danger">1.0</span></p>
+                <p>This priority value is only respected by the <strong>{{_('default scheduler')}}</strong>.</p>
                 <form id="task_priority" class="form-horizontal" method="post" action="{{ url_for('app.task_priority', short_name=app.short_name) }}">
                     {{ form.hidden_tag() }}
                     <fieldset>
