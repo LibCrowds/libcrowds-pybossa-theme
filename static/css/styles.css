@@ -42,7 +42,7 @@ input[type="checkbox"]{width:auto;margin-top:19px}
 .padding-bottom-sm{padding-bottom:30px}
 .padding-left-xs{padding-left:10px}
 .margin-bottom{margin-bottom:50px}
-.form-control{padding:12px 15px;height:auto;-webkit-appearance:none;-moz-appearance:none;appearance:none}
+.form-control{padding:12px 15px;height:47px;}
 .form-horizontal .form-group{margin-right:0;margin-left:0}
 div.white-rounded{background-color:#FFF;padding:20px 30px;border-radius:15px}
 div.white-rounded-panel{background-color:#FFF;border:1px solid #ECEDED;border-radius:15px;display:inline-block;width:100%}
@@ -391,7 +391,8 @@ thead{background:rgba(0,0,0,0.15)}
 .web-badge{max-height:100px;-webkit-filter:grayscale(100%);-moz-filter:grayscale(100%);-ms-filter:grayscale(100%);-o-filter:grayscale(100%);filter:grayscale(100%);-webkit-transition:.5s ease-in-out;-moz-transition:.5s ease-in-out;-o-transition:.5s ease-in-out;-ms-transition:.5s ease-in-out;transition:.5s ease-in-out}
 .web-badge:hover{-webkit-filter:grayscale(0%);-moz-filter:grayscale(0%);-ms-filter:grayscale(0%);-o-filter:grayscale(0%);filter:grayscale(0%)}
 record p,.chart p{margin:0}
-record{border-top:1px solid #EFEFEF;display:block;padding-top:20px}
+record{border-bottom:1px solid #EFEFEF;display:block;padding: 20px 0px}
+#search_results{border-top: 1px solid #EFEFEF;margin-top:10px}
 .glyphicon.spinning{animation:spin 1s infinite linear;-webkit-animation:spin2 1s infinite linear}
 @keyframes spin {
 from{transform:scale(1) rotate(0deg)}
@@ -410,4 +411,5 @@ img#navbar-logo {height: 90%;}
 .legend li{margin-bottom:4px}
 .legend li:first-letter{text-transform:capitalize}
 .pagination-centered {width: 100%;text-align: center;align-items: center;justify-content: center;}
+.pagination li {display: inline;padding-left: 5px;padding-right: 5px;}
 @media (max-width:991px){.navbar-header{float:none}.navbar-toggle{display:block}.navbar-collapse{border-top:1px solid transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.navbar-collapse.collapse{display:none!important}.navbar-nav{float:none!important;margin:7.5px -15px}.navbar-nav>li{float:none}.navbar-nav>li>a{padding-top:10px;padding-bottom:10px}.navbar-text{float:none;margin:15px 0}.navbar-collapse.collapse.in{display:block!important}.collapsing{overflow:hidden!important}}

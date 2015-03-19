@@ -14,7 +14,7 @@
                 {{ helper.render_app_title(app, upload_method, subtitle=_('Browse tasks')) }}
                 {% for t in tasks %}
                 {% set task_pct = t.pct_status*100 %}
-                <div class="row vcenter hcenter">
+                <div class="row vcenter hcenter padding-top-xs">
                         <div class="col-sm-3">
                             {% if task_pct >= 100 %}
                             {{_('Task')}} <span class="label label-success">#{{ t.id }}</span>
