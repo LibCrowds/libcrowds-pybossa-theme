@@ -110,6 +110,6 @@ function loadPreview() {
 function loadPreviewSquare() {
     if(typeof document.getElementById("avatar").files[0] != 'undefined') {
         $("#loading").show();
-        previewImage();
+        previewImageSquare();
     }
 }
