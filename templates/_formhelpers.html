@@ -58,7 +58,7 @@
 {% endmacro %}
 
 {% macro render_field_horizontal(field, addon, prepend, tooltip, label_text) %}
-        <div class="form-group {% if field.errors %} has-error{% endif %}">
+        <div class="form-group{% if field.errors %} has-error{% endif %}">
             {{ render_label_horizontal(field, tooltip, label_text) }}
                 {% if addon %}
                 <div class="{% if prepend %}input-group{%else%}input-group{%endif%}">
