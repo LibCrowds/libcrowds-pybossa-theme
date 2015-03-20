@@ -118,7 +118,7 @@
         {% if pagination.has_prev %}
           <li>
           <a href="{{ url_for_other_page(pagination.page - 1)
-            }}">&laquo; {{_('Prev')}}</a>
+            }}">&laquo; {{_('Prev')}} | </a>
           </li>
         {% endif %}
 
@@ -138,7 +138,7 @@
         {% if pagination.has_next %}
           <li>
           <a href="{{ url_for_other_page(pagination.page + 1)
-            }}">{{_('Next')}} &raquo;</a>
+            }}"> | {{_('Next')}} &raquo;</a>
           </li>
         {% endif %}
     </ul>
