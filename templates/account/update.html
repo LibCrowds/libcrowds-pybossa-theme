@@ -15,7 +15,7 @@
             <div class="row margin-bottom">
                 {% include "_flash_messages.html" %}
                 <div class="col-sm-6 col-xs-12 text-center">
-                    <form method="post" role="form" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
+                    <form method="post" role="form" class="upload-img-form" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
                         <fieldset>
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             <div class="center-block img-overlay-container">
@@ -52,7 +52,7 @@
                                         
                                         <div class="modal-footer">
                                             <div class="form-actions text-center">
-                                                <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-lg" />{{ _('Upload') }}</button>
+                                                <button type="submit" id="upload-btn" name='btn' value="Upload" class="btn btn-primary btn-lg" />{{ _('Upload') }}</button>
                                             </div>
                                         </div>
                                     </div>
