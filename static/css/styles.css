@@ -1,7 +1,6 @@
 .form-control[readonly].readonly-select{cursor:pointer;background-color:#fff}
 .inline-block{display:inline-block}
 ul{-webkit-padding-start:0px;-moz-padding-start:0px;padding-left:0px;list-style:none}
-.project-desc{overflow-y:auto}
 .project-polaroid{padding-top:25px}
 .pull-down{align-items:flex-end;display:flex;justify-content:flex-end}
 .pull-down-center{align-items:flex-end;display:flex;justify-content:flex-end;height:100%;width:50%;padding-bottom:25px}
@@ -170,7 +169,7 @@ body > footer .container{padding-left:20px;padding-right:20px}
 .bs-docs-sidenav.affix .nav-stacked li:first-child{padding-top:10px}
 .bs-docs-sidenav li.nav-link{margin-bottom:5px}
 .bs-docs-sidenav li > a{color:#A0A0A0;display:block;margin:0 0 -1px;padding:10px 20px;border-radius:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;transition:color 100ms;-webkit-transition:color 100ms;-ms-transition:color 100ms;-moz-transition:color 100ms;-o-transition:color 100ms}
-.bs-docs-sidenav > .active > a{background-color:#BA0000;color:#F7F7F7;position:relative;z-index:2;padding:9px 20px;border:0;text-shadow:0 1px 0 rgba(0,0,0,.15);-webkit-box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1);-moz-box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1);box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1)}
+.bs-docs-sidenav li > a.active{background-color:#BA0000;color:#F7F7F7;position:relative;z-index:2;padding:9px 20px;border:0;text-shadow:0 1px 0 rgba(0,0,0,.15);-webkit-box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1);-moz-box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1);box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1)}
 .bs-docs-sidenav .nav-link.active a:after{opacity:0}
 .bs-docs-sidenav .nav-link a:after{bottom:0;right:0;left:initial;background-color:#BA0000;height:100%;width:2px;content:'';opacity:0;-webkit-transition:opacity .2s;-moz-transition:opacity .2s;-ms-transition:opacity .2s;-o-transition:opacity .2s;transition:opacity .2s;-webkit-transition:-webkit-transform .2s;-moz-transition:-moz-transform .2s;-ms-transition:-ms-transform .2s;-o-transition:-o-transform .2s;transition:transform .2s;webkit-transform:translateX(-5px);-moz-transform:translateX(-5px);-ms-transform:translateX(-5px);-o-transform:translateX(-5px);transform:translateX(-5px)}
 .bs-docs-sidenav .nav-link:hover > a:first-child:after,.bs-docs-sidenav .nav-link:focus > a:first-child:after{opacity:1;transform:none}
