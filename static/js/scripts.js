@@ -7,4 +7,5 @@ function animateProgress(){$(".meter > span").each(function(){if(isVisible($(thi
 function animateCounter(elem){var $counter=$('#'+$(elem).attr('data-app')+'Complete');var progress=$(elem).attr('data-progress');jQuery({Counter:0}).animate({Counter:progress},{duration:1500,easing:'swing',step:function(){$counter.html('Complete: '+Math.ceil(this.Counter)+'%');}});}
 function formatDate(str){var date=str.substring(0,10);var arr=date.split("-");var ret=arr[2]+'-'+arr[1]+"-"+arr[0];return ret;}
 function updateXML(){if($("#xml").length>0){var text=vkbeautify.xml($('#xml2').html());var expr=new RegExp("\n","g")
-$('#xml').html(text.replace(expr,'<br>'));}}$('.upload-img-form').submit(function() {$('upload-btn').html('<i class="glyphicon glyphicon-refresh spinning"></i> Uploading')});
+$('#xml').html(text.replace(expr,'<br>'));}}
+$('.upload-img-form').submit(function() {$('#upload-btn').html('<i class="glyphicon glyphicon-refresh spinning"></i> Uploading');$('#upload-btn').blur();});
