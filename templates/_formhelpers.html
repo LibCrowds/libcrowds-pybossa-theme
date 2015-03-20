@@ -41,25 +41,25 @@
     {% endif %}
 {% endmacro %}
 
-{% macro render_field_horizontal(field, addon, prepend, tooltip, label_text) %}
-        <div class="form-group {% if field.errors %} has-error{% endif %}">
-            {{ render_label_horizontal(field, tooltip, label_text) }}
+{% macro render_field_horizontal(field, addon, prepend, tooltip, label_text, input_size='col-xs-9', label_size='col-xs-3') %}
+        <div class="form-group vcenter hcenter{% if field.errors %} has-error{% endif %}">
+            {{ render_label_horizontal(field, tooltip, label_text, label_size) }}
                 {% if addon %}
                 <div class="{% if prepend %}input-group{%else%}input-group{%endif%}">
                     {% if prepend %}
-                        <div class="col-xs-9 remove-padding">
+                        <div class="{{input_size}} remove-padding">
                             <span class="input-group-addon">{{addon|safe}}</span>
                             {{field(**kwargs)}}
                         </div>
                     {% else %}
-                        <div class="col-xs-9 remove-padding">
+                        <div class="{{input_size}} remove-padding">
                             {{field(**kwargs)}}
                             <span class="input-group-addon">{{addon|safe}}</span>
                         </div>
                     {% endif %}
                 </div>
                 {% else %}
-                    <div class="col-xs-9 remove-padding">
+                    <div class="{{input_size}} remove-padding">
                         {{field(**kwargs)}}
                     </div>
                 {% endif %}
@@ -74,19 +74,19 @@
 {% endmacro %}
 
 
-{% macro render_label_horizontal(field, tooltip, text) %}
+{% macro render_label_horizontal(field, tooltip, text, label_size) %}
     {% if tooltip and text %}
-        {{ field.label(class="col-xs-3 control-label", style='width:148px', text=text) }}
+        {{ field.label(class="{{label_size}} control-label", style='width:148px', text=text) }}
         <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
             &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
         {% elif tooltip and not text %}
-        {{ field.label(class="col-xs-3 control-label", style='width:148px') }}
+        {{ field.label(class="{{label_size}} control-label", style='width:148px') }}
         <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
             &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="glyphicon glyphicon-question-sign"></i></div>
     {% elif not tooltip and text %}
-        {{ field.label(class="col-xs-3 control-label", text=text) }}
+        {{ field.label(class="{{label_size}} control-label", text=text) }}
     {% else %}
-        {{ field.label(class="col-xs-3 control-label") }}
+        {{ field.label(class="{{label_size}} control-label") }}
     {% endif %}
 {% endmacro %}
 
