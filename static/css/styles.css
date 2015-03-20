@@ -22,11 +22,10 @@ a[rel="popover"]{cursor:pointer}
 .label-success{background-color:#398439}
 .label-danger{background-color:#BA0000}
 .label-default{background-color:#ADADAD}
-input[type=checkbox]{-webkit-appearance:checkbox}
+input[type="checkbox"]{-webkit-appearance:checkbox;height: auto;width:auto;margin-top:19px}
 input:focus,textarea:focus,textarea:focus,input[type="text"]:focus,input[type="password"]:focus,input[type="datetime"]:focus,input[type="datetime-local"]:focus,input[type="date"]:focus,input[type="month"]:focus,input[type="time"]:focus,input[type="week"]:focus,input[type="number"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="color"]:focus,.uneditable-input:focus{-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(139,191,54,0.6);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(139,191,54,0.6);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(139,191,54,0.6)}
 .inline-radio li{display:inline-block;padding-right:20px}
 textarea{resize:none}
-input[type="checkbox"]{width:auto;margin-top:19px}
 .remove-padding{padding:0!important}
 .remove-padding-left{padding-left:0!important}
 .remove-padding-bottom{padding-bottom:0!important}
@@ -139,7 +138,7 @@ ul.users li a{display:block;margin-bottom:5px;margin-right:10px;margin-left:10px
 .bs-docs-sidenav.affix .nav-stacked li:first-child{padding-top:10px}
 .bs-docs-sidenav li.nav-link{margin-bottom:5px}
 .bs-docs-sidenav li > a{color:#A0A0A0;display:block;margin:0 0 -1px;padding:10px 20px;border-radius:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;transition:color 100ms;-webkit-transition:color 100ms;-ms-transition:color 100ms;-moz-transition:color 100ms;-o-transition:color 100ms}
-.bs-docs-sidenav li > a.active{background-color:#BA0000;color:#F7F7F7;position:relative;z-index:2;padding:9px 20px;border:0;text-shadow:0 1px 0 rgba(0,0,0,.15);-webkit-box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1);-moz-box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1);box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1)}
+.bs-docs-sidenav li > a.active, .bs-docs-sidenav li > a.active:hover, .bs-docs-sidenav li > a.active:focus{background-color:#BA0000;color:#F7F7F7;position:relative;z-index:2;padding:9px 20px;border:0;text-shadow:0 1px 0 rgba(0,0,0,.15);-webkit-box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1);-moz-box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1);box-shadow:inset 1px 0 0 rgba(0,0,0,.1),inset -1px 0 0 rgba(0,0,0,.1)}
 .bs-docs-sidenav .nav-link.active a:after{opacity:0}
 .bs-docs-sidenav .nav-link a:after{bottom:0;right:0;left:initial;background-color:#BA0000;height:100%;width:2px;content:'';opacity:0;-webkit-transition:opacity .2s;-moz-transition:opacity .2s;-ms-transition:opacity .2s;-o-transition:opacity .2s;transition:opacity .2s;-webkit-transition:-webkit-transform .2s;-moz-transition:-moz-transform .2s;-ms-transition:-ms-transform .2s;-o-transition:-o-transform .2s;transition:transform .2s;webkit-transform:translateX(-5px);-moz-transform:translateX(-5px);-ms-transform:translateX(-5px);-o-transform:translateX(-5px);transform:translateX(-5px)}
 .bs-docs-sidenav .nav-link:hover > a:first-child:after,.bs-docs-sidenav .nav-link:focus > a:first-child:after{opacity:1;transform:none}
@@ -225,6 +224,7 @@ pre.prettyprint{text-align:left}
 .alert-error{color:#a94442;background-color:#f2dede;border-color:#ebccd1}
 .alert-message{color:#31708f;background-color:#d9edf7;border-color:#bce8f1}
 .profile-image{max-height:300px}
+.height-300{height:300px;}
 .img-overlay-container{position:relative;display:inline-block;margin-bottom:15px}
 .img-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.6);color:#fff;padding:40%;opacity:0;-webkit-transition:opacity .5s;-moz-transition:opacity .5s;-ms-transition:opacity .5s;-o-transition:opacity .5s;transition:opacity .5s;cursor:pointer}
 .img-overlay .fa{padding-left:5px}
@@ -291,6 +291,7 @@ record p,.chart p{margin:0}
 record{border-bottom:1px solid #EFEFEF;display:block;padding: 20px 0px}
 #search_results{border-top: 1px solid #EFEFEF;margin-top:10px}
 .glyphicon.spinning{animation:spin 1s infinite linear;-webkit-animation:spin2 1s infinite linear}
+.control-label{text-overflow:ellipsis;overflow-x:auto;}
 @keyframes spin {
 from{transform:scale(1) rotate(0deg)}
 to{transform:scale(1) rotate(360deg)}

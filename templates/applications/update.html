@@ -12,19 +12,22 @@
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-              <legend><strong>{{app.name}}</strong>: {{_('Update the project')}}</legend>
+              <h1><strong>{{app.name}}</strong>: {{_('Project Details')}}</h1>
+              <hr>
               <!-- Update form for project thumbnail -->
-              <form method="post" class="form-horizontal" action="{{ url_for('app.update', short_name=app.short_name) }}" enctype="multipart/form-data">
+              <form method="post" class="form-horizontal upload-img-form padding-top-xs" action="{{ url_for('app.update', short_name=app.short_name) }}" enctype="multipart/form-data">
                   <fieldset>
                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                        <div class="col-sm-6 col-xs-12 hidden-xs project-polaroid">
-                            <li>
-                                <a  class="polaroid" href="{{ url_for('app.details', short_name = app.short_name) }}" data-polaroid-title="{{ app.name }}">
-                                    {{ helper.render_app_thumbnail(app, upload_method) }}
-                                </a>
-                            </li>
+                        <div class="col-xs-12 text-center">
+                            <div class="center-block img-overlay-container">
+                                 {{ helper.render_app_thumbnail(app, upload_method, style="max-height:200px;", class="img-thumbnail") }}
+                                <div class="img-overlay edit-profile-image">
+                                        <i class="fa fa-pencil-square-o fa-3x"></i>
+                                        <span>Edit</span>
+                                </div>
+                            </div>
                         </div>
-                      {{ form_helper.render_field(upload_form.avatar, onchange="previewImage()") }}
+                      {{ form_helper.render_field(upload_form.avatar, onchange="loadPreviewSquare()", class="form-control hidden") }}
                       {{ upload_form.x1 }}
                       {{ upload_form.y1 }}
                       {{ upload_form.x2 }}
@@ -38,7 +41,7 @@
                                 
                                 <div class="modal-footer">
                                     <div class="form-actions text-center">
-                                        <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-lg" />{{ _('Upload') }}</button>
+                                        <button type="submit" id="upload-btn" name='btn' value="Upload" class="btn btn-primary btn-lg" />{{ _('Upload') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -46,24 +49,24 @@
                     </div>
                   </fieldset>
               </form>
-        
+            {{ helper.render_loading("Loading, please wait...") }}
               <!-- Update form for project data-->
-            <form class="form-horizontal" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}">
+            <form class="visible-form" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}">
               <fieldset>
                 {{ form.hidden_tag() }}
                 
-                {{ form_helper.render_field_horizontal(form.name, class="form-control", placeholder=_('Name')) }}
-                {{ form_helper.render_field_horizontal(form.short_name, class="form-control", placeholder=_('Short name or slug for the project'), label_text=_('Project slug:')) }}
-                {{ form_helper.render_field_horizontal(form.description, class="form-control", placeholder=_('Short description')) }}
-                {{ form_helper.render_field_horizontal(form.long_description, class="form-control", placeholder=_('Long description')) }}
-                {{ form_helper.render_field_horizontal(form.category_id, class="form-control") }}
-                {{ form_helper.render_field_horizontal(form.allow_anonymous_contributors, class="form-control") }}
-                {{ form_helper.render_field_horizontal(form.password, class="form-control") }}
-                {{ form_helper.render_field_horizontal(form.webhook, class="form-control") }}
-                {{ form_helper.render_field_horizontal(form.hidden, class="form-control") }}
-                <div class="form-actions">
-                  <button type="submit" name="btn" value="Save the changes" class="btn btn-danger">{{_('Save the changes')}}</button>
-                  <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
+                {{ form_helper.render_field(form.name, class="form-control", placeholder=_('Name'), visible='true') }}
+                {{ form_helper.render_field(form.short_name, class="form-control", placeholder=_('Short name or slug for the project'), visible='true', label_text=_('Project slug:')) }}
+                {{ form_helper.render_field(form.description, class="form-control", placeholder=_('Short description'), visible='true') }}
+                {{ form_helper.render_field(form.long_description, class="form-control height-300", placeholder=_('Long description'), visible='true') }}
+                {{ form_helper.render_field(form.category_id, class="form-control", visible='true') }}
+                {{ form_helper.render_field(form.allow_anonymous_contributors, class="form-control", visible='true') }}
+                {{ form_helper.render_field(form.password, class="form-control", visible='true') }}
+                {{ form_helper.render_field(form.webhook, class="form-control", visible='true') }}
+                {{ form_helper.render_field_horizontal(form.hidden) }}
+                <div role="group" class="pull-right">
+                    <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+                  <button type="submit" name="btn" value="Save the changes" class="btn btn-danger">{{_('Save')}}</button>
                 </div>
               </fieldset>
             </form>
