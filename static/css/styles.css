@@ -1,6 +1,7 @@
 .form-control[readonly].readonly-select{cursor:pointer;background-color:#fff}
 .inline-block{display:inline-block}
 ul{-webkit-padding-start:0px;-moz-padding-start:0px;padding-left:0px;list-style:none}
+.project-desc{height:100%}
 .project-polaroid{padding-top:25px}
 .pull-down{align-items:flex-end;display:flex;justify-content:flex-end}
 .pull-down-center{align-items:flex-end;display:flex;justify-content:flex-end;height:100%;width:50%;padding-bottom:25px}
