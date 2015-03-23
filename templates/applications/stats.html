@@ -5,6 +5,7 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
+<span class="set-main-bg" data-bg="pattern-white-wall"></span>
 <!-- Leaflet maps -->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
  <!--[if lte IE 8]>
@@ -12,420 +13,336 @@
  <![endif]-->
 <!-- Default Style -->
 <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" rel="stylesheet" type="text/css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" rel="stylesheet" type="text/css">
-<script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
-<script src="{{url_for('static', filename='js/stats/flotr2.min.js')}}" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js" type="text/javascript"></script>
-<script>
-    var appStats = {{appStats|safe}};
-</script>
-
-{{ render_local_nav(current_user, "statistics", app.short_name) }}
+<link href="{{url_for('static', filename='css/stats/MarkerCluster.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static', filename='css/stats/MarkerCluster.Default.css')}}" rel="stylesheet" type="text/css">
+<script src="{{url_for('static', filename='js/stats/leaflet.markercluster.js')}}" type="text/javascript"></script>
+    {{ render_local_nav(current_user, "statistics", app.short_name) }}
      <div class="container-padded  remove-padding-bottom">
-        <section class="white">
-            <div class="container container-padded">
-<div class="row">
-    <div class="col-sm-9 col-sm-offset-3">
-        {% include "_flash_messages.html" %}
-        {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-        {{ privacy.render_lock_page() }}
-        {% else %}
-        {{ helper.render_app_title(app, upload_method, subtitle=_('Statistics'))}}
-        <br/>
-
-            {% if private %}
+        <div class="container container-padded">
             <div class="row">
-                <div class="alert alert-info">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>{{_('Important')}}:</strong> {{_('Data has been')}} <strong>{{_('anonymized')}}!</strong>
-                </div>
-            </div>
-            {% endif %}
-
-            <!-- Hour Stats CARD -->
-            <div id="card" class="row">
-                <div class="white-rounded-panel  box-shadow-grey  margin-bottom">
-                    <h2 class="inset-text-grey-header">{{_('Distribution of Answers per Hour')}}</h2>
-                    <div class="col-xs-12">
-                    <div id="hourStats" style="margin:20px;height:500px;">
-                    </div>
-                    <script>
-                   $(window).on("resize", function () {
-                    function answersPerHour(obj) {
-                        return (parseInt(obj.y) + " answers were submitted at " + parseInt(obj.x) + " hours");
-                    }
-
-                    function hours(obj) {
-                        return (parseInt(obj) + ":00");
-                    }
-                    
-                    var container = document.getElementById('hourStats');
-                    var graph = Flotr.draw(container, [{data: appStats.hourStats[1]['values'], label:appStats.hourStats[1]['label']},{ data:appStats.hourStats[2]['values'],label:appStats.hourStats[2]['label'] }], {
-                        bubbles : {show: true, baseRadius:5},
-                        xaxis   : {min: 0, max:24, tickFormatter: hours},
-                        yaxis   : {min: 0, max:_.max(appStats.hourStats[0])},
-                        mouse   : {track: true, trackFormatter: answersPerHour},
-                        HtmlText: false,
-                        legend  : {postion: 'nw'}
-                    });
-                    }).resize();
-                    </script>
-                </div>
-            </div>
-                </div>
-            <!-- END Hour Stats CARD -->
-
-            <!-- Day Stats Total CARD -->
-            <div id="card" class="row">
-                <div class="white-rounded-panel  box-shadow-grey  margin-bottom">
-                    <h2 class="inset-text-grey-header">{{_('Completed Tasks in the last 15 days')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
-                    <div class="col-sm-12">
-                    <div id="dayStatsTotal" style="margin:20px;height:500px;"></div>
-                    <script>
-                   $(window).on("resize", function () {
-                    function date(obj) {
-                        var d = new Date(parseInt( obj ));
-                        var year = d.getFullYear();
-                        var month = d.getMonth() + 1;
-                        var day = d.getDate();
-                        return(year + "-" + month + '-' + day)
-                    }
-                    function answersPerDay(obj) {
-                        return ("Tasks: " + parseInt(obj.y));
-                    }
-                    var options = {
-                        xaxis   : {mode:'time'},
-                        yaxis   : {max: appStats.dayStats[4]['values'][0][1] + 1},
-                        mouse   : {track: true, trackFormatter: answersPerDay},
-                        HtmlText: false,
-                        legend  : {postion: 'nw'},
-                        selection: {
-                            mode: 'x',
-                            fps: 30
-                        }
-                    };
-
-                    var dayStatsTotalContainer = document.getElementById('dayStatsTotal');
-
-                    function drawGraph(opts) {
-                        // Clone the options, so the 'options' variable always keeps intact.
-                        var o = Flotr._.extend(Flotr._.clone(options), opts || {});
-                        
-                        // Return a new graph.
-                        return Flotr.draw(
-                        dayStatsTotalContainer, [{ data:appStats.dayStats[3]['values'],label:appStats.dayStats[3]['label']}, { data:appStats.dayStats[4]['values'],label:appStats.dayStats[4]['label']} , ], o);
-                    }
-                        
-                        // Actually draw the graph.
-                        graph = drawGraph();
-                        
-                        // Hook into the 'flotr:select' event.
-                        Flotr.EventAdapter.observe(dayStatsTotalContainer, 'flotr:select', function(area) {
-                        
-                            // Draw graph with new area
-                            graph = drawGraph({
-                                xaxis: {
-                                    mode: 'time',
-                                    min: area.x1,
-                                    max: area.x2
-                                },
-                                yaxis: {
-                                    min: area.y1,
-                                    max: area.y2
-                                }
-                            });
-                        });
-
-                        // When graph is clicked, draw the graph with default area.
-                        Flotr.EventAdapter.observe(dayStatsTotalContainer, 'flotr:click', function() {
-                            drawGraph();
-                        });
-                    }).resize();
-                    </script>
-                </div>
-            </div>
-            </div>
-            <!-- END Day Stats CARD -->
-
-
-            <!-- Day Stats CARD -->
-            <div id="card" class="row">
-                <div  class="white-rounded-panel  box-shadow-grey  margin-bottom">
-                    <h2 class="inset-text-grey-header">{{_('Answers per day')}} <small> {{_('select an area to zoom, click to reset the chart')}}</small></h2>
-                    <div class="col-xs-12">
-                    <div id="dayStats" style="margin:20px;height:500px;"></div>
-                    <script>
-                   $(window).on("resize", function () {
-                    function date(obj) {
-                        var d = new Date(parseInt( obj ));
-                        var year = d.getFullYear();
-                        var month = d.getMonth() + 1;
-                        var day = d.getDate();
-                        return(year + "-" + month + '-' + day)
-                    }
-                    function answersPerDay(obj) {
-                        return (parseInt(obj.y) + " {{_('answers were submitted this day')}} " + date(obj.x));
-                    }
-                    var options = {
-                        xaxis   : {mode:'time'},
-                        mouse   : {track: true, trackFormatter: answersPerDay},
-                        HtmlText: false,
-                        legend  : {postion: 'nw'},
-                        selection: {
-                            mode: 'x',
-                            fps: 30
-                        }
-                    };
-
-                    var dayStatsContainer = document.getElementById('dayStats');
-
-                    function drawGraph(opts) {
-                        // Clone the options, so the 'options' variable always keeps intact.
-                        var o = Flotr._.extend(Flotr._.clone(options), opts || {});
-                        
-                        // Return a new graph.
-                        return Flotr.draw(
-                        dayStatsContainer, [{data: appStats.dayStats[1]['values'], label:appStats.dayStats[1]['label']},{ data:appStats.dayStats[2]['values'],label:appStats.dayStats[2]['label'] }, { data:appStats.dayStats[0]['values'],label:appStats.dayStats[0]['label']} ], o);
-                    }
-                        
-                        // Actually draw the graph.
-                        graph = drawGraph();
-                        
-                        // Hook into the 'flotr:select' event.
-                        Flotr.EventAdapter.observe(dayStatsContainer, 'flotr:select', function(area) {
-                        
-                            // Draw graph with new area
-                            graph = drawGraph({
-                                xaxis: {
-                                    mode: 'time',
-                                    min: area.x1,
-                                    max: area.x2
-                                },
-                                yaxis: {
-                                    min: area.y1,
-                                    max: area.y2
-                                }
-                            });
-                        });
-
-                        // When graph is clicked, draw the graph with default area.
-                        Flotr.EventAdapter.observe(dayStatsContainer, 'flotr:click', function() {
-                            drawGraph();
-                        });
-                    }).resize();
-                    </script>
-                </div>
-            </div>
-                </div>
-            <!-- END Day Stats CARD -->
-
-
-            <!-- Number of answers CARD -->
-            <div id="card" class="row">
-                <div id="dist-answers" class="white-rounded-panel  box-shadow-grey  margin-bottom">
-                    <h2 class="inset-text-grey-header">{{_('Distribution of Answers')}}</h2>
-                    <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <table class="table table-hover table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>{{_('Type')}}</th>
-                                        <th>{{_('Users')}}</th>
-                                        <th>{{_('Percentage')}}</th>
-                                    </tr>
-                                </thead>
-                            {% for k in userStats.keys() if k != 'geo' %}
-                                <tr>
-                                    <th>{{k | capitalize}}</th>
-                                    <th>{{userStats[k].taskruns}}</th>
-                                    <th>{{userStats[k].pct_taskruns}} %</th>
-                                </tr>
-                            {% endfor %}
-                            </table>
-
+                <div class="col-sm-9 col-sm-offset-3">
+                    {% include "_flash_messages.html" %}
+                    {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+                        {{ privacy.render_lock_page() }}
+                    {% else %}
+                        <div class="row padding-bottom-sm">
+                            <div class="col-xs-12">
+                                <div class="white-rounded">
+                                    <h1><strong>{{app.name}}:</strong> Statistics</h1>
+                                </div>
+                            </div>
                         </div>
-                        <div id="userAnsStats" class="col-sm-4" style="height: 250px; width:250px;">
-                        </div>
-                        <script>
-                       $(window).on("resize", function () {
-                        var container = document.getElementById('userAnsStats');
-                        var graph = Flotr.draw(container, [
-                            {data:[appStats.userStats['values'][0]['value']], label:appStats.userStats['values'][0]['label']},
-                            {data:[appStats.userStats['values'][1]['value']],  label:appStats.userStats['values'][1]['label']}], 
-                            {
-                            pie     : {show: true, explode: 2},
-                            grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-                            HtmlText: false,
-                            xaxis   : {showLabels: false},
-                            yaxis   : {showLabels: false},
-                            legend  : {postion: 'nw'}
-                        });
-                        }).resize();
-                        </script>
-                    </div>
-                </div>
-            </div>
-                    </div>
-            <!-- END Number of Answers Stats CARD -->
-
-            <!-- Anon User Stats CARD -->
-            <div id="card" class="row">
-                <div id="dist-anon" class="white-rounded-panel  box-shadow-grey  margin-bottom">
-                    <h2 class="inset-text-grey-header">{{_('Details about Anonymous Users')}}</h2>
-                    <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p><i class="glyphicon glyphicon-group"></i> <strong>{{userStats.anonymous.users}} </strong> {{_('anonymous users have')}} <strong>{{_('participated')}}</strong></p>
-                            {% if userStats.anonymous.top5 and userStats.geo %}
-                            <h3>Top 5 users</h3>
-                            <table class="table table-hover table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{{_('Country')}}</th>
-                                        <th>{{_('City')}}</th>
-                                        <th>{{_('Answers')}}</th>
-                                    </tr>
-                                </thead>
-                            {% for u in userStats.anonymous.top5 %}
-                                <tr>
-                                    <th>{{loop.index}}</th>
-                                    <th>{{u.loc.country_name}}</th>
-                                    <th>{{u.loc.city}}</th>
-                                    <th>{{u.tasks}}</th>
-                                </tr>
-                            {% endfor %}
-                            </table>
-                            {% endif %}
-                        </div>
-                        <div id="userAnonStats" class="col-sm-12"  style='height:400px'>
-                        </div>
-                        {% if userStats.anonymous.users > 0 %}
-                            <script>
-                           $(window).on("resize", function () {
-                            var container = document.getElementById('userAnonStats');
-                            var graph = Flotr.draw(container, [
-                                {data:[[0, appStats.userAnonStats['top5'][0]['tasks'] ]],  label:'{{_('User')}} 1'},
-                                {data:[[0, appStats.userAnonStats['top5'][1]['tasks'] ]],  label:'{{_('User')}} 2'}, 
-                                {data:[[0, appStats.userAnonStats['top5'][2]['tasks'] ]],  label:'{{_('User')}} 3'}, 
-                                {data:[[0, appStats.userAnonStats['top5'][3]['tasks'] ]],  label:'{{_('User')}} 4'}, 
-                                {data:[[0, appStats.userAnonStats['top5'][4]['tasks'] ]],  label:'{{_('User')}} 5'}], 
-                                {
-                                pie     : {show: true, explode: 5},
-                                grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-                                HtmlText: false,
-                                xaxis   : {showLabels: false},
-                                yaxis   : {showLabels: false},
-                                legend  : {postion: 'se'}
-                            });
-                            }).resize();
-                            </script>
+                
+                        {% if private %}
+                            <div class="row">
+                                <div class="alert alert-info">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    {{_('Data has been')}} <strong>{{_('anonymized')}}!</strong>
+                                </div>
+                            </div>
                         {% endif %}
-                    </div>
-                    {% if userStats.geo %}
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div id="map" style="height:250px;"></div>
-                            <p class="note">{{_('This page includes GeoLite data created by MaxMind, available from')}}
-                            <a href="http://www.maxmind.com">http://www.maxmind.com</a></p>
+                        <div class="row padding-bottom-sm">
+                            <div class="col-xs-12">
+                                <div class="white-rounded chart">
+                                    <h4 class="text-center padding-bottom-sm">Distribution of Answers per Hour</h4>
+                                    <div id="hourly-chart">
+                                        <canvas id="hourly" style="max-height:300px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <script>
-                           $(window).on("resize", function () {
-                            var map = L.map('map');
-                            map.fitWorld();
-                            map.setZoom(1);
-                            var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                            L.tileLayer(url, 
-                                {
-                                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                                maxZoom: 18,
-                                minZoom:1
-                                }).addTo(map);
-
-                            var i = 0;
-                            var locations = appStats.userAnonStats.locs;
-                            var l = locations.length;
-                            var markers = new L.MarkerClusterGroup();
-                            for (i;i<l;i++) {
-                                if (locations[i].loc != null) {
-                                    var lat = parseFloat(locations[i].loc.latitude);
-                                    var lng = parseFloat(locations[i].loc.longitude);
-                                    markers.addLayer(L.marker([lat,lng]));
-                                }
-                            }
-                            map.addLayer(markers);
-                            }).resize();
-                        </script>
-                    </div>
+                        
+                        <div class="row padding-bottom-sm">
+                            <div class="col-xs-12">
+                                <div class="white-rounded chart">
+                                    <h4 class="text-center padding-bottom-sm">Distribution of Answers per Day</h4>
+                                    <div id="daily-chart">
+                                        <canvas id="daily" style="max-height:300px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12 padding-bottom-sm">
+                                <div class="white-rounded chart same-size">
+                                    <h4 class="text-center padding-bottom-sm">Proportion of Authenticated Users</h4>
+                                    <div id="user-chart">
+                                        <canvas id="users" width="500" height="500"></canvas>
+                                        <div id="users-legend" class="padding-top-sm legend">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12 padding-bottom-sm">
+                                <div class="white-rounded chart same-size">
+                                    <h4 class="text-center padding-bottom-sm">Total Daily Activity</h4>
+                                    <div id="dow-chart">
+                                        <canvas id="dow" width="500" height="500"></canvas>
+                                        <div id="dow-legend" class="padding-top-sm legend">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="row">
+                            <div class="col-xs-12 padding-bottom-sm">
+                                <div class="white-rounded chart">
+                                    <h4 class="text-center padding-bottom-sm">Top 5 Volunteers</h4>
+                                    <div id="top-users-chart">
+                                        <canvas id="top-users" width="500" height="500"></canvas>
+                                        <div id="top-users-legend" class="padding-top-sm legend">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row padding-bottom-sm">
+                            <div class="col-xs-12">
+                                <div class="white-rounded text-center chart">
+                                    <h4 class=" padding-bottom-sm">Locations of Anonymous Users</h4>
+                                    <div id="map" style="height:480px;"></div>
+                                </div>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </div>
-                </div>
-            <!-- END Anon User Stats CARD -->
-
-            <!-- Auth User Stats CARD -->
-            <div id="card" class="row">
-                <div id="dist-auth" class="white-rounded-panel  box-shadow-grey  margin-bottom">
-                    <h2 class="inset-text-grey-header">{{_('Details about Authenticated Users')}}</h2>
-                    <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p><i class="glyphicon glyphicon-group"></i> <strong>{{userStats.authenticated.users}}</strong> {{_('authenticated users have')}} <strong>{{_('participated')}}</strong>.</p>
-                            {% if userStats.authenticated.top5 %}
-                            <h3>{{_('Top 5 users')}}</h3>
-                            <table class="table table-hover table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{{_('User')}}</th>
-                                        <th>{{_('Answers')}}</th>
-                                    </tr>
-                                </thead>
-                            {% for u in userStats.authenticated.top5 %}
-                                <tr>
-                                    <th>{{loop.index}}</th>
-                                    <th><a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a></th>
-                                    <th>{{u.tasks}}</th>
-                                </tr>
-                            {% endfor %}
-                            </table>
-                            {% endif %}
-                        </div>
-                        <div id="userAuthStats" class="col-sm-12" style='height:400px'>
-                        </div>
-                        {% if userStats.authenticated.users > 0 %}
-                            <script>
-                           $(window).on("resize", function () {
-                            var container = document.getElementById('userAuthStats');
-                            var graph = Flotr.draw(container, [
-                                {data:[[0, appStats.userAuthStats['top5'][0]['tasks'] ]],  label:appStats.userAuthStats['top5'][0]['fullname']},
-                                {data:[[0, appStats.userAuthStats['top5'][1]['tasks'] ]],  label:appStats.userAuthStats['top5'][1]['fullname']}, 
-                                {data:[[0, appStats.userAuthStats['top5'][2]['tasks'] ]],  label:appStats.userAuthStats['top5'][2]['fullname']}, 
-                                {data:[[0, appStats.userAuthStats['top5'][3]['tasks'] ]],  label:appStats.userAuthStats['top5'][3]['fullname']}, 
-                                {data:[[0, appStats.userAuthStats['top5'][4]['tasks'] ]],  label:appStats.userAuthStats['top5'][4]['fullname']}], 
-                                {
-                                pie     : {show: true, explode: 5},
-                                grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
-                                HtmlText: false,
-                                xaxis   : {showLabels: false},
-                                yaxis   : {showLabels: false},
-                                legend  : {postion: 'nw'}
-                            });
-                            }).resize();
-                            </script>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-                </div>
-            <!-- END Auth User Stats CARD -->
-            {%endif%}
         </div>
-</div>
     </div>
-        </section>
-    </div>
+<script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.js')}}"></script>
+<script>
+Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOutQuart",showScale:true,scaleOverride:false,scaleSteps:null,scaleStepWidth:null,scaleStartValue:null,scaleLineColor:"rgba(0,0,0,.1)",scaleLineWidth:1,scaleShowLabels:true,scaleLabel:"<%=value%>",scaleIntegersOnly:true,scaleBeginAtZero:false,scaleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",scaleFontSize:12,scaleFontStyle:"normal",scaleFontColor:"#666",responsive:true,maintainAspectRatio:true,showTooltips:true,customTooltips:false,tooltipEvents:["mousemove","touchstart","touchmove"],tooltipFillColor:"rgba(0,0,0,0.8)",tooltipFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipFontSize:14,tooltipFontStyle:"normal",tooltipFontColor:"#fff",tooltipTitleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipTitleFontSize:14,tooltipTitleFontStyle:"bold",tooltipTitleFontColor:"#fff",tooltipYPadding:6,tooltipXPadding:6,tooltipCaretSize:8,tooltipCornerRadius:6,tooltipXOffset:10,onAnimationProgress:function(){},onAnimationComplete:function(){},segmentShowStroke:true,segmentStrokeColor:"#fff",tooltipTemplate:"<%%><%=label%><%%>",segmentStrokeWidth:2,percentageInnerCutout:50,animateRotate:true,animateScale:false,legendTemplate:'<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++)\u007D%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label)\u007D%><%=segments[i].label%\u007B<%}%></li><%\u007B%></ul>'}
+</script>
+<script>
+    $(function(){
+        var appStats = {{appStats|safe}};
+        $dow = {{dailyActivity|safe}}['dow'];
+        $auth = {{dailyActivity|safe}}['auth'];
+        $anon = {{dailyActivity|safe}}['anon'];
+      
+        //Hourly chart
+        var houreyLabels = [];
+        var houreyData = [];
+        for(var i = 0; i < appStats['hourStats']['0']['values'].length; i++) {
+            houreyLabels.push(formatHours(appStats['hourStats']['0']['values'][i]['0']));
+            houreyData.push(appStats['hourStats']['0']['values'][i]['1']);
+        }
+        
+        var data = {
+            labels: houreyLabels,
+            datasets: [
+                {
+                    label: "Answers per Hour",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: houreyData
+                }
+            ]
+        };
+        $("#hourly").attr("width", $('#hourly-chart').width());
+        $("#hourly").attr("height", 300);
+        var ctx = $("#hourly")[0].getContext("2d");
+        var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+        var hourlyChart = new Chart(ctx).Line(data, opts);
+        hourlyChart.draw();
+        
+        //Daily chart
+        var dailyLabels = [];
+        var dailyData = [];
+        for(var i = 0; i < appStats['dayStats']['0']['values'].length; i++) {
+            var t = new Date(parseInt(appStats['dayStats']['0']['values'][i]['0']));
+            dailyLabels.push($.datepicker.formatDate('dd M', t));
+            dailyData.push(appStats['dayStats']['0']['values'][i]['1']);
+        }
+        
+        var data = {
+            labels: dailyLabels,
+            datasets: [
+                {
+                    label: "Answers per Hour",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: dailyData
+                }
+            ]
+        };
+        $("#daily").attr("width", $('#daily-chart').width());
+        $("#daily").attr("height", 300);
+        var ctx = $("#daily")[0].getContext("2d");
+        var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+        var dailyChart = new Chart(ctx).Line(data, opts);
+        dailyChart.draw();
+        
+        //User proportions chart
+        var total = appStats['userStats']['values'][0]['value'][1] + appStats['userStats']['values'][1]['value'][1];
+        var anon = appStats['userStats']['values'][0]['value'][1];
+        var auth = appStats['userStats']['values'][1]['value'][1];
+        var label1 = "Anonymous : " + Math.round(anon/total*100) + "% (" + anon + " user";
+        if (appStats['userStats']['values'][0]['value'][1] != 1) {
+            label1 += "s"
+        }
+        label1 += ")";
+        var label2 = "Authenticated : " + Math.round(auth/total*100) + "% (" + auth + " user";
+        if (auth != 1) {
+            label2 += "s"
+        }
+        label2 += ")";
+        var data = [
+        {
+            value: anon,
+            color: "rgba(151,187,205,1)",
+            highlight: "rgba(151,187,205,0.8)",
+            label: label1
+        },
+        {
+            value : auth,
+            color:"#BA0000",
+            highlight: "#D00000",
+            label: label2
+        }
+        ];
+        var canvas = document.getElementById("users");
+        var ctx = canvas.getContext("2d");
+        var usersChart = new Chart(ctx).Doughnut(data);
+        var legendHolder = document.getElementById('users-legend')
+        canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
+        usersChart.generateLegend();
+        document.getElementById('users-legend').innerHTML = usersChart.generateLegend();
+        
+        //Top users
+        var users = [];
+        var tasks = [];
+        for(var i = 0; i < appStats['userAuthStats']['top5'].length; i++) {
+            users.push(appStats['userAuthStats']['top5'][i]['name']);
+            tasks.push(appStats['userAuthStats']['top5'][i]['tasks']);
+        }
+        var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+        var data = {
+            labels: users,
+            datasets: [
+                {
+                    label: "Top 5 Users",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    highlightFill: "rgba(151,187,205,0.1)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: tasks
+                }
+            ]
+        };
+        $("#top-users").attr("width", $('#top-users-chart').width());
+        $("#top-users").attr("height", 300);
+        var ctx = $("#top-users")[0].getContext("2d");
+        var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+        var topUsersChart = new Chart(ctx).Bar(data, opts);
+        topUsersChart.draw();
+        topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
+        topUsersChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
+        topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
+        topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
+        topUsersChart.update();
+        
+    //Daily Activity
+        
+        var authData = [];
+        var anonData = [];
+        var authSum = 0;
+        var anonSum = 0;
+        
+        for (i = 1; i <= 7; i++) {
+            if($.inArray(i, $dow) !== -1) {
+                $authVal = $auth.shift();
+                $anonVal = $anon.shift();
+                authSum += $authVal;
+                anonSum += $anonVal;
+                authData.push($authVal);
+                anonData.push($anonVal);
+            } else {
+                authData.push(0);
+                anonData.push(0);
+            }
+        }
+        
+        var data = {
+            labels: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+            datasets: [
+                {
+                    label: "Authenticated (" + authSum + " total answers)",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: authData
+                },
+                {
+                    label: "Anonymous (" + anonSum + " total answers)",
+                    fillColor: "rgba(150,150,150,0.2)",
+                    strokeColor: "rgba(150,150,150,1)",
+                    pointColor: "rgba(150,150,150,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(150,150,150,1)",
+                    data: anonData
+                }
+            ]
+        };
+        var canvas = document.getElementById("dow");
+        var ctx = $("#dow")[0].getContext("2d");
+        var opts = {populateSparseData:true, multiTooltipTemplate: " <%=value%> answer<%if(value != 1)\u007B%>s<%}%>"};
+        var dowChart = new Chart(ctx).Radar(data, opts);
+        var dowLegendHolder = document.getElementById('dow-legend')
+        canvas.parentNode.parentNode.appendChild(dowLegendHolder.firstChild);
+        dowChart.generateLegend();
+        document.getElementById('dow-legend').innerHTML = dowChart.generateLegend();
+        dowChart.draw();
+        
+        //Locations map
+        var map = L.map('map', {scrollWheelZoom: false, minZoom:1});
+        map.fitWorld();
+        map.setZoom(2);
+        var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+        L.tileLayer(url, 
+            {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> &mdash; <a href="http://www.maxmind.com">MaxMind</a>',
+            maxZoom: 18
+            }).addTo(map);
+    
+        console.log(appStats);
+        var i = 0;
+        var locations = appStats['userAnonStats']['locs'];
+        var l = locations.length;
+        var markers = new L.MarkerClusterGroup();
+        for (i;i<l;i++) {
+            if (locations[i].loc != null) {
+                var lat = parseFloat(locations[i].loc.latitude);
+                var lng = parseFloat(locations[i].loc.longitude);
+                markers.addLayer(L.marker([lat,lng]));
+            }
+        }
+        map.addLayer(markers);
+    });
+
+    function formatHours(str) {
+        str += ':00'
+        if (str.length < 5) {
+            str = '0' + str;
+        }
+        return str;
+    }
+    
+</script>
 {{ helper.broken_image() }}
 {% endblock %}
