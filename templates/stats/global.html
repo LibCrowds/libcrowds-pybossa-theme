@@ -137,7 +137,7 @@ $(function(){
     $('#all-stats').slideDown();
     $('.check-plural').each(function() {
         var ret = $(this).attr('data-num') + ' ' + $(this).attr('data-noun');
-        if (parseInt($(this).attr('data-num')) > 1) {
+        if (parseInt($(this).attr('data-num')) != 1) {
             ret += 's';
         }
         $(this).text(ret);
@@ -421,6 +421,7 @@ $(function(){
                 }
             ]
         };
+        var canvas = document.getElementById("dow");
         var ctx = $("#dow")[0].getContext("2d");
         var opts = {populateSparseData:true, multiTooltipTemplate: " <%=value%> answer<%if(value != 1)\u007B%>s<%}%>"};
         var dowChart = new Chart(ctx).Radar(data, opts);
