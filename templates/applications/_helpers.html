@@ -214,15 +214,11 @@ function imgError(image) {
             <h1>{{title}}</h1>
         </div>
             <div class="col-xs-12">
-              <ul class="featured polaroids">
-                  {% for app in apps %}
-                  <li>
-                            <a class="polaroid" href={{ url_for('app.details', short_name=app.short_name)}} data-polaroid-title="{{app.name}}">
-                                {{ render_app_thumbnail(app, upload_method) }}
-                            </a>
-                  </li>
-                  {% endfor %}
-              </ul>
+              <ul class="polaroids">
+                    {% for app in apps %}
+                        {{ show_app(app, "none", current_user, upload_method) }}
+                    {% endfor %}
+                </ul>
             </div>
         </div>
 {% endmacro %}
