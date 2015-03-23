@@ -22,7 +22,7 @@
             {% else %}
             <div class="row padding-bottom-sm" id="loading-stats">
                 <div class="col-xs-12">
-                    <div class="white-rounded text-center">
+                    <div class="white-rounded inset-shadow-white text-center">
                         <h3><span class="glyphicon glyphicon-refresh spinning"></span> Loading Statistics</h3>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
             <div id="all-stats" hidden>
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
-                        <div class="white-rounded chart">
+                        <div class="white-rounded inset-shadow-white chart">
                             <h3 class="text-center"><span class="check-plural" data-num="{{stats.n_total_users}}" data-noun="volunteer"></span> have participated in <span class="check-plural" data-num="{{stats.n_published_apps}}" data-noun="project"></span>, submitted <span class="check-plural" data-num="{{stats.n_task_runs}}" data-noun="answer"></span> and completed <span class="check-plural" data-num="{{stats.n_tasks_completed}}" data-noun="task"></span></h4>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                 
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
-                        <div class="white-rounded chart">
+                        <div class="white-rounded inset-shadow-white chart">
                             <h4 class="text-center padding-bottom-sm">Answers Submitted and Tasks Completed per Day</h4>
                             <div id="task-date-chart">
                                 <canvas id="task-date" style="max-height:300px;"></canvas>
@@ -50,7 +50,7 @@
                 
                 <div class="row">
                     <div class="col-sm-6 col-xs-12 padding-bottom-sm">
-                        <div class="white-rounded chart">
+                        <div class="white-rounded inset-shadow-white chart">
                             <h4 class="text-center padding-bottom-sm">Top Volunteers This Week</h4>
                             <div id="top-users-chart">
                                 <canvas id="top-users" width="500" height="500"></canvas>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-xs-12 padding-bottom-sm">
-                        <div class="white-rounded chart">
+                        <div class="white-rounded inset-shadow-white chart">
                             <h4 class="text-center padding-bottom-sm">Top Projects This Week</h4>
                             <div id="top-projects-chart">
                                 <canvas id="top-projects" width="500" height="500"></canvas>
@@ -73,7 +73,7 @@
                 
                 <div class="row">
                     <div class="col-sm-4 col-xs-12 padding-bottom-sm">
-                        <div class="white-rounded chart same-size">
+                        <div class="white-rounded inset-shadow-white chart same-size">
                             <h4 class="text-center padding-bottom-sm">Proportion of Authenticated Users</h4>
                             <div id="user-chart">
                                 <canvas id="users" width="500" height="500"></canvas>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4 col-xs-12 padding-bottom-sm">
-                        <div class="white-rounded chart same-size">
+                        <div class="white-rounded inset-shadow-white chart same-size">
                             <h4 class="text-center padding-bottom-sm">Total Daily Activity</h4>
                             <div id="dow-chart">
                                 <canvas id="dow" width="500" height="500"></canvas>
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4 col-xs-12 padding-bottom-sm">
-                        <div class="white-rounded chart same-size">
+                        <div class="white-rounded inset-shadow-white chart same-size">
                             <h4 class="text-center padding-bottom-sm">Status of Tasks</h4>
                             <div id="task-status-chart">
                                 <canvas id="task-status" width="500" height="500"></canvas>
@@ -106,7 +106,7 @@
                 
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
-                        <div class="white-rounded chart">
+                        <div class="white-rounded inset-shadow-white chart">
                             <h4 class="text-center padding-bottom-sm">Active Volunteers per Day</h4>
                             <div id="users-daily-chart">
                                 <canvas id="users-daily" style="max-height:300px;"></canvas>
@@ -117,7 +117,7 @@
                 
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
-                        <div class="white-rounded text-center chart">
+                        <div class="white-rounded inset-shadow-white text-center chart">
                             <h4 class=" padding-bottom-sm">Locations of Anonymous Users</h4>
                             <div id="map" style="height:480px;"></div>
                         </div>
