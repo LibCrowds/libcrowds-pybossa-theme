@@ -54,6 +54,7 @@ hr.extra-margins{margin-top:40px;margin-bottom:40px}
 .container-fluid{padding-left:0;padding-right:0}
 .container-padded{padding-top:50px;padding-bottom:50px}
 .container-main{padding-top:100px;padding-bottom:50px}
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {max-height: 400px;}
 .navbar{font-family:sans-serif;font-weight:400}
 .navbar-fixed-top{padding-top:30px;padding-bottom:25px;background-color:rgba(255,255,255,0);border:none;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;font-size:14px;-webkit-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0;-moz-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0;-ms-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0;-o-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0;transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0;z-index:9999}
 .navbar-fixed-top.opaque{padding-top:10px;padding-bottom:10px;background-color:rgba(255,255,255,1);border-bottom:2px solid #eee}
@@ -67,6 +68,8 @@ hr.extra-margins{margin-top:40px;margin-bottom:40px}
 .navbar-default .navbar-nav>li>a:focus,.navbar-default .navbar-nav>.open>a:hover,.navbar-default .navbar-nav>.open>a:focus,.navbar-default .navbar-nav>.open>a{color:#FFF;background-color:rgba(255,255,255,0)}
 .dropdown-menu.opaque>li>a,.navbar.opaque .nav > li > a,.navbar-default.opaque .navbar-nav>li>a:focus,.navbar-default.opaque .navbar-nav>.open>a:hover,.navbar-default.opaque .navbar-nav>.open>a:focus,.navbar-default.opaque .navbar-nav>.open>a{color:#666}
 .dropdown-menu>li>a:focus,.dropdown-menu .nav-link a:hover,.nav .open>ul>li>a:hover,.nav .open>a:hover,.navbar .nav > li > a:hover{color:#D00000;background-color:rgba(255,255,255,0)}
+.dropdown-menu>li>a:focus,.dropdown-menu .nav-link a:hover,.nav .open>ul>li>a:hover,.nav .open>a:hover,.navbar .nav > li > a:hover{color:#D00000;background-color:rgba(255,255,255,0)}
+.nav > .nav-link.open > .dropdown-menu.opaque > li > a:hover,.nav > .nav-link.open a.dropdown-toggle:hover {color:#D00000;}
 .dropdown-menu{top:63px;background-color:rgba(0,0,0,0.5)}
 .dropdown-menu .nav-link{background-color:rgba(255,255,255,0)}
 .dropdown-menu.opaque{background-color:rgba(255,255,255,1)}
@@ -353,6 +356,7 @@ body{font-size:16px}
 .splash{min-height:550px;max-height:650px}
 }
 @media (max-width: 991px) {
+.navbar-nav .open .dropdown-menu {position: static;float: none;width: auto;margin-top: 0;background-color: transparent;border: 0;-webkit-box-shadow: none;box-shadow: none;}
 .navbar-header{float:none}
 .navbar-toggle{display:block}
 .navbar-collapse{border-top:1px solid transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
