@@ -34,8 +34,8 @@
                 {{ form.hidden_tag() }}
                 <h3 class="text-center">Or sign in with your {{brand}} account</h3>
                 
-                {{ render_field(form.email, placeholder="Email", class="form-control") }}
-                {{ render_field(form.password, placeholder="Password", class="form-control") }}
+                {{ render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
+                {{ render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
                   <a href="{{ url_for('account.forgot_password') }}" class="btn btn-link pull-left remove-padding-left">{{ _('Forgotten password') }}</a>  
                   <div class="pull-right" role="group">
                     <input type="reset" value="Cancel" class="btn btn-default" />

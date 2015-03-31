@@ -18,8 +18,8 @@
                         <form role="form" method="POST" action="{{url_for('admin.categories')}}">
                             {{form.hidden_tag()}}
                             <fieldset>
-                            {{ render_field(form.name, placeholder= _('Category name'), class="form-control") }}
-                            {{ render_field(form.description, placeholder= _('Category description'), class="form-control") }}
+                            {{ render_field(form.name, placeholder= _('Category name'), class="form-control", required="required") }}
+                            {{ render_field(form.description, placeholder= _('Category description'), class="form-control", required="required") }}
                             <div class="pull-right" role="group">
                                 <button type="submit" class="btn btn-danger">{{_('Add')}}</button>
                             </div>

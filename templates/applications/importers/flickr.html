@@ -52,7 +52,7 @@
                                 <fieldset>
                                      {{ form.hidden_tag() }}
                                      <span class="help-block"> {{ _('Alteratively, you can manually provide the ID of a Flickr album') }}</span>
-                                     {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album") }}
+                                     {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album", required="required", autofocus="autofocus") }}
                                      <div class="pull-right" role="group">
                                         <a href="{{url_for('app.import_task', short_name=app.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
                                         <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-danger" />

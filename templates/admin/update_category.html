@@ -16,8 +16,8 @@
                             {{form.hidden_tag()}}
                             <fieldset>
                             {{form.id}}
-                            {{ render_field(form.name, placeholder= _('Category name'), class="form-control") }}
-                            {{ render_field(form.description, placeholder= _('Category description'), class="form-control") }}
+                            {{ render_field(form.name, placeholder= _('Category name'), class="form-control", required="required", autofocus="autofocus") }}
+                            {{ render_field(form.description, placeholder= _('Category description'), class="form-control", required="required") }}
                             <div class="pull-right" role="group">
                                 <a href="{{url_for('admin.categories')}}" class="btn btn-default" >{{_('Cancel')}}</a>
                                  <button type="submit" class="btn btn-danger">{{_('Update Category')}}</button>

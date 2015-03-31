@@ -55,7 +55,7 @@
               <fieldset>
                 {{ form.hidden_tag() }}
                 
-                {{ form_helper.render_field(form.name, class="form-control", placeholder=_('Name'), visible='true') }}
+                {{ form_helper.render_field(form.name, class="form-control", placeholder=_('Name'), visible='true', required="required", autofocus="autofocus") }}
                 {{ form_helper.render_field(form.short_name, class="form-control", placeholder=_('Short name or slug for the project'), visible='true', label_text=_('Project slug:')) }}
                 {{ form_helper.render_field(form.description, class="form-control", placeholder=_('Short description'), visible='true') }}
                 {{ form_helper.render_field(form.long_description, class="form-control", rows="18", placeholder=_('Long description'), visible='true') }}
