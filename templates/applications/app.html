@@ -4,9 +4,9 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    
+
+{{ render_local_nav(current_user, "info", app.short_name) }}
     {% if app %}
-    {{ render_local_nav(current_user, "info", app.short_name) }}
     <div class="container-padded  remove-padding-bottom">
         <section class="white">
             <div class="container container-padded">
