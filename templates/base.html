@@ -40,6 +40,7 @@
   </head>
 
   <body>
+    {% include '_socialmedia.html' ignore missing %}
       <div id="body-content">
         <div id="main-body-content">
         {% if not current_user.is_anonymous() %}
