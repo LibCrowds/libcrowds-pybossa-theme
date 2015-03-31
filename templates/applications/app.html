@@ -18,7 +18,9 @@
                         {{ helper.render_app_title(app, upload_method) }}
                         {{ helper.render_overall_progress(app, n_tasks, overall_progress) }}
                         {% if app.long_description %}
-                            {{ app.long_description | e | markdown }}
+                            <div class="description">
+                                {{ app.long_description | e | markdown }}
+                            </div>
                         {% endif %}
                         <div id="ckan" style="display:none">
                             <h2>Data repository: {{ ckan_name | default('CKAN server') }}</h2>
