@@ -67,7 +67,7 @@
                 <form id="catalogue-form" role="form" method="POST" action="{{url_for('oclc.search')}}" {% if apiString %}hidden{% endif %}>
                     {{form.hidden_tag()}}
                     <fieldset>
-                        {{ render_field(form.query, placeholder= _('Query'), class="form-control", required="true") }}
+                        {{ render_field(form.query, placeholder= _('Query'), class="form-control", required="required", autofocus="autofocus") }}
                         {{ render_field(form.startPos, placeholder= _('Starting position'), class="form-control", type="number") }}
                         {{ render_field(form.maxRecords, placeholder= _('Maximum records'), class="form-control", type="number") }}
                         {{ render_field(form.format, class="form-control inline-radio") }}

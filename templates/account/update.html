@@ -69,9 +69,9 @@
                             <h2 {% if form.errors %}name="profile"{%endif%}>Update your profile</h2>
                             {{ form.id }}
                             {{ form.hidden_tag() }}
-                            {{ form_helper.render_field_horizontal(form.fullname, placeholder= _('Full name'), class="form-control" ) }}
-                            {{ form_helper.render_field_horizontal(form.name, placeholder= _('Username'), class="form-control" ) }}
-                            {{ form_helper.render_field_horizontal(form.email_addr, placeholder= _('Email'), class="form-control" ) }}
+                            {{ form_helper.render_field_horizontal(form.fullname, placeholder= _('Full name'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                            {{ form_helper.render_field_horizontal(form.name, placeholder= _('Username'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                            {{ form_helper.render_field_horizontal(form.email_addr, placeholder= _('Email'), class="form-control", type="email" ) }}
                             {{ form_helper.render_field_horizontal_checkbox(form.privacy_mode, class="form-control") }}
                             <select class="form-control hidden" id="locale" name="locale"><option selected="" value="en">English</option></select>
                             <div class="pull-right form-actions" role="group">
@@ -88,9 +88,9 @@
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             {{ password_form.id }}
                             {{ password_form.hidden_tag() }}
-                            {{ form_helper.render_field(password_form.current_password, placeholder= _('Current password'), class="form-control") }}
-                            {{ form_helper.render_field(password_form.new_password, placeholder= _('New password'), class="form-control") }}
-                            {{ form_helper.render_field(password_form.confirm, placeholder= _('Confirm new password'), class="form-control") }}
+                            {{ form_helper.render_field(password_form.current_password, placeholder= _('Current password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                            {{ form_helper.render_field(password_form.new_password, placeholder= _('New password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                            {{ form_helper.render_field(password_form.confirm, placeholder= _('Confirm new password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
                             <div class="pull-right form-actions" role="group">
                                 <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
                                 <button type="submit" name="btn" value="Password" class="btn btn-success" />{{ _('Save') }}</button>
