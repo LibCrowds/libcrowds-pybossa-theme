@@ -12,8 +12,8 @@
       {{ form.hidden_tag() }}
       
             <fieldset>
-      {{ render_field(form.fullname, placeholder= _('Full Name'), class="form-control", required="required", pattern=".{3,}", title="Must be a minimum of 3 characters", autofocus="autofocus") }}
-      {{ render_field(form.name, placeholder= _('Username'), class="form-control", required="required", pattern=".{3,}", title="Must be a minimum of 3 characters") }}
+      {{ render_field(form.fullname, placeholder= _('Full Name'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters", autofocus="autofocus") }}
+      {{ render_field(form.name, placeholder= _('Username'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters") }}
       {{ render_field(form.email_addr, placeholder= _('Email'), class="form-control", type="email", required="required") }}
       {{ render_field(form.password, placeholder= _('Password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
       {{ render_field(form.confirm, placeholder= _('Confirm Password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}

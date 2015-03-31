@@ -17,100 +17,100 @@
 <link href="{{url_for('static', filename='css/stats/MarkerCluster.Default.css')}}" rel="stylesheet" type="text/css">
 <script src="{{url_for('static', filename='js/stats/leaflet.markercluster.js')}}" type="text/javascript"></script>
     {{ render_local_nav(current_user, "statistics", app.short_name) }}
-     <div class="container-padded  remove-padding-bottom">
-        <div class="container container-padded">
-            <div class="row">
-                <div class="col-sm-9 col-sm-offset-3">
-                    {% include "_flash_messages.html" %}
-                    {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-                        {{ privacy.render_lock_page() }}
-                    {% else %}
-                        <div class="row padding-bottom-sm">
-                            <div class="col-xs-12">
-                                <div class="white-rounded inset-shadow-white">
-                                    <h1><strong>{{app.name}}:</strong> Statistics</h1>
-                                </div>
-                            </div>
-                        </div>
-                
-                        {% if private %}
-                            <div class="row">
-                                <div class="alert alert-info">
-                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                    {{_('Data has been')}} <strong>{{_('anonymized')}}!</strong>
-                                </div>
-                            </div>
-                        {% endif %}
-                        <div class="row padding-bottom-sm">
-                            <div class="col-xs-12">
-                                <div class="white-rounded inset-shadow-white chart">
-                                    <h4 class="text-center padding-bottom-sm">Distribution of Answers per Hour</h4>
-                                    <div id="hourly-chart">
-                                        <canvas id="hourly" style="max-height:300px;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row padding-bottom-sm">
-                            <div class="col-xs-12">
-                                <div class="white-rounded inset-shadow-white chart">
-                                    <h4 class="text-center padding-bottom-sm">Distribution of Answers per Day</h4>
-                                    <div id="daily-chart">
-                                        <canvas id="daily" style="max-height:300px;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12 padding-bottom-sm">
-                                <div class="white-rounded inset-shadow-white chart same-size">
-                                    <h4 class="text-center padding-bottom-sm">Proportion of Authenticated Users</h4>
-                                    <div id="user-chart">
-                                        <canvas id="users" width="500" height="500"></canvas>
-                                        <div id="users-legend" class="padding-top-sm legend">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xs-12 padding-bottom-sm">
-                                <div class="white-rounded inset-shadow-white chart same-size">
-                                    <h4 class="text-center padding-bottom-sm">Total Daily Activity</h4>
-                                    <div id="dow-chart">
-                                        <canvas id="dow" width="500" height="500"></canvas>
-                                        <div id="dow-legend" class="padding-top-sm legend">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="row">
-                            <div class="col-xs-12 padding-bottom-sm">
-                                <div class="white-rounded inset-shadow-white chart">
-                                    <h4 class="text-center padding-bottom-sm">Top 5 Volunteers</h4>
-                                    <div id="top-users-chart">
-                                        <canvas id="top-users" width="500" height="500"></canvas>
-                                        <div id="top-users-legend" class="padding-top-sm legend">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row padding-bottom-sm">
-                            <div class="col-xs-12">
-                                <div class="white-rounded inset-shadow-white text-center chart">
-                                    <h4 class=" padding-bottom-sm">Locations of Anonymous Users</h4>
-                                    <div id="map" style="height:480px;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+    <div class="container-padded  remove-padding-bottom">
+       <div class="container container-padded">
+           <div class="row">
+               <div class="col-sm-9 col-sm-offset-3">
+                   {% include "_flash_messages.html" %}
+                   {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+                       {{ privacy.render_lock_page() }}
+                   {% else %}
+                       <div class="row padding-bottom-sm">
+                           <div class="col-xs-12">
+                               <div class="white-rounded inset-shadow-white">
+                                   <h1><strong>{{app.name}}:</strong> Statistics</h1>
+                               </div>
+                           </div>
+                       </div>
+               
+                       {% if private %}
+                           <div class="row">
+                               <div class="alert alert-info">
+                                   <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                   {{_('Data has been')}} <strong>{{_('anonymized')}}!</strong>
+                               </div>
+                           </div>
+                       {% endif %}
+                       <div class="row padding-bottom-sm">
+                           <div class="col-xs-12">
+                               <div class="white-rounded inset-shadow-white chart">
+                                   <h4 class="text-center padding-bottom-sm">Distribution of Answers per Hour</h4>
+                                   <div id="hourly-chart">
+                                       <canvas id="hourly" style="max-height:300px;"></canvas>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       
+                       <div class="row padding-bottom-sm">
+                           <div class="col-xs-12">
+                               <div class="white-rounded inset-shadow-white chart">
+                                   <h4 class="text-center padding-bottom-sm">Distribution of Answers per Day</h4>
+                                   <div id="daily-chart">
+                                       <canvas id="daily" style="max-height:300px;"></canvas>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       
+                       <div class="row">
+                           <div class="col-sm-6 col-xs-12 padding-bottom-sm">
+                               <div class="white-rounded inset-shadow-white chart same-size">
+                                   <h4 class="text-center padding-bottom-sm">Proportion of Authenticated Users</h4>
+                                   <div id="user-chart">
+                                       <canvas id="users" width="500" height="500"></canvas>
+                                       <div id="users-legend" class="padding-top-sm legend">
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-sm-6 col-xs-12 padding-bottom-sm">
+                               <div class="white-rounded inset-shadow-white chart same-size">
+                                   <h4 class="text-center padding-bottom-sm">Total Daily Activity</h4>
+                                   <div id="dow-chart">
+                                       <canvas id="dow" width="500" height="500"></canvas>
+                                       <div id="dow-legend" class="padding-top-sm legend">
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+       
+                       <div class="row">
+                           <div class="col-xs-12 padding-bottom-sm">
+                               <div class="white-rounded inset-shadow-white chart">
+                                   <h4 class="text-center padding-bottom-sm">Top 5 Volunteers</h4>
+                                   <div id="top-users-chart">
+                                       <canvas id="top-users" width="500" height="500"></canvas>
+                                       <div id="top-users-legend" class="padding-top-sm legend">
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       
+                       <div class="row padding-bottom-sm">
+                           <div class="col-xs-12">
+                               <div class="white-rounded inset-shadow-white text-center chart">
+                                   <h4 class=" padding-bottom-sm">Locations of Anonymous Users</h4>
+                                   <div id="map" style="height:480px;"></div>
+                               </div>
+                           </div>
+                       </div>
+                   {% endif %}
+               </div>
+           </div>
+       </div>
     </div>
 <script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.js')}}"></script>
 <script>
@@ -333,8 +333,7 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
             }
         }
         map.addLayer(markers);
-    });
-
+});
     function formatHours(str) {
         str += ':00'
         if (str.length < 5) {
@@ -342,7 +341,6 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         }
         return str;
     }
-    
 </script>
 {{ helper.broken_image() }}
 {% endblock %}
