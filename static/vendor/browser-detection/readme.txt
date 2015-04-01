@@ -1,0 +1,1 @@
+for more information please visit BrowserDetection at http://www.devslide.com/labs/browser-detection
