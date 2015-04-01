@@ -173,11 +173,11 @@ ul.users li a{display:block;margin-bottom:5px;margin-right:10px;margin-left:10px
 #browser-detection UL.bd-browsers-list{clear:both;margin-top:3px;border-top:1px solid #F5F5DC;border-bottom:1px solid #F5F5DC;width:100%;padding:7px 0}
 #browser-detection UL.bd-browsers-list LI{text-align:left}
 #browser-detection UL.bd-browsers-list LI A{width:60px;height:55px;display:block;color:#666;text-decoration:none;padding:10px 10px 0 65px}
-#browser-detection UL.bd-browsers-list LI.firefox A{background:url(./images/firefox.gif) no-repeat left top}
-#browser-detection UL.bd-browsers-list LI.chrome A{background:url(./images/chrome.gif) no-repeat left top}
-#browser-detection UL.bd-browsers-list LI.safari A{background:url(./images/safari.gif) no-repeat left top}
-#browser-detection UL.bd-browsers-list LI.opera A{background:url(./images/opera.gif) no-repeat left top}
-#browser-detection UL.bd-browsers-list LI.msie A{background:url(./images/msie.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.firefox A{background:url(../img/firefox.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.chrome A{background:url(../img/chrome.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.safari A{background:url(../img/safari.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.opera A{background:url(../img/opera.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.msie A{background:url(../img/msie.gif) no-repeat left top}
 #browser-detection UL.bd-skip-buttons{margin-top:10px}
 #browser-detection UL.bd-skip-buttons LI{display:inline;margin-right:10px}
 #browser-detection UL.bd-skip-buttons LI BUTTON{font-size:13px}
