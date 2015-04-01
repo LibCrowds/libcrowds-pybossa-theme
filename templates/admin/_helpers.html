@@ -28,6 +28,8 @@
         <li class="nav-link"><a href="{{url_for('admin.users')}}">Administrators</a></li>
         <li class="nav-link"><a href="{{url_for('admin.export_users', format='csv')}}">Export Users</a></li>
         <li class="nav-link"><a href="{{url_for('rq_dashboard.overview')}}">Background Jobs</a></li>
+        <li class="nav-link"><a href="{{url_for('admin.oclc_search')}}">OCLC Catalogue</a></li>
+        <li class="nav-link"><a href="{{url_for('admin.bl_search')}}">BL Catalogue</a></li>
     </ul>
 </li>
 {% endif %}
