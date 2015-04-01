@@ -44,7 +44,7 @@ $(function() {
         $('body').addClass($(".set-main-bg").attr('data-bg'));
     }
     if ($('.CodeMirror-gutter').length) {
-        $('#code-btns').attr('padding-left', $('.CodeMirror-gutter').style.width);
+        $('#code-btns').attr('padding-left', $('.CodeMirror-gutter').attr('width'));
     }
     $('#search-catalogue-again').click(function(evt) {
         evt.preventDefault();
