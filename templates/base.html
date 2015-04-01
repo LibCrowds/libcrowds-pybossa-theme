@@ -15,10 +15,9 @@
     <!-- Le styles -->
     <link href="{{url_for('static', filename='vendor/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css">
-    <link href="{{url_for('static', filename='css/styles.css')}}?v=2.0.5" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/styles.css')}}?v=2.0.6" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-    <link href="{{url_for('static', filename='vendor/browser-detection/browser-detection.css')}}" rel="stylesheet" type="text/css" media="screen" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -42,15 +41,14 @@
     {% include '_gcs.html' ignore missing %}
     <!-- Out of Date Browser Detection -->
     <script>
-      <!--
       var notSupportedBrowsers = [{'os': 'Any', 'browser': 'MSIE', 'version': 8}, {'os': 'Any', 'browser': 'Firefox', 'version': 1}];
+      var noticeLang = 'custom';
       var noticeLangCustom = {
       "title": "Whoaaa!",
       "notice": "You're still using {browser.name}? Unfortunately, LibCrowds is not compatible with this dinosaur of a browser. If you choose to continue without upgrading your experience while using this website is likely to be deeply unpleasant.",
       "selectBrowser": "We strong recommend you upgrade now, thank you :)",
       "remindMeLater": "",
       "neverRemindAgain": "" };
-      // -->
     </script>
     
   </head>
