@@ -7,66 +7,64 @@
 {% block content %}
 {{ render_local_nav(current_user, "openapp") }}
      <div class="container-padded  remove-padding-bottom">
-        <section class="white">
-            <div class="container container-padded">
-                <div class="row">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        {% include "_flash_messages.html" %}
-                    {% if current_user.admin == 1 %}
-                        <div class="row vcenter hcenter">
-                            <div class="col-md-8 col-xs-12">
-                                <h1><strong>Admin</strong>: {{ _('Projects') }}</h1>
-                            </div>
-    
-                            <div class="col-md-4 col-xs-12">            
-                                <a href="{{url_for('app.new')}}" class="btn btn-danger pull-right">Create a Project</a>
-                            </div>
+        <div class="container container-padded">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3">
+                    {% include "_flash_messages.html" %}
+                {% if current_user.admin == 1 %}
+                    <div class="row vcenter hcenter">
+                        <div class="col-md-8 col-xs-12">
+                            <h1><strong>Admin</strong>: {{ _('Projects') }}</h1>
                         </div>
-                        <hr>
-                        {% if apps_published or apps_draft %}
-                            {% if apps_published %}
-                                <div class="col-xs-12">
-                                    <h2>{{ _('Published') }}</h2>
-                                </div>
-                                <table class="table table-stripped table-condensed table-hover table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th>Created</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    {% for app in apps_published %}
-                                        {{ app_helper.render_app_short_summary(app, upload_method) }}
-                                    {% endfor %}
-                                </table>
-                            {% endif %}
-                            {% if apps_draft %}
-                                <div class="col-xs-12">
-                                    <h2>{{ _('Draft') }}</h2>
-                                </div>
-                                <table class="table table-stripped table-condensed table-hover table-responsive">
-                                    <thead>
+
+                        <div class="col-md-4 col-xs-12">            
+                            <a href="{{url_for('app.new')}}" class="btn btn-danger pull-right">Create a Project</a>
+                        </div>
+                    </div>
+                    <hr>
+                    {% if apps_published or apps_draft %}
+                        {% if apps_published %}
+                            <div class="col-xs-12">
+                                <h2>{{ _('Published') }}</h2>
+                            </div>
+                            <table class="table table-stripped table-condensed table-hover table-responsive">
+                                <thead>
                                     <tr>
                                         <th>Title</th>
                                         <th>Created</th>
                                         <th>Action</th>
                                     </tr>
-                                    </thead>
-                                    {% for app in apps_draft %}
-                                        {{ app_helper.render_app_short_summary(app, upload_method) }}
-                                    {% endfor %}
-                                </table>
-                            {% endif %}
-                        {% else %}
+                                </thead>
+                                {% for app in apps_published %}
+                                    {{ app_helper.render_app_short_summary(app, upload_method) }}
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                        {% if apps_draft %}
                             <div class="col-xs-12">
-                                <h2>{{ _('You have not created any projects') }}</h2>
+                                <h2>{{ _('Draft') }}</h2>
                             </div>
+                            <table class="table table-stripped table-condensed table-hover table-responsive">
+                                <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Created</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                {% for app in apps_draft %}
+                                    {{ app_helper.render_app_short_summary(app, upload_method) }}
+                                {% endfor %}
+                            </table>
                         {% endif %}
                     {% else %}
-                        {{ app_helper.render_app_restricted() }}
+                        <div class="col-xs-12">
+                            <h2>{{ _('You have not created any projects') }}</h2>
+                        </div>
                     {% endif %}
-                </div>
+                {% else %}
+                    {{ app_helper.render_app_restricted() }}
+                {% endif %}
             </div>
         </div>
     </div>
