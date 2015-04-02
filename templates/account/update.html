@@ -76,7 +76,7 @@
                             <select class="form-control hidden" id="locale" name="locale"><option selected="" value="en">English</option></select>
                             <div class="pull-right form-actions" role="group">
                                 <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
-                                <button type="submit" name="btn" value="Profile" class="btn btn-success" />{{ _('Save') }}</button>
+                                <button type="submit" name="btn" value="Profile" class="btn btn-success" >{{ _('Save') }}</button>
                             </div>
                         </fieldset>
                     </form>
@@ -93,7 +93,7 @@
                             {{ form_helper.render_field(password_form.confirm, placeholder= _('Confirm new password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
                             <div class="pull-right form-actions" role="group">
                                 <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
-                                <button type="submit" name="btn" value="Password" class="btn btn-success" />{{ _('Save') }}</button>
+                                <button type="submit" name="btn" value="Password" class="btn btn-success" >{{ _('Save') }}</button>
                             </div>
                         </fieldset>
                     </form>
