@@ -1,14 +1,14 @@
 <div class="navbar opaque navbar-fixed-top navbar-default">
         <div class="container">
           <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <var id="logo-black" data-src="{{url_for('static',filename='img/default_logo.png')}}"/>
-          <var id="logo-white" data-src="{{url_for('static',filename='img/default_logo_white.png')}}"/>
-          <a class="navbar-brand" href="{{ url_for('home.home') }}"><img id="navbar-logo" src="{% if active_page == 'index' %}{{url_for('static',filename='img/default_logo_white.png')}} {% else %}{{url_for('static',filename='img/default_logo.png')}} {% endif %}" alt="{{brand}}"></a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          <var id="logo-black" data-src="{{url_for('static',filename='img/default_logo.png')}}"></var>
+          <var id="logo-white" data-src="{{url_for('static',filename='img/default_logo_white.png')}}"></var>
+          <a class="navbar-brand" href="{{ url_for('home.home') }}"><img id="navbar-logo" src="{% if active_page == 'index' %}{{url_for('static',filename='img/default_logo_white.png')}} {% else %}{{url_for('static',filename='img/default_logo.png')}} {% endif %}" alt="{{brand}}" /></a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
