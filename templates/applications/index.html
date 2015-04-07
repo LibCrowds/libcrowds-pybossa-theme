@@ -76,7 +76,7 @@ $( function() {
     var sortValue = $(this).attr('data-sort-value');
     $container.isotope({ sortBy: sortValue });
     if (sortValue == 'original-order') {
-        $("#order").text('name');
+        $("#order").text('date');
     }
     else {
         $("#order").text(sortValue);
