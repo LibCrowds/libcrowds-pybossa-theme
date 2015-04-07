@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 
-                <div class="row">
+                <div class="row" id="top-5-row">
                     <div class="col-sm-6 col-xs-12 padding-bottom-sm">
                         <div class="white-rounded inset-shadow-white chart">
                             <h4 class="text-center padding-bottom-sm">Top Volunteers This Week</h4>
@@ -342,35 +342,39 @@ $(function(){
         //Top users this week
         var users = [];
         var tasks = [];
-        {% for user in top5_users_1_week %}
-            users.push('{{user.name}}');
-            tasks.push(parseInt({{user.n_answers}}));
-        {% endfor %}
-        var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
-        var data = {
-            labels: users,
-            datasets: [
-                {
-                    label: "Top 5 Users This Week",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    highlightFill: "rgba(151,187,205,0.1)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: tasks
-                }
-            ]
-        };
-        $("#top-users").attr("width", $('#top-users-chart').width());
-        $("#top-users").attr("height", 300);
-        var ctx = $("#top-users")[0].getContext("2d");
-        var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
-        var topUsersChart = new Chart(ctx).Bar(data, opts);
-        topUsersChart.draw();
-        topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
-        topUsersChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
-        topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
-        topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
-        topUsersChart.update();
+        {% if top5_users_1_week %}
+            {% for user in top5_users_1_week %}
+                users.push('{{user.name}}');
+                tasks.push(parseInt({{user.n_answers}}));
+            {% endfor %}
+            var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+            var data = {
+                labels: users,
+                datasets: [
+                    {
+                        label: "Top 5 Users This Week",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        highlightFill: "rgba(151,187,205,0.1)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: tasks
+                    }
+                ]
+            };
+            $("#top-users").attr("width", $('#top-users-chart').width());
+            $("#top-users").attr("height", 300);
+            var ctx = $("#top-users")[0].getContext("2d");
+            var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+            var topUsersChart = new Chart(ctx).Bar(data, opts);
+            topUsersChart.draw();
+            topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
+            topUsersChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
+            topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
+            topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
+            topUsersChart.update();
+        {% else %}
+            $("#top-5-row").hide();
+        {% endif %}
         
         //Daily Activity
         $dow = {{completion_days|safe}}['dow'];
@@ -434,35 +438,39 @@ $(function(){
         //Top 5 projects this week
         var projects = [];
         var tasks = [];
-        {% for app in top5_apps_1_week %}
-            projects.push('{{app.name}}');
-            tasks.push(parseInt({{app.n_answers}}));
-        {% endfor %}
-        var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
-        var data = {
-            labels: projects,
-            datasets: [
-                {
-                    label: "Top 5 Projects This Week",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    highlightFill: "rgba(151,187,205,0.1)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: tasks
-                }
-            ]
-        };
-        $("#top-projects").attr("width", $('#top-projects-chart').width());
-        $("#top-projects").attr("height", 300);
-        var ctx = $("#top-projects")[0].getContext("2d");
-        var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
-        var topProjectsChart = new Chart(ctx).Bar(data, opts);
-        topProjectsChart.draw();
-        topProjectsChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
-        topProjectsChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
-        topProjectsChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,5)";
-        topProjectsChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
-        topProjectsChart.update();
+        {% if top5_apps_1_week %}
+            {% for app in top5_apps_1_week %}
+                projects.push('{{app.name}}');
+                tasks.push(parseInt({{app.n_answers}}));
+            {% endfor %}
+            var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+            var data = {
+                labels: projects,
+                datasets: [
+                    {
+                        label: "Top 5 Projects This Week",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        highlightFill: "rgba(151,187,205,0.1)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: tasks
+                    }
+                ]
+            };
+            $("#top-projects").attr("width", $('#top-projects-chart').width());
+            $("#top-projects").attr("height", 300);
+            var ctx = $("#top-projects")[0].getContext("2d");
+            var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+            var topProjectsChart = new Chart(ctx).Bar(data, opts);
+            topProjectsChart.draw();
+            topProjectsChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
+            topProjectsChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
+            topProjectsChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,5)";
+            topProjectsChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
+            topProjectsChart.update();
+        {% else %}
+            $("#top-5-row").hide();
+        {% endif %}
         
 });
 </script>
