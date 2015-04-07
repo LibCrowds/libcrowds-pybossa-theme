@@ -27,10 +27,10 @@
                     <div class="col-xs-12 padding-top-xs">
                         {% include "_flash_messages.html" %}
                         <div id="sorts" class="btn-group pull-right">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Sort by <span id="order">Name</span> <span class="caret"></span></button>
+                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Sort by <span id="order">Date</span> <span class="caret"></span></button>
                             <ul class="dropdown-menu" style="top:35px;">
-                              <li><a href="#" data-sort-value="original-order">name</a></li>
-                              <li><a href="#" data-sort-value="date">date</a></li>
+                              <li><a href="#" data-sort-value="original-order">date</a></li>
+                              <li><a href="#" data-sort-value="name">name</a></li>
                               <li><a href="#" data-sort-value="activity">activity</a></li>
                               <li><a href="#" data-sort-value="progress">progress</a></li>
                             </ul>
@@ -61,16 +61,15 @@ $( function() {
   var $container = $('.projects').isotope({
     itemSelector: '.project-item',
     layoutMode: 'fitRows',
+    sortAscending: true,
     getSortData: {
       date: '.date',
+      name: '.project-name',
       activity: '.activity',
       progress: '.progress parseInt',
-    },
-    sortAscending: {
-        progress: false,
-        activity: false,
     }
   });
+  console.log($('.projects').isotope());
 
   // bind sort button click
   $('#sorts').on( 'click', 'a', function() {
