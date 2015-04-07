@@ -92,7 +92,7 @@
 
 {% macro show_app(app, active_cat, current_user, upload_method) %}
 
-<div class="container container-padded">
+<div class="project-item container container-padded">
     <div class="row project-summary padding-bottom">
         <div class="col-md-8 col-xs-12 same-size">
             <div class="white-rounded inset-shadow-white project-desc">
@@ -103,6 +103,14 @@
                         </a>
                     </li>
                 </div>
+                <div id="data" hidden>
+                    <span class="date">{{ app.created[0:10] }}</span>
+                    {% if app.last_activity_raw != None %}
+                    <span class="activity">{{app.last_activity_raw}}</span>
+                    {% endif %}
+                    <span class="progress">{{ app.overall_progress | round | int }}</span>
+                </div>
+                
                 <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg padding-top-xs">
                     <div class="shadow shadow-inline">
                         {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:150px") }}
