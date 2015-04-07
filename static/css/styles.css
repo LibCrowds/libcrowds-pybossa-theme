@@ -36,7 +36,7 @@ textarea{resize:none}
 .padding-top-sm{padding-top:40px}
 .padding-top-xs{padding-top:20px}
 .margin-top-xs{margin-top:10px}
-.margin-top-sm{margin-top:30px}
+.margin-top-sm{margin-top:20px}
 .margin-right-xs{margin-right:10px}
 .margin-bottom-xs{margin-bottom:10px}
 .padding-bottom{padding-bottom:50px}
@@ -48,6 +48,7 @@ textarea{resize:none}
 div.white-rounded{background-color:#FFF;padding:20px 30px;border-radius:15px}
 div.white-rounded-panel{background-color:#FFF;border:1px solid #ECEDED;border-radius:15px;display:inline-block;width:100%}
 #show-app-stats .btn{position:absolute;right:25%;bottom:0px;}
+#sorts{z-index:1}
 html{overflow-x:hidden;height:100%;width:100%}
 body{height:100%;font-weight:lighter;background-color:#fff;min-height:800px;width:100%;font-family:'Source Sans Pro',sans-serif;color:#666}
 hr.extra-margins{margin-top:40px;margin-bottom:40px}
