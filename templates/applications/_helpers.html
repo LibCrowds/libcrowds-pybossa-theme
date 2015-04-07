@@ -105,6 +105,7 @@
                 </div>
                 <div id="data" hidden>
                     <span class="date">{{ app.created[0:10] }}</span>
+                    <span class="project-name">{{ app.name}}</span>
                     {% if app.last_activity_raw != None %}
                     <span class="activity">{{app.last_activity_raw}}</span>
                     {% endif %}
