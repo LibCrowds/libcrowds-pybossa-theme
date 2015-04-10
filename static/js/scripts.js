@@ -70,6 +70,7 @@ $(function() {
         $('#project-menu').slideToggle("fast", function() {});
     });
     $(".polaroids li:nth-child(even)").addClass("even");
+    $("ul.polaroids div:nth-child(even) li").addClass("even");
 });
 $(window).scroll(function() {
     if ($("#homepage-flag").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {

@@ -103,14 +103,16 @@
                         </a>
                     </li>
                 </div>
-                <div id="data" hidden>
-                    <span class="date">{{ app.created[0:10] }}</span>
-                    <span class="project-name">{{ app.name}}</span>
-                    {% if app.last_activity_raw != None %}
-                    <span class="activity">{{app.last_activity_raw}}</span>
-                    {% endif %}
-                    <span class="progress">{{ app.overall_progress | round | int }}</span>
-                </div>
+                {% if app.created %}
+                    <div id="data" hidden>
+                        <span class="date">{{ app.created[0:10] }}</span>
+                        <span class="project-name">{{ app.name}}</span>
+                        {% if app.last_activity_raw != None %}
+                        <span class="activity">{{app.last_activity_raw}}</span>
+                        {% endif %}
+                        <span class="progress">{{ app.overall_progress | round | int }}</span>
+                    </div>
+                {% endif %}
                 
                 <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg padding-top-xs">
                     <div class="shadow shadow-inline">
