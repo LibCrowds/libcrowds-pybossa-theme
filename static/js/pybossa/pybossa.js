@@ -171,7 +171,7 @@ if (typeof(console) == 'undefined') {
                         else {
                             var nextUrl = '/app/' + appname + '/task/' + task.id;
                         }
-                        history.pushState ({}, "Title", nextUrl);
+                        History.pushState ({}, "Title", nextUrl);
                     } catch(e) {
                         console.log(e);
                     }
@@ -190,6 +190,7 @@ if (typeof(console) == 'undefined') {
     };
 
     pybossa.saveTask = function ( taskid, answer ) {
+      console.log('saving: ' + taskid);
         return getTask( taskid, answer ).pipe(createTaskRun);
     };
 
