@@ -69,6 +69,7 @@ $(function() {
         $('#admin-menu').slideUp();
         $('#project-menu').slideToggle("fast", function() {});
     });
+    $("li:nth-child(even)").addClass("even");
 });
 $(window).scroll(function() {
     if ($("#homepage-flag").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
