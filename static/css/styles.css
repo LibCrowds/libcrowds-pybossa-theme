@@ -132,7 +132,6 @@ body > footer .container{padding-top:20px;padding-bottom:20px}
 .banner .featured li a:hover{position:absolute;margin:-2px 0 0 -2px;-webkit-box-shadow:0 0 3px 0 rgba(0,0,0,0.8);box-shadow:0 0 3px 0 rgba(0,0,0,0.8);background-color:#FFF;width:112px;z-index:2}
 .banner .featured li a:hover img{border:solid 6px #FFF;-webkit-box-shadow:inset 0 0 2px 0 rgba(0,0,0,0.5);box-shadow:inset 0 0 2px 0 rgba(0,0,0,0.5);width:100px}
 .banner .featured li img{min-width:100px;min-height:100px}
-.image_container{margin-top:0px;}
 ul.users{margin:0 auto;display:table;}
 ul.users li{display:inline-block;margin:25px 0 0px 3px;float:none;}
 ul.users li a{display:block;margin-bottom:5px;margin-right:10px;margin-left:10px}

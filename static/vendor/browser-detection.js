@@ -48,7 +48,7 @@ var notSupportedBrowsers = [{
         },
         writeNoticeCode: function() {
             var e = "Out of date browser detected!",
-                t = "Unfortunately, LibCrowds is not compatible with your browser. If you choose to continue, without upgrading, your experience while using this website is likely to be deeply unpleasant.",
+                t = "Unfortunately, LibCrowds is not compatible with your browser. If you choose to continue, without upgrading, your experience while using this website is likely to be greatly diminished.",
                 r = "We strongly recommend that you upgrade now, via one of the links below",
                 o = null,
                 s = '<div id="black_overlay"></div><div class="hcenter text-center"><div id="browser-detection"><a class="close" id="close">x</a>';
