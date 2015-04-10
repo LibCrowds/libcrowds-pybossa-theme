@@ -113,6 +113,8 @@ var notSupportedBrowsers = [{
         }]
     };
 window.onload = function() {
-    BrowserDetection.init()
-    if ($.cookie('outofdatebrowser') == null) {$.cookie('outofdatebrowser', '1');}
+    if ($.cookie('outofdatebrowser') == null) {
+		BrowserDetection.init()
+		$.cookie('outofdatebrowser', '1');
+	}
 };
