@@ -16,7 +16,7 @@
     
             {% if apps_contrib %}
                 <section id="contributed-apps" class="white pattern-white-wall inset-shadow-top">
-                    {{render_grid_apps(apps_contrib, "Your Contributions", upload_method)}}
+                    {{app_helper.render_grid_apps(apps_contrib, "Your Contributions", upload_method)}}
                 </section>
             {% else %}
             
