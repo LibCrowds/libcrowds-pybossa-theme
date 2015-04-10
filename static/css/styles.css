@@ -263,11 +263,11 @@ pre.prettyprint{text-align:left}
 ul.polaroids a.polaroid:after{content:attr(data-polaroid-title)}
 ul.polaroids a.polaroid{list-style:none;text-overflow:ellipsis;overflow:hidden;background:#fff;display:inline;float:left;margin:0 0 27px 30px;width:140px;padding:10px 7px 11px;text-align:center;font-family:'Permanent Marker',cursive;text-decoration:none;color:#333;font-size:14px;-webkit-box-shadow:0 3px 6px rgba(0,0,0,.25);-moz-box-shadow:0 3px 6px rgba(0,0,0,.25);box-shadow:0 3px 6px rgba(0,0,0,.25);-webkit-transition:-webkit-transform .15s linear;-moz-transition:-moz-transform .15s linear;-ms-transition:-ms-transform .15s linear;-o-transition:-o-transform .15s linear;transition:transform .15s linear;-moz-transform:rotate(-2deg);-webkit-transform:rotate(-2deg);-ms-transform:rotate(-2deg);-o-transform:rotate(-2deg);transform:rotate(-2deg)}
 ul.polaroids a.polaroid.polaroid-sm{width:120px}
-ul.polaroids .polaroid-sm img{width:100px;height:100px}
+ul.polaroids .polaroid-sm img{width:100px!important;height:100px}
 ul.polaroids a.polaroid:hover{-webkit-transform:scale(1.25);-moz-transform:scale(1.25);position:relative;z-index:5}
-ul.polaroids li:nth-child(even) a{-webkit-transform:rotate(2deg);-moz-transform:rotate(2deg);-ms-transform:rotate(-2deg);-o-transform:rotate(-2deg);transform:rotate(-2deg)}
-ul.polaroids .polaroid li:nth-child(3n) a{-webkit-transform:none;-moz-transform:none;position:relative;top:-5px}
-ul.polaroids .polaroid li:nth-child(5n) a{-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg);-ms-transform:rotate(-2deg);-o-transform:rotate(-2deg);transform:rotate(-2deg);position:relative;right:5px}
+ul.polaroids li:nth-child(even) a,ul.polaroids li.even a{-webkit-transform:rotate(2deg);-moz-transform:rotate(2deg);-ms-transform:rotate(2deg);-o-transform:rotate(2deg);transform:rotate(2deg)}
+ul.polaroids .polaroid li:nth-child(3n) a{-webkit-transform:none;-moz-transform:none;-ms-transform:none;position:relative;top:-5px}
+ul.polaroids .polaroid li:nth-child(5n) a{-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg);-ms-transform:rotate(5deg);-o-transform:rotate(5deg);transform:rotate(5deg);position:relative;right:5px}
 ul.polaroids .polaroid li:nth-child(8n) a{position:relative;top:8px;right:5px}
 ul.polaroids .polaroid li:nth-child(11n) a{position:relative;top:3px;left:-5px}
 ul.polaroids .polaroid img{width:120px;max-width:120px;max-height:120px;margin-bottom:10px;border:1px solid #DDD}
