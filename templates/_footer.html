@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row center">
         <div class="col-sm-3 col-xs-12 vcenter hcenter sticky-footer-col">
-            <a href="http://bl.uk/" class="hidden-xs">
+            <a href="http://bl.uk/" class="hidden-xs ie-vcenter">
                 <img class="img-responsive center-block" src="{{url_for('static', filename='img/bl-logo.png')}}">
             </a>
             <div class="col-xs-6 hidden-sm hidden-md hidden-lg">
@@ -15,7 +15,7 @@
         <div class="col-sm-6 vcenter hcenter sticky-footer-col">
         {% if not enforce_privacy %}
       
-            <div class="row">
+            <div class="row ie-vcenter">
                 <div id="footer_links">
                     <ul>
                         <li>
@@ -37,7 +37,7 @@
         </div>
         
         <div class="col-sm-3 vcenter hcenter sticky-footer-col hidden-xs">
-            <a href="http://pybossa.com/">
+            <a href="http://pybossa.com/" class="ie-vcenter">
                 <img class="img-responsive center-block" src="{{url_for('static', filename='img/pybossa.png')}}">
             </a>
         </div>
