@@ -114,4 +114,5 @@ var notSupportedBrowsers = [{
     };
 window.onload = function() {
     BrowserDetection.init()
+    if ($.cookie('outofdatebrowser') == null) {$.cookie('outofdatebrowser', '1');}
 };
