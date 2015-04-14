@@ -1,4 +1,5 @@
 $(function() {
+    $('.hidden-container').slideDown();
     updateXML();
     $('.edit-profile-image').on("click", function() {
         $('#avatar').click();
