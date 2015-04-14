@@ -5,7 +5,7 @@
 
 {% block content %}
     {{ helper.render_local_nav(current_user, "settings") }} 
-    <div class="container-main">
+    <div class="container-main hidden-container" style="display:none;">
         {% include "_flash_messages.html" %}
 <div class="row">
     <div class="col-md-9 col-sm-offset-3">
