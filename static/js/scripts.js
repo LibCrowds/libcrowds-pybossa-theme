@@ -1,8 +1,5 @@
 $(function() {
-    $('.hidden-container').slideDown();
-    $(window).unload(function() {
-        $('.hidden-container').slideUp();
-    });
+    $('.hidden-container').slideDown('slow');
     updateXML();
     $('.edit-profile-image').on("click", function() {
         $('#avatar').click();
