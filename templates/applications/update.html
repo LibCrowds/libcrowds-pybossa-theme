@@ -64,7 +64,7 @@
                 {{ form_helper.render_field(form.password, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.webhook, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.flickr_link, class="form-control", visible='true') }}
-                {{ form_helper.render_field(form.zip_link, class="form-control", visible='true') }}
+                {{ form_helper.render_field(form.image_set, class="form-control", visible='true') }}
                 {{ form_helper.render_field_horizontal(form.hidden) }}
                 <div role="group" class="pull-right">
                     <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
