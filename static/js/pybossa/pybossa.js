@@ -23,6 +23,8 @@ if (typeof(console) == 'undefined') {
   };
 }
 
+
+
 (function( pybossa, $, undefined ) {
     var url = '/';
 
@@ -41,6 +43,7 @@ if (typeof(console) == 'undefined') {
 
     function getTaskRun( app ) {
         return $.ajax({
+            cache: false,
             url: url + 'api/app/' + app.id + '/newtask',
             dataType: 'json'
         })
@@ -52,6 +55,7 @@ if (typeof(console) == 'undefined') {
 
     function getTask( taskid, answer ) {
         return $.ajax({
+          cache: false,
             url: url + 'api/task/' + taskid,
             dataType: 'json'
         })
@@ -73,6 +77,7 @@ if (typeof(console) == 'undefined') {
         taskrun = JSON.stringify(taskrun);
 
         return $.ajax({
+          cache: false,
             type: 'POST',
             url: url + 'api/taskrun',
             dataType: 'json',
@@ -100,6 +105,7 @@ if (typeof(console) == 'undefined') {
 
     function userProgress( appname ) {
         return $.ajax({
+          cache: false,
             url: url + 'api/app/' + appname + '/userprogress',
             dataType: 'json'
         });
@@ -122,6 +128,7 @@ if (typeof(console) == 'undefined') {
     function run ( appname ) {
         var me = this;
         $.ajax({
+          cache: false,
             url: url + 'api/app',
             data: 'short_name=' + appname,
             dataType:'json'
@@ -131,6 +138,7 @@ if (typeof(console) == 'undefined') {
                 offset = offset || 0;
                 var def = $.Deferred();
                 var xhr = $.ajax({
+                  cache: false,
                     url: url + 'api/app/' + app.id + '/newtask',
                     data: 'offset=' + offset,
                     dataType: 'json'
