@@ -118,7 +118,10 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
 </script>
 <script>
     $(function(){
+        $('.hidden-container').slideDown('slow');
         var appStats = {{appStats|safe}};
+        console.log(appStats);
+        
         $dow = {{dailyActivity|safe}}['dow'];
         $auth = {{dailyActivity|safe}}['auth'];
         $anon = {{dailyActivity|safe}}['anon'];
