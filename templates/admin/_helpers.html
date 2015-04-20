@@ -17,7 +17,7 @@
 
 {% macro render_local_nav(current_user, active_link, active_app) %}
 {{app}}
-<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
+<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix">
 {% if current_user.admin %}
 <li class="nav-link">
     <a href="#" id="admin-options">Admin Options<i class="fa fa-angle-down pull-right"></i></a>
