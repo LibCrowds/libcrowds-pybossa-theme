@@ -1,0 +1,83 @@
+{% extends "/base.html" %}
+{% set active_page = "data" %}
+{% set active_app  = "all" %}
+{% import "privacy/locked.html" as privacy %}
+
+{% block content %}
+<span class="set-main-bg" data-bg="pattern-white-wall"></span>
+
+<div class="container container-main">
+    <div class="row padding-bottom-sm">
+        <div class="col-xs-12">
+            <div class="white-rounded inset-shadow-white text-center">
+                <h2>{{brand}} Open Data</h2>
+                <p>This page contains all of the datasets collected from and images used within
+                the crowdsourcing projects on this platform. Everything on this page is made available
+                under CC0, meaning that it can be used without any copyright restrictions.<p>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="white-rounded inset-shadow-white text-center">
+                <h3>Raw task data</h3>
+                <table class="table table-stripped table-condensed table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>JSON</th>
+                            <th>CSV</th>
+                        </tr>
+                    </thead>
+                    {% for app in apps %}
+                        <tr>
+                            <td>{{app.name}}</td>
+                            <td><a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                            <td><a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="white-rounded inset-shadow-white text-center">
+                <h3>Raw answer data</h3>
+                    <table class="table table-stripped table-condensed table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>JSON</th>
+                            <th>CSV</th>
+                        </tr>
+                    </thead>
+                    {% for app in apps %}
+                        <tr>
+                            <td>{{app.name}}</td>
+                            <td><a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                            <td><a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="white-rounded inset-shadow-white text-center">
+                <h3>Images</h3>
+                    <table class="table table-stripped table-condensed table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Flickr</th>
+                            <th>Zip</th>
+                        </tr>
+                    </thead>
+                    {% for app in apps %}
+                        <tr>
+                            <td>{{app.name}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
