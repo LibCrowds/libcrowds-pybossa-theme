@@ -51,7 +51,7 @@
               </form>
             {{ helper.render_loading("Loading, please wait...") }}
               <!-- Update form for project data-->
-            <form class="visible-form" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}">
+            <form class="visible-form" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}" enctype="multipart/form-data">
               <fieldset>
                 {{ form.hidden_tag() }}
                 

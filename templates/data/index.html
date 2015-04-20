@@ -87,7 +87,7 @@
                                 <tr>
                                     <td>{{app.name}}</td>
                                     <td class="text-center"><a href="{{app.flickr_link}}" target="_blank"><i class="fa fa-link"></i></a></td>
-                                    <td class="text-center"><a href="{{app.zip_link}}"><i class="fa fa-download"></i></a></td>
+                                    <td class="text-center"><a href="{{ url_for('uploads.uploaded_file', filename=(app.info.container + '/' + app.info.image_set))}}"><i class="fa fa-download"></i></a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
