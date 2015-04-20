@@ -168,6 +168,8 @@
                   after you have completed a few tasks you should be able to recognise these shelf marks more easily.</p>
               <p>Please try to transcribe the shelf mark as accurately as possible, including maintaining the case
               and punctuation.</p>
+              <p>Even if you didn't match the card against a record, this is still a very useful stage in helping us
+                with further organisation.</p>
               <p>That's it! Once you have have finished click 'Done' and you will be presented with the next task.</p>
              
             </div>
@@ -192,7 +194,7 @@
   });
   
   
-  //Facebook sharing
+    //Facebook sharing
   $(document).delegate('#fb-share', 'click', function(e) {
       FB.ui({
           method: 'feed',  
@@ -241,7 +243,7 @@ function loadUserProgress() {
         var pct = Math.round((data.done*100)/data.total);
         $("#progress").css("width", pct.toString() +"%");
         $("#progress").attr("title", pct.toString() + "% completed!");
-        $("#progress").tooltip({'placement': 'left'}); 
+        $("#progress").tooltip({'placement': 'bottom'}); 
         $("#total").text(data.total);
         $("#done").text(data.done);
     });
@@ -311,8 +313,8 @@ $(document).delegate('#oclc_search_form', 'submit', function(e) {
             countStr += 'and';
         }
         notFirst = 1;
-        searchStr += '(1,4)="' + searchArray.title + '"';
-        countStr += '(1,4)="' + searchArray.title + '"';
+        searchStr += '(1,4)="' + searchArray.title + '?"';
+        countStr += '(1,4)="' + searchArray.title + '?"';
         break;
       case 'author':
         if(notFirst){
@@ -320,8 +322,8 @@ $(document).delegate('#oclc_search_form', 'submit', function(e) {
             countStr += 'and';
         }
         notFirst = 1;
-        searchStr += '(1,1003)="' + searchArray.author + '"';
-        countStr += '(1,1003)="' + searchArray.author + '"';
+        searchStr += '(1,1003)="' + searchArray.author + '?"';
+        countStr += '(1,1003)="' + searchArray.author + '?"';
         break;
       case 'year':
         if(notFirst){
@@ -482,7 +484,7 @@ pybossa.taskLoaded(function(task, deferred) {
           
             deferred.resolve(task);
         });
-        img.attr('src', task.info.url_b).css('height', 460);
+        img.attr('src', task.info.url_b + "?now=" + new Date().getTime() ).css('height', 460);
         img.addClass('img-thumbnail img-responsive');
         task.info.image = img;
     }
