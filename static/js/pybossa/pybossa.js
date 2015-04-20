@@ -128,7 +128,6 @@ if (typeof(console) == 'undefined') {
     function run ( appname ) {
         var me = this;
         $.ajax({
-          cache: false,
             url: url + 'api/app',
             data: 'short_name=' + appname,
             dataType:'json'
@@ -148,6 +147,7 @@ if (typeof(console) == 'undefined') {
                     if (taskId) {
                         param =  'api/task/' + taskId;
                         var xhr = $.ajax({
+                          cache: false,
                             url: url + 'api/task/' + taskId,
                             dataType: 'json'
                         })
