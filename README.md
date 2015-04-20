@@ -1,5 +1,5 @@
-This is the default theme for the [Pybossa
-server](https://github.com/PyBossa/pybossa).
+This is the British Library theme for the crowdsourcing platform based on [Pybossa
+](https://github.com/PyBossa/pybossa).
 
 ![Shuttleworth Foundation Funded](http://pybossa.com/assets/img/shuttleworth-funded.png)
 
@@ -10,34 +10,23 @@ crowd-source human problem-solving skills!
 
 # See it in Action
 
-PyBossa powers [CrowdCrafting.org](http://crowdcrafting.org/) and [ForestWatchers.net](http://forestwatchers.net)
+PyBossa powers [LibCrowds.com](http://libcrowds.com)
 
 # Installing and Upgrading
 
-This theme is automatically grabbed and installed in the PyBossa server when
-you clone the server with the option **--recursive**, as this theme is included
-as a sub-module in PyBossa.
+This theme is included as a sub-module in the [British Library fork of PyBossa
+](https://github.com/alexandermendes/pybossa).
 
-# Creating a new theme
+Alternatively, it can be installed by including it in your PyBossa themes folder.
 
-In order to create a new theme, fork this repository and make all the required
-changes in the **templates** and **static** folder.
 
 # Useful Links
 
 * [Documentation](http://docs.pybossa.com/)
-* [Mailing List](http://lists.okfn.org/mailman/listinfo/open-science-dev)
 
-# Contributing
-
-If you want to contribute to the project, please, check the
-[CONTRIBUTING file](CONTRIBUTING.md).
-
-It has the instructions to become a contributor.
 
 ## Copyright / License
 
-Copyright 2014 SF Isle of Man Limited. 
 
 Source Code License: The GNU Affero General Public License, either version 3 of the License
 or (at your option) any later version. (see COPYING file)
