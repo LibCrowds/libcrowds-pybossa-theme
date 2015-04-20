@@ -4,80 +4,97 @@
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
-<span class="set-main-bg" data-bg="pattern-white-wall"></span>
-
-<div class="container container-main">
-    <div class="row padding-bottom-sm">
-        <div class="col-xs-12">
-            <div class="white-rounded inset-shadow-white text-center">
-                <h2>{{brand}} Open Data</h2>
+<div class="container container-padded remove-padding-bottom">
+    <section class="white">
+        <div class="container container-padded">
+            {% include "_flash_messages.html" %}
+            <div class="col-md-11">
+                <h1>Open Data</h1>
                 <p>This page contains all of the datasets collected from and images used within
                 the crowdsourcing projects on this platform. Everything on this page is made available
-                under CC0, meaning that it can be used without any copyright restrictions.<p>
+                under <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>, meaning that
+                it can be used without any copyright restrictions.</p>
             </div>
         </div>
-        <div class="col-xs-12">
-            <div class="white-rounded inset-shadow-white text-center">
-                <h3>Raw task data</h3>
-                <table class="table table-stripped table-condensed table-hover table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>JSON</th>
-                            <th>CSV</th>
-                        </tr>
-                    </thead>
-                    {% for app in apps %}
-                        <tr>
-                            <td>{{app.name}}</td>
-                            <td><a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
-                            <td><a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <div class="white-rounded inset-shadow-white text-center">
-                <h3>Raw answer data</h3>
+    </section>
+</div>
+<section class="white pattern-white-wall box-shadow-white-bottom">
+    <div class="container container-padded">
+        <div class="row padding-bottom">
+            <div class="col-xs-12">
+                <div class="white-rounded inset-shadow-white">
+                    <h3 class="text-center">Raw task data</h3>
                     <table class="table table-stripped table-condensed table-hover table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>JSON</th>
-                            <th>CSV</th>
-                        </tr>
-                    </thead>
-                    {% for app in apps %}
-                        <tr>
-                            <td>{{app.name}}</td>
-                            <td><a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
-                            <td><a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th class="text-center">JSON</th>
+                                <th class="text-center">CSV</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for app in apps %}
+                                <tr>
+                                    <td>{{app.name}}</td>
+                                    <td class="text-center"><a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                                    <td class="text-center"><a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="col-xs-12">
-            <div class="white-rounded inset-shadow-white text-center">
-                <h3>Images</h3>
-                    <table class="table table-stripped table-condensed table-hover table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Flickr</th>
-                            <th>Zip</th>
-                        </tr>
-                    </thead>
-                    {% for app in apps %}
-                        <tr>
-                            <td>{{app.name}}</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    {% endfor %}
-                </table>
+        <div class="row padding-bottom">
+            <div class="col-xs-12">
+                <div class="white-rounded inset-shadow-white">
+                    <h3 class="text-center">Raw answer data</h3>
+                        <table class="table table-stripped table-condensed table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th class="text-center">JSON</th>
+                                <th class="text-center">CSV</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for app in apps %}
+                                <tr>
+                                    <td>{{app.name}}</td>
+                                    <td class="text-center"><a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                                    <td class="text-center"><a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row padding-bottom">
+            <div class="col-xs-12">
+                <div class="white-rounded inset-shadow-white">
+                    <h3 class="text-center">Images</h3>
+                        <table class="table table-stripped table-condensed table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th class="text-center">Flickr</th>
+                                <th class="text-center">Zip</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for app in apps %}
+                                <tr>
+                                    <td>{{app.name}}</td>
+                                    <td class="text-center"><a href="{{app.flickr_link}}" target="_blank"><i class="fa fa-link"></i></a></td>
+                                    <td class="text-center"><a href="{{app.zip_link}}"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+{% endblock %}
