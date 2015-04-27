@@ -98,15 +98,6 @@
                                </div>
                            </div>
                        </div>
-                       
-                       <div class="row padding-bottom-sm">
-                           <div class="col-xs-12">
-                               <div class="white-rounded inset-shadow-white text-center chart">
-                                   <h4 class=" padding-bottom-sm">Locations of Anonymous Users</h4>
-                                   <div id="map" style="height:480px;"></div>
-                               </div>
-                           </div>
-                       </div>
                    {% endif %}
                </div>
            </div>
@@ -312,29 +303,6 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         document.getElementById('dow-legend').innerHTML = dowChart.generateLegend();
         dowChart.draw();
         
-        //Locations map
-        var map = L.map('map', {scrollWheelZoom: false, minZoom:1});
-        map.fitWorld();
-        map.setZoom(2);
-        var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        L.tileLayer(url, 
-            {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> &mdash; <a href="http://www.maxmind.com">MaxMind</a>',
-            maxZoom: 18
-            }).addTo(map);
-    
-        var i = 0;
-        var locations = appStats['userAnonStats']['locs'];
-        var l = locations.length;
-        var markers = new L.MarkerClusterGroup();
-        for (i;i<l;i++) {
-            if (locations[i].loc != null) {
-                var lat = parseFloat(locations[i].loc.latitude);
-                var lng = parseFloat(locations[i].loc.longitude);
-                markers.addLayer(L.marker([lat,lng]));
-            }
-        }
-        map.addLayer(markers);
 });
     function formatHours(str) {
         str += ':00'
