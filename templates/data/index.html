@@ -10,7 +10,7 @@
             {% include "_flash_messages.html" %}
             <div class="col-md-11">
                 <h1>Open Data</h1>
-                <p>This page contains all of the datasets collected from and images used within
+                <p>This page contains all of the datasets collected from, and images used within,
                 the crowdsourcing projects on this platform. Everything on this page is made available
                 under <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>, meaning that
                 it can be used without any copyright restrictions.</p>
@@ -87,7 +87,7 @@
                                 <tr>
                                     <td><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{app.name}}</a></td>
                                     <td class="text-center"><a href="{{app.flickr_link}}" target="_blank"><i class="fa fa-link"></i></a></td>
-                                    <td class="text-center"><a href="{{ url_for('uploads.uploaded_file', filename=(app.info.container + '/' + app.info.image_set))}}"><i class="fa fa-download"></i></a></td>
+                                    <td class="text-center"><a href="{{ url_for('uploads.uploaded_file', filename=(app.info.container + '/' + app.info.image_set))}}"><i class="fa fa-download" data-filesize="{{app.info.image_set_size}}"></i></a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -97,4 +97,23 @@
         </div>
     </div>
 </section>
+<script>
+    $(function(){
+        $('.fa-download').each(function() {
+            var bytes = $(this).attr('data-filesize');
+            if (typeof bytes !== typeof undefined && bytes !== false) {
+                $(this).html("<small> (" + bytesToSize(bytes) + ")</small>");
+            }
+        });
+    });
+    
+    function bytesToSize(bytes) {
+       if(bytes == 0) return '0 Bytes';
+       if(bytes == 1) return '1 Byte';
+       var k = 1000;
+       var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+       var i = Math.floor(Math.log(bytes) / Math.log(k));
+       return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+    }
+</script>
 {% endblock %}
