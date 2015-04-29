@@ -65,7 +65,7 @@
                 <h4>This page can be used to test requests to and responses received from the British Library database</h4>
                 <hr>
                 {% from "_formhelpers.html" import render_field %}
-                <form id="catalogue-form" role="form" method="POST" action="{{url_for('bl.search')}}" {% if apiString %}hidden{% endif %}>
+                <form id="catalogue-form" role="form" method="POST" action="{{url_for('z3950.search', z3950_catalogue="bl")}}" {% if apiString %}hidden{% endif %}>
                     {{form.hidden_tag()}}
                     <fieldset>
                         {{ render_field(form.query, placeholder= _('Query'), class="form-control", required="required", autofocus="autofocus") }}
