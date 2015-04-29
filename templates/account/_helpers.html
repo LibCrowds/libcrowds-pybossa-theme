@@ -92,7 +92,7 @@
             
             <p><i class="fa fa-clock-o"></i> {{ _('Joined') }}: <span class="format-date" data-date="{{user.created}}"></span></p>
             {% if private %}
-                <p><i class="fa fa-key"></i> {{ _('API Key') }}: {{api_key}}</p>
+                <p><i class="fa fa-key"></i> {{ _('API Key') }}: {{user.api_key}}</p>
                 
                 <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-default btn-sm btn-padded"><i class="fa fa-user"></i> {{ _('Edit') }}</a>
             {% endif %}
