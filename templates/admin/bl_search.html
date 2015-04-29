@@ -20,7 +20,7 @@
                 <h4>This page can be used to test requests to and responses received from the British Library database</h4>
                 <hr>
                 {% from "_formhelpers.html" import render_field %}
-                <form id="catalogue-form" role="form" method="POST" action="{{url_for('z3950.search', z3950_catalogue="bl")}}" {% if apiString %}hidden{% endif %}>
+                <form id="catalogue-form" role="form" method="POST" onSubmit="removePlaceholders()" action="{{url_for('z3950.search', z3950_catalogue="bl")}}" {% if apiString %}hidden{% endif %}>
                     {{form.hidden_tag()}}
                     <fieldset>
                         {{ render_field(form.query, placeholder= _('Query'), class="form-control", required="required", autofocus="autofocus") }}
@@ -55,4 +55,14 @@
 
 <script type="text/xml" id="xml2">{{record}}</script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<script>
+    function removePlaceholders() {
+        $(".form-control").each(function() {
+            if($(this).attr('placeholder') === $(this).val()){
+                $(this).val('');
+            }
+        });
+        return true;
+    }
+</script>
 {% endblock %}
