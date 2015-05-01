@@ -1,4 +1,4 @@
-<div class="container-padded">
+<div class="container-padded remove-padding-bottom">
     <section class="white">
         <div class="container container-padded">
             {% include "_flash_messages.html" %}
@@ -23,27 +23,38 @@
                    
     <section class="mid-grey pattern-brushed box-shadow-grey">
         <div class="container container-padded">
-            <div class="col-md-11">
-                <h1 class="inset-text-grey">{{ _('Technology') }}</h1>
+            <div class="col-md-11 padding-top-xs padding-bottom-sm">
+                <h2 class="inset-text-grey">{{ _('Technology') }}</h2>
                 
                 <p>{{ brand }} is built on top of <a href="http://docs.pybossa.com/"> PyBossa </a>, which is a an open-source framework for the creation of
                 crowd-sourcing projects.</p>
                 
                 <p>Individual applications are primarily written in HTML and Javascript, with some making use of components written in additional languages, such as PHP.</p>
-            </div>
+            
             <div class="col-sm-6 col-sm-offset-3 col-xs-12 padding-top-sm">
                 <div class="col-xs-4"><img src="{{url_for('static',filename='img/html-logo.png')}}" class="img-responsive web-badge"></div>
                     <div class="col-xs-4"><img src="{{url_for('static',filename='img/css-logo.png')}}" class="img-responsive web-badge"></div>
                         <div class="col-xs-4"><img src="{{url_for('static',filename='img/js-logo.png')}}" class="img-responsive web-badge"></div>
             </div>
+            </div>
                 
         </div>
     </section>
-                
+    
     <section class="white">
         <div class="container container-padded">
-            <div class="col-md-11">
-                <h1 id="contact">{{ _('Contact information') }}</h1>
+            <div class="col-md-11 padding-top-xs padding-bottom-sm">
+                <h2 id="contact">{{ _('Design') }}</h2>
+                <p>Website designed and created by <a href="mailto:info@alexandermendes.com">Alexander Mendes</a>.</p>
+                <p>Photography courtesy of <a href="http://www.lensintheface.com" target="_blank">Jon Ellis</a>.</p>
+            </div>
+        </div>
+    </section>
+                
+    <section class="white pattern-white-wall box-shadow-white-bottom">
+        <div class="container container-padded">
+            <div class="col-md-11 padding-top-xs padding-bottom-sm">
+                <h2 id="contact">{{ _('Contact information') }}</h2>
                 <ul>
                     <li>For more info, email: <a href="mailto:info@libcrowds.com">info@libcrowds.com</a></li>
                     <li>Report any bugs, issues or improvements,
