@@ -1,4 +1,5 @@
 $(function() {
+    $('.splash').css('background-image', 'url(../static/img/Cards/splash' + (Math.floor(Math.random() * 5) + 1) + '.jpg)');
     $('.hidden-container').slideDown('slow');
     updateXML();
     $('.edit-profile-image').on("click", function() {
