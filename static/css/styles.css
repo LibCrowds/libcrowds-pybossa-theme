@@ -243,6 +243,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .btn-secondary{background-color:#2B9884;border:2px solid #fff;color:#fff;padding:10px 20px;font-weight:600;font-size:13px}
 .btn-filter{background-color:#fff;border-color:#ddd;color:#666}
 .splash{background-size:cover;color:#fff;text-align:center;background-repeat:no-repeat;}
+#home-splash{background-image:url(../img/Cards/splash1.jpg)};
 .splash h1{font-size:2.0em;text-shadow:none;color:#fff;font-weight:200}
 .splash-overlay{-webkit-transition:background 1s;-moz-transition:background 1s;-ms-transition:background 1s;-o-transition:background 1s;transition:background 1s;width:100%;height:100%}
 

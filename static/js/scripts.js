@@ -1,5 +1,4 @@
 $(function() {
-    $('.splash').css('background-image', $(this).attr('data-splash'));
     $('.hidden-container').slideDown('slow');
     updateXML();
     $('.edit-profile-image').on("click", function() {
