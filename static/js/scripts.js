@@ -31,6 +31,9 @@ $(function() {
         $('.splash').css({
             'height': ($(window).height()) + 'px'
         });
+        $('.btn-anchor-small').css({
+            'top': (($(window).height())/2)-100 + 'px'
+        });
         if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
             $('.navbar').removeClass('opaque');
             $('.dropdown-menu').removeClass('opaque');
