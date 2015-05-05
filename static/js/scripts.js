@@ -31,7 +31,7 @@ $(function() {
         $('.splash').css({
             'height': ($(window).height()) + 'px'
         });
-        if ($("#homepage-flag").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
+        if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
             $('.navbar').removeClass('opaque');
             $('.dropdown-menu').removeClass('opaque');
             $('#navbar-logo').attr('src', $('#logo-white').attr('data-src'));
@@ -86,7 +86,7 @@ $(function() {
     $("ul.polaroids div:nth-child(even) li").addClass("even");
 });
 $(window).scroll(function() {
-    if ($("#homepage-flag").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
+    if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
       $('.navbar').removeClass('opaque');
       $('.dropdown-menu').removeClass('opaque');
       $('#navbar-logo').attr('src', $('#logo-white').attr('data-src'));
