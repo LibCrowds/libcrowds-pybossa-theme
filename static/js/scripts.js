@@ -29,13 +29,10 @@ $(function() {
         $(".well").height(m);
         animateProgress();
         $('.splash').css({
-            'height': ($(window).height() - 200) + 'px'
-        });
-        $('#home-splash').css({
             'height': ($(window).height()) + 'px'
         });
         $('.btn-circle-small').css({
-            'top': (($(window).height())/2)-300 + 'px'
+            'top': (($(window).height())/2)-100 + 'px'
         });
         if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
             $('.navbar').removeClass('opaque');
