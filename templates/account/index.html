@@ -9,20 +9,9 @@
 {% include "_flash_messages_floating.html" %}
 <div class="splash" id="community-splash">
   <div class="splash-overlay vcenter hcenter">
-    <div class="container text-center ie-vcenter padding-top">
-      <div class="col-sm-12">
-        <div data-anchor="#intro" class="btn btn-circle btn-circle-small anchor-btn">
-          <a>
-            <div><i class="fa fa-angle-double-down fa-3x"></i></div>
-            <div><i class="fa fa-angle-double-down fa-3x"></i></div>
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
-<a id="intro"></a>
   {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
     {{ privacy.render_lock_page() }}
   {% else %}
