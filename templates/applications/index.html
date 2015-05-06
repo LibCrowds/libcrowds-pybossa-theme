@@ -4,10 +4,15 @@
 {% import "applications/_helpers.html" as helper %}
 
 {% block content %}
+    {% include "_flash_messages_floating.html" %}
 <script src="{{url_for('static', filename='js/vendor/isotope.pkgd.min.js')}}"></script>
 
+<div class="splash" id="project-splash">
+  <div class="splash-overlay vcenter hcenter">
+  </div>
+</div>
+
 <span class="set-main-bg" data-bg="pattern-white-wall"></span>
-<div class="container-padded remove-padding-bottom">
     <section class="dark-grey pattern-classy-fabric">
         <div class="container padding-top">
             <div class="col-xs-10 col-xs-offset-1">
@@ -23,37 +28,34 @@
         </div>
     </section>
         
-                <div class="container">
-                    <div class="col-xs-12 padding-top-xs">
-                        {% include "_flash_messages.html" %}
-                        <div id="sorts" class="btn-group pull-right">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Sort by <span id="order">Date</span> <span class="caret"></span></button>
-                            <ul class="dropdown-menu" style="top:35px;">
-                              <li><a href="#" data-sort-value="original-order">date</a></li>
-                              <li><a href="#" data-sort-value="name">name</a></li>
-                              <li><a href="#" data-sort-value="activity">activity</a></li>
-                              <li><a href="#" data-sort-value="progress">progress</a></li>
-                            </ul>
-                        </div>
-                
-                    {% if apps %}
-                        <ul class="polaroids projects margin-top-sm">
-                            {% for app in apps %}
-                                {{ helper.show_app(app, active_cat.short_name, current_user, upload_method) }}
-                            {% endfor %}
-                        </ul>
-                            {% if pagination.pages > 1 %}
-                            {{ helper.render_pagination(pagination) }}
-                        {% endif %}
-                        {% else %}
-                            <div class="container container-padded">
-                                <h2 class="text-center inset-text-grey">{{_('Sorry, there are no published projects for this category yet')}}</h2>
-                            </div>
-                        {% endif %}
-                    </div>
+    <div class="container">
+        <div class="col-xs-12 padding-top-xs">
+            <div id="sorts" class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Sort by <span id="order">Date</span> <span class="caret"></span></button>
+                <ul class="dropdown-menu" style="top:35px;">
+                  <li><a href="#" data-sort-value="original-order">date</a></li>
+                  <li><a href="#" data-sort-value="name">name</a></li>
+                  <li><a href="#" data-sort-value="activity">activity</a></li>
+                  <li><a href="#" data-sort-value="progress">progress</a></li>
+                </ul>
+            </div>
+    
+        {% if apps %}
+            <ul class="polaroids projects margin-top-sm">
+                {% for app in apps %}
+                    {{ helper.show_app(app, active_cat.short_name, current_user, upload_method) }}
+                {% endfor %}
+            </ul>
+                {% if pagination.pages > 1 %}
+                {{ helper.render_pagination(pagination) }}
+            {% endif %}
+            {% else %}
+                <div class="container container-padded">
+                    <h2 class="text-center inset-text-grey">{{_('Sorry, there are no published projects for this category yet')}}</h2>
                 </div>
-            
-</div>
+            {% endif %}
+        </div>
+    </div>
 {{ helper.broken_image() }}
 <script>
 $( function() {
