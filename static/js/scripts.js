@@ -1,4 +1,9 @@
 $(function() {
+    $(window).on("resize", function() {
+        $('.splash').css({
+            'height': ($(window).height()) + 'px'
+        });
+    }).resize();
     $('.hidden-container').slideDown('slow');
     updateXML();
     $('.edit-profile-image').on("click", function() {
@@ -28,9 +33,6 @@ $(function() {
         });
         $(".well").height(m);
         animateProgress();
-        $('.splash').css({
-            'height': ($(window).height()) + 'px'
-        });
         $('.btn-circle-small').css({
             'top': (($(window).height())/2)-100 + 'px'
         });
@@ -87,6 +89,7 @@ $(function() {
     });
     $(".polaroids li:nth-child(even)").addClass("even");
     $("ul.polaroids div:nth-child(even) li").addClass("even");
+    $("#loading-overlay").fadeOut("fast");
 });
 $(window).scroll(function() {
     if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {

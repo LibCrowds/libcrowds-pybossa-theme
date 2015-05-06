@@ -15,7 +15,7 @@
     <!-- Le styles -->
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}?v=2.3.0">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}?v=2.3.1">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Permanent+Marker">
 
@@ -50,48 +50,53 @@
     {% include '_ga.html' ignore missing %}
     <!-- Google Custom Search -->
     {% include '_gcs.html' ignore missing %}
-    
   </head>
 
   <body>
-    {% include '_socialmedia.html' ignore missing %}
-      <div id="body-content">
-        <div id="main-body-content">
-        {% if not current_user.is_anonymous() %}
-        <!-- checkpoint::logged-in::{{current_user.name}} -->
-        {% endif %}
-    
-    
-        {% set active_page = active_page | default('index') -%}
-        {% set active_app  = active_app | default('none') -%}
-        {% include "_navbar.html" %}
-    
-          <div class="container-fluid" style="min-height:400px;">
-        
-            {% block content %}{% endblock %}
-            
-            
-            {% if show_cookies_warning %}
-            <div id="cookies_warning" class="container">
-              <div class="col-md-12 text-center">
-                <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="glyphicon glyphicon-thumbs-up"></i> OK</button> <a class="btn btn-success btn-xs" href="{{url_for('help.cookies_policy')}}"><i class="icon-info-sign"></i> More info</a></span></span>
-              </div>
-            </div>
+    <div id="loading-overlay" class="cover-all"></div>
+    <noscript>
+      <div id="error" class="alert alert-danger" style="margin:80px 0px 80px;z-index:9999999">  
+        <strong>Please enable JavaScript!</strong> This website will not work correctly with JavaScript disabled.
+      </div>
+    </noscript>
+      {% include '_socialmedia.html' ignore missing %}
+        <div id="body-content">
+          <div id="main-body-content">
+          {% if not current_user.is_anonymous() %}
+          <!-- checkpoint::logged-in::{{current_user.name}} -->
           {% endif %}
+      
+      
+          {% set active_page = active_page | default('index') -%}
+          {% set active_app  = active_app | default('none') -%}
+          {% include "_navbar.html" %}
+      
+            <div class="container-fluid" style="min-height:400px;">
           
+              {% block content %}{% endblock %}
+              
+              
+              {% if show_cookies_warning %}
+              <div id="cookies_warning" class="container">
+                <div class="col-md-12 text-center">
+                  <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="glyphicon glyphicon-thumbs-up"></i> OK</button> <a class="btn btn-success btn-xs" href="{{url_for('help.cookies_policy')}}"><i class="icon-info-sign"></i> More info</a></span></span>
+                </div>
+              </div>
+            {% endif %}
+            
+            </div>
           </div>
-        </div>
-        
-      <footer id="sticky-footer">
-        {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
-      </footer>
-    </div>
-      <!-- Le javascript
-      ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
-    <script>{% include 'cookies.js' %}</script>
-    <script src="{{url_for('static', filename='js/vkbeautify.js')}}" type="text/javascript"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/scripts.min.js')}}?v=1.2.3"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/placeholders.min.js')}}" ></script>
+          
+        <footer id="sticky-footer">
+          {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
+        </footer>
+      </div>
+        <!-- Le javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+      <script>{% include 'cookies.js' %}</script>
+      <script src="{{url_for('static', filename='js/vkbeautify.js')}}" type="text/javascript"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/scripts.min.js')}}?v=1.2.4"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/placeholders.min.js')}}" ></script>
   </body>
 </html>
