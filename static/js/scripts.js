@@ -13,7 +13,7 @@ $(function() {
         'height': ($(window).height()) + 'px'
     });
     }).resize();
-    $('.hidden-container').slideDown('slow');
+    $('.hidden-container').fadeIn();
     updateXML();
     $('.edit-profile-image').on("click", function() {
         $('#avatar').click();
