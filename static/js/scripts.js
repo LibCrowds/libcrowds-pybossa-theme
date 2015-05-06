@@ -107,6 +107,9 @@ $(function() {
         window.location = newLocation;
     }
     
+    $('.navbar-default')[0].offsetHeight; // Trigger a reflow, flushing the CSS changes
+    $('.navbar-default').removeClass('notransition');
+    
 });
 
 
