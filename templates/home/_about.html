@@ -1,3 +1,4 @@
+{% include "_flash_messages_floating.html" %}
 <div class="splash" id="about-splash">
   <div class="splash-overlay vcenter hcenter">
     <div class="container text-center ie-vcenter padding-top">
@@ -12,16 +13,19 @@
     </div>
   </div>
 </div>
-<div class="container-padded remove-padding-bottom">
     <a id="intro"></a>
-    <section class="white">
+    <section class="mid-grey pattern-brushed box-shadow-grey-bottom">
+        <p style="float:right;padding-right:10px;"><small>Photo: &copy; <a href="http://www.lensintheface.com" target="_href">Jon Ellis</a></small></p>
         <div class="container container-padded">
-            {% include "_flash_messages.html" %}
             <div class="col-md-11">
                 <h1>{{ _('About') }}</h1>
                 
-                <p>{{ brand }} is a crowd-sourcing platform with the ultimate goal of making important research material available
-                and accessible to a wider audience.</p>
+                <p>While the British Library is relatively young for a national library, its history stretches back until
+                long before computers were used for cataloguing as standard. The library's online database,
+                <a href="http://explore.bl.uk/" target="_blank">Explore</a>, provides public access to nearly 57 million records.
+                However, there are many important research items that can currently only be found by searching...</p>
+                
+                <p>Blah, blah, blah...this section will be updated soon with something more specific to the card catalogues :)</p>
                     
                 <p>Each project contains a collection of tasks related to a specific area of research. These are tasks that can be
                 accurately processed by computers, they require human intelligence. Each individual task can usually be completed quickly,
@@ -36,7 +40,7 @@
         </div>
     </section>
                    
-    <section class="mid-grey pattern-brushed box-shadow-grey">
+    <section class="white pattern-white-wall box-shadow-white-bottom">
         <div class="container container-padded">
             <div class="col-md-11 padding-bottom-sm">
                 <h2 class="inset-text-grey">{{ _('Technology') }}</h2>
@@ -67,4 +71,3 @@
             </div>
         </div>
     </section>
-</div>
