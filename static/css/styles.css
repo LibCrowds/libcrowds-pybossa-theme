@@ -216,7 +216,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .btn-circle{z-index:1;width:90px;height:90px;margin:0 auto;border-radius:50%;border:1px solid #fff;display:block;cursor:pointer;position:relative;overflow:hidden;font-weight:200;font-size:18px;color:#fff;text-transform:uppercase}
 .btn-circle-small{width:70px;height:70px}
 .btn-circle-small i{padding-top:10px;}
-.btn-circle a{color:#fff;display:inline-block;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transition:-webkit-transform .4s;-moz-transition:-moz-transform .4splashs;-ms-transition:-ms-transform .4s;-o-transition:-o-transform .4s;transition:transform .4s;-webkit-transform:translateY(-90px);-moz-transform:translateY(-90px);-ms-transform:translateY(-90px);-o-transform:translateY(-90px);transform:translateY(-90px)}
+.btn-circle a{color:#fff;display:inline-block;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-transition:-webkit-transform .4s;-moz-transition:-moz-transform .4s;-ms-transition:-ms-transform .4s;-o-transition:-o-transform .4s;transition:transform .4s;-webkit-transform:translateY(-90px);-moz-transform:translateY(-90px);-ms-transform:translateY(-90px);-o-transform:translateY(-90px);transform:translateY(-90px)}
 .btn-circle a div{height:87px;text-transform:uppercase;font-size:14px;font-weight:300}
 .btn-circle:hover a{transform:none}
 .btn-circle:hover,.btn-circle:focus,.btn-circle:active,.btn-circle.active,.open .dropdown-toggle.btn-primary{color:#FAFAFA;background-position:0 -15px}

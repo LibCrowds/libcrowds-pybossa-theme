@@ -1,8 +1,17 @@
 $(function() {
     $(window).on("resize", function() {
+    if ($(window).height() < 700) {
         $('.splash').css({
             'height': ($(window).height()) + 'px'
-        });
+        });    
+    } else {
+        $('.splash').css({
+            'height': ($(window).height() * .75) + 'px'
+        });   
+    }
+    $('#home-splash').css({
+        'height': ($(window).height()) + 'px'
+    });
     }).resize();
     $('.hidden-container').slideDown('slow');
     updateXML();
@@ -33,9 +42,6 @@ $(function() {
         });
         $(".well").height(m);
         animateProgress();
-        $('.btn-circle-small').css({
-            'top': (($(window).height())/2)-100 + 'px'
-        });
         if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
             $('.navbar').removeClass('opaque');
             $('.dropdown-menu').removeClass('opaque');
