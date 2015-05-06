@@ -89,8 +89,21 @@ $(function() {
     });
     $(".polaroids li:nth-child(even)").addClass("even");
     $("ul.polaroids div:nth-child(even) li").addClass("even");
-    $("#loading-overlay").fadeOut("fast");
+    $("#loading-overlay").fadeOut();
+    
+    
+    $('.nav-fade').click(function(e) {
+        e.preventDefault();
+        newLocation = this.href;
+            $('#loading-overlay').fadeIn('fast', newpage);
+        });
+        function newpage() {
+        window.location = newLocation;
+    }
+    
 });
+
+
 $(window).scroll(function() {
     if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
       $('.navbar').removeClass('opaque');
