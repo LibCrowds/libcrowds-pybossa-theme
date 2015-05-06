@@ -248,9 +248,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 #home-splash{background-image:url(../img/Cards/splash1.jpg)}
 #community-splash{background-image:url(../img/Cards/splash2.jpg)}
 #data-splash{background-image:url(../img/Cards/splash3.jpg)}
-#project-splash{background-image:url(../img/Cards/splash4.jpg)}
-#about-splash{background-image:url(../img/Cards/splash6.jpg)}
-#stats-splash{background-image:url(../img/Cards/splash5.jpg)}
+#about-splash{background-image:url(../img/Cards/splash4.jpg)}
 .splash h1{font-size:2.0em;text-shadow:none;color:#fff;font-weight:200}
 .splash-overlay{-webkit-transition:background 1s;-moz-transition:background 1s;-ms-transition:background 1s;-o-transition:background 1s;transition:background 1s;width:100%;height:100%}
 
