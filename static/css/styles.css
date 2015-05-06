@@ -381,7 +381,7 @@ body{font-size:16px}
 .vcenter-sm{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-flex-align:center;-ms-flex-align:center;-webkit-align-items:center}
 .pull-right-sm{float:right}
 .splash-overlay{background:rgba(0,0,0,.5)}
-.lead{font-size:1.2em;font-weight:200}
+.lead{font-size:1.1em;font-weight:200}
 }
 @media (min-width: 768px) and (max-width: 991px) {
 .bs-docs-sidenav{width:166px;margin-top:0}
