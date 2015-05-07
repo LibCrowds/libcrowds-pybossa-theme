@@ -1454,10 +1454,15 @@
 		}
 	});
 
-	Chart.Scale = Chart.Element.extend({
-		initialize : function(){
-			this.fit();
-		},
+	 Chart.Scale = Chart.Element.extend({
+        initialize: function() {
+            //truncate the labels if option is grater than 0
+            this.xLabels = this.labelLength > 0 ? this.xLabels.map(this.truncateLabel, this) : this.xLabels;
+            this.fit();
+        },
+        truncateLabel: function(label) {
+            return label.substring(0, this.labelLength) + "...";
+        },
 		buildYLabels : function(){
 			this.yLabels = [];
 
@@ -1468,11 +1473,12 @@
 			}
 			this.yLabelWidth = (this.display && this.showLabels) ? longestText(this.ctx,this.font,this.yLabels) : 0;
 		},
-		addXLabel : function(label){
-			this.xLabels.push(label);
-			this.valuesCount++;
-			this.fit();
-		},
+		addXLabel: function(label) {
+            //also added here for when adding single items of data to a graph
+            this.xLabels.push(this.labelLength > 0 ? this.truncateLabel(label) : label);
+            this.valuesCount++;
+            this.fit();
+        },
 		removeXLabel : function(){
 			this.xLabels.shift();
 			this.valuesCount--;
@@ -2209,6 +2215,7 @@
 			};
 
 			var scaleOptions = {
+				labelLength: this.options.labelLength,
 				templateString : this.options.scaleLabel,
 				height : this.chart.height,
 				width : this.chart.width,
