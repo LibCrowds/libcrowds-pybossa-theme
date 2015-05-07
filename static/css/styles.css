@@ -160,7 +160,7 @@ ul.users li a{display:block;margin-bottom:5px;margin-right:10px;margin-left:10px
 .nav-stacked li > a{color:#888;padding:2px 18px}
 .footer-links{display:inline}
 .sticky-footer-col{padding-top:10px}
-#sticky-footer{margin-top:20px;width:100%;position:absolute;bottom:0;background-color:#F7F7F7;font-family:sans-serif;font-size:12px;z-index:100}
+#sticky-footer{margin-top:20px;width:100%;position:absolute;bottom:0;background-color:#F9F9F9;font-family:sans-serif;font-size:12px;z-index:100}
 #sticky-footer ul{color:#777;list-style:none;padding:0;margin:0;width:100%;text-align:center}
 #main-body-content{padding-bottom:120px;min-height:800px}
 #sticky-footer li{text-align:center;display:inline-block}
