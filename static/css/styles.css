@@ -282,7 +282,6 @@ img.grey-border{border:1px solid #DDD}
 .jcrop-keymgr{display:none!important}
 .jcrop-holder{display:block;margin-right:auto;margin-left:auto}
 .loading-overlay{position:fixed;top:0;left:0;background:rgba(0,0,0,0.6);z-index:105;width:100%;height:100%;display:none}
-.cover-all{display:table;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:999999;}
 .loading-text{color:#fff;text-align:center;font-size:2em;height:100%}
 .pattern-brushed{background-image:url(../img/patterns/brushed.png)}
 .pattern-classy-fabric{background-image:url(../img/patterns/classy_fabric.png)}
@@ -373,6 +372,7 @@ body > footer .container{padding-left:20px;padding-right:20px}
 .text-center-xs{text-align:center}
 }
 @media (min-width: 768px) {
+.cover-all{display:table;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:999999;}
 .form-horizontal .control-label{padding-top:13px}
 .flickr-thumbnails h4, .flickr-thumbnails .h4{text-overflow:ellipsis;}
 body{font-size:16px}
