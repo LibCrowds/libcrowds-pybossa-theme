@@ -238,7 +238,7 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         $("#top-users").attr("width", $('#top-users-chart').width());
         $("#top-users").attr("height", 300);
         var ctx = $("#top-users")[0].getContext("2d");
-        var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+        var opts = {labelLength:8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
         var topUsersChart = new Chart(ctx).Bar(data, opts);
         topUsersChart.draw();
         topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
