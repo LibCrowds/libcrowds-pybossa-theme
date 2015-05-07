@@ -198,7 +198,6 @@ if (typeof(console) == 'undefined') {
     };
 
     pybossa.saveTask = function ( taskid, answer ) {
-      console.log('saving: ' + taskid);
         return getTask( taskid, answer ).pipe(createTaskRun);
     };
 
