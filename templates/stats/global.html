@@ -40,6 +40,17 @@
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
+                            <h4 class="text-center padding-bottom-sm">Most Active Volunteers</h4>
+                            <div id="top-users-alltime-chart">
+                                <canvas id="top-users-alltime" style="max-height:300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row padding-bottom-sm">
+                    <div class="col-xs-12">
+                        <div class="white-rounded inset-shadow-white chart">
                             <h4 class="text-center padding-bottom-sm">Answers Submitted and Tasks Completed per Day</h4>
                             <div id="task-date-chart">
                                 <canvas id="task-date" style="max-height:300px;"></canvas>
@@ -472,6 +483,42 @@ $(function(){
             $("#top-5-row").hide();
         {% endif %}
         
+        //Top volunteers of all time
+        var users = [];
+        var tasks = [];
+        {% if top_users %}
+            {% for user in top_users %}
+                users.push('{{user.name}}');
+                tasks.push(parseInt({{user.task_runs}}));
+            {% endfor %}
+            var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+            var data = {
+                labels: users,
+                datasets: [
+                    {
+                        label: "Top Volunteers of All Time",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        highlightFill: "rgba(151,187,205,0.1)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: tasks
+                    }
+                ]
+            };
+            console.log(tasks);
+            console.log(users);
+            $("#top-users-alltime").attr("width", $('#top-users-alltime-chart').width());
+            $("#top-users-alltime").attr("height", 300);
+            var ctx = $("#top-users-alltime")[0].getContext("2d");
+            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+            var topUsersAlltimeChart = new Chart(ctx).Bar(data, opts);
+            topUsersAlltimeChart.draw();
+            topUsersAlltimeChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
+            topUsersAlltimeChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
+            topUsersAlltimeChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,5)";
+            topUsersAlltimeChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
+            topUsersAlltimeChart.update();
+        {% endif %}
 });
 </script>
 {% endblock %}
