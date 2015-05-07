@@ -364,7 +364,7 @@ $(function(){
             $("#top-users").attr("width", $('#top-users-chart').width());
             $("#top-users").attr("height", 300);
             var ctx = $("#top-users")[0].getContext("2d");
-            var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
             var topUsersChart = new Chart(ctx).Bar(data, opts);
             topUsersChart.draw();
             topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
@@ -460,7 +460,7 @@ $(function(){
             $("#top-projects").attr("width", $('#top-projects-chart').width());
             $("#top-projects").attr("height", 300);
             var ctx = $("#top-projects")[0].getContext("2d");
-            var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
             var topProjectsChart = new Chart(ctx).Bar(data, opts);
             topProjectsChart.draw();
             topProjectsChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
