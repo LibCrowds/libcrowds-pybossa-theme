@@ -5,7 +5,7 @@
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-{{ render_local_nav(current_user, "blog", app.short_name) }}
+{{ render_local_nav(current_user, "blog", project.short_name) }}
 <div class="container-padded hidden-container" style="display:none;">
     <div class="container container-padded">
         <div class="row">
@@ -13,8 +13,8 @@
                 {% include "_flash_messages.html" %}
                     {{ helper.render_app_title(app) }}
                     <h2>{{ _('Edit the blog post') }}</h2>
-                    <form class="form-horizontal" method="post" action="{{ url_for('app.update_blogpost',
-                                                                    short_name=app.short_name,
+                    <form class="form-horizontal" method="post" action="{{ url_for('project.update_blogpost',
+                                                                    short_name=project.short_name,
                                                                     id=blogpost.id) }}">
                         {{ form.hidden_tag() }}
                         <fieldset>
@@ -22,7 +22,7 @@
                             {{ render_field(form.body, class_="col-md-4", placeholder= _('Write your post here. You can use Markdown!')) }}
                             <div class="form-actions">
                                 <input type="submit" value={{_('Update')}} class="btn btn-danger" />
-                                <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
+                                <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn">{{_('Cancel')}}</a>
                             </div>
                         </fieldset>
                     </form>

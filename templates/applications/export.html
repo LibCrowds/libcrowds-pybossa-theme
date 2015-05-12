@@ -6,7 +6,7 @@
 
 {% block content %}
     <span class="set-main-bg" data-bg="pattern-white-wall"></span>
-        {{ render_local_nav(current_user, 'export', app.short_name) }}
+        {{ render_local_nav(current_user, 'export', project.short_name) }}
             <div class="container-padded hidden-container" style="display:none;">
                 <div class="container container-padded">
                     <div class="row">
@@ -18,7 +18,7 @@
                         <div class="row">
                             
                             <div id="csv-task" class="col-sm-6 col-md-3">
-                                <a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='csv')}}" rel="nofollow">
+                                <a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='csv')}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-file-excel-o fa-4x"></i> 
                                         <h3  class="margin-bottom-xs">{{_('Tasks (CSV)')}}</h3>
@@ -26,7 +26,7 @@
                                 </a>
                             </div>
                             <div id="users-list" class="col-sm-6 col-md-3">
-                                <a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}}" rel="nofollow">
+                                <a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv')}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-file-excel-o fa-4x"></i> 
                                         <h3  class="margin-bottom-xs">{{_('Answers (CSV)')}}</h3>
@@ -34,7 +34,7 @@
                                 </a>
                             </div>
                             <div id="json-task" class="col-sm-6 col-md-3">
-                                <a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}}" rel="nofollow">
+                                <a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='json')}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-code fa-4x"></i> 
                                         <h3  class="margin-bottom-xs">{{_('Tasks (JSON)')}}</h3>
@@ -42,7 +42,7 @@
                                 </a>
                             </div>
                             <div id="users-list" class="col-sm-6 col-md-3">
-                                <a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='json')}}" rel="nofollow">
+                                <a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='json')}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-code fa-4x"></i> 
                                         <h3  class="margin-bottom-xs">{{_('Answers (JSON)')}}</h3>

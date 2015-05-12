@@ -5,7 +5,7 @@
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-{{ render_local_nav(current_user, "import", app.short_name) }}
+{{ render_local_nav(current_user, "import", project.short_name) }}
 <div class="container-padded hidden-container" style="display:none;">
     <div class="container container-padded">
         <div class="row">

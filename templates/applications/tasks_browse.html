@@ -5,7 +5,7 @@
 
 {% block content %}
 {% if app %}
-{{ render_local_nav(current_user, "tasks", app.short_name) }}
+{{ render_local_nav(current_user, "tasks", project.short_name) }}
 <div class="container-padded hidden-container" style="display:none;">
     <div class="container container-padded">
         <div class="row">
@@ -34,12 +34,12 @@
                         {% endif %}
                         <div class="col-sm-4">
                         {% if task_pct >= 100 %}
-                            <a id="fulldownload" class="btn btn-success" href="{{ url_for('app.export', 
-                                short_name=app.short_name,
+                            <a id="fulldownload" class="btn btn-success" href="{{ url_for('project.export', 
+                                short_name=project.short_name,
                                 task_id=t.id) }}"><i class="fa fa-download"></i> {{_('Download Results')}}</a>
                         {% elif task_pct > 0 and task_pct < 100 %}
-                            <a id="partialdownload" class="btn btn-primary" href="{{ url_for('app.export', 
-                                short_name=app.short_name,
+                            <a id="partialdownload" class="btn btn-primary" href="{{ url_for('project.export', 
+                                short_name=project.short_name,
                                 task_id=t.id) }}"><i class="fa fa-download"></i> {{_('Download Partial results')}}</a>
 
                          {% else %}

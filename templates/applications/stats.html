@@ -16,7 +16,7 @@
 <link href="{{url_for('static', filename='css/stats/MarkerCluster.css')}}" rel="stylesheet" type="text/css">
 <link href="{{url_for('static', filename='css/stats/MarkerCluster.Default.css')}}" rel="stylesheet" type="text/css">
 <script src="{{url_for('static', filename='js/stats/leaflet.markercluster.js')}}" type="text/javascript"></script>
-    {{ render_local_nav(current_user, "statistics", app.short_name) }}
+    {{ render_local_nav(current_user, "statistics", project.short_name) }}
     <div class="container-padded  remove-padding-bottom hidden-container" style="display:none;">
        <div class="container container-padded">
            <div class="row">
@@ -28,7 +28,7 @@
                        <div class="row padding-bottom-sm">
                            <div class="col-xs-12">
                                <div class="white-rounded inset-shadow-white">
-                                   <h1><strong>{{app.name}}:</strong> Statistics</h1>
+                                   <h1><strong>{{project.name}}:</strong> Statistics</h1>
                                </div>
                            </div>
                        </div>

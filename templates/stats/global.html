@@ -441,8 +441,8 @@ $(function(){
         var tasks = [];
         {% if top5_apps_1_week %}
             {% for app in top5_apps_1_week %}
-                projects.push('{{app.name}}');
-                tasks.push(parseInt({{app.n_answers}}));
+                projects.push('{{project.name}}');
+                tasks.push(parseInt({{project.n_answers}}));
             {% endfor %}
             var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
             var data = {

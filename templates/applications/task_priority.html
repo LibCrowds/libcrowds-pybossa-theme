@@ -6,7 +6,7 @@
 
 {% block content %}
 {% if app %}
-{{ render_local_nav(current_user, "tasks", app.short_name) }}
+{{ render_local_nav(current_user, "tasks", project.short_name) }}
 <div class="container-padded hidden-container" style="display:none;">
     <div class="container container-padded">
         <div class="row">
@@ -17,13 +17,13 @@
                 <p>Set the <strong>{{_('priority')}}</strong> of one or more tasks by providing a list of task IDs below.</p>
                 <p>The lowest priority is <span class="label label-danger">0.0</span> and the highest is <span class="label label-danger">1.0</span></p>
                 <p>This priority value is only respected by the <strong>{{_('default scheduler')}}</strong>.</p>
-                <form id="task_priority" class="form-horizontal" method="post" action="{{ url_for('app.task_priority', short_name=app.short_name) }}">
+                <form id="task_priority" class="form-horizontal" method="post" action="{{ url_for('project.task_priority', short_name=project.short_name) }}">
                     {{ form.hidden_tag() }}
                     <fieldset>
                         {{ render_field(form.task_ids, class_="form-control", placeholder=_('Comma separated task IDs (e.g. 3, 532, 100)'), required="required", autofocus="autofocus")}}
                         {{ render_field(form.priority_0, class_="form-control", placeholder=_('Priority between 0.0 and 1.0'), required="required", type="number", step="any")}}
                         <div class="pull-right" role="group">
-                            <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+                            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
                             <input type="submit" value="Set Priority" class="btn btn-danger" />
                         </div>
                     </fieldset>

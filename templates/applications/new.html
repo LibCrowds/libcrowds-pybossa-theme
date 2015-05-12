@@ -14,7 +14,7 @@
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
                     <h4 class="text-center">{{ _('Create a new project') }}</h4>
-                    <form role="form" method="post" action="{{ url_for('app.new')}}" enctype="multipart/form-data">
+                    <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
                     {{ form.hidden_tag() }}
                     <fieldset>
                         {{ render_field(form.name, placeholder=_('Name'), class="form-control", required="required", autofocus="autofocus") }}

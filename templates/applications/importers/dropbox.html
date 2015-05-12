@@ -1,6 +1,6 @@
 {% extends "/base.html" %}
 {% set active_page = "applications" %}
-{% set active_app  = app.short_name %}
+{% set active_app  = project.short_name %}
 {% import "applications/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 
@@ -8,26 +8,26 @@
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="{{ config.get('DROPBOX_APP_KEY') }}"></script>
-        {{ render_local_nav(current_user, "tasks", app.short_name) }}
+        {{ render_local_nav(current_user, "tasks", project.short_name) }}
             <div class="container-padded hidden-container" style="display:none;">
                 <div class="container container-padded">
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-3">
                           {% include "_flash_messages.html" %}
                             {{ helper.render_loading("Importing tasks, this may take a while, please wait...") }}
-                            <h1><strong>{{app.name}}</strong>: {{_('Import tasks')}}</h1>
+                            <h1><strong>{{project.name}}</strong>: {{_('Import tasks')}}</h1>
                             <hr>
                               <h3>{{_('From Dropbox')}}</h3>
                                <div id="dropbox-chooser"></div>
                                <br>
                                {% if form %}
-                               <form method="post" action="{{ url_for(target, short_name=app.short_name) }}">
+                               <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
                                    <fieldset>
                                        {{ form.hidden_tag() }}
                                        <p id="message" style="display: none;">{{ _('You are about to import') }} <span id="numFiles"></span> {{ _('files') }}.</p>
                                        {{ form.files(style="display: none;") }}
                                        <div class="pull-right" role="group">
-                                        <a href="{{ url_for('app.tasks', short_name=app.short_name) }}" class="btn btn-default">{{_('Cancel')}}</a>
+                                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">{{_('Cancel')}}</a>
                                            <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-danger" />
                                        </div>
                                    </fieldset>

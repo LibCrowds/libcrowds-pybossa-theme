@@ -5,22 +5,22 @@
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-{{ helper.render_local_nav(current_user, 'blog', app.short_name) }}
+{{ helper.render_local_nav(current_user, 'blog', project.short_name) }}
     <div class="container-padded hidden-container" style="display:none;">
         <div class="container container-padded">
         <div id="app-form" class="row"> 
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
                 {{ helper.render_app_title(app) }}
-                <h2>{{ _('Write a new blog post for ad') }} {{ app.name }}</h2>
-            <form class="form-horizontal" method="post" action="{{ url_for('app.new_blogpost', short_name=app.short_name) }}">
+                <h2>{{ _('Write a new blog post for ad') }} {{ project.name }}</h2>
+            <form class="form-horizontal" method="post" action="{{ url_for('project.new_blogpost', short_name=project.short_name) }}">
                 {{ form.hidden_tag() }}
                 <fieldset>
                     {{ render_field(form.title, class_="col-md-4", placeholder= _('The title of your post')) }}
                     {{ render_field(form.body, class_="col-md-4", placeholder= _('Write your post here. You can use Markdown!')) }}
                     <div class="form-actions">
                         <input type="submit" value={{_('Create')}} class="btn btn-danger" />
-                        <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn">{{_('Cancel')}}</a>
+                        <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn">{{_('Cancel')}}</a>
                     </div>
                 </fieldset>
             </form>

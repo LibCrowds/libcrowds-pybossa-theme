@@ -1,6 +1,6 @@
 {% extends "/base.html" %}
 {% set active_page = "applications"  %}
-{% set active_app = app.short_name %}
+{% set active_app = project.short_name %}
 
 {% block content %}
 <script>
@@ -24,7 +24,7 @@
             </div>
         </div>
         {% endif %}
-        {{ app.info.task_presenter|safe }}
+        {{ project.info.task_presenter|safe }}
         
         
         <div id='PYBOSSA_USER_LOCALE' hidden>
