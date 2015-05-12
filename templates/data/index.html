@@ -40,9 +40,9 @@
                         <tbody>
                             {% for app in apps %}
                                 <tr>
-                                    <td><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{app.name}}</a></td>
-                                    <td class="text-center"><a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
-                                    <td class="text-center"><a href="{{url_for('app.export_to', short_name=app.short_name, type='task', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                                    <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
+                                    <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                                    <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -65,9 +65,9 @@
                         <tbody>
                             {% for app in apps %}
                                 <tr>
-                                    <td><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{app.name}}</a></td>
-                                    <td class="text-center"><a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
-                                    <td class="text-center"><a href="{{url_for('app.export_to', short_name=app.short_name, type='task_run', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                                    <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
+                                    <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
+                                    <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -90,9 +90,9 @@
                         <tbody>
                             {% for app in apps %}
                                 <tr>
-                                    <td><a href="{{ url_for('app.details', short_name = app.short_name) }}">{{app.name}}</a></td>
-                                    <td class="text-center"><a href="{{app.flickr_link}}" target="_blank"><i class="fa fa-link"></i></a></td>
-                                    <td class="text-center"><a href="{{ url_for('uploads.uploaded_file', filename=(app.info.container + '/' + app.info.image_set))}}"><i class="fa fa-download" data-filesize="{{app.info.image_set_size}}"></i></a></td>
+                                    <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
+                                    <td class="text-center"><a href="{{project.flickr_link}}" target="_blank"><i class="fa fa-link"></i></a></td>
+                                    <td class="text-center"><a href="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.image_set))}}"><i class="fa fa-download" data-filesize="{{project.info.image_set_size}}"></i></a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

@@ -5,7 +5,7 @@
 
 {% block content %}
 {% if app %}
-        {{ render_local_nav(current_user, 'blogpost', app.short_name) }}
+        {{ render_local_nav(current_user, 'blogpost', project.short_name) }}
             <div class="container-padded hidden-container" style="display:none;">
                 <div class="container container-padded">
                     <div class="row">
@@ -19,7 +19,7 @@
                                 {% for blogpost in blogposts %}
                                     <li>
                                         <div>
-                                            <a href="{{url_for('app.show_blogpost', short_name=app.short_name, id=blogpost.id)}}">{{ blogpost.title }}</a>
+                                            <a href="{{url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id)}}">{{ blogpost.title }}</a>
                                         </div>
                                     </li>
                                 {% endfor %}

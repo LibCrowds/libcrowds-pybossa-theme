@@ -6,7 +6,7 @@
 
 {% block content %}
 {% if app %}
-{{ render_local_nav(current_user, "tasks", app.short_name) }}
+{{ render_local_nav(current_user, "tasks", project.short_name) }}
 <div class="container-padded hidden-container" style="display:none;">
     <div class="container container-padded">
         <div class="row">
@@ -21,12 +21,12 @@
                     <li><strong>{{_('Random')}}</strong>: returns a random task - a user could get the same task more than once.</li>
                 </ul>
 
-                <form id="task_scheduler" class="form-horizontal" method="post" action="{{ url_for('app.task_scheduler', short_name=app.short_name) }}">
+                <form id="task_scheduler" class="form-horizontal" method="post" action="{{ url_for('project.task_scheduler', short_name=project.short_name) }}">
                     {{ form.hidden_tag() }}
                     <fieldset>
                         {{ render_field(form.sched, class_="form-control", placeholder="Task scheduler for your app")}}
                         <div class="pull-right" role="group">
-                            <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+                            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
                             <input type="submit" value="Set" class="btn btn-danger" />
                         </div>
                     </fieldset>

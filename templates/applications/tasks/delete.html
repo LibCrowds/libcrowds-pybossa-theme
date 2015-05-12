@@ -5,21 +5,21 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-        {{ render_local_nav(current_user, "tasks", app.short_name) }}
+        {{ render_local_nav(current_user, "tasks", project.short_name) }}
             <div class="container-padded hidden-container" style="display:none;">
                 <div class="container container-padded">
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-3">
-                            <h1><strong>{{app.name}}</strong>: Delete all Tasks and Task Runs</h1>
+                            <h1><strong>{{project.name}}</strong>: Delete all Tasks and Task Runs</h1>
                             <div class="alert alert-danger">
                                 <strong>{{_('Warning!')}}</strong> {{_('If you delete the tasks and task runs they will be gone forever!')}}
                             </div>
-                            <form role="form" method="post" action="{{ url_for('app.delete_tasks', short_name = app.short_name) }}">
+                            <form role="form" method="post" action="{{ url_for('project.delete_tasks', short_name = project.short_name) }}">
                                 <h3><strong>{{_('Are you sure you want to delete ALL of the project tasks and associated task runs?')}}</strong></h3>
                                 <div class="pull-right" role="group">
                                     <button type="submit" name='btn' class="btn btn-default" value="Yes">{{_('Yes')}}</button>
                                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                                    <a href="{{ url_for('app.tasks', short_name = app.short_name) }}"
+                                    <a href="{{ url_for('project.tasks', short_name = project.short_name) }}"
                                     class="btn btn-danger">{{_('No, do not delete anything!')}}</a>
                                 </div>
                             </form>

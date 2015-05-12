@@ -6,16 +6,16 @@
 {% block content %}
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
-{{ render_local_nav(current_user, "tasks", app.short_name) }}
+{{ render_local_nav(current_user, "tasks", project.short_name) }}
 <div class="container-padded hidden-container" style="display:none;">
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-              <h1><strong>{{app.name}}</strong>: {{_('Project Details')}}</h1>
+              <h1><strong>{{project.name}}</strong>: {{_('Project Details')}}</h1>
               <hr>
               <!-- Update form for project thumbnail -->
-              <form method="post" class="form-horizontal upload-img-form padding-top-xs" action="{{ url_for('app.update', short_name=app.short_name) }}" enctype="multipart/form-data">
+              <form method="post" class="form-horizontal upload-img-form padding-top-xs" action="{{ url_for('project.update', short_name=project.short_name) }}" enctype="multipart/form-data">
                   <fieldset>
                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <div class="col-xs-12 text-center">
@@ -51,7 +51,7 @@
               </form>
             {{ helper.render_loading("Loading, please wait...") }}
               <!-- Update form for project data-->
-            <form class="visible-form" method="post" action="{{ url_for('app.update', short_name = app.short_name) }}" enctype="multipart/form-data">
+            <form class="visible-form" method="post" action="{{ url_for('project.update', short_name = project.short_name) }}" enctype="multipart/form-data">
               <fieldset>
                 {{ form.hidden_tag() }}
                 
@@ -67,7 +67,7 @@
                 {{ form_helper.render_field(form.image_set, class="form-control", visible='true') }}
                 {{ form_helper.render_field_horizontal(form.hidden) }}
                 <div role="group" class="pull-right">
-                    <a href="{{url_for('app.tasks', short_name=app.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+                    <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
                   <button type="submit" name="btn" value="Save the changes" class="btn btn-danger">{{_('Save')}}</button>
                 </div>
               </fieldset>

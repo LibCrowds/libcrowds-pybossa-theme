@@ -109,7 +109,7 @@
         </div>
          <!--- Social media buttons --->
           <a href="#" id="fb-share" target="_blank" class="btn btn-facebook"><i class="fa fa-facebook"></i> Share</a>
-          <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fapp%2F{{app.short_name}}%2Ftask%2F734&text={{app.description}}
+          <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fapp%2F{{project.short_name}}%2Ftask%2F734&text={{project.description}}
           &tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com&via=britishlibrary" class="btn btn-twitter">
   <i class="fa fa-twitter"></i> Tweet</a>
           </div>
@@ -132,7 +132,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                <h3 class="text-center">The {{app.name}} tutorial</h3>
+                <h3 class="text-center">The {{project.name}} tutorial</h3>
             </div>
 			
             <div id="0" class="modal-body">
@@ -187,9 +187,9 @@
   
   //Tutorial cookie
   $(document).ready(function() {
-    if ($.cookie('{{app.short_name}}') === null) {
+    if ($.cookie('{{project.short_name}}') === null) {
       $('#modal').modal('show');
-      $.cookie('{{app.short_name}}', '7');
+      $.cookie('{{project.short_name}}', '7');
     }
   });
   
@@ -199,10 +199,10 @@
       FB.ui({
           method: 'feed',  
           link: "http://www.libcrowds.com",
-          name: "LibCrowds: {{app.name}}",
+          name: "LibCrowds: {{project.name}}",
           picture: "http://libcrowds.com/static/img/BL_logo.jpg",
           caption: "A crowdsourcing project from the British Library",
-          description: "{{app.description}}."
+          description: "{{project.description}}."
       }, function(response) {
           if (response && response.post_id) {
              $("#shared").fadeIn();
@@ -239,7 +239,7 @@
     showStep('next');
 
 function loadUserProgress() {
-    pybossa.userProgress('{{app.short_name}}').done(function(data){
+    pybossa.userProgress('{{project.short_name}}').done(function(data){
         var pct = Math.round((data.done*100)/data.total);
         $("#progress").css("width", pct.toString() +"%");
         $("#progress").attr("title", pct.toString() + "% completed!");
@@ -525,7 +525,7 @@ pybossa.presentTask(function(task, deferred) {
               {
                 $("#shelfmark_field").val('');
               }
-              task.answer.shelfmark = $("#shelfmark_field").val().replace(/\s/g, "").replace(/,/g,".");
+              task.answer.shelfmark = $("#shelfmark_field").val().replace(/\s/g, " ").replace(/,/g,".");
               console.log(task.answer);
                 pybossa.saveTask(task.id, task.answer)
                   .done(function() {
@@ -549,6 +549,6 @@ pybossa.presentTask(function(task, deferred) {
     }
 });
 
-pybossa.run('{{app.short_name}}');
+pybossa.run('{{project.short_name}}');
 
 </script>
