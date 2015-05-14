@@ -12,7 +12,7 @@
                 {% include "_flash_messages.html" %}
                 <h1><strong>{{brand}}</strong>: API Help</h1>
                 <p>{{brand}} has a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a> that can be used for creating new projects,
-                getting tasks, submitting answers, etc. The API end point is available at:
+                getting tasks, submitting contributions, etc. The API end point is available at:
                 </p>
                 <ul>
                     <li><a href="{{url_for('api.index')}}">{{url_for('api.index', _external=True)}}</a></li>
@@ -85,7 +85,7 @@
                 you can use <em>limit</em> and <em>offset</em> to tune the number of results.
                 For further information read the <a href="http://docs.pybossa.com/en/latest/api.html">documentation</a>.
                 </p>
-                <p>You can also do <strong>queries using the API</strong>. For example, get the task runs -in other words the answers for a given task- for a given project using the project id:</p>
+                <p>You can also do <strong>queries using the API</strong>. For example, get the contributions for a given task- for a given project using the project id:</p>
                 <ul>
                     <li><a href="{{url_for('api.api_taskrun', project_id=project_id)}}">{{url_for('api.api_taskrun', project_id=project_id, _external=True)}}</a></li>
                 </ul>

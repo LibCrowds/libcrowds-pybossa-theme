@@ -16,7 +16,7 @@
               <li class="nav-link {% if active_page == 'about' %} active{% endif %}"><a class="nav-fade" href="{{ url_for('home.about')}}">{{ _('About') }}</a></li>
               <li class="nav-link {% if active_page == 'globalstats' %} active{% endif %}"><a class="nav-fade" href="{{ url_for('stats.index')}}">{{ _('Statistics') }}</a></li>
               <li class="nav-link {% if active_page == 'community' %} active{% endif %}"><a class="nav-fade" href="{{ url_for('account.index')}}">{{ _('Community') }}</a></li>
-              <li class="nav-link {% if active_page == 'data' %} active{% endif %}"><a class="nav-fade" href="/data/index.html">{{ _('Data') }}</a></li>
+              <li class="nav-link {% if active_page == 'data' %} active{% endif %}"><a class="nav-fade" href="{{ url_for('data.index')}}">{{ _('Data') }}</a></li>
          </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
