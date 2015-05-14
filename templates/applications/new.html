@@ -6,11 +6,11 @@
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-        {{ render_local_nav(current_user, "newapp") }}
+        {{ render_local_nav(current_user, "newproject") }}
 <div class="container-padded hidden-container" style="display:none;">
     <div class="container container-padded">
         {% if current_user.admin %}
-        <div id="app-form" class="row">
+        <div id="project-form" class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
                     <h4 class="text-center">{{ _('Create a new project') }}</h4>

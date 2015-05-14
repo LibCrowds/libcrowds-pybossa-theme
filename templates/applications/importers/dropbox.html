@@ -7,7 +7,7 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
-<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="{{ config.get('DROPBOX_project_KEY') }}"></script>
+<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-project-key="{{ config.get('DROPBOX_project_KEY') }}"></script>
         {{ render_local_nav(current_user, "tasks", project.short_name) }}
             <div class="container-padded hidden-container" style="display:none;">
                 <div class="container container-padded">
