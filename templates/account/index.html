@@ -39,7 +39,7 @@
                 <a href="{{url_for('account.profile', name=account.name)}}" class="polaroid polaroid-sm" rel="popover" title="{{account.name}}" data-polaroid-title="{{account.name}}" data-html="true" data-content="
                   <strong>{{_('Joined')}}:</strong> {{account.created[0:10]}} 
                   <br/>
-                  <strong>{{_('Answers')}}:</strong> {{account.task_runs}}
+                  <strong>{{_('Contributions')}}:</strong> {{account.task_runs}}
                   " rel="popover" data-original-title="<strong>{{account.name}}</strong>">
                   {{ helper.render_user_thumbnail(account, upload_method) }}
                 </a>

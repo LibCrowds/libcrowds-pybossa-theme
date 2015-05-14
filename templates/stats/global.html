@@ -32,7 +32,7 @@
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
-                            <h3 class="text-center"><span class="check-plural" data-num="{{stats.n_total_users}}" data-noun="volunteer"></span> have participated in <span class="check-plural" data-num="{{stats.n_published_projects}}" data-noun="project"></span>, submitted <span class="check-plural" data-num="{{stats.n_task_runs}}" data-noun="answer"></span> and completed <span class="check-plural" data-num="{{stats.n_tasks_completed}}" data-noun="task"></span></h3>
+                            <h3 class="text-center"><span class="check-plural" data-num="{{stats.n_total_users}}" data-noun="volunteer"></span> have participated in <span class="check-plural" data-num="{{stats.n_published_projects}}" data-noun="project"></span>, submitted <span class="check-plural" data-num="{{stats.n_task_runs}}" data-noun="contribution"></span> and completed <span class="check-plural" data-num="{{stats.n_tasks_completed}}" data-noun="task"></span></h3>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Answers Submitted and Tasks Completed per Day</h4>
+                            <h4 class="text-center padding-bottom-sm">Contributions and Completed Tasks per Day</h4>
                             <div id="task-date-chart">
                                 <canvas id="task-date" style="max-height:300px;"></canvas>
                             </div>
@@ -252,13 +252,13 @@ $(function(){
         canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
           
         //Tasks completed per day
-        $answers = {{task_runs_daily|safe}}['days'];
+        $contributions = {{task_runs_daily|safe}}['days'];
         $completed = {{tasks_completed_daily|safe}}['days'];
         
-        $answerTasks = {{task_runs_daily|safe}}['tasks'];
+        $contributionTasks = {{task_runs_daily|safe}}['tasks'];
         $completedTasks = {{tasks_completed_daily|safe}}['tasks'];
         
-        var compiledDates = $answers.concat($completed);
+        var compiledDates = $contributions.concat($completed);
         compiledDates.sort(function(a, b){
             return new Date(a) - new Date(b);
         });
@@ -273,15 +273,15 @@ $(function(){
             }
         });
         
-        var answerData = [];
+        var contributionData = [];
         var completedData = [];
         
         $.each(sortedDatesFull, function(i, date){
             var dateObj = new Date(date);
-            if($.inArray(date, $answers)!==-1) {
-                answerData.push($answerTasks.shift());
+            if($.inArray(date, $contributions)!==-1) {
+                contributionData.push($contributionTasks.shift());
             } else {
-                answerData.push(0);
+                contributionData.push(0);
             }
             if($.inArray(date, $completed)!==-1) {
                 completedData.push($completedTasks.shift());
@@ -293,14 +293,14 @@ $(function(){
             labels: sortedDates,
             datasets: [
                 {
-                    label: "answer",
+                    label: "contribution",
                     fillColor: "rgba(151,187,205,0.2)",
                     strokeColor: "rgba(151,187,205,1)",
                     pointColor: "rgba(151,187,205,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: answerData
+                    data: contributionData
                 },
                 {
                     label: "completed task",
@@ -358,7 +358,7 @@ $(function(){
         {% if top5_users_1_week %}
             {% for user in top5_users_1_week %}
                 users.push('{{user.name}}');
-                tasks.push(parseInt({{user.n_answers}}));
+                tasks.push(parseInt({{user.n_contributions}}));
             {% endfor %}
             var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
             var data = {
@@ -377,7 +377,7 @@ $(function(){
             $("#top-users").attr("width", $('#top-users-chart').width());
             $("#top-users").attr("height", 300);
             var ctx = $("#top-users")[0].getContext("2d");
-            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
             var topUsersChart = new Chart(ctx).Bar(data, opts);
             topUsersChart.draw();
             topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
@@ -417,7 +417,7 @@ $(function(){
             labels: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
             datasets: [
                 {
-                    label: "Authenticated (" + authSum + " total answers)",
+                    label: "Authenticated (" + authSum + " total contributions)",
                     fillColor: "rgba(151,187,205,0.2)",
                     strokeColor: "rgba(151,187,205,1)",
                     pointColor: "rgba(151,187,205,1)",
@@ -430,7 +430,7 @@ $(function(){
         };
         var canvas = document.getElementById("dow");
         var ctx = $("#dow")[0].getContext("2d");
-        var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+        var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
         var dowChart = new Chart(ctx).Radar(data, opts);
         var dowLegendHolder = document.getElementById('dow-legend')
         canvas.parentNode.parentNode.appendChild(dowLegendHolder.firstChild);
@@ -442,7 +442,7 @@ $(function(){
         {% if top5_projects_1_week %}
             {% for project in top5_projects_1_week %}
                 projects.push('{{project.name}}');
-                tasks.push(parseInt({{project.n_answers}}));
+contributions                tasks.push(parseInt({{project.n_contributions}}));
             {% endfor %}
             var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
             var data = {
@@ -461,7 +461,7 @@ $(function(){
             $("#top-projects").attr("width", $('#top-projects-chart').width());
             $("#top-projects").attr("height", 300);
             var ctx = $("#top-projects")[0].getContext("2d");
-            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
             var topProjectsChart = new Chart(ctx).Bar(data, opts);
             topProjectsChart.draw();
             topProjectsChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
@@ -500,7 +500,7 @@ $(function(){
             $("#top-users-alltime").attr("width", $('#top-users-alltime-chart').width());
             $("#top-users-alltime").attr("height", 300);
             var ctx = $("#top-users-alltime")[0].getContext("2d");
-            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>answers<%}else\u007B%>answer<%}%>"};
+            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
             var topUsersAlltimeChart = new Chart(ctx).Bar(data, opts);
             topUsersAlltimeChart.draw();
             topUsersAlltimeChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";

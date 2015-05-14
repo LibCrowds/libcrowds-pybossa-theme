@@ -61,7 +61,7 @@
           <a href="{{url_for('account.profile', name=user.name)}}" data-content="
              <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}} 
              <br/>
-             <strong>{{_('Answers')}}:</strong> {{user.task_runs}}
+             <strong>{{_('Contributions')}}:</strong> {{user.task_runs}}
              " rel="popover" data-original-title="<strong>{{user.name}}</strong>">
              <div class="shadow img-circle shadow-circle">
           {{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;", class="img-circle") }}
