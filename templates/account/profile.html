@@ -2,7 +2,7 @@
 {% set active_page = "profile" %}
 {% set active_link = "profile" %}
 {% import "account/_helpers.html" as helper %}
-{% import "applications/_helpers.html" as app_helper %}
+{% import "projects/_helpers.html" as project_helper %}
 
 {% block content %}
 <span class="set-main-bg" data-bg="pattern-white-wall"></span>
@@ -14,16 +14,16 @@
         </div>
     </section>
     
-            {% if apps_contrib %}
-                <section id="contributed-apps" class="white pattern-white-wall inset-shadow-top">
-                    {{app_helper.render_grid_apps(apps_contrib, "Your Contributions", upload_method)}}
+            {% if projects_contrib %}
+                <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
+                    {{project_helper.render_grid_projects(projects_contrib, "Your Contributions", upload_method)}}
                 </section>
             {% else %}
             
                     
                 <small>No contributions yet</small>
             {% endif %}
-        {{ app_helper.broken_image() }}
+        {{ project_helper.broken_image() }}
     
     
 </div>

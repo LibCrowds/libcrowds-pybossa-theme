@@ -1,6 +1,6 @@
 {% extends "/base.html" %}
 {% set active_page = "data" %}
-{% set active_app  = "all" %}
+{% set active_project  = "all" %}
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for app in apps %}
+                            {% for project in projects %}
                                 <tr>
                                     <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
                                     <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
@@ -63,7 +63,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for app in apps %}
+                            {% for project in projects %}
                                 <tr>
                                     <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
                                     <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
@@ -88,7 +88,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for app in apps %}
+                            {% for project in projects %}
                                 <tr>
                                     <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
                                     <td class="text-center"><a href="{{project.flickr_link}}" target="_blank"><i class="fa fa-link"></i></a></td>

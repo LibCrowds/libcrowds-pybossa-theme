@@ -1,13 +1,13 @@
 {% extends "/base.html" %}
-{% set active_page = "applications" %}
-{% set active_app  = project.short_name %}
-{% import "applications/_helpers.html" as helper %}
+{% set active_page = "projects" %}
+{% set active_project  = project.short_name %}
+{% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {{ helper.render_loading(loading_text) }}
-<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="{{ config.get('DROPBOX_APP_KEY') }}"></script>
+<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="{{ config.get('DROPBOX_project_KEY') }}"></script>
         {{ render_local_nav(current_user, "tasks", project.short_name) }}
             <div class="container-padded hidden-container" style="display:none;">
                 <div class="container container-padded">

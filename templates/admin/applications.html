@@ -1,7 +1,7 @@
 {% extends "/base.html" %}
 {% set active_page = "profile" %}
 {% from "admin/_helpers.html" import render_local_nav %}
-{% from "applications/_helpers.html" import render_app_admin_featured, broken_image %}
+{% from "projects/_helpers.html" import render_project_admin_featured, broken_image %}
 
 {% block content %}
     {{ render_local_nav(current_user, "featured") }}
@@ -11,7 +11,7 @@
                 <div class="col-sm-9 col-sm-offset-3">
                     {% include "_flash_messages.html" %}
                     <h1><strong>{{ _('Admin') }} :</strong> {{ _('Featured projects') }}</h1>
-                {% include "admin/js/featured_apps.js" %}
+                {% include "admin/js/featured_projects.js" %}
                     <ul class="nav nav-pills nav-pills-dark">
                         {% for c in categories %}
                         <li {% if loop.first %}class="active"{% endif %}>
@@ -30,8 +30,8 @@
                                     <th style="text-align:center;">Featured</th>
                                 </tr>
                             </thead>
-                            {% for app in apps[c.short_name] %}
-                                {{ render_app_admin_featured(app, upload_method) }}
+                            {% for project in projects[c.short_name] %}
+                                {{ render_project_admin_featured(project, upload_method) }}
                             {% endfor %}
                             </table>
                         </div>

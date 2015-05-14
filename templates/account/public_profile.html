@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% set active_page = "account" %}
 {% import "account/_helpers.html" as helper %}
-{% from "applications/_helpers.html" import render_grid_apps, broken_image %}
+{% from "projects/_helpers.html" import render_grid_projects, broken_image %}
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
@@ -21,18 +21,18 @@
         </div>
     </section>
     
-    {% if apps_created %}    
+    {% if projects_created %}    
                         
                         
-    <section id="created-apps" class="white pattern-white-wall inset-shadow-top">
-        {{render_grid_apps(apps_created, "Created Projects", upload_method)}}
+    <section id="created-projects" class="white pattern-white-wall inset-shadow-top">
+        {{render_grid_projects(projects_created, "Created Projects", upload_method)}}
     </section>
                     {% endif %}
                         
-                    {% if apps %}    
+                    {% if projects %}    
                         
-    <section id="contributed-apps" class="white pattern-white-wall inset-shadow-top">
-        {{render_grid_apps(apps, "Contributions", upload_method)}}
+    <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
+        {{render_grid_projects(projects, "Contributions", upload_method)}}
     </section>
                     {% endif %}
                 
