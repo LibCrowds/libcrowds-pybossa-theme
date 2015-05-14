@@ -24,7 +24,7 @@
                 <form id="task_scheduler" class="form-horizontal" method="post" action="{{ url_for('project.task_scheduler', short_name=project.short_name) }}">
                     {{ form.hidden_tag() }}
                     <fieldset>
-                        {{ render_field(form.sched, class_="form-control", placeholder="Task scheduler for your app")}}
+                        {{ render_field(form.sched, class_="form-control", placeholder="Task scheduler for your project")}}
                         <div class="pull-right" role="group">
                             <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
                             <input type="submit" value="Set" class="btn btn-danger" />
