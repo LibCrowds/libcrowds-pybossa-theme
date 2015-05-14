@@ -92,7 +92,11 @@
                                 <tr>
                                     <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
                                     <td class="text-center"><a href="{{project.flickr_link}}" target="_blank"><i class="fa fa-link"></i></a></td>
+                                {% if project.info.container and project.info.image_set and project.info.image_set_size%}
                                     <td class="text-center"><a href="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.image_set))}}"><i class="fa fa-download" data-filesize="{{project.info.image_set_size}}"></i></a></td>
+                                {% else %}
+                                    <td class="text-center">No data available</td>
+                                {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>
