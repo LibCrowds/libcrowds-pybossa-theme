@@ -1,7 +1,7 @@
 {% extends "/base.html" %}
 {% set active_page = "create" %}
 {% import "account/_helpers.html" as helper %}
-{% import "applications/_helpers.html" as app_helper %}
+{% import "projects/_helpers.html" as project_helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
@@ -35,7 +35,7 @@
                 </div>
             </div>
             {% else %}
-                {{ app_helper.render_app_restricted() }}
+                {{ project_helper.render_project_restricted() }}
             {% endif %}
         </div>
     </div>

@@ -1,6 +1,6 @@
 {% extends "/base.html" %}
-{% set active_page = "applications" %}
-{% import "applications/_helpers.html" as helper %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 {% import "_formhelpers.html" as form_helper %}
 {% block content %}
@@ -20,7 +20,7 @@
                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <div class="col-xs-12 text-center">
                             <div class="center-block img-overlay-container">
-                                 {{ helper.render_app_thumbnail(app, upload_method, style="max-height:200px;", class="img-thumbnail") }}
+                                 {{ helper.render_project_thumbnail(project, upload_method, style="max-height:200px;", class="img-thumbnail") }}
                                 <div class="img-overlay edit-profile-image">
                                         <i class="fa fa-pencil-square-o fa-3x"></i>
                                         <span>Edit</span>

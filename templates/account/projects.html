@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% import "account/_helpers.html" as helper %}
-{% import "applications/_helpers.html" as app_helper %}
+{% import "projects/_helpers.html" as project_helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
@@ -19,17 +19,17 @@
                                     <a href="#" class="btn btn-inverse pull-right-sm" id="catalogue-help">Create a project</a>
                             </div>
                         </div>
-                        {% if apps_published or apps_draft %}
-                            {% if apps_published %}
+                        {% if projects_published or projects_draft %}
+                            {% if projects_published %}
                             <h2>{{ _('Published') }}</h2>
-                            {% for app in apps_published %}
-                            {{ app_helper.render_app_short_summary(app, upload_method) }}
+                            {% for project in projects_published %}
+                            {{ project_helper.render_project_short_summary(project, upload_method) }}
                             {% endfor %}
                             {% endif %}
-                            {% if apps_draft %}
+                            {% if projects_draft %}
                             <h2>{{ _('Draft') }}</h2>
-                            {% for app in apps_draft %}
-                            {{ app_helper.render_app_short_summary(app, upload_method) }}
+                            {% for project in projects_draft %}
+                            {{ project_helper.render_project_short_summary(project, upload_method) }}
                             {% endfor %}
                             {% endif %}
                         {% else %}
@@ -37,11 +37,11 @@
                             <a href="{{url_for('project.new')}}" class="btn btn-primary">{{ _('Get started') }}</a>
                         {% endif %}
                     {% else %}
-                        {{ app_helper.render_app_restricted() }}
+                        {{ project_helper.render_project_restricted() }}
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-{{ app_helper.broken_image() }}
+{{ project_helper.broken_image() }}
 {% endblock %}

@@ -1,17 +1,17 @@
 {% extends "/base.html" %}
-{% set active_page = "applications" %}
-{% import "applications/_helpers.html" as helper %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-{% if app %}
+{% if project %}
 {{ render_local_nav(current_user, "tasks", project.short_name) }}
 <div class="container-padded hidden-container" style="display:none;">
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-                {{ helper.render_app_title(app, subtitle=_('Task Settings'))}}
+                {{ helper.render_project_title(project, subtitle=_('Task Settings'))}}
                 <hr>
                 <div class="row">
                     <div id="task_scheduler" class="col-sm-6 well">

@@ -1,6 +1,6 @@
 {% extends "/base.html" %}
-{% set active_page = "applications" %}
-{% import "applications/_helpers.html" as helper %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
 {% import "privacy/locked.html" as privacy %}
 {% from "admin/_helpers.html" import render_local_nav %}
 
@@ -110,8 +110,8 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
 <script>
     $(function(){
         $('.hidden-container').slideDown('slow');
-        var appStats = {{appStats|safe}};
-        console.log(appStats);
+        var projectstats = {{projectstats|safe}};
+        console.log(projectstats);
         
         $dow = {{dailyActivity|safe}}['dow'];
         $auth = {{dailyActivity|safe}}['auth'];
@@ -120,9 +120,9 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         //Hourly chart
         var houreyLabels = [];
         var houreyData = [];
-        for(var i = 0; i < appStats['hourStats']['0']['values'].length; i++) {
-            houreyLabels.push(formatHours(appStats['hourStats']['0']['values'][i]['0']));
-            houreyData.push(appStats['hourStats']['0']['values'][i]['1']);
+        for(var i = 0; i < projectstats['hourStats']['0']['values'].length; i++) {
+            houreyLabels.push(formatHours(projectstats['hourStats']['0']['values'][i]['0']));
+            houreyData.push(projectstats['hourStats']['0']['values'][i]['1']);
         }
         
         var data = {
@@ -150,10 +150,10 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         //Daily chart
         var dailyLabels = [];
         var dailyData = [];
-        for(var i = 0; i < appStats['dayStats']['0']['values'].length; i++) {
-            var t = new Date(parseInt(appStats['dayStats']['0']['values'][i]['0']));
+        for(var i = 0; i < projectstats['dayStats']['0']['values'].length; i++) {
+            var t = new Date(parseInt(projectstats['dayStats']['0']['values'][i]['0']));
             dailyLabels.push($.datepicker.formatDate('dd M', t));
-            dailyData.push(appStats['dayStats']['0']['values'][i]['1']);
+            dailyData.push(projectstats['dayStats']['0']['values'][i]['1']);
         }
         
         var data = {
@@ -179,11 +179,11 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         dailyChart.draw();
         
         //User proportions chart
-        var total = appStats['userStats']['values'][0]['value'][1] + appStats['userStats']['values'][1]['value'][1];
-        var anon = appStats['userStats']['values'][0]['value'][1];
-        var auth = appStats['userStats']['values'][1]['value'][1];
+        var total = projectstats['userStats']['values'][0]['value'][1] + projectstats['userStats']['values'][1]['value'][1];
+        var anon = projectstats['userStats']['values'][0]['value'][1];
+        var auth = projectstats['userStats']['values'][1]['value'][1];
         var label1 = "Anonymous : " + Math.round(anon/total*100) + "% (" + anon + " user";
-        if (appStats['userStats']['values'][0]['value'][1] != 1) {
+        if (projectstats['userStats']['values'][0]['value'][1] != 1) {
             label1 += "s"
         }
         label1 += ")";
@@ -217,9 +217,9 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         //Top users
         var users = [];
         var tasks = [];
-        for(var i = 0; i < appStats['userAuthStats']['top5'].length; i++) {
-            users.push(appStats['userAuthStats']['top5'][i]['name']);
-            tasks.push(appStats['userAuthStats']['top5'][i]['tasks']);
+        for(var i = 0; i < projectstats['userAuthStats']['top5'].length; i++) {
+            users.push(projectstats['userAuthStats']['top5'][i]['name']);
+            tasks.push(projectstats['userAuthStats']['top5'][i]['tasks']);
         }
         var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
         var data = {

@@ -31,17 +31,17 @@
   </div>
 {% endmacro %}
 
-{% macro render_app_summary(app, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
+{% macro render_project_summary(project, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
 <div class="row">
     <div class="col-sm-6">
-        {{ render_app_thumbnail(app, upload_method, class='img-polaroid') }}
+        {{ render_project_thumbnail(project, upload_method, class='img-polaroid') }}
     </div>
     <div class="col-sm-6 padding-top-xs">
       <ul style="list-style-type: none; font-size: 16px;">
         {% if current_user.id == project.owner_id %}
         <li><strong><i class="glyphicon glyphicon-cog"></i> {{ _('ID') }}</strong>: {{ project.id }}</li>
         {% endif %}
-        <li><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ app['description'] }}</li>
+        <li><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ project['description'] }}</li>
         <li><strong><i class="fa fa-magic"></i> {{ _('Created') }}</strong>: <span class="format-date" data-date="{{project.created}}"></span></li>
         <li><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: <span class="format-date" data-date="{{project.last_activity}}"></span></li>
         <li><strong><i class="fa fa-check-square-o remove-colour"></i> {{ _('Overall progress') }}</strong>: {{ overall_progress | round | int }}% {{ _('completed') }}</li>
@@ -59,7 +59,7 @@
 </div>
 {% endmacro %}
 
-{% macro render_app_short_summary(app, upload_method) -%}
+{% macro render_project_short_summary(project, upload_method) -%}
 <tr>
     <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
     <td><span class="format-date" data-date="{{project.created}}"></span></td>
@@ -67,30 +67,30 @@
 </tr>
 {% endmacro %}
 
-{% macro render_app_admin_featured(app, upload_method) -%}
+{% macro render_project_admin_featured(project, upload_method) -%}
 <tr>
         <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
-        <td>{{ app['short_name'] }}</td>
+        <td>{{ project['short_name'] }}</td>
         {% if project.featured %}
             <td style="text-align:center;"><a id="appBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})">
-                    <i id="app{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove') }}
+                    <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove') }}
             </a>
             <a id="appBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})" style="display:none;">
-                    <i id="app{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
+                    <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
             </a></td>
         {% else %}
             <td style="text-align:center;"><a id="appBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})">
-                    <i id="app{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
+                    <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
             </a>
             <a id="appBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})" style="display:none;">
-                    <i id="app{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove') }}
+                    <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove') }}
             </a></td>
         {% endif %}
     </tr>
 {% endmacro %}
 
 
-{% macro show_app(app, active_cat, current_user, upload_method) %}
+{% macro show_project(project, active_cat, current_user, upload_method) %}
 
 <div class="project-item container container-padded">
     <div class="row project-summary padding-bottom">
@@ -99,7 +99,7 @@
                 <div class="col-sm-6 col-xs-12 hidden-xs project-polaroid">
                     <li>
                         <a  class="polaroid" href="{{ url_for('project.details', short_name = project.short_name) }}" data-polaroid-title="{{ project.name }}">
-                            {{ render_app_thumbnail(app, upload_method, class='img-polaroid') }}
+                            {{ render_project_thumbnail(project, upload_method, class='img-polaroid') }}
                         </a>
                     </li>
                 </div>
@@ -116,7 +116,7 @@
                 
                 <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg padding-top-xs">
                     <div class="shadow shadow-inline">
-                        {{ render_app_thumbnail(app, upload_method, class="img-polaroid", style="max-width:150px") }}
+                        {{ render_project_thumbnail(project, upload_method, class="img-polaroid", style="max-width:150px") }}
                     </div>
                 </div>
                 
@@ -191,7 +191,7 @@ function imgError(image) {
 </script>
 {% endmacro %}
 
-{% macro render_app_title(app, upload_method, subtitle=None) %}
+{% macro render_project_title(project, upload_method, subtitle=None) %}
 <h1 class="vcenter inset-text-grey">
     {% if subtitle %}
     <strong>{{ project.name }}</strong>: {{subtitle}}</h1>
@@ -201,7 +201,7 @@ function imgError(image) {
 <hr>
 {% endmacro %}
 
-{% macro render_overall_progress(app, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
+{% macro render_overall_progress(project, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
     <div class="row vcenter-md hcenter">
         <div class="col-md-8 col-xs-12 vcenter-sm text-center-xs">
             <div class="col-sm-2 vcenter hcenter"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
@@ -219,15 +219,15 @@ function imgError(image) {
     <hr>
 {% endmacro %}
 
-{% macro render_grid_apps(apps, title, upload_method) %}
+{% macro render_grid_projects(projects, title, upload_method) %}
     <div class="container container-padded">
         <div class="row text-center padding-bottom-sm">
             <h1>{{title}}</h1>
         </div>
             <div class="col-xs-12">
               <ul class="polaroids">
-                    {% for app in apps %}
-                        {{ show_app(app, "none", current_user, upload_method) }}
+                    {% for project in projects %}
+                        {{ show_project(project, "none", current_user, upload_method) }}
                     {% endfor %}
                 </ul>
             </div>
@@ -244,7 +244,7 @@ function imgError(image) {
 </div>
 {% endmacro %}
 
-{% macro render_app_thumbnail(app, upload_method, id, class, style) %}
+{% macro render_project_thumbnail(project, upload_method, id, class, style) %}
 {% if project.info.container %}
     {% if upload_method == 'rackspace'%}
     <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);">
@@ -258,7 +258,7 @@ function imgError(image) {
 {% endif %}
 {% endmacro %}
 
-{% macro render_url_thumbnail(app, upload_method) %}
+{% macro render_url_thumbnail(project, upload_method) %}
 {% if project.info.container %}
     {% if upload_method == 'rackspace'%}
     {{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}"
@@ -272,9 +272,9 @@ function imgError(image) {
 {% endif %}
 {% endmacro %}
 
-{% macro render_app_restricted() -%}
+{% macro render_project_restricted() -%}
     <h1>Area restricted</h1>
-        <p class="lead">Sorry, the creation and administration of applications is currently restricted.</p>
+        <p class="lead">Sorry, the creation and administration of projects is currently restricted.</p>
         <p class="lead">For access to this area please request admin rights.</p>
                 <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg"> 
                     <i class="glyphicon glyphicon-home"></i>

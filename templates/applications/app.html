@@ -1,12 +1,12 @@
 {% extends "/base.html" %}
-{% set active_page = "applications" %}
-{% import "applications/_helpers.html" as helper %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 
 {{ render_local_nav(current_user, "info", project.short_name) }}
-    {% if app %}
+    {% if project %}
     <div class="container-padded  remove-padding-bottom hidden-container" style="display:none;">
         <section class="white">
             <div class="container container-padded">
@@ -15,8 +15,8 @@
                     <!-- Project -->
                     <div class="col-sm-9 col-sm-offset-3">
                         {% include "_flash_messages.html" %}
-                        {{ helper.render_app_title(app, upload_method) }}
-                        {{ helper.render_overall_progress(app, n_tasks, overall_progress) }}
+                        {{ helper.render_project_title(project, upload_method) }}
+                        {{ helper.render_overall_progress(project, n_tasks, overall_progress) }}
                         {% if project.long_description %}
                             <div class="description">
                                 {{ project.long_description | e | markdown }}

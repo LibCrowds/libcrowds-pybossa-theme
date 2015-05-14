@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% import "applications/_helpers.html" as helper %}
+{% import "projects/_helpers.html" as helper %}
 {% import "account/_helpers.html" as account_helper %}
 {% block content %}
 {% include "_flash_messages_floating.html" %}
@@ -35,14 +35,14 @@
       </div>
 </section>
 
- {% if categories_apps['featured'] %}
+ {% if categories_projects['featured'] %}
 <section class="white pattern-white-wall box-shadow-white-bottom">
   <div class="row text-center padding-top-sm">
         <h2>{{ _('Featured Projects') }}</h2>
       </div>
   <ul class="polaroids">
-      {% for app in categories_apps['featured'] %}
-        {{ helper.show_app(app, "featured", current_user, upload_method) }}
+      {% for project in categories_projects['featured'] %}
+        {{ helper.show_project(project, "featured", current_user, upload_method) }}
       {% endfor %}
   </ul>
 </section>

@@ -2,7 +2,7 @@
 {% set active_page = "profile" %}
 {% set active_link = "settings" %}
 {% import "account/_helpers.html" as helper %}
-{% import "applications/_helpers.html" as app_helper %}
+{% import "projects/_helpers.html" as project_helper %}
 {% import "_formhelpers.html" as form_helper %}
 {% block content %}
 
@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <br>
-                            {{ app_helper.render_loading("Loading, please wait...") }}
+                            {{ project_helper.render_loading("Loading, please wait...") }}
                             {%if not current_user.info.avatar%}
                                 <div class="row">
                                     <div class="col-xs-6 col-xs-offset-3 alert alert-info">
@@ -104,5 +104,5 @@
     </section>
 </div>
 <script src="{{url_for('static', filename='js/image_crop.js')}}" type="text/javascript"></script>
-{{ app_helper.broken_image() }}
+{{ project_helper.broken_image() }}
 {% endblock %}
