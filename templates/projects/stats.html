@@ -65,18 +65,18 @@
                        
                        <div class="row">
                            <div class="col-sm-6 col-xs-12 padding-bottom-sm">
-                               <div class="white-rounded inset-shadow-white chart same-size">
-                                   <h4 class="text-center padding-bottom-sm">Proportion of Authenticated Users</h4>
-                                   <div id="user-chart">
-                                       <canvas id="users" width="500" height="500"></canvas>
-                                       <div id="users-legend" class="padding-top-sm legend">
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
+                                <div class="white-rounded inset-shadow-white chart same-size">
+                                    <h4 class="text-center padding-bottom-sm">Progress</h4>
+                                    <div id="task-status-chart">
+                                        <canvas id="task-status" width="500" height="500"></canvas>
+                                        <div id="task-status-legend" class="padding-top-sm legend">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                            <div class="col-sm-6 col-xs-12 padding-bottom-sm">
                                <div class="white-rounded inset-shadow-white chart same-size">
-                                   <h4 class="text-center padding-bottom-sm">Total Daily Activity</h4>
+                                   <h4 class="text-center padding-bottom-sm">Daily Activity</h4>
                                    <div id="dow-chart">
                                        <canvas id="dow" width="500" height="500"></canvas>
                                        <div id="dow-legend" class="padding-top-sm legend">
@@ -178,41 +178,39 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         var dailyChart = new Chart(ctx).Line(data, opts);
         dailyChart.draw();
         
-        //User proportions chart
-        var total = projectstats['userStats']['values'][0]['value'][1] + projectstats['userStats']['values'][1]['value'][1];
-        var anon = projectstats['userStats']['values'][0]['value'][1];
-        var auth = projectstats['userStats']['values'][1]['value'][1];
-        var label1 = "Anonymous : " + Math.round(anon/total*100) + "% (" + anon + " user";
-        if (projectstats['userStats']['values'][0]['value'][1] != 1) {
+        //Task status
+        var completed = {{stats.n_tasks_completed|safe}};
+        var ongoing = {{stats.n_tasks_ongoing|safe}};
+        var total = ongoing + completed;
+        var label1 = "Remaining : " + Math.round(ongoing/total*100) + "% (" + ongoing + " task";
+        if (userData['values'][1]['value'][1] != 1) {
             label1 += "s"
         }
         label1 += ")";
-        var label2 = "Authenticated : " + Math.round(auth/total*100) + "% (" + auth + " user";
-        if (auth != 1) {
+        var label2 = "Completed : " + Math.round(completed/total*100) + "% (" + completed + " task";
+        if (completed != 1) {
             label2 += "s"
         }
         label2 += ")";
         var data = [
         {
-            value: anon,
+            value: ongoing,
             color: "rgba(151,187,205,1)",
             highlight: "rgba(151,187,205,0.8)",
             label: label1
         },
         {
-            value : auth,
+            value : completed,
             color:"#BA0000",
             highlight: "#D00000",
             label: label2
         }
         ];
-        var canvas = document.getElementById("users");
+        var canvas = document.getElementById("task-status");
         var ctx = canvas.getContext("2d");
-        var usersChart = new Chart(ctx).Doughnut(data);
-        var legendHolder = document.getElementById('users-legend')
+        var taskStatusChart = new Chart(ctx).Doughnut(data);
+        var legendHolder = document.getElementById('task-status-legend')
         canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
-        usersChart.generateLegend();
-        document.getElementById('users-legend').innerHTML = usersChart.generateLegend();
         
         //Top users
         var users = [];
