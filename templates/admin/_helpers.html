@@ -57,7 +57,7 @@
     {% if active_project %}
         <li class="nav-link{% if active_link=="info"%} active{% endif %}"><a href="{{url_for('project.details', short_name=active_project)}}">{{_('Info')}}</a></li>
         <li class="nav-link{% if active_link=="contribute"%} active{% endif %}"><a href="{{url_for('project.presenter', short_name=active_project)}}"> {{_('Contribute')}}</a></li>
-        <li class="nav-link{% if active_link=="statistics"%} active{% endif %}"><a href="{{url_for('statistics.project_stats', short_name=active_project)}}"> {{_('Statistics')}}</a></li>
+        <li class="nav-link{% if active_link=="statistics"%} active{% endif %}"><a href="{{url_for('project.show_stats', short_name=active_project)}}"> {{_('Statistics')}}</a></li>
     {% endif %}
 </ul>
 {% endmacro %}
