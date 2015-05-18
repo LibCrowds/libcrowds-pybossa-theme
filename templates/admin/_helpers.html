@@ -35,7 +35,7 @@
         <a href="#" id="project-options">Project Options<i class="fa fa-angle-down pull-right"></i></a>
         <ul class="nav nav-stacked inset-shadow remove-padding-top" id="project-menu" hidden>
             <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
-            <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
+            <li class="nav-link"><a href="{{ url_for('blplugin.projects', name=current_user.name) }}">Open</a></li>
             {% if active_project %}
                 <li class="divider"></li>
                 <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">{{_('Dashboard')}}</a></li>
