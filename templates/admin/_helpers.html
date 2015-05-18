@@ -6,12 +6,12 @@
     <td class="hidden-xs">{{user.name}}</td>
     <td class="hidden-xs" style="text-align:center;"><span class="format-date" data-date="{{user.created}}"></span></td>
     {% if user.admin %}
-        <td style="text-align:center;"><a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
-            <i class="glyphicon glyphicon-remove"></i> {{ _(' Revoke admin rights') }}</a></td>
-        {% else %}
+        <td style="text-align:center;">{% if user.id != 1 %}<a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
+            <i class="glyphicon glyphicon-remove"></i> {{ _(' Revoke admin rights') }}</a>{% else %}N/A{% endif %}</td>
+    {% else %}
         <td  style="text-align:center;"><a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-inverse">
             <i class="glyphicon glyphicon-plus"></i> {{ _(' Grant admin rights') }}</a></td>
-        {% endif %}
+    {% endif %}
 </tr>
 {% endmacro %}
 
