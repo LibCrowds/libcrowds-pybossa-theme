@@ -14,17 +14,11 @@
         </div>
     </section>
     
-            {% if projects_contrib %}
-                <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
-                    {{project_helper.render_grid_projects(projects_contrib, "Your Contributions", upload_method)}}
-                </section>
-            {% else %}
-            
-                    
-                <small>No contributions yet</small>
-            {% endif %}
-        {{ project_helper.broken_image() }}
-    
-    
+    {% if projects_contrib %}
+        <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
+            {{project_helper.render_grid_projects(projects_contrib, "Your Contributions", upload_method)}}
+        </section>
+    {% endif %}
+    {{ project_helper.broken_image() }}
 </div>
 {% endblock %}
