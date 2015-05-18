@@ -9,7 +9,7 @@
         <td style="text-align:center;"><a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
             <i class="glyphicon glyphicon-remove"></i> {{ _(' Revoke admin rights') }}</a></td>
         {% else %}
-        <td><a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-inverse">
+        <td  style="text-align:center;"><a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-inverse">
             <i class="glyphicon glyphicon-plus"></i> {{ _(' Grant admin rights') }}</a></td>
         {% endif %}
 </tr>
