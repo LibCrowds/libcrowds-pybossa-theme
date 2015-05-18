@@ -60,11 +60,11 @@
                 {{ form_helper.render_field(form.description, class="form-control", placeholder=_('Short description'), visible='true', required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
                 {{ form_helper.render_field(form.long_description, rows="13", placeholder=_('Long description:
                         
-                        á Describe the purpose of the project and what it aims to achieve.
-                        á Explain how the project works and how volunteers can help.
-                        á Highlight the reasons why volunteer contributions are essential.
+            Describe the purpose of the project and what it aims to achieve.
+            Explain how the project works and how volunteers can help.
+            Highlight the reasons why volunteer contributions are essential.
                         
-                        You can use Markdown to format your description.'), class="form-control", required="required") }}
+You can use Markdown to format your description.'), class="form-control", required="required") }}
                 {{ form_helper.render_field(form.category_id, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.allow_anonymous_contributors, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.password, class="form-control", visible='true') }}
