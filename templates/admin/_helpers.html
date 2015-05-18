@@ -40,7 +40,7 @@
                 <li class="divider"></li>
                 <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">{{_('Dashboard')}}</a></li>
                 <li class="nav-link"><a href="{{url_for('project.task_presenter_editor', short_name=active_project)}}">{{_('Code Editor')}}</a></li>
-                <li class="nav-link"><a href="{{url_for('project.update', short_name=active_project)}}"> {{_('Project Details')}}</a></li>
+                <li class="nav-link"><a href="{{url_for('update_project.update', short_name=active_project)}}"> {{_('Project Details')}}</a></li>
                 <li class="nav-link"><a href="{{url_for('project.auditlog', short_name=active_project)}}">{{_('Audit Logs')}}</a></li>
             {% endif %}
         </ul>
