@@ -1,14 +1,3 @@
-{% macro render_account_local_nav(current_user, active_link) -%}
-<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
-    <li {% if active_link=="profile"%}class="active"{% endif %}><a href="{{url_for('account.profile', name=current_user.name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Profile') }}</a></li>
-    <li {% if active_link=="projects"%}class="active"{% endif %}><a href="{{url_for('blplugin.projects', name=current_user.name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Projects') }}</a></li>
-    {% if current_user.admin %}
-    <li {% if active_link=="admin"%}class="active"{% endif %}><a href="{{url_for('admin.index')}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('Admin Site') }}</a></li>
-    {% endif %}
-    <li {% if active_link=="settings"%}class="active"{% endif %}><a href="{{url_for('account.update_profile', name=current_user.name)}}"><i class="glyphicon glyphicon-chevron-right"></i> {{ _('My Settings') }}</a></li>
-</ul>
-{% endmacro %}
-
 {% macro render_twitter_btn(project) %}
 <a href="https://twitter.com/share" class="twitter-share-button"
     data-text="{{ _('I\'ve done') }} {{project.c}} {{ _('tasks for the @PyBossa project:') }} {{project.name}}. {{ _('Do you want to help?') }} {{url_for('project.details',short_name=project.short_name,_external=True)}}"
