@@ -86,6 +86,7 @@ You can use Markdown to format your description.'), class="form-control", requir
     $("i[rel='tooltip']").tooltip();
     $(function() {
         $('#flickr_link').attr('value', '{{project.info.flickr_link | safe}}');
+        $('.control-label').addClass('remove-padding-left');
     });
 </script>
 <script src="{{url_for('static', filename='js/image_crop.js')}}" type="text/javascript"></script>
