@@ -14,7 +14,7 @@
                         <h1 class="inset-text-grey"><strong>Admin Options</strong></h1>
                     </div>
                         <div id="projects" class="col-sm-6 col-md-4">
-                            <a href="{{ url_for('account.projects', name=current_user.name) }}" rel="nofollow">
+                            <a href="{{ url_for('blplugin.projects', name=current_user.name) }}" rel="nofollow">
                             <div class="well">
                                 <i class="fa fa-folder-open fa-4x"></i>
                                 <h3  class="margin-bottom-xs">{{_('Projects')}}</h3>
