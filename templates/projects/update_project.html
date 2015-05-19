@@ -15,7 +15,7 @@
               <h1><strong>{{project.name}}</strong>: {{_('Project Details')}}</h1>
               <hr>
               <!-- Update form for project thumbnail -->
-              <form method="post" class="form-horizontal upload-img-form padding-top-xs" action="{{ url_for('project.update', short_name=project.short_name) }}" enctype="multipart/form-data">
+              <form method="post" class="form-horizontal upload-img-form padding-top-xs" action="{{ url_for('blplugin.update_project', short_name=project.short_name) }}" enctype="multipart/form-data">
                   <fieldset>
                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <div class="col-xs-12 text-center">
@@ -51,7 +51,7 @@
               </form>
             {{ helper.render_loading("Loading, please wait...") }}
               <!-- Update form for project data-->
-            <form class="visible-form" method="post" action="{{ url_for('project.update', short_name = project.short_name) }}" enctype="multipart/form-data">
+            <form class="visible-form" method="post" action="{{ url_for('blplugin.update_project', short_name = project.short_name) }}" enctype="multipart/form-data">
               <fieldset>
                 {{ form.hidden_tag() }}
                 
