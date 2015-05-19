@@ -14,7 +14,7 @@
                 {% include "_flash_messages.html" %}
                 <h1><strong>{{ project.name }}</strong>: {{ _('Settings') }}</h1>
                 <div class="btn-group">
-                    <a class="btn" href="{{ url_for('blplugin.update', short_name = project.short_name) }}"><i class="glyphicon glyphicon-edit icon-white"></i> {{ _('Edit the project details') }}</a>
+                    <a class="btn" href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="glyphicon glyphicon-edit icon-white"></i> {{ _('Edit the project details') }}</a>
                     <a class="btn" href="{{ url_for('project.task_settings', short_name = project.short_name) }}"><i class="glyphicon glyphicon-wrench icon-white"></i> {{ _('Task Settings') }}</a>
                     <a class="btn" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="glyphicon glyphicon-trash icon-white"></i> {{ _('Delete the project') }}</a>
                 </div>
