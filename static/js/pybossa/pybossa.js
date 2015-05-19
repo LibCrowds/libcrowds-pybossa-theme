@@ -32,7 +32,7 @@ if (typeof(console) == 'undefined') {
     // Private methods
     function getApp(appname){
         return $.ajax({
-            url: url + 'api/app',
+            url: url + 'api/project',
             data: 'short_name='+appname,
             dataType:'json'
         })
@@ -44,7 +44,7 @@ if (typeof(console) == 'undefined') {
     function getTaskRun( app ) {
         return $.ajax({
             cache: false,
-            url: url + 'api/app/' + app.id + '/newtask',
+            url: url + 'api/project/' + app.id + '/newtask',
             dataType: 'json'
         })
         .pipe( function( data ) {
@@ -106,7 +106,7 @@ if (typeof(console) == 'undefined') {
     function userProgress( appname ) {
         return $.ajax({
           cache: false,
-            url: url + 'api/app/' + appname + '/userprogress',
+            url: url + 'api/project/' + appname + '/userprogress',
             dataType: 'json'
         });
     }
@@ -128,7 +128,7 @@ if (typeof(console) == 'undefined') {
     function run ( appname ) {
         var me = this;
         $.ajax({
-            url: url + 'api/app',
+            url: url + 'api/project',
             data: 'short_name=' + appname,
             dataType:'json'
         }).done(function(app) {
@@ -138,7 +138,7 @@ if (typeof(console) == 'undefined') {
                 var def = $.Deferred();
                 var xhr = $.ajax({
                   cache: false,
-                    url: url + 'api/app/' + app.id + '/newtask',
+                    url: url + 'api/project/' + app.id + '/newtask',
                     data: 'offset=' + offset,
                     dataType: 'json'
                 });
@@ -174,10 +174,10 @@ if (typeof(console) == 'undefined') {
                     // avoid this
                     try {
                         if (url != '/') {
-                            var nextUrl = url + '/app/' + appname + '/task/' + task.id;
+                            var nextUrl = url + '/project/' + appname + '/task/' + task.id;
                         }
                         else {
-                            var nextUrl = '/app/' + appname + '/task/' + task.id;
+                            var nextUrl = '/project/' + appname + '/task/' + task.id;
                         }
                         History.pushState ({}, "Title", nextUrl);
                     } catch(e) {
