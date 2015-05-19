@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
  
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="1; url={{ url_for('project.update', short_name=project.short_name) }}">
+<meta http-equiv="refresh" content="1; url={{ url_for('blplugin.update_project', short_name=project.short_name) }}">
  
 <script>
-  window.location.href = "{{ url_for('project.update', short_name=project.short_name) }}"
+  window.location.href = "{{ url_for('blplugin.update_project', short_name=project.short_name) }}"
 </script>
  
 <title>Page Redirection</title>
  
-If you are not redirected automatically, follow the <a href='{{ url_for('project.update', short_name=project.short_name) }}http://example.com'>link to the new page</a>
+If you are not redirected automatically, follow the <a href='{{ url_for('blplugin.update_project', short_name=project.short_name) }}http://example.com'>link to the new page</a>
