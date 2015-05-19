@@ -35,12 +35,12 @@
         <a href="#" id="project-options">Project Options<i class="fa fa-angle-down pull-right"></i></a>
         <ul class="nav nav-stacked inset-shadow remove-padding-top" id="project-menu" hidden>
             <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
-            <li class="nav-link"><a href="{{ url_for('blplugin.projects') }}">Open</a></li>
+            <li class="nav-link"><a href="{{ url_for('account.projects') }}">Open</a></li>
             {% if active_project %}
                 <li class="divider"></li>
                 <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">{{_('Dashboard')}}</a></li>
                 <li class="nav-link"><a href="{{url_for('project.task_presenter_editor', short_name=active_project)}}">{{_('Code Editor')}}</a></li>
-                <li class="nav-link"><a href="{{url_for('blplugin.update', short_name=active_project)}}"> {{_('Project Details')}}</a></li>
+                <li class="nav-link"><a href="{{url_for('project.update', short_name=active_project)}}"> {{_('Project Details')}}</a></li>
                 <li class="nav-link"><a href="{{url_for('project.auditlog', short_name=active_project)}}">{{_('Audit Logs')}}</a></li>
             {% endif %}
         </ul>
