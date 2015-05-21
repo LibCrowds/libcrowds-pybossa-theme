@@ -419,7 +419,7 @@ $(function(){
             var taskRuns = [];
             {% for user in top5_users_1_week %}
                 users.push('{{user.name}}');
-                taskRuns.push(parseInt({{user.task_runs}}));
+                taskRuns.push(parseInt({{user.n_task_runs}}));
             {% endfor %}
             var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
             var data = {
@@ -459,7 +459,7 @@ $(function(){
                 projects.push('{{project.name}}');
                 taskRuns.push(parseInt({{project.n_task_runs}}));
             {% endfor %}
-            var highScore = taskRuns.indexOf(Math.max.apply(Math, task_runs));
+            var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
             var data = {
                 labels: projects,
                 datasets: [
@@ -469,7 +469,7 @@ $(function(){
                         strokeColor: "rgba(151,187,205,1)",
                         highlightFill: "rgba(151,187,205,0.1)",
                         highlightStroke: "rgba(151,187,205,1)",
-                        data: task_runs
+                        data: taskRuns
                     }
                 ]
             };
@@ -495,7 +495,7 @@ $(function(){
             var taskRuns = [];
             {% for user in top_users %}
                 users.push('{{user.name}}');
-                taskRuns.push(parseInt({{user.task_runs}}));
+                taskRuns.push(parseInt({{user.n_task_runs}}));
             {% endfor %}
             var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
             var data = {
