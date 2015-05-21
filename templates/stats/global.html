@@ -438,13 +438,13 @@ $(function(){
         
         //Top 5 projects this week
         var projects = [];
-        var tasks = [];
+        var contributions = [];
         {% if top5_projects_1_week %}
             {% for project in top5_projects_1_week %}
                 projects.push('{{project.name}}');
-contributions                tasks.push(parseInt({{project.n_contributions}}));
+                contributions.push(parseInt({{project.n_contributions}}));
             {% endfor %}
-            var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+            var highScore = contributions.indexOf(Math.max.apply(Math, tasks));
             var data = {
                 labels: projects,
                 datasets: [
@@ -454,7 +454,7 @@ contributions                tasks.push(parseInt({{project.n_contributions}}));
                         strokeColor: "rgba(151,187,205,1)",
                         highlightFill: "rgba(151,187,205,0.1)",
                         highlightStroke: "rgba(151,187,205,1)",
-                        data: tasks
+                        data: contributions
                     }
                 ]
             };
