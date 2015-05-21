@@ -419,7 +419,7 @@ $(function(){
             var taskRuns = [];
             {% for user in top5_users_1_week %}
                 users.push('{{user.name}}');
-                taskRuns.push(parseInt({{user.n_task_runs}}));
+                taskRuns.push(parseInt({{user.task_runs}}));
             {% endfor %}
             var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
             var data = {
@@ -457,7 +457,7 @@ $(function(){
             var taskRuns = [];
             {% for project in top5_projects_1_week %}
                 projects.push('{{project.name}}');
-                taskRuns.push(parseInt({{project.n_task_runs}}));
+                taskRuns.push(parseInt({{project.task_runs}}));
             {% endfor %}
             var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
             var data = {
@@ -495,7 +495,7 @@ $(function(){
             var taskRuns = [];
             {% for user in top_users %}
                 users.push('{{user.name}}');
-                taskRuns.push(parseInt({{user.n_task_runs}}));
+                taskRuns.push(parseInt({{user.task_runs}}));
             {% endfor %}
             var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
             var data = {
