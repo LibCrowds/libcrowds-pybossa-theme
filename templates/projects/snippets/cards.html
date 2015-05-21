@@ -75,7 +75,7 @@
             </div>
             <p id="results_count" class="pull-left padding-left-xs" hidden></p>
             <div class="pull-right" role="group">
-                <a href="#" id="not_found_btn" class="btn btn-default">Record Not Found</a>
+              <a href="#" id="not_found_btn" class="btn btn-default btn-answer" value="Skip / Not Found">Skip / Not Found</a>
                 <button id="search_submit_btn" class="btn btn-danger" value="Search" >Search</button>
             </div>
           </form>
@@ -99,7 +99,7 @@
         <!-- Feedback items for the user -->
         <div class="padding-top-sm">
           <p><span id="i18n_working_task">You are working now on task:</span> <span id="task-id" class="label label-default">#</span></p>
-          <p><span id="i18n_tasks_completed">You have completed:</span> <span id="done" class="label label-danger"></span> <span id="i18n_tasks_from">tasks from</span>
+          <p><span id="i18n_tasks_completed">You contributed to</span> <span id="done" class="label label-danger"></span> <span id="i18n_tasks_from">tasks from </span>
           
           <!-- Progress bar for the user -->
           <span id="total" class="label label-danger"></span></p>
@@ -109,7 +109,7 @@
         </div>
          <!--- Social media buttons --->
           <a href="#" id="fb-share" target="_blank" class="btn btn-facebook"><i class="fa fa-facebook"></i> Share</a>
-          <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fapp%2F{{project.short_name}}%2Ftask%2F734&text={{project.description}}
+          <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fproject%2F{{project.short_name}}%2Ftask%2F734&text=Long desc
           &tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com&via=britishlibrary" class="btn btn-twitter">
   <i class="fa fa-twitter"></i> Tweet</a>
           </div>
@@ -139,7 +139,7 @@
               <p>The purpose of this project is to link scanned images, such as the one below, to catalogue records held in
                 an external database.</p>
               <div class="row text-center">
-             	 <img src="/static/img/tutorials/pinyin_card.jpg" width="200" class="img-thumbnail" alt="Chinese_PY_Titles_A-By1204"></a><br>
+                <img src="/static/img/tutorials/card.jpg" width="200" class="img-thumbnail" alt="Chinese_PY_Titles_A-By1204"></a><br>
           	  </div><br>
               <p>Your tasks comes in two parts:</p>
 
@@ -154,22 +154,20 @@
                 publication year and ISBN of the item. Once you have performed a search and retrieved some results, you 
                 can choose the appropriate record by clicking on the select button to the right of that record.</p>
               
-              <p>If you are unable to locate the correct record, please click the 'Record Not Found' button.</p>
+              <p>If you are unable to locate the correct record, please click the 'Skip / Not found' button.</p>
               <div class="row text-center">
-              	<img src="/static/img/tutorials/pinyin_buttons.png" width="200" class="img-thumbnail" alt="Chinese_PY_Titles_A-By1204"></a><br>
+              	<img src="/static/img/tutorials/card_buttons.png" width="200" class="img-thumbnail" alt="Chinese_PY_Titles_A-By1204"></a><br>
               </div>
                 
             </div>
 			
             <div id="2" class="modal-body" style="display:none;">
               <p><strong>Step 2:</strong></p>
-                <p>The next stage is to transcribe the shelf mark, which is usually located at the top right of the image; 
-                  this location will be highlighted by a blue box. Very occasionally the shelf mark will be in a different location;
+                <p>If you managed to locate a matching record, the next stage is to transcribe the shelf mark, 
+                  which is usually located at the top right of the image. Very occasionally the shelf mark will be in a different location but
                   after you have completed a few tasks you should be able to recognise these shelf marks more easily.</p>
               <p>Please try to transcribe the shelf mark as accurately as possible, including maintaining the case
               and punctuation.</p>
-              <p>Even if you didn't match the card against a record, this is still a very useful stage in helping us
-                with further organisation.</p>
               <p>That's it! Once you have have finished click 'Done' and you will be presented with the next task.</p>
              
             </div>
@@ -201,8 +199,8 @@
           link: "http://www.libcrowds.com",
           name: "LibCrowds: {{project.name}}",
           picture: "http://libcrowds.com/static/img/BL_logo.jpg",
-          caption: "A crowdsourcing project from the British Library",
-          description: "{{project.description}}."
+          caption: " ",
+          description: "Long desc."
       }, function(response) {
           if (response && response.post_id) {
              $("#shared").fadeIn();
@@ -264,22 +262,6 @@ function isScrolledIntoView(elem) {
     var elemBottom = elemTop + $(elem).height();
     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 }
-
-//Not found button clicked
-$(document).delegate('#not_found_btn', 'click', function(e) {
-  	$("#oclc_search_form").slideUp();
-    $("#search_results").slideUp();
-    $("#results_count").html('');
-    $("#results_count").hide();
-    $("#selected_record").html('<p>Record not found</p><p><a href="#" id="search_again"><small>Search Again</small></a></p><hr>');
-    $("#selected_record").attr('data-selected-oclc', '');
-    $("#selected_record").attr('data-selected-libs', '');
-    $("#selected_record").show();
-    $("#shelfmark_form").slideDown();
-    $("#shelfmark_field").focus();
-    $("html, body").animate({ scrollTop: 0 });	
-	
-});
 
 //Get and display the search results
 $(document).delegate('#oclc_search_form', 'submit', function(e) {
@@ -353,9 +335,9 @@ $(document).delegate('#oclc_search_form', 'submit', function(e) {
 });
 
 
-function performSearch(searchStr, pageNum) {
-  var page = parseInt(pageNum, 10);
-   $.get(searchStr + "&startPos=" + pageNum, function(results){
+function performSearch(searchStr, startPos) {
+  var page = parseInt(startPos, 10);
+   $.get(searchStr + "&startPos=" + startPos, function(results){
      var pageStr = '';
       	pageStr = '<div class="row text-center"><small><span>';
       	if (page > 1) {
@@ -364,7 +346,7 @@ function performSearch(searchStr, pageNum) {
       	    pageStr+= '&lt; Previous | ' + page + ' to ';
       	}
       if (page  + 4 < parseInt($("#search_results").attr("data-count"))) {
-        pageStr += (page  + 5) + ' of ' + $("#search_results").attr("data-count") +
+        pageStr += (page  + 4) + ' of ' + $("#search_results").attr("data-count") +
         ' | <a href="#" id="next">Next &gt;</a></span></small></div>';
       	} else {
         pageStr += $("#search_results").attr("data-count") + ' of ' + $("#search_results").attr("data-count") +
@@ -481,7 +463,6 @@ pybossa.taskLoaded(function(task, deferred) {
         var img = $('<img />');
         img.load(function() {
             // continue as soon as the image is loaded
-          
             deferred.resolve(task);
         });
         img.attr('src', task.info.url_b + "?now=" + new Date().getTime() ).css('height', 460);
@@ -516,27 +497,27 @@ pybossa.presentTask(function(task, deferred) {
         $("#loading").fadeOut(500);
         $('.btn-answer').off('click').on('click', function(evt) {
           if (typeof $(this).attr("value") != 'undefined') {
-            if($("#shelfmark_field").val()) {
-              task.answer = $("#shelfmark_form").serializeJSON();
-              task.answer.title = task.info.title;
-              task.answer.oclc = $("#selected_record").attr('data-selected-oclc');
-              task.answer.libs = $("#selected_record").attr('data-selected-libs');
-              if($("#shelfmark_field").attr('placeholder') === $("#shelfmark_field").val())
-              {
-                $("#shelfmark_field").val('');
-              }
-              task.answer.shelfmark = $("#shelfmark_field").val().replace(/\s/g, " ").replace(/,/g,".");
-              console.log(task.answer);
-                pybossa.saveTask(task.id, task.answer)
-                  .done(function() {
-                    $("#success").fadeIn(500).fadeOut(1000);
-                    deferred.resolve();
-                  })
-                  .fail(function() {
-                      $("#error").show();
-                  });
+            	task.answer = $("#shelfmark_form").serializeJSON();
+            task.answer.title = task.info.title;
+            task.answer.oclc = $("#selected_record").attr('data-selected-oclc');
+            task.answer.libs = $("#selected_record").attr('data-selected-libs');
+            if($("#shelfmark_field").attr('placeholder') === $("#shelfmark_field").val())
+            {
+              $("#shelfmark_field").val('');
             }
+            task.answer.shelfmark = $("#shelfmark_field").val().replace(/\s/g, " ").replace(/,/g,".");
+            console.log(task.answer);
+            pybossa.saveTask(task.id, task.answer)
+            .done(function() {
+              $("#success").fadeIn(500).fadeOut(1000);
+              deferred.resolve();
+            })
+            .fail(function(e) {
+              console.log(e);
+              $("#error").show();
+            });
           } else {
+            console.log('one');
                 $("#error").show();
           }
         });
