@@ -10,28 +10,28 @@
             <div class="col-md-11">
                 <h1 class="inset-text-grey">About</h1>
                 
-                <p class="lead">LibCrowds, in association with BL Labs, is a British Library crowd-sourcing experiment focused on making important research materials at the British Library
-				more readily available to a wider audience.</p> 
-				</div>
+                <p class="lead">LibCrowds, in association with BL Labs, is a crowd-sourcing experiment focused on
+                making important research materials held at the British Library more readily available to a wider audience.</p> 
+            </div>
         </div>
     </section>
-    <section class="white pattern-white-wall box-shadow-white-bottom">
+    <section class="white">
         <div class="container container-padded">
             <div class="col-md-11 padding-bottom-sm">
-                <h2>{{ _('Current Project: Convert-a-Card') }}</h2>
+                <h2>Current Project: Convert-a-Card</h2>
 			
-				<p>In our first project series, Convert-a-Card, we're focusing on liberating collection items discoverable only through our physical card catalogues onsite. </p>
-				
-				<p>While the <a href="http://www.bl.uk/aboutus/quickinfo/facts/history/" target="_blank">British Library</a> is relatively young for a national library, 
-				much of its vast historical collections were acquired before computers were used for cataloguing as standard. So while the library's online catalogue 
-                <a href="http://explore.bl.uk/" target="_blank">Explore</a> provides public access to nearly 57 million records,
-                there are thousands of important research items that can still only be found by searching the old physical card catalogues onsite.</p>
+                <p>In our first project series, Convert-a-Card, we're focusing on liberating collection items currently only discoverable onsite, through our physical card catalogues. </p>
+                
+                <p>While the <a href="http://www.bl.uk/aboutus/quickinfo/facts/history/" target="_blank">British Library</a> is relatively young for a national library, 
+                much of its vast historical collections were acquired long before computers were used for cataloguing as standard. So, while the library's online catalogue, 
+                <a href="http://explore.bl.uk/" target="_blank">Explore</a>, provides public access to nearly 57 million records,
+                there are still thousands of important research items that can only be found by searching the old physical card catalogues.</p>
                                                                            
                 <p>Records matched, located, transcribed or translated as part of Convert-a-Card will be uploaded to the
-				<a href="http://explore.bl.uk/" target="_blank">British Library's Explore catalogue</a> for anyone to search online. By participating you will have a direct impact on the availability of research material to anyone interested in
-                the diverse collections available at the British Library. </p>
-				
-				<p>Let's <a href="http://www.libcrowds.com/projects.hml" target="_blank">get started</a>!</P>
+                <a href="http://explore.bl.uk/" target="_blank">British Library's Explore catalogue</a> for anyone to search online. By participating you will have a direct impact
+                on the availability of research material to anyone interested in the diverse collections available at the British Library. </p>
+                
+                <p>Let's <a href="{{ url_for('project.index') }}">get started</a>!</p>
             </div>
         </div>
     </section>
@@ -42,15 +42,16 @@
                 <h2>{{ _('Technology') }}</h2>
                 
                 <p>{{ brand }} is built on top of <a href="http://docs.pybossa.com/"> PyBossa </a>, an open-source Python framework for the creation of
-                crowd-sourcing projects. Individual projects are primarily written in HTML and Javascript.</p>
+                crowd-sourcing projects. Individual projects are primarily written in HTML and Javascript. The {{brand}} 
+                <a href="http://docs.pybossa.com/">theme</a> and <a href="http://docs.pybossa.com/">plugin</a>, which handles certain {{brand}} 
+                specific features, are also open-source and suggestions or contributions are welcome.</p>
             
-            <div class="col-sm-6 col-sm-offset-3 col-xs-12 padding-top-sm">
-                <div class="col-xs-4"><img src="{{url_for('static',filename='img/html-logo.png')}}" class="img-responsive web-badge"></div>
-                    <div class="col-xs-4"><img src="{{url_for('static',filename='img/css-logo.png')}}" class="img-responsive web-badge"></div>
-                        <div class="col-xs-4"><img src="{{url_for('static',filename='img/js-logo.png')}}" class="img-responsive web-badge"></div>
+                <div class="col-sm-6 col-sm-offset-3 col-xs-12 padding-top-sm">
+                  <div class="col-xs-4"><img src="{{url_for('static',filename='img/html-logo.png')}}" class="img-responsive web-badge"></div>
+                  <div class="col-xs-4"><img src="{{url_for('static',filename='img/css-logo.png')}}" class="img-responsive web-badge"></div>
+                  <div class="col-xs-4"><img src="{{url_for('static',filename='img/js-logo.png')}}" class="img-responsive web-badge"></div>
+                </div>
             </div>
-            </div>
-                
         </div>
     </section>
                 
@@ -60,7 +61,7 @@
                 <h2>{{ _('Contact information') }}</h2>
                 <ul>
                     <li>For more info, email: <a href="mailto:info@libcrowds.com">info@libcrowds.com</a></li>
-                    <li>Report any bugs, issues or improvements,
+                    <li>Report any bugs, issues or suggest improvements
                     <a href="https://github.com/alexandermendes/BL-pybossa-theme/issues">here</a>
                     </li>            
                 </ul>
