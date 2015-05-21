@@ -305,13 +305,13 @@ $(function(){
           
         {% if task_runs_daily %}
             //Tasks completed per day
-            $contributions = {{task_runs_daily|safe}}['days'];
-            $completed = {{tasks_completed_daily|safe}}['days'];
+            $taskRunDates = {{task_runs_daily|safe}}['days'];
+            $taskDates = {{tasks_completed_daily|safe}}['days'];
             
-            $contributionTasks = {{task_runs_daily|safe}}['tasks'];
-            $completedTasks = {{tasks_completed_daily|safe}}['tasks'];
+            $taskRunCount = {{task_runs_daily|safe}}['tasks'];
+            $taskCount = {{tasks_completed_daily|safe}}['tasks'];
             
-            var compiledDates = $contributions.concat($completed);
+            var compiledDates = $taskRunDates.concat($taskDates);
             compiledDates.sort(function(a, b){
                 return new Date(a) - new Date(b);
             });
@@ -326,20 +326,20 @@ $(function(){
                 }
             });
             
-            var contributionData = [];
-            var completedData = [];
+            var taskRunData = [];
+            var taskData = [];
             
             $.each(sortedDatesFull, function(i, date){
                 var dateObj = new Date(date);
-                if($.inArray(date, $contributions)!==-1) {
-                    contributionData.push($contributionTasks.shift());
+                if($.inArray(date, $taskRunDates)!==-1) {
+                    taskRunData.push($taskRunCount.shift());
                 } else {
-                    contributionData.push(0);
+                    taskRunData.push(0);
                 }
-                if($.inArray(date, $completed)!==-1) {
-                    completedData.push($completedTasks.shift());
+                if($.inArray(date, $taskDates)!==-1) {
+                    taskData.push($taskCount.shift());
                 } else {
-                    completedData.push(0);
+                    taskData.push(0);
                 }
             });
             var data = {
@@ -353,7 +353,7 @@ $(function(){
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: contributionData
+                        data: taskRunData
                     },
                     {
                         label: "completed task",
@@ -363,7 +363,7 @@ $(function(){
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(150,150,150,1)",
-                        data: completedData
+                        data: taskData
                     }
                 ]
             };
@@ -416,12 +416,12 @@ $(function(){
         {% if top5_users_1_week %}
             //Top users this week
             var users = [];
-            var contributions = [];
+            var taskRuns = [];
             {% for user in top5_users_1_week %}
                 users.push('{{user.name}}');
-                contributions.push(parseInt({{user.n_contributions}}));
+                taskRuns.push(parseInt({{user.task_runs}}));
             {% endfor %}
-            var highScore = contributions.indexOf(Math.max.apply(Math, contributions));
+            var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
             var data = {
                 labels: users,
                 datasets: [
@@ -431,7 +431,7 @@ $(function(){
                         strokeColor: "rgba(151,187,205,1)",
                         highlightFill: "rgba(151,187,205,0.1)",
                         highlightStroke: "rgba(151,187,205,1)",
-                        data: contributions
+                        data: taskRuns
                     }
                 ]
             };
@@ -454,12 +454,12 @@ $(function(){
         {% if top5_projects_1_week %}
             //Top 5 projects this week
             var projects = [];
-            var contributions = [];
+            var taskRuns = [];
             {% for project in top5_projects_1_week %}
                 projects.push('{{project.name}}');
-                contributions.push(parseInt({{project.n_contributions}}));
+                taskRuns.push(parseInt({{project.n_task_runs}}));
             {% endfor %}
-            var highScore = contributions.indexOf(Math.max.apply(Math, contributions));
+            var highScore = taskRuns.indexOf(Math.max.apply(Math, task_runs));
             var data = {
                 labels: projects,
                 datasets: [
@@ -469,7 +469,7 @@ $(function(){
                         strokeColor: "rgba(151,187,205,1)",
                         highlightFill: "rgba(151,187,205,0.1)",
                         highlightStroke: "rgba(151,187,205,1)",
-                        data: contributions
+                        data: task_runs
                     }
                 ]
             };
@@ -492,12 +492,12 @@ $(function(){
         {% if top_users %}
             //Top volunteers of all time
             var users = [];
-            var contributions = [];
+            var taskRuns = [];
             {% for user in top_users %}
                 users.push('{{user.name}}');
-                contributions.push(parseInt({{user.task_runs}}));
+                taskRuns.push(parseInt({{user.task_runs}}));
             {% endfor %}
-            var highScore = contributions.indexOf(Math.max.apply(Math, contributions));
+            var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
             var data = {
                 labels: users,
                 datasets: [
@@ -507,7 +507,7 @@ $(function(){
                         strokeColor: "rgba(151,187,205,1)",
                         highlightFill: "rgba(151,187,205,0.1)",
                         highlightStroke: "rgba(151,187,205,1)",
-                        data: contributions
+                        data: taskRuns
                     }
                 ]
             };
