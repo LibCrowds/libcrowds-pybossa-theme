@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 
-                <div class="row padding-bottom-sm">
+                <div class="row padding-bottom-sm" id="top-users-alltime-row">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
                             <h4 class="text-center padding-bottom-sm">Most Active Volunteers</h4>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 
-                <div class="row padding-bottom-sm">
+                <div class="row padding-bottom-sm" id="task-date-row">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
                             <h4 class="text-center padding-bottom-sm">Contributions and Completed Tasks per Day</h4>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 
-                <div class="row padding-bottom-sm">
+                <div class="row padding-bottom-sm" id="users-daily-row">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
                             <h4 class="text-center padding-bottom-sm">Number of Volunteers per Day</h4>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 
-                <div class="row">
+                <div class="row" id="activity-progress-row">
                     <!--
                     <div class="col-sm-4 col-xs-12 padding-bottom-sm">
                         <div class="white-rounded inset-shadow-white chart same-size">
@@ -216,151 +216,212 @@ $(function(){
         usersChart.generateLegend();
         document.getElementById('users-legend').innerHTML = usersChart.generateLegend();
         */
-    
-        //Task status
-        var completed = {{stats.n_tasks_completed|safe}};
-        var ongoing = {{stats.n_tasks_ongoing|safe}};
-        var total = ongoing + completed;
-        var label1 = "Remaining : " + Math.round(ongoing/total*100) + "% (" + ongoing + " task";
-        if (userData['values'][1]['value'][1] != 1) {
-            label1 += "s"
-        }
-        label1 += ")";
-        var label2 = "Completed : " + Math.round(completed/total*100) + "% (" + completed + " task";
-        if (completed != 1) {
-            label2 += "s"
-        }
-        label2 += ")";
-        var data = [
-        {
-            value: ongoing,
-            color: "rgba(151,187,205,1)",
-            highlight: "rgba(151,187,205,0.8)",
-            label: label1
-        },
-        {
-            value : completed,
-            color:"#BA0000",
-            highlight: "#D00000",
-            label: label2
-        }
-        ];
-        var canvas = document.getElementById("task-status");
-        var ctx = canvas.getContext("2d");
-        var taskStatusChart = new Chart(ctx).Doughnut(data);
-        var legendHolder = document.getElementById('task-status-legend')
-        canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
+        
+        {% if stats.n_tasks_completed and completion_days %}
+            //Task status
+            var completed = {{stats.n_tasks_completed|safe}};
+            var ongoing = {{stats.n_tasks_ongoing|safe}};
+            var total = ongoing + completed;
+            var label1 = "Remaining : " + Math.round(ongoing/total*100) + "% (" + ongoing + " task";
+            if (userData['values'][1]['value'][1] != 1) {
+                label1 += "s"
+            }
+            label1 += ")";
+            var label2 = "Completed : " + Math.round(completed/total*100) + "% (" + completed + " task";
+            if (completed != 1) {
+                label2 += "s"
+            }
+            label2 += ")";
+            var data = [
+            {
+                value: ongoing,
+                color: "rgba(151,187,205,1)",
+                highlight: "rgba(151,187,205,0.8)",
+                label: label1
+            },
+            {
+                value : completed,
+                color:"#BA0000",
+                highlight: "#D00000",
+                label: label2
+            }
+            ];
+            var canvas = document.getElementById("task-status");
+            var ctx = canvas.getContext("2d");
+            var taskStatusChart = new Chart(ctx).Doughnut(data);
+            var legendHolder = document.getElementById('task-status-legend')
+            canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
+        
+            //Daily Activity
+            $dow = {{completion_days|safe}}['dow'];
+            $auth = {{completion_days|safe}}['auth'];
+            $anon = {{completion_days|safe}}['anon'];
+            
+            var authData = [];
+            var anonData = [];
+            var authSum = 0;
+            var anonSum = 0;
+            
+            for (i = 1; i <= 7; i++) {
+                if($.inArray(i, $dow) !== -1) {
+                    $authVal = $auth.shift();
+                    $anonVal = $anon.shift();
+                    authSum += $authVal;
+                    anonSum += $anonVal;
+                    authData.push($authVal);
+                    anonData.push($anonVal);
+                } else {
+                    authData.push(0);
+                    anonData.push(0);
+                }
+            }
+            
+            var data = {
+                labels: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+                datasets: [
+                    {
+                        label: "Authenticated (" + authSum + " total contributions)",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: authData
+                    }
+                ]
+            };
+            var canvas = document.getElementById("dow");
+            var ctx = $("#dow")[0].getContext("2d");
+            var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+            var dowChart = new Chart(ctx).Radar(data, opts);
+            var dowLegendHolder = document.getElementById('dow-legend')
+            canvas.parentNode.parentNode.appendChild(dowLegendHolder.firstChild);
+            dowChart.draw();
+        {% else %}
+            $("#activity-progress-row").hide();
+        {% endif %}
+        
           
-        //Tasks completed per day
-        $contributions = {{task_runs_daily|safe}}['days'];
-        $completed = {{tasks_completed_daily|safe}}['days'];
-        
-        $contributionTasks = {{task_runs_daily|safe}}['tasks'];
-        $completedTasks = {{tasks_completed_daily|safe}}['tasks'];
-        
-        var compiledDates = $contributions.concat($completed);
-        compiledDates.sort(function(a, b){
-            return new Date(a) - new Date(b);
-        });
-        
-        var sortedDates = [];
-        var sortedDatesFull = [];
-        $.each(compiledDates, function(i, date){
-            var dateObj = new Date(date);
-            if($.inArray(date, sortedDatesFull) === -1) {
-                sortedDates.push($.datepicker.formatDate('dd M', dateObj));
-                sortedDatesFull.push(date);
-            }
-        });
-        
-        var contributionData = [];
-        var completedData = [];
-        
-        $.each(sortedDatesFull, function(i, date){
-            var dateObj = new Date(date);
-            if($.inArray(date, $contributions)!==-1) {
-                contributionData.push($contributionTasks.shift());
-            } else {
-                contributionData.push(0);
-            }
-            if($.inArray(date, $completed)!==-1) {
-                completedData.push($completedTasks.shift());
-            } else {
-                completedData.push(0);
-            }
-        });
-        var data = {
-            labels: sortedDates,
-            datasets: [
-                {
-                    label: "contribution",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: contributionData
-                },
-                {
-                    label: "completed task",
-                    fillColor: "rgba(150,150,150,0.2)",
-                    strokeColor: "rgba(150,150,150,1)",
-                    pointColor: "rgba(150,150,150,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(150,150,150,1)",
-                    data: completedData
+        {% if task_runs_daily %}
+            //Tasks completed per day
+            $contributions = {{task_runs_daily|safe}}['days'];
+            $completed = {{tasks_completed_daily|safe}}['days'];
+            
+            $contributedTasks = {{task_runs_daily|safe}}['tasks'];
+            $completedTasks = {{tasks_completed_daily|safe}}['tasks'];
+            
+            var compiledDates = $contributions.concat($completed);
+            compiledDates.sort(function(a, b){
+                return new Date(a) - new Date(b);
+            });
+            
+            var sortedDates = [];
+            var sortedDatesFull = [];
+            $.each(compiledDates, function(i, date){
+                var dateObj = new Date(date);
+                if($.inArray(date, sortedDatesFull) === -1) {
+                    sortedDates.push($.datepicker.formatDate('dd M', dateObj));
+                    sortedDatesFull.push(date);
                 }
-            ]
-        };
-        $("#task-date").attr("width", $('#task-date-chart').width());
-        $("#task-date").attr("height", 300);
-        var ctx = $("#task-date")[0].getContext("2d");
-        var opts = {populateSparseData:true, multiTooltipTemplate: " <%=value%> <%=datasetLabel%><%if(value != 1)\u007B%>s<%}%>"};
-        var taskDateChart = new Chart(ctx).Line(data, opts);
-        taskDateChart.draw();
-        
-        
-        //Volunteers per day
-        var usersDailyData = {{users_daily|safe}};
-        var usersDays = [];
-        
-        $.each(usersDailyData['days'], function(i, date){
-            usersDays.push($.datepicker.formatDate('dd M', new Date(date)));
-        });
-        
-        var data = {
-            labels: usersDays,
-            datasets: [
-                {
-                    label: "Volunteers per Day",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: usersDailyData['users']
+            });
+            
+            var contributionData = [];
+            var completedData = [];
+            
+            $.each(sortedDatesFull, function(i, date){
+                var dateObj = new Date(date);
+                if($.inArray(date, $contributions)!==-1) {
+                    contributionData.push($contributionTasks.shift());
+                } else {
+                    contributionData.push(0);
                 }
-            ]
-        };
-        $("#users-daily").attr("width", $('#users-daily-chart').width());
-        $("#users-daily").attr("height", 300);
-        var ctx = $("#users-daily")[0].getContext("2d");
-        var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>volunteers<%}else\u007B%>volunteer<%}%>"};
-        var usersDailyChart = new Chart(ctx).Line(data, opts);
-        usersDailyChart.draw();
+                if($.inArray(date, $completed)!==-1) {
+                    completedData.push($completedTasks.shift());
+                } else {
+                    completedData.push(0);
+                }
+            });
+            var data = {
+                labels: sortedDates,
+                datasets: [
+                    {
+                        label: "contribution",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: contributionData
+                    },
+                    {
+                        label: "completed task",
+                        fillColor: "rgba(150,150,150,0.2)",
+                        strokeColor: "rgba(150,150,150,1)",
+                        pointColor: "rgba(150,150,150,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(150,150,150,1)",
+                        data: completedData
+                    }
+                ]
+            };
+            $("#task-date").attr("width", $('#task-date-chart').width());
+            $("#task-date").attr("height", 300);
+            var ctx = $("#task-date")[0].getContext("2d");
+            var opts = {populateSparseData:true, multiTooltipTemplate: " <%=value%> <%=datasetLabel%><%if(value != 1)\u007B%>s<%}%>"};
+            var taskDateChart = new Chart(ctx).Line(data, opts);
+            taskDateChart.draw();
+        {% else %}
+            $("#top-date-row").hide();
+        {% endif %}
         
-        //Top users this week
-        var users = [];
-        var tasks = [];
+        
+        {% if users_daily %}
+            //Volunteers per day
+            var usersDailyData = {{users_daily|safe}};
+            var usersDays = [];
+            
+            $.each(usersDailyData['days'], function(i, date){
+                usersDays.push($.datepicker.formatDate('dd M', new Date(date)));
+            });
+            
+            var data = {
+                labels: usersDays,
+                datasets: [
+                    {
+                        label: "Volunteers per Day",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: usersDailyData['users']
+                    }
+                ]
+            };
+            $("#users-daily").attr("width", $('#users-daily-chart').width());
+            $("#users-daily").attr("height", 300);
+            var ctx = $("#users-daily")[0].getContext("2d");
+            var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>volunteers<%}else\u007B%>volunteer<%}%>"};
+            var usersDailyChart = new Chart(ctx).Line(data, opts);
+            usersDailyChart.draw();
+        {% else %}
+            $("#users-daily-row").hide();
+        {% endif %}
+        
+        
         {% if top5_users_1_week %}
+            //Top users this week
+            var users = [];
+            var contributions = [];
             {% for user in top5_users_1_week %}
                 users.push('{{user.name}}');
-                tasks.push(parseInt({{user.n_contributions}}));
+                contributions.push(parseInt({{user.n_contributions}}));
             {% endfor %}
-            var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+            var highScore = contributions.indexOf(Math.max.apply(Math, contributions));
             var data = {
                 labels: users,
                 datasets: [
@@ -370,7 +431,7 @@ $(function(){
                         strokeColor: "rgba(151,187,205,1)",
                         highlightFill: "rgba(151,187,205,0.1)",
                         highlightStroke: "rgba(151,187,205,1)",
-                        data: tasks
+                        data: contributions
                     }
                 ]
             };
@@ -389,62 +450,16 @@ $(function(){
             $("#top-5-row").hide();
         {% endif %}
         
-        //Daily Activity
-        $dow = {{completion_days|safe}}['dow'];
-        $auth = {{completion_days|safe}}['auth'];
-        $anon = {{completion_days|safe}}['anon'];
         
-        var authData = [];
-        var anonData = [];
-        var authSum = 0;
-        var anonSum = 0;
-        
-        for (i = 1; i <= 7; i++) {
-            if($.inArray(i, $dow) !== -1) {
-                $authVal = $auth.shift();
-                $anonVal = $anon.shift();
-                authSum += $authVal;
-                anonSum += $anonVal;
-                authData.push($authVal);
-                anonData.push($anonVal);
-            } else {
-                authData.push(0);
-                anonData.push(0);
-            }
-        }
-        
-        var data = {
-            labels: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-            datasets: [
-                {
-                    label: "Authenticated (" + authSum + " total contributions)",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: authData
-                }
-            ]
-        };
-        var canvas = document.getElementById("dow");
-        var ctx = $("#dow")[0].getContext("2d");
-        var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
-        var dowChart = new Chart(ctx).Radar(data, opts);
-        var dowLegendHolder = document.getElementById('dow-legend')
-        canvas.parentNode.parentNode.appendChild(dowLegendHolder.firstChild);
-        dowChart.draw();
-        
-        //Top 5 projects this week
-        var projects = [];
-        var contributions = [];
         {% if top5_projects_1_week %}
+            //Top 5 projects this week
+            var projects = [];
+            var contributions = [];
             {% for project in top5_projects_1_week %}
                 projects.push('{{project.name}}');
                 contributions.push(parseInt({{project.n_contributions}}));
             {% endfor %}
-            var highScore = contributions.indexOf(Math.max.apply(Math, tasks));
+            var highScore = contributions.indexOf(Math.max.apply(Math, contributions));
             var data = {
                 labels: projects,
                 datasets: [
@@ -473,15 +488,16 @@ $(function(){
             $("#top-5-row").hide();
         {% endif %}
         
-        //Top volunteers of all time
-        var users = [];
-        var tasks = [];
+        
         {% if top_users %}
+            //Top volunteers of all time
+            var users = [];
+            var contributions = [];
             {% for user in top_users %}
                 users.push('{{user.name}}');
-                tasks.push(parseInt({{user.task_runs}}));
+                contributions.push(parseInt({{user.task_runs}}));
             {% endfor %}
-            var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+            var highScore = contributions.indexOf(Math.max.apply(Math, contributions));
             var data = {
                 labels: users,
                 datasets: [
@@ -491,12 +507,10 @@ $(function(){
                         strokeColor: "rgba(151,187,205,1)",
                         highlightFill: "rgba(151,187,205,0.1)",
                         highlightStroke: "rgba(151,187,205,1)",
-                        data: tasks
+                        data: contributions
                     }
                 ]
             };
-            console.log(tasks);
-            console.log(users);
             $("#top-users-alltime").attr("width", $('#top-users-alltime-chart').width());
             $("#top-users-alltime").attr("height", 300);
             var ctx = $("#top-users-alltime")[0].getContext("2d");
@@ -508,6 +522,8 @@ $(function(){
             topUsersAlltimeChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,5)";
             topUsersAlltimeChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
             topUsersAlltimeChart.update();
+        {% else %}
+            $("#top-users-alltime-row").hide();
         {% endif %}
 });
 </script>
