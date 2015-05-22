@@ -14,7 +14,7 @@ This theme can be installed by including it in your PyBossa themes folder. You w
 * [PyBossa Documentation](http://docs.pybossa.com/)
 
 
-# Author
+## Author
 
 * [Alexander Mendes](mailto:alexanderhmendes@gmail.com)
 
