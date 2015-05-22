@@ -1,5 +1,4 @@
-This is the British Library theme for the crowdsourcing platform based on [Pybossa
-](https://github.com/PyBossa/pybossa).
+This is [Pybossa](https://github.com/PyBossa/pybossa) theme for the BL Labs crowd-sourcing platform.
 
 # See it in Action
 
@@ -7,15 +6,17 @@ Visit [LibCrowds.com](http://libcrowds.com)
 
 # Installing and Upgrading
 
-This theme is included as a sub-module in the [British Library fork of PyBossa
-](https://github.com/alexandermendes/pybossa).
-
-Alternatively, it can be installed by including it in your PyBossa themes folder.
+This theme can be installed by including it in your PyBossa themes folder. You will also need to install the [BL-pybossa-plugin](https://github.com/alexandermendes/BL-pybossa-plugin).
 
 
 # Useful Links
 
 * [PyBossa Documentation](http://docs.pybossa.com/)
+
+
+# Author
+
+* [Alexander Mendes](mailto:alexanderhmendes@gmail.com)
 
 
 ## Copyright / License
