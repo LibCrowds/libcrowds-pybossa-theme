@@ -71,7 +71,7 @@ You can use Markdown to format your description.'), class="form-control", requir
                 {{ form_helper.render_field(form.webhook, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.flickr_link, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.image_set, class="form-control", visible='true',  accept=".zip") }}
-                {{ form_helper.render_field_horizontal(form.required_matches, class="form-control", visible='true') }}
+                {{ form_helper.render_field(form.required_matches, class="form-control", visible='true') }}
                 {{ form_helper.render_field_horizontal(form.hidden) }}
                 <div role="group" class="pull-right">
                     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
