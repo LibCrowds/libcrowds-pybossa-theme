@@ -3,6 +3,7 @@
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
+{% from "_formhelpers.html" import render_field %}
 
 {% block content %}
     <span class="set-main-bg" data-bg="pattern-white-wall"></span>
@@ -12,44 +13,60 @@
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-3">
                             {% include "_flash_messages.html" %}
-                        {{ helper.render_project_title(project, upload_method, subtitle=_('Export Tasks'))}}
-                        {{ helper.render_loading("Exporting data, this may take a while, please wait...") }}
-                        <h3 class="text-inset-grey">Export Raw Data</h3>
-                        <div class="row">
+                            {{ helper.render_project_title(project, upload_method, subtitle=_('Export Tasks'))}}
+                            {{ helper.render_loading("Exporting data, this may take a while, please wait...") }}
+                            <h3 class="text-inset-grey">Export Raw CSV Data</h3>
+                            <div class="row">
+                                
+                                <div class="col-sm-6">
+                                    <a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='csv')}}" rel="nofollow">
+                                        <div class="well">
+                                            <i class="fa fa-file-excel-o fa-4x"></i> 
+                                            <h3  class="margin-bottom-xs">{{_('Tasks (CSV)')}}</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv')}}" rel="nofollow">
+                                        <div class="well">
+                                            <i class="fa fa-file-excel-o fa-4x"></i> 
+                                            <h3  class="margin-bottom-xs">{{_('Contributions (CSV)')}}</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                             
-                            <div id="csv-task" class="col-sm-6 col-md-3">
-                                <a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='csv')}}" rel="nofollow">
-                                    <div class="well">
-                                        <i class="fa fa-file-excel-o fa-4x"></i> 
-                                        <h3  class="margin-bottom-xs">{{_('Tasks (CSV)')}}</h3>
-                                    </div>
-                                </a>
+                            <h3 class="text-inset-grey padding-top-sm">Export Raw JSON Data</h3>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='json')}}" rel="nofollow">
+                                        <div class="well">
+                                            <i class="fa fa-code fa-4x"></i> 
+                                            <h3  class="margin-bottom-xs">{{_('Tasks (JSON)')}}</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='json')}}" rel="nofollow">
+                                        <div class="well">
+                                            <i class="fa fa-code fa-4x"></i> 
+                                            <h3  class="margin-bottom-xs">{{_('Contributions (JSON)')}}</h3>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                            <div id="users-list" class="col-sm-6 col-md-3">
-                                <a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv')}}" rel="nofollow">
-                                    <div class="well">
-                                        <i class="fa fa-file-excel-o fa-4x"></i> 
-                                        <h3  class="margin-bottom-xs">{{_('Contributions (CSV)')}}</h3>
-                                    </div>
-                                </a>
+                            
+                            <h3 class="text-inset-grey padding-top-sm">Export Formatted Data</h3>   
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <a href="{{ url_for('blplugin.export_formatted', short_name=project.short_name) }}" rel="nofollow">
+                                        <div class="well">
+                                            <i class="fa fa-code fa-4x"></i> 
+                                            <h3  class="margin-bottom-xs">{{_('Contributions (JSON)')}}</h3>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                            <div id="json-task" class="col-sm-6 col-md-3">
-                                <a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='json')}}" rel="nofollow">
-                                    <div class="well">
-                                        <i class="fa fa-code fa-4x"></i> 
-                                        <h3  class="margin-bottom-xs">{{_('Tasks (JSON)')}}</h3>
-                                    </div>
-                                </a>
-                            </div>
-                            <div id="users-list" class="col-sm-6 col-md-3">
-                                <a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='json')}}" rel="nofollow">
-                                    <div class="well">
-                                        <i class="fa fa-code fa-4x"></i> 
-                                        <h3  class="margin-bottom-xs">{{_('Contributions (JSON)')}}</h3>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
                         </div>
                     </div>
                 </div>
