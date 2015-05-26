@@ -247,7 +247,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .btn-secondary{background-color:#2B9884;border:2px solid #fff;color:#fff;padding:10px 20px;font-weight:600;font-size:13px}
 .btn-filter{background-color:#fff;border-color:#ddd;color:#666}
 .splash{background-size:cover;color:#fff;text-align:center;background-repeat:no-repeat;}
-#home-splash{background-image:url(../img/Crowd.jpg)}
+#home-splash{background-image:url(../img/Crowd.jpg);background-position:center}
 #community-splash{background-image:url(../img/Cards/splash2.jpg)}
 #data-splash{background-image:url(../img/Cards/splash3.jpg)}
 #about-splash{background-image:url(../img/Cards/splash4.jpg)}
