@@ -87,6 +87,7 @@ You can use Markdown to format your description.'), class="form-control", requir
     $("i[rel='tooltip']").tooltip();
     $(function() {
         $('#flickr_link').attr('value', '{{project.info.flickr_link | safe}}');
+        $('#required_matches').attr('value', '{{project.info.required_matches | safe}}');
         $('.control-label').addClass('remove-padding-left');
     });
 </script>
