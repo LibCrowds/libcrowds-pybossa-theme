@@ -62,8 +62,8 @@
 {% macro render_project_short_summary(project, upload_method) -%}
 <tr>
     <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
+    <td>{{project.category}}</td>
     <td><span class="format-date" data-date="{{project.created}}"></span></td>
-    <td><a class="btn btn-inverse" href="{{url_for('project.tasks', short_name=project.short_name)}}">{{ _('Open') }}</a></td>
 </tr>
 {% endmacro %}
 
