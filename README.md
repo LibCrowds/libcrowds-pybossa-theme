@@ -1,4 +1,4 @@
-This is [Pybossa](https://github.com/PyBossa/pybossa) theme for the BL Labs crowd-sourcing platform.
+This is a [Pybossa](https://github.com/PyBossa/pybossa) theme for the BL Labs crowd-sourcing platform.
 
 ## See it in Action
 
