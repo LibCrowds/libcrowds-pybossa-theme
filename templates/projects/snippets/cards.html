@@ -99,7 +99,7 @@
         <!-- Feedback items for the user -->
         <div class="padding-top-sm">
           <p><span id="i18n_working_task">You are working now on task:</span> <span id="task-id" class="label label-default">#</span></p>
-          <p><span id="i18n_tasks_completed">You contributed to</span> <span id="done" class="label label-danger"></span> <span id="i18n_tasks_from">tasks from </span>
+          <p><span id="i18n_tasks_completed">You have contributed to</span> <span id="done" class="label label-danger"></span> <span id="i18n_tasks_from">tasks from </span>
           
           <!-- Progress bar for the user -->
           <span id="total" class="label label-danger"></span></p>
@@ -329,7 +329,7 @@ $(document).delegate('#oclc_search_form', 'submit', function(e) {
         break;
     }
   }
-  performSearch(searchStr, "1");
+  performSearch(searchStr, "0");
   performCount(countStr);
   Placeholders.enable();
 });
