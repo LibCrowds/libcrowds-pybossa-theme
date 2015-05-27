@@ -16,7 +16,7 @@
                         <form id="task_redundancy" class="form-horizontal" method="post" action="{{ url_for('project.task_n_answers', short_name=project.short_name) }}">
                             {{ form.hidden_tag() }}
                             <fieldset>
-                                {{ render_field(form.n_contributions, class_="input-block-level form-control", placeholder= _('The number of contributions required per task'), type="number", autofocus="autofocus", required="required", pattern=".{1,100}", title="Must be a number between 1 and 100") }}
+                                {{ render_field(form.n_answers, class_="input-block-level form-control", placeholder= _('The number of contributions required per task'), type="number", autofocus="autofocus", required="required", pattern=".{1,100}", title="Must be a number between 1 and 100") }}
                                 <div class="pull-right" role="group">
                                     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
                                     <input type="submit" value="Set redundancy" class="btn btn-danger" />
