@@ -178,6 +178,13 @@ function updateXML() {
         $('#xml').html(text.replace(expr, '<br>'));
     }
 }
+
+function recordIP(){
+    $.ajax({
+        url: '/blplugin/record_ip'
+    })
+}
+
 $('.upload-img-form').submit(function() {
     $('#upload-btn').html('<i class="glyphicon glyphicon-refresh spinning"></i> Uploading');
     $('#upload-btn').blur();
