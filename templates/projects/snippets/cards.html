@@ -99,7 +99,7 @@
         <!-- Feedback items for the user -->
         <div class="padding-top-sm">
           <p><span id="i18n_working_task">You are working now on task:</span> <span id="task-id" class="label label-default">#</span></p>
-          <p><span id="i18n_tasks_completed">You have contributed to</span> <span id="done" class="label label-danger"></span> <span id="i18n_tasks_from">tasks from </span>
+          <p><span id="i18n_tasks_completed">You contributed to</span> <span id="done" class="label label-danger"></span> <span id="i18n_tasks_from">tasks from </span>
           
           <!-- Progress bar for the user -->
           <span id="total" class="label label-danger"></span></p>
@@ -182,13 +182,16 @@
     </div>
 </div>
 <script>
-  
-  //Tutorial cookie
+    
   $(document).ready(function() {
-    if ($.cookie('{{project.short_name}}') === null) {
+    //Tutorial cookie
+    if ($.cookie('{{project.short_name}}') === undefined || $.cookie('{{project.short_name}}') === null) {
       $('#modal').modal('show');
       $.cookie('{{project.short_name}}', '7');
     }
+    
+    //Record user IP
+    $.ajax('/blplugin/record_ip');
   });
   
   
@@ -329,14 +332,14 @@ $(document).delegate('#oclc_search_form', 'submit', function(e) {
         break;
     }
   }
-  performSearch(searchStr, "0");
+  performSearch(searchStr, "1");
   performCount(countStr);
   Placeholders.enable();
 });
 
 
 function performSearch(searchStr, startPos) {
-  var page = parseInt(startPos, 10) + 1;
+  var page = parseInt(startPos, 10);
    $.get(searchStr + "&startPos=" + startPos, function(results){
      var pageStr = '';
       	pageStr = '<div class="row text-center"><small><span>';
