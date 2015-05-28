@@ -32,7 +32,7 @@
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
-                            <h3 class="text-center"><span class="check-plural" data-num="{{stats.n_total_users}}" data-noun="volunteer"></span> have participated in <span class="check-plural" data-num="{{stats.n_published_projects}}" data-noun="project"></span>, submitted <span class="check-plural" data-num="{{stats.n_task_runs}}" data-noun="contribution"></span> and completed <span class="check-plural" data-num="{{stats.n_tasks_completed}}" data-noun="task"></span></h3>
+                            <h3 class="text-center"><span class="check-plural" data-num="{{stats.n_total_users}}" data-noun="volunteer"></span> have participated in <span class="check-plural" data-num="{{stats.n_published_projects}}" data-noun="project"></span>, made <span class="check-plural" data-num="{{stats.n_task_runs}}" data-noun="contribution"></span> and completed <span class="check-plural" data-num="{{stats.n_tasks_completed}}" data-noun="task"></span></h3>
                         </div>
                     </div>
                 </div>
@@ -128,14 +128,17 @@
                     </div>
                 </div>
                 
+                <!--
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white text-center chart">
-                            <h4 class=" padding-bottom-sm">Locations of Users</h4>
+                            <h4 class=" padding-bottom-sm">Locations of Anonymous Users</h4>
                             <div id="map" style="height:480px;"></div>
                         </div>
                     </div>
                 </div>
+                
+                -->
             </div>
             {% endif %}
 </div>
@@ -156,6 +159,9 @@ $(function(){
         $(this).text(ret);
     });
     
+    var userData = {{users|safe}};
+    
+    /*
     //Locations map
         var map = L.map('map', {scrollWheelZoom: false, minZoom:1});
         map.fitWorld();
@@ -180,9 +186,7 @@ $(function(){
         }
         map.addLayer(markers);
     
-    var userData = {{users|safe}};
-    
-    /*User proportions chart
+    User proportions chart
         var total = {{stats.n_total_users|safe}};
         var label1 = userData['values'][0]['label'] + " : " + Math.round(userData['values'][0]['value'][1]/total*100) + "% (" + userData['values'][0]['value'][1] + " user";
         if (userData['values'][0]['value'][1] != 1) {
