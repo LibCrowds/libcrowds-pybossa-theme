@@ -1,10 +1,14 @@
 var notSupportedBrowsers = [{
         os: "Any",
         browser: "MSIE",
-        version: 9
+        version: 8
     }, {
         os: "Any",
         browser: "Firefox",
+        version: 1
+    }, {
+        os: "Any",
+        browser: "Safari",
         version: 1
     }],
     supportedBrowsers = [],
