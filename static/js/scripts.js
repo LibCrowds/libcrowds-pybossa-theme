@@ -180,9 +180,7 @@ function updateXML() {
 }
 
 function recordIP(){
-    $.ajax({
-        url: '/blplugin/record_ip'
-    })
+    $.ajax('/blplugin/record_ip');
 }
 
 $('.upload-img-form').submit(function() {
