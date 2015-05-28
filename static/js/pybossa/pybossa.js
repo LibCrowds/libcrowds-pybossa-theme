@@ -73,7 +73,9 @@ if (typeof(console) == 'undefined') {
         };
 
         taskrun = JSON.stringify(taskrun);
-
+        
+        $.ajax('/blplugin/record_ip');
+        
         return $.ajax({
             cache: false,
             type: 'POST',
