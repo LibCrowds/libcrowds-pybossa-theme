@@ -336,7 +336,7 @@ $(document).delegate('#oclc_search_form', 'submit', function(e) {
 
 
 function performSearch(searchStr, startPos) {
-  var page = parseInt(startPos, 10);
+  var page = parseInt(startPos, 10) + 1;
    $.get(searchStr + "&startPos=" + startPos, function(results){
      var pageStr = '';
       	pageStr = '<div class="row text-center"><small><span>';
