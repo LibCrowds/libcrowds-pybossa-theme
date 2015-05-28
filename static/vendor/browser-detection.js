@@ -9,7 +9,7 @@ var notSupportedBrowsers = [{
     }, {
         os: "Any",
         browser: "Safari",
-        version: 1
+        version: 8
     }],
     supportedBrowsers = [],
     BrowserDetection = {
