@@ -136,7 +136,7 @@ body > footer .container{padding-top:20px;padding-bottom:20px}
 .banner .featured li img{min-width:100px;min-height:100px}
 ul.users{margin:0 auto;display:table;}
 ul.users li{display:inline-block;margin:25px 0 0px 3px;float:none;}
-ul.users li a{display:block;margin-bottom:5px;margin-right:10px;margin-left:10px}
+ul.users li a{display:block;margin-bottom:5px;margin-right:7px;margin-left:7px}
 #cookies_warning{position:fixed;color:#ddd;min-height:30px;position:fixed;left:0;bottom:0;width:100%;z-index:99999;padding:6px 20px 4px;background-color:rgba(70,70,70,0.9);text-align:left}
 #cookies_warning > p{margin-top:8px}
 .bs-docs-sidenav{z-index:99;padding:0;width:220px;background-color:rgba(0,0,0,0.7);position:fixed;}
