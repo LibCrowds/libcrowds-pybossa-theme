@@ -128,7 +128,6 @@
                     </div>
                 </div>
                 
-                <!--
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white text-center chart">
@@ -137,8 +136,6 @@
                         </div>
                     </div>
                 </div>
-                
-                -->
             </div>
             {% endif %}
 </div>
@@ -161,7 +158,7 @@ $(function(){
     
     var userData = {{users|safe}};
     
-    /*
+    
     //Locations map
         var map = L.map('map', {scrollWheelZoom: false, minZoom:1});
         map.fitWorld();
@@ -186,6 +183,7 @@ $(function(){
         }
         map.addLayer(markers);
     
+    /*
     User proportions chart
         var total = {{stats.n_total_users|safe}};
         var label1 = userData['values'][0]['label'] + " : " + Math.round(userData['values'][0]['value'][1]/total*100) + "% (" + userData['values'][0]['value'][1] + " user";
