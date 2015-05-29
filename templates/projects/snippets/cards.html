@@ -477,6 +477,11 @@ pybossa.taskLoaded(function(task, deferred) {
     }
 });
 
+$(document).delegate('#shelfmark_form', 'submit', function(e) {
+   e.preventDefault();
+   $('.btn-answer').triggerHandler('click');
+});
+
 pybossa.presentTask(function(task, deferred) {
   $("#loading").fadeIn(500);
   if ( !$.isEmptyObject(task) ) {
@@ -499,8 +504,8 @@ pybossa.presentTask(function(task, deferred) {
         $("#title_field").focus();
         $("#loading").fadeOut(500);
         $('.btn-answer').off('click').on('click', function(evt) {
-          if (typeof $(this).attr("value") != 'undefined') {
-            	task.answer = $("#shelfmark_form").serializeJSON();
+        if (typeof $(this).attr("value") != 'undefined') {
+            task.answer = $("#shelfmark_form").serializeJSON();
             task.answer.title = task.info.title;
             task.answer.oclc = $("#selected_record").attr('data-selected-oclc');
             task.answer.libs = $("#selected_record").attr('data-selected-libs');
