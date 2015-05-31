@@ -139,11 +139,11 @@
         
             <div class="col-sm-3 hidden-sm hidden-xs same-size" id="show-project-stats">
                 <div class="white-rounded inset-shadow-white">
-                    <span class="vcenter"><i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div></span>
+                    <i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div>
                     <hr class="no-margins">
-                    <span class="vcenter"><i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block">Tasks: {{project.n_tasks}}</div></span>
+                    <i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block">Tasks: {{project.n_tasks}}</div>
                     <hr class="no-margins">
-                    <span class="vcenter"><i class="fa fa-users fa-2x"></i><div class="padding-left-xs inline-block">Volunteers: {{ project.n_volunteers}}</div></span>
+                    <i class="fa fa-users fa-2x"></i><div class="padding-left-xs inline-block">Volunteers: {{ project.n_volunteers}}</div>
                 </div>
                 <div class="text-center padding-top-sm">
                     {% if active_cat != "draft" %}
