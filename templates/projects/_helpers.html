@@ -139,7 +139,7 @@
         
             <div class="col-sm-3 hidden-sm hidden-xs same-size" id="show-project-stats">
                 <div class="white-rounded inset-shadow-white">
-                    <span class="vcenter"><i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: 0%</div></span>
+                    <span class="vcenter"><i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div></span>
                     <hr class="no-margins">
                     <span class="vcenter"><i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block">Tasks: {{project.n_tasks}}</div></span>
                     <hr class="no-margins">
@@ -192,7 +192,7 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_project_title(project, upload_method, subtitle=None) %}
-<h1 class="vcenter inset-text-grey">
+<h1 class="inset-text-grey">
     {% if subtitle %}
     <strong>{{ project.name }}</strong>: {{subtitle}}</h1>
     {% else %}
