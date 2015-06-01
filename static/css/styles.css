@@ -119,12 +119,6 @@ section.white,section.white:before,section.white:after{background-color:#fff}
 section.white:before,section.white:after{content:"";position:absolute;top:-1px;bottom:-1px}
 section.white:before{right:100%}
 section.white:after{left:100%}
-.box{background-color:#FFF;border:1px solid #d9d9d9}
-.app.box{padding:5px;min-height:138px;margin-bottom:15px}
-.app.box .image{display:block;max-width:208px;width:100%;height:138px;background-image:url(../img/placeholder.png);background-repeat:no-repeat;background-size:cover;-webkit-box-shadow:inset 0 0 2px 0 rgba(0,0,0,0.5);box-shadow:inset 0 0 2px 0 rgba(0,0,0,0.5)}
-.app.box h3{padding:10px 5px 2px;margin:0}
-.app.box p{padding-left:5px;margin-bottom:5px;font-size:12px}
-.app.box .btn{margin:0 4px 0 0}
 body > footer .container{padding-top:20px;padding-bottom:20px}
 .banner .featured{margin:-6px 0 0;border-left:solid 2px #FFF;height:309px;overflow:hidden}
 .banner .featured li{display:block;float:left;width:103px;height:103px;background-color:#FFF;background-image:url(../img/placeholder.png);background-repeat:no-repeat;background-position:right bottom;background-size:97px 97px}
@@ -150,7 +144,7 @@ ul.users li a{display:block;margin-bottom:5px;margin-right:7px;margin-left:7px}
 .bs-docs-sidenav .nav-link:hover > a:first-child:after,.bs-docs-sidenav .nav-link:focus > a:first-child:after{opacity:1;transform:none}
 .bs-docs-sidenav .nav-stacked li > a:hover,.bs-docs-sidenav .nav-stacked li > a:focus{background-color:rgba(255,255,255,0.7);color:#404040}
 .bs-docs-sidenav a.active:hover i,.bs-docs-sidenav a.active:focus i,.bs-docs-sidenav>li>a.active i{color:#fff}
-.bs-docs-sidenav>li>a:hover i{color:#BA0000}
+.bs-docs-sidenav>li>a:hover{color:#fff}
 .bs-docs-sidenav>li>a:hover,.bs-docs-sidenav>li>a:focus{background:rgba(255,255,255,0)}
 .bs-docs-sidenav>li.nav-link.active>a:hover,.bs-docs-sidenav>li.nav-link.active>a:focus,.bs-docs-sidenav>li.nav-link.active>a{background-color:#BA0000;color:#fff}
 .bs-docs-sidenav.affix{top:70px;height:100%;font-size:14px;overflow-y:auto}
@@ -356,7 +350,6 @@ img#navbar-logo {height: 90%;}
 .navbar .nav > li > a{color:#404040}
 .navbar-fixed-top{padding-top:10px;padding-bottom:10px;background-color:rgba(255,255,255,1);border-bottom:2px solid #eee}
 .navbar-inner{padding-left:15px!important;padding-right:15px!important}
-.banner .featured{display:none}
 .app.box .image{float:left}
 .app.box h3,.app.box p{margin-left:220px}
 body > footer{margin-left:-20px;margin-right:-20px;text-align:center}
@@ -412,12 +405,6 @@ body{padding-top:0}
 .navbar .brand{padding:0}
 .navbar .brand img{max-height:20px}
 .navbar .nav > li > a{margin-top:5px;margin-bottom:0}
-.banner{padding:0;margin-left:0}
-.banner .featured{border-left:solid 4px #FFF;height:354px}
-.banner .featured li{width:118px;height:118px;background-size:112px 112px}
-.banner .featured li a img{width:112px}
-.banner .featured li a:hover{width:130px}
-.banner .featured li a:hover img{width:118px}
 text-center-sm{text-align:center}
 }
 @media (min-width: 992px) {
