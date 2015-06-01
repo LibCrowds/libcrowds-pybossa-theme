@@ -29,20 +29,23 @@ $(function() {
         }, 1000);
     });
     $(window).on("resize", function() {
-        if($(window).width() > 991){
             var m2 = 0;
             $(".row .same-size").height("");
             $(".row .same-size").each(function(i, el) {
                 m2 = Math.max(m2, $(el).height());
             });
-            $(".row .same-size").height(m2);
+            if($(window).width() > 991){
+                $(".row .same-size").height(m2);
+            } else {
+                $(".row .same-size").height(m2 + 50);
+            }
+            
             var m = 0;
             $(".well").height("");
             $(".well").each(function(i, el) {
                 m = Math.max(m, $(el).height());
             });
             $(".well").height(m);
-        }
         animateProgress();
         if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
             $('.navbar').removeClass('opaque');
