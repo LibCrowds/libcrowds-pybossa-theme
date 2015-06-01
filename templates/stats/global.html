@@ -130,6 +130,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="row padding-bottom-sm">
+                    <div class="col-xs-12">
+                        <div class="white-rounded inset-shadow-white chart">
+                            <h4 class="text-center padding-bottom-sm">Hourly Activity</h4>
+                            <div id="hourly-chart">
+                                <canvas id="hourly" style="max-height:300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
@@ -530,6 +540,36 @@ $(function(){
         {% else %}
             $("#top-users-alltime-row").hide();
         {% endif %}
+        
+    //Hourly chart
+    var houreyLabels = [];
+    var houreyData = [];
+    {% for hour in hourly_activity %}
+        houreyLabels.push('{{hour.h}}');
+        houreyData.push(parseInt({{hour.count}}));
+    {% endfor %}
+    
+    var data = {
+        labels: houreyLabels,
+        datasets: [
+            {
+                label: "Hourly Activity",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: houreyData
+            }
+        ]
+    };
+    $("#hourly").attr("width", $('#hourly-chart').width());
+    $("#hourly").attr("height", 300);
+    var ctx = $("#hourly")[0].getContext("2d");
+    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+    var hourlyChart = new Chart(ctx).Line(data, opts);
+    hourlyChart.draw();
 });
 </script>
 {% endblock %}
