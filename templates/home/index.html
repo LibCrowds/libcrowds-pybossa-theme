@@ -81,7 +81,9 @@
 {% endif %}
 
 <script>
-   $("a[rel=popover]").popover({
+  $.ajax('/api/user/set_default_avatar');
+  
+  $("a[rel=popover]").popover({
            html: true,
            animation: true,
            trigger: 'hover',
