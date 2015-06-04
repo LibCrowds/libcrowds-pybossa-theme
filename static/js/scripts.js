@@ -28,6 +28,9 @@ $(function() {
             scrollTop: $(anchor).offset().top - 40
         }, 1000);
     });
+    $('.localVideo').lightGallery({
+        thumbnail:false
+    });
     $(window).on("resize", function() {
             var m2 = 0;
             $(".row .same-size").height("");

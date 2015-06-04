@@ -208,7 +208,22 @@ function imgError(image) {
         </div>
         <div class="col-md-4 col-xs-12 text-center">
             {% if show_contribute_btn %}
-                <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger pull-right-md"> {{ _('Contribute') }}</a>
+                <div class="pull-right-md" role="group">
+                    {% if project.info.video %}
+                        <ul class="localVideo">
+                            <li data-html="#video1"> 
+                                <span class="btn btn-success" ><i class="fa fa-play"> </i> Watch the video</span>
+                            </li>
+                        </ul>
+                        <div style="display:none;" id="video1">
+                            <video width="100%" controls autoplay>
+                                <source src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.video))}}" type="video/mp4">
+                                 Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+                    {% endif %}
+                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> {{ _('Contribute') }}</a>
+                </div>
             {% elif show_n_tasks %}
                 <span class="pull-right-md"><strong>{{n_tasks}}</strong> {{_('Tasks')}}</span>
             {% endif %}
