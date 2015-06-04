@@ -61,7 +61,7 @@ hr.extra-margins{margin-top:40px;margin-bottom:40px}
 .navbar{font-family:sans-serif;font-weight:400}
 .navbar-fixed-top{padding-top:30px;padding-bottom:25px;background-color:rgba(255,255,255,0);border:none;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;font-size:14px;-webkit-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;-moz-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;-ms-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;-o-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;z-index:9999}
 .navbar-fixed-top.opaque{padding-top:10px;padding-bottom:10px;background-color:rgba(255,255,255,1);border-bottom:2px solid #eee}
-.navbar-brand{padding:0 15px;margin:0}
+.navbar-brand{padding:5px 15px;margin:0}
 .navbar-nav>li{margin:0 20px}
 .navbar .nav > li > a{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;color:#fff;-webkit-transition:color 200ms 0;-moz-transition:color 200ms 0;-ms-transition:color 200ms 0;-o-transition:color 200ms 0;transition:color 200ms 0}
 .navbar-default .navbar-nav>.active>a,.navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>.active>a:hover{background-color:rgba(0,0,0,0);color:#D00000}
@@ -309,7 +309,6 @@ to{transform:scale(1) rotate(360deg)}
 from{-webkit-transform:rotate(0deg)}
 to{-webkit-transform:rotate(360deg)}
 }
-img#navbar-logo {height: 90%;}
 .legend li span{display:block;width:14px;height:14px;border-radius:7px;float:left;margin-top:4px;margin-right:8px}
 .legend{list-style:none;margin:0;padding:0;font-size:14px;margin-top:20px}
 .legend li{margin-bottom:4px}
