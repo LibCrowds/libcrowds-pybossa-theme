@@ -97,7 +97,7 @@
                 </div>
                 
                 <div class="row" id="activity-progress-row">
-                    <!--
+
                     <div class="col-sm-4 col-xs-12 padding-bottom-sm">
                         <div class="white-rounded inset-shadow-white chart same-size">
                             <h4 class="text-center padding-bottom-sm">Proportion of Authenticated Users</h4>
@@ -108,8 +108,8 @@
                             </div>
                         </div>
                     </div>
-                    -->
-                    <div class="col-sm-6 col-xs-12 padding-bottom-sm">
+
+                    <div class="col-sm-4 col-xs-12 padding-bottom-sm">
                         <div class="white-rounded inset-shadow-white chart same-size">
                             <h4 class="text-center padding-bottom-sm">Daily Activity</h4>
                             <div id="dow-chart">
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xs-12 padding-bottom-sm">
+                    <div class="col-sm-4 col-xs-12 padding-bottom-sm">
                         <div class="white-rounded inset-shadow-white chart same-size">
                             <h4 class="text-center padding-bottom-sm">Total Progress</h4>
                             <div id="task-status-chart">
@@ -171,7 +171,6 @@ $(function(){
     
     var userData = {{users|safe}};
     
-    
     //Locations map
         var map = L.map('map', {scrollWheelZoom: false, minZoom:1});
         map.fitWorld();
@@ -196,9 +195,9 @@ $(function(){
         }
         map.addLayer(markers);
     
-    /*
-    User proportions chart
-        var total = {{stats.n_total_users|safe}};
+
+    //User proportions chart
+        var total = {{stats.n_active_users|safe}};
         var label1 = userData['values'][0]['label'] + " : " + Math.round(userData['values'][0]['value'][1]/total*100) + "% (" + userData['values'][0]['value'][1] + " user";
         if (userData['values'][0]['value'][1] != 1) {
             label1 += "s"
@@ -230,7 +229,7 @@ $(function(){
         canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
         usersChart.generateLegend();
         document.getElementById('users-legend').innerHTML = usersChart.generateLegend();
-        */
+
         
         {% if stats.n_tasks_completed and completion_days %}
             //Task status
