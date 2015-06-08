@@ -431,7 +431,7 @@ $("#shelfmark_field").blur(function() {
     $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
     $("#search_results").slideUp();
     $('#search_submit_btn').fadeTo(500, 0.3);
-    performSearch($("#search_results").attr("data-api"), parseInt($("#search_results").attr("data-page")) + 5);
+    performSearch($("#search_results").attr("data-api"), parseInt($("#search_results").attr("data-page")) * 5);
 });
 
 
@@ -440,7 +440,8 @@ $("#shelfmark_field").blur(function() {
     $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
     $("#search_results").slideUp();
     $('#search_submit_btn').fadeTo(500, 0.3);
-    performSearch($("#search_results").attr("data-api"), parseInt($("#search_results").attr("data-page")) - 5);
+    var number = parseInt($("#search_results").attr("data-page"));
+    performSearch($("#search_results").attr("data-api"), (Math.round(number / 5) * 5) - 5);
 });
 
 //Remove any trailing slashes from the returned records
