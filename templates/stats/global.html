@@ -111,7 +111,7 @@
 
                     <div class="col-sm-4 col-xs-12 padding-bottom-sm">
                         <div class="white-rounded inset-shadow-white chart same-size">
-                            <h4 class="text-center padding-bottom-sm">Daily Activity</h4>
+                            <h4 class="text-center padding-bottom-sm">Total Daily Activity</h4>
                             <div id="dow-chart">
                                 <canvas id="dow" width="500" height="500"></canvas>
                                 <div id="dow-legend" class="padding-top-sm legend">
@@ -133,7 +133,7 @@
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Hourly Activity</h4>
+                            <h4 class="text-center padding-bottom-sm">Total Hourly Activity</h4>
                             <div id="hourly-chart">
                                 <canvas id="hourly" style="max-height:300px;"></canvas>
                             </div>
@@ -227,7 +227,6 @@ $(function(){
         var usersChart = new Chart(ctx).Doughnut(data);
         var legendHolder = document.getElementById('users-legend')
         canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
-        usersChart.generateLegend();
         document.getElementById('users-legend').innerHTML = usersChart.generateLegend();
 
         
@@ -265,6 +264,7 @@ $(function(){
             var taskStatusChart = new Chart(ctx).Doughnut(data);
             var legendHolder = document.getElementById('task-status-legend')
             canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
+            document.getElementById('task-status-legend').innerHTML = taskStatusChart.generateLegend();
         
             //Daily Activity
             $dow = {{completion_days|safe}}['dow'];
