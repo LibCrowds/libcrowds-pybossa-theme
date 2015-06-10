@@ -1,6 +1,6 @@
 <!-- Success and Error Messages for the user --> 
 <div class="row">
-    <div class="col-sm-6" style="height:50px">
+    <div class="col-sm-6" style="height:50px;">
         <div id="success" class="alert alert-success" style="display:none;">
             <a class="close">x</a><span>Answer saved</span>
         </div>
@@ -21,7 +21,8 @@
         </div>
         <div id="error" class="alert alert-danger" style="display:none;">
             <a class="close">x</a>
-            <strong>Error!</strong> Something went wrong, please contact the site administrators
+            <strong>Error!</strong> Something went wrong, please report this via the 
+	    <a href="http://community.libcrowds.com">LibCrowds Community</a>
         </div>
 		<div id="search_error" class="alert alert-info" style="display:none;">
             <a class="close">x</a>
@@ -47,9 +48,18 @@
               <h1 id="question"><span id="i18n_question">What is this item?</span></h1> <!-- The question will be loaded here -->
           </div>
           <div class="col-xs-2">
-              <a href="#" class="btn btn-inverse pull-right-sm" data-toggle="modal" data-target="#modal"><i class="fa fa-book"></i> Help</a>
+              <a href="#" class="btn btn-inverse" data-toggle="modal" data-target="#modal"><i class="fa fa-book"></i> Tutorial</a>
+              <a href="#comments" id="comments_btn" class="btn btn-inverse" data-toggle="collapse" aria-expanded="false" aria-controls="comments">
+		<i class="fa fa-plus"></i> Comment</a>
           </div>
         </div>
+	<div class="row">
+	    <div class="col-xs-12">
+	      <div class="collapse" id="comments">
+		<textarea class="form-control margin-bottom-xs" rows="5" id="comments_field" placeholder="Comments"></textarea>
+	      </div>
+	    </div>
+	</div>
 		
 <!-- Start of answer DIV -->
         <div id="contribution"> 
@@ -109,7 +119,8 @@
         </div>
          <!--- Social media buttons --->
           <a href="#" id="fb-share" target="_blank" class="btn btn-facebook"><i class="fa fa-facebook"></i> Share</a>
-          <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fproject%2F{{project.short_name}}%2Ftask%2F734&text={{project.description}}&
+          <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fproject%2F{{project.short_name}}%2Ftask%2F734&text=Help convert this British Library card catalogue
+	  into a searchable online database&
 	  tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com&via=@libcrowds" class="btn btn-twitter">
   <i class="fa fa-twitter"></i> Tweet</a>
           </div>
@@ -125,6 +136,8 @@
         </div>
     </div>
 </div>
+
+<span id="client_ip" hidden></span>
 
 <!-- Tutorial -->
 <div id="modal" class="modal fade">
@@ -190,8 +203,10 @@
       $.cookie('{{project.short_name}}', '7');
     }
     
-    //Record user IP
-    $.ajax('/api/user/update_ip');
+    //Get client IP
+    $.get('/api/user/get_ip', function(results){
+          $("#client_ip").html(results);
+    });
   });
   
   
@@ -203,7 +218,7 @@
           name: "LibCrowds: {{project.name}}",
           picture: "http://libcrowds.com/static/img/BL_logo.jpg",
           caption: " ",
-          description: "{{project.description}}"
+          description: "Help convert this British Library card catalogue into a searchable online database"
       }, function(response) {
           if (response && response.post_id) {
              $("#shared").fadeIn();
@@ -492,13 +507,17 @@ pybossa.presentTask(function(task, deferred) {
         $('#task-id').html(task.id);
         $('#shelfmark_form').trigger("reset");
         $('#oclc_search_form').trigger("reset");
-        $("#shelfmark_form").slideUp();
+        $("#shelfmark_form").hide();
         $("#search_results").slideUp();
+	$('#comments').removeClass('in');
+	$('#comments').attr('aria-expanded', 'false');
+	$('#comments_btn').attr('aria-expanded', 'false');
         $("#search_error").hide();
-        $("#oclc_search_form").slideDown();
+        $("#oclc_search_form").show();
         $("#selected_record").html('');
         $("#selected_record").attr('data-selected-oclc', '');
         $("#selected_record").attr('data-selected-libs', '');
+	$("#comments_field").val('');
         $("#results_count").html('');
         $("#results_count").hide();
         $("#selected_record").hide();
@@ -510,6 +529,12 @@ pybossa.presentTask(function(task, deferred) {
             task.answer.title = task.info.title;
             task.answer.oclc = $("#selected_record").attr('data-selected-oclc');
             task.answer.libs = $("#selected_record").attr('data-selected-libs');
+	    task.answer.ip_address = $('#client_ip').html();
+	    if($("#comments_field").attr('placeholder') === $("#comments_field").val())
+            {
+              $("#comments_field").val('');
+            }
+	    task.answer.comments = $('#comments_field').val();
             if($("#shelfmark_field").attr('placeholder') === $("#shelfmark_field").val())
             {
               $("#shelfmark_field").val('');
