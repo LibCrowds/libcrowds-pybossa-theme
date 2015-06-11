@@ -209,18 +209,18 @@ $(function(){
         }
         label2 += ")";
         var data = [
-        {
-            value: userData['values'][0]['value'][1],
-            color: "rgba(151,187,205,1)",
-            highlight: "rgba(151,187,205,0.8)",
-            label: label1
-        },
-        {
-            value : userData['values'][1]['value'][1],
-            color:"#BA0000",
-            highlight: "#D00000",
-            label: label2
-        }
+            {
+                value : userData['values'][1]['value'][1],
+                color:"#BA0000",
+                highlight: "#D00000",
+                label: label2
+            },
+            {
+                value: userData['values'][0]['value'][1],
+                color: "rgba(151,187,205,1)",
+                highlight: "rgba(151,187,205,0.8)",
+                label: label1
+            }
         ];
         var canvas = document.getElementById("users");
         var ctx = canvas.getContext("2d");
@@ -246,18 +246,18 @@ $(function(){
             }
             label2 += ")";
             var data = [
-            {
-                value: ongoing,
-                color: "rgba(151,187,205,1)",
-                highlight: "rgba(151,187,205,0.8)",
-                label: label1
-            },
-            {
-                value : completed,
-                color:"#BA0000",
-                highlight: "#D00000",
-                label: label2
-            }
+                {
+                    value : completed,
+                    color:"#BA0000",
+                    highlight: "#D00000",
+                    label: label2
+                },
+                {
+                    value: ongoing,
+                    color: "rgba(151,187,205,1)",
+                    highlight: "rgba(151,187,205,0.8)",
+                    label: label1
+                }
             ];
             var canvas = document.getElementById("task-status");
             var ctx = canvas.getContext("2d");
@@ -302,15 +302,27 @@ $(function(){
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(151,187,205,1)",
                         data: authData
+                    },
+                    {
+                        label: "Anonymous (" + anonSum + " total contributions)",
+                        fillColor: "rgba(150,150,150,0.2)",
+                        strokeColor: "rgba(150,150,150,1)",
+                        pointColor: "rgba(150,150,150,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(150,150,150,1)",
+                        data: anonData
                     }
+                    
                 ]
             };
             var canvas = document.getElementById("dow");
             var ctx = $("#dow")[0].getContext("2d");
-            var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+            var opts = {populateSparseData:true, multiTooltipTemplate: " <%=value%> <%=datasetLabel.split(' ')[0]%>"};
             var dowChart = new Chart(ctx).Radar(data, opts);
             var dowLegendHolder = document.getElementById('dow-legend')
             canvas.parentNode.parentNode.appendChild(dowLegendHolder.firstChild);
+            document.getElementById('dow-legend').innerHTML = dowChart.generateLegend();
             dowChart.draw();
         {% else %}
             $("#activity-progress-row").hide();
