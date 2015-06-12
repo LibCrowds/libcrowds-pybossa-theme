@@ -259,7 +259,7 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_project_thumbnail(project, upload_method, id, class, style) %}
-{% if project.info.container %}
+{% if project.info.container and project.info.thumbnail %}
     {% if upload_method == 'rackspace'%}
     <img id="{{id}}" class="{{class}}" width="{{width}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);">
     {% else %}
@@ -273,7 +273,7 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_url_thumbnail(project, upload_method) %}
-{% if project.info.container %}
+{% if project.info.container and project.info.thumbnail %}
     {% if upload_method == 'rackspace'%}
     {{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}"
     {% else %}
