@@ -62,29 +62,6 @@
                                </div>
                            </div>
                        </div>
-                       
-                       <div class="row">
-                           <div class="col-sm-6 col-xs-12 padding-bottom-sm">
-                                <div class="white-rounded inset-shadow-white chart same-size">
-                                    <h4 class="text-center padding-bottom-sm">Progress</h4>
-                                    <div id="task-status-chart">
-                                        <canvas id="task-status" width="500" height="500"></canvas>
-                                        <div id="task-status-legend" class="padding-top-sm legend">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           <div class="col-sm-6 col-xs-12 padding-bottom-sm">
-                               <div class="white-rounded inset-shadow-white chart same-size">
-                                   <h4 class="text-center padding-bottom-sm">Daily Activity</h4>
-                                   <div id="dow-chart">
-                                       <canvas id="dow" width="500" height="500"></canvas>
-                                       <div id="dow-legend" class="padding-top-sm legend">
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
        
                        <div class="row">
                            <div class="col-xs-12 padding-bottom-sm">
@@ -178,12 +155,6 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         var dailyChart = new Chart(ctx).Line(data, opts);
         dailyChart.draw();
         
-        //Task status
-        var completed = {{n_completed_tasks|safe}};
-        var ongoing = {{overall_progress|safe}};
-        console.log(completed);
-        console.log(ongoing);
-        
         //Top users
         var users = [];
         var tasks = [];
@@ -216,62 +187,6 @@ Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOut
         topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
         topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
         topUsersChart.update();
-        
-    //Daily Activity
-        
-        var authData = [];
-        var anonData = [];
-        var authSum = 0;
-        var anonSum = 0;
-        
-        for (i = 1; i <= 7; i++) {
-            if($.inArray(i, $dow) !== -1) {
-                $authVal = $auth.shift();
-                $anonVal = $anon.shift();
-                authSum += $authVal;
-                anonSum += $anonVal;
-                authData.push($authVal);
-                anonData.push($anonVal);
-            } else {
-                authData.push(0);
-                anonData.push(0);
-            }
-        }
-        
-        var data = {
-            labels: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-            datasets: [
-                {
-                    label: "Authenticated (" + authSum + " total contributions)",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: authData
-                },
-                {
-                    label: "Anonymous (" + anonSum + " total contributions)",
-                    fillColor: "rgba(150,150,150,0.2)",
-                    strokeColor: "rgba(150,150,150,1)",
-                    pointColor: "rgba(150,150,150,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(150,150,150,1)",
-                    data: anonData
-                }
-            ]
-        };
-        var canvas = document.getElementById("dow");
-        var ctx = $("#dow")[0].getContext("2d");
-        var opts = {populateSparseData:true, multiTooltipTemplate: " <%=value%> contribution<%if(value != 1)\u007B%>s<%}%>"};
-        var dowChart = new Chart(ctx).Radar(data, opts);
-        var dowLegendHolder = document.getElementById('dow-legend')
-        canvas.parentNode.parentNode.appendChild(dowLegendHolder.firstChild);
-        dowChart.generateLegend();
-        document.getElementById('dow-legend').innerHTML = dowChart.generateLegend();
-        dowChart.draw();
         
 });
     function formatHours(str) {

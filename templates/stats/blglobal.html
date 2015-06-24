@@ -268,25 +268,16 @@ $(function(){
         
             //Daily Activity
             $dow = {{completion_days|safe}}['dow'];
-            $auth = {{completion_days|safe}}['auth'];
-            $anon = {{completion_days|safe}}['anon'];
+            $task_runs = {{completion_days|safe}}['task_runs'];
             
-            var authData = [];
-            var anonData = [];
-            var authSum = 0;
-            var anonSum = 0;
+            var dailyData = [];
             
-            for (i = 1; i <= 7; i++) {
+            for (i = 0; i < 7; i++) {
                 if($.inArray(i, $dow) !== -1) {
-                    $authVal = $auth.shift();
-                    $anonVal = $anon.shift();
-                    authSum += $authVal;
-                    anonSum += $anonVal;
-                    authData.push($authVal);
-                    anonData.push($anonVal);
+                    $taskRunVal = $task_runs.shift();
+                    dailyData.push($taskRunVal);
                 } else {
-                    authData.push(0);
-                    anonData.push(0);
+                    dailyData.push(0);
                 }
             }
             
@@ -294,35 +285,20 @@ $(function(){
                 labels: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
                 datasets: [
                     {
-                        label: "Authenticated (" + authSum + " total contributions)",
                         fillColor: "rgba(151,187,205,0.2)",
                         strokeColor: "rgba(151,187,205,1)",
                         pointColor: "rgba(151,187,205,1)",
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: authData
-                    },
-                    {
-                        label: "Anonymous (" + anonSum + " total contributions)",
-                        fillColor: "rgba(150,150,150,0.2)",
-                        strokeColor: "rgba(150,150,150,1)",
-                        pointColor: "rgba(150,150,150,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(150,150,150,1)",
-                        data: anonData
+                        data: dailyData
                     }
-                    
                 ]
             };
             var canvas = document.getElementById("dow");
             var ctx = $("#dow")[0].getContext("2d");
-            var opts = {populateSparseData:true, multiTooltipTemplate: " <%=value%> <%=datasetLabel.split(' ')[0]%>"};
+            var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
             var dowChart = new Chart(ctx).Radar(data, opts);
-            var dowLegendHolder = document.getElementById('dow-legend')
-            canvas.parentNode.parentNode.appendChild(dowLegendHolder.firstChild);
-            document.getElementById('dow-legend').innerHTML = dowChart.generateLegend();
             dowChart.draw();
         {% else %}
             $("#activity-progress-row").hide();
@@ -407,14 +383,16 @@ $(function(){
         {% if users_daily %}
             //Volunteers per day
             var usersDailyData = {{users_daily|safe}};
-            var usersDays = [];
             
+            var usersDailyLabels = [];
             $.each(usersDailyData['days'], function(i, date){
-                usersDays.push($.datepicker.formatDate('dd M', new Date(date)));
+                var dateObj = new Date(date);
+                usersDailyLabels.push($.datepicker.formatDate('dd M', dateObj));
             });
             
+            
             var data = {
-                labels: usersDays,
+                labels: usersDailyLabels,
                 datasets: [
                     {
                         label: "Volunteers per Day",
