@@ -6,7 +6,7 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
         {{ render_local_nav(current_user, "tasks", project.short_name) }}
-            <div class="container-padded hidden-container" style="display:none;">
+            <div class="container-padded">
                 <div class="container container-padded">
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-3">
@@ -37,7 +37,7 @@
                                 {% for album in albums %}
                                     <li class="col-md-3 col-sm-4 col-xs-12 text-center-xs flickr-thumbnails">
                                         <h4><strong>{{ album['title'] }}</strong></h4>
-                                        <img src="{{ album['thumbnail_url'] }}" class="grey-border">
+                                        <img src="{{ album['thumbnail_url'] }}" class="grey-border" alt="Flickr album thumbnail">
                                         <p class="small">{{ album['photos'] }} {{ _('photos') }}</p>
                                         <button id="{{ album['id'] }}" class="btn btn-success btn-album">{{ _('Select') }}</button>
                                     </li>

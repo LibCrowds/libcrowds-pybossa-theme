@@ -10,19 +10,20 @@
 </div>
 
     <section class="mid-grey pattern-brushed box-shadow-grey-bottom">
-        <p style="float:right;padding-right:10px;"><small>Photo: &copy; <a href="http://www.lensintheface.com" target="_href">Jon Ellis</a></small></p>
+        <p style="float:right;padding-right:10px;"><small>Photo: &copy; <a href="http://www.lensintheface.com" target="_blank">Jon Ellis</a></small></p>
         <div class="container container-padded">
             {% include "_flash_messages.html" %}
             <div class="col-md-11">
                 <h1 class="inset-text-grey">Data</h1>
-                <p class="lead">This page contains all of the datasets collected from, and images used within,
-                the crowdsourcing projects on this platform. Everything on this page is made available
+                <p class="lead">This page contains all of the open datasets collected from, and images used within,
+                the experimental crowdsourcing projects hosted on this platform. Everything on this page is made available
                 under <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0</a>, meaning that
-                it can be used without any copyright restrictions.</p> 
+                it can be used without any copyright restrictions.</p>
                 <p class="lead"> We at <a href="http://labs.bl.uk/" target="_blank">BL Labs</a> are very keen for these materials to be used in innovative ways to further research into new technologies.
                 The digitised catalogue cards used in Convert-a-Card for instance might prove useful for testing pattern recognition applications such as multi-lingual and hand-writing OCR technologies,
                 or even new approaches to crowdsourcing transcription! Visit the <a href="http://community.libcrowds.com">LibCrowds Community</a> if you have any further enquiries, or would simply like
-                to tell us about how you've made use of the data. </p> 
+                to tell us about how you've made use of the data.</p>
+                <p class="lead">The open datasets provided on this page are updated several times an hour.</p>
             </div>
         </div>
     </section>
@@ -44,7 +45,7 @@
                         <tbody>
                             {% for project in projects %}
                                 <tr>
-                                    <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
+                                    <td><a href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{project.name}}</a></td>
                                     <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
                                     <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
                                 </tr>
@@ -69,7 +70,7 @@
                         <tbody>
                             {% for project in projects %}
                                 <tr>
-                                    <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
+                                    <td><a href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{project.name}}</a></td>
                                     <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='json')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
                                     <td class="text-center"><a href="{{url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv')}}" rel="nofollow"><i class="fa fa-download"></i></a></td>
                                 </tr>
@@ -94,7 +95,7 @@
                         <tbody>
                             {% for project in projects %}
                                 <tr>
-                                    <td><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{project.name}}</a></td>
+                                    <td><a href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{project.name}}</a></td>
                                     <td class="text-center">{% if project.info.flickr_link %}<a href="{{project.info.flickr_link}}" target="_blank">{% endif %}<i class="fa fa-link"></i>{% if project.info.flickr_link %}</a>{% endif %}</td>
                                 {% if project.info.container and project.info.image_set and project.info.image_set_size%}
                                     <td class="text-center"><a href="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.image_set))}}"><i class="fa fa-download" data-filesize="{{project.info.image_set_size}}"></i></a></td>

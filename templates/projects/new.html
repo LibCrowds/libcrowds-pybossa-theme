@@ -7,7 +7,7 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
         {{ render_local_nav(current_user, "newproject") }}
-<div class="container-padded hidden-container" style="display:none;">
+<div class="container-padded">
     <div class="container container-padded">
         {% if current_user.admin %}
         <div id="project-form" class="row">

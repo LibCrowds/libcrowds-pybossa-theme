@@ -1,69 +1,12 @@
-{% extends "base.html" %}
-{% set active_page = "community"  %}
-{% import "privacy/locked.html" as privacy %}
-{% import "account/_helpers.html" as helper %}
-{% from "projects/_helpers.html" import broken_image %}
-{% import "admin/_helpers.html" as admin_helper %}
-
-{% block content %}
-{% include "_flash_messages_floating.html" %}
-<div class="splash" id="community-splash">
-  <div class="splash-overlay vcenter hcenter">
-  </div>
-</div>
-
-  {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-    {{ privacy.render_lock_page() }}
-  {% else %}
-    <section class="mid-grey pattern-brushed box-shadow-grey-bottom">
-      <p style="float:right;padding-right:10px;"><small>Photo: &copy; <a href="http://www.lensintheface.com" target="_href">Jon Ellis</a></small></p>
-      <div class="container container-padded">
-        <div class="row vcenter-sm hcenter">
-          <div class="col-md-8 col-xs-12 xs-center">
-            <h1 class="inset-text-grey">{{ _('Community') }} </h1>
-            <p class="lead">{{total}} {{ _('registered users') }}</p>
-            <p>Active volunteers are shown below</p>
-          </div>
-          <div class="col-md-4 col-xs-12 padding-top-xs text-center">
-            <a class="pull-right-sm btn btn-danger" href="{{url_for('leaderboard.index')}}">{{ _('View Leaderboard') }}</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="white">
-      <div class="container container-padded">
-        {% if accounts %}
-          <ul class="polaroids users">
-            {% for account in accounts %}
-              <li>
-                <a href="{{url_for('account.profile', name=account.name)}}" class="polaroid polaroid-sm" rel="popover" title="{{account.name}}" data-polaroid-title="{{account.name}}" data-html="true" data-content="
-                  <strong>{{_('Joined')}}:</strong> {{account.created[0:10]}} 
-                  <br/>
-                  <strong>{{_('Contributions')}}:</strong> {{account.task_runs}}
-                  " rel="popover" data-original-title="<strong>{{account.name}}</strong>">
-                  {{ helper.render_user_thumbnail(account, upload_method) }}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-          <div class="col-sm-9">
-            {% if pagination.pages > 1 %}
-              {{ helper.render_pagination(pagination) }}
-            {% endif %}
-          </div>
-        {% endif %}
-      </div>
-    </section>
-  {% endif %}
-
+<!DOCTYPE HTML>
+ 
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="1; url=http://community.libcrowds.com">
+ 
 <script>
-$("a[rel=popover]").popover({
-        html: true,
-        animate: true,
-        trigger: 'hover',
-        placement: 'bottom'
-                });
-
+  window.location.href = "http://community.libcrowds.com";
 </script>
-{{ broken_image() }}
-{% endblock %}
+ 
+<title>Page Redirection</title>
+ 
+If you are not redirected automatically, follow the <a href="http://community.libcrowds.com">link to the new page</a>

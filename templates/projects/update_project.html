@@ -7,7 +7,7 @@
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
 {{ render_local_nav(current_user, "tasks", project.short_name) }}
-<div class="container-padded hidden-container" style="display:none;">
+<div class="container-padded">
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
@@ -20,7 +20,7 @@
                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <div class="col-xs-12 text-center">
                             <div class="center-block img-overlay-container">
-                                 {{ helper.render_project_thumbnail(project, upload_method, style="max-height:200px;", class="img-thumbnail") }}
+                                 {{ helper.render_project_thumbnail(project, upload_method, style="max-height:200px;", class="img-thumbnail", id="project.id") }}
                                 <div class="img-overlay edit-profile-image">
                                         <i class="fa fa-pencil-square-o fa-3x"></i>
                                         <span>Edit</span>
@@ -70,7 +70,8 @@ You can use Markdown to format your description.'), class="form-control", requir
                 {{ form_helper.render_field(form.password, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.webhook, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.flickr_link, class="form-control", visible='true') }}
-                {{ form_helper.render_field(form.required_matches, class="form-control", visible='true') }}
+                {{ form_helper.render_field(form.attribution, class="form-control", visible='true') }}
+                {{ form_helper.render_field(form.attribution_link, class="form-control", visible='true') }}
                 {{ form_helper.render_field_horizontal(form.hidden) }}
                 <div role="group" class="pull-right">
                     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
@@ -98,6 +99,17 @@ You can use Markdown to format your description.'), class="form-control", requir
                     </div>
                 </fieldset>
             </form>
+              
+            <form method="post" class="padding-top-xs" action="{{ url_for('blplugin.update_project', short_name=project.short_name) }}" enctype="multipart/form-data">
+                <fieldset>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    {{ form_helper.render_field(upload_splash_form.splash, class="form-control", visible='true') }}
+                    <div role="group" class="pull-right">
+                        <button type="submit" name="btn" value="Upload Splash" class="btn btn-success">{{_('Upload')}}</button>
+                    </div>
+                </fieldset>
+            </form>
+              
           </div>
         </div>
     </div>
@@ -106,7 +118,8 @@ You can use Markdown to format your description.'), class="form-control", requir
     $("i[rel='tooltip']").tooltip();
     $(function() {
         $('#flickr_link').attr('value', '{{project.info.flickr_link | safe}}');
-        $('#required_matches').attr('value', '{{project.info.required_matches | safe}}');
+        $('#attribution').attr('value', '{{project.info.attribution | safe}}');
+        $('#attribution_link').attr('value', '{{project.info.attribution_link | safe}}');
         $('.control-label').addClass('remove-padding-left');
     });
 </script>

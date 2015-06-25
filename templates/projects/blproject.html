@@ -1,0 +1,330 @@
+{% extends "/base.html" %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
+{% from "admin/_helpers.html" import render_local_nav %}
+
+{% block content %}
+    {% if project %}
+        
+        {% if project.info.splash %}
+            {% include "_flash_messages_floating.html" %}
+            <div class="splash" id="project-splash" data-splash="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.splash))}}">
+                <div class="vcenter hcenter position-relative" style="height:100%;">
+                    <div class="container text-center ie-vcenter padding-top">
+                        <div class="container-padded">
+                            <h1>{{ helper.render_project_title(project, upload_method) }}</h1>
+                            <h2>{{ overall_progress | round | int }}% {{_('complete')}}</h2>
+                        </div>
+                        <div class="col-xs-12">
+                            <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-circle btn-circle-large btn-circle-progress {% if overall_progress < 100 %}glowing-link{% endif %}" data-progress="{{ overall_progress | round | int }}">
+                                <div class="arc arc-q1"></div>
+                                <div class="arc arc-q2"></div>
+                                <div class="arc arc-q3"></div>
+                                <div class="arc arc-q4"></div>
+                                <p>Contribute<br>Now</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a id="info"></a>
+            <section class="mid-grey pattern-brushed box-shadow-grey-bottom inset-text-grey">
+                
+                {% if project.info.attribution %}
+                    <p style="float:right;padding-right:10px;"><small>Photo:
+                    {% if project.info.attribution_link %}
+                        <a href="{{project.info.attribution_link}}" target="_blank">
+                    {% endif %}
+                    {{project.info.attribution}}
+                    {% if project.info.attribution_link %}
+                        </a>
+                    {% endif %}
+                    </small></p>
+                {% endif %}
+            
+                <div class="container container-padded">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        
+                        {% if overall_progress == 100 %}
+                            <p class="lead-large">
+                                Many thanks to all those who helped us complete this project.
+                            </p>
+                            <p id="volunteers"></p>
+                            <p class="lead-large padding-top-sm">
+                                Special thanks go out to our
+                                <a class="anchor-btn" data-anchor="#top5">most active volunteers</a>
+                                for their extra efforts!
+                            </p>
+                        {% else %}
+                            
+                            {% if project.info.video %}
+                                <div class="row text-center padding-bottom padding-top-sm">
+                                    <video width="640" height="360" controls>
+                                        <source src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.video))}}" type="video/mp4">
+                                        Your browser does not support HTML5 video.
+                                    </video>
+                                </div>
+                            {% endif %}
+                            
+                            {% if project.long_description %}
+                                <div class="description">
+                                    {{ project.long_description | e | markdown }}
+                                </div>
+                            {% endif %}
+                            
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+            
+            <section class="white pattern-white-wall box-shadow-white-bottom">
+                <a id="top5"></a>
+                <div class="row text-center padding-top-sm padding-bottom">
+                    <h2>Project Statistics</h2>
+                </div>
+                
+                <div class="container">
+                    <div class="row padding-bottom-sm">
+                        <div class="col-xs-12 padding-bottom-sm">
+                            <div class="white-rounded inset-shadow-white chart">
+                                <h4 class="text-center padding-bottom-sm">Most Active Volunteers</h4>
+                                <div id="top-users-chart">
+                                    <canvas id="top-users" width="500" height="500"></canvas>
+                                    <div id="top-users-legend" class="padding-top-sm legend">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="row padding-bottom-sm">
+                        <div class="col-xs-12">
+                            <div class="white-rounded inset-shadow-white chart">
+                                <h4 class="text-center padding-bottom-sm">Contributions per Day</h4>
+                                <div id="daily-chart">
+                                    <canvas id="daily" style="max-height:300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="row padding-bottom">
+                        <div class="col-xs-12">
+                            <div class="white-rounded inset-shadow-white chart">
+                                <h4 class="text-center padding-bottom-sm">Hourly Activity</h4>
+                                <div id="hourly-chart">
+                                    <canvas id="hourly" style="max-height:300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                        
+            </section>
+            
+            {% if overall_progress < 100 %}
+                <section>
+                    <div class="container container-padded">
+                        <div class="col-xs-12 text-center">
+                            <div class="row text-center">
+                            <h2>Get involved</h2>
+                            <p>Your contributions will have a direct impact on enabling future reasearch at the British Library.<p>
+                                <div class="row text-center padding-top-xs">
+                                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> {{ _('Contribute now') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+                            
+            
+        {% else %}
+            <div class="container-padded remove-padding-bottom">
+                <section class="white">
+                    <div class="container container-padded">
+                    
+                        <div class="row">
+                            <!-- Project -->
+                            <div class="col-xs-10 col-xs-offset-1">
+                                {% include "_flash_messages.html" %}
+                                <div class="text-center">{{ helper.render_project_title(project, upload_method) }}</div>
+                                {{ helper.render_overall_progress(project, n_tasks, overall_progress) }}
+                                {% if overall_progress == 100 %}
+                                    <p class="lead-large">
+                                        Many thanks to all those who helped us complete this project.
+                                    </p>
+                                    <p id="volunteers"></p>
+                                    <p class="lead-large padding-top-sm">
+                                        Special thanks go out to our most active volunteers for their extra efforts!
+                                    </p>
+                                {% else %}
+                                    
+                                    {% if project.info.video %}
+                                        <div class="row text-center padding-bottom padding-top-sm">
+                                            <video width="640" height="360" controls>
+                                                <source src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.video))}}" type="video/mp4">
+                                                Your browser does not support HTML5 video.
+                                            </video>
+                                        </div>
+                                    {% endif %}
+                                    {% if project.long_description %}
+                                        <div class="description">
+                                            {{ project.long_description | e | markdown }}
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        {% endif %}
+        
+    {% else %}
+        <div class="container-padded remove-padding-bottom">
+            <section class="white">
+                <div class="container container-padded">
+                    <div class="page-header">
+                        <h1>Sorry! This project does not exist.</h1>
+                    </div>
+                </div>
+            </section>
+        </div>
+    {% endif %}
+
+<script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.js')}}"></script>
+<script>
+Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOutQuart",showScale:true,scaleOverride:false,scaleSteps:null,scaleStepWidth:null,scaleStartValue:null,scaleLineColor:"rgba(0,0,0,.1)",scaleLineWidth:1,scaleShowLabels:true,scaleLabel:"<%=value%>",scaleIntegersOnly:true,scaleBeginAtZero:false,scaleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",scaleFontSize:12,scaleFontStyle:"normal",scaleFontColor:"#666",responsive:true,maintainAspectRatio:true,showTooltips:true,customTooltips:false,tooltipEvents:["mousemove","touchstart","touchmove"],tooltipFillColor:"rgba(0,0,0,0.8)",tooltipFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipFontSize:14,tooltipFontStyle:"normal",tooltipFontColor:"#fff",tooltipTitleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipTitleFontSize:14,tooltipTitleFontStyle:"bold",tooltipTitleFontColor:"#fff",tooltipYPadding:6,tooltipXPadding:6,tooltipCaretSize:8,tooltipCornerRadius:6,tooltipXOffset:10,onAnimationProgress:function(){},onAnimationComplete:function(){},segmentShowStroke:true,segmentStrokeColor:"#fff",tooltipTemplate:"<%%><%=label%><%%>",segmentStrokeWidth:2,percentageInnerCutout:50,animateRotate:true,animateScale:false,legendTemplate:'<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++)\u007D%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label)\u007D%><%=segments[i].label%\u007B<%}%></li><%\u007B%></ul>'}
+</script>
+<script>
+    $(function(){
+        
+        
+        var projectstats = {{appStats|safe}};
+      
+        //Hourly chart
+        var houreyLabels = [];
+        var houreyData = [];
+        for(var i = 0; i < projectstats['hourStats']['0']['values'].length; i++) {
+            houreyLabels.push(formatHours(projectstats['hourStats']['0']['values'][i]['0']));
+            houreyData.push(projectstats['hourStats']['0']['values'][i]['1']);
+        }
+        
+        var data = {
+            labels: houreyLabels,
+            datasets: [
+                {
+                    label: "Hourly Activity",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: houreyData
+                }
+            ]
+        };
+        $("#hourly").attr("width", $('#hourly-chart').width());
+        $("#hourly").attr("height", 300);
+        var ctx = $("#hourly")[0].getContext("2d");
+        var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+        var hourlyChart = new Chart(ctx).Line(data, opts);
+        hourlyChart.draw();
+        
+        //Daily chart
+        var dailyLabels = [];
+        var dailyData = [];
+        for(var i = 0; i < projectstats['dayStats']['0']['values'].length; i++) {
+            var t = new Date(parseInt(projectstats['dayStats']['0']['values'][i]['0']));
+            dailyLabels.push($.datepicker.formatDate('dd M', t));
+            dailyData.push(projectstats['dayStats']['0']['values'][i]['1']);
+        }
+        
+        var data = {
+            labels: dailyLabels,
+            datasets: [
+                {
+                    label: "Daily Activity",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: dailyData
+                }
+            ]
+        };
+        $("#daily").attr("width", $('#daily-chart').width());
+        $("#daily").attr("height", 300);
+        var ctx = $("#daily")[0].getContext("2d");
+        var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+        var dailyChart = new Chart(ctx).Line(data, opts);
+        dailyChart.draw();
+        
+        //Top users
+        var users = [];
+        var tasks = [];
+        for(var i = 0; i < projectstats['userAuthStats']['top5'].length; i++) {
+            users.push(projectstats['userAuthStats']['top5'][i]['name']);
+            tasks.push(projectstats['userAuthStats']['top5'][i]['tasks']);
+        }
+        var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+        var data = {
+            labels: users,
+            datasets: [
+                {
+                    label: "Most Active Users",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    highlightFill: "rgba(151,187,205,0.1)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: tasks
+                }
+            ]
+        };
+        $("#top-users").attr("width", $('#top-users-chart').width());
+        $("#top-users").attr("height", 300);
+        var ctx = $("#top-users")[0].getContext("2d");
+        var opts = {labelLength:8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+        var topUsersChart = new Chart(ctx).Bar(data, opts);
+        topUsersChart.draw();
+        topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
+        topUsersChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
+        topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
+        topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
+        topUsersChart.update();
+        
+        //Provide usernames
+        if ($('#volunteers').length) {
+            $.ajax({
+                type: 'GET',
+                url: '/api/project/{{project.id}}/allusers',
+                success : function(text) {
+                    $('#volunteers').html(commaSeperateJson(text) + ' and all of our anonymous volunteers');
+                }
+            });
+        }
+        
+});
+function formatHours(str) {
+    str += ':00'
+    if (str.length < 5) {
+        str = '0' + str;
+    }
+    return str;
+}
+
+function commaSeperateJson(json) {
+    formatted = JSON.stringify(json).replace('[', '').replace(']', ''); //remove brackets
+    formatted = formatted.split('"').join(''); //remove quotes
+    formatted = formatted.split(',').join(', '); //add a space after commas
+    return formatted;
+}
+</script>
+{{ helper.broken_image() }}
+{{ helper.knob() }}
+{% endblock %}

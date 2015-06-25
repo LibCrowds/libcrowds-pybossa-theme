@@ -37,11 +37,11 @@
                         </div>
                 
                     {% if projects %}
-                        <ul class="polaroids projects margin-top-sm">
+                        <div class="polaroids projects margin-top-sm">
                             {% for project in projects %}
                                 {{ helper.show_project(project, active_cat.short_name, current_user, upload_method) }}
                             {% endfor %}
-                        </ul>
+                        </div>
                             {% if pagination.pages > 1 %}
                             {{ helper.render_pagination(pagination) }}
                         {% endif %}
