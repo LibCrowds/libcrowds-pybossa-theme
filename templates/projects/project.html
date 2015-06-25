@@ -4,63 +4,59 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-
-{{ render_local_nav(current_user, "info", project.short_name) }}
+<meta name="robots" content="noindex">
+    
     {% if project %}
-    <div class="container-padded  remove-padding-bottom hidden-container" style="display:none;">
-        <section class="white">
-            <div class="container container-padded">
+        
+        {% if project_splash %}
             
-                <div class="row">
-                    <!-- Project -->
-                    <div class="col-sm-9 col-sm-offset-3">
-                        {% include "_flash_messages.html" %}
-                        {{ helper.render_project_title(project, upload_method) }}
-                        {{ helper.render_overall_progress(project, n_tasks, overall_progress) }}
-                        {% if overall_progress == 100 %}
-                            <h2>Many thanks to all those who helped us complete this project. Special thanks go out to
-                            our <a href="{{url_for('project.show_stats', short_name=project.short_name)}}">top volunteers</a> for their extra efforts!</h2>
-                        <p></p>
-                        {% else %}
-                            {% if project.long_description %}
-                                <div class="description">
-                                    {{ project.long_description | e | markdown }}
+        {% else %}
+            <div class="container-padded  remove-padding-bottom hidden-container" style="display:none;">
+                <section class="white">
+                    <div class="container container-padded">
+                    
+                        <div class="row">
+                            <!-- Project -->
+                            <div class="col-sm-9 col-sm-offset-3">
+                                {% include "_flash_messages.html" %}
+                                {{ helper.render_project_title(project, upload_method) }}
+                                {{ helper.render_overall_progress(project, n_tasks, overall_progress) }}
+                                {% if overall_progress == 100 %}
+                                    <h2>Many thanks to all those who helped us complete this project. Special thanks go out to
+                                    our <a href="{{url_for('project.show_stats', short_name=project.short_name)}}">top volunteers</a> for their extra efforts!</h2>
+                                <p></p>
+                                {% else %}
+                                    {% if project.long_description %}
+                                        <div class="description">
+                                            {{ project.long_description | e | markdown }}
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                                <div id="ckan" style="display:none">
+                                    <h2>Data repository: {{ ckan_name | default('CKAN server') }}</h2>
+                                    <p><i class="glyphicon glyphicon-bar-chart" style="font-size:16px;"></i> <a href="{{ckan_url}}/dataset/{{project.short_name}}">Preview the data</a>
+                                    </p>
+                                    <p id="ckan_license" style="display:none"><strong>Data License</strong>: <span id="ckan_license_value"></span></p>
                                 </div>
-                            {% endif %}
-                        {% endif %}
-                        <div id="ckan" style="display:none">
-                            <h2>Data repository: {{ ckan_name | default('CKAN server') }}</h2>
-                            <p><i class="glyphicon glyphicon-bar-chart" style="font-size:16px;"></i> <a href="{{ckan_url}}/dataset/{{project.short_name}}">Preview the data</a>
-                            </p>
-                            <p id="ckan_license" style="display:none"><strong>Data License</strong>: <span id="ckan_license_value"></span></p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
-    </div>
+        {% endif %}
+        
     {% else %}
-        <div class="container-padded  remove-padding-bottom">
+        <div class="container-padded remove-padding-bottom">
             <section class="white">
                 <div class="container container-padded">
                     <div class="page-header">
-                        <h1>{{ _('Sorry! This project does not exist.') }}</h1>
+                        <h1>Sorry! This project does not exist.</h1>
                     </div>
                 </div>
             </section>
         </div>
     {% endif %}
-<script>
-    var url = "{{ckan_url}}/api/3/action/package_show";
-    $.get(url, {id: '{{ckan_pkg_name}}'}, function(data){
-        if (data['success'] == true) {
-            $("#ckan").show();
-            if (data['result']['license_title'] != null) {
-                $("#ckan_license").show();
-            }
-        }
-    });
-</script>
+
 {{ helper.broken_image() }}
 {{ helper.knob() }}
 {% endblock %}
