@@ -18,7 +18,7 @@
                     {{ form.hidden_tag() }}
                     <fieldset>
                         {{ render_field(form.name, placeholder=_('Name'), class="form-control", required="required", autofocus="autofocus") }}
-                        {{ render_field(form.short_name, placeholder=_('Abbreviated name for the project'), label_text=_('Project slug:'), class="form-control", required="required") }}
+                        {{ render_field(form.short_name, placeholder=_('Abbreviated name for the project'), label_text=_('Short name:'), class="form-control", required="required") }}
                         {{ render_field(form.long_description, rows="13", placeholder=_('Long description:
                         
                         · Describe the purpose of the project and what it aims to achieve.

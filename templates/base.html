@@ -20,18 +20,18 @@
 
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/font-awesome-4.3.0/css/font-awesome.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}?v=2.5.1">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}?v=2.5.2">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400%7CPermanent+Marker">
     
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-      <style>.ie-vcenter{top:25%;position:relative}</style>
+      <style>.ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}</style>
     <![endif]-->
     <!--[if IE 9]>
       <style>
-      .ie-vcenter{top:25%;position:relative}
+      .ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}
       #image_container{margin-top:0px!important;}
       </style>
     <![endif]-->
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/static/img/favicon.png">
 
     {% assets "js_top" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.0"></script>
     {% endassets %}
 
     {% include '_ga.html' ignore missing %}
@@ -48,7 +48,7 @@
 
   <body>
     <noscript>
-      <div id="error" class="alert alert-danger" style="margin:80px 0px 80px;z-index:9999999">  
+      <div id="error" class="alert alert-danger js-alert">  
         <strong>Please enable JavaScript!</strong> This website will not work correctly with JavaScript disabled.
       </div>
     </noscript>
@@ -62,7 +62,7 @@
           {% set active_project  = active_project | default('none') -%}
           {% include "_navbar.html" %}
 
-            <div class="container-fluid" style="min-height:400px;">
+            <div class="container-fluid">
           
               {% block content %}{% endblock %}
 
@@ -85,7 +85,7 @@
         <script>$.ajax('/api/user/set_default_avatar');</script>
       {% endif %}
       {% assets "js_bottom" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.0"></script>
       {% endassets %}
   </body>
 </html>

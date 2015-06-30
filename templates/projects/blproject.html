@@ -32,7 +32,7 @@
             <section class="mid-grey pattern-brushed box-shadow-grey-bottom inset-text-grey">
                 
                 {% if project.info.attribution %}
-                    <p style="float:right;padding-right:10px;"><small>Photo:
+                    <p class="attribution"><small>Photo:
                     {% if project.info.attribution_link %}
                         <a href="{{project.info.attribution_link}}" target="_blank">
                     {% endif %}
@@ -60,7 +60,7 @@
                             
                             {% if project.info.video %}
                                 <div class="row text-center padding-bottom padding-top-sm">
-                                    <video width="640" height="360" controls>
+                                    <video class="tutorial-video" controls>
                                         <source src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.video))}}" type="video/mp4">
                                         Your browser does not support HTML5 video.
                                     </video>
@@ -163,7 +163,7 @@
                                     
                                     {% if project.info.video %}
                                         <div class="row text-center padding-bottom padding-top-sm">
-                                            <video width="640" height="360" controls>
+                                            <video class="tutorial-video" controls>
                                                 <source src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.video))}}" type="video/mp4">
                                                 Your browser does not support HTML5 video.
                                             </video>

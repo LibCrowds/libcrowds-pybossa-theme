@@ -56,7 +56,7 @@
                 {{ form.hidden_tag() }}
                 
                 {{ form_helper.render_field(form.name, class="form-control", placeholder=_('Name'), visible='true', required="required", autofocus="autofocus") }}
-                {{ form_helper.render_field(form.short_name, class="form-control", placeholder=_('Short name or slug for the project'), visible='true', label_text=_('Project slug:')) }}
+                {{ form_helper.render_field(form.short_name, class="form-control", placeholder=_('Short name'), visible='true', label_text=_('Short name:')) }}
                 {{ form_helper.render_field(form.description, class="form-control", placeholder=_('Short description'), visible='true', required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
                 {{ form_helper.render_field(form.long_description, rows="13", placeholder=_('Long description:
                         
@@ -84,7 +84,8 @@ You can use Markdown to format your description.'), class="form-control", requir
                 <fieldset>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     {{ form_helper.render_field(upload_imageset_form.image_set, class="form-control", visible='true',  accept=".zip") }}
-                    <div role="group" class="pull-right">
+                    <div role="group" class="pull-right vcenter ie-vcenter">
+                        {% if project.info.image_set %}<i class="fa fa-check-circle-o fa-2x margin-right-xs badge-success"></i>{% endif %}
                         <button type="submit" name="btn" value="Upload Image Set" class="btn btn-success">{{_('Upload')}}</button>
                     </div>
                 </fieldset>
@@ -94,7 +95,8 @@ You can use Markdown to format your description.'), class="form-control", requir
                 <fieldset>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     {{ form_helper.render_field(upload_video_form.video, class="form-control", visible='true',  accept=".mp4") }}
-                    <div role="group" class="pull-right">
+                    <div role="group" class="pull-right vcenter ie-vcenter">
+                        {% if project.info.video %}<i class="fa fa-check-circle-o fa-2x margin-right-xs badge-success"></i>{% endif %}
                         <button type="submit" name="btn" value="Upload Video" class="btn btn-success">{{_('Upload')}}</button>
                     </div>
                 </fieldset>
@@ -104,7 +106,8 @@ You can use Markdown to format your description.'), class="form-control", requir
                 <fieldset>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     {{ form_helper.render_field(upload_splash_form.splash, class="form-control", visible='true') }}
-                    <div role="group" class="pull-right">
+                    <div role="group" class="pull-right vcenter ie-vcenter">
+                        {% if project.info.splash %}<i class="fa fa-check-circle-o fa-2x margin-right-xs badge-success"></i>{% endif %}
                         <button type="submit" name="btn" value="Upload Splash" class="btn btn-success">{{_('Upload')}}</button>
                     </div>
                 </fieldset>
