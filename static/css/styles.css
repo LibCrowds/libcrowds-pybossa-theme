@@ -370,6 +370,7 @@ to{-webkit-transform:rotate(360deg)}
 #project-splash h2{font-size:1.2em}
 .project-desc{height:100%;display:inline-block}
 #sticky-footer{height:60px}
+#sticky-footer li {font-size: 2.0em;padding-left: 20px;padding-right: 20px;}
 #main-body-content{padding-bottom:60px;}
 .footer-links{padding-top:15px}
 .navbar .container{width:auto!important}

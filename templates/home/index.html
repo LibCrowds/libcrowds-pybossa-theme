@@ -23,7 +23,7 @@
 <section class="mid-grey pattern-brushed box-shadow-grey-bottom">
   <p class="attribution"><small>Photo: <a href="http://flic.kr/p/i5L8Ux" target="_blank">Mechanical Curator</a></small></p>
       <div class="container container-padded">
-         <div class="col-sm-offset-2 col-sm-8">
+         <div class="col-sm-offset-2 col-sm-8 text-center">
           <h2 class="inset-text-grey text-center">What's this all about?</h2>
             <p class="lead text-left">
                {{brand}}, in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>, is a platform for 
@@ -80,14 +80,5 @@
 </div>
 </section>
 {% endif %}
-
-<script>
-  $("a.avatar-popover").popover({
-           html: true,
-           animation: true,
-           trigger: 'hover',
-           placement: 'top'
-                   });
-</script>
 {{ helper.broken_image() }}
 {% endblock %}

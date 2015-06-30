@@ -234,3 +234,10 @@ $('.upload-img-form').submit(function() {
     $('#upload-btn').html('<i class="glyphicon glyphicon-refresh spinning"></i> Uploading');
     $('#upload-btn').blur();
 });
+
+$("a.avatar-popover").popover({
+    html: true,
+    animation: true,
+    trigger: 'hover',
+    placement: 'top'
+});

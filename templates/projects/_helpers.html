@@ -127,7 +127,7 @@
                     {% endif %}
                     <div class="row hidden-md hidden-lg text-center">
                     {% if active_cat != "draft" %}
-                        <a class="btn btn-danger margin-top-sm margin-bottom-xs" href="{{ url_for('project.presenter', short_name = project.short_name) }}">{{ _('Contribute') }}</a>
+                        <a class="btn btn-danger margin-top-sm margin-bottom-xs" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{ _('Contribute') }}</a>
                     {% endif %}
                     </div>
                 </div>
@@ -148,7 +148,7 @@
                 </div>
                 <div class="text-center padding-top-md">
                     {% if active_cat != "draft" %}
-                        <p><a class="btn btn-danger" href="{{ url_for('project.presenter', short_name = project.short_name) }}">{{ _('Contribute') }}</a></p>
+                        <p><a class="btn btn-danger" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{ _('Contribute') }}</a></p>
                     {% endif %}
                 </div>
             </div>
