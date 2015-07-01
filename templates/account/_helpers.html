@@ -96,10 +96,10 @@
         {% if upload_method == 'rackspace'%}
         <img class="{{class}}" style="{{style}}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 'user');"  alt="User avatar">
         {% else %}
-        <img class="{{class}}" style="{{style}}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar))}}" onerror="imgError(this, 'user');" alt="User avatar">
+        <img class="{{class}}" style="{{style}}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar))|resize('90x90')}}" onerror="imgError(this, 'user');" alt="User avatar">
         {% endif %}
     {% else %}
-        <img class="{{class}}" style="{{style}}" src="{{ url_for('static', filename='img/placeholder.user.png')}}" alt="User avatar">
+        <img class="{{class}}" style="{{style}}" src="{{ url_for('static', filename='img/placeholder.user.png')|resize('90x90')}}}}" alt="User avatar">
     {% endif %}
 {% endmacro %}
 

@@ -4,6 +4,7 @@
 {% import "account/_helpers.html" as helper %}
 {% import "projects/_helpers.html" as project_helper %}
 {% import "_formhelpers.html" as form_helper %}
+{% set preload_js = "true" %}
 {% block content %}
 
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>

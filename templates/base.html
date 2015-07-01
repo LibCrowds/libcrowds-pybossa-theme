@@ -19,11 +19,10 @@
     <link href="https://google.com/+LibcrowdsBL" rel="publisher">
 
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/font-awesome-4.3.0/css/font-awesome.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}?v=2.5.1">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}?v=2.5.2">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400%7CPermanent+Marker">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/font-awesome-4.3.0/css/font-awesome.min.css')}}">
     
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -38,10 +37,12 @@
 
     <link rel="shortcut icon" href="/static/img/favicon.png">
 
-    {% assets "js_top" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.0"></script>
-    {% endassets %}
-
+    {% if preload_js == "true" %}
+      {% assets "js_top" %}
+      <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.0"></script>
+      {% endassets %}
+    {% endif %}
+    
     {% include '_ga.html' ignore missing %}
     {% include '_gcs.html' ignore missing %}
   </head>
@@ -59,6 +60,8 @@
           <!-- checkpoint::logged-in::{{current_user.name}} -->
           {% endif %}
           {% set active_page = active_page | default('index') -%}
+          {% set has_splash = has_splash | default('false') -%}
+          {% set preload_js = preload_js | default('false') -%}
           {% set active_project  = active_project | default('none') -%}
           {% include "_navbar.html" %}
 
@@ -69,7 +72,7 @@
               {% if show_cookies_warning %}
               <div id="cookies_warning" class="container">
                 <div class="col-md-12 text-center">
-                  <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button> <a class="btn btn-success btn-xs" href="{{url_for('help.cookies_policy')}}"><i class="icon-info-sign"></i> More info</a></span>
+                  <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button></span>
                 </div>
               </div>
             {% endif %}
@@ -81,8 +84,14 @@
           {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
         </footer>
       </div>
+        
       {% if current_user.is_authenticated() and not current_user.info.avatar%}
         <script>$.ajax('/api/user/set_default_avatar');</script>
+      {% endif %}
+      {% if not preload_js == "true" %}
+        {% assets "js_top" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.0"></script>
+        {% endassets %}
       {% endif %}
       {% assets "js_bottom" %}
         <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.1"></script>

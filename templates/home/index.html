@@ -66,7 +66,7 @@
              <strong>{{_('Contributions')}}:</strong> {{user.task_runs}}
              " class="avatar-popover" data-original-title="<strong>{{user.name}}</strong>">
              <div class="shadow img-circle shadow-circle">
-                {{ account_helper.render_user_thumbnail(user, upload_method, style="height:90px; width:90px;", class="img-circle") }}
+                {{ account_helper.render_user_thumbnail(user, upload_method, class="img-circle") }}
              </div>
           </a>
           <p class="label label-danger">{{user.task_runs}}</p>

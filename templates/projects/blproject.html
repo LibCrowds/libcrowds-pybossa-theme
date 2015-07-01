@@ -2,6 +2,10 @@
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
+{% set preload_js = "true" %}
+{% if project.info.splash %}
+    {% set has_splash = "true" %}
+{% endif %}
 
 {% block content %}
     {% if project %}
@@ -81,7 +85,9 @@
             <section class="white pattern-white-wall box-shadow-white-bottom">
                 <a id="top5"></a>
                 <div class="row text-center padding-top-sm padding-bottom">
-                    <h2>Project Statistics</h2>
+                    <div class="col-xs-12">
+                        <h2>Project Statistics</h2>
+                    </div>
                 </div>
                 
                 <div class="container">
@@ -195,12 +201,9 @@
     {% endif %}
 
 <script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.js')}}"></script>
-<script>
-Chart.defaults.global={animation:true,animationSteps:60,animationEasing:"easeOutQuart",showScale:true,scaleOverride:false,scaleSteps:null,scaleStepWidth:null,scaleStartValue:null,scaleLineColor:"rgba(0,0,0,.1)",scaleLineWidth:1,scaleShowLabels:true,scaleLabel:"<%=value%>",scaleIntegersOnly:true,scaleBeginAtZero:false,scaleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",scaleFontSize:12,scaleFontStyle:"normal",scaleFontColor:"#666",responsive:true,maintainAspectRatio:true,showTooltips:true,customTooltips:false,tooltipEvents:["mousemove","touchstart","touchmove"],tooltipFillColor:"rgba(0,0,0,0.8)",tooltipFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipFontSize:14,tooltipFontStyle:"normal",tooltipFontColor:"#fff",tooltipTitleFontFamily:"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",tooltipTitleFontSize:14,tooltipTitleFontStyle:"bold",tooltipTitleFontColor:"#fff",tooltipYPadding:6,tooltipXPadding:6,tooltipCaretSize:8,tooltipCornerRadius:6,tooltipXOffset:10,onAnimationProgress:function(){},onAnimationComplete:function(){},segmentShowStroke:true,segmentStrokeColor:"#fff",tooltipTemplate:"<%%><%=label%><%%>",segmentStrokeWidth:2,percentageInnerCutout:50,animateRotate:true,animateScale:false,legendTemplate:'<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++)\u007D%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label)\u007D%><%=segments[i].label%\u007B<%}%></li><%\u007B%></ul>'}
-</script>
+<script src="{{url_for('static', filename='js/chartconfig.js')}}"></script>
 <script>
     $(function(){
-        
         
         var projectstats = {{appStats|safe}};
       

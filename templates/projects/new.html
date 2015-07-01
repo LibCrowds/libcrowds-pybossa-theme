@@ -3,10 +3,11 @@
 {% import "account/_helpers.html" as helper %}
 {% import "projects/_helpers.html" as project_helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
+{% from "_formhelpers.html" import render_field %}
+{% set preload_js = "true" %}
 
 {% block content %}
-{% from "_formhelpers.html" import render_field %}
-        {{ render_local_nav(current_user, "newproject") }}
+{{ render_local_nav(current_user, "newproject") }}
 <div class="container-padded">
     <div class="container container-padded">
         {% if current_user.admin %}

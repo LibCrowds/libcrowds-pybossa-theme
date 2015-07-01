@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% set active_page = "oclcsearch" %}
 {% from "admin/_helpers.html" import render_local_nav %}
+{% set preload_js = "true" %}
 {% block content %}
 {{ render_local_nav(current_user, "catalogue") }}
 <div class="container-padded">

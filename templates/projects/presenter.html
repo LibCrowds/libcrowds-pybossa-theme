@@ -1,9 +1,8 @@
 {% extends "/base.html" %}
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
-
+{% set preload_js = "true" %}
 {% block content %}
-    
 <script>
     Modernizr.load({
             test: window.JSON,

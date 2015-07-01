@@ -2,6 +2,7 @@
 {% set active_page = "data" %}
 {% set active_project  = "all" %}
 {% import "privacy/locked.html" as privacy %}
+{% set has_splash = "true" %}
 
 {% block content %}
 <div class="splash" id="data-splash">
@@ -111,23 +112,4 @@
         </div>
     </div>
 </section>
-<script>
-    $(function(){
-        $('.fa-download').each(function() {
-            var bytes = $(this).attr('data-filesize');
-            if (typeof bytes !== typeof undefined && bytes !== false) {
-                $(this).html("<small> (" + bytesToSize(bytes) + ")</small>");
-            }
-        });
-    });
-    
-    function bytesToSize(bytes) {
-       if(bytes == 0) return '0 Bytes';
-       if(bytes == 1) return '1 Byte';
-       var k = 1000;
-       var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-       var i = Math.floor(Math.log(bytes) / Math.log(k));
-       return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
-    }
-</script>
 {% endblock %}

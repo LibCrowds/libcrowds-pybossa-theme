@@ -5,76 +5,63 @@
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-        {{ render_local_nav(current_user, "tasks", project.short_name) }}
-            <div class="container-padded">
-                <div class="container container-padded">
-                    <div class="row">
-                        <div class="col-sm-9 col-sm-offset-3">
-                            {% include "_flash_messages.html" %}
-                            {{ helper.render_loading("Importing tasks, this may take a while, please wait...") }}
-                            <h1><strong>{{project.name}}</strong>: {{_('Import tasks')}}</h1>
-                            <hr>
-                            <div class="row vcenter hcenter">  
-                                        <div class="col-xs-10">
-                                        <h3>{{_('From Flickr')}}
-                                        </div>
-                                      <div class="col-xs-2">
-                                            {% if albums %}
-                                    <a href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right">{{ _('Revoke access') }}</a>
-                                {% endif %}
-                                      </div>
-                                    </div>
-                                
-                            </h3>
-                            {% if not albums %}
-                               <p> {{ _('To select an album click below to grant access to your Flickr account') }}</p></br>
-                     
-                            <p><a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-success">{{ _('Log in to Flickr') }}</a></p>
-                            {% else %}
-                            <h3>{{ _('Select an album, then click import:') }}</h3>
-                            <div class="row">
-                                <ul>
-                                {% for album in albums %}
-                                    <li class="col-md-3 col-sm-4 col-xs-12 text-center-xs flickr-thumbnails">
-                                        <h4><strong>{{ album['title'] }}</strong></h4>
-                                        <img src="{{ album['thumbnail_url'] }}" class="grey-border" alt="Flickr album thumbnail">
-                                        <p class="small">{{ album['photos'] }} {{ _('photos') }}</p>
-                                        <button id="{{ album['id'] }}" class="btn btn-success btn-album">{{ _('Select') }}</button>
-                                    </li>
-                                {% endfor %}
-                                </ul>
+    {{ render_local_nav(current_user, "tasks", project.short_name) }}
+    <div class="container-padded">
+        <div class="container container-padded">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3">
+                    {% include "_flash_messages.html" %}
+                    {{ helper.render_loading("Importing tasks, this may take a while, please wait...") }}
+                    <h1><strong>{{project.name}}</strong>: {{_('Import tasks')}}</h1>
+                    <hr>
+                    <div class="row vcenter hcenter">  
+                                <div class="col-xs-10">
+                                <h3>{{_('From Flickr')}}
+                                </div>
+                              <div class="col-xs-2">
+                                    {% if albums %}
+                            <a href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right">{{ _('Revoke access') }}</a>
+                        {% endif %}
+                              </div>
                             </div>
-                            </br>
-                            {% endif %}
-                            <br>
-                            {% if form %}
-                            <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
-                                <fieldset>
-                                     {{ form.hidden_tag() }}
-                                     <span class="help-block"> {{ _('Alteratively, you can manually provide the ID of a Flickr album') }}</span>
-                                     {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album", required="required", autofocus="autofocus") }}
-                                     <div class="pull-right" role="group">
-                                        <a href="{{url_for('project.import_task', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
-                                        <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-danger" />
-                                     </div>
-                                 </fieldset>
-                             </form>
-                             {% endif %}
-                        </div>
+                        
+                    </h3>
+                    {% if not albums %}
+                       <p> {{ _('To select an album click below to grant access to your Flickr account') }}</p></br>
+             
+                    <p><a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-success">{{ _('Log in to Flickr') }}</a></p>
+                    {% else %}
+                    <h3>{{ _('Select an album, then click import:') }}</h3>
+                    <div class="row">
+                        <ul>
+                        {% for album in albums %}
+                            <li class="col-md-3 col-sm-4 col-xs-12 text-center-xs flickr-thumbnails">
+                                <h4><strong>{{ album['title'] }}</strong></h4>
+                                <img src="{{ album['thumbnail_url'] }}" class="grey-border" alt="Flickr album thumbnail">
+                                <p class="small">{{ album['photos'] }} {{ _('photos') }}</p>
+                                <button id="{{ album['id'] }}" class="btn btn-success btn-album">{{ _('Select') }}</button>
+                            </li>
+                        {% endfor %}
+                        </ul>
                     </div>
+                    </br>
+                    {% endif %}
+                    <br>
+                    {% if form %}
+                    <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+                        <fieldset>
+                             {{ form.hidden_tag() }}
+                             <span class="help-block"> {{ _('Alteratively, you can manually provide the ID of a Flickr album') }}</span>
+                             {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album", required="required", autofocus="autofocus") }}
+                             <div class="pull-right" role="group">
+                                <a href="{{url_for('project.import_task', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+                                <input id="import" type="submit" value="{{_('Import')}}" class="btn btn-danger" />
+                             </div>
+                         </fieldset>
+                     </form>
+                     {% endif %}
                 </div>
             </div>
-<script>
-    $("#submit").off('click').on('click', function(){
-        $("#loading").show();
-    });
-</script>
-<script type="text/javascript">
-    $(".btn-album").each(function(){
-        $(this).off('click').on('click', function(){
-            document.getElementById('album_id').value = $(this).attr('id');
-            document.location.href = "#album_id";
-        });
-    });
-</script>
+        </div>
+    </div>
 {% endblock %}
