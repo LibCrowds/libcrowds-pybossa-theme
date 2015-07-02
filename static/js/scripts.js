@@ -76,7 +76,9 @@ $(function() {
     else {
         $("#btnHome").show();
     }
-        
+    
+    animateProgress();
+    sameSize();
     styleNavigation();
 });
 
