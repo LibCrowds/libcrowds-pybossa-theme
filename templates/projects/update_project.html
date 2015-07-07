@@ -3,6 +3,7 @@
 {% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 {% import "_formhelpers.html" as form_helper %}
+{% set preload_js = "true" %}
 {% block content %}
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
