@@ -82,7 +82,7 @@
                 </div>
             </section>
             
-            <section class="white pattern-white-wall box-shadow-white-bottom">
+            <section id="stats" class="white pattern-white-wall box-shadow-white-bottom">
                 <a id="top5"></a>
                 <div class="row text-center padding-top-sm padding-bottom">
                     <div class="col-xs-12">
@@ -206,7 +206,12 @@
     $(function(){
         
         var projectstats = {{appStats|safe}};
-      
+        
+        //Hide charts of no data exists yet
+        if (!projectstats['dayStats']['0']['values'].length > 0) {
+            
+        }
+        
         //Hourly chart
         var houreyLabels = [];
         var houreyData = [];
