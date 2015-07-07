@@ -223,9 +223,10 @@ function imgError(image) {
 
 {% macro render_grid_projects(projects, title, upload_method) %}
     <div class="container container-padded">
-        <div class="row text-center padding-bottom-sm">
+        <div class="row text-center">
             <h3>{{title}}</h3>
         </div>
+        
             <div class="col-xs-12">
               <div class="polaroids">
                     {% for project in projects %}

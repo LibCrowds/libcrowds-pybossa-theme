@@ -285,6 +285,7 @@ pre.prettyprint{text-align:left}
 .img-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.6);color:#fff;padding:40%;opacity:0;-webkit-transition:opacity .5s;-moz-transition:opacity .5s;-ms-transition:opacity .5s;-o-transition:opacity .5s;transition:opacity .5s;cursor:pointer}
 .img-overlay .fa{padding-left:5px}
 .img-overlay:hover{opacity:1;transform:none}
+img.img-polaroid{max-width:100%}
 .polaroids .polaroid:after{content:attr(data-polaroid-title)}
 .polaroids .polaroid{list-style:none;text-overflow:ellipsis;overflow:hidden;background:#fff;display:inline;float:left;margin:0 0 27px 30px;width:140px;padding:10px 7px 11px;text-align:center;font-family:'Permanent Marker',cursive;text-decoration:none;color:#333;font-size:14px;-webkit-box-shadow:0 3px 6px rgba(0,0,0,.25);-moz-box-shadow:0 3px 6px rgba(0,0,0,.25);box-shadow:0 3px 6px rgba(0,0,0,.25);-webkit-transition:-webkit-transform .15s linear;-moz-transition:-moz-transform .15s linear;-ms-transition:-ms-transform .15s linear;-o-transition:-o-transform .15s linear;transition:transform .15s linear;-moz-transform:rotate(-2deg);-webkit-transform:rotate(-2deg);-ms-transform:rotate(-2deg);-o-transform:rotate(-2deg);transform:rotate(-2deg)}
 .polaroids .polaroid.polaroid-sm{width:120px}
