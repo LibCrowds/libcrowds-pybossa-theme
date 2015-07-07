@@ -114,7 +114,7 @@
                 
                 <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg padding-top-xs">
                     <div class="shadow shadow-inline">
-                        {{ render_project_thumbnail(project, upload_method, class="img-polaroid", id="project.id", style="width:100%;max-width:200px") }}
+                        {{ render_project_thumbnail(project, upload_method, class="img-polaroid", id="project.id") }}
                     </div>
                 </div>
                 
@@ -246,17 +246,17 @@ function imgError(image) {
 </div>
 {% endmacro %}
 
-{% macro render_project_thumbnail(project, upload_method, id, class, style) %}
+{% macro render_project_thumbnail(project, upload_method, id, class, style, size="200x200") %}
 {% if project.info.container and project.info.thumbnail %}
     {% if upload_method == 'rackspace'%}
     <img class="{{class}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
     {% else %}
-    <img  class="{{class}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))|resize('200x200')}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
+    <img  class="{{class}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))|resize(size)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
     {% endif %}
 {% elif project.info.thumbnail %}
     <img class="{{class}}" src="{{project.info.thumbnail}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
 {% else %}
-    <img class="{{class}}" src="{{url_for('static', filename='img/placeholder.project.png')|resize('200x200')}}}}" style="{{style}}" alt="Project thumbnail">
+    <img class="{{class}}" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="{{style}}" alt="Project thumbnail">
 {% endif %}
 {% endmacro %}
 

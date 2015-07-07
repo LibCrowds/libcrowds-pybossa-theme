@@ -21,7 +21,7 @@
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             <div class="center-block img-overlay-container">
                                 <div class="shadow shadow-circle">
-                                    {{ helper.render_user_thumbnail(current_user, upload_method, class="img-circle profile-image img-responsive center-block")}}
+                                    {{ helper.render_user_thumbnail(current_user, upload_method, class="img-circle profile-image img-responsive center-block", size='150x150')}}
                                 </div>
                                 <div class="img-overlay img-circle edit-profile-image">
                                     <i class="fa fa-pencil-square-o fa-4x"></i>
