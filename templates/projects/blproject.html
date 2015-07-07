@@ -208,103 +208,104 @@
         var projectstats = {{appStats|safe}};
         
         //Hide charts of no data exists yet
-        if (!projectstats['dayStats']['0']['values'].length > 0) {
+        if (projectstats['dayStats']['0']['values'].length < 1) {
+            $('#stats').hide();
+        } else {
             
+            //Hourly chart
+            var houreyLabels = [];
+            var houreyData = [];
+            for(var i = 0; i < projectstats['hourStats']['0']['values'].length; i++) {
+                houreyLabels.push(formatHours(projectstats['hourStats']['0']['values'][i]['0']));
+                houreyData.push(projectstats['hourStats']['0']['values'][i]['1']);
+            }
+            
+            var data = {
+                labels: houreyLabels,
+                datasets: [
+                    {
+                        label: "Hourly Activity",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: houreyData
+                    }
+                ]
+            };
+            $("#hourly").attr("width", $('#hourly-chart').width());
+            $("#hourly").attr("height", 300);
+            var ctx = $("#hourly")[0].getContext("2d");
+            var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+            var hourlyChart = new Chart(ctx).Line(data, opts);
+            hourlyChart.draw();
+            
+            //Daily chart
+            var dailyLabels = [];
+            var dailyData = [];
+            for(var i = 0; i < projectstats['dayStats']['0']['values'].length; i++) {
+                var t = new Date(parseInt(projectstats['dayStats']['0']['values'][i]['0']));
+                dailyLabels.push($.datepicker.formatDate('dd M', t));
+                dailyData.push(projectstats['dayStats']['0']['values'][i]['1']);
+            }
+            
+            var data = {
+                labels: dailyLabels,
+                datasets: [
+                    {
+                        label: "Daily Activity",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: dailyData
+                    }
+                ]
+            };
+            $("#daily").attr("width", $('#daily-chart').width());
+            $("#daily").attr("height", 300);
+            var ctx = $("#daily")[0].getContext("2d");
+            var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+            var dailyChart = new Chart(ctx).Line(data, opts);
+            dailyChart.draw();
+            
+            //Top users
+            var users = [];
+            var tasks = [];
+            for(var i = 0; i < projectstats['userAuthStats']['top5'].length; i++) {
+                users.push(projectstats['userAuthStats']['top5'][i]['name']);
+                tasks.push(projectstats['userAuthStats']['top5'][i]['tasks']);
+            }
+            var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+            var data = {
+                labels: users,
+                datasets: [
+                    {
+                        label: "Most Active Users",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        highlightFill: "rgba(151,187,205,0.1)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: tasks
+                    }
+                ]
+            };
+            $("#top-users").attr("width", $('#top-users-chart').width());
+            $("#top-users").attr("height", 300);
+            var ctx = $("#top-users")[0].getContext("2d");
+            var opts = {labelLength:8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+            var topUsersChart = new Chart(ctx).Bar(data, opts);
+            topUsersChart.draw();
+            topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
+            topUsersChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
+            topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
+            topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
+            topUsersChart.update();
         }
-        
-        //Hourly chart
-        var houreyLabels = [];
-        var houreyData = [];
-        for(var i = 0; i < projectstats['hourStats']['0']['values'].length; i++) {
-            houreyLabels.push(formatHours(projectstats['hourStats']['0']['values'][i]['0']));
-            houreyData.push(projectstats['hourStats']['0']['values'][i]['1']);
-        }
-        
-        var data = {
-            labels: houreyLabels,
-            datasets: [
-                {
-                    label: "Hourly Activity",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: houreyData
-                }
-            ]
-        };
-        $("#hourly").attr("width", $('#hourly-chart').width());
-        $("#hourly").attr("height", 300);
-        var ctx = $("#hourly")[0].getContext("2d");
-        var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
-        var hourlyChart = new Chart(ctx).Line(data, opts);
-        hourlyChart.draw();
-        
-        //Daily chart
-        var dailyLabels = [];
-        var dailyData = [];
-        for(var i = 0; i < projectstats['dayStats']['0']['values'].length; i++) {
-            var t = new Date(parseInt(projectstats['dayStats']['0']['values'][i]['0']));
-            dailyLabels.push($.datepicker.formatDate('dd M', t));
-            dailyData.push(projectstats['dayStats']['0']['values'][i]['1']);
-        }
-        
-        var data = {
-            labels: dailyLabels,
-            datasets: [
-                {
-                    label: "Daily Activity",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: dailyData
-                }
-            ]
-        };
-        $("#daily").attr("width", $('#daily-chart').width());
-        $("#daily").attr("height", 300);
-        var ctx = $("#daily")[0].getContext("2d");
-        var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
-        var dailyChart = new Chart(ctx).Line(data, opts);
-        dailyChart.draw();
-        
-        //Top users
-        var users = [];
-        var tasks = [];
-        for(var i = 0; i < projectstats['userAuthStats']['top5'].length; i++) {
-            users.push(projectstats['userAuthStats']['top5'][i]['name']);
-            tasks.push(projectstats['userAuthStats']['top5'][i]['tasks']);
-        }
-        var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
-        var data = {
-            labels: users,
-            datasets: [
-                {
-                    label: "Most Active Users",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    highlightFill: "rgba(151,187,205,0.1)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: tasks
-                }
-            ]
-        };
-        $("#top-users").attr("width", $('#top-users-chart').width());
-        $("#top-users").attr("height", 300);
-        var ctx = $("#top-users")[0].getContext("2d");
-        var opts = {labelLength:8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
-        var topUsersChart = new Chart(ctx).Bar(data, opts);
-        topUsersChart.draw();
-        topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
-        topUsersChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
-        topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
-        topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
-        topUsersChart.update();
         
         //Provide usernames
         if ($('#volunteers').length) {
