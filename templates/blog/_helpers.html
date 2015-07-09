@@ -1,0 +1,86 @@
+{% macro render_blog_post(current_user, blogpost, form) %}
+    <div class="col-xs-12 col-sm-7 col-sm-offset-1">
+        {% if blogpost %}
+            <hr>
+            <article class="blogpost">
+                <header>
+                    <a href="{{ url_for('blog.show_blogpost', id=blogpost.id) }}"><h2>{{ blogpost.title }}</h2></a>
+                    <p>
+                        <small>
+                            <i class="fa fa-clock-o"></i> <span class="format-date" data-date="{{ blogpost.created[0:10] }}"></span>
+                            <i class="fa fa-user padding-left-xs"></i>
+                            <a href="{{ url_for('account.profile', name=blogpost.owner.name) }}">{{ blogpost.owner.name }}</a>
+                        </small>
+                    </p>
+                </header>
+                
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8">
+                        <a href="#" class="btn btn-facebook"
+                           onclick="popUp=window.open('http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.libcrowds.com%2Fblog%2F{{blogpost.id}}',
+                                                   'popupwindow', 'scrollbars=yes,width=510,height=620');popUp.focus();return false">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fblog%2F{{blogpost.id}}
+                        &text={{blogpost.title}}&tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com%2Fblog%2F{{blogpost.id}}" class="btn btn-twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-googleplus"
+                        onclick="popUp=window.open('https://plus.google.com/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblog%2F{{blogpost.id}}',
+                                                   'popupwindow', 'scrollbars=yes,width=510,height=725');popUp.focus();return false">
+                            <i class="fa fa-google"></i>
+                        </a>
+                        <a href="#" class="btn btn-tumblr"
+                        onclick="popUp=window.open('http://www.tumblr.com/share/link?url=http%3A%2F%2Fwww.libcrowds.com%2Fblog%2F{{blogpost.id}}',
+                                                   'popupwindow', 'scrollbars=yes,width=510,height=430');popUp.focus();return false">
+                            <i class="fa fa-tumblr"></i>
+                        </a>
+                        <a href="#" class="btn btn-linkedin"
+                        onclick="popUp=window.open('https://www.linkedin.com/cws/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblog%2F{{blogpost.id}}',
+                                                   'popupwindow', 'scrollbars=yes,width=510,height=520');popUp.focus();return false">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                    {% if current_user.admin %}
+                        <div class="col-xs-12 col-sm-4">
+                            <form class="form-horizontal" method="post" action="{{ url_for('blog.delete_blogpost', id=blogpost.id) }}"
+                                  onsubmit="return confirm('Do you really want to delete the blog post?');">
+                                {{ form.hidden_tag() }}
+                                <div role="group" class="pull-right">
+                                    <input type="submit" value={{_('Delete')}} class="btn btn-default" />
+                                    <a href="{{url_for('blog.update_blogpost', id=blogpost.id)}}" class="btn btn-danger">{{_('Edit')}}</a>
+                                </div>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+                <hr>
+                <body>
+                    <p>{{ blogpost.body | e | markdown }}</p>
+                </body>
+            </article>
+            <hr>
+        {% else %}
+        <div class="page-header">
+            <h1>{{ _('Sorry! This blogpost does not exist.') }}</h1>
+        </div>
+    {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro render_blog_menu(current_user, months) %}
+    <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-2 blog-menu">
+        <p class="blog-menu-title inset-text-grey">Archive</p>
+        <div class="blog-menu-body">
+            {% for month in months %}
+            <p><a href="{{url_for('blog.monthly', month=month)}}">{{month}}</a></p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    {% if current_user.admin %}
+    <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-2 text-center padding-top-sm">
+        <a href="{{ url_for('blog.new')}}" class="btn btn-danger">New Post</a>
+    </div>
+    {% endif %}
+{% endmacro %}

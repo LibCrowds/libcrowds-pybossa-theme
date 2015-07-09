@@ -1,49 +1,12 @@
-{% extends "/base.html" %}
-{% set active_page = "projects" %}
-{% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
-
-{% block content %}
-{% if project %}
-        {{ render_local_nav(current_user, 'blogpost', project.short_name) }}
-            <div class="container-padded">
-                <div class="container container-padded">
-                    <div class="row">
-                        <div class="col-sm-9 col-sm-offset-3">
-                            {% include "_flash_messages.html" %}
-                        {{ helper.render_project_title(project, upload_method) }}
-                        <hr>
-                        {% if blogposts %}
-                        <hr>
-                            <ul>
-                                {% for blogpost in blogposts %}
-                                    <li>
-                                        <div>
-                                            <a href="{{url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id)}}">{{ blogpost.title }}</a>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <h1>{{ _('Sorry! No posts so far.') }}</h1>
-                        {% endif %}
-                        <hr>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <div class="container-padded">
-                <div class="container container-padded">
-                    <div class="row">
-                        <div class="col-sm-9 col-sm-offset-3">
-                            <div class="page-header">
-                                <h1>{{ _('This project does not exist.') }}</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-{{ helper.broken_image() }}
-{{ helper.knob() }}
-{% endblock %}
+<!DOCTYPE HTML>
+ 
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="1; url={{ url_for('blog.index') }}">
+ 
+<script>
+  window.location.href = "{{ url_for('blog.index') }}";
+</script>
+ 
+<title>Page Redirection</title>
+ 
+If you are not redirected automatically, follow the <a href="{{ url_for('blog.index') }}">link to the new page</a>

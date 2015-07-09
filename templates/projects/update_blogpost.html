@@ -1,35 +1,12 @@
-{% extends "/base.html" %}
-{% set active_page = "projects" %}
-{% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
-
-{% block content %}
-{% from "_formhelpers.html" import render_field %}
-{{ render_local_nav(current_user, "blog", project.short_name) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                    {{ helper.render_project_title(project) }}
-                    <h2>{{ _('Edit the blog post') }}</h2>
-                    <form class="form-horizontal" method="post" action="{{ url_for('project.update_blogpost',
-                                                                    short_name=project.short_name,
-                                                                    id=blogpost.id) }}">
-                        {{ form.hidden_tag() }}
-                        <fieldset>
-                            {{ render_field(form.title, class_="col-md-4", placeholder= _('The title of your post')) }}
-                            {{ render_field(form.body, class_="col-md-4", placeholder= _('Write your post here. You can use Markdown!')) }}
-                            <div class="form-actions">
-                                <input type="submit" value={{_('Update')}} class="btn btn-danger" />
-                                <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn">{{_('Cancel')}}</a>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-{{ helper.broken_image() }}
-{{ helper.knob() }}
-{% endblock %}
+<!DOCTYPE HTML>
+ 
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="1; url={{ url_for('blog.index') }}">
+ 
+<script>
+  window.location.href = "{{ url_for('blog.index') }}";
+</script>
+ 
+<title>Page Redirection</title>
+ 
+If you are not redirected automatically, follow the <a href="{{ url_for('blog.index') }}">link to the new page</a>

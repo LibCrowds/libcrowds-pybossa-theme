@@ -19,7 +19,6 @@
   </div>
 </div>
 
-<a id="intro"></a>
 <section class="mid-grey pattern-brushed box-shadow-grey-bottom">
   <p class="attribution"><small>Photo: <a href="http://flic.kr/p/i5L8Ux" target="_blank">Mechanical Curator</a></small></p>
       <div class="container container-padded">
@@ -35,10 +34,11 @@
       </div>
 </section>
 
- {% if categories_projects['featured'] %}
+<a id="intro"></a>
+{% if categories_projects['featured'] %}
 <section class="white pattern-white-wall box-shadow-white-bottom">
   <div class="container padding-top-sm">
-    <div class="text-center col-xs-12 padding-bottom-xs">
+    <div class="text-center col-xs-12 padding-bottom-sm">
       <h2>{{ _('Featured Crowdsourcing Projects') }}</h2>
     </div>
     <div class="polaroids">
