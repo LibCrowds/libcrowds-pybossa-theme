@@ -6,6 +6,7 @@
 {% if project.info.splash %}
     {% set has_splash = "true" %}
 {% endif %}
+{% set description = project.description %}
 
 {% block content %}
     {% if project %}
@@ -133,12 +134,37 @@
                 <section>
                     <div class="container container-padded">
                         <div class="col-xs-12 text-center">
-                            <div class="row text-center">
-                            <h2>Get involved</h2>
-                            <p>Your contributions will have a direct impact on enabling future reasearch at the British Library.<p>
+                            <div class="row">
+                                <h2>Get involved</h2>
+                                <p>Your contributions will have a direct impact on enabling future reasearch at the British Library.<p>
                                 <div class="row text-center padding-top-xs">
                                     <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> {{ _('Contribute now') }}</a>
                                 </div>
+                                <hr class="padding-bottom-xs">
+                                <a href="#" class="btn btn-facebook"
+                                   onclick="popUp=window.open('http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
+                                                           'popupwindow', 'scrollbars=yes,width=510,height=620');popUp.focus();return false">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}
+                                &text={{project.description}}&tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}" class="btn btn-twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a href="#" class="btn btn-googleplus"
+                                onclick="popUp=window.open('https://plus.google.com/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
+                                                           'popupwindow', 'scrollbars=yes,width=510,height=725');popUp.focus();return false">
+                                    <i class="fa fa-google"></i>
+                                </a>
+                                <a href="#" class="btn btn-stumbleupon"
+                                onclick="popUp=window.open('http://www.stumbleupon.com/submit?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}&amp;title={{project.name}}',
+                                                           'popupwindow', 'scrollbars=yes,width=510,height=640');popUp.focus();return false">
+                                    <i class="fa fa-stumbleupon"></i>
+                                </a>
+                                <a href="#" class="btn btn-linkedin"
+                                onclick="popUp=window.open('https://www.linkedin.com/cws/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
+                                                           'popupwindow', 'scrollbars=yes,width=510,height=520');popUp.focus();return false">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
