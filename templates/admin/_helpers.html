@@ -45,14 +45,6 @@
             {% endif %}
         </ul>
     </li>
-    <li class="nav-link">
-        <a href="#" id="web-service-options">Web Service<i class="fa fa-angle-down pull-right"></i></a>
-        <ul class="nav nav-stacked inset-shadow remove-padding-top" id="web-service-menu" hidden>
-            <li class="nav-link"><a href="{{url_for('z3950.search', z3950_catalogue="bl")}}">Search BL</a></li>
-            <li class="nav-link"><a href="{{url_for('z3950.search', z3950_catalogue="oclc")}}">Search OCLC</a></li>
-            <li class="nav-link"><a href="{{url_for('z3950.help')}}">Help</a></li>
-        </ul>
-    </li>
     {% endif %}
     {% if active_project %}
         <li class="nav-link{% if active_link=="info"%} active{% endif %}"><a href="{{url_for('blplugin.details', short_name=active_project)}}">{{_('Info')}}</a></li>
