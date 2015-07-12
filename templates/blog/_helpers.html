@@ -15,7 +15,7 @@
                 </header>
                 
                 <div class="row">
-                    <div class="col-xs-12 col-sm-8">
+                    <div class="col-xs-12 col-md-8 padding-bottom-xs">
                         <a href="#" class="btn btn-facebook"
                            onclick="popUp=window.open('http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.libcrowds.com%2Fblog%2F{{blogpost.id}}',
                                                    'popupwindow', 'scrollbars=yes,width=510,height=620');popUp.focus();return false">
@@ -42,11 +42,11 @@
                         </a>
                     </div>
                     {% if current_user.admin %}
-                        <div class="col-xs-12 col-sm-4">
+                        <div class="col-xs-12 col-md-4">
                             <form class="form-horizontal" method="post" action="{{ url_for('blog.delete_blogpost', id=blogpost.id) }}"
                                   onsubmit="return confirm('Do you really want to delete the blog post?');">
                                 {{ form.hidden_tag() }}
-                                <div role="group" class="pull-right">
+                                <div role="group" class="pull-right-md">
                                     <input type="submit" value={{_('Delete')}} class="btn btn-default" />
                                     <a href="{{url_for('blog.update_blogpost', id=blogpost.id)}}" class="btn btn-danger">{{_('Edit')}}</a>
                                 </div>
