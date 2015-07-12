@@ -3,7 +3,8 @@
 {% from "projects/_helpers.html" import broken_image %}
 {% import "blog/_helpers.html" as helper %}
 {% set preload_js = "true" %}
-{% set description = "" %}
+{% set description = blogpost.body %}
+{% set title = blogpost.title %}
 
 {% block content %}
 <div class="container container-main">
