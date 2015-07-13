@@ -77,6 +77,13 @@ $(function() {
         $("#btnHome").show();
     }
     
+    $('.tasks-remaining').each(function() {
+        var tasks = $(this).attr('data-tasks');
+        var progress = $(this).attr('data-progress');
+        var remaining = Math.ceil((100 - progress) * .01 * tasks);
+        $(this).html('Tasks Remaining: ' + remaining);
+    });
+    
     animateProgress();
     sameSize();
     styleNavigation();

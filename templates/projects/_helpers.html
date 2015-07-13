@@ -140,13 +140,23 @@
         
             <div class="col-sm-3 hidden-sm hidden-xs">
                 <div class="white-rounded inset-shadow-white project-info">
-                    <i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div>
-                    <hr class="no-margins">
-                    <i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block">Tasks: {{project.n_tasks}}</div>
-                    <hr class="no-margins">
-                    <i class="fa fa-users fa-2x"></i><div class="padding-left-xs inline-block">Volunteers: {{ project.n_volunteers}}</div>
+                    <div class="vcenter ie-vcenter">
+                        <i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div>
+                    </div>
+                    <hr class="small-margins">
+                    <div class="vcenter ie-vcenter">
+                        <i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block tasks-remaining" data-tasks="{{project.n_tasks}}" data-progress="{{ project.overall_progress | round | int }}">Tasks Remaining: {{project.n_tasks}}</div>
+                    </div>
+                    <hr class="small-margins">
+                    <div class="vcenter ie-vcenter">
+                        <i class="fa fa-users fa-2x"></i><div class="padding-left-xs inline-block">Volunteers: {{ project.n_volunteers}}</div>
+                    </div>
+                    <hr class="small-margins">
+                    <div class="vcenter ie-vcenter">
+                        <i class="fa fa-clock-o fa-2x"></i><div class="padding-left-xs inline-block">Active: {{ project.last_activity}}</div>
+                    </div>
                 </div>
-                <div class="text-center padding-top-md">
+                <div class="text-center padding-top-sm">
                     {% if active_cat != "draft" %}
                         <p><a class="btn btn-danger" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{ _('Contribute') }}</a></p>
                     {% endif %}
