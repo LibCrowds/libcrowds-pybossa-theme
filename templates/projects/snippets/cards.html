@@ -1,569 +1,556 @@
-<!-- Success and Error Messages for the user --> 
-<div class="row">
-    <div class="col-sm-6" style="height:50px;">
-        <div id="success" class="alert alert-success" style="display:none;">
-            <a class="close">x</a><span>Answer saved</span>
+<!-- Start of Photo DIV (column) -->
+  <div class="col-xs-12 col-sm-7 col-sm-push-5 col-md-6 col-md-push-6 text-center" id="photo-container">
+     <div id="image_container" style="position: relative;">
+        <a id="photo-link" href="#">
+        <img id="photo" src="http://i.imgur.com/GeHxzb7.png" alt="Loading">
+        </a>
+     </div>
+  </div>
+
+<div class="row skeleton">
+   <!-- Start Skeleton Row-->
+  <div class="col-xs-12 col-sm-5 col-sm-pull-7 col-md-6 col-md-pull-6">
+    
+    <!-- Success and Error Messages for the user --> 
+  	<div id="alert-row">	
+    	<div id="success" class="alert alert-success remove-margin-bottom" style="display:none;">
+           <a class="close">x</a><span>Answer saved</span>
         </div>
-        <div id="loading" class="alert alert-info" style="display:none;">
-            <a class="close">x</a>
-            <span id="i18n_loading_next_task">Loading next task...</span>
+        <div id="loading" class="alert alert-info remove-margin-bottom" style="display:none;">
+           <a class="close">x</a>
+           <span id="i18n_loading_next_task">Loading next task...</span>
         </div>
-        <div id="taskcompleted" class="alert alert-info" style="display:none;">
-            <strong id="i18n_task_completed">The task has been completed!</strong> <span id="i18n_thanks">Thanks a lot!</span>
+        <div id="taskcompleted" class="alert alert-info remove-margin-bottom" style="display:none;">
+           <strong id="i18n_task_completed">The task has been completed!</strong> <span id="i18n_thanks">Thanks a lot!</span>
         </div>
-        <div id="finish" class="alert alert-success" style="display:none;">
-            <strong id="i18n_congratulations">Congratulations!</strong> <span id="i18n_congratulations_text">You have participated in all available tasks!</span>
-            <br/>
-            <div class="alert-actions">
-                <a class="btn btn-small" href="/">Go back</a>
-                <a class="btn btn-small" href="/project">or, Check other projects</a>
-            </div>
+        <div id="finish" class="alert alert-success remove-margin-bottom" style="display:none;">
+           <strong id="i18n_congratulations">Congratulations!</strong> <span id="i18n_congratulations_text">You have participated in all available tasks!</span>
+           <br/>
+           <div class="alert-actions">
+              <a class="btn btn-small" href="/">Go back</a>
+              <a class="btn btn-small" href="/project">or, Check other projects</a>
+           </div>
         </div>
-        <div id="error" class="alert alert-danger" style="display:none;">
-            <a class="close">x</a>
-            <strong>Error!</strong> Something went wrong, please report this via the 
-	    <a href="http://community.libcrowds.com">LibCrowds Community</a>
+        <div id="error" class="alert alert-danger remove-margin-bottom" style="display:none;">
+           <a class="close">x</a>
+           <strong>Error!</strong> Something went wrong, please report this via the 
+           <a href="http://community.libcrowds.com">LibCrowds Community</a>
         </div>
-		<div id="search_error" class="alert alert-info" style="display:none;">
-            <a class="close">x</a>
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> No results returned.
+        <div id="search_error" class="alert alert-info remove-margin-bottom" style="display:none;">
+           <a class="close">x</a>
+           <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> No results returned.
         </div>
-      <div id="shared" class="alert alert-success" style="display:none;">
-        <a class="close">x</a>
-        <span>Thanks for sharing!</span>
+        <div id="shared" class="alert alert-success remove-margin-bottom" style="display:none;">
+           <a class="close">x</a>
+           <span>Thanks for sharing!</span>
+        </div>
       </div>
-    </div> <!-- End Success and Error Messages for the user -->
-</div> <!-- End of Row -->
-
-
-<!--
-    Task DOM for loading the Flickr Images
-    It uses the class="skeleton" to identify the elements that belong to the
-    task.
--->
-<div class="row skeleton"> <!-- Start Skeleton Row-->
-    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
-        <div class="row vcenter hcenter">  
-          <div class="col-xs-10">
-              <h1 id="question"><span id="i18n_question">What is this item?</span></h1> <!-- The question will be loaded here -->
-          </div>
-          <div class="col-xs-2">
-              <a href="#" class="btn btn-inverse" data-toggle="modal" data-target="#modal"><i class="fa fa-book"></i> Tutorial</a>
-              <a href="#comments" id="comments_btn" class="btn btn-inverse" data-toggle="collapse" aria-expanded="false" aria-controls="comments">
-		<i class="fa fa-plus"></i> Comment</a>
-          </div>
-        </div>
-	<div class="row">
-	    <div class="col-xs-12">
-	      <div class="collapse" id="comments">
-		<textarea class="form-control margin-bottom-xs" rows="5" id="comments_field" placeholder="Comments"></textarea>
-	      </div>
-	    </div>
-	</div>
-		
-<!-- Start of answer DIV -->
-        <div id="contribution"> 
-
-          <!-- The search form -->
-          <form id="oclc_search_form" role="form" class="padding-bottom">
-          
-            <div class="form-group">
-                <label for="title_field">Search Criteria:</label>
-                <input type="text" id="title_field" class="form-control" placeholder="Title" />
+    
+     <!-- Start of Question and Submission DIV (column) -->
+      <div class="row vcenter-md hcenter">
+         <div class="col-md-8 col-xs-12">
+            <h1 id="question"><span id="i18n_question">What is this item?</span></h1>
+            <!-- The question will be loaded here -->
+         </div>
+         <div class="col-md-4 hidden-xs hidden-sm">
+            <a href="#" class="btn btn-inverse pull-right" data-toggle="modal" data-target="#modal"><i class="fa fa-book"></i> Tutorial</a><br/>
+            <a href="#comments" id="comments_btn" class="btn btn-inverse pull-right" data-toggle="collapse" aria-expanded="false" aria-controls="comments">
+            <i class="fa fa-plus"></i> Comment</a>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-12">
+            <div class="collapse" id="comments">
+               <textarea class="form-control margin-bottom-xs" rows="5" id="comments_field" placeholder="Comments"></textarea>
             </div>
-                
+         </div>
+      </div>
+      <!-- Start of answer DIV -->
+      <div id="contribution">
+         <!-- The search form -->
+         <form id="oclc_search_form" role="form">
             <div class="form-group">
-                <input type="text" id="author_field" class="form-control" placeholder="Author" />
+               <label for="title_field">Search Criteria:</label>
+               <input type="text" id="title_field" class="form-control" placeholder="Title" />
             </div>
-                
             <div class="form-group">
-                <input type="number" id="year_field" class="form-control" placeholder="Year"/>
+               <input type="text" id="author_field" class="form-control" placeholder="Author" />
             </div>
-              
             <div class="form-group">
-                <input type="number" id="isbn_field" class="form-control" placeholder="ISBN"/>
+               <input type="number" id="year_field" class="form-control" placeholder="Year"/>
+            </div>
+            <div class="form-group">
+               <input type="number" id="isbn_field" class="form-control" placeholder="ISBN"/>
             </div>
             <p id="results_count" class="pull-left padding-left-xs" hidden></p>
-            <div class="pull-right" role="group">
-              <a href="#" id="not_found_btn" class="btn btn-default btn-answer" value="Skip / Not Found">Skip / Not Found</a>
-                <button id="search_submit_btn" class="btn btn-danger" value="Search" >Search</button>
+            <div class="pull-right-md text-center" role="group">
+               <a href="#" class="btn btn-default btn-answer hidden-xs hidden-sm" value="Skip / Not Found">Skip / Not Found</a>
+               <button id="search_submit_btn" class="btn btn-danger" value="Search" >Search</button>
+               <a href="#" class="btn btn-default btn-answer hidden-md hidden-lg" value="Skip / Not Found">Skip / Not Found</a>
             </div>
-          </form>
-
-<!-- The selected record will be loaded here --> 
-<div id="selected_record"></div>
-
-<!-- Search results will be loaded here -->
-<div class="col-12" id="search_results">
-</div>
-
-<!-- Shelf mark form -->
-<form id="shelfmark_form" role="form" style="display:none;">
-<div class="form-group">
-<label for="shelfmark_field" class="control-label">Shelf Mark:</label>
-    <input type="text" id="shelfmark_field" class="form-control" placeholder="Enter shelf mark" required/>
-</div>
-	<a href="#" class="btn btn-success btn-answer pull-right" value="Done"><i class="fa fa-thumbs-o-up"></i> Done</a>
-</form>
-
-        <!-- Feedback items for the user -->
-        <div class="padding-top-sm">
-          <p><span id="i18n_working_task">You are working now on task:</span> <span id="task-id" class="label label-default">#</span></p>
-          <p><span id="i18n_tasks_completed">You contributed to</span> <span id="done" class="label label-danger"></span> <span id="i18n_tasks_from">tasks from </span>
-          
-          <!-- Progress bar for the user -->
-          <span id="total" class="label label-danger"></span></p>
-          <div class="progress progress-striped">
-              <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
-          </div>
-        </div>
-         <!--- Social media buttons --->
-          <a href="#" id="fb-share" target="_blank" class="btn btn-facebook"><i class="fa fa-facebook"></i> Share</a>
-          <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fproject%2F{{project.short_name}}%2Ftask%2F734&text=Help convert this British Library card catalogue
-	  into a searchable online database&
-	  tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com&via=@libcrowds" class="btn btn-twitter">
-  <i class="fa fa-twitter"></i> Tweet</a>
-          </div>
-    
-</div>
-
-    <!-- Start of Photo DIV (column) -->
-    <div class="col-md-6">
-    <div id="image_container" style="position: relative;">
-        <a id="photo-link" href="#">
-            <img id="photo" src="http://i.imgur.com/GeHxzb7.png" style="max-width=100%" alt="Loading">
-        </a>
-        </div>
-    </div>
+         </form>
+         <div class="col-xs-12 text-center hidden-md hidden-lg">
+            <a href="#" class="btn btn-inverse" data-toggle="modal" data-target="#modal"><i class="fa fa-book"></i> Tutorial</a>
+            <a href="#comments" id="comments_btn" class="btn btn-inverse padding-left-xs" data-toggle="collapse" aria-expanded="false" aria-controls="comments">
+            <i class="fa fa-plus"></i> Comment</a>
+         </div>
+         <!-- The selected record will be loaded here --> 
+         <div class="row">
+            <div class="col-xs-12">
+               <div id="selected_record" class="padding-top-xs"></div>
+            </div>
+         </div>
+         <!-- Search results will be loaded here -->
+         <div class="col-xs-12" id="search_results"></div>
+         <!-- Shelf mark form -->
+         <form id="shelfmark_form" role="form" style="display:none;">
+            <div class="form-group">
+               <label for="shelfmark_field" class="control-label">Shelf Mark:</label>
+               <input type="text" id="shelfmark_field" class="form-control" placeholder="Enter shelf mark" required/>
+            </div>
+            <a href="#" class="btn btn-success btn-answer pull-right" value="Done"><i class="fa fa-thumbs-o-up"></i> Done</a>
+         </form>
+         <!-- Feedback items for the user -->
+         <div class="padding-top-sm text-center">
+            <p><span id="i18n_working_task">You are working now on task:</span> <span id="task-id" class="label label-default">#</span></p>
+            <p>
+               <span id="i18n_tasks_completed">You contributed to</span> <span id="done" class="label label-danger"></span> <span id="i18n_tasks_from">tasks from </span>
+               <!-- Progress bar for the user -->
+               <span id="total" class="label label-danger"></span>
+            </p>
+            <div class="progress progress-striped">
+               <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
+            </div>
+         </div>
+      </div>
+      <div class="row text-center">
+         <a href="#" class="btn btn-facebook"
+	    onclick="popUp=window.open('http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
+	    'popupwindow', 'scrollbars=yes,width=510,height=620');popUp.focus();return false">
+	 <i class="fa fa-facebook"></i>
+	 </a>
+	 <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}
+	    &text={{project.description}}&tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}" class="btn btn-twitter">
+	 <i class="fa fa-twitter"></i>
+	 </a>
+	 <a href="#" class="btn btn-googleplus"
+	    onclick="popUp=window.open('https://plus.google.com/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
+	    'popupwindow', 'scrollbars=yes,width=510,height=725');popUp.focus();return false">
+	 <i class="fa fa-google"></i>
+	 </a>
+	 <a href="#" class="btn btn-stumbleupon"
+	    onclick="popUp=window.open('http://www.stumbleupon.com/submit?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}&amp;title={{project.name}}',
+	    'popupwindow', 'scrollbars=yes,width=510,height=640');popUp.focus();return false">
+	 <i class="fa fa-stumbleupon"></i>
+	 </a>
+	 <a href="#" class="btn btn-linkedin"
+	    onclick="popUp=window.open('https://www.linkedin.com/cws/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
+	    'popupwindow', 'scrollbars=yes,width=510,height=520');popUp.focus();return false">
+	 <i class="fa fa-linkedin"></i>
+	 </a>
+      </div>
+   </div>
 </div>
 
 <span id="client_ip" hidden></span>
 
 <!-- Tutorial -->
 <div id="modal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                <h3 class="text-center">The {{project.name}} tutorial</h3>
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+            <h3 class="text-center">{{project.name}} tutorial</h3>
+         </div>
+         <div id="0" class="modal-body">
+            <p>The purpose of this project is to link scanned images, such as the one below, to catalogue records held in
+               an external database.
+            </p>
+            <div class="row text-center">
+               <img src="/static/img/tutorials/card.jpg" width="200" class="img-thumbnail" alt="Chinese_PY_Titles_A-By1204" alt="Catalogue card"></a><br>
             </div>
-			
-            <div id="0" class="modal-body">
-              <p>The purpose of this project is to link scanned images, such as the one below, to catalogue records held in
-                an external database.</p>
-              <div class="row text-center">
-                <img src="/static/img/tutorials/card.jpg" width="200" class="img-thumbnail" alt="Chinese_PY_Titles_A-By1204" alt="Catalogue card"></a><br>
-          	  </div><br>
-              <p>Your tasks comes in two parts:</p>
-
-				<p>1.	Locate the catalogue record relating to the card displayed.<br>
-                  2.	 Transcribe the shelf mark shown on the card.</p>
-
+            <br>
+            <p>Your tasks comes in two parts:</p>
+            <p>1.	Locate the catalogue record relating to the card displayed.<br>
+               2.	 Transcribe the shelf mark shown on the card.
+            </p>
+         </div>
+         <div id="1" class="modal-body" style="display:none;">
+            <p><strong>Step 1:</strong></p>
+            <p>Next to the image of the card you will be provided with a set of search fields for the title, author, 
+               publication year and ISBN of the item. Once you have performed a search and retrieved some results, you 
+               can choose the appropriate record by clicking on the select button to the right of that record.
+            </p>
+            <p>If you are unable to locate the correct record, please click the 'Skip / Not found' button.</p>
+            <div class="row text-center">
+               <img src="/static/img/tutorials/card_buttons.png" width="200" class="img-thumbnail" alt="Chinese_PY_Titles_A-By1204"></a><br>
             </div>
-			
-            <div id="1" class="modal-body" style="display:none;">
-              <p><strong>Step 1:</strong></p>
-              <p>Next to the image of the card you will be provided with a set of search fields for the title, author, 
-                publication year and ISBN of the item. Once you have performed a search and retrieved some results, you 
-                can choose the appropriate record by clicking on the select button to the right of that record.</p>
-              
-              <p>If you are unable to locate the correct record, please click the 'Skip / Not found' button.</p>
-              <div class="row text-center">
-              	<img src="/static/img/tutorials/card_buttons.png" width="200" class="img-thumbnail" alt="Chinese_PY_Titles_A-By1204"></a><br>
-              </div>
-                
-            </div>
-			
-            <div id="2" class="modal-body" style="display:none;">
-              <p><strong>Step 2:</strong></p>
-                <p>If you managed to locate a matching record, the next stage is to transcribe the shelf mark, 
-                  which is usually located at the top right of the image. Very occasionally the shelf mark will be in a different location but
-                  after you have completed a few tasks you should be able to recognise these shelf marks more easily.</p>
-              <p>Please try to transcribe the shelf mark as accurately as possible, including maintaining the case
-              and punctuation.</p>
-              <p>That's it! Once you have have finished click 'Done' and you will be presented with the next task.</p>
-             
-            </div>
-			
-            <div class="modal-footer">
-                <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
-                <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
-                <button id="startContrib" data-dismiss="modal" class="btn btn-primary" style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Start</button>
-
-            </div>
-        </div>
-    </div>
+         </div>
+         <div id="2" class="modal-body" style="display:none;">
+            <p><strong>Step 2:</strong></p>
+            <p>If you managed to locate a matching record, the next stage is to transcribe the shelf mark, 
+               which is usually located at the top right of the image. Very occasionally the shelf mark will be in a different location but
+               after you have completed a few tasks you should be able to recognise these shelf marks more easily.
+            </p>
+            <p>Please try to transcribe the shelf mark as accurately as possible, including maintaining the case
+               and punctuation.
+            </p>
+            <p>That's it! Once you have have finished click 'Done' and you will be presented with the next task.</p>
+         </div>
+         <div class="modal-footer">
+            <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
+            <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
+            <button id="startContrib" data-dismiss="modal" class="btn btn-primary" style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Start</button>
+         </div>
+      </div>
+   </div>
 </div>
+
 <script>
-    
-  $(document).ready(function() {
-    //Tutorial cookie
-    if ($.cookie('{{project.short_name}}') === undefined || $.cookie('{{project.short_name}}') === null) {
-      $('#modal').modal('show');
-      $.cookie('{{project.short_name}}', '7');
-    }
-    
-    //Get client IP
-    $.get('/api/user/get_ip', function(results){
-          $("#client_ip").html(results);
-    });
-  });
-  
-  
-    //Facebook sharing
-  $(document).delegate('#fb-share', 'click', function(e) {
-      FB.ui({
-          method: 'feed',  
-          link: "http://www.libcrowds.com",
-          name: "LibCrowds: {{project.name}}",
-          picture: "http://libcrowds.com/static/img/BL_logo.jpg",
-          caption: " ",
-          description: "Help convert this British Library card catalogue into a searchable online database"
-      }, function(response) {
-          if (response && response.post_id) {
-             $("#shared").fadeIn();
-          }
-      });
-    });
-  
-	var step = -1;
-    function showStep(action) {
-        $("#" + step).hide();
-        if (action == 'next') {
-            step = step + 1;
-        }
-        if (action == 'prev') {
-            step = step - 1;
-        }
-        if (step === 0) {
-            $("#prevBtn").hide();
-            $("#nextBtn").show();
-            $("#startContrib").hide();
-        }
-        else {
-            $("#prevBtn").show();
-            $("#nextBtn").show();
-            $("#startContrib").hide();
-        }
+   $(document).ready(function() {
 
-        if (step == 2) {
-            $("#nextBtn").hide();
-            $("#startContrib").show();
-        }
-        $("#" + step).show();
-    }
-    showStep('next');
+     //Get client IP
+     $.get('/api/user/get_ip', function(results) {
+         $("#client_ip").html(results);
+     });
 
-function loadUserProgress() {
-    pybossa.userProgress('{{project.short_name}}').done(function(data){
-        var pct = Math.round((data.done*100)/data.total);
-        $("#progress").css("width", pct.toString() +"%");
-        $("#progress").attr("title", pct.toString() + "% completed!");
-        $("#progress").tooltip({'placement': 'bottom'}); 
-        $("#total").text(data.total);
-        $("#done").text(data.done);
-    });
-}
+ });
 
-//Move the image with the scrolling of the window
-$(window).scroll(function(){
-	if(!isScrolledIntoView($("#progress")) && $(window).height() > 720){
-		$("#image_container").css({"margin-top": ($(window).scrollTop()) + "px", "margin-left":($(window).scrollLeft()) + "px"}); 
-	}
-});
+ var step = -1;
 
-//Check if an element is partially in view
-function isScrolledIntoView(elem) {
-    var docViewTop = $(window).scrollTop();
-    var docViewBottom = docViewTop + $(window).height();
-    var elemTop = $(elem).offset().top;
-    var elemBottom = elemTop + $(elem).height();
-    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-}
+ function showStep(action) {
+     $("#" + step).hide();
+     if (action == 'next') {
+         step = step + 1;
+     }
+     if (action == 'prev') {
+         step = step - 1;
+     }
+     if (step === 0) {
+         $("#prevBtn").hide();
+         $("#nextBtn").show();
+         $("#startContrib").hide();
+     } else {
+         $("#prevBtn").show();
+         $("#nextBtn").show();
+         $("#startContrib").hide();
+     }
 
-//Get and display the search results
-$(document).delegate('#oclc_search_form', 'submit', function(e) {
-  $("#oclc_search_form input").each(function() {
-    if($(this).attr('placeholder') === $(this).val()){
-    	$(this).val('');
-    }
-  });
-  e.preventDefault();
-  $("#search_error").hide();
-  $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
-  $("#search_results").slideUp();
-  $("#results_count").html('');
-  $("#results_count").hide();
-  $('#search_submit_btn').fadeTo(500, 0.3);
-  var searchArray = {};
-  if ($("#title_field").val() !== "") {searchArray['title'] = encodeURIComponent($("#title_field").val().trim());}
-  if ($("#author_field").val() !== "") {searchArray['author'] = encodeURIComponent($("#author_field").val().trim());}
-  if ($("#year_field").val() !== "") {searchArray['year'] = encodeURIComponent($("#year_field").val().trim());}
-  if ($("#isbn_field").val() !== "") {searchArray['isbn'] = encodeURIComponent($("#isbn_field").val().trim().replace(/-/g, ""));}
-  key = encodeURIComponent($('#api-key').attr('data-key'));
-  libs = '"(DLC or CUY or ZCU or HMY or PULEA or YUL or CNEAL or CGU or COO or AMH or AUT or NSL or SLY or L2U or OCLCA or OCLCQ or OCLCF or OCLCO)"';
-  searchStr = 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/search?format=HTML&api_key=' + key + '&query=(1,1183)="eng"and(1,6119)=' + libs + 'and';
-  countStr = 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/count?api_key=' + key + '&query=(1,1183)="eng"and(1,6119)=' + libs + 'and';
-  var notFirst = 0;
-  for (var key in searchArray){
-    switch (key){
-      case 'title':
-        if(notFirst){
-            searchStr += 'and';
-            countStr += 'and';
-        }
-        notFirst = 1;
-        searchStr += '(1,4)="' + searchArray.title + '?"';
-        countStr += '(1,4)="' + searchArray.title + '?"';
-        break;
-      case 'author':
-        if(notFirst){
-        	searchStr += 'and';
-            countStr += 'and';
-        }
-        notFirst = 1;
-        searchStr += '(1,1003)="' + searchArray.author + '?"';
-        countStr += '(1,1003)="' + searchArray.author + '?"';
-        break;
-      case 'year':
-        if(notFirst){
-          	searchStr += 'and';
-            countStr += 'and';
-        }
-        notFirst = 1;
-        searchStr += '(1,31)="' + searchArray.year + '"';
-        countStr += '(1,31)="' + searchArray.year + '"';
-        break;
-      case 'isbn':
-        if(notFirst){
-          	searchStr += 'and';
-            countStr += 'and';
-        }
-        notFirst = 1;
-        searchStr += '(1,7)="' + searchArray.isbn + '"';
-        countStr += '(1,7)="' + searchArray.isbn + '"';
-        break;
-      default:
-        break;
-    }
-  }
-  performCount(countStr);
-  performSearch(searchStr, 1);
-  Placeholders.enable();
-});
+     if (step == 2) {
+         $("#nextBtn").hide();
+         $("#startContrib").show();
+     }
+     $("#" + step).show();
+ }
+ showStep('next');
+
+ function loadUserProgress() {
+     pybossa.userProgress('{{project.short_name}}').done(function(data) {
+         var pct = Math.round((data.done * 100) / data.total);
+         $("#progress").css("width", pct.toString() + "%");
+         $("#progress").attr("title", pct.toString() + "% completed!");
+         $("#progress").tooltip({
+             'placement': 'bottom'
+         });
+         $("#total").text(data.total);
+         $("#done").text(data.done);
+     });
+ }
+
+ //Get and display the search results
+ $(document).delegate('#oclc_search_form', 'submit', function(e) {
+     $("#oclc_search_form input").each(function() {
+         if ($(this).attr('placeholder') === $(this).val()) {
+             $(this).val('');
+         }
+     });
+     e.preventDefault();
+     $("#search_error").hide();
+     $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
+     $("#search_results").slideUp();
+     $("#results_count").html('');
+     $("#results_count").hide();
+     $('#search_submit_btn').fadeTo(500, 0.3);
+     var searchArray = {};
+     if ($("#title_field").val() !== "") {
+         searchArray['title'] = encodeURIComponent($("#title_field").val().trim());
+     }
+     if ($("#author_field").val() !== "") {
+         searchArray['author'] = encodeURIComponent($("#author_field").val().trim());
+     }
+     if ($("#year_field").val() !== "") {
+         searchArray['year'] = encodeURIComponent($("#year_field").val().trim());
+     }
+     if ($("#isbn_field").val() !== "") {
+         searchArray['isbn'] = encodeURIComponent($("#isbn_field").val().trim().replace(/-/g, ""));
+     }
+     key = encodeURIComponent($('#api-key').attr('data-key'));
+     libs = '"(DLC or CUY or ZCU or HMY or PULEA or YUL or CNEAL or CGU or COO or AMH or AUT or NSL or SLY or L2U or OCLCA or OCLCQ or OCLCF or OCLCO or BLSTP)"';
+     searchStr = 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/search?format=HTML&api_key=' + key + '&query=(1,1183)="eng"and(1,6119)=' + libs + 'and';
+     countStr = 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/count?api_key=' + key + '&query=(1,1183)="eng"and(1,6119)=' + libs + 'and';
+     var notFirst = 0;
+     for (var key in searchArray) {
+         switch (key) {
+             case 'title':
+                 if (notFirst) {
+                     searchStr += 'and';
+                     countStr += 'and';
+                 }
+                 notFirst = 1;
+                 searchStr += '(1,4)="' + searchArray.title + '?"';
+                 countStr += '(1,4)="' + searchArray.title + '?"';
+                 break;
+             case 'author':
+                 if (notFirst) {
+                     searchStr += 'and';
+                     countStr += 'and';
+                 }
+                 notFirst = 1;
+                 searchStr += '(1,1003)="' + searchArray.author + '?"';
+                 countStr += '(1,1003)="' + searchArray.author + '?"';
+                 break;
+             case 'year':
+                 if (notFirst) {
+                     searchStr += 'and';
+                     countStr += 'and';
+                 }
+                 notFirst = 1;
+                 searchStr += '(1,31)="' + searchArray.year + '"';
+                 countStr += '(1,31)="' + searchArray.year + '"';
+                 break;
+             case 'isbn':
+                 if (notFirst) {
+                     searchStr += 'and';
+                     countStr += 'and';
+                 }
+                 notFirst = 1;
+                 searchStr += '(1,7)="' + searchArray.isbn + '"';
+                 countStr += '(1,7)="' + searchArray.isbn + '"';
+                 break;
+             default:
+                 break;
+         }
+     }
+     performCount(countStr);
+     performSearch(searchStr, 1);
+     Placeholders.enable();
+ });
 
 
-function performSearch(searchStr, page) {
-  var startPos = (page - 1) * 5;
-  var endPos = startPos + 5;
-   $.get(searchStr + "&startPos=" + startPos, function(results){
-     var pageStr = '';
-      	pageStr = '<div class="row text-center"><small><span>';
-      	if (page > 1) {
-         pageStr+= '<a href="#" id="previous">&lt; Previous</a> | ' + (startPos + 1) + ' to ';
-      	} else {
-      	    pageStr+= '&lt; Previous | ' + (startPos + 1) + ' to ';
-      	}
-      if (endPos < parseInt($("#search_results").attr("data-count"))) {
-        pageStr += endPos + ' of ' + $("#search_results").attr("data-count") +
-        ' | <a href="#" id="next">Next &gt;</a></span></small></div>';
-      	} else {
-        pageStr += $("#search_results").attr("data-count") + ' of ' + $("#search_results").attr("data-count") +
-         ' | Next &gt;</span></small></div>';
-      	}
-   	$("#search_results").html(results + pageStr);
-	$("#search_results").attr("data-page", page);
-	$("#search_results").attr("data-api", searchStr);
-   	$("#search_results").slideDown();
-    $("#results_count").show();
-   	$('#search_submit_btn').fadeTo(300, 1);
-   	$('#search_submit_btn').blur();
-	$('#search_submit_btn').html("Search");
-	stripTrailingSlashes();
-    }).fail(function(){
-	    $("#search_error").show();
-	    $('#search_submit_btn').fadeTo(300, 1);
-	    $('#search_submit_btn').blur();
-	    $('#search_submit_btn').html("Search");
-    });
-}
+ function performSearch(searchStr, page) {
+     var startPos = (page - 1) * 5;
+     var endPos = startPos + 5;
+     $.get(searchStr + "&startPos=" + startPos, function(results) {
+         var pageStr = '';
+         pageStr = '<div class="row text-center padding-top-xs" id="results-pagination"><p><small><span>';
+         if (page > 1) {
+             pageStr += '<a href="#" id="previous">&lt; Previous</a> | ' + (startPos + 1) + ' to ';
+         } else {
+             pageStr += '&lt; Previous | ' + (startPos + 1) + ' to ';
+         }
+         if (endPos < parseInt($("#search_results").attr("data-count"))) {
+             pageStr += endPos + ' of ' + $("#search_results").attr("data-count") +
+                 ' | <a href="#" id="next">Next &gt;</a></span></small></p></div>';
+         } else {
+             pageStr += $("#search_results").attr("data-count") + ' of ' + $("#search_results").attr("data-count") +
+                 ' | Next &gt;</span></small></p></div>';
+         }
+         $("#search_results").html(results + pageStr);
+         $("#search_results").attr("data-page", page);
+         $("#search_results").attr("data-api", searchStr);
+         $("#search_results").slideDown();
+         $("#results_count").show();
+         $('#search_submit_btn').fadeTo(300, 1);
+         $('#search_submit_btn').blur();
+         $('#search_submit_btn').html("Search");
+         $('.marc-record').addClass('vcenter');
+         $('.marc-record').addClass('hcenter');
+         $('.marc-record').addClass('iecenter');
+         addOclcLinks();
+         stripTrailingSlashes();
+     }).fail(function() {
+         $("#search_error").show();
+         $('#search_submit_btn').fadeTo(300, 1);
+         $('#search_submit_btn').blur();
+         $('#search_submit_btn').html("Search");
+     });
+ }
 
-function performCount(countStr) {
-    $.get(countStr, function(results){
-	$("#search_results").attr("data-count", results);
-      if(parseInt(results) == 1) {
-      	$("#results_count").html('<small>' + results + ' result</small>');
-      } else {
-    	$("#results_count").html('<small>' + results + ' results</small>');
-      }
-    });
-}
+ function addOclcLinks() {
+     $(".marc-record").each(function() {
+         $(this).find('a:first').attr('href', 'http://www.worldcat.org/title/apis/oclc/' + $(this).find('div:first').attr('id'));
+     });
+ }
 
-
-//Select the catalogue record
-$(document).delegate('.oclc_btn', 'click', function(e) {
-    $("#oclc_search_form").slideUp();
-    $("#search_results").slideUp();
-    $("#results_count").html('');
-    $("#results_count").hide();
-    $("#selected_record").html($("#" + $(this).attr('data-oclc')).html() + '<a href="#" id="search_again"><small>Search Again</small></a><hr>');
-    $("#selected_record").attr('data-selected-oclc', $(this).attr('data-oclc'));
-    $("#selected_record").attr('data-selected-libs', $(this).attr('data-libs'));
-    $("#selected_record").show();
-    $("#shelfmark_form").slideDown();
-    $("#shelfmark_field").focus();
-});
-  
+ function performCount(countStr) {
+     $.get(countStr, function(results) {
+         $("#search_results").attr("data-count", results);
+         if (parseInt(results) == 1) {
+             $("#results_count").html('<small>' + results + ' result</small>');
+         } else {
+             $("#results_count").html('<small>' + results + ' results</small>');
+         }
+     });
+ }
 
 
-//Return to the search form
-$(document).delegate('#search_again', 'click', function(e) {
-    $("#selected_record").slideUp();
-    $("#oclc_search_form").slideDown();
-    $("#shelfmark_form").slideUp();
-});
+ //Select the catalogue record
+ $(document).delegate('.marc-btn', 'click', function(e) {
+     $("#oclc_search_form").slideUp();
+     $("#search_results").slideUp();
+     $("#results_count").html('');
+     $("#results_count").hide();
+     $("#selected_record").html($("#" + $(this).attr('data-control-num')).html() + '<a href="#" id="search_again"><small>Search Again</small></a><hr>');
+     $("#selected_record").attr('data-selected-oclc', $(this).attr('data-control-num'));
+     $("#selected_record").show();
+     $("#shelfmark_form").slideDown();
+     $("#shelfmark_field").focus();
+ });
 
 
-//Highlight the shelf mark location
-$("#shelfmark_field").focus(function() {
-var container = $("#image_container");
-$('<div class="child" style="position: absolute"/>')
-    .appendTo($("#image_container"))
-    .css("left", container.width()-325 + "px")
-    .css("bottom", container.height()-125 + "px")
-    .css("width", 325+"px")
-    .css("height", 125+"px")
-    .css("border", "1px solid " + 'blue');
-});
 
-//Remove the shelf mark highlight
-$("#shelfmark_field").blur(function() {
-    $("#image_container").children('div:last-child').remove();
-});
+ //Return to the search form
+ $(document).delegate('#search_again', 'click', function(e) {
+     $("#selected_record").slideUp();
+     $("#oclc_search_form").slideDown();
+     $("#shelfmark_form").slideUp();
+ });
 
 
-//Go to the next search result page
-    $(document).delegate('#next', 'click', function(e) {
-    $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
-    $("#search_results").slideUp();
-    $('#search_submit_btn').fadeTo(500, 0.3);
-    performSearch($("#search_results").attr("data-api"), parseInt($("#search_results").attr("data-page")) + 1);
-});
+ //Highlight the shelf mark location
+ $("#shelfmark_field").focus(function() {
+     var container = $("#image_container");
+     $('<div class="child" style="position: absolute"/>')
+         .appendTo($("#image_container"))
+         .css("left", container.width() - (.6 * container.width()) + "px")
+         .css("bottom", container.height() - (.4 * container.height()) + "px")
+         .css("width", (.6 * container.width()) + "px")
+         .css("height", (.4 * container.height()) + "px")
+         .css("border", "1px solid " + 'blue');
+ });
+
+ //Remove the shelf mark highlight
+ $("#shelfmark_field").blur(function() {
+     $("#image_container").children('div:last-child').remove();
+ });
 
 
-//Go to the previous search result page
-    $(document).delegate('#previous', 'click', function(e) {
-    $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
-    $("#search_results").slideUp();
-    $('#search_submit_btn').fadeTo(500, 0.3);
-    performSearch($("#search_results").attr("data-api"), parseInt($("#search_results").attr("data-page")) - 1);
-});
-
-//Remove any trailing slashes from the returned records
-function stripTrailingSlashes() {
-    $("record a").each(function() {
-	str = $( this ).text();
-	if(str.substr(-1) == '/') {
-	    $( this ).text(str.substr(0, str.length - 1));
-	}
-    });
-}
-
-//Close alert windows
-$(document).delegate('.close', 'click', function(e) {
-	$(this).parent().hide();
-});
+ //Go to the next search result page
+ $(document).delegate('#next', 'click', function(e) {
+     $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
+     $("#search_results").slideUp();
+     $('#search_submit_btn').fadeTo(500, 0.3);
+     performSearch($("#search_results").attr("data-api"), parseInt($("#search_results").attr("data-page")) + 1);
+ });
 
 
-pybossa.taskLoaded(function(task, deferred) {
-    if ( !$.isEmptyObject(task) ) {
-        loadUserProgress();
-        // load image from flickr
-        var img = $('<img />');
-        img.load(function() {
-            // continue as soon as the image is loaded
-            deferred.resolve(task);
-        });
-        img.attr('src', task.info.url_b + "?now=" + new Date().getTime() ).css('height', 460);
-        img.addClass('img-thumbnail img-responsive');
-        task.info.image = img;
-    }
-    else {
-        deferred.resolve(task);
-    }
-});
+ //Go to the previous search result page
+ $(document).delegate('#previous', 'click', function(e) {
+     $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
+     $("#search_results").slideUp();
+     $('#search_submit_btn').fadeTo(500, 0.3);
+     performSearch($("#search_results").attr("data-api"), parseInt($("#search_results").attr("data-page")) - 1);
+ });
 
-$(document).delegate('#shelfmark_form', 'submit', function(e) {
-   e.preventDefault();
-   $('.btn-answer').triggerHandler('click');
-});
+ //Remove any trailing slashes from the returned records
+ function stripTrailingSlashes() {
+     $("record a").each(function() {
+         str = $(this).text();
+         if (str.substr(-1) == '/') {
+             $(this).text(str.substr(0, str.length - 1));
+         }
+     });
+ }
 
-pybossa.presentTask(function(task, deferred) {
-  $("#loading").fadeIn(500);
-  if ( !$.isEmptyObject(task) ) {
-        loadUserProgress();
-        $('#photo-link').html('').append(task.info.image);
-        $("#photo-link").attr("href", task.info.link);
-        $('#task-id').html(task.id);
-        $('#shelfmark_form').trigger("reset");
-        $('#oclc_search_form').trigger("reset");
-        $("#shelfmark_form").hide();
-        $("#search_results").slideUp();
-	$('#comments').removeClass('in');
-	$('#comments').attr('aria-expanded', 'false');
-	$('#comments_btn').attr('aria-expanded', 'false');
-        $("#search_error").hide();
-        $("#oclc_search_form").show();
-        $("#selected_record").html('');
-        $("#selected_record").attr('data-selected-oclc', '');
-        $("#selected_record").attr('data-selected-libs', '');
-	$("#comments_field").val('');
-        $("#results_count").html('');
-        $("#results_count").hide();
-        $("#selected_record").hide();
-        $("#title_field").focus();
-        $("#loading").fadeOut(500);
-        $('.btn-answer').off('click').on('click', function(evt) {
-        if (typeof $(this).attr("value") != 'undefined') {
-            task.answer = $("#shelfmark_form").serializeJSON();
-            task.answer.title = task.info.title;
-            task.answer.oclc = $("#selected_record").attr('data-selected-oclc');
-            task.answer.libs = $("#selected_record").attr('data-selected-libs');
-	    task.answer.ip_address = $('#client_ip').html();
-	    if($("#comments_field").attr('placeholder') === $("#comments_field").val())
-            {
-              $("#comments_field").val('');
-            }
-	    task.answer.comments = $('#comments_field').val();
-            if($("#shelfmark_field").attr('placeholder') === $("#shelfmark_field").val())
-            {
-              $("#shelfmark_field").val('');
-            }
-            task.answer.shelfmark = $("#shelfmark_field").val().replace(/\s/g, " ").replace(/,/g,".");
-            console.log(task.answer);
-            pybossa.saveTask(task.id, task.answer)
-            .done(function() {
-              $("#success").fadeIn(500).fadeOut(1000);
-              deferred.resolve();
-            })
-            .fail(function(e) {
-              console.log(e);
-              $("#error").show();
-            });
-          } else {
-            console.log('one');
-                $("#error").show();
-          }
-        });
-        $("#loading").hide();
-        Placeholders.enable();
-    } else {
-        $(".skeleton").hide();
-        $("#loading").hide();
-        $("#finish").fadeIn(500);
-    }
-});
+ //Close alert windows
+ $(document).delegate('.close', 'click', function(e) {
+     $(this).parent().hide();
+ });
 
-pybossa.run('{{project.short_name}}');
 
+ pybossa.taskLoaded(function(task, deferred) {
+     if (!$.isEmptyObject(task)) {
+         loadUserProgress();
+         // load image from flickr
+         var img = $('<img />');
+         img.load(function() {
+             // continue as soon as the image is loaded
+             deferred.resolve(task);
+         });
+         img.attr('src', task.info.url_b + "?now=" + new Date().getTime()).css('max-height', 460);
+         img.addClass('img-thumbnail img-responsive');
+         task.info.image = img;
+     } else {
+         deferred.resolve(task);
+     }
+ });
+
+ $(document).delegate('#shelfmark_form', 'submit', function(e) {
+     e.preventDefault();
+     $('.btn-answer').triggerHandler('click');
+ });
+
+ pybossa.presentTask(function(task, deferred) {
+   	$("#loading").fadeIn(500);
+    if (!$.isEmptyObject(task)) {
+         loadUserProgress();
+         $('#photo-link').html('').append(task.info.image);
+         $("#photo-link").attr("href", task.info.link);
+         $('#task-id').html(task.id);
+         $('#shelfmark_form').trigger("reset");
+         $('#oclc_search_form').trigger("reset");
+         $("#shelfmark_form").hide();
+         $("#search_results").slideUp();
+         $('#comments').removeClass('in');
+         $('#comments').attr('aria-expanded', 'false');
+         $('#comments_btn').attr('aria-expanded', 'false');
+         $("#search_error").hide();
+         $("#oclc_search_form").show();
+         $("#selected_record").html('');
+         $("#selected_record").attr('data-selected-oclc', '');
+         $("#comments_field").val('');
+         $("#results_count").html('');
+         $("#results_count").hide();
+         $("#selected_record").hide();
+         $("#title_field").focus();
+         $("#loading").fadeOut(500);
+         $('.btn-answer').off('click').on('click', function(evt) {
+             if (typeof $(this).attr("value") != 'undefined') {
+                 task.answer = $("#shelfmark_form").serializeJSON();
+                 task.answer.title = task.info.title;
+                 task.answer.oclc = $("#selected_record").attr('data-selected-oclc');
+                 task.answer.ip_address = $('#client_ip').html();
+                 if ($("#comments_field").attr('placeholder') === $("#comments_field").val()) {
+                     $("#comments_field").val('');
+                 }
+                 task.answer.comments = $('#comments_field').val();
+                 if ($("#shelfmark_field").attr('placeholder') === $("#shelfmark_field").val()) {
+                     $("#shelfmark_field").val('');
+                 }
+                 task.answer.shelfmark = $("#shelfmark_field").val().replace(/\s/g, " ").replace(/,/g, ".");
+                 console.log(task.answer);
+                 pybossa.saveTask(task.id, task.answer)
+                     .done(function() {
+                         $("#success").fadeIn(500).fadeOut(1000);
+                         deferred.resolve();
+                     })
+                     .fail(function(e) {
+                         console.log(e);
+                         $("#error").show();
+                     });
+             } else {
+                 console.log('one');
+                 $("#error").show();
+             }
+         });
+         $("#loading").hide();
+         Placeholders.enable();
+     } else {
+         $(".skeleton").hide();
+         $("#loading").hide();
+         $("#finish").fadeIn(500);
+     }
+ });
+
+ pybossa.run('{{project.short_name}}');
 </script>
