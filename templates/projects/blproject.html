@@ -19,8 +19,7 @@
                         <div class="container-padded">
                             <h1>{{ helper.render_project_title(project, upload_method) }}</h1>
                             <h2>{{ overall_progress | round | int }}% {{_('complete')}}</h2>
-                        </div>
-                        <div class="col-xs-12">
+                            <div class="col-xs-12">
                             <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-circle btn-circle-large btn-circle-progress {% if overall_progress < 100 %}glowing-link{% endif %}" data-progress="{{ overall_progress | round | int }}">
                                 <div class="arc arc-q1"></div>
                                 <div class="arc arc-q2"></div>
@@ -28,6 +27,7 @@
                                 <div class="arc arc-q4"></div>
                                 <p>Contribute<br>Now</p>
                             </a>
+                        </div>
                         </div>
                     </div>
                 </div>

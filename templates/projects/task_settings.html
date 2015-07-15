@@ -2,7 +2,7 @@
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
-
+{% set preload_js = "true" %}
 {% block content %}
 {% if project %}
 {{ render_local_nav(current_user, "tasks", project.short_name) }}
@@ -46,5 +46,4 @@
 {% endif %}
         </div>
             </div>
-{{ helper.knob() }}
 {% endblock %}
