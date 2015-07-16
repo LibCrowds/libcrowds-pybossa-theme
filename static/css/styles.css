@@ -177,6 +177,7 @@ i.fa-users{color:#CF60C9}
 i.fa-tasks{color:#3A7BD2}
 i.fa-clock-o{color:#54BBBB}
 article.blogpost small i.fa{color:#666}
+article.blogpost img{border:solid 1px #eee}
 i.fa-check-square-o{color:#15b592}
 h1 i,h2 i,h3 i{padding-right:10px}
 .description h3{margin-top:50px}
