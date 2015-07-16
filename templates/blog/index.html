@@ -9,7 +9,6 @@
 <div class="container container-main">
     {% include "_flash_messages.html" %}
     <div class="row">
-        {{helper.render_blog_menu(current_user, dates)}}
         
         {% if blogposts %}
             {% for blogpost in blogposts %}
@@ -20,6 +19,8 @@
                 <h1>{{ _('Sorry! No posts so far.') }}</h1>
             </div>
         {% endif %}
+        
+        {{helper.render_blog_menu(current_user, dates)}}
     </div>
 </div>
 {{ broken_image() }}
