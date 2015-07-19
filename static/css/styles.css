@@ -272,7 +272,9 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .badge-warning{color:#e38d13;background-color:#fff}
 .btn-danger{border:2px solid #d2322d;color:#d2322d}
 .btn-danger:hover,.btn-danger:focus,.btn-danger:active,.btn-danger.active,.open .dropdown-toggle.btn-danger{color:#fff;background-color:#d2322d;border-color:#ac2925}
-.badge-danger{color:#d2322d;background-color:#fff}
+.badge{font-weight:200;color:#fff;-webkit-transition:color 500ms, background-color 500ms;-moz-transition:color 500ms, background-color 500ms;-ms-transition:color 500ms, background-color 500ms;-o-transition:color 500ms, background-color 500ms;transition:color 500ms, background-color 500ms}
+.badge-danger{color:#BA0000;background-color:#fff}
+.navbar.opaque .badge-danger{color:#fff;background-color:#BA0000}
 .btn-secondary{background-color:#2B9884;border:2px solid #fff;color:#fff;padding:10px 20px;font-weight:600;font-size:13px}
 .btn-filter{background-color:#fff;border-color:#ddd;color:#666}
 .splash{background-size:cover;color:#fff;text-align:center;background-repeat:no-repeat;}

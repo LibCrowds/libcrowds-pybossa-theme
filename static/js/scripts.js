@@ -1,5 +1,5 @@
 $(function() {
-    
+    notificationPills();
     var glow = $('.glowing-link');
     setInterval(function(){
         glow.hasClass('glow') ? glow.removeClass('glow') : glow.addClass('glow');
@@ -86,6 +86,7 @@ $(function() {
     
     animateProgress();
     sameSize();
+    notificationPills();
     styleNavigation();
 });
 
@@ -99,6 +100,16 @@ $(window).on("resize", function() {
     animateProgress();
     styleNavigation();
 }).resize();
+
+function notificationPills() {
+    var discourse = '';
+    $.get('/api/discourse/notifications/count', function(results) {
+         if (results !== '0') {
+            $('#community-nav').html('Community <span class="badge badge-danger">' + results + '</span>')
+         }
+    });
+}
+
 
 function isVisible(elem) {
     var $elem = $(elem);
