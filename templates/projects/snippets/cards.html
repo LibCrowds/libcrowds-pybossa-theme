@@ -340,7 +340,7 @@
  function performSearch(searchStr, page) {
      var startPos = (page - 1) * 5;
      var endPos = startPos + 5;
-     $.get(searchStr + "&startPos=" + startPos, function(results) {
+     $.get(searchStr + "&start=" + startPos, function(results) {
          var pageStr = '';
          pageStr = '<div class="row text-center padding-top-xs" id="results-pagination"><p><small><span>';
          if (page > 1) {
