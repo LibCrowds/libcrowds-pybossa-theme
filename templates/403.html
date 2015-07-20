@@ -6,8 +6,11 @@
         <div class="container container-padded">
             {% include "_flash_messages.html" %}
             <div class="col-md-12">
-                <h1><strong>Forbidden</strong></h1>
-                <p class="lead">You do not have the permission to access the requested resource.</p>
+                <h1>Forbidden</h1>
+                <p class="lead">You do not have permission to access the requested resource.</p>
+                <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse"> 
+                    <i class="glyphicon glyphicon-home"></i> Go Home
+                </a>
             </div>
         </div>
     </div>

@@ -7,13 +7,9 @@
             {% include "_flash_messages.html" %}
             <h1>Page not found!</h1>
             <p class="lead">We're sorry, but we can't find the page that you're looking for.</p>
-            <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse" style="display:none;"> 
-                <i class="glyphicon glyphicon-home"></i>
-                Go Home
+            <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse"> 
+                <i class="glyphicon glyphicon-home"></i> Go Home
             </a>
-            <a id="btnBack" href="#" class="btn btn-inverse" onclick="history.back()" style="display:none;"> 
-                <i class="glyphicon glyphicon-arrow-left"></i>
-                Go Back</a>
         </div>
     </div>
 {% endblock %}
