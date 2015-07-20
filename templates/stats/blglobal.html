@@ -122,10 +122,10 @@
                     </div>
                     <div class="col-sm-4 col-xs-12 padding-bottom-sm">
                         <div class="white-rounded inset-shadow-white chart same-size">
-                            <h4 class="text-center padding-bottom-sm">Total Progress</h4>
-                            <div id="task-status-chart">
-                                <canvas id="task-status" width="500" height="500"></canvas>
-                                <div id="task-status-legend" class="padding-top-sm legend">
+                            <h4 class="text-center padding-bottom-sm">Top 10 Percent</h4>
+                            <div id="top-10-percent-chart">
+                                <canvas id="top-10-percent" width="500" height="500"></canvas>
+                                <div id="top-10-percent-legend" class="padding-top-sm legend">
                                 </div>
                             </div>
                         </div>
@@ -230,40 +230,43 @@ $(function(){
 
         
         {% if stats.n_tasks_completed and completion_days %}
-            //Task status
-            var completed = {{stats.n_tasks_completed|safe}};
-            var ongoing = {{stats.n_tasks_ongoing|safe}};
-            var total = ongoing + completed;
-            var label1 = "Remaining : " + Math.round(ongoing/total*100) + "% (" + ongoing + " task";
-            if (userData['values'][1]['value'][1] != 1) {
-                label1 += "s"
+            //Top 10 percent chart
+            var top10Percent = {{top_10_percent|safe}};
+            var total = {{stats.n_task_runs | safe}}
+            
+            var remaining = total - top10Percent;
+            
+            var label1 = "Remaining 90%: " + remaining + " task";
+            if (remaining != 1) {
+                label1 += "s";
             }
-            label1 += ")";
-            var label2 = "Completed : " + Math.round(completed/total*100) + "% (" + completed + " task";
-            if (completed != 1) {
-                label2 += "s"
+            
+            var label2 = "Top 10% : " + top10Percent + " task";
+            if (top10Percent != 1) {
+                label2 += "s";
             }
-            label2 += ")";
+            
             var data = [
                 {
-                    value : completed,
+                    value : remaining,
                     color:"#BA0000",
                     highlight: "#D00000",
                     label: label2
                 },
                 {
-                    value: ongoing,
+                    value: top10Percent,
                     color: "rgba(151,187,205,1)",
                     highlight: "rgba(151,187,205,0.8)",
                     label: label1
                 }
             ];
-            var canvas = document.getElementById("task-status");
+            var canvas = document.getElementById("top-10-percent");
             var ctx = canvas.getContext("2d");
-            var taskStatusChart = new Chart(ctx).Doughnut(data);
-            var legendHolder = document.getElementById('task-status-legend')
+            var Top10PercentChart = new Chart(ctx).Doughnut(data);
+            var legendHolder = document.getElementById('top-10-percent-legend')
             canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
-            document.getElementById('task-status-legend').innerHTML = taskStatusChart.generateLegend();
+            document.getElementById('top-10-percent-legend').innerHTML = Top10PercentChart.generateLegend();
+        
         
             //Daily Activity
             $dow = {{completion_days|safe}}['dow'];
