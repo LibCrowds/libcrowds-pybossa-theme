@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
     
 <div class="container container-main">
@@ -19,9 +18,12 @@
       {{ render_field(form.confirm, placeholder= _('Confirm Password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
       
                 <div class="pull-right" role="group">
-                    <input type="reset" value="{{ _('Cancel') }}" class="btn btn-default" />
+                    <input type="reset" value="Clear" class="btn btn-default" />
                     <input type="submit" value="{{_('Create Account')}}" class="btn btn-success" />
                 </div>
+                <a href="{{url_for('account.signin')}}" class="btn btn-inverse" onclick="javascript:history.go(-1)"> 
+                <i class="glyphicon glyphicon-arrow-left"></i>
+                Go Back</a>
             </fieldset>
         </form>
         <div class="padding-top">
