@@ -104,7 +104,7 @@ $(window).on("resize", function() {
 function notificationPills() {
     var discourse = '';
     $.get('/api/discourse/notifications/count', function(results) {
-         if (results !== '0') {
+         if (results !== 0) {
             $('#community-nav').html('Community <span class="badge badge-danger">' + results + '</span>')
          }
     });
