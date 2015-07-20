@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
  
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="1; url=http://community.libcrowds.com">
+<meta http-equiv="refresh" content="1; url={{url_for('discourse.index')}}">
  
 <script>
-  window.location.href = "http://community.libcrowds.com";
+  window.location.href = "{{url_for('discourse.index')}}";
 </script>
  
 <title>Page Redirection</title>
  
-If you are not redirected automatically, follow the <a href="http://community.libcrowds.com">link to the new page</a>
+If you are not redirected automatically, follow the <a href="{{url_for('discourse.index')}}">link to the new page</a>
