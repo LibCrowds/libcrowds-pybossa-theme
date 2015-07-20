@@ -86,7 +86,6 @@ $(function() {
     
     animateProgress();
     sameSize();
-    notificationPills();
     styleNavigation();
 });
 
