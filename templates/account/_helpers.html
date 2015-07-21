@@ -62,7 +62,7 @@
         </div>
         <hr class="extra-margins">
             
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-sm-10 col-sm-offset-1 user-info">
             <p><i class="fa fa-user"></i> {{ _('Username')}}: {{ user.name }}</p>
             {% if private %}
                 <p><i class="fa fa-envelope"></i> {{_('E-mail')}}: {{ user.email_addr }}</p>
@@ -73,7 +73,6 @@
             
             <p><i class="fa fa-clock-o"></i> {{ _('Joined') }}: <span class="format-date" data-date="{{user.created}}"></span></p>
             {% if private %}
-                <p><i class="fa fa-key"></i> {{ _('API Key') }}: {{user.api_key}}</p>
                 
                 <div class="text-center">
                     <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-default btn-sm btn-padded"><i class="fa fa-pencil-square-o"></i> {{ _('Edit') }}</a>

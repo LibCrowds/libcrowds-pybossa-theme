@@ -176,7 +176,7 @@ i.fa-trophy{color:#FFC041}
 i.fa-users{color:#CF60C9}
 i.fa-tasks{color:#3A7BD2}
 i.fa-clock-o{color:#54BBBB}
-article.blogpost small i.fa{color:#666}
+article.blogpost small i.fa,user-info i.fa{color:#666}
 article.blogpost img{border:solid 1px #eee}
 i.fa-check-square-o{color:#15b592}
 h1 i,h2 i,h3 i{padding-right:10px}
@@ -300,7 +300,6 @@ pre.prettyprint{text-align:left}
 .small-margins{margin-top:10px;margin-bottom:10px;}
 .img-overlay-container{position:relative;display:inline-block;margin-bottom:15px}
 .img-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.6);color:#fff;padding:40%;opacity:0;-webkit-transition:opacity .5s;-moz-transition:opacity .5s;-ms-transition:opacity .5s;-o-transition:opacity .5s;transition:opacity .5s;cursor:pointer}
-.img-overlay .fa{padding-left:5px}
 .img-overlay:hover{opacity:1;transform:none}
 img.img-polaroid{max-width:100%}
 .polaroids .polaroid:after{content:attr(data-polaroid-title)}
