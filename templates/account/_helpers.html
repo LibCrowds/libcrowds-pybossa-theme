@@ -80,7 +80,8 @@
                       {% if (user.confirmation_email_sent == False) %}
                       <a href="{{ url_for('account.confirm_email')}}" class="btn btn-danger">Validate email</a>
                       {% else %}
-                      <a href="#" class="label label-info">Email sent for validation</a>
+                        <br />
+                        <p class="label label-danger">Email sent for validation</p>
                       {% endif %}
                     {% endif %}
                 </div>

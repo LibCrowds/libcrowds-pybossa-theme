@@ -6,14 +6,13 @@
 {% import "_formhelpers.html" as form_helper %}
 {% set preload_js = "true" %}
 {% block content %}
-
+<span class="set-main-bg" data-bg="pattern-white-wall"></span>
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
 
 <div class="container-padded remove-padding-bottom">
     <section class="mid-grey pattern-brushed padding-bottom-sm">
         <div class="container padding-top">
-            {% include "_flash_messages.html" %}
             <div class="row margin-bottom">
                 <div class="col-sm-6 col-xs-12 text-center">
                     <form method="post" role="form" class="upload-img-form" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
@@ -29,6 +28,8 @@
                                 </div>
                             </div>
                             <br>
+                            <h1 class="inset-text-grey">{{current_user.fullname}}</h1>
+                            {% include "_flash_messages.html" %}
                             {{ project_helper.render_loading("Loading, please wait...") }}
                             {%if not current_user.info.avatar%}
                                 <div class="row">
@@ -38,7 +39,6 @@
                                     </div>
                                 </div>
                             {% endif %}
-                            <h1 class="inset-text-grey">{{current_user.fullname}}</h1>
                             {{ form_helper.render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
                             {{ upload_form.x1 }}
                             {{ upload_form.y1 }}
@@ -73,7 +73,6 @@
                             {{ form_helper.render_field_horizontal(form.fullname, placeholder= _('Full name'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                             {{ form_helper.render_field_horizontal(form.name, placeholder= _('Username'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                             {{ form_helper.render_field_horizontal(form.email_addr, placeholder= _('Email'), class="form-control", type="email" ) }}
-                            {{ form_helper.render_field_horizontal_checkbox(form.privacy_mode, class="form-control") }}
                             <select class="form-control hidden" id="locale" name="locale"><option selected="" value="en">English</option></select>
                             <div class="pull-right form-actions" role="group">
                                 <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
@@ -81,8 +80,8 @@
                             </div>
                         </fieldset>
                     </form>
-                <hr class="extra-margins">
                     {% if show_passwd_form %}
+                    <hr class="extra-margins">
                     <h2 {% if password_form.errors %} name="password" {%endif%}>{{ _('Change your Password') }}</h2>
                     <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         <fieldset>
