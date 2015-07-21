@@ -84,13 +84,6 @@
           {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
         </footer>
       </div>
-        
-      {% if current_user.is_authenticated() %}
-        <script>$.ajax('/api/discourse/badges/trigger');</script>
-        {% if not current_user.info.avatar %}
-          <script>$.ajax('/api/user/set_default_avatar');</script>
-        {% endif %}
-      {% endif %}
       {% if not preload_js == "true" %}
         {% assets "js_top" %}
         <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.0"></script>
@@ -99,5 +92,11 @@
       {% assets "js_bottom" %}
         <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.1"></script>
       {% endassets %}
+      {% if current_user.is_authenticated() %}
+          <script>$.ajax('/api/discourse/badges/trigger');</script>
+          {% if not current_user.info.avatar %}
+          <script>$.ajax('/api/user/set_default_avatar');</script>
+        {% endif %}
+      {% endif %}
   </body>
 </html>
