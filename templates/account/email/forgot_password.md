@@ -1,15 +1,12 @@
 Hello {{ user.fullname }},
 
-We received a request to reset your {{ config.BRAND }} password.
-
-If you did not request this, please ignore this email.
-
-To recover your password, please visit the URL below:
+To recover your {{ config.BRAND }} password, please visit the URL below:
 
 [Click here to recover your account][recover]
 
 [recover]: {{ recovery_url }}
 
-Regards,
+If you did not make a password reset request, please ignore this email.
 
+Regards,
 {{ config.BRAND }} Team

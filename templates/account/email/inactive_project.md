@@ -12,9 +12,7 @@ If at the end the project is deleted, we will send you
 a ZIP file where you can download your project.
 
 All the best,
-
 {{ BRAND }} team
 
 ***
-Powered by [PyBossa](http://pybossa.com)
-Follow us: [Twitter](http://twitter.com/pybossa), [Google+](https://plus.google.com/115359083217638640334/posts)
+[Follow us on Twitter](http://twitter.com/LibCrowds)
