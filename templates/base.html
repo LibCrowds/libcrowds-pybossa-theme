@@ -92,11 +92,8 @@
       {% assets "js_bottom" %}
         <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.1"></script>
       {% endassets %}
-      {% if current_user.is_authenticated() %}
-          <script>$.ajax('/api/discourse/badges/assign?trigger={{ request.url }}');</script>
-          {% if not current_user.info.avatar %}
+      {% if current_user.is_authenticated() and not current_user.info.avatar %}
           <script>$.ajax('/api/user/set_default_avatar');</script>
-        {% endif %}
       {% endif %}
   </body>
 </html>
