@@ -65,7 +65,7 @@ hr.extra-margins{margin-top:40px;margin-bottom:40px}
 .navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse{max-height:450px;}
 .navbar{font-family:sans-serif;font-weight:400}
 .navbar-fixed-top{padding-top:30px;padding-bottom:25px;background-color:rgba(255,255,255,0);border:none;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;font-size:14px;-webkit-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;-moz-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;-ms-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;-o-transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;transition:background-color 200ms 0s,padding-top 1s 0s,padding-bottom 1s 0s;z-index:999}
-.navbar-fixed-top.opaque{padding-top:10px;padding-bottom:10px;background-color:rgba(255,255,255,1);border-bottom:2px solid #eee}
+.navbar-fixed-top.opaque{z-index:99999;padding-top:10px;padding-bottom:10px;background-color:rgba(255,255,255,1);border-bottom:2px solid #eee}
 .navbar-brand{padding:5px 15px;margin:0}
 .navbar-nav>li{margin:0 10px}
 .navbar .nav > li > a{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;color:#fff;-webkit-transition:color 200ms 0;-moz-transition:color 200ms 0;-ms-transition:color 200ms 0;-o-transition:color 200ms 0;transition:color 200ms 0}
@@ -181,6 +181,8 @@ article.blogpost img{border:solid 1px #eee}
 i.fa-check-square-o{color:#15b592}
 h1 i,h2 i,h3 i{padding-right:10px}
 .description h3{margin-top:50px}
+#total-share-count{margin-top:10px;display:none}
+#total-share-count:after{content:"Shared " attr(data-count) " times";font-size:0.8em}
 .btn-twitter{background:#00acee;border-radius:0;color:#fff;}
 .btn-twitter:active,.btn-twitter:hover,.btn-twitter:focus{background:#0087bd;color:#fff;}
 .btn-facebook{background:#3b5998;border-radius:0;color:#fff;}
@@ -189,6 +191,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .btn-tumblr:active,.btn-tumblr:hover,.btn-tumbler:focus{background:#253142;color:#fff;}
 .btn-googleplus{background: #d34836;border-radius: 0;color: #fff;}
 .btn-googleplus:active,.btn-googleplus:hover,.btn-googleplus:focus{background:#ba3225;color:#fff;}
+.btn-popover{margin:1px}
 .btn-stumbleupon{background:#f74425;border-radius:0;color:#fff;}
 .btn-stumbleupon:active,.btn-stumbleupon:hover,.btn-stumbleupon:focus{background:#c7371e;color:#fff;}
 .btn-linkedin{background:#0e76a8;border-radius:0;color:#fff;}

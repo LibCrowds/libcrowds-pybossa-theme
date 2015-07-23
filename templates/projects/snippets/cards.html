@@ -124,26 +124,22 @@
          </div>
       </div>
       <div class="row text-center">
-         <a href="#" class="btn btn-facebook"
+         <a href="#" data-content="Share on Facebook" class="btn-popover btn btn-facebook"
 	    onclick="popUp=window.open('http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
 	    'popupwindow', 'scrollbars=yes,width=510,height=620');popUp.focus();return false">
 	 <i class="fa fa-facebook"></i>
 	 </a>
 	 <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}
-	    &text={{project.description}}&tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}" class="btn btn-twitter">
+	    &text={{project.description}}&tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}"
+		 data-content="Share on Twitter" class="btn-popover btn btn-twitter">
 	 <i class="fa fa-twitter"></i>
 	 </a>
-	 <a href="#" class="btn btn-googleplus"
+	 <a href="#" data-content="Share on Google+" class="btn-popover btn btn-googleplus"
 	    onclick="popUp=window.open('https://plus.google.com/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
 	    'popupwindow', 'scrollbars=yes,width=510,height=725');popUp.focus();return false">
 	 <i class="fa fa-google"></i>
 	 </a>
-	 <a href="#" class="btn btn-stumbleupon"
-	    onclick="popUp=window.open('http://www.stumbleupon.com/submit?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}&amp;title={{project.name}}',
-	    'popupwindow', 'scrollbars=yes,width=510,height=640');popUp.focus();return false">
-	 <i class="fa fa-stumbleupon"></i>
-	 </a>
-	 <a href="#" class="btn btn-linkedin"
+	 <a href="#" data-content="Share on LinkedIn" class="btn-popover btn btn-linkedin"
 	    onclick="popUp=window.open('https://www.linkedin.com/cws/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
 	    'popupwindow', 'scrollbars=yes,width=510,height=520');popUp.focus();return false">
 	 <i class="fa fa-linkedin"></i>

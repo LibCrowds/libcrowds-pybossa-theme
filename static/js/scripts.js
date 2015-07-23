@@ -87,6 +87,7 @@ $(function() {
     animateProgress();
     sameSize();
     styleNavigation();
+    getShareStats();
 });
 
 $(window).scroll(function() {
@@ -107,6 +108,72 @@ function notificationPills() {
             $('#community-nav').html('Community <span class="badge badge-danger">' + results + '</span>')
          }
     });
+}
+
+function getShareStats(){
+    if ($('.btn-facebook').length > 0) {
+        $.getJSON('https://graph.facebook.com/?id=' + window.location.href, function(json) {
+            if (json['shares'] == 1) {
+                $('.btn-facebook').attr('data-content', 'Shared once on Facebook');   
+            } else {
+                $('.btn-facebook').attr('data-content', 'Shared ' + json['shares'] + ' times on Facebook');   
+            }
+            $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + json['shares']);
+        });
+    }
+    if ($('.btn-twitter').length > 0) {
+        $.getJSON('http://urls.api.twitter.com/1/urls/count.json?url=' + window.location.href + '&callback=?', function(json) {
+            if (json['shares'] == 1) {
+                $('.btn-twitter').attr('data-content', 'Shared once on Twitter');  
+            } else {
+                $('.btn-twitter').attr('data-content', 'Shared ' + json['count'] + ' times on Twitter');   
+            }
+            $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + json['count']);
+        });
+    }
+    if ($('.btn-linkedin').length > 0) {
+        $.getJSON('https://www.linkedin.com/countserv/count/share?url=' + window.location.href + '&callback=?', function(json) {
+            if (json['shares'] == 1) {
+                $('.btn-linkedin').attr('data-content', 'Shared once on LinkedIn');  
+            } else {
+                $('.btn-linkedin').attr('data-content', 'Shared ' + json['count'] + ' times on LinkedIn');   
+            }
+            $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + json['count']);
+        });
+    }
+    if ($('.btn-googleplus').length > 0) {
+        var data = {
+            "method":"pos.plusones.get",
+            "id":window.location.href,
+            "params":{
+                "nolog":true,
+                "id":window.location.href,
+                "source":"widget",
+                "userId":"@viewer",
+                "groupId":"@self"
+            },
+            "jsonrpc":"2.0",
+            "key":"p",
+            "apiVersion":"v1"
+        };
+        $.ajax({
+            type: "POST",
+            url: "https://clients6.google.com/rpc",
+            processData: true,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function(r){
+                count = r.result.metadata.globalCounts.count;
+                if (count == 1) {
+                   $('.btn-googleplus').attr('data-content', 'Shared once on Google+');  
+                } else {
+                    $('.btn-googleplus').attr('data-content', 'Shared ' + count + ' times on Google+');   
+                }
+                $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + count);
+            }
+        });
+    }
+    $('#total-share-count').fadeIn('slow');
 }
 
 
@@ -248,6 +315,14 @@ $("a.avatar-popover").popover({
     animation: true,
     trigger: 'hover',
     placement: 'top'
+});
+
+$("a.btn-popover").popover({
+    html: true,
+    animation: true,
+    trigger: 'hover',
+    placement: 'bottom',
+    container: 'body'
 });
 
 $('.edit-profile-image').on("click", function() {
