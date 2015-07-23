@@ -86,11 +86,11 @@
       </div>
       {% if not preload_js == "true" %}
         {% assets "js_top" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.0"></script>
+        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.2"></script>
         {% endassets %}
       {% endif %}
       {% assets "js_bottom" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.1"></script>
+        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.2"></script>
       {% endassets %}
       {% if current_user.is_authenticated() and not current_user.info.avatar %}
           <script>$.ajax('/api/user/set_default_avatar');</script>
