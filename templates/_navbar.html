@@ -21,7 +21,11 @@
               <li class="nav-link {% if active_page == 'about' %} active{% endif %}"><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li>
               <li class="nav-link {% if active_page == 'projects' %} active{% endif %}"><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
               <li class="nav-link {% if active_page == 'globalstats' %} active{% endif %}"><a href="{{ url_for('statistics.index')}}">{{ _('Statistics') }}</a></li>
-              <li class="nav-link"><a id="community-nav" href="{{url_for('discourse.index')}}">Community</a></li>
+              <li class="nav-link"><a id="community-nav" href="{{url_for('discourse.index')}}">Community
+              {% if current_user.info.notification_count and current_user.info.notification_count > 0 %}
+                      <span class="badge badge-danger">' + {{current_user.info.notification_count}} + '</span>
+              {% endif %}
+              </a></li>
               <li class="nav-link {% if active_page == 'data' %} active{% endif %}"><a href="{{ url_for('data.index')}}">{{ _('Data') }}</a></li>
               <li class="nav-link {% if active_page == 'blog' %} active{% endif %}"><a href="{{ url_for('blog.index')}}">{{ _('Blog') }}</a></li>
          </ul>
