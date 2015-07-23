@@ -137,7 +137,7 @@ function getShareStats(){
     }
     if ($('.btn-linkedin').length > 0) {
         $.getJSON('https://www.linkedin.com/countserv/count/share?url=' + window.location.href + '&callback=?', function(json) {
-            if (json['shares'] > 0) {
+            if (json['count'] > 0) {
                 if (json['shares'] == 1) {
                     $('.btn-linkedin').attr('data-content', 'Shared once on LinkedIn');  
                 } else {
