@@ -83,7 +83,6 @@ $(function() {
         $(this).html('Tasks Remaining: ' + remaining);
     });
     
-    updateUserNotifications();
     animateProgress();
     sameSize();
     styleNavigation();
@@ -100,10 +99,6 @@ $(window).on("resize", function() {
     animateProgress();
     styleNavigation();
 }).resize();
-
-function updateUserNotifications() {
-    $.ajax('/api/discourse/notifications/{{current_user.name}}/count');
-}
 
 function getShareStats(){
     if ($('.btn-facebook').length > 0) {
