@@ -1,5 +1,4 @@
 $(function() {
-    notificationPills();
     var glow = $('.glowing-link');
     setInterval(function(){
         glow.hasClass('glow') ? glow.removeClass('glow') : glow.addClass('glow');
@@ -84,6 +83,7 @@ $(function() {
         $(this).html('Tasks Remaining: ' + remaining);
     });
     
+    updateUserNotifications();
     animateProgress();
     sameSize();
     styleNavigation();
@@ -101,13 +101,8 @@ $(window).on("resize", function() {
     styleNavigation();
 }).resize();
 
-function notificationPills() {
-    var discourse = '';
-    $.get('/api/discourse/notifications/count', function(results) {
-         if (results !== 0 && $.isNumeric(results)) {
-            $('#community-nav').html('Community <span class="badge badge-danger">' + results + '</span>')
-         }
-    });
+function updateUserNotifications() {
+    $.ajax('/api/discourse/notifications/{{current_user.name}}/count');
 }
 
 function getShareStats(){
