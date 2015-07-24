@@ -16,12 +16,6 @@
                     }, 15000);
            })();
           
-          var source = new EventSource('/discourse/sse/subscribe');
-          
-          source.addEventListener('{{current_user.name}}', function(e) {
-                    updateNotificationsPill(data);
-          }, false);
-          
           function updateNotificationsPill(data) {
                     if (data !== 0 && $.isNumeric(data)) {
                               $('#community-nav').html('Community <span class="badge badge-danger">' + data + '</span>')
