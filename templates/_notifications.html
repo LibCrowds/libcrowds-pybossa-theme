@@ -4,7 +4,10 @@
                     $.ajax({ url: "/api/discourse/notifications/{{current_user.name}}/count"
                            , success: function(data) {
                               updateNotificationsPill(data);
-                    }});
+                    }, error: function(){ //Create a new user
+                              $.ajax('/api/discourse/user/{{current_user.name}}/create');
+                              }
+                              });
           });
           
           (function poll() {
