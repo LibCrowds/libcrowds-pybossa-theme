@@ -64,6 +64,10 @@
              <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}} 
              <br/>
              <strong>{{_('Contributions')}}:</strong> {{user.score}}
+              {% if 'title' in user.info %}
+               <br />
+               {{user.info['title']}}
+              {% endif %}
              " class="avatar-popover" data-original-title="<strong>{{user.name}}</strong>">
              <div class="shadow img-circle shadow-circle">
                 {{ account_helper.render_user_thumbnail(user, upload_method, class="img-circle") }}

@@ -29,6 +29,7 @@
                             </div>
                             <br>
                             <h1 class="inset-text-grey">{{current_user.fullname}}</h1>
+                            <h4 class="inset-text-grey">{% if 'title' in user.info %}{{user.info['title']}}{% endif %}</h4>
                             {% include "_flash_messages.html" %}
                             {{ project_helper.render_loading("Loading, please wait...") }}
                             {%if not current_user.info.avatar%}
