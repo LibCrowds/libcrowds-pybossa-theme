@@ -28,7 +28,9 @@
             </div>
         </div>
         <h1 class="inset-text-grey">{{user.fullname}}</h1>
-        <h4 class="inset-text-grey">{% if 'title' in user.info %}{{user.info['title']}}{% endif %}</h4>
+        {% if 'title' in user.info and not user.info['title'] == None %}
+        <h4 class="inset-text-grey">{{user.info['title']}}</h4>
+        {% endif %}
     </div>
     <div class="col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1 white-rounded inset-shadow">
         
