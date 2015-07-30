@@ -231,7 +231,7 @@
         var projectstats = {{appStats|safe}};
         
         //Hide charts of no data exists yet
-        if (typeof projectstats['top5'] == undefined || projectstats['top5']['0']['values'].length < 1) {
+        if (typeof projectstats['userAuthStats']['top5'] == undefined || projectstats['userAuthStats']['top5'].length < 1) {
             $('#stats').hide();
         } else {
             
