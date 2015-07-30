@@ -61,14 +61,15 @@
         {% for user in top_users %}
           <li class="text-center">
           <a href="{{url_for('account.profile', name=user.name)}}" data-content="
-             <strong>{{_('Joined')}}:</strong> {{user.created[0:10]}} 
+             <strong>{{_('Joined')}}:</strong> {{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}
              <br/>
              <strong>{{_('Contributions')}}:</strong> {{user.score}}
-              {% if 'title' in user.info %}
-               <br />
+             " class="avatar-popover" data-original-title="<strong>{{user.name}}</strong>
+             <br />
+             {% if 'title' in user.info and not user.info['title'] == None %}
                {{user.info['title']}}
               {% endif %}
-             " class="avatar-popover" data-original-title="<strong>{{user.name}}</strong>">
+              ">
              <div class="shadow img-circle shadow-circle">
                 {{ account_helper.render_user_thumbnail(user, upload_method, class="img-circle") }}
              </div>

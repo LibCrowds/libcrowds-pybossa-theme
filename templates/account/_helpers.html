@@ -72,7 +72,7 @@
         
             
             
-            <p><i class="fa fa-clock-o"></i> {{ _('Joined') }}: <span class="format-date" data-date="{{user.created}}"></span></p>
+            <p><i class="fa fa-clock-o"></i> {{ _('Joined') }}: {{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}</p>
             {% if private %}
                 
                 <div class="text-center">

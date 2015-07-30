@@ -4,7 +4,7 @@
 <tr>
     <td>{{user.fullname}}</td>
     <td class="hidden-xs">{{user.name}}</td>
-    <td class="hidden-xs" style="text-align:center;"><span class="format-date" data-date="{{user.created}}"></span></td>
+    <td class="hidden-xs" style="text-align:center;">{{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}</td>
     {% if user.admin %}
         <td style="text-align:center;">{% if user.id != 1 %}<a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
             <i class="glyphicon glyphicon-remove"></i> {{ _(' Revoke admin rights') }}</a>{% else %}N/A{% endif %}</td>

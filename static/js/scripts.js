@@ -47,10 +47,6 @@ $(function() {
         });
     });
     
-    $(".format-date").each(function() {
-        $(this).html(formatDate($(this).attr('data-date')));
-    });
-    
     if ($(".set-main-bg").length > 0) {
         $('body').addClass($(".set-main-bg").attr('data-bg'));
     }
@@ -211,13 +207,6 @@ function animateCounter(elem) {
             $counter.html('Complete: ' + Math.ceil(this.Counter) + '%');
         }
     });
-}
-
-function formatDate(str) {
-    var date = str.substring(0, 10);
-    var arr = date.split("-");
-    var ret = arr[2] + '-' + arr[1] + "-" + arr[0];
-    return ret;
 }
 
 function updateXML() {

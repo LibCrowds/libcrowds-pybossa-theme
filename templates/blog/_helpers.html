@@ -7,7 +7,7 @@
                     <a href="{{ url_for('blog.show_blogpost', id=blogpost.id) }}"><h2>{{ blogpost.title }}</h2></a>
                     <p>
                         <small>
-                            <i class="fa fa-clock-o"></i> <span class="format-date" data-date="{{ blogpost.created[0:10] }}"></span>
+                            <i class="fa fa-clock-o"></i> {{blogpost.created[8:10]}}-{{blogpost.created[5:7]}}-{{blogpost.created[0:4]}}</span>
                             <i class="fa fa-user padding-left-xs"></i>
                             <a href="{{ url_for('account.profile', name=blogpost.owner.name) }}">{{ blogpost.owner.name }}</a>
                         </small>

@@ -42,8 +42,8 @@
         <li><strong><i class="glyphicon glyphicon-cog"></i> {{ _('ID') }}</strong>: {{ project.id }}</li>
         {% endif %}
         <li><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ project['description'] }}</li>
-        <li><strong><i class="fa fa-magic"></i> {{ _('Created') }}</strong>: <span class="format-date" data-date="{{project.created}}"></span></li>
-        <li><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: <span class="format-date" data-date="{{project.last_activity}}"></span></li>
+        <li><strong><i class="fa fa-magic"></i> {{ _('Created') }}</strong>: {{project.created[8:10]}}-{{project.created[5:7]}}-{{project.created[0:4]}}</li>
+        <li><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: {{project.last_activity[8:10]}}-{{project.last_activity[5:7]}}-{{project.last_activity[0:4]}}</li>
         <li><strong><i class="fa fa-check-square-o remove-colour"></i> {{ _('Overall progress') }}</strong>: {{ overall_progress | round | int }}% {{ _('completed') }}</li>
         <li><strong><i class="glyphicon glyphicon-tasks"></i> <a href="{{url_for('project.tasks',short_name=project.short_name)}}">{{ _('Tasks') }}</strong></a> ({{ n_tasks }})</li>
         {% if not current_user.is_anonymous() %}
@@ -63,7 +63,7 @@
 <tr>
     <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
     <td style="text-align:center;">{{project.category}}</td>
-    <td style="text-align:center;"><span class="format-date" data-date="{{project.created}}"></span></td>
+    <td style="text-align:center;">{{project.created[8:10]}}-{{project.created[5:7]}}-{{project.created[0:4]}}</td>
 </tr>
 {% endmacro %}
 
