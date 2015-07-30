@@ -231,7 +231,7 @@
         var projectstats = {{appStats|safe}};
         
         //Hide charts of no data exists yet
-        if (projectstats['dayStats']['0']['values'].length < 1) {
+        if (projectstats['top5']['0']['values'].length < 1) {
             $('#stats').hide();
         } else {
             
