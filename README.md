@@ -1,12 +1,8 @@
-This is a [Pybossa](https://github.com/PyBossa/pybossa) theme for the BL Labs crowd-sourcing platform.
+A [Pybossa](https://github.com/PyBossa/pybossa) theme for the [LibCrowds](https://www.libcrowds.com) platform.
 
-## See it in Action
+## Installation
 
-Visit [LibCrowds.com](http://libcrowds.com)
-
-## Installing and Upgrading
-
-This theme can be installed by including it in your PyBossa themes folder. You will also need to install the [BL-pybossa-plugin](https://github.com/alexandermendes/BL-pybossa-plugin).
+This theme can be installed by including it in your PyBossa themes folder. Curently, you will also need to install the [BL-pybossa-plugin](https://github.com/LibCrowds/BL-pybossa-plugin) and the [discourse-pybossa-plugin](https://github.com/LibCrowds/discourse-pybossa-plugin).
 
 
 ## Useful Links
