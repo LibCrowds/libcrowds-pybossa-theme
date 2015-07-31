@@ -246,7 +246,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .arc.percent23:before{-moz-transform:skewX(-82.8deg);-webkit-transform:skewX(-82.8deg);-ms-transform:skewX(-82.8deg);-o-transform:skewX(-82.8deg);transform:skewX(-82.8deg);border: solid 10px #2FA92F;-webkit-transition: border-color .2s linear;-moz-transition: border-color .2s linear;-ms-transition: border-color .2s linear;-o-transition: border-color .2s linear;transition: border-color .2s linear;}
 .arc.percent24:before{-moz-transform:skewX(-86.4deg);-webkit-transform:skewX(-86.4deg);-ms-transform:skewX(-86.4deg);-o-transform:skewX(-86.4deg);transform:skewX(-86.4deg);border: solid 10px #2FA92F;-webkit-transition: border-color .2s linear;-moz-transition: border-color .2s linear;-ms-transition: border-color .2s linear;-o-transition: border-color .2s linear;transition: border-color .2s linear;}
 .arc.percent25:before{-moz-transform:skewX(-90deg);-webkit-transform:skewX(-90deg);-ms-transform:skewX(-90deg);-o-transform:skewX(-90deg);transform:skewX(-90deg);border: solid 10px #2FA92F;-webkit-transition: border-color .2s linear;-moz-transition: border-color .2s linear;-ms-transition: border-color .2s linear;-o-transition: border-color .2s linear;transition: border-color .2s linear;}
-#image_container{z-index:99999;}
+#image_container{z-index:9999;}
 .blogpost img{max-width:100%;height:auto;}
 .blog-menu{margin-top: 20px}
 .blog-menu .blog-menu-title{text-align:center;margin-bottom: 0;padding:5px 10px;font-weight:400;background-image:url(../img/patterns/brushed.png);text-transform:uppercase;}
