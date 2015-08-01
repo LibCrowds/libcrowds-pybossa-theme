@@ -100,7 +100,6 @@
         {% if not current_user.info.avatar %}
           <script>$.ajax('/api/user/set_default_avatar');</script>
         {% endif %}
-        {% include '_notifications.html' ignore missing %}
       {% endif %}
   </body>
 </html>
