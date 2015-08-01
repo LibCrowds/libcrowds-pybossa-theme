@@ -84,13 +84,14 @@
           {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
         </footer>
       </div>
-      <script src="{{url_for('discourse_static.file', filename='js/message_bus.js')}}" />
       
       {% if not preload_js == "true" %}
         {% assets "js_top" %}
         <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.2"></script>
         {% endassets %}
       {% endif %}
+      
+      <script src="{{url_for('discourse_static.file', filename='js/message_bus.js')}}" />
       
       {% assets "js_bottom" %}
         <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.2"></script>
