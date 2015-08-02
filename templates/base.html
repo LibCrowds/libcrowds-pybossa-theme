@@ -112,11 +112,11 @@
              })();
             function updateNotificationsPill(data) {
                       if (data !== 0 && $.isNumeric(data)) {
-                                $('#discourse-notifications').html(data)
+                                $('#discourse-notifications').html(data);
                                 document.title = '(' + data + ') ' + originalTitle;
                       } else {
-                                $('#discourse-notifications').html('')
-                                document.title = originalTitle
+                                $('#discourse-notifications').html('');
+                                document.title = originalTitle;
                       }
             }
           </script>
