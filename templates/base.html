@@ -112,10 +112,10 @@
              })();
             function updateNotificationsPill(data) {
                       if (data !== 0 && $.isNumeric(data)) {
-                                $('#discourse-nav').html(originalNavContent + ' <span class="badge badge-danger">' + data + '</span>')
+                                $('#discourse-notifications').html(data)
                                 document.title = '(' + data + ') ' + originalTitle;
                       } else {
-                                $('#discourse-nav').html(originalNavContent)
+                                $('#discourse-notifications').html('')
                                 document.title = originalTitle
                       }
             }
