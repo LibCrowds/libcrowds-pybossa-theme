@@ -91,7 +91,7 @@
         {% endassets %}
       {% endif %}
       
-      <script src="{{url_for('discourse_static.file', filename='js/message_bus.js')}}" />
+      {% include {{url_for('discourse_static.file', filename='html/_notifications.html')}} ignore missing %}
       
       {% assets "js_bottom" %}
         <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.2"></script>
