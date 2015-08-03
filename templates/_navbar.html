@@ -23,11 +23,13 @@
               <li class="nav-link {% if active_page == 'globalstats' %} active{% endif %}"><a href="{{ url_for('statistics.index')}}">{{ _('Statistics') }}</a></li>
               <li class="nav-link"><a href="{{url_for('discourse.index')}}">Community
                         {% if current_user.is_authenticated() %}
-                                <span id="discourse-notifications" class="badge badge-danger">
                                         {% if current_user.info.notification_count and current_user.info.notification_count > 0 %}
-                                                {{current_user.info.notification_count}}
+                                                <span id="discourse-notifications" class="badge badge-danger">
+                                                        {{current_user.info.notification_count}}
+                                                </span>
+                                        {% else %}
+                                                <span id="discourse-notifications" class="badge badge-danger"></span>
                                         {% endif %}
-                                </span>
                         {% endif %}
               </a></li>
               <li class="nav-link {% if active_page == 'data' %} active{% endif %}"><a href="{{ url_for('data.index')}}">{{ _('Data') }}</a></li>
