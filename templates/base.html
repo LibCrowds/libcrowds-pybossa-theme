@@ -91,37 +91,6 @@
         {% endassets %}
       {% endif %}
       
-      {% if current_user.is_authenticated() %}
-          <script>
-            var originalTitle = document.title;
-            var originalNavContent =  $('#discourse-nav').html();
-            $(function() {
-                      $.ajax({ url: "/api/discourse/notifications/{{current_user.name}}/count"
-                             , success: function(data) {
-                                updateNotificationsPill(data);
-                                }
-                      });
-            });
-            (function poll() {
-                      setTimeout(function() {
-                                $.ajax({ url: "/api/discourse/notifications/{{current_user.name}}/count"
-                                       , success: function(data) {
-                                          updateNotificationsPill(data);
-                                        }, dataType: "json", complete: poll });
-                      }, 15000);
-             })();
-            function updateNotificationsPill(data) {
-                      if (data !== 0 && $.isNumeric(data)) {
-                                $('#discourse-notifications').html(data);
-                                document.title = '(' + data + ') ' + originalTitle;
-                      } else {
-                                $('#discourse-notifications').html('');
-                                document.title = originalTitle;
-                      }
-            }
-          </script>
-      {% endif %}
-      
       {% assets "js_bottom" %}
         <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.2"></script>
       {% endassets %}
@@ -131,5 +100,36 @@
           <script>$.ajax('/api/user/set_default_avatar');</script>
         {% endif %}
       {% endif %}
+      
+      {% if current_user.is_authenticated() %}
+        <script>
+            var originalTitle = document.title;
+            var originalNavContent =  $('#discourse-nav').html();
+            $(function() {
+                $.ajax({ url: "/api/discourse/notifications/{{current_user.name}}/count",
+                    success: function(data) {
+                        updateNotificationsPill(data);
+                    }
+                });
+            });
+            (function poll() {
+                setTimeout(function() {
+                    $.ajax({ url: "/api/discourse/notifications/{{current_user.name}}/count",
+                        success: function(data) {
+                            updateNotificationsPill(data);
+                        }, dataType: "json", complete: poll });
+                    }, 15000);
+            })();
+            function updateNotificationsPill(data) {
+                if (data !== 0 && $.isNumeric(data)) {
+                    $('#discourse-notifications').html(data);
+                    document.title = '(' + data + ') ' + originalTitle;
+                } else {
+                    $('#discourse-notifications').html('');
+                    document.title = originalTitle;
+                }
+            }
+        </script>
+    {% endif %}
   </body>
 </html>
