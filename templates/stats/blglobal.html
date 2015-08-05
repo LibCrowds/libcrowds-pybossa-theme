@@ -236,28 +236,28 @@ $(function(){
             
             var remaining = total - top10Percent;
             
-            var label1 = "Remaining 90%: " + remaining + " task";
-            if (remaining != 1) {
+            var label1 = "Most Active 10% : " + top10Percent + " task";
+            if (top10Percent != 1) {
                 label1 += "s";
             }
             
-            var label2 = "Most Active 10% : " + top10Percent + " task";
-            if (top10Percent != 1) {
+            var label2 = "Remaining 90%: " + remaining + " task";
+            if (remaining != 1) {
                 label2 += "s";
             }
             
             var data = [
                 {
-                    value : remaining,
+                    value : top10Percent,
                     color:"#BA0000",
                     highlight: "#D00000",
-                    label: label2
+                    label: label1
                 },
                 {
-                    value: top10Percent,
+                    value: remaining,
                     color: "rgba(151,187,205,1)",
                     highlight: "rgba(151,187,205,0.8)",
-                    label: label1
+                    label: label2
                 }
             ];
             var canvas = document.getElementById("top-10-percent");
