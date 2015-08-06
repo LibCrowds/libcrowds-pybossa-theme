@@ -91,13 +91,12 @@
 
 
 {% macro show_project(project, active_cat, current_user, upload_method) %}
-
 <div class="project-item container container-padded">
     <div class="row project-summary padding-bottom">
         <div class="col-md-8 col-xs-12">
             <div class="white-rounded inset-shadow-white project-desc">
                 <div class="col-sm-6 col-xs-12 hidden-xs project-polaroid">
-                    <a  class="polaroid" href="{{ url_for('blplugin.details', short_name = project.short_name) }}" data-polaroid-title="{{ project.name }}">
+                    <a class="polaroid" href="{{ url_for('blplugin.details', short_name = project.short_name) }}" data-polaroid-title="{{ project.name }}">
                         {{ render_project_thumbnail(project, upload_method, class='img-polaroid', id="project.id") }}
                     </a>
                 </div>
@@ -113,9 +112,11 @@
                 {% endif %}
                 
                 <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg padding-top-xs">
-                    <div class="shadow shadow-inline">
-                        {{ render_project_thumbnail(project, upload_method, class="img-polaroid", id="project.id") }}
-                    </div>
+                    <a href="{{ url_for('blplugin.details', short_name = project.short_name) }}">
+                        <div class="shadow shadow-inline">
+                            {{ render_project_thumbnail(project, upload_method, class="img-polaroid", id="project.id") }}
+                        </div>
+                    </a>
                 </div>
                 
                 <div class="col-sm-6 col-xs-10 col-xs-offset-1 col-sm-offset-0">
@@ -258,17 +259,17 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_project_thumbnail(project, upload_method, id, class, style, size="200x200") %}
-{% if project.info.container and project.info.thumbnail %}
-    {% if upload_method == 'rackspace'%}
-    <img class="{{class}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
+    {% if project.info.container and project.info.thumbnail %}
+        {% if upload_method == 'rackspace'%}
+        <img class="{{class}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
+        {% else %}
+        <img  class="{{class}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))|resize(size)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
+        {% endif %}
+    {% elif project.info.thumbnail %}
+        <img class="{{class}}" src="{{project.info.thumbnail}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
     {% else %}
-    <img  class="{{class}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))|resize(size)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
+        <img class="{{class}}" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="{{style}}" alt="Project thumbnail">
     {% endif %}
-{% elif project.info.thumbnail %}
-    <img class="{{class}}" src="{{project.info.thumbnail}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
-{% else %}
-    <img class="{{class}}" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="{{style}}" alt="Project thumbnail">
-{% endif %}
 {% endmacro %}
 
 {% macro render_url_thumbnail(project, upload_method) %}
