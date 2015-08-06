@@ -392,7 +392,8 @@ to{-webkit-transform:rotate(360deg)}
 .legend li:first-letter{text-transform:capitalize}
 .pagination-centered {width: 100%;text-align:center;align-items:center;-webkit-align-items:center;justify-content:center;-webkit-justify-content: center;-ms-flex-pack:center;-ms-flex-align:center;}
 .pagination li {display: inline;padding-left: 5px;padding-right: 5px;}
-.modal-dialog {margin: 100px auto;}
+.modal-dialog {margin-top: 100px;}
+.modal{z-index:9999;}
 @media (max-width: 767px) {
 #comments_btn{padding-left:15px}
 #oclc_search_form label{visibility:hidden;}

@@ -22,21 +22,48 @@
                                 <th class="hidden-sm hidden-xs">Source</th>
                                 <th>Action</th>
                                 <th>Attribute</th>
-                                <th class="hidden-sm hidden-xs">Old Value</th>
-                                <th class="hidden-sm hidden-xs">New Value</th>
                             </tr>
                             </thead>
                         {% for log in logs | sort(reverse=True, attribute='created') %}
                             <tr>
-                                <td>{{log.created[8:10]}}-{{log.created[5:7]}}-{{log.created[0:4]}}</td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#modal-log-{{log.id}}">
+                                        {{log.created[8:10]}}-{{log.created[5:7]}}-{{log.created[0:4]}}, {{log.created[11:16]}}
+                                    </a>
+                                </td>
                                 <td>{% if current_user.name == log.user_name%}You{%else%}{{log.user_name}}{%endif%}</td>
                                 <td class="hidden-sm hidden-xs">{{log.caller}}</td>
                                 <td>{{log.action}}</td>
                                 <td>{{log.attribute}}</td>
-                                <td class="hidden-sm hidden-xs">{{(log.old_value or "Nothing")|truncate(30)}}</td>
-                                <td class="hidden-sm hidden-xs">{{(log.new_value or "Nothing")|truncate(30)}}</td>
                             </tr>
-                
+                            <div id="modal-log-{{log.id}}" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                            <h3 class="text-center remove-margin-bottom"><strong>Audit log:</strong> {{log.created[8:10]}}-{{log.created[5:7]}}-{{log.created[0:4]}}, {{log.created[11:16]}}</h3>
+                                            <h4 class="text-center">{{log.user_name}} - {{log.action}} {{log.attribute}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6 col-xs-12">
+                                                    <strong>Old Value</strong>
+                                                    {{(log.old_value or "Nothing")}}
+                                                </div>
+                                                <div class="col-md-6 col-xs-12">
+                                                    <strong>New Value</strong>
+                                                    {{(log.new_value or "Nothing")}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="row text-center">
+                                                <button data-dismiss="modal" class="btn btn-success">OK</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         {% endfor %}
                         </table>
                         {% else %}

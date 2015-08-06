@@ -116,6 +116,14 @@
                                 </a>
                             </div>
                             
+                            <div id="audit_logs" class="col-sm-6 col-md-4">
+                                <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" rel="nofollow">
+                                    <div class="well">
+                                        <i class="fa fa-calendar fa-4x"></i>
+                                        <h3 class="margin-bottom-xs">{{_('Audit Logs')}}</h3>
+                                    </div>
+                                </a>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
