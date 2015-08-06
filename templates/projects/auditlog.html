@@ -17,24 +17,24 @@
                         <table class="table table-stripped table-condensed table-hover table-responsive">
                             <thead>
                             <tr>
-                                <th>When</th>
-                                <th>Who</th>
-                                <th class="hidden-sm hidden-xs">Source</th>
-                                <th>Action</th>
-                                <th>Attribute</th>
+                                <th class="text-center">When</th>
+                                <th class="text-center">Who</th>
+                                <th class="hidden-sm hidden-xs text-center">Source</th>
+                                <th class="text-center">Action</th>
+                                <th class="text-center">Attribute</th>
                             </tr>
                             </thead>
                         {% for log in logs | sort(reverse=True, attribute='created') %}
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     <a href="#" data-toggle="modal" data-target="#modal-log-{{log.id}}">
                                         {{log.created[8:10]}}-{{log.created[5:7]}}-{{log.created[0:4]}}, {{log.created[11:16]}}
                                     </a>
                                 </td>
-                                <td>{% if current_user.name == log.user_name%}You{%else%}{{log.user_name}}{%endif%}</td>
-                                <td class="hidden-sm hidden-xs">{{log.caller}}</td>
-                                <td>{{log.action}}</td>
-                                <td>{{log.attribute}}</td>
+                                <td class="text-center">{% if current_user.name == log.user_name%}You{%else%}{{log.user_name}}{%endif%}</td>
+                                <td class="hidden-sm hidden-xs text-center">{{log.caller}}</td>
+                                <td class="text-center">{{log.action}}</td>
+                                <td class="text-center">{{log.attribute}}</td>
                             </tr>
                             <div id="modal-log-{{log.id}}" class="modal fade">
                                 <div class="modal-dialog">
