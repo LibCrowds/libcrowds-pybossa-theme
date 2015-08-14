@@ -65,10 +65,6 @@
              <br/>
              <strong>{{_('Contributions')}}:</strong> {{user.score}}
              " class="avatar-popover" data-original-title="<strong>{{user.name}}</strong>
-             <br />
-             {% if 'title' in user.info and not user.info['title'] == None %}
-               {{user.info['title']}}
-              {% endif %}
               ">
              <div class="shadow img-circle shadow-circle">
                 {{ account_helper.render_user_thumbnail(user, upload_method, class="img-circle") }}
