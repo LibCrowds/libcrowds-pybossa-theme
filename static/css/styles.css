@@ -287,7 +287,6 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .btn-filter{background-color:#fff;border-color:#ddd;color:#666}
 .splash{background-size:cover;color:#fff;text-align:center;background-repeat:no-repeat;}
 #home-splash{background-image:url(../img/Crowd.png);background-position:center;height:100vh}
-#data-splash{background-image:url(../img/Cards/splash1.jpg);height:75vh}
 #about-splash{background-image:url(../img/Cards/splash4.jpg);height:75vh}
 #project-splash{height:100vh}
 #project-splash h1 strong{font-weight:300}
