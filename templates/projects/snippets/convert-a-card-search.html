@@ -282,10 +282,9 @@
      if ($("#isbn_field").val() !== "") {
          searchArray['isbn'] = encodeURIComponent($("#isbn_field").val().trim().replace(/-/g, ""));
      }
-     key = encodeURIComponent($('#api-key').attr('data-key'));
      libs = '"(DLC or CUY or ZCU or HMY or PULEA or YUL or CNEAL or CGU or COO or AMH or AUT or NSL or SLY or L2U or OCLCA or OCLCQ or OCLCF or OCLCO or BLSTP)"';
-     searchStr = 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/search?format=HTML&api_key=' + key + '&query=(1,1183)="eng"and(1,6119)=' + libs + 'and';
-     countStr = 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/count?api_key=' + key + '&query=(1,1183)="eng"and(1,6119)=' + libs + 'and';
+     searchStr = 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/search?format=HTML&query=(1,1183)="eng"and(1,6119)=' + libs + 'and';
+     countStr = 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/count?query=(1,1183)="eng"and(1,6119)=' + libs + 'and';
      var notFirst = 0;
      for (var key in searchArray) {
          switch (key) {
