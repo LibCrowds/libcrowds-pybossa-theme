@@ -346,10 +346,10 @@
              pageStr += '&lt; Previous | ' + (startPos + 1) + ' to ';
          }
          if (endPos < parseInt($("#search_results").attr("data-count"))) {
-             pageStr += endPos + ' of ' + $("#search_results").attr("data-count") +
+             pageStr += endPos + ' of ' + humanise($("#search_results").attr("data-count")) +
                  ' | <a href="#" id="next">Next &gt;</a></span></small></p></div>';
          } else {
-             pageStr += $("#search_results").attr("data-count") + ' of ' + $("#search_results").attr("data-count") +
+             pageStr += humanise($("#search_results").attr("data-count")) + ' of ' + humanise($("#search_results").attr("data-count")) +
                  ' | Next &gt;</span></small></p></div>';
          }
          $("#search_results").html(results + pageStr);
@@ -381,13 +381,18 @@
 
  function performCount(countStr) {
      $.get(countStr, function(results) {
-         $("#search_results").attr("data-count", results);
-         if (parseInt(results) == 1) {
-             $("#results_count").html('<small>' + results + ' result</small>');
+      resultsStr = String(results['message']);
+         $("#search_results").attr("data-count", results['message']);
+         if (parseInt(results['message']) == 1) {
+             $("#results_count").html('<small>' + humanise(resultsStr) + ' result</small>');
          } else {
-             $("#results_count").html('<small>' + results + ' results</small>');
+             $("#results_count").html('<small>' + humanise(resultsStr) + ' results</small>');
          }
      });
+ }
+ 
+ function humanise(str) {
+   return String(str).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
  }
 
 
