@@ -278,20 +278,20 @@ $(document).delegate('#oclc_search_form', 'submit', function(e) {
     $("#search_results").slideUp();
     $("#results_count").html('');
     $('#search_submit_btn').fadeTo(500, 0.3);
-    title = encodeURIComponent($("#title_field").val().trim());
+    title = $("#title_field").val().trim();
     if (title.length >= 2) {
       title += "?"
     } else {
       title = "";
     }
-    author = encodeURIComponent($("#author_field").val().trim());
+    author = $("#author_field").val().trim();
     if (author.length >= 2) {
       author += "?"
     } else {
       author = "";
     }
-    year = encodeURIComponent($("#year_field").val().trim());
-    isbn = encodeURIComponent($("#isbn_field").val().trim().replace(/-/g, ""));
+    year = $("#year_field").val().trim();
+    isbn = $("#isbn_field").val().trim().replace(/-/g, "");
     libs = '"(DLC or CUY or ZCU or HMY or PULEA or YUL or CNEAL or CGU or COO or AMH or AUT or NSL or SLY or L2U or OCLCA or OCLCQ or OCLCF or OCLCO or BLSTP)"';
     searchQuery = '(1,1183)="eng"and(1,6119)=' + libs;
     searchQuery += 'and(1,4)="' + title + '"';
