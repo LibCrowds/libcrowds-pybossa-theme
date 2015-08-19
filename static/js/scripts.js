@@ -304,10 +304,18 @@ $("a.avatar-popover").popover({
     placement: 'top'
 });
 
-$("a.btn-popover, .input-popover").popover({
+$("a.btn-popover").popover({
     html: true,
     animation: true,
     trigger: 'hover',
+    placement: 'bottom',
+    container: 'body'
+});
+
+$(".input-popover").popover({
+    html: true,
+    animation: true,
+    trigger: 'manual',
     placement: 'bottom',
     container: 'body'
 });
