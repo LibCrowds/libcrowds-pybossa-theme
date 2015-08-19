@@ -304,7 +304,7 @@ $("a.avatar-popover").popover({
     placement: 'top'
 });
 
-$("a.btn-popover").popover({
+$("a.btn-popover, .input-popover").popover({
     html: true,
     animation: true,
     trigger: 'hover',
