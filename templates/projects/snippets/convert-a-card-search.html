@@ -383,7 +383,6 @@ $(document).delegate('.marc-btn', 'click', function(e) {
     $("#oclc_search_form").slideUp();
     $("#search_results").slideUp();
     $("#results_count").html('');
-    $("#results_count").hide();
     $("#selected_record").html($("#" + $(this).attr('data-control-num')).html() + '<a href="#" id="search_again"><small>Search Again</small></a><hr>');
     $("#selected_record").attr('data-selected-oclc', $(this).attr('data-control-num'));
     $("#selected_record").show();
