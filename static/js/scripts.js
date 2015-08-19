@@ -97,49 +97,53 @@ $(window).on("resize", function() {
 }).resize();
 
 function getShareStats(){
-    if ($('.btn-facebook').length > 0) {
-        $.getJSON('https://graph.facebook.com/?id=' + window.location.href + '&callback=?', function(json) {
+    $('.btn-facebook').each(function(){
+        var facebook = $(this);
+        $.getJSON('https://graph.facebook.com/?id=' + $(this).data('url') + '&callback=?', function(json) {
             if (typeof json['shares'] != 'undefined') {
                 if (json['shares'] == 1) {
-                    $('.btn-facebook').attr('data-content', 'Shared once on Facebook');   
+                    facebook.attr('data-content', 'Shared once on Facebook');   
                 } else {
-                    $('.btn-facebook').attr('data-content', 'Shared ' + json['shares'] + ' times on Facebook');   
+                    facebook.attr('data-content', 'Shared ' + json['shares'] + ' times on Facebook');   
                 }
                 $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + json['shares']);
             }
         });
-    }
-    if ($('.btn-twitter').length > 0) {
-        $.getJSON('http://urls.api.twitter.com/1/urls/count.json?url=' + window.location.href + '&callback=?', function(json) {
+    });
+    $('.btn-twitter').each(function(){
+        var twitter = $(this);
+        $.getJSON('http://urls.api.twitter.com/1/urls/count.json?url=' + $(this).data('url') + '&callback=?', function(json) {
             if (json['count'] > 0) {
                 if (json['shares'] == 1) {
-                    $('.btn-twitter').attr('data-content', 'Shared once on Twitter');  
+                    twitter.attr('data-content', 'Shared once on Twitter');  
                 } else {
-                    $('.btn-twitter').attr('data-content', 'Shared ' + json['count'] + ' times on Twitter');   
+                    twitter.attr('data-content', 'Shared ' + json['count'] + ' times on Twitter');   
                 }
                 $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + json['count']);
             }
         });
-    }
-    if ($('.btn-linkedin').length > 0) {
-        $.getJSON('https://www.linkedin.com/countserv/count/share?url=' + window.location.href + '&callback=?', function(json) {
+    });
+    $('.btn-linkedin').each(function(){
+        var linkedin = $(this);
+        $.getJSON('https://www.linkedin.com/countserv/count/share?url=' + $(this).data('url') + '&callback=?', function(json) {
             if (json['count'] > 0) {
                 if (json['shares'] == 1) {
-                    $('.btn-linkedin').attr('data-content', 'Shared once on LinkedIn');  
+                    linkedin.attr('data-content', 'Shared once on LinkedIn');  
                 } else {
-                    $('.btn-linkedin').attr('data-content', 'Shared ' + json['count'] + ' times on LinkedIn');   
+                    linkedin.attr('data-content', 'Shared ' + json['count'] + ' times on LinkedIn');   
                 }
                 $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + json['count']);
             }
         });
-    }
-    if ($('.btn-googleplus').length > 0) {
+    });
+    $('.btn-googleplus').each(function(){
+        var googleplus = $(this);
         var data = {
             "method":"pos.plusones.get",
-            "id":window.location.href,
+            "id":$(this).data('url'),
             "params":{
                 "nolog":true,
-                "id":window.location.href,
+                "id":$(this).data('url'),
                 "source":"widget",
                 "userId":"@viewer",
                 "groupId":"@self"
@@ -158,15 +162,15 @@ function getShareStats(){
                 count = r.result.metadata.globalCounts.count;
                 if (count > 0) {
                     if (count == 1) {
-                        $('.btn-googleplus').attr('data-content', 'Shared once on Google+');  
+                        googleplus.attr('data-content', 'Shared once on Google+');  
                     } else {
-                        $('.btn-googleplus').attr('data-content', 'Shared ' + count + ' times on Google+');   
+                        googleplus.attr('data-content', 'Shared ' + count + ' times on Google+');   
                     }
                     $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + count);
                 }
             }
         });
-    }
+    });
     $('#total-share-count').fadeIn('slow');
 }
 
