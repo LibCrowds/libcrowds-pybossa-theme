@@ -17,28 +17,22 @@
         {% if invite_new_volunteers %}
             <div class="row">
                 <div class="col-xs-12">
-                    <h1>Sorry, you've contributed to all the tasks for this project</h1>
+                    <h1>Great, you've contributed to all the tasks for this project.</h1>
                     <h2>But this project still needs more volunteers, so please spread the word!</h2>
                 </div>
             </div>
-        {% endif %}
+        {% else %}
             
-        {% if project.hidden == 0 %}
-            {{ project.info.task_presenter|safe }}
-        {% else %}
-            <div class="row">
-                <div class="col-xs-12">
-                    <h1>Sorry, this project is currently hiding</h1>
-                    <h2>It will be revealed shortly, see you then!</h2>
+            {% if project.hidden == 0 %}
+                {{ project.info.task_presenter|safe }}
+            {% else %}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1>Sorry, this project is currently hiding</h1>
+                        <h2>It will be revealed shortly, see you then!</h2>
+                    </div>
                 </div>
-            </div>
-        {% endif %}
-        
-        <div id='PYBOSSA_USER_LOCALE' hidden>
-        {% if current_user.is_anonymous() %}
-        en
-        {% else %}
-        {{ current_user.locale }}
+            {% endif %}
         {% endif %}
         </div>
     </div>
