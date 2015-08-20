@@ -80,20 +80,23 @@ $(function() {
     });
     
     //EpicEditor
-    var epicEditorTextArea = $('#epiceditor').data('textarea');
-    var opts = {
-    container: 'epiceditor',
-      textarea: epicEditorTextArea,
-      basePath: window.location.origin + '/static/',
-      clientSideStorage: false,
-      theme: {
-        base: 'vendor/EpicEditor-v0.2.2/themes/base/epiceditor.css',
-        preview: 'css/styles.css',
-        editor: 'css/styles.css'
-      }
+    console.log(typeof(EpicEditor));
+    if (typeof(EpicEditor) !== "undefined") {
+        var epicEditorTextArea = $('#epiceditor').data('textarea');
+        var opts = {
+        container: 'epiceditor',
+          textarea: epicEditorTextArea,
+          basePath: window.location.origin + '/static/',
+          clientSideStorage: false,
+          theme: {
+            base: 'vendor/EpicEditor-v0.2.2/themes/base/epiceditor.css',
+            preview: 'css/styles.css',
+            editor: 'css/styles.css'
+          }
+        }
+        var editor = new EpicEditor(opts);
+        editor.load();
     }
-    var editor = new EpicEditor(opts);
-    editor.load();
     
     animateProgress();
     sameSize();
