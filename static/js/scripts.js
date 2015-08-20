@@ -80,7 +80,6 @@ $(function() {
     });
     
     //EpicEditor
-    console.log(typeof(EpicEditor));
     if (typeof(EpicEditor) !== "undefined") {
         var epicEditorTextArea = $('#epiceditor').data('textarea');
         var opts = {
