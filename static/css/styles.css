@@ -5,7 +5,7 @@ ul{-webkit-padding-start:0;-moz-padding-start:0;padding-left:0;list-style:none}
 .project-polaroid{padding-top:25px}
 .pull-down{align-items:flex-end;-webkit-align-items: flex-end;display:flex;display:-webkit-flex;justify-content:flex-end;-ms-flex-pack:end}
 .pull-down-center{align-items:flex-end;-webkit-align-items: flex-end;display:flex;display:-webkit-flex;justify-content:flex-end;-webkit-justify-content: flex-end;-ms-flex-pack:end;height:100%;width:50%;padding-bottom:25px}
-a{color:#BA0000}
+a{color:#BA0000;text-decoration:none}
 a:focus,a:hover{color:#D00000;text-decoration:none}
 #body-content{height:auto;min-height:100%;position:relative}
 h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{font-weight:200}
@@ -16,6 +16,7 @@ h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{font-weight:200}
 .h4,h4{font-size:1.2em}
 p{margin:0 0 20px}
 a[rel="popover"]{cursor:pointer}
+#epiceditor{min-height:500px;width:100%}
 .label{-webkit-border-radius:0;border-radius:0;background-color:#1A1A1A}
 .label-info{background-color:#4190c2}
 .label-success{background-color:#398439}
@@ -56,7 +57,7 @@ textarea{resize:none}
 #show-app-stats .btn{position:absolute;right:25%;bottom:0;}
 #sorts{z-index:1}
 html{overflow-x:hidden;height:100%;width:100%}
-body{height:100%;font-weight:300;background-color:#fff;min-height:800px;width:100%;font-family:'Source Sans Pro',sans-serif;color:#666}
+body{height:100%;font-weight:300;background-color:#fff;min-height:800px;width:100%;font-family:'Source Sans Pro',sans-serif;color:#666;margin:0 auto}
 hr.extra-margins{margin-top:40px;margin-bottom:40px}
 .container-max-height{height:100%}
 .container-fluid{padding-left:0;padding-right:0}

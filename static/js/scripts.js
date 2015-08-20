@@ -79,6 +79,21 @@ $(function() {
         $(this).html('Tasks Remaining: ' + remaining);
     });
     
+    //EpicEditor
+    var epicEditorTextArea = $('#epiceditor').data('textarea');
+    var opts = {
+    container: 'epiceditor',
+      textarea: epicEditorTextArea,
+      basePath: window.location.origin + '/static/',
+      theme: {
+        base: 'vendor/EpicEditor-v0.2.2/themes/base/epiceditor.css',
+        preview: 'css/styles.css',
+        editor: 'css/styles.css'
+      }
+    }
+    var editor = new EpicEditor(opts);
+    editor.load();
+    
     animateProgress();
     sameSize();
     styleNavigation();

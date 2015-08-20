@@ -2,6 +2,7 @@
 {% set active_page = "blog" %}
 {% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
+{% set preload_js = "true" %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
@@ -17,7 +18,8 @@
                         {{ form.hidden_tag() }}
                         <fieldset>
                             {{ render_field(form.title, class_="form-control", required="required", placeholder= _('The title of your post')) }}
-                            {{ render_field(form.body, class_="form-control", required="required", rows="15",
+                            <div id="epiceditor" class="form-control" data-textarea="body"></div>
+                            {{ render_field(form.body, class_="form-control hidden", required="required", rows="15",
                             placeholder= _('Write your post here. You can use Markdown!')) }}
                             <div role="group" class="pull-right">
                                 <a href="{{url_for('blog.index')}}" class="btn btn-default">{{_('Cancel')}}</a>

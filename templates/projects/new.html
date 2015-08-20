@@ -20,13 +20,14 @@
                     <fieldset>
                         {{ render_field(form.name, placeholder=_('Name'), class="form-control", required="required", autofocus="autofocus") }}
                         {{ render_field(form.short_name, placeholder=_('Abbreviated name for the project'), label_text=_('Short name:'), class="form-control", required="required") }}
+                        <div id="epiceditor" class="form-control" data-textarea="long_description"></div>
                         {{ render_field(form.long_description, rows="13", placeholder=_('Long description:
                         
                         · Describe the purpose of the project and what it aims to achieve.
                         · Explain how the project works and how volunteers can help.
                         · Highlight the reasons why volunteers contributions are essential.
                         
-                        You can use Markdown to format your description.'), class="form-control", required="required") }}
+                        You can use Markdown to format your description.'), class="form-control hidden", required="required") }}
                         <div class="pull-right" role="group">
                             <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">{{_('Cancel')}}</a>
                             <input type="submit" value="Create" class="btn btn-success" />
