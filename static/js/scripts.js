@@ -177,14 +177,16 @@ function getShareStats(){
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function(r){
-                count = r.result.metadata.globalCounts.count;
-                if (count > 0) {
-                    if (count == 1) {
-                        googleplus.attr('data-content', 'Shared once on Google+');  
-                    } else {
-                        googleplus.attr('data-content', 'Shared ' + count + ' times on Google+');   
+                if (typeof(r.result) !== "undefined") {
+                    count = r.result.metadata.globalCounts.count;
+                    if (count > 0) {
+                        if (count == 1) {
+                            googleplus.attr('data-content', 'Shared once on Google+');  
+                        } else {
+                            googleplus.attr('data-content', 'Shared ' + count + ' times on Google+');   
+                        }
+                        $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + count);
                     }
-                    $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + count);
                 }
             }
         });
