@@ -59,7 +59,6 @@
                 {{ form_helper.render_field(form.name, class="form-control", placeholder=_('Name'), visible='true', required="required", autofocus="autofocus") }}
                 {{ form_helper.render_field(form.short_name, class="form-control", placeholder=_('Short name'), visible='true', label_text=_('Short name:')) }}
                 {{ form_helper.render_field(form.description, class="form-control", placeholder=_('Short description'), visible='true', required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
-                <div id="epiceditor" class="form-control" data-textarea="long_description"></div>
                 {{ form_helper.render_field(form.long_description, rows="13", placeholder=_('Long description:
                         
             Describe the purpose of the project and what it aims to achieve.
@@ -67,6 +66,7 @@
             Highlight the reasons why volunteer contributions are essential.
                         
 You can use Markdown to format your description.'), class="form-control hidden", required="required", visible='true') }}
+                <div id="epiceditor" class="form-control" data-textarea="long_description"></div>
                 {{ form_helper.render_field(form.category_id, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.allow_anonymous_contributors, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.password, class="form-control", visible='true') }}
