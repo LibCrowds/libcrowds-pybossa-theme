@@ -16,7 +16,7 @@
                 {{ form.hidden_tag() }}
                 <fieldset>
                     {{ render_field(form.title, class="form-control", required="required", placeholder= _('The title of your post')) }}
-                    {{ render_field(form.body, class="form-control", required="required", rows="15",
+                    {{ render_field(form.body, class="form-control hidden", required="required", rows="15",
                     placeholder= _('Write your post here. You can use Markdown!')) }}
                     <div id="epiceditor" class="form-control" data-textarea="body"></div>
                     <div role="group" class="pull-right">
