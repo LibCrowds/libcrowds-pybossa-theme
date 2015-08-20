@@ -85,6 +85,7 @@ $(function() {
     container: 'epiceditor',
       textarea: epicEditorTextArea,
       basePath: window.location.origin + '/static/',
+      clientSideStorage: false,
       theme: {
         base: 'vendor/EpicEditor-v0.2.2/themes/base/epiceditor.css',
         preview: 'css/styles.css',
