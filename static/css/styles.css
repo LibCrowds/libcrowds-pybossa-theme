@@ -16,7 +16,7 @@ h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{font-weight:200}
 .h4,h4{font-size:1.2em}
 p{margin:0 0 20px}
 a[rel="popover"]{cursor:pointer}
-#epiceditor{min-height:500px;width:100%}
+#epiceditor{min-height:500px;width:100%;margin-bottom:40px}
 .label{-webkit-border-radius:0;border-radius:0;background-color:#1A1A1A}
 .label-info{background-color:#4190c2}
 .label-success{background-color:#398439}
