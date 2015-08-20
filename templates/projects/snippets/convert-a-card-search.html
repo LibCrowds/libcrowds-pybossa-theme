@@ -49,7 +49,8 @@
          </div>
          <div id="search_error" class="alert alert-info remove-margin-bottom" style="display:none;">
             <a class="close">x</a>
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> No results returned.
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	    <span id ="search_error_text">No results returned.</span>
          </div>
       </div>
       
@@ -366,7 +367,11 @@ function performSearch(searchQuery, page) {
     }, error: function(jqXhr, textStatus, errorThrown) {
       var res = JSON.parse(jqXhr.responseText)
       if (jqXhr.status == 404){
-        $("#search_error").show();
+	 $("#search_error_text").html("No results found")
+	 $("#search_error").show();
+      } else if (res['message'] == "Truncated words too short") {
+	 $("#search_error_text").html("Search terms too short")
+	 $("#search_error").show();
       } else {
         $('#error-details').html("Error: " + res['message']);
         $('#error').show();
