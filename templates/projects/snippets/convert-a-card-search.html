@@ -1,3 +1,12 @@
+<!-- Project completed DIV -->
+<div id="completed-row" class="row" style="display:none;">
+   <div class="col-xs-12 text-center padding-top">
+       <h1>Success! This project has now been completed.</h1>
+       <h2>Thank you for all of your contributions.</h2>
+       <a href="/"><i class="fa fa-home fa-3x"></i></a>
+   </div>
+</div>
+
 <!-- Start of Photo DIV (column) -->
 <div class="col-xs-12 col-sm-7 col-sm-push-5 col-md-6 col-md-push-6 text-center" id="photo-container">
    <div id="image_container" style="position: relative;">
@@ -472,6 +481,8 @@ pybossa.taskLoaded(function(task, deferred) {
         task.info.image = img;
     } else {
         deferred.resolve(task);
+	$("#image_container").hide();
+	$("#completed-row").show();
     }
 });
 
