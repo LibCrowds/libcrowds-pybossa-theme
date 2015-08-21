@@ -84,6 +84,20 @@
                 {% endfor %}
             </div>
         </div>
+        {% if not current_user.subscribed %}
+            <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-2 blog-menu">
+                <p class="blog-menu-title inset-text-grey">Newsletter</p>
+                <div class="blog-menu-body">
+                    <p>Sign up here to receive the latest LibCrowds news direct to your inbox.</p>
+                    <p><small>We will use you email address responsibly, promise.</small></p>
+                    <div class="text-center padding-top-xs padding-bottom-xs"> 
+                    <a id="signmeup" class="btn btn-danger"
+			    href="{{url_for('account.newsletter_subscribe', subscribe=True,
+			    next=blog)}}">sign me up</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         
         {% if current_user.admin %}
         <div class="col-xs-12 col-sm-3 col-md-offset-1 col-md-2 text-center padding-top-xs blog-menu">
