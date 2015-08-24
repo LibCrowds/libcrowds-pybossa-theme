@@ -185,6 +185,8 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .description h3{margin-top:50px}
 #total-share-count{margin-top:10px;display:none}
 #total-share-count:after{content:"Shared " attr(data-count) " times";font-size:0.8em}
+.input-group-btn .btn{padding:12px 15px;height:47px;border-top-right-radius:5px;border-bottom-right-radius:5px;border:1px solid}
+.input-group-btn .btn:hover{border-color:#888D88}
 .btn-twitter{background:#00acee;border-radius:0;color:#fff;}
 .btn-twitter:active,.btn-twitter:hover,.btn-twitter:focus{background:#0087bd;color:#fff;}
 .btn-facebook{background:#3b5998;border-radius:0;color:#fff;}
