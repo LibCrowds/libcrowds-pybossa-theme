@@ -296,7 +296,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 #project-splash h1{font-size:3.0em;}
 .splash h1{font-size:2.0em;text-shadow:none;color:#fff;font-weight:300}
 .splash h2{color:#fff}
-.splash-overlay{background:rgba(0,0,0,.5);text-align:center;padding-top:20px;-webkit-transition:background 1s;-moz-transition:background 1s;-ms-transition:background 1s;-o-transition:background 1s;transition:background 1s;width:100%;height:100%}
+.splash-overlay{background:rgba(0,0,0,.5);text-align:center;-webkit-transition:background 1s;-moz-transition:background 1s;-ms-transition:background 1s;-o-transition:background 1s;transition:background 1s;width:100%;height:100%}
 pre.prettyprint{text-align:left}
 .vcenter{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-moz-flex;display:-ms-flex;display:-o-flex;display:-webkit-flex;display:flex;-webkit-flex-align:center;-ms-flex-align:center;-webkit-align-items:center}
 .hcenter{justify-content:center;-ms-flex-pack:center;align-items:center;-webkit-align-items:center;-ms-flex-align:center}

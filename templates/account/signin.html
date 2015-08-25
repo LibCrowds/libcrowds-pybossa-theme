@@ -36,7 +36,7 @@
                 
                 {{ render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
                 {{ render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                  <a href="{{ url_for('account.forgot_password') }}" class="btn btn-link pull-left remove-padding-left">{{ _('Forgotten password') }}</a>  
+                  <a href="{{ url_for('account.forgot_password') }}" class="pull-left remove-padding-left">{{ _('Forgotten password') }}</a>  
                   <div class="pull-right" role="group">
                     <input type="reset" value="Cancel" class="btn btn-default" />
                     <input type="submit" value="Sign in" class="btn btn-success" />

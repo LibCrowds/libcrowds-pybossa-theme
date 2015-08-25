@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row center">
-        <div class="col-sm-3 col-xs-12 vcenter ie-vcenter hcenter sticky-footer-col">
-            <a href="http://labs.bl.uk/" target="_blank" class="hidden-xs">
-                <img class="img-responsive center-block" src="{{url_for('static', filename='img/bl-logo.png')}}" alt="BL Labs logo">
+        <div class="col-sm-3 col-xs-12 vcenter hcenter sticky-footer-col hidden-xs">
+            <a href="http://labs.bl.uk/" target="_blank">
+                <img class="img-responsive center-block ie-mid-vcenter" src="{{url_for('static', filename='img/bl-logo.png')}}" alt="BL Labs logo">
             </a>
         </div>
-        <div class="col-sm-6 vcenter ie-vcenter hcenter sticky-footer-col">
+        <div class="col-sm-6 vcenter hcenter sticky-footer-col">
         {% if not enforce_privacy %}
-            <div class="row">
+            <div class="row ie-vcenter">
                 <ul>
                     <li>
                         <a href="mailto:{{contact_email}}"><i class="fa fa-envelope padding-sides-xs"></i></a>
@@ -22,9 +22,9 @@
             </div>
         {% endif %}
         </div>
-        <div class="col-sm-3 vcenter ie-vcenter hcenter sticky-footer-col hidden-xs">
+        <div class="col-sm-3 vcenter hcenter sticky-footer-col hidden-xs">
             <a href="http://pybossa.com/"  target="_blank">
-                <img class="img-responsive center-block" src="{{url_for('static', filename='img/pybossa.png')}}"  alt="PyBossa logo">
+                <img class="img-responsive center-block ie-mid-vcenter" src="{{url_for('static', filename='img/pybossa.png')}}"  alt="PyBossa logo">
             </a>
         </div>
     </div>

@@ -141,19 +141,19 @@
         
             <div class="col-sm-3 hidden-sm hidden-xs">
                 <div class="white-rounded inset-shadow-white project-info">
-                    <div class="vcenter ie-vcenter">
+                    <div class="vcenter">
                         <i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div>
                     </div>
                     <hr class="small-margins">
-                    <div class="vcenter ie-vcenter">
+                    <div class="vcenter">
                         <i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block tasks-remaining" data-tasks="{{project.n_tasks}}" data-progress="{{ project.overall_progress | round | int }}">Tasks Remaining:</div>
                     </div>
                     <hr class="small-margins">
-                    <div class="vcenter ie-vcenter">
+                    <div class="vcenter">
                         <i class="fa fa-users fa-2x"></i><div class="padding-left-xs inline-block">Volunteers: {{ project.n_volunteers}}</div>
                     </div>
                     <hr class="small-margins">
-                    <div class="vcenter ie-vcenter">
+                    <div class="vcenter">
                         <i class="fa fa-clock-o fa-2x"></i><div class="padding-left-xs inline-block">Last Active: {{ project.last_activity}}</div>
                     </div>
                 </div>
