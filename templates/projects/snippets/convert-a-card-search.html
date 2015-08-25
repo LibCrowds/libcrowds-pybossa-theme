@@ -81,16 +81,19 @@
          <!-- The search form -->
          <form id="oclc_search_form" role="form">
             <div class="form-group">
-               <label for="title_field">Search Criteria:</label>
+               <label class="sr-only" for="title_field">Title</label>
               <input type="text" id="title_field" class="form-control" placeholder="Title" pattern=".+{2,}|"/>
             </div>
             <div class="form-group">
+	       <label class="sr-only" for="title_field">Author</label>
                <input type="text" id="author_field" class="form-control" placeholder="Author" />
             </div>
             <div class="form-group">
+	       <label class="sr-only" for="title_field">Year</label>
                <input type="number" id="year_field" class="form-control" placeholder="Year"/>
             </div>
             <div class="form-group">
+	       <label class="sr-only" for="title_field">ISBN</label>
                <input type="number" id="isbn_field" class="form-control" placeholder="ISBN"/>
             </div>
             <p id="results_count" class="pull-left padding-left-xs"></p>
@@ -281,11 +284,6 @@ function loadUserProgress() {
 
 //Get and display the search results
 $(document).delegate('#oclc_search_form', 'submit', function(e) {
-    $("#oclc_search_form input").each(function() {
-        if ($(this).attr('placeholder') === $(this).val()) {
-            $(this).val('');
-        }
-    });
     e.preventDefault();
     $(".alert").hide();
     $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
@@ -313,7 +311,6 @@ $(document).delegate('#oclc_search_form', 'submit', function(e) {
     searchQuery += 'and(1,31)="' + year + '"';
     searchQuery += 'and(1,7)="' + isbn + '"';
     performSearch(searchQuery, 1);
-    Placeholders.enable();
 });
 
 
@@ -525,13 +522,7 @@ pybossa.presentTask(function(task, deferred) {
                 task.answer.title = task.info.title;
                 task.answer.oclc = $("#selected_record").attr('data-selected-oclc');
                 task.answer.ip_address = $('#client_ip').html();
-                if ($("#comments_field").attr('placeholder') === $("#comments_field").val()) {
-                    $("#comments_field").val('');
-                }
                 task.answer.comments = $('#comments_field').val();
-                if ($("#shelfmark_field").attr('placeholder') === $("#shelfmark_field").val()) {
-                    $("#shelfmark_field").val('');
-                }
                 task.answer.shelfmark = $("#shelfmark_field").val().replace(/,/g, ".").replace(/ /g,'').replace(/\.$/, "");
                 console.log(task.answer);
                 pybossa.saveTask(task.id, task.answer)
@@ -549,7 +540,6 @@ pybossa.presentTask(function(task, deferred) {
             }
         });
         $("#loading").hide();
-        Placeholders.enable();
     } else {
         $(".skeleton").hide();
         $("#loading").hide();

@@ -101,6 +101,7 @@ $(function() {
     sameSize();
     styleNavigation();
     getShareStats();
+    addIEInputLabels();
 });
 
 $(window).scroll(function() {
@@ -238,6 +239,16 @@ function updateXML() {
         var text = vkbeautify.xml($('#xml2').html());
         var expr = new RegExp("\n", "g")
         $('#xml').html(text.replace(expr, '<br>'));
+    }
+}
+
+function addIEInputLabels() {
+    if (/*@cc_on!@*/false || !!document.documentMode) {
+        $('label').each(function() {
+            if (!$(this).siblings('.hidden').length) {
+                $(this).removeClass('sr-only');
+            }
+        });
     }
 }
 
