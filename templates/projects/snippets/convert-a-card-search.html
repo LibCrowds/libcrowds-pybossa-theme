@@ -321,7 +321,7 @@ function performSearch(searchQuery, page) {
   $.ajax({
     type: "get",
     url: 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/search',
-    data: {query: searchQuery, format: 'HTML', start: startPos},
+    data: {query: searchQuery, format: 'HTML', start: startPos, jsonify: 'True'},
     success: function(results) {
       
       //Set result count
