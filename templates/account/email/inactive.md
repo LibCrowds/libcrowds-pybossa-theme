@@ -1,10 +1,15 @@
 Hi, {{ user['fullname']}}!
 
-We notice you haven’t been around {{config.BRAND}} for more than three months. We would like to encourage you to visit us again and continue collaborating with us. We hope not to bother you with this email- we’re just trying to make you not forget about us.
+We notice you haven’t been visited {{config.BRAND}} for more than three months.
+It would be great if you could come and help us again and improve access to the
+collections of the British Library!
 
-In any case, thank you for your contribution so far.
+[Click here to see the projects that need your help.]({{ url_for('project.index') }})
 
-Cheers!
+Thanks,
 
 {{ config.BRAND }} Team
 
+***
+[Update your notification preferences]({{ url_for('account.update_profile', name=user['name'], _external=True)}})
+[Follow us on Twitter](http://twitter.com/LibCrowds)

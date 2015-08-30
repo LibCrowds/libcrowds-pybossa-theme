@@ -1,14 +1,30 @@
-<p>Hello {{ user['fullname'] }},
+{% extends "account/email/base.html" %}
+
+{% block subject %}
+Validate your account
+{% endblock %}
+
+{% block subtitle %}
+Hello {{ user['fullname'] }},
+{% endblock %}
+
+{% block body %}
+<p>
+You have updated your email address at {{ config.BRAND }}.
 </p>
-<p>You have updated your email at {{ config.BRAND }}.
+<p>
+To verify that you are the owner of this e-mail address, please visit the URL below:
 </p>
-<p>To verify that you are the owner of this e-mail address, please visit the URL below:
+<p>
+Click here to validate your new e-mail address:
 </p>
-<p><a href="{{ confirm_url }}">{{ confirm_url }}</a>
+<p>
+    <a href="{{confirm_url}}">{{ confirm_url }}</a>
 </p>
-<p>Regards,
+<p>
+Regards,
 </p>
-<p>{{ config.BRAND }} Team
+<p>
+{{ config.BRAND }} Team
 </p>
-<hr>
-<p><a href="http://twitter.com/LibCrowds">Follow us on Twitter</a></p>
+{% endblock %}

@@ -1,12 +1,16 @@
 Hello {{ user.fullname }},
 
-To recover your {{ config.BRAND }} password, please visit the URL below:
+We received a request to reset your {{ config.BRAND }} password.
 
-[Click here to recover your account][recover]
+[Click here to reset your password.][recover]
 
 [recover]: {{ recovery_url }}
 
-If you did not make a password reset request, please ignore this email.
+If you did not make this request, please ignore this email.
 
 Regards,
+
 {{ config.BRAND }} Team
+
+***
+[Follow us on Twitter](http://twitter.com/LibCrowds)

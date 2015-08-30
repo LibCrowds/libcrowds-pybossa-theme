@@ -12,3 +12,5 @@ Regards,
 
 {{ config.BRAND }} Team
 
+***
+[Follow us on Twitter](http://twitter.com/LibCrowds)

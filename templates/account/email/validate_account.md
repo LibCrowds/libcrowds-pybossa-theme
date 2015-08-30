@@ -1,16 +1,19 @@
 Hello {{ user['fullname'] }},
 
-Thank you for signing up at {{ config.BRAND }}.
+Thank you for creating a {{ config.BRAND }} account.
 
-To verify that you are the owner of this e-mail address, please visit the URL below:
+To complete your registration, please verify that you are the owner of this
+e-mail address by visiting the URL below:
 
 [Click here to confirm your e-mail address and create your account][confirm]
 
-If you did not request this verification, please ignore this email.
-
 [confirm]: {{ confirm_url }}
 
-Best wishes,
+If you did not request this conformation, please ignore this email.
+
+Regards,
 
 {{ config.BRAND }} Team
 
+***
+[Follow us on Twitter](http://twitter.com/LibCrowds)

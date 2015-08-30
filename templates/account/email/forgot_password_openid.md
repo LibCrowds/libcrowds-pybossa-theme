@@ -1,6 +1,6 @@
 Hello {{ user.fullname }},
 
-We received a request to reset your {{ config.BRAND }} password.
+We received a request to recover your {{ config.BRAND }} password.
 
 If you did not request this, please ignore this email.
 
@@ -11,3 +11,5 @@ account, please contact {{ account_name }}.
 Regards,
 {{ config.BRAND }} Team
 
+***
+[Follow us on Twitter](http://twitter.com/LibCrowds)

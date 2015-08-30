@@ -1,13 +1,25 @@
-<p>Hi, {{ user['fullname'] }}!
+{% extends "account/email/base.html" %}
+
+{% block subject %}
+We need your help!
+{% endblock %}
+
+{% block subtitle %}
+Hello {{user['fullname']}},
+{% endblock %}
+
+{% block body %}
+<p>We notice you signed up for {{config.BRAND}} some time ago but never contributed.</p>
+<p>It would be great if you could come and help us in improving access to the
+collections of the British Library!</p>
+<p>
+    <a href="{{ url_for('project.index') }}">Click here to see the projects that need your help.</a>
 </p>
-<p>We notice you signed up for {{config.BRAND}} some time ago, but never contributed.
-It would be great if you could visit again and give us a hand in improving access to the collections of British Library!
-</p>
-<p>Cheers!
+<p>
+Thanks,
 </p>
 <p>{{ config.BRAND }} Team
 </p>
 <hr>
-<p><a href="{{url_for('account.update_profile', name=user['name'], _external=True)}}">Update your notifications preferences</a></p>
-<hr>
-<p><a href="http://twitter.com/LibCrowds">Follow us on Twitter</a></p>
+<p><a href="{{url_for('account.update_profile', name=user['name'], _external=True)}}">Update your notification preferences</a></p>
+{% endblock %}

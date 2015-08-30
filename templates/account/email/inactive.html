@@ -1,16 +1,25 @@
-<p>Hi, {{ user['fullname']}}!
+{% extends "account/email/base.html" %}
+
+{% block subject %}
+We miss you!
+{% endblock %}
+
+{% block subtitle %}
+Hello {{user['fullname']}},
+{% endblock %}
+
+{% block body %}
+<p>We notice you haven’t been visited {{config.BRAND}} for more than three months.</p>
+<p>It would be great if you could come and help us again and improve access to the
+collections of the British Library!
 </p>
-<p>We notice you haven’t been around {{config.BRAND}} for more than three months.
-We would like to encourage you to visit us again and continue collaborating with us.
-We hope not to bother you with this email- we’re just trying to make you not forget about us.
+<p>
+    <a href="{{ url_for('project.index') }}">Click here to see the projects that need your help.</a>
 </p>
-<p>In any case, thank you for your contribution so far.
-</p>
-<p>Cheers!
+<p>Thanks,
 </p>
 <p>{{ config.BRAND }} Team
 </p>
 <hr>
-<p><a href="{{url_for('account.update_profile', name=user['name'], _external=True)}}">Update your notifications preferences</a></p>
-<hr>
-<p><a href="http://twitter.com/LibCrowds">Follow us on Twitter</a></p>
+<p><a href="{{url_for('account.update_profile', name=user['name'], _external=True)}}">Update your notification preferences</a></p>
+{% endblock %}
