@@ -9,11 +9,11 @@
             {% include "_flash_messages.html" %}
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="white-rounded inset-shadow-white">
-                    <h2>{{ _('Great, just one more step!') }}</h2>
-                    <p>{{ _("In order to confirm your identity, we've sent an email to the address you just provided. Please, check it out and click on the link to finish creating your account at") }} {{ config.BRAND }}.</p>
-                    <p>{{ _("If you have not received the email in the next couple of minutes, please check the junk folder. If it's not there drop us an email at") }} <a href="mailto:issues@libcrowds.com">issues@libcrowds.com</a>.</p>
+                    <h2>Great, just one more step!</h2>
+                    <p>In order to confirm your identity, we've sent an email to the address you just provided. Please, click on the link given in this email to finish creating your {{ config.BRAND }} account.</p>
+                    <p>If you have not received the email in the next couple of minutes, please check the junk folder. If it's not there drop us an email at <a href="mailto:issues@libcrowds.com">issues@libcrowds.com</a>.</p>
                     <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse"> 
-                    <i class="glyphicon glyphicon-home"></i> Home</a>
+                    <i class="fa fa-home"></i> Home</a>
                 </div>
             </div>
         </div>

@@ -15,20 +15,20 @@
                         <div class="col-sm-9 col-sm-offset-3">
                           {% include "_flash_messages.html" %}
                             {{ helper.render_loading("Importing tasks, this may take a while, please wait...") }}
-                            <h1><strong>{{project.name}}</strong>: {{_('Import tasks')}}</h1>
+                            <h1><strong>{{project.name}}</strong>: Import tasks</h1>
                             <hr>
-                              <h3>{{_('From Dropbox')}}</h3>
+                              <h3>From Dropbox</h3>
                                <div id="dropbox-chooser"></div>
                                <br>
                                {% if form %}
                                <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
                                    <fieldset>
                                        {{ form.hidden_tag() }}
-                                       <p id="message" style="display: none;">{{ _('You are about to import') }} <span id="numFiles"></span> {{ _('files') }}.</p>
+                                       <p id="message" style="display: none;">You are about to import <span id="numFiles"></span> files.</p>
                                        {{ form.files(style="display: none;") }}
                                        <div class="pull-right" role="group">
-                                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">{{_('Cancel')}}</a>
-                                           <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-danger" />
+                                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
+                                           <input id="submit" type="submit" value="Import" class="btn btn-danger" />
                                        </div>
                                    </fieldset>
                                </form>

@@ -11,37 +11,37 @@
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-                {{ helper.render_project_title(project, subtitle=_('Task Settings'))}}
+                {{ helper.render_project_title(project, subtitle="Task Settings")}}
                 <hr>
                 <div class="row">
                     <div id="task_scheduler" class="col-sm-6 well">
-                        <h2><i class="glyphicon glyphicon-filter"></i> {{_('Task Scheduler')}}</h2>
-                        <p>{{_('Change how the tasks are delivered to volunteers')}}</p>
-                        <a href="{{url_for('project.task_scheduler', short_name=project.short_name)}}" class="btn btn-danger">{{_('Scheduler')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        <h2><i class="glyphicon glyphicon-filter"></i> Task Scheduler</h2>
+                        <p>Change how the tasks are delivered to volunteers</p>
+                        <a href="{{url_for('project.task_scheduler', short_name=project.short_name)}}" class="btn btn-danger">Scheduler <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                     <div id="task_priority" class="col-sm-6 well">
-                        <h2><i class="glyphicon glyphicon-sort-by-order-alt"></i> {{_('Task Priority')}}</h2>
-                        <p>{{_('Change the priority of the tasks')}}</p>
-                        <a href="{{url_for('project.task_priority', short_name=project.short_name)}}" class="btn btn-danger">{{_('Priority')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        <h2><i class="glyphicon glyphicon-sort-by-order-alt"></i> Task Priority</h2>
+                        <p>Change the priority of the tasks</p>
+                        <a href="{{url_for('project.task_priority', short_name=project.short_name)}}" class="btn btn-danger">Priority <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
                 <div class="row">
                     <div id="task_delete" class="col-sm-6 well">
-                        <h2><i class="glyphicon glyphicon-remove"></i> {{_('Delete Tasks')}}</h2>
-                        <p>{{_('Delete all the tasks and associated contributions')}}</p>
-                        <a href="{{url_for('project.delete_tasks', short_name=project.short_name)}}" class="btn btn-danger">{{_('Delete')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        <h2><i class="glyphicon glyphicon-remove"></i> Delete Tasks</h2>
+                        <p>Delete all the tasks and associated contributions</p>
+                        <a href="{{url_for('project.delete_tasks', short_name=project.short_name)}}" class="btn btn-danger">Delete <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                     <div id="task_redundancy" class="col-sm-6 well">
-                        <h2><i class="glyphicon glyphicon-repeat"></i> {{_('Task Redundancy')}}</h2>
-                        <p>{{_('Change the redundancy level for the tasks')}}</p>
-                        <a href="{{url_for('project.task_n_answers', short_name=project.short_name)}}" class="btn btn-danger">{{_('Redundancy')}} <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        <h2><i class="glyphicon glyphicon-repeat"></i> Task Redundancy</h2>
+                        <p>Change the redundancy level for the tasks</p>
+                        <a href="{{url_for('project.task_n_answers', short_name=project.short_name)}}" class="btn btn-danger">Redundancy <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
             </div><!-- col-sm-9 -->
         </div>
 {% else %}
   <div class="page-header">
-      <h1>{{_('Sorry! This project does not exist.')}}.</h1>
+      <h1>Sorry! This project does not exist.</h1>
   </div>
 {% endif %}
         </div>

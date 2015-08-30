@@ -7,16 +7,16 @@
 <div class="row">
     <div class="col-md-9 col-sm-offset-3">
         {% include "_flash_messages.html" %}
-        <h1><strong>{{current_user.fullname}}</strong>: {{ _(' Reset API Key') }}</h1>
+        <h1><strong>{{current_user.fullname}}</strong>:  Reset API Key</h1>
         <div class="alert alert-warning">
-            <strong>{{ _('Note') }}</strong>{{ _(' If you reset the API key, you will need to use the new generated key for any API call.') }}
+            <strong>Note</strong> If you reset the API key, you will need to use the new generated key for any API call.
         </div>
         <form class="form-horizontal" method="post" action="{{ url_for('account.reset_api_key', name=current_user.name)}}">
-        <h3><strong>{{ _('Do you want to reset your personal API Key?') }}</strong></h3>
+        <h3><strong>Do you want to reset your personal API Key?</strong></h3>
         <div class="form-actions">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <input type="submit" class="btn btn-sm" value="Yes"/>
-          <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-lg btn-primary">{{ _('No, do not reset the API key!') }}</a>
+          <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-lg btn-primary">No, do not reset the API key!</a>
         </div>
     </div>
 </div>

@@ -12,8 +12,8 @@
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
                 {{ helper.render_loading(loading_text) }}
-                <h1><strong>{{project.name}}</strong>: {{_('Currently configured autoimport')}}</h1>
-                <h2>{{_('You currently have the following autoimporter configured')}}</h2>
+                <h1><strong>{{project.name}}</strong>: Currently configured autoimport</h1>
+                <h2>You currently have the following autoimporter configured</h2>
                 {% if importer['type']=='epicollect' %}
                 <p><strong>Type: </strong>Epicollect</p>
                 <p><strong>Epicollect project: </strong>{{ importer['epicollect_project'] }}</p>
@@ -33,8 +33,8 @@
                 <fieldset>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                   <div class="form-actions">
-                    <input id="submit" type="submit" value="{{_('Delete')}}" class="btn btn-danger" />
-                    <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn">{{_('Back')}}</a>
+                    <input id="submit" type="submit" value="Delete" class="btn btn-danger" />
+                    <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn">Back</a>
                   </div>
                 </fieldset>
               </form>

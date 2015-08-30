@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-              <h1><strong>{{project.name}}</strong>: {{_('Project Details')}}</h1>
+              <h1><strong>{{project.name}}</strong>: Project Details</h1>
               <hr>
               <!-- Update form for project thumbnail -->
               <form method="post" class="form-horizontal upload-img-form padding-top-xs" action="{{ url_for('blplugin.update_project', short_name=project.short_name) }}" enctype="multipart/form-data">
@@ -42,7 +42,7 @@
                                 
                                 <div class="modal-footer">
                                     <div class="form-actions text-center">
-                                        <button type="submit" id="upload-btn" name='btn' value="Upload Avatar" class="btn btn-primary btn-lg" >{{ _('Upload') }}</button>
+                                        <button type="submit" id="upload-btn" name='btn' value="Upload Avatar" class="btn btn-primary btn-lg" >Upload</button>
                                     </div>
                                 </div>
                             </div>
@@ -56,16 +56,16 @@
               <fieldset>
                 {{ form.hidden_tag() }}
                 
-                {{ form_helper.render_field(form.name, class="form-control", placeholder=_('Name'), visible='true', required="required", autofocus="autofocus") }}
-                {{ form_helper.render_field(form.short_name, class="form-control", placeholder=_('Short name'), visible='true', label_text=_('Short name:')) }}
-                {{ form_helper.render_field(form.description, class="form-control", placeholder=_('Short description'), visible='true', required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
-                {{ form_helper.render_field(form.long_description, rows="13", placeholder=_('Long description:
+                {{ form_helper.render_field(form.name, class="form-control", placeholder="Name", visible='true', required="required", autofocus="autofocus") }}
+                {{ form_helper.render_field(form.short_name, class="form-control", placeholder="Short name", visible='true', label_text="Short name:") }}
+                {{ form_helper.render_field(form.description, class="form-control", placeholder="Short description", visible='true', required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
+                {{ form_helper.render_field(form.long_description, rows="13", placeholder="Long description:
                         
             Describe the purpose of the project and what it aims to achieve.
             Explain how the project works and how volunteers can help.
             Highlight the reasons why volunteer contributions are essential.
                         
-You can use Markdown to format your description.'), class="form-control hidden", required="required", visible='true') }}
+You can use Markdown to format your description.", class="form-control hidden", required="required", visible='true') }}
                 <div id="epiceditor" class="form-control" data-textarea="long_description"></div>
                 {{ form_helper.render_field(form.category_id, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.allow_anonymous_contributors, class="form-control", visible='true') }}
@@ -76,8 +76,8 @@ You can use Markdown to format your description.'), class="form-control hidden",
                 {{ form_helper.render_field(form.attribution_link, class="form-control", visible='true') }}
                 {{ form_helper.render_field_horizontal(form.hidden) }}
                 <div role="group" class="pull-right">
-                    <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
-                  <button type="submit" name="btn" value="Save the changes" class="btn btn-danger">{{_('Save')}}</button>
+                    <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
+                  <button type="submit" name="btn" value="Save the changes" class="btn btn-danger">Save</button>
                 </div>
               </fieldset>
             </form>
@@ -88,7 +88,7 @@ You can use Markdown to format your description.'), class="form-control hidden",
                     {{ form_helper.render_field(upload_imageset_form.image_set, class="form-control", visible='true',  accept=".zip") }}
                     <div role="group" class="pull-right vcenter ie-vcenter">
                         {% if project.info.image_set %}<i class="fa fa-check-circle-o fa-2x margin-right-xs badge-success"></i>{% endif %}
-                        <button type="submit" name="btn" value="Upload Image Set" class="btn btn-success">{{_('Upload')}}</button>
+                        <button type="submit" name="btn" value="Upload Image Set" class="btn btn-success">Upload</button>
                     </div>
                 </fieldset>
             </form>
@@ -99,7 +99,7 @@ You can use Markdown to format your description.'), class="form-control hidden",
                     {{ form_helper.render_field(upload_video_form.video, class="form-control", visible='true',  accept=".mp4") }}
                     <div role="group" class="pull-right vcenter ie-vcenter">
                         {% if project.info.video %}<i class="fa fa-check-circle-o fa-2x margin-right-xs badge-success"></i>{% endif %}
-                        <button type="submit" name="btn" value="Upload Video" class="btn btn-success">{{_('Upload')}}</button>
+                        <button type="submit" name="btn" value="Upload Video" class="btn btn-success">Upload</button>
                     </div>
                 </fieldset>
             </form>
@@ -110,7 +110,7 @@ You can use Markdown to format your description.'), class="form-control hidden",
                     {{ form_helper.render_field(upload_splash_form.splash, class="form-control", visible='true') }}
                     <div role="group" class="pull-right vcenter ie-vcenter">
                         {% if project.info.splash %}<i class="fa fa-check-circle-o fa-2x margin-right-xs badge-success"></i>{% endif %}
-                        <button type="submit" name="btn" value="Upload Splash" class="btn btn-success">{{_('Upload')}}</button>
+                        <button type="submit" name="btn" value="Upload Splash" class="btn btn-success">Upload</button>
                     </div>
                 </fieldset>
             </form>

@@ -4,7 +4,7 @@
         {% if pagination.has_prev %}
           <li>
           <a href="{{ url_for_other_page(pagination.page - 1)
-              }}">&laquo; {{_('Prev')}} {{handle}}</a>
+              }}">&laquo; Prev {{handle}}</a>
           </li>
         {% endif %}
 
@@ -24,7 +24,7 @@
         {% if pagination.has_next %}
           <li>
           <a href="{{ url_for_other_page(pagination.page + 1)
-              }}">{{_('Next')}} {{handle}}&raquo;</a>
+              }}">Next {{handle}}&raquo;</a>
           </li>
         {% endif %}
     </ul>
@@ -39,18 +39,18 @@
     <div class="col-sm-6 padding-top-xs">
       <ul style="list-style-type: none; font-size: 16px;">
         {% if current_user.id == project.owner_id %}
-        <li><strong><i class="glyphicon glyphicon-cog"></i> {{ _('ID') }}</strong>: {{ project.id }}</li>
+        <li><strong><i class="glyphicon glyphicon-cog"></i> ID</strong>: {{ project.id }}</li>
         {% endif %}
-        <li><strong><i class="glyphicon glyphicon-info-sign"></i> {{ _('Description') }}</strong>: {{ project['description'] }}</li>
-        <li><strong><i class="fa fa-magic"></i> {{ _('Created') }}</strong>: {{project.created[8:10]}}-{{project.created[5:7]}}-{{project.created[0:4]}}</li>
-        <li><strong><i class="glyphicon glyphicon-time"></i> {{ _('Last Activity') }}</strong>: {{project.last_activity[8:10]}}-{{project.last_activity[5:7]}}-{{project.last_activity[0:4]}}</li>
-        <li><strong><i class="fa fa-check-square-o remove-colour"></i> {{ _('Overall progress') }}</strong>: {{ overall_progress | round | int }}% {{ _('completed') }}</li>
-        <li><strong><i class="glyphicon glyphicon-tasks"></i> <a href="{{url_for('project.tasks',short_name=project.short_name)}}">{{ _('Tasks') }}</strong></a> ({{ n_tasks }})</li>
+        <li><strong><i class="glyphicon glyphicon-info-sign"></i> Description</strong>: {{ project['description'] }}</li>
+        <li><strong><i class="fa fa-magic"></i> Created</strong>: {{project.created[8:10]}}-{{project.created[5:7]}}-{{project.created[0:4]}}</li>
+        <li><strong><i class="glyphicon glyphicon-time"></i> Last Activity</strong>: {{project.last_activity[8:10]}}-{{project.last_activity[5:7]}}-{{project.last_activity[0:4]}}</li>
+        <li><strong><i class="fa fa-check-square-o remove-colour"></i> Overall progress</strong>: {{ overall_progress | round | int }}% completed</li>
+        <li><strong><i class="glyphicon glyphicon-tasks"></i> <a href="{{url_for('project.tasks',short_name=project.short_name)}}">Tasks</strong></a> ({{ n_tasks }})</li>
         {% if not current_user.is_anonymous() %}
         <li>{% if project.hidden == 1 %}
-            <i class="icon glyphicon glyphicon-eye-close"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('Yes') }}
+            <i class="icon glyphicon glyphicon-eye-close"></i> <strong>Hidden</strong>: Yes
         {% else %} 
-            <i class="icon glyphicon glyphicon-eye-open"></i> <strong>{{ _('Hidden') }}</strong>: {{ _('No') }}
+            <i class="icon glyphicon glyphicon-eye-open"></i> <strong>Hidden</strong>: No
         {% endif %}
         </li>
         {% endif %}
@@ -73,17 +73,17 @@
         <td>{{ project['short_name'] }}</td>
         {% if project.featured %}
             <td style="text-align:center;"><a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})">
-                    <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove') }}
+                    <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> Remove
             </a>
             <a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})" style="display:none;">
-                    <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
+                    <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> Add
             </a></td>
         {% else %}
             <td style="text-align:center;"><a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})">
-                    <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> {{ _('Add') }}
+                    <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> Add
             </a>
             <a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})" style="display:none;">
-                    <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> {{ _('Remove') }}
+                    <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> Remove
             </a></td>
         {% endif %}
     </tr>
@@ -128,7 +128,7 @@
                     {% endif %}
                     <div class="row hidden-md hidden-lg text-center">
                     {% if active_cat != "draft" %}
-                        <a class="btn btn-danger margin-top-sm margin-bottom-xs" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{ _('Contribute') }}</a>
+                        <a class="btn btn-danger margin-top-sm margin-bottom-xs" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">Contribute</a>
                     {% endif %}
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                 </div>
                 <div class="text-center padding-top-sm">
                     {% if active_cat != "draft" %}
-                        <p><a class="btn btn-danger" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{ _('Contribute') }}</a></p>
+                        <p><a class="btn btn-danger" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">Contribute</a></p>
                     {% endif %}
                 </div>
             </div>
@@ -216,15 +216,15 @@ function imgError(image) {
     <div class="row vcenter-md hcenter">
         <div class="col-md-8 col-xs-12 vcenter-sm text-center-xs">
             <div class="col-sm-2 vcenter hcenter"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
-            <h3><strong> {{_('Overall progress')}}</strong>: {{ overall_progress | round | int }}% {{_('completed')}}</h3>
+            <h3><strong> Overall progress</strong>: {{ overall_progress | round | int }}% completed</h3>
         </div>
         <div class="col-md-4 col-xs-12 text-center">
             {% if show_contribute_btn %}
                 <div class="pull-right-md" role="group">
-                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> {{ _('Contribute') }}</a>
+                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> Contribute</a>
                 </div>
             {% elif show_n_tasks %}
-                <span class="pull-right-md"><strong>{{n_tasks}}</strong> {{_('Tasks')}}</span>
+                <span class="pull-right-md"><strong>{{n_tasks}}</strong> Tasks</span>
             {% endif %}
         </div>
         

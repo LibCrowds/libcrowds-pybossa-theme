@@ -27,7 +27,7 @@
                             {% endif %}
                     {% endfor %}
                     {% if current_user.is_authenticated() and current_user.admin %}
-                            <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a href="{{url_for('project.draft')}}"> {{ _('Draft') }}</a></li>
+                            <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a href="{{url_for('project.draft')}}"> Draft</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -58,7 +58,7 @@
             {% endif %}
             {% else %}
                 <div class="container container-padded">
-                    <h2 class="text-center inset-text-grey">{{_('Sorry, there are no published projects for this category yet')}}</h2>
+                    <h2 class="text-center inset-text-grey">Sorry, there are no published projects for this category yet</h2>
                 </div>
             {% endif %}
         </div>

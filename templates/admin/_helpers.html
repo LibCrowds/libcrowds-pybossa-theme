@@ -7,10 +7,10 @@
     <td class="hidden-xs" style="text-align:center;">{{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}</td>
     {% if user.admin %}
         <td style="text-align:center;">{% if user.id != 1 %}<a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
-            <i class="glyphicon glyphicon-remove"></i> {{ _(' Revoke admin rights') }}</a>{% else %}N/A{% endif %}</td>
+            <i class="glyphicon glyphicon-remove"></i>  Revoke admin rights</a>{% else %}N/A{% endif %}</td>
     {% else %}
         <td  style="text-align:center;"><a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-inverse">
-            <i class="glyphicon glyphicon-plus"></i> {{ _(' Grant admin rights') }}</a></td>
+            <i class="glyphicon glyphicon-plus"></i> Grant admin rights</a></td>
     {% endif %}
 </tr>
 {% endmacro %}
@@ -38,18 +38,18 @@
             <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
             {% if active_project %}
                 <li class="divider"></li>
-                <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">{{_('Dashboard')}}</a></li>
-                <li class="nav-link"><a href="{{url_for('project.task_presenter_editor', short_name=active_project)}}">{{_('Code Editor')}}</a></li>
-                <li class="nav-link"><a href="{{url_for('project.update', short_name=active_project)}}"> {{_('Project Details')}}</a></li>
-                <li class="nav-link"><a href="{{url_for('project.auditlog', short_name=active_project)}}">{{_('Audit Logs')}}</a></li>
+                <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">Dashboard</a></li>
+                <li class="nav-link"><a href="{{url_for('project.task_presenter_editor', short_name=active_project)}}">Code Editor</a></li>
+                <li class="nav-link"><a href="{{url_for('project.update', short_name=active_project)}}"> Project Details</a></li>
+                <li class="nav-link"><a href="{{url_for('project.auditlog', short_name=active_project)}}">Audit Logs</a></li>
             {% endif %}
         </ul>
     </li>
     {% endif %}
     {% if active_project %}
-        <li class="nav-link{% if active_link=="info"%} active{% endif %}"><a href="{{url_for('blplugin.details', short_name=active_project)}}">{{_('Info')}}</a></li>
-        <li class="nav-link{% if active_link=="contribute"%} active{% endif %}"><a href="{{url_for('project.presenter', short_name=active_project)}}"> {{_('Contribute')}}</a></li>
-        <li class="nav-link{% if active_link=="statistics"%} active{% endif %}"><a href="{{url_for('project.show_stats', short_name=active_project)}}"> {{_('Statistics')}}</a></li>
+        <li class="nav-link{% if active_link=="info"%} active{% endif %}"><a href="{{url_for('blplugin.details', short_name=active_project)}}">Info</a></li>
+        <li class="nav-link{% if active_link=="contribute"%} active{% endif %}"><a href="{{url_for('project.presenter', short_name=active_project)}}"> Contribute</a></li>
+        <li class="nav-link{% if active_link=="statistics"%} active{% endif %}"><a href="{{url_for('project.show_stats', short_name=active_project)}}"> Statistics</a></li>
     {% endif %}
 </ul>
 {% endmacro %}

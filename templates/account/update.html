@@ -53,7 +53,7 @@
                                         
                                         <div class="modal-footer">
                                             <div class="form-actions text-center">
-                                                <button type="submit" id="upload-btn" name='btn' value="Upload" class="btn btn-primary btn-lg" >{{ _('Upload') }}</button>
+                                                <button type="submit" id="upload-btn" name='btn' value="Upload" class="btn btn-primary btn-lg" >Upload</button>
                                             </div>
                                         </div>
                                     </div>
@@ -70,31 +70,31 @@
                             <h2 {% if form.errors %}name="profile"{%endif%}>Update your profile</h2>
                             {{ form.id }}
                             {{ form.hidden_tag() }}
-                            {{ form_helper.render_field(form.fullname, visible='true', placeholder= _('Full name'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
-                            {{ form_helper.render_field(form.name, visible='true', placeholder= _('Username'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
-                            {{ form_helper.render_field(form.email_addr, visible='true', placeholder= _('Email'), class="form-control", type="email" ) }}
+                            {{ form_helper.render_field(form.fullname, visible='true', placeholder="Full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                            {{ form_helper.render_field(form.name, visible='true', placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                            {{ form_helper.render_field(form.email_addr, visible='true', placeholder="Email", class="form-control", type="email" ) }}
                             {{ form_helper.render_field_checkbox(form.subscribed, label_text="Subscribe to email notifications") }}
                             <select class="form-control hidden" id="locale" name="locale"><option selected="" value="en">English</option></select>
                             <div class="pull-right form-actions" role="group">
-                                <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
-                                <button type="submit" name="btn" value="Profile" class="btn btn-success" >{{ _('Save') }}</button>
+                                <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">Cancel</a>
+                                <button type="submit" name="btn" value="Profile" class="btn btn-success" >Save</button>
                             </div>
                         </fieldset>
                     </form>
                     {% if show_passwd_form %}
                     <hr class="extra-margins">
-                    <h2 {% if password_form.errors %} name="password" {%endif%}>{{ _('Change your Password') }}</h2>
+                    <h2 {% if password_form.errors %} name="password" {%endif%}>Change your Password</h2>
                     <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         <fieldset>
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             {{ password_form.id }}
                             {{ password_form.hidden_tag() }}
-                            {{ form_helper.render_field(password_form.current_password, placeholder= _('Current password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                            {{ form_helper.render_field(password_form.new_password, placeholder= _('New password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                            {{ form_helper.render_field(password_form.confirm, placeholder= _('Confirm new password'), class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                            {{ form_helper.render_field(password_form.current_password, placeholder="Current password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                            {{ form_helper.render_field(password_form.new_password, placeholder="New password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                            {{ form_helper.render_field(password_form.confirm, placeholder="Confirm new password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
                             <div class="pull-right form-actions" role="group">
-                                <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
-                                <button type="submit" name="btn" value="Password" class="btn btn-success" >{{ _('Save') }}</button>
+                                <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">Cancel</a>
+                                <button type="submit" name="btn" value="Password" class="btn btn-success" >Save</button>
                             </div>
                         </fieldset>
                     </form>

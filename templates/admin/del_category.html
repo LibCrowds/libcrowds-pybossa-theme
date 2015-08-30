@@ -10,12 +10,12 @@
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-                <h1><strong>{{ _('Admin') }}:</strong> Delete Category</h1>
+                <h1><strong>Admin:</strong> Delete Category</h1>
                 <hr>
                 <div class="alert alert-danger">
-                    <strong>{{ _('Warning!') }}</strong> {{ _('Deleting the category will remove all associated projects. This operation cannot be undone.') }}
+                    <strong>Warning!</strong> Deleting the category will remove all associated projects. This operation cannot be undone.
                 </div>
-                <h2>{{_('Delete Category')}}: {{category.name}}?</h2>
+                <h2>Delete Category: {{category.name}}?</h2>
                 <form method="POST" role="form" action="{{url_for('admin.del_category', id=category.id)}}">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     <input class="btn btn-danger" type="submit"  value="Yes"></input>

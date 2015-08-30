@@ -39,7 +39,7 @@
 <section class="white pattern-white-wall box-shadow-white-bottom">
   <div class="container padding-top-sm">
     <div class="text-center col-xs-12 padding-bottom-sm">
-      <h2>{{ _('Featured Crowdsourcing Projects') }}</h2>
+      <h2>Featured Crowdsourcing Projects</h2>
     </div>
     <div class="polaroids">
         {% for project in categories_projects['featured'] %}
@@ -55,15 +55,15 @@
    <div class="container container-padded">
     <div class="col-xs-12">
       <div class="row text-center">
-        <h2>{{ _('Most Active Volunteers') }}</h2>
+        <h2>Most Active Volunteers</h2>
       </div>
         <ul class="users text-center">
         {% for user in top_users %}
           <li class="text-center">
           <a href="{{url_for('account.profile', name=user.name)}}" data-content="
-             <strong>{{_('Joined')}}:</strong> {{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}
+             <strong>Joined:</strong> {{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}
              <br/>
-             <strong>{{_('Contributions')}}:</strong> {{user.score}}
+             <strong>Contributions:</strong> {{user.score}}
              " class="avatar-popover" data-original-title="<strong>{{user.name}}</strong>
               ">
              <div class="shadow img-circle shadow-circle">

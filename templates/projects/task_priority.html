@@ -12,18 +12,18 @@
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-                {{ helper.render_project_title(project, subtitle=_('Task Priority'))}}
+                {{ helper.render_project_title(project, subtitle="Task Priority") }}
                 
-                <p>Set the <strong>{{_('priority')}}</strong> of one or more tasks by providing a list of task IDs below.</p>
+                <p>Set the <strong>priority</strong> of one or more tasks by providing a list of task IDs below.</p>
                 <p>The lowest priority is <span class="label label-danger">0.0</span> and the highest is <span class="label label-danger">1.0</span></p>
-                <p>This priority value is only respected by the <strong>{{_('default scheduler')}}</strong>.</p>
+                <p>This priority value is only respected by the <strong>default scheduler</strong>.</p>
                 <form id="task_priority" class="form-horizontal" method="post" action="{{ url_for('project.task_priority', short_name=project.short_name) }}">
                     {{ form.hidden_tag() }}
                     <fieldset>
-                        {{ render_field(form.task_ids, class_="form-control", placeholder=_('Comma separated task IDs (e.g. 3, 532, 100)'), required="required", autofocus="autofocus")}}
-                        {{ render_field(form.priority_0, class_="form-control", placeholder=_('Priority between 0.0 and 1.0'), required="required", type="number", step="any")}}
+                        {{ render_field(form.task_ids, class_="form-control", placeholder="Comma separated task IDs (e.g. 3, 532, 100)", required="required", autofocus="autofocus")}}
+                        {{ render_field(form.priority_0, class_="form-control", placeholder="Priority between 0.0 and 1.0", required="required", type="number", step="any")}}
                         <div class="pull-right" role="group">
-                            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+                            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
                             <input type="submit" value="Set Priority" class="btn btn-danger" />
                         </div>
                     </fieldset>
@@ -32,7 +32,7 @@
         </div>
 {% else %}
   <div class="page-header">
-      <h1>{{_('Sorry! This project does not exist.')}}.</h1>
+      <h1>Sorry! This project does not exist.</h1>
   </div>
 {% endif %}
             </div>

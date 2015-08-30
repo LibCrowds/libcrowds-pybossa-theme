@@ -12,13 +12,13 @@
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-                {{ helper.render_project_title(project, subtitle=_('Task Scheduler'))}}
-                <p>{{_('You can choose from the following schedulers')}}:</p>
+                {{ helper.render_project_title(project, subtitle="Task Scheduler")}}
+                <p>You can choose from the following schedulers:</p>
                 <ul class="padding-bottom-sm">
-                    <li><strong>{{_('Default')}}</strong> {{_('or')}}
-                    <strong>{{_('Depth First')}}</strong>: returns the first task that has not been completed.</li>
-                    <li><strong>{{_('Breadth First')}}</strong>: returns a task with the least number of contributions.</li>
-                    <li><strong>{{_('Random')}}</strong>: returns a random task - a user could get the same task more than once.</li>
+                    <li><strong>Default</strong> or
+                    <strong>Depth First</strong>: returns the first task that has not been completed.</li>
+                    <li><strong>Breadth First</strong>: returns a task with the least number of contributions.</li>
+                    <li><strong>Random</strong>: returns a random task - a user could get the same task more than once.</li>
                 </ul>
 
                 <form id="task_scheduler" class="form-horizontal" method="post" action="{{ url_for('project.task_scheduler', short_name=project.short_name) }}">
@@ -26,7 +26,7 @@
                     <fieldset>
                         {{ render_field(form.sched, class_="form-control", placeholder="Task scheduler for your project")}}
                         <div class="pull-right" role="group">
-                            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
+                            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
                             <input type="submit" value="Set" class="btn btn-danger" />
                         </div>
                     </fieldset>
@@ -35,7 +35,7 @@
         </div>
 {% else %}
   <div class="page-header">
-      <h1>{{_('Sorry! This project does not exist.')}}.</h1>
+      <h1>Sorry! This project does not exist.</h1>
   </div>
 {% endif %}
 </div>

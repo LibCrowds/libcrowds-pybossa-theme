@@ -53,8 +53,8 @@
                                   onsubmit="return confirm('Do you really want to delete the blog post?');">
                                 {{ form.hidden_tag() }}
                                 <div role="group" class="pull-right-md">
-                                    <input type="submit" value={{_('Delete')}} class="btn btn-default" />
-                                    <a href="{{url_for('blog.update_blogpost', id=blogpost.id)}}" class="btn btn-danger">{{_('Edit')}}</a>
+                                    <input type="submit" value=Delete class="btn btn-default" />
+                                    <a href="{{url_for('blog.update_blogpost', id=blogpost.id)}}" class="btn btn-danger">Edit</a>
                                 </div>
                             </form>
                         </div>
@@ -68,7 +68,7 @@
             <hr>
         {% else %}
         <div class="page-header">
-            <h1>{{ _('Sorry! This blogpost does not exist.') }}</h1>
+            <h1>Sorry! This blogpost does not exist.</h1>
         </div>
     {% endif %}
     </div>
