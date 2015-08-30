@@ -67,14 +67,14 @@
                 
                     <form method="post" role="form" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         <fieldset>
-                            <h2 {% if form.errors %}name="profile"{%endif%}>Update your profile</h2>
+                            <h2>Update your profile</h2>
                             {{ form.id }}
                             {{ form.hidden_tag() }}
                             {{ form_helper.render_field(form.fullname, visible='true', placeholder="Full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                             {{ form_helper.render_field(form.name, visible='true', placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                             {{ form_helper.render_field(form.email_addr, visible='true', placeholder="Email", class="form-control", type="email" ) }}
                             {{ form_helper.render_field_checkbox(form.subscribed, label_text="Subscribe to email notifications") }}
-                            <select class="form-control hidden" id="locale" name="locale"><option selected="" value="en">English</option></select>
+                            {{ form_helper.render_field(form.locale, class="hidden") }}
                             <div class="pull-right form-actions" role="group">
                                 <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">Cancel</a>
                                 <button type="submit" name="btn" value="Profile" class="btn btn-success" >Save</button>
