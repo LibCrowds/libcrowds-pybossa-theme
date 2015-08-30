@@ -73,6 +73,7 @@
                             {{ form_helper.render_field_horizontal(form.fullname, placeholder= _('Full name'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                             {{ form_helper.render_field_horizontal(form.name, placeholder= _('Username'), class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                             {{ form_helper.render_field_horizontal(form.email_addr, placeholder= _('Email'), class="form-control", type="email" ) }}
+                            {{ form_helper.render_field_horizontal_checkbox(form.subscribed, class="form-control") }}
                             <select class="form-control hidden" id="locale" name="locale"><option selected="" value="en">English</option></select>
                             <div class="pull-right form-actions" role="group">
                                 <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">{{ _('Cancel') }}</a>
