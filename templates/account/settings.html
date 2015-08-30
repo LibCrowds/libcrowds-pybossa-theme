@@ -9,11 +9,11 @@
         {% include "_flash_messages.html" %}
 <div class="row">
     <div class="col-md-9 col-sm-offset-3">
-        <h1><strong>{{_('User')}}</strong>: {{ user.fullname }}</h1>
+        <h1><strong>User</strong>: {{ user.fullname }}</h1>
         {{ helper.render_user_profile(user, upload_method, "settings") }}
-        <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-lg"><i class="icon glyphicon glyphicon-user"></i> {{ _('Update your profile') }}</a>
+        <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-lg"><i class="icon glyphicon glyphicon-user"></i> Update your profile</a>
         {% if(not (user.twitter_user_id or user.facebook_user_id or user.google_user_id)) %}
-        <a href="{{ url_for('account.change_password', name=current_user.name) }}" class="btn btn-lg"><i class="icon glyphicon glyphicon-lock"></i> {{ _(' Change your Password') }}</a>
+        <a href="{{ url_for('account.change_password', name=current_user.name) }}" class="btn btn-lg"><i class="icon glyphicon glyphicon-lock"></i> Change your Password</a>
         {% endif %}
     </div>
 </div>

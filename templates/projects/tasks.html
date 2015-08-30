@@ -22,7 +22,7 @@
                                 <a href="{{url_for('project.import_task', short_name=project.short_name)}}" rel="nofollow">
                                 <div class="well  ">
                                         <i class="fa fa-download fa-4x"></i> 
-                                        <h3 class="margin-bottom-xs">{{_('Import Tasks')}}</h3>
+                                        <h3 class="margin-bottom-xs">Import Tasks</h3>
                                 </div>
                                 </a>
                             </div>
@@ -30,7 +30,7 @@
                                 <a href="{{url_for('project.export_to', short_name=project.short_name)}}" rel="nofollow">
                                         <div class="well  ">
                                                 <i class="fa fa-upload fa-4x"></i>
-                                                <h3 class="margin-bottom-xs"> {{_('Export Tasks')}}</h3>
+                                                <h3 class="margin-bottom-xs">Export Tasks</h3>
                                         </div>
                                 </a>
                             </div>
@@ -39,7 +39,7 @@
                                 <a href="{{url_for('project.setup_autoimporter', short_name=project.short_name)}}" rel="nofollow">
                                         <div class="well  ">
                                                 <i class="fa fa-cogs fa-4x"></i>
-                                                <h3 class="margin-bottom-xs"> {{_('Auto-import Tasks')}}</h3>
+                                                <h3 class="margin-bottom-xs">Auto-import Tasks</h3>
                                         </div>
                                 </a>
                             </div>
@@ -48,7 +48,7 @@
                                 <a href="{{url_for('project.task_presenter_editor', short_name=project.short_name)}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-edit fa-4x"></i>
-                                        <h3 class="margin-bottom-xs"> {{_('Task Presenter')}}</h3>
+                                        <h3 class="margin-bottom-xs">Task Presenter</h3>
                                     </div>
                                 </a>
                             </div>
@@ -57,7 +57,7 @@
                                 <a href="{{url_for('project.tasks_browse', short_name=project.short_name)}}" rel="nofollow">
                                 <div class="well">
                                         <i class="fa fa-list-alt fa-4x"></i>
-                                        <h3 class="margin-bottom-xs"> {{_('Browse Tasks')}}</h3>
+                                        <h3 class="margin-bottom-xs">Browse Tasks</h3>
                                     </div>
                                 </a>
                             </div>
@@ -66,7 +66,7 @@
                                 <a href="{{url_for('project.delete_tasks', short_name=project.short_name)}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-trash-o fa-4x"></i>
-                                        <h3 class="margin-bottom-xs">{{_('Delete Tasks')}}</h3>
+                                        <h3 class="margin-bottom-xs">Delete Tasks</h3>
                                     </div>
                                 </a>
                             </div>
@@ -75,7 +75,7 @@
                                 <a href="{{url_for('project.task_n_answers', short_name=project.short_name)}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-repeat fa-4x"></i>
-                                        <h3 class="margin-bottom-xs"> {{_('Task Redundancy')}}</h3>
+                                        <h3 class="margin-bottom-xs">Task Redundancy</h3>
                                     </div>
                                 </a>
                             </div>
@@ -84,7 +84,7 @@
                                 <a href="{{url_for('project.task_priority', short_name=project.short_name)}}" rel="nofollow">
                                 <div class="well">
                                         <i class="fa fa-sort-numeric-asc fa-4x"></i>
-                                        <h3 class="margin-bottom-xs"> {{_('Task Priority')}}</h3>
+                                        <h3 class="margin-bottom-xs">Task Priority</h3>
                                     </div>
                                 </a>
                             </div>
@@ -93,7 +93,7 @@
                                 <a href="{{url_for('project.task_scheduler', short_name=project.short_name)}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-filter fa-4x"></i>
-                                        <h3 class="margin-bottom-xs">{{_('Task Scheduler')}}</h3>
+                                        <h3 class="margin-bottom-xs">Task Scheduler</h3>
                                     </div>
                                 </a>
                             </div>
@@ -102,7 +102,7 @@
                                 <a href="{{url_for('project.delete', short_name=project.short_name)}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-trash fa-4x"></i>
-                                        <h3 class="margin-bottom-xs">{{_('Delete Project')}}</h3>
+                                        <h3 class="margin-bottom-xs">Delete Project</h3>
                                     </div>
                                 </a>
                             </div>
@@ -111,7 +111,7 @@
                                 <a href="{{ url_for('project.update', short_name = project.short_name) }}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-file-text-o fa-4x"></i>
-                                        <h3 class="margin-bottom-xs">{{_('Project Details')}}</h3>
+                                        <h3 class="margin-bottom-xs">Project Details</h3>
                                     </div>
                                 </a>
                             </div>
@@ -120,7 +120,7 @@
                                 <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" rel="nofollow">
                                     <div class="well">
                                         <i class="fa fa-calendar fa-4x"></i>
-                                        <h3 class="margin-bottom-xs">{{_('Audit Logs')}}</h3>
+                                        <h3 class="margin-bottom-xs">Audit Logs</h3>
                                     </div>
                                 </a>
                             </div>
@@ -132,7 +132,7 @@
 </div>
 {% else %}
   <div class="page-header">
-      <h1>{{_('Sorry! This project does not exist.')}}.</h1>
+      <h1>Sorry! This project does not exist.</h1>
   </div>
 {% endif %}
 {% endblock %}

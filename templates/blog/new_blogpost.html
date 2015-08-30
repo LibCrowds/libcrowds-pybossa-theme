@@ -11,17 +11,17 @@
         <div class="row"> 
             <div class="col-sm-9 col-sm-offset-3 col-xs-12">
                 {% include "_flash_messages.html" %}
-                <h2>{{ _('Write a new blog post') }}</h2>
+                <h2>Write a new blog post</h2>
             <form class="form-horizontal" method="post" action="{{ url_for('blog.new') }}">
                 {{ form.hidden_tag() }}
                 <fieldset>
-                    {{ render_field(form.title, class="form-control", required="required", placeholder= _('The title of your post')) }}
+                    {{ render_field(form.title, class="form-control", required="required", placeholder="The title of your post") }}
                     {{ render_field(form.body, class="form-control hidden", required="required", rows="15",
-                    placeholder= _('Write your post here. You can use Markdown!')) }}
+                    placeholder="Write your post here. You can use Markdown!") }}
                     <div id="epiceditor" class="form-control" data-textarea="body"></div>
                     <div role="group" class="pull-right">
-                        <a href="{{url_for('blog.index')}}" class="btn btn-default">{{_('Cancel')}}</a>
-                        <input type="submit" value={{_('Create')}} class="btn btn-danger" />
+                        <a href="{{url_for('blog.index')}}" class="btn btn-default">Cancel</a>
+                        <input type="submit" value="Create" class="btn btn-danger">
                     </div>
                 </fieldset>
             </form>

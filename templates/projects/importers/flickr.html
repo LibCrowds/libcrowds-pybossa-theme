@@ -12,34 +12,34 @@
                 <div class="col-sm-9 col-sm-offset-3">
                     {% include "_flash_messages.html" %}
                     {{ helper.render_loading("Importing tasks, this may take a while, please wait...") }}
-                    <h1><strong>{{project.name}}</strong>: {{_('Import tasks')}}</h1>
+                    <h1><strong>{{project.name}}</strong>: Import tasks</h1>
                     <hr>
                     <div class="row vcenter hcenter">  
                                 <div class="col-xs-10">
-                                <h3>{{_('From Flickr')}}
+                                <h3>From Flickr
                                 </div>
                               <div class="col-xs-2">
                                     {% if albums %}
-                            <a href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right">{{ _('Revoke access') }}</a>
+                            <a href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right">Revoke access</a>
                         {% endif %}
                               </div>
                             </div>
                         
                     </h3>
                     {% if not albums %}
-                       <p> {{ _('To select an album click below to grant access to your Flickr account') }}</p></br>
+                       <p> To select an album click below to grant access to your Flickr account</p></br>
              
-                    <p><a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-success">{{ _('Log in to Flickr') }}</a></p>
+                    <p><a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-success">Log in to Flickr</a></p>
                     {% else %}
-                    <h3>{{ _('Select an album, then click import:') }}</h3>
+                    <h3>Select an album, then click import:</h3>
                     <div class="row">
                         <ul>
                         {% for album in albums %}
                             <li class="col-md-3 col-sm-4 col-xs-12 text-center-xs flickr-thumbnails">
                                 <h4><strong>{{ album['title'] }}</strong></h4>
                                 <img src="{{ album['thumbnail_url'] }}" class="grey-border" alt="Flickr album thumbnail">
-                                <p class="small">{{ album['photos'] }} {{ _('photos') }}</p>
-                                <button id="{{ album['id'] }}" class="btn btn-success btn-album">{{ _('Select') }}</button>
+                                <p class="small">{{ album['photos'] }} photos</p>
+                                <button id="{{ album['id'] }}" class="btn btn-success btn-album">Select</button>
                             </li>
                         {% endfor %}
                         </ul>
@@ -51,11 +51,11 @@
                     <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
                         <fieldset>
                              {{ form.hidden_tag() }}
-                             <span class="help-block"> {{ _('Alteratively, you can manually provide the ID of a Flickr album') }}</span>
+                             <span class="help-block"> Alteratively, you can manually provide the ID of a Flickr album</span>
                              {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album", required="required", autofocus="autofocus") }}
                              <div class="pull-right" role="group">
-                                <a href="{{url_for('project.import_task', short_name=project.short_name)}}" class="btn btn-default">{{_('Cancel')}}</a>
-                                <input id="import" type="submit" value="{{_('Import')}}" class="btn btn-danger" />
+                                <a href="{{url_for('project.import_task', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
+                                <input id="import" type="submit" value="Import" class="btn btn-danger" />
                              </div>
                          </fieldset>
                      </form>

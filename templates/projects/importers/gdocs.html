@@ -12,12 +12,12 @@
                 <div class="col-sm-9 col-sm-offset-3">
                     {% include "_flash_messages.html" %}
                     {{ helper.render_loading("Importing tasks, this may take a while, please wait...") }}
-                    <h1><strong>{{project.name}}</strong>: {{_('Import tasks')}}</h1>
+                    <h1><strong>{{project.name}}</strong>: Import tasks</h1>
                     {% if form %}
                         <hr>
                             <div class="row vcenter">  
                                 <div class="col-xs-10">
-                                <h3>{{_('From a Google Docs Spreadsheet')}}</h3>
+                                <h3>From a Google Docs Spreadsheet</h3>
                                 </div>
                               <div class="col-xs-2">
                                     <a href="https://docs.google.com/spreadsheet/ccc?key=0AsNlt0WgPAHwdHFEN29mZUF0czJWMUhIejF6dWZXdkE&usp=sharing"><i class="fa fa-book"></i> Sample Data</a>
@@ -28,8 +28,8 @@
                     {{ form.hidden_tag() }}
                       {{ render_field(form.googledocs_url, class_="input-block-level form-control", placeholder="The URL of the Google Docs Spreadsheet", required="required", autofocus="autofocus", type="url") }}
                       <div class="pull-right" role="group">
-                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">{{_('Cancel')}}</a>
-                        <input id="import" type="submit" value="{{_('Import')}}" class="btn btn-danger" />
+                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
+                        <input id="import" type="submit" value="Import" class="btn btn-danger" />
                       </div>
                     </fieldset>
                   </form>

@@ -13,7 +13,7 @@
                {% if current_user.admin == 1 %}
                   <div class="row vcenter hcenter">
                       <div class="col-md-8 col-xs-12">
-                          <h1><strong>Admin</strong>: {{ _('Projects') }}</h1>
+                          <h1><strong>Admin</strong>: Projects</h1>
                       </div>
                       <div class="col-md-4 col-xs-12">            
                           <a href="{{url_for('project.new')}}" class="btn btn-danger pull-right">Create a Project</a>
@@ -22,7 +22,7 @@
                   <hr>
                   {% if all_projects %}
                      <div class="col-xs-12">
-                         <h2>{{ _('Published') }}</h2>
+                         <h2>Published</h2>
                      </div>
                      <table class="table table-stripped table-condensed table-hover table-responsive">
                          <thead>
@@ -38,7 +38,7 @@
                      </table>
                   {% else %}
                      <div class="col-xs-12">
-                         <h2>{{ _('No projects have been created') }}</h2>
+                         <h2>No projects have been created</h2>
                      </div>
                   {% endif %}
                {% else %}

@@ -12,15 +12,15 @@
                         <div class="col-sm-9 col-sm-offset-3">
                             <h1><strong>{{project.name}}</strong>: Delete all Tasks and Task Runs</h1>
                             <div class="alert alert-danger">
-                                <strong>{{_('Warning!')}}</strong> {{_('If you delete the tasks and task runs they will be gone forever!')}}
+                                <strong>Warning!</strong> If you delete the tasks and task runs they will be gone forever!
                             </div>
                             <form role="form" method="post" action="{{ url_for('project.delete_tasks', short_name = project.short_name) }}">
-                                <h3><strong>{{_('Are you sure you want to delete ALL of the project tasks and associated task runs?')}}</strong></h3>
+                                <h3><strong>Are you sure you want to delete ALL of the project tasks and associated task runs?</strong></h3>
                                 <div class="pull-right" role="group">
-                                    <button type="submit" name='btn' class="btn btn-default" value="Yes">{{_('Yes')}}</button>
+                                    <button type="submit" name='btn' class="btn btn-default" value="Yes">Yes</button>
                                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                     <a href="{{ url_for('project.tasks', short_name = project.short_name) }}"
-                                    class="btn btn-danger">{{_('No, do not delete anything!')}}</a>
+                                    class="btn btn-danger">No, do not delete anything!</a>
                                 </div>
                             </form>
                         </div>
