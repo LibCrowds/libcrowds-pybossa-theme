@@ -3,7 +3,9 @@
 {% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 {% set preload_js = "true" %}
+
 {% block content %}
+    
 {% if project %}
 {{ render_local_nav(current_user, "tasks", project.short_name) }}
 <div class="container-padded">
@@ -37,13 +39,15 @@
                         <a href="{{url_for('project.task_n_answers', short_name=project.short_name)}}" class="btn btn-danger">Redundancy <i class="glyphicon glyphicon-chevron-right"></i></a>
                     </div>
                 </div>
-            </div><!-- col-sm-9 -->
-        </div>
-{% else %}
-  <div class="page-header">
-      <h1>Sorry! This project does not exist.</h1>
-  </div>
-{% endif %}
-        </div>
             </div>
+        </div>
+     </div>
+</div>
+
+{% else %}
+<div class="page-header">
+    <h1>Sorry! This project does not exist.</h1>
+</div>
+{% endif %}
+       
 {% endblock %}

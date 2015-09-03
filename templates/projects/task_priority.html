@@ -5,6 +5,7 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
+    
 {% if project %}
 {{ render_local_nav(current_user, "tasks", project.short_name) }}
 <div class="container-padded">
@@ -28,13 +29,15 @@
                         </div>
                     </fieldset>
                 </form>
-            </div><!-- col-sm-9 -->
-        </div>
-{% else %}
-  <div class="page-header">
-      <h1>Sorry! This project does not exist.</h1>
-  </div>
-{% endif %}
             </div>
         </div>
+    </div>
+</div>
+
+{% else %}
+<div class="page-header">
+    <h1>Sorry! This project does not exist.</h1>
+</div>
+{% endif %}
+           
 {% endblock %}
