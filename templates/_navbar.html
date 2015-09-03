@@ -45,6 +45,7 @@
                     {% if current_user.admin == 1 %}
                     <li class="divider"></li>
                     <li class="nav-link"><a href="{{ url_for('admin.index') }}"><i class="fa fa-cog"></i> Admin</a></li>
+                    <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}"><i class="fa fa-folder-open"></i> Open Project</a></li>
                     {% endif %}
                     <li class="divider"></li>
                   <li class="nav-link"><a href="{{ url_for('discourse.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a></li>
