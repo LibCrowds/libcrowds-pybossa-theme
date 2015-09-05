@@ -112,7 +112,7 @@
 
                     <div class="col-sm-4 col-xs-12 padding-bottom-sm">
                         <div class="white-rounded inset-shadow-white chart same-size">
-                            <h4 class="text-center padding-bottom-sm">Total Daily Activity</h4>
+                            <h4 class="text-center padding-bottom-sm">Contributions Per Day of the Week</h4>
                             <div id="dow-chart">
                                 <canvas id="dow" width="500" height="500"></canvas>
                                 <div id="dow-legend" class="padding-top-sm legend">
@@ -229,7 +229,7 @@ $(function(){
         document.getElementById('users-legend').innerHTML = usersChart.generateLegend();
 
         
-        {% if stats.n_tasks_completed and completion_days %}
+        {% if stats.n_tasks_completed and dow %}
             //Top 10 percent chart
             var top10Percent = {{top_10_percent|safe}};
             var total = {{stats.n_task_runs | safe}}
@@ -269,22 +269,11 @@ $(function(){
         
         
             //Daily Activity
-            $dow = {{completion_days|safe}}['dow'];
-            $task_runs = {{completion_days|safe}}['task_runs'];
-            
-            var dailyData = [];
-            
-            for (i = 0; i < 7; i++) {
-                if($.inArray(i, $dow) !== -1) {
-                    $taskRunVal = $task_runs.shift();
-                    dailyData.push($taskRunVal);
-                } else {
-                    dailyData.push(0);
-                }
-            }
+            var dowLabels = {{dow|safe}}['days'];
+            var dowData = {{dow|safe}}['percentages']
             
             var data = {
-                labels: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+                labels: dowLabels,
                 datasets: [
                     {
                         fillColor: "rgba(151,187,205,0.2)",
@@ -293,13 +282,13 @@ $(function(){
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: dailyData
+                        data: dowData
                     }
                 ]
             };
             var canvas = document.getElementById("dow");
             var ctx = $("#dow")[0].getContext("2d");
-            var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+            var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%>%"};
             var dowChart = new Chart(ctx).Radar(data, opts);
             dowChart.draw();
         {% else %}
