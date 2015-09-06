@@ -55,7 +55,7 @@
                 <div class="row padding-bottom-sm" id="task-date-row">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Contributions and Tasks Completed per Day</h4>
+                            <h4 class="text-center padding-bottom-sm">Contributions per Day</h4>
                             <div id="task-date-chart">
                                 <canvas id="task-date" style="max-height:300px;"></canvas>
                             </div>
@@ -150,6 +150,17 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="row padding-bottom-sm">
+                    <div class="col-xs-12">
+                        <div class="white-rounded inset-shadow-white chart">
+                            <h4 class="text-center padding-bottom-sm">Percentage of Contributions per User</h4>
+                            <div id="contributions-per-user-chart">
+                                <canvas id="contributions-per-user" style="max-height:300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endif %}
 </div>
@@ -232,7 +243,7 @@ $(function(){
         {% if stats.n_tasks_completed and dow %}
             //Top 10 percent chart
             var top10Percent = {{top_10_percent|safe}};
-            var total = {{stats.n_task_runs | safe}}
+            var total = {{stats.n_task_runs | safe}};
             
             var remaining = total - top10Percent;
             
@@ -270,7 +281,7 @@ $(function(){
         
             //Daily Activity
             var dowLabels = {{dow|safe}}['days'];
-            var dowData = {{dow|safe}}['percentages']
+            var dowData = {{dow|safe}}['percentages'];
             
             var data = {
                 labels: dowLabels,
@@ -298,7 +309,7 @@ $(function(){
           
         {% if task_runs_daily %}
             //Tasks completed per day
-            var tasksCompletedData = {{task_runs_daily|safe}}['days']
+            var tasksCompletedData = {{task_runs_daily|safe}}['days'];
             
             var tasksCompletedLabels = [];
             $.each(tasksCompletedData, function(i, date){
@@ -512,6 +523,32 @@ $(function(){
     var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
     var hourlyChart = new Chart(ctx).Line(data, opts);
     hourlyChart.draw();
+    
+    var contributionsPerUserData = {{contributions_per_user|safe}};
+    
+    //Contributions per user
+   var data = {
+        labels: {{contributions_per_user|safe}}['increments'],
+        datasets: [
+            {
+                label: "Contributions Per User",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: {{contributions_per_user|safe}}['task_runs']
+            }
+        ]
+    };
+    $("#contributions-per-user").attr("width", $('#contributions-per-user-chart').width());
+    $("#contributions-per-user").attr("height", 300);
+    var ctx = $("#contributions-per-user")[0].getContext("2d");
+    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>% of contributions<%}else\u007B%>% of contribution<%}%>"};
+    var contributionsPerUserChart = new Chart(ctx).Line(data, opts);
+    contributionsPerUserChart.draw();
+    
     
     function formatHours(str) {
         str += ':00'
