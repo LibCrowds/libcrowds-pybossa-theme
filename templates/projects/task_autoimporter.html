@@ -36,7 +36,7 @@
                 
                 <hr />
                 
-                {% if importer['type']=='ambiguous' %}
+                {% if not importer['type']=='ambiguous' %}
                 <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
                 {% else %}
                 <form class="form-horizontal" method="post" action="{{ url_for('data/project.delete_ambiguous_autoimporter', short_name=project.short_name) }}">
