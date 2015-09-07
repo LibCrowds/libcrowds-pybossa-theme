@@ -29,7 +29,7 @@
                 {% endfor %}
                 <div class="row">
                     <div class="col-sm-4">
-                        <a href="{{url_for('data/project.ambiguous_importer', short_name=project.short_name, type='ambiguous')}}" rel="nofollow">
+                        <a href="{{url_for(target, short_name=project.short_name, type='ambiguous')}}" rel="nofollow">
                             <div class="well">
                                 <i class="fa fa-search fa-4x"></i>
                                 <h3 class="margin-bottom-xs">Ambiguous Contributions</h3> 
