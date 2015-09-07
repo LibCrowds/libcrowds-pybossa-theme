@@ -28,6 +28,10 @@
                 <p><strong>Type: </strong>Flickr album importer</p>
                 <p><strong>Flickr album ID: </strong>{{ importer['album_id'] }}</p>
                 {% endif %}
+                {% elif importer['type']=='ambiguous'%}
+                <p><strong>Type: </strong>Ambiguous Data importer</p>
+                <p><strong>Project: <a href="{{ url_for('blplugin.details', short_name = importer['project_short_name']) }}">{{importer['project_name']}}</a></p>
+                {% endif %}
         
               <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
                 <fieldset>
