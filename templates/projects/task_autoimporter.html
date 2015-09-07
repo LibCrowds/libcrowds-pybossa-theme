@@ -27,21 +27,23 @@
                 {% elif importer['type']=='flickr'%}
                 <p><strong>Type: </strong>Flickr album importer</p>
                 <p><strong>Flickr album ID: </strong>{{ importer['album_id'] }}</p>
-                {% endif %}
                 {% elif importer['type']=='ambiguous'%}
-                <p><strong>Type: </strong>Ambiguous Data importer</p>
-                <p><strong>Project: <a href="{{ url_for('blplugin.details', short_name = importer['project_short_name']) }}">{{importer['project_name']}}</a></p>
+                <p><strong>Type: </strong><a href="{{url_for('data/project.ambiguous_autoimporter', short_name=project.short_name)}}">Ambiguous Data importer</a></p>
                 {% endif %}
         
-              <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
-                <fieldset>
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                  <div class="form-actions">
-                    <input id="submit" type="submit" value="Delete" class="btn btn-danger" />
-                    <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn">Back</a>
-                  </div>
-                </fieldset>
-              </form>
+                {% if importer['type']=='ambiguous' %}
+                <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
+                {% else %}
+                <form class="form-horizontal" method="post" action="{{ url_for('data/project.delete_ambiguous_autoimporter', short_name=project.short_name) }}">
+                {% endif %}
+                    <fieldset>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <div class="form-actions">
+                            <input id="submit" type="submit" value="Delete" class="btn btn-danger" />
+                            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn">Back</a>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
