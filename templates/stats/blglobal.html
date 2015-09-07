@@ -55,7 +55,7 @@
                 <div class="row padding-bottom-sm">
                     <div class="col-xs-12">
                         <div class="white-rounded inset-shadow-white chart">
-                            <h3 class="text-center">Volunteers have come from {{n_countries}} countries and {{n_cities}} cities</h3>
+                            <h3 class="text-center">Contributions have been made from {{stats.n_continents}} continents, {{stats.n_countries}} countries and {{stats.n_cities}} cities</h3>
                         </div>
                     </div>
                 </div>
@@ -65,6 +65,17 @@
                         <div class="white-rounded inset-shadow-white text-center chart">
                             <h4 class=" padding-bottom-sm">Locations of Active Volunteers</h4>
                             <div id="map" style="height:480px;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row padding-bottom-sm" id="top-countries-row">
+                    <div class="col-xs-12">
+                        <div class="white-rounded inset-shadow-white chart">
+                            <h4 class="text-center padding-bottom-sm">Most Active Countries</h4>
+                            <div id="top-countries-chart">
+                                <canvas id="top-countries" style="max-height:300px;"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -139,7 +150,7 @@
                     </div>
                     <div class="col-sm-4 col-xs-12 padding-bottom-sm">
                         <div class="white-rounded inset-shadow-white chart same-size">
-                            <h4 class="text-center padding-bottom-sm">Most Active 10%</h4>
+                            <h4 class="text-center padding-bottom-sm">Most Active 10% of Volunteers</h4>
                             <div id="top-10-percent-chart">
                                 <canvas id="top-10-percent" width="500" height="500"></canvas>
                                 <div id="top-10-percent-legend" class="padding-top-sm legend">
@@ -155,6 +166,17 @@
                             <h4 class="text-center padding-bottom-sm">Percentage of Contributions per User</h4>
                             <div id="contributions-per-user-chart">
                                 <canvas id="contributions-per-user" style="max-height:300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row padding-bottom-sm">
+                    <div class="col-xs-12">
+                        <div class="white-rounded inset-shadow-white chart">
+                            <h4 class="text-center padding-bottom-sm">Number of Active Days per User</h4>
+                            <div id="days-active-chart">
+                                <canvas id="days-active" style="max-height:300px;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -502,6 +524,39 @@ $(function(){
             $("#top-users-alltime-row").hide();
         {% endif %}
         
+    {% if top_countries %}
+    //Top countries
+    var task_runs = {{top_countries|safe}}['n_task_runs'];
+    console.log(highScore);
+    var data = {
+        labels: {{top_countries|safe}}['countries'],
+        datasets: [
+            {
+                label: "Top Countries of All Time",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                highlightFill: "rgba(151,187,205,0.1)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: task_runs
+            }
+        ]
+    };
+    $("#top-countries").attr("width", $('#top-countries-chart').width());
+    $("#top-countries").attr("height", 300);
+    var ctx = $("#top-countries")[0].getContext("2d");
+    var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+    var topCountriesChart = new Chart(ctx).Bar(data, opts);
+    topCountriesChart.draw();
+    topCountriesChart.datasets[0].bars[0].fillColor = "rgba(186,0,0,0.1)";
+    topCountriesChart.datasets[0].bars[0].strokeColor = "rgba(186,0,0,0.5)";
+    topCountriesChart.datasets[0].bars[0].highlightStroke = "rgba(208,0,0,5)";
+    topCountriesChart.datasets[0].bars[0].highlightFill = "rgba(186,0,0,0.05)";
+    topCountriesChart.update();
+    {% else %}
+        $("#top-countries-row").hide();
+    {% endif %}
+
+        
     //Hourly chart
     var hourlyActivity = {{hourly_activity|safe}};
     var hourlyLabels = [];
@@ -529,11 +584,9 @@ $(function(){
     $("#hourly").attr("width", $('#hourly-chart').width());
     $("#hourly").attr("height", 300);
     var ctx = $("#hourly")[0].getContext("2d");
-    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%><%if(value != 1)\u007B%>% of contributions<%}else\u007B%>% of contribution<%}%>"};
     var hourlyChart = new Chart(ctx).Line(data, opts);
     hourlyChart.draw();
-    
-    var contributionsPerUserData = {{contributions_per_user|safe}};
     
     //Contributions per user
    var data = {
@@ -554,9 +607,33 @@ $(function(){
     $("#contributions-per-user").attr("width", $('#contributions-per-user-chart').width());
     $("#contributions-per-user").attr("height", 300);
     var ctx = $("#contributions-per-user")[0].getContext("2d");
-    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>% of contributions<%}else\u007B%>% of contribution<%}%>"};
+    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> of users made <%}%><%=value%><%if(value != 1)\u007B%>% of contributions<%}else\u007B%>% of contribution<%}%>"};
     var contributionsPerUserChart = new Chart(ctx).Line(data, opts);
     contributionsPerUserChart.draw();
+    
+    
+    //Active days per user
+   var data = {
+        labels: {{active_days_per_user|safe}}['increments'],
+        datasets: [
+            {
+                label: "Active Days Per User",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: {{active_days_per_user|safe}}['days']
+            }
+        ]
+    };
+    $("#days-active").attr("width", $('#days-active-chart').width());
+    $("#days-active").attr("height", 300);
+    var ctx = $("#days-active")[0].getContext("2d");
+    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> of users were active for <%}%><%=value%> <%if(value != 1)\u007B%>days<%}else\u007B%>day<%}%>"};
+    var activeDaysChart = new Chart(ctx).Line(data, opts);
+    activeDaysChart.draw();
     
     
     function formatHours(str) {
