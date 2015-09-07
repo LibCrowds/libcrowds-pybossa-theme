@@ -31,7 +31,8 @@
                 <p><strong>Type: </strong>Flickr album importer</p>
                 <p><strong>Flickr album ID: </strong>{{ importer['album_id'] }}</p>
                 {% elif importer['type']=='ambiguous'%}
-                <p><strong>Type: </strong><a href="{{url_for('data/project.ambiguous_autoimporter', short_name=project.short_name)}}">Ambiguous Data importer</a></p>
+                <p><strong>Type: </strong>Ambiguous Data importer</p>
+                <p><strong>Project: </strong>{{importer['project_name']}}</p>
                 {% endif %}
                 
                 <hr />
