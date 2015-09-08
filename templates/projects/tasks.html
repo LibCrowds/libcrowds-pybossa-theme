@@ -107,6 +107,34 @@
                     </a>
                 </div>
                 
+                <div id="task_investigation" class="col-sm-6 col-md-4">
+                    <a href="{{ url_for('data/project.investigate', short_name=project.short_name) }}" rel="nofollow">
+                        <div class="well">
+                            <i class="fa fa-search fa-4x"></i>
+                            <h3 class="margin-bottom-xs">Investigate Tasks</h3>
+                        </div>
+                    </a>
+                </div>
+                
+                
+                <div id="task_investigation" class="col-sm-6 col-md-4">
+                    <a href="{{url_for('data/project.ambiguous_autoimporter', type='ambiguous', short_name=project.short_name)}}" rel="nofollow">
+                        <div class="well">
+                            <i class="fa fa-cogs fa-4x"></i>
+                            <h3 class="margin-bottom-xs">Auto Import Ambiguous Tasks</h3> 
+                        </div>
+                    </a>
+                </div>
+                
+                <div id="task_investigators" class="col-sm-6 col-md-4">
+                    <a href="{{ url_for('data/project.investigators', short_name=project.short_name) }}" rel="nofollow">
+                        <div class="well">
+                            <i class="fa fa-users fa-4x"></i>
+                            <h3 class="margin-bottom-xs">Investigators</h3>
+                        </div>
+                    </a>
+                </div>
+                
                 <div id="delete_project" class="col-sm-6 col-md-4">
                     <a href="{{url_for('project.delete', short_name=project.short_name)}}" rel="nofollow">
                         <div class="well">

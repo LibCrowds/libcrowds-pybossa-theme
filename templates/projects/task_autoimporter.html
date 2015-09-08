@@ -12,8 +12,11 @@
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
                 {{ helper.render_loading(loading_text) }}
-                <h1><strong>{{project.name}}</strong>: Currently configured autoimport</h1>
-                <h2>You currently have the following autoimporter configured</h2>
+                <h1><strong>{{project.name}}</strong>: Auto Importer Configured</h1>
+                <h3>You currently have the following auto-importer configured</h3>
+                
+                <hr />
+                
                 {% if importer['type']=='epicollect' %}
                 <p><strong>Type: </strong>Epicollect</p>
                 <p><strong>Epicollect project: </strong>{{ importer['epicollect_project'] }}</p>
@@ -27,17 +30,26 @@
                 {% elif importer['type']=='flickr'%}
                 <p><strong>Type: </strong>Flickr album importer</p>
                 <p><strong>Flickr album ID: </strong>{{ importer['album_id'] }}</p>
+                {% elif importer['type']=='ambiguous'%}
+                <p><strong>Type: </strong>Ambiguous Data importer</p>
+                <p><strong>Project: </strong>{{importer['project_name']}}</p>
                 {% endif %}
-        
-              <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
-                <fieldset>
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                  <div class="form-actions">
-                    <input id="submit" type="submit" value="Delete" class="btn btn-danger" />
-                    <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn">Back</a>
-                  </div>
-                </fieldset>
-              </form>
+                
+                <hr />
+                
+                {% if not importer['type']=='ambiguous' %}
+                <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
+                {% else %}
+                <form class="form-horizontal" method="post" action="{{ url_for('data/project.delete_ambiguous_autoimporter', short_name=project.short_name) }}">
+                {% endif %}
+                    <fieldset>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <div class="pull-right form-actions" role="group">
+                            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Back</a>
+                            <input id="submit" type="submit" value="Delete" class="btn btn-danger" />
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
