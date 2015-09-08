@@ -117,6 +117,15 @@
                     </a>
                 </div>
                 
+                <div id="task_investigators" class="col-sm-6 col-md-4">
+                    <a href="{{ url_for('data/project.investigators', short_name=project.short_name) }}" rel="nofollow">
+                        <div class="well">
+                            <i class="fa fa-users fa-4x"></i>
+                            <h3 class="margin-bottom-xs">Investigators</h3>
+                        </div>
+                    </a>
+                </div>
+                
                 <div id="delete_project" class="col-sm-6 col-md-4">
                     <a href="{{url_for('project.delete', short_name=project.short_name)}}" rel="nofollow">
                         <div class="well">
