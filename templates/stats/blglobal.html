@@ -555,7 +555,7 @@ $(function(){
     $('#top-countries-table').html(table);
     
     var data = {
-        labels: all_countries.slice(0,4),
+        labels: all_countries.slice(0,5),
         datasets: [
             {
                 label: "Top Countries of All Time",
@@ -563,7 +563,7 @@ $(function(){
                 strokeColor: "rgba(151,187,205,1)",
                 highlightFill: "rgba(151,187,205,0.1)",
                 highlightStroke: "rgba(151,187,205,1)",
-                data: all_contributions.slice(0,4)
+                data: all_contributions.slice(0,5)
             }
         ]
     };
