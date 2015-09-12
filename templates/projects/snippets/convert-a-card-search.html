@@ -523,9 +523,7 @@ pybossa.presentTask(function(task, deferred) {
                 task.answer.oclc = $("#selected_record").attr('data-selected-oclc');
                 task.answer.ip_address = $('#client_ip').html();
                 task.answer.comments = $('#comments_field').val();
-                task.answer.shelfmark = $("#shelfmark_field").val().replace(/,/g, ".").replace(/ /g, '.').replace(/\.+/g,'.').replace(/\.$/, "").replace(/^chi/i, "CHI");
-                console.log(task.answer);
-                pybossa.saveTask(task.id, task.answer)
+                task.answer.shelfmark = $("#shelfmark_field").val().replace(/,/g, ".").replace(/ /g, '.').replace(/\.+/g,'.').replace(/\.$/, "").replace(/^\./, "").replace(/^chi/i, "CHI");pybossa.saveTask(task.id, task.answer)
                     .done(function() {
                         $("#success").fadeIn(500).fadeOut(1000);
                         deferred.resolve();
