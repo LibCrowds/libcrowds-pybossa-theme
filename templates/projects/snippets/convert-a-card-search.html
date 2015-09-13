@@ -521,6 +521,11 @@ pybossa.presentTask(function(task, deferred) {
                 task.answer = $("#shelfmark_form").serializeJSON();
                 task.answer.title = task.info.title;
                 task.answer.oclc = $("#selected_record").attr('data-selected-oclc');
+		if (task.answer.oclc.length > 0) {
+                  task.answer.worldcat_url = 'https://www.worldcat.org/oclc/' + task.answer.oclc;
+                } else {
+                  task.answer.worldcat_url = '';
+                }
                 task.answer.ip_address = $('#client_ip').html();
                 task.answer.comments = $('#comments_field').val();
                 task.answer.shelfmark = $("#shelfmark_field").val().replace(/,/g, ".").replace(/ /g, '.').replace(/\.+/g,'.').replace(/\.$/, "").replace(/^\./, "").replace(/^chi/i, "CHI");pybossa.saveTask(task.id, task.answer)
