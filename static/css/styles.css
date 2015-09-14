@@ -275,6 +275,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .btn-success{border:2px solid #2B9884;color:#2B9884}
 .btn-success:hover,.btn-success:focus,.btn-success:active,.btn-success.active,.open .dropdown-toggle.btn-success{color:#fff;background-color:#2B9884;border-color:#398439;background-position:0 -15px}
 .badge-success{background-color:#2B9884;color:#fff;font-weight:400}
+.badge-success-inverse{background-color:#fff;color:#2B9884;font-weight:400}
 .btn-info{color:#5bc0de;border:2px solid #5bc0de}
 .btn-info:hover,.btn-info:focus,.btn-info:active,.btn-info.active,.open .dropdown-toggle.btn-info{color:#fff;background-color:#5bc0de;border-color:#46b8da}
 .badge-info{background-color:#5bc0de;color:#fff;font-weight:400}
