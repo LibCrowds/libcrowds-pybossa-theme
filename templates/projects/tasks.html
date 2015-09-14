@@ -112,7 +112,7 @@
                     <a href="{{url_for('data/project.ambiguous_autoimporter', type='ambiguous', short_name=project.short_name)}}" rel="nofollow">
                         <div class="well">
                             <span class="fa fa-cogs fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Auto Import Ambiguous Tasks</h3> 
+                            <h3 class="margin-bottom-xs">Auto-import Ambiguous Tasks</h3> 
                         </div>
                     </a>
                 </div>
@@ -122,6 +122,15 @@
                         <div class="well">
                             <span class="fa fa-users fa-4x"></span>
                             <h3 class="margin-bottom-xs">Investigators</h3>
+                        </div>
+                    </a>
+                </div>
+                
+                <div id="grouped_data_criteria" class="col-sm-6 col-md-4">
+                    <a href="{{ url_for('data/project.criteria', short_name=project.short_name) }}" rel="nofollow">
+                        <div class="well">
+                            <span class="fa fa-balance-scale fa-4x"></span>
+                            <h3 class="margin-bottom-xs">Grouped Data Criteria</h3>
                         </div>
                     </a>
                 </div>

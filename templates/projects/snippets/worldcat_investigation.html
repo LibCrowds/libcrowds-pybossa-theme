@@ -1,0 +1,302 @@
+<div id="completed-row" class="row" style="display:none;">
+   <div class="col-xs-12 text-center padding-top">
+       <h1>Success! This project has now been completed.</h1>
+       <h2>Thank you for all of your contributions.</h2>
+       <a href="/"><i class="fa fa-home fa-3x"></i></a>
+   </div>
+</div>
+
+<!-- Start of Photo DIV (column) -->
+  <div class="col-xs-12 col-sm-7 col-sm-push-5 col-md-6 col-md-push-6 text-center" id="photo-container">
+     <div id="image_container" style="position: relative;">
+        <a id="photo-link" href="#">
+        <img id="photo" src="http://i.imgur.com/GeHxzb7.png" alt="Loading">
+        </a>
+     </div>
+  </div>
+
+<div class="row skeleton">
+   <!-- Start Skeleton Row-->
+  <div class="col-xs-12 col-sm-5 col-sm-pull-7 col-md-6 col-md-pull-6">
+    
+    <!-- Success and Error Messages for the user --> 
+  	<div id="alert-row">
+        <div id="loading" class="alert alert-info remove-margin-bottom" style="display:none;">
+           <a class="close">x</a>
+           <span id="i18n_loading_next_task">Loading OCLC records...</span>
+
+        <div id="finish" class="alert alert-success remove-margin-bottom" style="display:none;">
+           <strong id="i18n_congratulations">Congratulations!</strong> <span id="i18n_congratulations_text">You have participated in all available tasks!</span>
+           <br/>
+           <div class="alert-actions">
+              <a class="btn btn-small" href="/">Go back</a>
+              <a class="btn btn-small" href="/project">or, Check other projects</a>
+           </div>
+        </div>
+        <div id="error" class="alert alert-danger remove-margin-bottom" style="display:none;">
+           <a class="close">x</a>
+           <strong>Error! </strong><div id="error-details"></div>
+        </div>
+      </div>
+    
+     <!-- Start of Question and Submission DIV (column) -->
+    
+    <div class="col-xs-12" id="search_results"></div>
+  
+      <!-- Start of answer DIV -->
+      <form id="ambiguous_form" role="form">
+		<div class="form-group">
+          <label for="shelfmark_field" class="control-label padding-top-sm">Shelf Mark:</label>
+          <input type="text" id="shelfmark_field" class="form-control" placeholder="Enter shelf mark" required/>
+        </div>
+        <div class="form-group">
+          <label for="comments_field" class="control-label padding-top-sm">Comments:</label>
+          <textarea class="form-control margin-bottom-xs" rows="5" id="comments_field"></textarea>
+        </div>
+        <div class="pull-right-md text-center" role="group">
+          <a href="#" id="reject-lg" class="btn btn-danger btn-answer hidden-xs hidden-sm disabled" value="Reject"><i class="fa fa-thumbs-o-down"></i> Reject</a>
+          <a href="#" id="accept" class="btn btn-success btn-answer disabled" value="Accept"><i class="fa fa-thumbs-o-up"></i> Accept</a>
+          <a href="#" id="reject-sm" class="btn btn-danger btn-answer hidden-md hidden-lg disabled" value="Reject"><i class="fa fa-thumbs-o-down"></i> Reject</a>
+        </div>
+      </form>
+      <div class="padding-top">
+        <div class="progress progress-striped">
+          <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
+        </div>
+      </div>
+   </div>
+</div>
+
+<script>
+   $(document).ready(function() {
+     $("#image_container").draggable();
+ });
+  
+  
+  function loadProgress(task) {
+    $.ajax({
+      type: "get",
+      dataType: "json",
+      url: 'http://www.libcrowds.com/api/project/' + task.project_id + '/percentcomplete',
+      success: function(pct) {
+      	$("#progress").css("width", pct.toString() + "%");
+        $("#progress").attr("title", pct.toString() + "% complete");
+        $("#progress").tooltip({
+            'placement': 'bottom'
+        });
+      }
+    });
+  }
+  
+ 
+  function loadOclcRecords(task) {
+    $('#reject-sm').addClass('disabled');
+    $('#reject-lg').addClass('disabled');
+    $("#loading").fadeIn(300);
+    $.ajax({
+      type: "get",
+      dataType: "json",
+      url: 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/search',
+      data: {query:  '(1,12)="(' + task['info']['oclc'].join(' ').trim().replace(/ +/g, ' ').replace(/ /g, ' or ') + ')"', format: 'HTML', jsonify: 'True'},
+      success: function(results) {
+        $("#search_results").append(results['results']);
+        $('.marc-record').addClass('vcenter');
+        $('.marc-record').addClass('hcenter');
+        $('.marc-record').addClass('iecenter');
+        $('.marc-btn').removeClass('btn-success');
+        $('.marc-btn').addClass('btn-default');
+        addOclcLinks();
+        stripTrailingSlashes();
+        addUsernames(task);
+        $("#loading").fadeOut(300);
+        $('#reject-sm').removeClass('disabled');
+        $('#reject-lg').removeClass('disabled');
+      }, error: function(jqXhr, textStatus, errorThrown) {
+        $("#loading").fadeOut(300);
+        var res = JSON.parse(jqXhr.responseText)
+        if (jqXhr.status == 404){
+          $("#error-details").html("No results were returned!")
+        } else {
+          $('#error-details').html("Error: " + res['message']);
+        }
+        $('#error').show();
+      }
+    });
+  }
+  
+  
+  function addUsernames(task){
+    var oclcNumbers = task['info']['oclc'];
+    var usernames = task['info']['usernames'];
+    for (i = 0; i < oclcNumbers.length; i++) { 
+      var username = usernames[i];
+      var oclcNum = oclcNumbers[i];
+      if(oclcNum.length > 0) {
+        if (!$('#count-' + oclcNum).length) {
+          $('a[data-control-num="' + oclcNum + '"]').parent()
+          .prepend('<span id="count-' + oclcNum + '" class="badge badge-default" style="position:absolute;top:-32px;right:15px;background-color:#ADADAD">1</span>');
+          $('a[data-control-num="' + oclcNum + '"]').parent()
+          .append('<span id="usernames-' + oclcNum + '" style="position:absolute;top:60px;right:15px;font-size:0.8em;color:#9A9A9A;font-weight:300;white-space:nowrap;text-transform:lowercase;">' + username + '</span>');
+        } else { 
+          currentCount = parseInt($('#count-' + oclcNum).html());
+          currentCount = currentCount + 1;
+          $('#count-' + oclcNum).html(currentCount);
+          currentUsernames = $('#usernames-' + oclcNum).html();
+          currentUsernames = currentUsernames + ', ' + username;
+          $('#usernames-' + oclcNum).html(currentUsernames);
+          $("#loading").fadeOut(300);
+        }
+      }
+    }
+  }
+  
+  
+  function loadShelfmark(task) {
+    var shelfmarks = task['info']['shelfmark'];
+    $.each(shelfmarks,function(k, v){
+      if(v.length > 0) {
+        $('#shelfmark_field').val(v);
+        return false;
+      }
+    });
+  }
+  
+  
+  function loadComments(task) {
+    var comments = task['info']['comments'].join(' ');
+    $('#comments_field').val(comments);
+  }
+  
+  
+  //Select the catalogue record
+  $(document).delegate('.marc-btn', 'click', function(e) {
+    e.preventDefault();
+    if($(this).html() === 'Select') {
+      	$(this).addClass('selected-oclc-record');
+      	$('#accept').addClass('disabled');
+      	$('.marc-record').css('background-color', '#FFF');
+      	$('.marc-btn').html('Select');
+    	$(this).parents('.marc-record').css('background-color', '#EAEAEA');
+      	$(this).html('Deselect');
+      	$('#accept').removeClass('disabled');
+    } else {
+        $(this).removeClass('selected-oclc-record');
+      	$('#accept').addClass('disabled');
+      	$(this).parents('.marc-record').css('background-color', '#FFF');
+    	$(this).html('Select');
+    }
+    $("#shelfmark_field").focus();
+  });
+
+  
+  function addOclcLinks() {
+    $(".marc-record").each(function() {
+        $(this).find('a:first').attr('href', 'http://www.worldcat.org/title/apis/oclc/' + $(this).find('div:first').attr('id'));
+    });
+  }
+  
+  
+  function stripTrailingSlashes() {
+      $("record a").each(function() {
+          str = $(this).text();
+          if (str.substr(-1) == '/') {
+              $(this).text(str.substr(0, str.length - 1));
+          }
+      });
+  }
+  
+  
+ //Highlight an area of the image
+ $(".highlight").focus(function() {
+     var container = $("#image_container");
+   	 var highlightedPos = $(this).data('highlight-position');
+     var left = parseFloat(highlightedPos[0]['left']);
+     var bottom = parseFloat(highlightedPos[0]['bottom']);
+     var width = parseFloat(highlightedPos[0]['width']);
+     var height = parseFloat(highlightedPos[0]['height']);
+     $('<div class="child" style="position: absolute"/>')
+         .appendTo($("#image_container"))
+         .css("left", container.width() - (left * container.width()) + "px")
+         .css("bottom", container.height() - (bottom * container.height()) + "px")
+         .css("width", (width * container.width()) + "px")
+         .css("height", (height * container.height()) + "px")
+         .css("border", "1px solid " + 'blue');
+ }).blur(function() {
+     $("#image_container").children('div:last-child').remove();
+ });
+
+  
+ //Close alert windows
+ $(document).delegate('.close', 'click', function(e) {
+     $(this).parent().hide();
+ });
+
+
+ pybossa.taskLoaded(function(task, deferred) {
+   if (!$.isEmptyObject(task)) {
+         // load image from flickr
+         var img = $('<img />');
+         img.load(function() {
+             // continue as soon as the image is loaded
+             deferred.resolve(task);
+         });
+         img.attr('src', task.info.url_b + "?now=" + new Date().getTime()).css('max-height', 460);
+         img.addClass('img-thumbnail img-responsive');
+         task.info.image = img;
+     	
+     } else {
+       deferred.resolve(task);
+       $("#image_container").hide();
+	   $("#completed-row").show();
+     }
+ });
+
+  
+pybossa.presentTask(function(task, deferred) {
+    if (!$.isEmptyObject(task)) {
+      console.log(task);
+      $("#search_results").html('');
+      $("#shelfmark_field").val('');
+      $("#comments_field").val('');
+      $('#accept').addClass('disabled');
+      loadOclcRecords(task);
+      loadShelfmark(task);
+      loadComments(task);
+      loadProgress(task);
+      $('#photo-link').html('').append(task.info.image);
+      $("#photo-link").attr("href", task.info.link);
+      $('#task-id').html(task.id);
+      $("#shelfmark_field").focus();
+      $('.btn-answer').off('click').on('click', function(evt) {
+        if (typeof $(this).attr("value") != 'undefined' && !$(this).hasClass('disabled')) {
+          task.answer = $("#ambiguous_form").serializeJSON();
+          task.answer.accepted = $(this).attr("value") === 'Accept';
+          task.answer.title = task.info.title[0];
+          if($(".selected-oclc-record").length) {
+          	task.answer.oclc = $(".selected-oclc-record").attr('data-control-num');
+            task.answer.worldcat_url = 'https://www.worldcat.org/oclc/' + task.answer.oclc;
+          } else {
+          	task.answer.oclc = '';
+            task.answer.worldcat_url = '';
+          }
+          task.answer.ip_address = '';
+          task.answer.comments = $('#comments_field').val();
+          task.answer.shelfmark = $("#shelfmark_field").val().replace(/,/g, ".").replace(/ /g, '.').replace(/\.+/g,'.').replace(/\.$/, "").replace(/^\./, "").replace(/^chi/i, "CHI");
+          console.log(task.answer);
+          pybossa.saveTask(task.id, task.answer)
+          .done(function() {
+            $('#ambiguous_form').trigger("reset");
+            deferred.resolve();
+          })
+          .fail(function(e) {
+            $("#error").show();
+          });
+        } else if (!$(this).hasClass('disabled')) {
+          $("#error").show();
+        }
+      });
+    }
+});
+
+ pybossa.run('{{project.short_name}}');
+</script>
