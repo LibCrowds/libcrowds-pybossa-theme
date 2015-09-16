@@ -46,6 +46,9 @@
           {{ helper.show_project(project, "featured", current_user, upload_method) }}
         {% endfor %}
     </div>
+    <div class="col-xs-12 text-center padding-bottom">
+      <a class="btn btn-default" href="{{url_for('project.index')}}">View All Projects</a>
+    </div>
   </div>
 </section>
 {% endif %}
