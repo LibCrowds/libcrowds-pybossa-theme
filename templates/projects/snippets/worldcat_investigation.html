@@ -81,6 +81,7 @@
       success: function(pct) {
       	$("#progress").css("width", pct.toString() + "%");
         $("#progress").attr("title", pct.toString() + "% complete");
+	$("#progress").attr("data-original-title", pct.toString() + "% complete");
         $("#progress").tooltip({
             'placement': 'bottom'
         });
