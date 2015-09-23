@@ -94,35 +94,42 @@
     $('#reject-sm').addClass('disabled');
     $('#reject-lg').addClass('disabled');
     $("#loading").fadeIn(300);
-    $.ajax({
-      type: "get",
-      dataType: "json",
-      url: 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/search',
-      data: {query:  '(1,12)="(' + task['info']['oclc'].join(' ').trim().replace(/ +/g, ' ').replace(/ /g, ' or ') + ')"', format: 'HTML', jsonify: 'True'},
-      success: function(results) {
-        $("#search_results").append(results['results']);
-        $('.marc-record').addClass('vcenter');
-        $('.marc-record').addClass('hcenter');
-        $('.marc-record').addClass('iecenter');
-        $('.marc-btn').removeClass('btn-success');
-        $('.marc-btn').addClass('btn-default');
-        addOclcLinks();
-        stripTrailingSlashes();
-        addUsernames(task);
-        $("#loading").fadeOut(300);
-        $('#reject-sm').removeClass('disabled');
-        $('#reject-lg').removeClass('disabled');
-      }, error: function(jqXhr, textStatus, errorThrown) {
-        $("#loading").fadeOut(300);
-        var res = JSON.parse(jqXhr.responseText)
-        if (jqXhr.status == 404){
-          $("#error-details").html("No results were returned!")
-        } else {
-          $('#error-details').html("Error: " + res['message']);
+    if (task['info']['oclc'].join(' ').trim().replace(/ +/g, ' ').replace(/ /g, ' or ').length > 0) {
+      $.ajax({
+        type: "get",
+        dataType: "json",
+        url: 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/search',
+        data: {query:  '(1,12)="(' + task['info']['oclc'].join(' ').trim().replace(/ +/g, ' ').replace(/ /g, ' or ') + ')"', format: 'HTML', jsonify: 'True'},
+        success: function(results) {
+          $("#search_results").append(results['results']);
+          $('.marc-record').addClass('vcenter');
+          $('.marc-record').addClass('hcenter');
+          $('.marc-record').addClass('iecenter');
+          $('.marc-btn').removeClass('btn-success');
+          $('.marc-btn').addClass('btn-default');
+          addOclcLinks();
+          stripTrailingSlashes();
+          addUsernames(task);
+          $("#loading").fadeOut(300);
+          $('#reject-sm').removeClass('disabled');
+          $('#reject-lg').removeClass('disabled');
+        }, error: function(jqXhr, textStatus, errorThrown) {
+          $("#loading").fadeOut(300);
+          var res = JSON.parse(jqXhr.responseText)
+          if (jqXhr.status == 404){
+            $("#error-details").html("No results were returned!")
+          } else {
+            $('#error-details').html("Error: " + res['message']);
+          }
+          $('#error').show();
         }
-        $('#error').show();
-      }
-    });
+      });
+    } else {
+      $("#loading").fadeOut(300);
+      $('#reject-sm').removeClass('disabled');
+      $('#reject-lg').removeClass('disabled');
+      $("#search_results").append('<h2>No records were selected, this card should be rejected!</h2>');
+    }
   }
   
   
