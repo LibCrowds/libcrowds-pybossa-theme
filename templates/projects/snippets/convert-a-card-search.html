@@ -17,7 +17,7 @@
 </div>
 
 <!-- Start Skeleton Row-->
-<div class="row skeleton">
+<div class="row skeleton" id="answer-container">
    <div class="col-xs-12 col-sm-5 col-sm-pull-7 col-md-6 col-md-pull-6">
       
       <!-- Success and Error Messages for the user --> 
@@ -483,9 +483,10 @@ pybossa.taskLoaded(function(task, deferred) {
         img.addClass('img-thumbnail img-responsive');
         task.info.image = img;
     } else {
-        deferred.resolve(task);
-	$("#image_container").hide();
-	$("#completed-row").show();
+	deferred.resolve(task);
+       $("#image_container").hide();
+       $("#answer-container").hide();
+       $("#completed-row").show();
     }
 });
 

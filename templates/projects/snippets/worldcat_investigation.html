@@ -15,7 +15,7 @@
      </div>
   </div>
 
-<div class="row skeleton">
+<div class="row skeleton" id="answer-container">
    <!-- Start Skeleton Row-->
   <div class="col-xs-12 col-sm-5 col-sm-pull-7 col-md-6 col-md-pull-6">
     
@@ -255,7 +255,8 @@
      } else {
        deferred.resolve(task);
        $("#image_container").hide();
-	   $("#completed-row").show();
+       $("#answer-container").hide();
+       $("#completed-row").show();
      }
  });
 
