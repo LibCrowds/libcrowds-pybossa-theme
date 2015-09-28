@@ -484,9 +484,6 @@ pybossa.taskLoaded(function(task, deferred) {
         task.info.image = img;
     } else {
 	deferred.resolve(task);
-       $("#image_container").hide();
-       $("#answer-container").hide();
-       $("#completed-row").show();
     }
 });
 
@@ -546,9 +543,10 @@ pybossa.presentTask(function(task, deferred) {
         });
         $("#loading").hide();
     } else {
-        $(".skeleton").hide();
-        $("#loading").hide();
-        $("#finish").fadeIn(500);
+      $(".skeleton").hide();
+      $('#image_container').hide();
+      $("#loading").hide();
+      $("#completed-row").show();
     }
 });
 
