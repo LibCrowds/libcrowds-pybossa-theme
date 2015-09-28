@@ -254,9 +254,6 @@
      	
      } else {
        deferred.resolve(task);
-       $("#image_container").hide();
-       $("#answer-container").hide();
-       $("#completed-row").show();
      }
  });
 
@@ -304,6 +301,11 @@ pybossa.presentTask(function(task, deferred) {
           $("#error").show();
         }
       });
+    } else {
+      $(".skeleton").hide();
+      $('#image_container').hide();
+      $("#loading").hide();
+      $("#completed-row").show();
     }
 });
 
