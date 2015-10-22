@@ -3,6 +3,7 @@
 {% set active_project = project.short_name %}
 {% set preload_js = "true" %}
 {% block content %}
+    
 <script>
     Modernizr.load({
             test: window.JSON,
@@ -23,19 +24,7 @@
                 </div>
             </div>
         {% else %}
-            
-            {% if project.hidden == 0 %}
-                {{ project.info.task_presenter|safe }}
-            {% else %}
-                <div class="row">
-                    <div class="col-xs-12 text-center padding-top">
-                        <h1>Sorry, this project is currently hiding.</h1>
-                        <h2>It will be revealed shortly, see you then!</h2>
-                        <a href="/"><i class="fa fa-home fa-3x"></i></a>
-                    </div>
-                </div>
-            {% endif %}
-        {% endif %}
+        {{ project.info.task_presenter|safe }}
     </div>
 </div>
 {% endblock %}
