@@ -161,6 +161,15 @@
                         </div>
                     </a>
                 </div>
+                
+                <div id="publish" class="col-sm-6 col-md-4">
+                    <a href="{{url_for('project.publish', short_name=project.short_name)}}" rel="nofollow">
+                        <div class="well">
+                            <span class="fa fa-thumbs-up fa-4x"></span>
+                            <h3 class="margin-bottom-xs">Publish</h3>
+                        </div>
+                    </a>
+                </div>
                 {% endif %}
             </div>
         </div>
