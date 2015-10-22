@@ -69,7 +69,7 @@ You can use Markdown to format your description.", class="form-control hidden", 
                 <div id="epiceditor" class="form-control" data-textarea="long_description"></div>
                 {{ form_helper.render_field(form.category_id, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.allow_anonymous_contributors, class="form-control", visible='true') }}
-                {{ form_helper.render_field_horizontal(form.protect, class="form-control") }}
+                {{ form_helper.render_field_horizontal(form.protect) }}
                 {{ form_helper.render_field(form.password, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.webhook, class="form-control", visible='true') }}
                 {{ form_helper.render_field(form.flickr_link, class="form-control", visible='true') }}
