@@ -20,8 +20,8 @@
                                 <h3>From Flickr
                                 </div>
                               <div class="col-xs-2">
-                                    <div id="revoke">
-                              <a href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right" style="display:none;">Revoke access</a>
+                                    <div id="revoke" style="display:none;">
+                              <a href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right">Revoke access</a>
                               </div>
                               </div>
                             </div>
