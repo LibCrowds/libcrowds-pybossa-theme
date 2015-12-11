@@ -64,4 +64,30 @@
             </div>
         </div>
     </div>
+    <script>
+    $("#submit").off('click').on('click', function(){
+        $("#loading").show();
+    });
+</script>
+<script type="text/javascript">
+    $(function() {
+        $.get('/flickr/albums').done(function(albums) {
+            if (albums.hasOwnProperty('length') && albums.length > 0) {
+                $('#revoke').show();
+                $('#grant').hide();
+                $('#albums-container').prepend('<p>'+"{{ _('Select one of your albums:') }}"+'</p>');
+                albums.forEach(function(album){
+                    var albumElement = $('<li class="col-md-4 col-sm-6 col-xs-12"><h4>'+album.title+'</h4><img src="'+album.thumbnail_url+'"><p class="small">'+album.photos+' {{ _('photos') }}</p><button id="'+album.id+'" class="btn btn-default btn-album">{{ _('Select') }}</button></li>');
+                    $('#albums').append(albumElement);
+                });
+            }
+            $(".btn-album").each(function(){
+                $(this).off('click').on('click', function(evt){
+                    evt.preventDefault();
+                    document.getElementById('album_id').value = $(this).attr('id');
+                });
+            });
+        });
+    });
+</script>
 {% endblock %}
