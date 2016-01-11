@@ -2,17 +2,19 @@ A [Pybossa](https://github.com/PyBossa/pybossa) theme for the [LibCrowds](https:
 
 ## Installation
 
-This theme can be installed by including it in your PyBossa themes folder. Curently, you will also need to install the [BL-pybossa-plugin](https://github.com/LibCrowds/BL-pybossa-plugin) and the [discourse-pybossa-plugin](https://github.com/LibCrowds/discourse-pybossa-plugin).
+Clone this repository into your PyBossa [themes](https://github.com/PyBossa/pybossa/tree/master/pybossa/themes) folder
+and add the following setting to your PyBossa configuration file:
+
+```
+THEME = {your-custom-theme}
+```
+
+See the [PyBossa documentation](http://docs.pybossa.com/en/latest/customizing.html) for more details.
 
 
-## Useful Links
+## Requirements
 
-* [PyBossa Documentation](http://docs.pybossa.com/)
-
-
-## Author
-
-* [Alexander Mendes](mailto:alexanderhmendes@gmail.com)
+[PyBossa](https://github.com/PyBossa/pybossa) >= v1.3.0
 
 
 ## Copyright / License
