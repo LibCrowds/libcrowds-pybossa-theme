@@ -97,12 +97,6 @@
       {% endassets %}
       
       {% if current_user.is_authenticated() %}
-        {% if not current_user.info.avatar %}
-          <script>$.ajax('/api/user/set_default_avatar');</script>
-        {% endif %}
-      {% endif %}
-      
-      {% if current_user.is_authenticated() %}
         <script>
             var originalTitle = document.title;
             var originalNavContent =  $('#discourse-nav').html();

@@ -20,7 +20,7 @@
             <ul class="nav navbar-nav">
               <li class="nav-link {% if active_page == 'about' %} active{% endif %}"><a href="{{ url_for('home.about')}}">About</a></li>
               <li class="nav-link {% if active_page == 'projects' %} active{% endif %}"><a href="{{ url_for('project.index') }}">Projects</a></li>
-              <li class="nav-link {% if active_page == 'globalstats' %} active{% endif %}"><a href="{{ url_for('statistics.index')}}">Statistics</a></li>
+              <li class="nav-link {% if active_page == 'statistics' %} active{% endif %}"><a href="{{ url_for('stats.index')}}">Statistics</a></li>
               <li class="nav-link"><a href="{{url_for('discourse.index')}}">Community
                         {% if current_user.is_authenticated() %}
                                         {% if current_user.info.notification_count and current_user.info.notification_count > 0 %}
@@ -33,7 +33,6 @@
                         {% endif %}
               </a></li>
               <li class="nav-link {% if active_page == 'data' %} active{% endif %}"><a href="{{ url_for('data.index')}}">Data</a></li>
-              <li class="nav-link {% if active_page == 'blog' %} active{% endif %}"><a href="{{ url_for('blog.index')}}">Blog</a></li>
          </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
