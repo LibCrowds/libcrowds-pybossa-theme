@@ -2,10 +2,9 @@
 {% set active_page = "blog" %}
 {% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
-{% set preload_js = "true" %}
+{% from "_formhelpers.html" import render_field %}
 
 {% block content %}
-{% from "_formhelpers.html" import render_field %}
 {{ render_local_nav(current_user, "blog") }}
 <div class="container-padded">
     <div class="container container-padded">

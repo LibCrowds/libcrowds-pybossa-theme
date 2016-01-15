@@ -1,9 +1,10 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
+{% set active_link = "update" %}
 {% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 {% import "_formhelpers.html" as form_helper %}
-{% set preload_js = "true" %}
+
 {% block content %}
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
@@ -39,7 +40,7 @@
                                 <div class="modal-body">
                                     <img id="uploadPreview">
                                 </div>
-                                
+
                                 <div class="modal-footer">
                                     <div class="form-actions text-center">
                                         <button type="submit" id="upload-btn" name='btn' value="Upload Avatar" class="btn btn-primary btn-lg" >Upload</button>
@@ -55,16 +56,16 @@
             <form class="visible-form" method="post" action="{{ url_for('blplugin.update_project', short_name = project.short_name) }}" enctype="multipart/form-data">
               <fieldset>
                 {{ form.hidden_tag() }}
-                
+
                 {{ form_helper.render_field(form.name, class="form-control", placeholder="Name", visible='true', required="required", autofocus="autofocus") }}
                 {{ form_helper.render_field(form.short_name, class="form-control", placeholder="Short name", visible='true', label_text="Short name:") }}
                 {{ form_helper.render_field(form.description, class="form-control", placeholder="Short description", visible='true', required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
                 {{ form_helper.render_field(form.long_description, rows="13", placeholder="Long description:
-                        
+
             Describe the purpose of the project and what it aims to achieve.
             Explain how the project works and how volunteers can help.
             Highlight the reasons why volunteer contributions are essential.
-                        
+
 You can use Markdown to format your description.", class="form-control hidden", required="required", visible='true') }}
                 <div id="epiceditor" class="form-control" data-textarea="long_description"></div>
                 {{ form_helper.render_field(form.category_id, class="form-control", visible='true') }}
@@ -81,7 +82,7 @@ You can use Markdown to format your description.", class="form-control hidden", 
                 </div>
               </fieldset>
             </form>
-            
+
             <form method="post" class="padding-top-xs" action="{{ url_for('blplugin.update_project', short_name=project.short_name) }}" enctype="multipart/form-data">
                 <fieldset>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -92,7 +93,7 @@ You can use Markdown to format your description.", class="form-control hidden", 
                     </div>
                 </fieldset>
             </form>
-              
+
             <form method="post" class="padding-top-xs" action="{{ url_for('blplugin.update_project', short_name=project.short_name) }}" enctype="multipart/form-data">
                 <fieldset>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -103,7 +104,7 @@ You can use Markdown to format your description.", class="form-control hidden", 
                     </div>
                 </fieldset>
             </form>
-              
+
             <form method="post" class="padding-top-xs" action="{{ url_for('blplugin.update_project', short_name=project.short_name) }}" enctype="multipart/form-data">
                 <fieldset>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -114,7 +115,7 @@ You can use Markdown to format your description.", class="form-control hidden", 
                     </div>
                 </fieldset>
             </form>
-              
+
           </div>
         </div>
     </div>

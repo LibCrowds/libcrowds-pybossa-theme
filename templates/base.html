@@ -11,21 +11,24 @@
     <meta name="description" content="{{ description }}">
     <meta name="author" content="Alexander Mendes">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    
+
     {% if active_page == 'profile' or activate_page == 'account' %}
       <meta name="robots" content="noindex,nofollow">
     {% endif %}
-      
+
     <link href="https://google.com/+LibcrowdsBL" rel="publisher">
 
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}?v=2.6.8">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400%7CPermanent+Marker">
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='fonts/font-awesome-4.4.0/css/font-awesome.min.css')}}">
-    
+
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='')}}"></script>
+
+
       <style>.ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}
       .ie-mid-vcenter{position:relative;top:25%;transform:translateY(-25%);}</style>
     <![endif]-->
@@ -39,19 +42,13 @@
 
     <link rel="shortcut icon" href="/static/img/favicon.png">
 
-    {% if preload_js == "true" %}
-      {% assets "js_top" %}
-      <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.3"></script>
-      {% endassets %}
-    {% endif %}
-    
     {% include '_ga.html' ignore missing %}
     {% include '_gcs.html' ignore missing %}
   </head>
 
   <body>
     <noscript>
-      <div id="error" class="alert alert-danger js-alert">  
+      <div id="error" class="alert alert-danger js-alert">
         <strong>Please enable JavaScript!</strong> This website will not work correctly with JavaScript disabled.
       </div>
     </noscript>
@@ -62,12 +59,11 @@
           {% endif %}
           {% set active_page = active_page | default('index') -%}
           {% set has_splash = has_splash | default('false') -%}
-          {% set preload_js = preload_js | default('false') -%}
           {% set active_project  = active_project | default('none') -%}
           {% include "_navbar.html" %}
 
             <div class="container-fluid">
-          
+
               {% block content %}{% endblock %}
 
               {% if show_cookies_warning %}
@@ -77,31 +73,23 @@
                 </div>
               </div>
             {% endif %}
-            
+
             </div>
           </div>
-          
+
         <footer id="sticky-footer">
           {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
         </footer>
       </div>
-      
-      {% if not preload_js == "true" %}
-        {% assets "js_top" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.3"></script>
-        {% endassets %}
-      {% endif %}
-      
-      {% assets "js_bottom" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.3"></script>
-      {% endassets %}
-      
+
+      <!-- Le javascript -->
+
       {% if current_user.is_authenticated() %}
         {% if not current_user.info.avatar %}
           <script>$.ajax('/api/user/set_default_avatar');</script>
         {% endif %}
       {% endif %}
-      
+
       {% if current_user.is_authenticated() %}
         <script>
             var originalTitle = document.title;
