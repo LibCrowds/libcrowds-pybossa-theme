@@ -4,6 +4,6 @@
       <input type="hidden" name="ie" value="ISO-8859-1" />
       <div class="input-append">
       <input type="text" name="q" class="span2 search-query" placeholder="Search"  />
-      <button class="btn" type="submit"><i class="icon-search"></i></button>
+      <button class="btn" type="submit"><i class="fa fa-search"></i></button>
       </div>
 </form>

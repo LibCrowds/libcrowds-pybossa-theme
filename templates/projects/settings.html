@@ -14,9 +14,9 @@
                 {% include "_flash_messages.html" %}
                 <h1><strong>{{ project.name }}</strong>: Settings</h1>
                 <div class="btn-group">
-                    <a class="btn" href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="glyphicon glyphicon-edit icon-white"></i> Edit the project details</a>
-                    <a class="btn" href="{{ url_for('project.task_settings', short_name = project.short_name) }}"><i class="glyphicon glyphicon-wrench icon-white"></i> Task Settings</a>
-                    <a class="btn" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="glyphicon glyphicon-trash icon-white"></i> Delete the project</a>
+                    <a class="btn" href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="fa fa-edit"></i> Edit the project details</a>
+                    <a class="btn" href="{{ url_for('project.task_settings', short_name = project.short_name) }}"><i class="fa fa-wrench"></i> Task Settings</a>
+                    <a class="btn" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="dfa fa-trash"></i> Delete the project</a>
                 </div>
             </div>
             {% else %}

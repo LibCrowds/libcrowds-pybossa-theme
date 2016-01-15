@@ -7,10 +7,10 @@
   <div class="row" style="padding-top:20px">
       <hr>
           <div class="col-sm-12 btn-group" style="text-align:center">
-              <a class="btn"   href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="glyphicon glyphicon-edit icon-white"></i> Edit the project details</a>
-              <a class="btn"   href="{{ url_for('project.task_presenter_editor', short_name = project.short_name) }}"><i class="glyphicon glyphicon-edit icon-white"></i> Edit the task presenter</a>
-              <a class="btn"   href="{{ url_for('project.import_task', short_name = project.short_name) }}"><i class="glyphicon glyphicon-tasks icon-white"></i> Import tasks</a>
-              <a class="btn" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="glyphicon glyphicon-trash icon-white"></i> Delete the project</a>
+              <a class="btn"   href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="fa fa-edit"></i> Edit the project details</a>
+              <a class="btn"   href="{{ url_for('project.task_presenter_editor', short_name = project.short_name) }}"><i class="fa fa-edit"></i> Edit the task presenter</a>
+              <a class="btn"   href="{{ url_for('project.import_task', short_name = project.short_name) }}"><i class="da da-tasks"></i> Import tasks</a>
+              <a class="btn" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="fa fa-trash"></i> Delete the project</a>
           </div>
   </div>
 {% endblock %}

@@ -45,11 +45,11 @@
                         <td>{{c.name}}</td>
                         <td style="text-align:center;">{{ n_projects_per_category[c.short_name]}}</td>
                         <td style="text-align:center;"><div class="btn-group">
-                            <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn"><i class="glyphicon glyphicon-edit"></i> Edit Category</a>
+                            <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn"><i class="fa fa-edit"></i> Edit Category</a>
                             {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
-                            <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn"><i class="glyphicon glyphicon-trash"></i> Delete Category</a>
+                            <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn"><i class="fa fa-trash"></i> Delete Category</a>
                             {% else %}
-                            <a href="#" class="btn disabled"><i class="glyphicon glyphicon-trash"></i> Delete Category</a>
+                            <a href="#" class="btn disabled"><i class="fa fa-trash"></i> Delete Category</a>
                             {% endif %}
                         </div></td>
                     </tr>

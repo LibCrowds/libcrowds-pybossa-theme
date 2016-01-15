@@ -26,17 +26,17 @@
         {% endif %}
       {% endif %}
       <hr>
-      
+
       {% from "_formhelpers.html" import render_field %}
-      
+
             <div class="col-xs-12 col-sm-6 col-sm-offset-3">
               <form id="signin" method="post" role="form" action="">
                 {{ form.hidden_tag() }}
                 <h3 class="text-center">Or sign in with your {{brand}} account</h3>
-                
+
                 {{ render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
                 {{ render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                  <a href="{{ url_for('account.forgot_password') }}" class="pull-left remove-padding-left">Forgotten password</a>  
+                  <a href="{{ url_for('account.forgot_password') }}" class="pull-left remove-padding-left">Forgotten password</a>
                   <div class="pull-right" role="group">
                     <input type="reset" value="Cancel" class="btn btn-default" />
                     <input type="submit" value="Sign in" class="btn btn-success" />
@@ -47,15 +47,15 @@
               </div>
               <hr>
             </div>
-      
+
       <br>
       <br>
       <div class="row">
           <div class="col-xs-12 text-center">
-              <a href="{{ url_for('account.register') }}" class="btn btn-primary"><i class="icon glyphicon glyphicon-white icon-user"></i> Create a new account</a>
+              <a href="{{ url_for('account.register') }}" class="btn btn-primary"><i class="fa-user-plus"></i> Create a new account</a>
           </div>
       </div>
   </div>
-    
-    
+
+
 {% endblock %}

@@ -79,21 +79,13 @@
     <div class="col-sm-6 padding-top-xs">
       <ul style="list-style-type: none; font-size: 16px;">
         {% if current_user.id == project.owner_id %}
-        <li><strong><i class="glyphicon glyphicon-cog"></i> ID</strong>: {{ project.id }}</li>
+        <li><strong><i class="fa fa-cog"></i> ID</strong>: {{ project.id }}</li>
         {% endif %}
-        <li><strong><i class="glyphicon glyphicon-info-sign"></i> Description</strong>: {{ project['description'] }}</li>
+        <li><strong><i class="fa fa-info-circle"></i> Description</strong>: {{ project['description'] }}</li>
         <li><strong><i class="fa fa-magic"></i> Created</strong>: {{project.created[8:10]}}-{{project.created[5:7]}}-{{project.created[0:4]}}</li>
-        <li><strong><i class="glyphicon glyphicon-time"></i> Last Activity</strong>: {{project.last_activity[8:10]}}-{{project.last_activity[5:7]}}-{{project.last_activity[0:4]}}</li>
+        <li><strong><i class="fa fa-clock-o"></i> Last Activity</strong>: {{project.last_activity[8:10]}}-{{project.last_activity[5:7]}}-{{project.last_activity[0:4]}}</li>
         <li><strong><i class="fa fa-check-square-o remove-colour"></i> Overall progress</strong>: {{ overall_progress | round | int }}% completed</li>
-        <li><strong><i class="glyphicon glyphicon-tasks"></i> <a href="{{url_for('project.tasks',short_name=project.short_name)}}">Tasks</strong></a> ({{ n_tasks }})</li>
-        {% if not current_user.is_anonymous() %}
-        <li>{% if project.hidden == 1 %}
-            <i class="icon glyphicon glyphicon-eye-close"></i> <strong>Hidden</strong>: Yes
-        {% else %}
-            <i class="icon glyphicon glyphicon-eye-open"></i> <strong>Hidden</strong>: No
-        {% endif %}
-        </li>
-        {% endif %}
+        <li><strong><i class="fa fa-tasks"></i> <a href="{{url_for('project.tasks',short_name=project.short_name)}}">Tasks</strong></a> ({{ n_tasks }})</li>
       </ul>
     </div>
 </div>
@@ -113,17 +105,17 @@
         <td>{{ project['short_name'] }}</td>
         {% if project.featured %}
             <td style="text-align:center;"><a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})">
-                    <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> Remove
+                    <i id="project{{project.id}}" class="fa fa-remove"></i> Remove
             </a>
             <a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})" style="display:none;">
-                    <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> Add
+                    <i id="project{{project.id}}" class="fa fa-plus"></i> Add
             </a></td>
         {% else %}
             <td style="text-align:center;"><a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})">
-                    <i id="project{{project.id}}" class="glyphicon glyphicon-plus"></i> Add
+                    <i id="project{{project.id}}" class="fa fa-plus"></i> Add
             </a>
             <a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})" style="display:none;">
-                    <i id="project{{project.id}}" class="glyphicon glyphicon-remove"></i> Remove
+                    <i id="project{{project.id}}" class="fa fa-remove"></i> Remove
             </a></td>
         {% endif %}
     </tr>
@@ -292,7 +284,7 @@ function imgError(image) {
 <div class="row">
     <div class="col-md-12">
         <div id="loading" class="alert alert-info" style="display:none;">
-            <span class="glyphicon glyphicon-refresh spinning"></span> {{text}}
+            <span class="fa fa-refresh spinning"></span> {{text}}
         </div>
     </div>
 </div>
@@ -331,10 +323,10 @@ function imgError(image) {
         <p class="lead">Sorry, the creation and administration of projects is currently restricted.</p>
         <p class="lead">For access to this area please request admin rights.</p>
                 <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg">
-                    <i class="glyphicon glyphicon-home"></i>
+                    <i class="fa fa-home"></i>
                     Go Home
                 </a>
                 <a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()">
-                    <i class="glyphicon glyphicon-arrow-left"></i>
+                    <i class="fa fa-arrow-left"></i>
                     Go Back</a>
 {% endmacro %}

@@ -17,7 +17,7 @@
                 <div class="input-group">
                 <input id="user" name="user" type="text" class="search-query form-control" placeholder="Enter full name or username">
                 <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default form-control search-button"><i class="glyphicon glyphicon-search"></i></button>
+                    <button type="submit" class="btn btn-default form-control search-button"><i class="fa fa-search"></i></button>
                 </span>
                 </div>
                 </form>
@@ -32,14 +32,14 @@
                             <th style="text-align:center;">Action</th>
                         </tr>
                     </thead>
-                
+
                 {% for user in found %}
                     {{ render_admin_user(user) }}
                 {% endfor %}
                 </table>
-                        
+
                 {% endif %}
-        
+
                 <h2 class="padding-top-sm">Current Administrators</h2>
                 <table class="table table-stripped table-condensed table-hover table-responsive">
                     <thead>

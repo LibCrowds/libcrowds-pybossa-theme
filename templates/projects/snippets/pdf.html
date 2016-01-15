@@ -5,7 +5,7 @@
 </style>
 
 <div class="row">
-    <!-- Success and Error Messages for the user --> 
+    <!-- Success and Error Messages for the user -->
     <!-- Question, task id, photo and action buttons for answering the question-->
     <div class="col-md-6 col-md-offset-2" style="height:50px">
         <div id="success" class="alert alert-success" style="display:none;">
@@ -37,7 +37,7 @@
 <div class="row skeleton">
     <div id="question" class="col-md-12">
       <h1>Question</h1>
-      <span class="label label-info"><i class="icon glyphicon glyphicon-bullhorn"></i> Important</span> <strong>This is just a demo project. You can re-use the code to create your own project.</strong>
+      <span class="label label-info"><i class="fa fa-bullhorn"></i> Important</span> <strong>This is just a demo project. You can re-use the code to create your own project.</strong>
       <hr>
     </div>
 </div>
@@ -46,9 +46,9 @@
       <!-- Answer buttons -->
       <div id="answer" class="col-md-8" style="text-align:center;">
           <div class="btn-group" style="padding-bottom:5px;">
-          <button class="btn btn-zoom" value=0><i class="icon glyphicon glyphicon-white icon-undo"></i></button>
-          <button class="btn btn-zoom" value=1><i class="icon glyphicon glyphicon-white icon-zoom-in"></i></button>
-          <button class="btn btn-zoom" value=-1><i class="icon glyphicon glyphicon-white icon-zoom-out"></i></button>
+          <button class="btn btn-zoom" value=0><i class="fa fa-unod"></i></button>
+          <button class="btn btn-zoom" value=1><i class="fa fa-search-plus"></i></button>
+          <button class="btn btn-zoom" value=-1><i class="fa fa-search-minus"></i></button>
           </div>
           <!--<div id="viewport" style="width:620px;height:755px;overflow:auto;">
               <canvas id="the-canvas"></canvas>
@@ -161,7 +161,7 @@ function loadUserProgress() {
         var pct = Math.round((data.done*100)/data.total);
         $("#progress").css("width", pct.toString() +"%");
         $("#progress").attr("title", pct.toString() + "% completed!");
-        $("#progress").tooltip({'placement': 'left'}); 
+        $("#progress").tooltip({'placement': 'left'});
         $("#total").text(data.total);
         $("#done").text(data.done);
     });
@@ -173,7 +173,7 @@ pybossa.taskLoaded(function(task, deferred){
             $('#answer').hide();
             $('#taskcompleted').show();
         }
-        // NOTE: 
+        // NOTE:
         // Modifying the URL below to another server will likely *NOT* work. Because of browser
         // security restrictions, we have to use a file server with special headers
         // (CORS) - most servers don't support cross-origin browser requests.
@@ -187,7 +187,7 @@ pybossa.taskLoaded(function(task, deferred){
         viewport.css("display", "none");
         viewport.append(canvas);
         $("#answer").append(viewport);
-        
+
         $('#viewport_' + task.id).dragscrollable({dragSelector:'#canvas_' + task.id});
         task.canvas = document.getElementById('canvas_' + task.id);
         task.ctx = document.getElementById("canvas_" + task.id).getContext('2d');
