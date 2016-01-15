@@ -102,7 +102,8 @@
 {% macro render_project_admin_featured(project, upload_method) -%}
 <tr>
         <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
-        <td>{{ project['short_name'] }}</td>
+        <td>{{ project.category.name }}</td>
+
         {% if project.featured %}
             <td style="text-align:center;"><a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})">
                     <i id="project{{project.id}}" class="fa fa-remove"></i> Remove
