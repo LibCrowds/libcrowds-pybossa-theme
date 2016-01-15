@@ -148,17 +148,17 @@ ul.users li a{display:block;margin-bottom:5px;margin-right:7px;margin-left:7px}
 #browser-detection P.bd-title{padding-top:0;font-size:25px;line-height:100%}
 #browser-detection P.bd-notice{padding-bottom:5px;padding-top:5px}
 #browser-detection SPAN.bd-highlight{color:#B50E0E}
-#browser-detection A#browser-detection-close{width:15px;height:15px;outline:none;position:absolute;right:10px;top:10px;text-indent:-500em;line-height:100%;background:url(./images/close.gif) no-repeat center center}
+#browser-detection A#browser-detection-close{width:15px;height:15px;outline:none;position:absolute;right:10px;top:10px;text-indent:-500em;line-height:100%;background:url(./images/browserdetection/close.gif) no-repeat center center}
 #browser-detection A#browser-detection-close:HOVER{background-color:#F5F5DC}
 #browser-detection UL.bd-browsers-list,#browser-detection UL.bd-browsers-list LI,#browser-detection UL.bd-skip-buttons,#browser-detection UL.bd-skip-buttons LI{font-size:10px;list-style:none;margin:0;padding:0;padding-top:20px;padding-bottom:20px;}
 #browser-detection UL.bd-browsers-list{clear:both;margin-top:3px;border-top:1px solid #F5F5DC;border-bottom:1px solid #F5F5DC;width:100%;padding:7px 0;display:table}
 #browser-detection UL.bd-browsers-list LI{text-align:left;display:inline-block}
 #browser-detection UL.bd-browsers-list LI A{width:100px;height:55px;display:block;color:#666;text-decoration:none;padding:10px 10px 0 65px}
-#browser-detection UL.bd-browsers-list LI.firefox A{background:url(../img/firefox.gif) no-repeat left top}
-#browser-detection UL.bd-browsers-list LI.chrome A{background:url(../img/chrome.gif) no-repeat left top}
-#browser-detection UL.bd-browsers-list LI.safari A{background:url(../img/safari.gif) no-repeat left top}
-#browser-detection UL.bd-browsers-list LI.opera A{background:url(../img/opera.gif) no-repeat left top}
-#browser-detection UL.bd-browsers-list LI.msie A{background:url(../img/msie.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.firefox A{background:url(../img/browserdetection/firefox.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.chrome A{background:url(../img/browserdetection/chrome.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.safari A{background:url(../img/browserdetection/safari.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.opera A{background:url(../img/browserdetection/opera.gif) no-repeat left top}
+#browser-detection UL.bd-browsers-list LI.msie A{background:url(../img/browserdetection/msie.gif) no-repeat left top}
 .remove-colour{color:#404040!important}
 p.muted{color:#777}
 p.score{margin-top:-20px;font-size:1.8em}
@@ -291,7 +291,7 @@ h1 i,h2 i,h3 i{padding-right:10px}
 .btn-filter{background-color:#fff;border-color:#ddd;color:#666}
 .splash{background-size:cover;color:#fff;text-align:center;background-repeat:no-repeat;}
 #home-splash{background-image:url(../img/Crowd.png);background-position:center;height:100vh}
-#about-splash{background-image:url(../img/Cards/splash4.jpg);height:75vh}
+#about-splash{background-image:url(../img/splash/close_up.jpg);height:75vh}
 #project-splash{height:100vh}
 #project-splash h1 strong{font-weight:300}
 #project-splash h1{font-size:3.0em;}
