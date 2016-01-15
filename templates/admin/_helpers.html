@@ -5,25 +5,37 @@
     <td>{{user.name}}</td>
     <td class="hidden-xs">{{user.fullname}}</td>
     <td class="hidden-xs text-center">{{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}</td>
+
     {% if user.admin %}
-        <td class="text-center">{% if user.id != 1 %}<a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
-            <i class="fa fa-remove"></i>  Revoke admin rights</a>{% else %}N/A{% endif %}</td>
+    <td class="text-center">
+        {% if user.id != 1 %}
+        <a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-inverse">
+            <i class="fa fa-remove"></i>  Revoke admin rights
+        </a>
+        {% else %}
+        N/A
+        {% endif %}
+    </td>
     {% else %}
-        <td class="text-center"><a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-inverse">
-            <i class="fa fa-plus"></i> Grant admin rights</a></td>
+    <td class="text-center">
+        <a href="{{url_for('admin.add_admin', user_id=user.id)}}" class="btn btn-inverse">
+            <i class="fa fa-plus"></i> Grant admin rights
+        </a>
+    </td>
     {% endif %}
 </tr>
 {% endmacro %}
 
+
 {% macro render_admin_local_nav(current_user, active_link, active_project) %}
 <ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix">
     {% if current_user.admin %}
-        <li class="nav-link"><a href="{{url_for('admin.index')}}">Dashboard</a></li>
-        <li class="nav-link"><a href="{{url_for('admin.featured')}}">Featured</a></li>
-        <li class="nav-link"><a href="{{url_for('admin.categories')}}">Categories</a></li>
-        <li class="nav-link"><a href="{{url_for('admin.users')}}">Administrators</a></li>
-        <li class="nav-link"><a href="{{url_for('admin.export_users', format='csv')}}">Export Users</a></li>
-        <li class="nav-link"><a href="{{url_for('rq_dashboard.overview')}}">Background Jobs</a></li>
+    <li class="nav-link"><a href="{{url_for('admin.index')}}">Dashboard</a></li>
+    <li class="nav-link"><a href="{{url_for('admin.featured')}}">Featured</a></li>
+    <li class="nav-link"><a href="{{url_for('admin.categories')}}">Categories</a></li>
+    <li class="nav-link"><a href="{{url_for('admin.users')}}">Administrators</a></li>
+    <li class="nav-link"><a href="{{url_for('admin.export_users', format='csv')}}">Export Users</a></li>
+    <li class="nav-link"><a href="{{url_for('rq_dashboard.overview')}}">Background Jobs</a></li>
     {% endif %}
 </ul>
 {% endmacro %}

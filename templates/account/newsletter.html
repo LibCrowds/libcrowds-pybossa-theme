@@ -3,23 +3,21 @@
 {% set body_class="account" %}
 
 {% block content %}
-
 <div class="container container-main">
-	<div class="row">
-		<div id="newsletter" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-			{% include "_flash_messages.html" %}
-			<h1>Thanks for signing up!</h1>
-		<p class="lead">Before you get started, perhaps you would like to subscribe to our newsletter. We'll
-		update you from time to time with new features, developments, crowdsourcing prprojects and blog articles.</p>
-		<div class="pull-right" role="group">
-			<a id="notinterested" class="btn btn-default" 
-			    href="{{url_for('account.newsletter_subscribe', subscribe=False,
-			    next=next)}}">Leave me alone</a>
-			<a id="signmeup" class="btn btn-danger"
-			    href="{{url_for('account.newsletter_subscribe', subscribe=True,
-			    next=next)}}">Sure, sign me up</a>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div id="newsletter" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+	    {% include "_flash_messages.html" %}
+            <h1>Thanks for signing up!</h1>
+            <p class="lead">
+		Before you get started, perhaps you would like to subscribe to our newsletter. We'll
+		update you from time to time with new features and developments on the platform
+		(and we promise not to write too often)!
+	    </p>
+            <div class="pull-right" role="group">
+                <a id="notinterested" class="btn btn-default" href="{{url_for('account.newsletter_subscribe', subscribe=False, next=next)}}">No thanks</a>
+		<a id="signmeup" class="btn btn-danger" href="{{url_for('account.newsletter_subscribe', subscribe=True, next=next)}}">Sure, sign me up</a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

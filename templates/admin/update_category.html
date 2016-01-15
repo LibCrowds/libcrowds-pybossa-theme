@@ -3,29 +3,29 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    {{ render_local_nav(current_user, "catagories") }}
-        <div class="container-padded">
-            <div class="container container-padded">
-                <div class="row">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        {% include "_flash_messages.html" %}
-                        <h1><strong>Admin:</strong> Edit Category</h1>
-                        <hr>
-                        {% from "_formhelpers.html" import render_field %}
-                        <form role="form" method="POST" action="{{url_for('admin.update_category', id=category.id)}}">
-                            {{form.hidden_tag()}}
-                            <fieldset>
-                            {{form.id}}
-                            {{ render_field(form.name, placeholder="Category name", class="form-control", required="required", autofocus="autofocus") }}
-                            {{ render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
-                            <div class="pull-right" role="group">
-                                <a href="{{url_for('admin.categories')}}" class="btn btn-default" >Cancel</a>
-                                 <button type="submit" class="btn btn-danger">Update Category</button>
-                            </div>
-                            </fieldset>
-                        </form>
+{{ render_local_nav(current_user, "catagories") }}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                {% include "_flash_messages.html" %}
+                <h1><strong>Admin:</strong> Edit Category</h1>
+                <hr>
+                {% from "_formhelpers.html" import render_field %}
+                <form role="form" method="POST" action="{{url_for('admin.update_category', id=category.id)}}">
+                    {{form.hidden_tag()}}
+                    <fieldset>
+                    {{form.id}}
+                    {{ render_field(form.name, placeholder="Category name", class="form-control", required="required", autofocus="autofocus") }}
+                    {{ render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
+                    <div class="pull-right" role="group">
+                        <a href="{{url_for('admin.categories')}}" class="btn btn-default" >Cancel</a>
+                         <button type="submit" class="btn btn-danger">Update Category</button>
                     </div>
-                </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
+    </div>
+</div>
 {% endblock %}

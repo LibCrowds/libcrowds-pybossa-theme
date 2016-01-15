@@ -4,7 +4,7 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    {{ render_local_nav(current_user, "administrators") }}
+{{ render_local_nav(current_user, "administrators") }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
@@ -13,13 +13,13 @@
                 <h1><strong>Admin:</strong> Manage Administrators</h1>
                 {% from "_formhelpers.html" import render_field %}
                 <form class="form-search" method="POST">
-                {{ form.hidden_tag() }}
-                <div class="input-group">
-                <input id="user" name="user" type="text" class="search-query form-control" placeholder="Enter full name or username">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default form-control search-button"><i class="fa fa-search"></i></button>
-                </span>
-                </div>
+                    {{ form.hidden_tag() }}
+                    <div class="input-group">
+                        <input id="user" name="user" type="text" class="search-query form-control" placeholder="Enter full name or username">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default form-control search-button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
                 </form>
                 {% if found %}
                 <h2 class="padding-top-sm">Results</h2>

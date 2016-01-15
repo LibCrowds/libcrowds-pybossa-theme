@@ -32,15 +32,15 @@
                             {% include "_flash_messages.html" %}
                             {{ project_helper.render_loading("Loading, please wait...") }}
                             {%if not current_user.info.avatar%}
-                                <div class="row">
-                                    <div class="col-xs-6 col-xs-offset-3 alert alert-info">
-                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                        Click above to choose your avatar.
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-xs-offset-3 alert alert-info">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    Click above to choose your avatar.
                                 </div>
+                            </div>
                             {% endif %}
                             {% if 'pybossa_gravatar' in plugins %}
-                                <a href="{{ url_for('set_gravatar', name=current_user.name) }}" class="btn btn-default">Use Gravatar</a>
+                            <a href="{{ url_for('set_gravatar', name=current_user.name) }}" class="btn btn-default">Use Gravatar</a>
                             {% endif %}
                             {{ form_helper.render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
                             {{ upload_form.x1 }}
