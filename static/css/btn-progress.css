@@ -1,0 +1,441 @@
+.arc {
+    overflow: hidden;
+    position: absolute;
+    top: -10px;
+    right: 50%;
+    bottom: 50%;
+    left: -10px;
+    -webkit-transform-origin: 100% 100%;
+    -moz-transform-origin: 100% 100%;
+    -ms-transform-origin: 100% 100%;
+    -o-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+}
+
+.arc:before {
+    box-sizing: border-box;
+    display: block;
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    border-radius: 50%;
+    content: '';
+}
+
+.arc-q1.full {
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg)
+}
+
+.arc-q1.full:before {
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc-q2.full {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg)
+}
+
+.arc-q2.full:before {
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc-q3.full {
+    -moz-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg)
+}
+
+.arc-q3.full:before {
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc-q4.full {
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg)
+}
+
+.arc-q4.full:before {
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent1:before {
+    -moz-transform: skewX(-3.6deg);
+    -webkit-transform: skewX(-3.6deg);
+    -ms-transform: skewX(-3.6deg);
+    -o-transform: skewX(-3.6deg);
+    transform: skewX(-3.6deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent2:before {
+    -moz-transform: skewX(-7.2deg);
+    -webkit-transform: skewX(-7.2deg);
+    -ms-transform: skewX(-7.2deg);
+    -o-transform: skewX(-7.2deg);
+    transform: skewX(-7.2deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent3:before {
+    -moz-transform: skewX(-10.8deg);
+    -webkit-transform: skewX(-10.8deg);
+    -ms-transform: skewX(-10.8deg);
+    -o-transform: skewX(-10.8deg);
+    transform: skewX(-10.8deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent4:before {
+    -moz-transform: skewX(-14.4deg);
+    -webkit-transform: skewX(-14.4deg);
+    -ms-transform: skewX(-14.4deg);
+    -o-transform: skewX(-14.4deg);
+    transform: skewX(-14.4deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent5:before {
+    -moz-transform: skewX(-18deg);
+    -webkit-transform: skewX(-18deg);
+    -ms-transform: skewX(-18deg);
+    -o-transform: skewX(-18deg);
+    transform: skewX(-18deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent6:before {
+    -moz-transform: skewX(-21.6deg);
+    -webkit-transform: skewX(-21.6deg);
+    -ms-transform: skewX(-21.6deg);
+    -o-transform: skewX(-21.6deg);
+    transform: skewX(-21.6deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent7:before {
+    -moz-transform: skewX(-25.2deg);
+    -webkit-transform: skewX(-25.2deg);
+    -ms-transform: skewX(-25.2deg);
+    -o-transform: skewX(-25.2deg);
+    transform: skewX(-25.2deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent8:before {
+    -moz-transform: skewX(-28.8deg);
+    -webkit-transform: skewX(-28.8deg);
+    -ms-transform: skewX(-28.8deg);
+    -o-transform: skewX(-28.8deg);
+    transform: skewX(-28.8deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent9:before {
+    -moz-transform: skewX(-32.4deg);
+    -webkit-transform: skewX(-32.4deg);
+    -ms-transform: skewX(-32.4deg);
+    -o-transform: skewX(-32.4deg);
+    transform: skewX(-32.4deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent10:before {
+    -moz-transform: skewX(-36deg);
+    -webkit-transform: skewX(-36deg);
+    -ms-transform: skewX(-36deg);
+    -o-transform: skewX(-36deg);
+    transform: skewX(-36deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent11:before {
+    -moz-transform: skewX(-39.6deg);
+    -webkit-transform: skewX(-39.6deg);
+    -ms-transform: skewX(-39.6deg);
+    -o-transform: skewX(-39.6deg);
+    transform: skewX(-39.6deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent12:before {
+    -moz-transform: skewX(-43.2deg);
+    -webkit-transform: skewX(-43.2deg);
+    -ms-transform: skewX(-43.2deg);
+    -o-transform: skewX(-43.2deg);
+    transform: skewX(-43.2deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent13:before {
+    -moz-transform: skewX(-46.8deg);
+    -webkit-transform: skewX(-46.8deg);
+    -ms-transform: skewX(-46.8deg);
+    -o-transform: skewX(-46.8deg);
+    transform: skewX(-46.8deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent14:before {
+    -moz-transform: skewX(-50.4deg);
+    -webkit-transform: skewX(-50.4deg);
+    -ms-transform: skewX(-50.4deg);
+    -o-transform: skewX(-50.4deg);
+    transform: skewX(-50.4deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent15:before {
+    -moz-transform: skewX(-54deg);
+    -webkit-transform: skewX(-54deg);
+    -ms-transform: skewX(-54deg);
+    -o-transform: skewX(-54deg);
+    transform: skewX(-54deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent16:before {
+    -moz-transform: skewX(-57.6deg);
+    -webkit-transform: skewX(-57.6deg);
+    -ms-transform: skewX(-57.6deg);
+    -o-transform: skewX(-57.6deg);
+    transform: skewX(-57.6deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent17:before {
+    -moz-transform: skewX(-61.2deg);
+    -webkit-transform: skewX(-61.2deg);
+    -ms-transform: skewX(-61.2deg);
+    -o-transform: skewX(-61.2deg);
+    transform: skewX(-61.2deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent18:before {
+    -moz-transform: skewX(-64.8deg);
+    -webkit-transform: skewX(-64.8deg);
+    -ms-transform: skewX(-64.8deg);
+    -o-transform: skewX(-64.8deg);
+    transform: skewX(-64.8deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent19:before {
+    -moz-transform: skewX(-68.4deg);
+    -webkit-transform: skewX(-68.4deg);
+    -ms-transform: skewX(-68.4deg);
+    -o-transform: skewX(-68.4deg);
+    transform: skewX(-68.4deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent20:before {
+    -moz-transform: skewX(-72deg);
+    -webkit-transform: skewX(-72deg);
+    -ms-transform: skewX(-72deg);
+    -o-transform: skewX(-72deg);
+    transform: skewX(-72deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent21:before {
+    -moz-transform: skewX(-75.6deg);
+    -webkit-transform: skewX(-75.6deg);
+    -ms-transform: skewX(-75.6deg);
+    -o-transform: skewX(-75.6deg);
+    transform: skewX(-75.6deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent22:before {
+    -moz-transform: skewX(-79.2deg);
+    -webkit-transform: skewX(-79.2deg);
+    -ms-transform: skewX(-79.2deg);
+    -o-transform: skewX(-79.2deg);
+    transform: skewX(-79.2deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent23:before {
+    -moz-transform: skewX(-82.8deg);
+    -webkit-transform: skewX(-82.8deg);
+    -ms-transform: skewX(-82.8deg);
+    -o-transform: skewX(-82.8deg);
+    transform: skewX(-82.8deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent24:before {
+    -moz-transform: skewX(-86.4deg);
+    -webkit-transform: skewX(-86.4deg);
+    -ms-transform: skewX(-86.4deg);
+    -o-transform: skewX(-86.4deg);
+    transform: skewX(-86.4deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.arc.percent25:before {
+    -moz-transform: skewX(-90deg);
+    -webkit-transform: skewX(-90deg);
+    -ms-transform: skewX(-90deg);
+    -o-transform: skewX(-90deg);
+    transform: skewX(-90deg);
+    border: solid 10px #2FA92F;
+    -webkit-transition: border-color .2s linear;
+    -moz-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
