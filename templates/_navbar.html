@@ -33,7 +33,6 @@
                         {% endif %}
               </a></li>
               <li class="nav-link {% if active_page == 'data' %} active{% endif %}"><a href="{{ url_for('data.index')}}">Data</a></li>
-              <li class="nav-link {% if active_page == 'blog' %} active{% endif %}"><a href="{{ url_for('blog.index')}}">Blog</a></li>
          </ul>
             {% include '_gcs_form.html' ignore missing %}
           {% if current_user.is_authenticated() %}
