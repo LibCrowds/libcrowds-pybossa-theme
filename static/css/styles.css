@@ -1271,12 +1271,6 @@ h1 i, h2 i, h3 i {
     padding-right: 10px;
 }
 
-#epiceditor {
-    min-height: 500px;
-    width: 100%;
-    margin-bottom: 40px
-}
-
 #sorts {
     z-index: 1
 }
