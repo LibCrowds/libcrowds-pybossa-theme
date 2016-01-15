@@ -295,7 +295,7 @@ function imgError(image) {
         {% if upload_method == 'rackspace'%}
         <img class="{{class}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
         {% else %}
-        <img  class="{{class}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))|resize(size)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
+        <img  class="{{class}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail)) }}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
         {% endif %}
     {% elif project.info.thumbnail %}
         <img class="{{class}}" src="{{project.info.thumbnail}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
