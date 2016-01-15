@@ -37,28 +37,27 @@
             <li class="nav-link">
                 <a href="{{ url_for('discourse.index')}}">Community
 
-                {% if current_user.is_authenticated() %}
-                    {% if current_user.info.notification_count and current_user.info.notification_count > 0 %}
-                        <span id="discourse-notifications" class="badge badge-danger">
-                            {{current_user.info.notification_count}}
-                        </span>
-                    {% else %}
-                        <span id="discourse-notifications" class="badge badge-danger"></span>
-                    {% endif %}
+                {% if current_user.info.notification_count and current_user.info.notification_count > 0 %}
+                <span id="discourse-notifications" class="badge badge-danger">
+                    {{current_user.info.notification_count}}
+                </span>
+                {% else %}
+                <span id="discourse-notifications" class="badge badge-danger"></span>
                 {% endif %}
+
                 </a>
             </li>
             {% endif %}
 
             <!-- Use the libcrowds-data-repo plugin, if available -->
             {% if 'libcrowds_data_repo' in plugins %}
-                <li class="nav-link {% if active_page == 'data' %} active{% endif %}">
-                    <a href="{{ url_for('data.index')}}">Data</a>
-                </li>
+            <li class="nav-link {% if active_page == 'data' %} active{% endif %}">
+                <a href="{{ url_for('data.index')}}">Data</a>
+            </li>
             {% endif %}
         </ul>
 
-        <!-- Search form -->
+        <!-- Optional search form -->
         {% include '_gcs_form.html' ignore missing %}
 
         {% if current_user.is_authenticated() %}
@@ -88,15 +87,15 @@
 
                 <li class="divider"></li>
 
-                <!-- Use pybossa-discourse plugin, if available -->
+                <!-- Also sign out from Discourse, if plugin is available -->
                 {% if 'pybossa_discourse' in plugins %}
-                    <li class="nav-link">
-                        <a href="{{ url_for('discourse.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
-                    </li>
+                <li class="nav-link">
+                    <a href="{{ url_for('discourse.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
+                </li>
                 {% else %}
-                    <li class="nav-link">
-                        <a href="{{ url_for('account.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
-                    </li>
+                <li class="nav-link">
+                    <a href="{{ url_for('account.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
+                </li>
                 {% endif %}
 
               </ul>
