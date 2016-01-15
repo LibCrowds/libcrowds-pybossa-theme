@@ -53,6 +53,7 @@
         scrollbarStyle: null,
     });
 
+    /** Use stylesheets and JS in preview */
     function updatePreview() {
         var previewFrame = document.getElementById('preview');
         var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
@@ -68,6 +69,8 @@
         $head.append($("<script/>", { src: "{{url_for('static', filename='vendor/bootstrap-3.3.2/js/bootstrap.js')}}" }));
         $head.append($("<script/>", { src: "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" }));
     }
+
+    /** Toggle slide between code editor and preview */
     $(".btn-preview").off('click').on('click', function(e){
         if ($(this).text() == 'Preview'){
             updatePreview();
@@ -82,5 +85,10 @@
         $(window).scrollTop();
         $(this).blur();
     });
+
+    /** Fix gutter size */
+    if ($('.CodeMirror-gutter').length) {
+        $('#code-btns').attr('padding-left', $('.CodeMirror-gutter').attr('width'));
+    }
 </script>
 {% endblock %}

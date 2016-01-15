@@ -54,12 +54,12 @@
             </div>
         </div>
     </div>
-    <script>
+<script>
     $("#submit").off('click').on('click', function(){
         $("#loading").show();
     });
 </script>
-<script type="text/javascript">
+<script>
     $(function() {
         $.get('/flickr/albums').done(function(albums) {
             if (albums.hasOwnProperty('length') && albums.length > 0) {
@@ -75,6 +75,7 @@
                 $(this).off('click').on('click', function(evt){
                     evt.preventDefault();
                     document.getElementById('album_id').value = $(this).attr('id');
+                    document.location.href = "#album_id";
                 });
             });
         });

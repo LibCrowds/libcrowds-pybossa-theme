@@ -1,93 +1,30 @@
 $(function() {
-    var glow = $('.glowing-link');
-    setInterval(function(){
-        glow.hasClass('glow') ? glow.removeClass('glow') : glow.addClass('glow');
-    }, 2000);
+    loadSplash();
+    getShareStats();
+    stylePolaroids();
+    setBodyBackground();
+    showHistoryButton();
+    makeLinkGlow();
+    setTasksRemaining();
+    animateProgress();
+    sameSize();
+    styleNavigation();
+    addIEInputLabels();
+});
 
+
+/** Load any custom splash images. */
+function loadSplash(){
     var customSplash = $('.splash').attr('data-splash');
     if (typeof customSplash !== typeof undefined && customSplash !== false) {
         $('.splash').css({
             "background-image": 'url(' + customSplash + ")"
         });
     }
+}
 
-    updateXML();
 
-    $(".btn-album").each(function(){
-        $(this).off('click').on('click', function(){
-            document.getElementById('album_id').value = $(this).attr('id');
-            document.location.href = "#album_id";
-        });
-    });
-
-    if ($(".set-main-bg").length > 0) {
-        $('body').addClass($(".set-main-bg").attr('data-bg'));
-    }
-
-    if ($('.CodeMirror-gutter').length) {
-        $('#code-btns').attr('padding-left', $('.CodeMirror-gutter').attr('width'));
-    }
-
-    $(".polaroids .polaroid:nth-child(even)").addClass("even");
-    $("ul.polaroids div:nth-child(even) .polaroid").addClass("even");
-
-    $('.fa-download').each(function() {
-            var bytes = $(this).attr('data-filesize');
-            if (typeof bytes !== typeof undefined && bytes !== false) {
-                $(this).html("<small> (" + bytesToSize(bytes) + ")</small>");
-            }
-    });
-
-    if (history.length > 1) {
-        $("#btnBack").show();
-    }
-    else {
-        $("#btnHome").show();
-    }
-
-    $('.tasks-remaining').each(function() {
-        var tasks = $(this).attr('data-tasks');
-        var progress = $(this).attr('data-progress');
-        var remaining = Math.ceil((100 - progress) * .01 * tasks);
-        $(this).html('Tasks Remaining: ' + remaining);
-    });
-
-    //EpicEditor
-    if (typeof(EpicEditor) !== "undefined") {
-        var epicEditorTextArea = $('#epiceditor').data('textarea');
-        var opts = {
-        container: 'epiceditor',
-          textarea: epicEditorTextArea,
-          basePath: window.location.origin + '/static/',
-          clientSideStorage: false,
-          theme: {
-            base: 'vendor/EpicEditor-v0.2.2/themes/base/epiceditor.css',
-            preview: 'css/styles.css',
-            editor: 'css/styles.css'
-          }
-        }
-        var editor = new EpicEditor(opts);
-        editor.load();
-    }
-
-    animateProgress();
-    sameSize();
-    styleNavigation();
-    getShareStats();
-    addIEInputLabels();
-});
-
-$(window).scroll(function() {
-    styleNavigation();
-    animateProgress();
-});
-
-$(window).on("resize", function() {
-    sameSize();
-    animateProgress();
-    styleNavigation();
-}).resize();
-
+/** Update social media share stats. */
 function getShareStats(){
     $('.btn-facebook').each(function(){
         var facebook = $(this);
@@ -169,6 +106,58 @@ function getShareStats(){
 }
 
 
+/** Style any polaroid images. */
+function stylePolaroids(){
+    $(".polaroids .polaroid:nth-child(even)").addClass("even");
+    $("ul.polaroids div:nth-child(even) .polaroid").addClass("even");
+}
+
+
+/** Add background class body allowing backgrounds to be set from templates. */
+function setBodyBackground(){
+    if ($(".set-main-bg").length > 0) {
+        $('body').addClass($(".set-main-bg").attr('data-bg'));
+    }
+}
+
+
+/** Show back button, or home button if now history. */
+function showHistoryButton(){
+    if (history.length > 1) {
+        $("#btnBack").show();
+    }
+    else {
+        $("#btnHome").show();
+    }
+}
+
+/** Set tasks remaining in project summaries. */
+function setTasksRemaining() {
+$('.tasks-remaining').each(function() {
+    var tasks = $(this).attr('data-tasks');
+    var progress = $(this).attr('data-progress');
+    var remaining = Math.ceil((100 - progress) * .01 * tasks);
+    $(this).html('Tasks Remaining: ' + remaining);
+});
+}
+
+
+/** Trigger refresh of certain elements on scroll. */
+$(window).scroll(function() {
+    styleNavigation();
+    animateProgress();
+});
+
+
+/** Trigger refresh of certain elements on resize. */
+$(window).on("resize", function() {
+    sameSize();
+    animateProgress();
+    styleNavigation();
+}).resize();
+
+
+/** Return True if an element is visible on the screen, False otherwise. */
 function isVisible(elem) {
     var $elem = $(elem);
     var $window = $(window);
@@ -179,6 +168,8 @@ function isVisible(elem) {
     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 }
 
+
+/** Animate the progress bar. */
 function animateProgress() {
     $(".meter > span").each(function() {
         if (isVisible($(this)) && $(this).attr('data-progress') > 0) {
@@ -191,6 +182,8 @@ function animateProgress() {
     });
 }
 
+
+/** Animate the progress counter. */
 function animateCounter(elem) {
     var $counter = $('#' + $(elem).attr('data-app') + 'Complete');
     var progress = $(elem).attr('data-progress');
@@ -207,28 +200,8 @@ function animateCounter(elem) {
     });
 }
 
-function updateXML() {
-    if ($("#xml").length > 0) {
-        var text = vkbeautify.xml($('#xml2').html());
-        var expr = new RegExp("\n", "g")
-        $('#xml').html(text.replace(expr, '<br>'));
-    }
-}
 
-function addIEInputLabels() {
-    if (/*@cc_on!@*/false || !!document.documentMode) {
-        $('label').each(function() {
-            if (!$(this).siblings('.hidden').length) {
-                $(this).removeClass('sr-only');
-            }
-        });
-    }
-}
-
-function recordIP(){
-    $.ajax('/blplugin/record_ip');
-}
-
+/** Toggle the main navigation between opaque and transparent. */
 function styleNavigation() {
     if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
         $('.navbar').removeClass('opaque');
@@ -239,19 +212,12 @@ function styleNavigation() {
         $('.dropdown-menu').addClass('opaque');
         $('#navbar-logo').attr('src', $('#logo-black').attr('data-src'));
     }
-    $('.navbar-default')[0].offsetHeight; // Trigger a reflow, flushing the CSS changes
+    $('.navbar-default')[0].offsetHeight; // Trigger a reflow, flushing the CSS
     $('.navbar-default').removeClass('notransition');
 }
 
-function bytesToSize(bytes) {
-    if(bytes == 0) return '0 Bytes';
-    if(bytes == 1) return '1 Byte';
-    var k = 1000;
-    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    var i = Math.floor(Math.log(bytes) / Math.log(k));
-    return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
-}
 
+/** Sets all elements of class same-size to the same height. */
 function sameSize() {
     var m2 = 0;
     $(".row .same-size").height("");
@@ -272,11 +238,15 @@ function sameSize() {
     $(".well").height(m);
 }
 
+
+/** Show loading icon while image form uploads */
 $('.upload-img-form').submit(function() {
-    $('#upload-btn').html('<i class="glyphicon glyphicon-refresh spinning"></i> Uploading');
+    $('#upload-btn').html('<i class="fa fa-refresh spinning"></i> Uploading');
     $('#upload-btn').blur();
 });
 
+
+/** Display popover */
 $("a.avatar-popover").popover({
     html: true,
     animation: true,
@@ -284,6 +254,8 @@ $("a.avatar-popover").popover({
     placement: 'top'
 });
 
+
+/** Display popover */
 $("a.btn-popover").popover({
     html: true,
     animation: true,
@@ -292,6 +264,8 @@ $("a.btn-popover").popover({
     container: 'body'
 });
 
+
+/** Display popover */
 $(".input-popover").popover({
     html: true,
     animation: true,
@@ -300,10 +274,14 @@ $(".input-popover").popover({
     container: 'body'
 });
 
+
+/** Click the avatar button when edit-profile-image clicked. */
 $('.edit-profile-image').on("click", function() {
     $('#avatar').click();
 });
 
+
+/** On click scroll to the element with the ID given in data-anchor. */
 $('.anchor-btn').click(function(evt) {
     evt.preventDefault();
     var anchor = $(this).attr('data-anchor');
@@ -312,12 +290,8 @@ $('.anchor-btn').click(function(evt) {
     }, 1000);
 });
 
-$('#search-catalogue-again').click(function(evt) {
-    evt.preventDefault();
-    $('#catalogue-results').slideUp();
-    $('#catalogue-form').slideDown();
-});
 
+/** Toggle slide of admin options menu */
 $('#admin-options').click(function(evt) {
     evt.preventDefault();
     var current = $(this).attr("class");
@@ -329,6 +303,8 @@ $('#admin-options').click(function(evt) {
     $('#admin-menu').slideToggle("fast", function() {});
 });
 
+
+/** Toggle slide of project options menu */
 $('#project-options').click(function(evt) {
     evt.preventDefault();
     var current = $(this).attr("class");
@@ -336,27 +312,33 @@ $('#project-options').click(function(evt) {
     $(this).attr("class", current);
     $(this).toggleClass("active");
     $('#admin-menu').slideUp();
-    $('#web-service-menu').slideUp();
     $('#project-menu').slideToggle("fast", function() {});
 });
 
-$('#web-service-options').click(function(evt) {
-    evt.preventDefault();
-    var current = $(this).attr("class");
-    $('.bs-docs-sidenav .nav-link > a').removeClass('active');
-    $(this).attr("class", current);
-    $(this).toggleClass("active");
-    $('#admin-menu').slideUp();
-    $('#project-menu').slideUp();
-    $('#web-service-menu').slideToggle("fast", function() {});
+
+/** Show loading ID when import ID clickied. */
+$("#import").off('click').on('click', function(){
+    $("#loading").show();
 });
 
+
+/** Show loading ID when ckan link clickied. */
 $("#ckan > a").off('click').on('click', function(){
     $("#loading").show();
 });
 
+
+/** Fix for tooltips. */
 $("a[rel=tooltip]").tooltip();
 
-$("#import").off('click').on('click', function(){
-    $("#loading").show();
-});
+
+/** IE fix for form input labels. */
+function addIEInputLabels() {
+    if (/*@cc_on!@*/false || !!document.documentMode) {
+        $('label').each(function() {
+            if (!$(this).siblings('.hidden').length) {
+                $(this).removeClass('sr-only');
+            }
+        });
+    }
+}
