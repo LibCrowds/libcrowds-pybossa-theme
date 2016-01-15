@@ -1,7 +1,6 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
-{% set preload_js = "true" %}
 {% set description = "Participate in crowdsourcing projects and help improve access to collections of the British Library." %}
 
 {% block content %}
@@ -33,7 +32,7 @@
             </div>
         </div>
     </section>
-        
+
     <div class="container">
         <div class="col-xs-12 padding-top-xs">
             {% include "_flash_messages.html" %}
@@ -46,7 +45,7 @@
                   <li><a href="#" data-sort-value="progress">progress</a></li>
                 </ul>
             </div>
-    
+
         {% if projects %}
             <div class="polaroids projects margin-top-sm">
                 {% for project in projects %}
@@ -63,7 +62,7 @@
             {% endif %}
         </div>
     </div>
-            
+
 </div>
 {{ helper.broken_image() }}
 <script>

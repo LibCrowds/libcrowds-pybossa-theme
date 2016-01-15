@@ -17,7 +17,7 @@
             {% else %}
             <li class="active">
                 <a href="#">{{ page }}</a>
-            </li>  
+            </li>
             {% endif %}
           {% endif %}
         {%- endfor %}
@@ -30,6 +30,46 @@
     </ul>
   </div>
 {% endmacro %}
+
+
+{% macro render_project_local_nav(project, active_link, current_user, pro_features) -%}
+<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
+    {% if ( current_user.is_authenticated() and current_user.id == project.owner_id
+    and current_user.pro) or current_user.admin %}
+        <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
+        <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
+        <li class="divider"></li>
+        <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">Dashboard</a></li>
+        <li class="nav-link{% if active_link=="update"%} active{% endif %}">
+            <a href="{{url_for('project.update', short_name=active_project)}}"> Project Details</a>
+        </li>
+
+        {% if pro_features.get('auditlog_enabled') %}
+        <li class="nav-link{% if active_link=="auditlog"%} active{% endif %}">
+            <a href="{{url_for('project.auditlog', short_name=project.short_name)}}"> Audit Logs</a>
+        </li>
+        {% endif %}
+        {% if pro_features.get('webhooks_enabled') %}
+        <li class="nav-link{% if active_link=="webhook"%} active{% endif %}">
+            <a href="{{url_for('project.webhook_handler', short_name=project.short_name)}}"> Webhooks</a>
+        </li>
+        {% endif %}
+        <li class="nav-link{% if active_link=="blog"%} active{% endif %}">
+            <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}"> Blog</a>
+        </li>
+        <li class="nav-link{% if active_link=="results"%} active{% endif %}">
+            <a href="{{url_for('project.results', short_name=active_project)}}"> Results</a>
+        </li>
+        <li class="nav-link{% if active_link=="statistics"%} active{% endif %}">
+            <a href="{{url_for('project.show_stats', short_name=active_project)}}"> Statistics</a>
+        </li>
+    {% endif %}
+    <li class="nav-link{% if active_link=="contribute"%} active{% endif %}">
+        <a href="{{url_for('project.presenter', short_name=active_project)}}"> Contribute</a>
+    </li>
+</ul>
+{% endmacro %}
+
 
 {% macro render_project_summary(project, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
 <div class="row">
@@ -49,7 +89,7 @@
         {% if not current_user.is_anonymous() %}
         <li>{% if project.hidden == 1 %}
             <i class="icon glyphicon glyphicon-eye-close"></i> <strong>Hidden</strong>: Yes
-        {% else %} 
+        {% else %}
             <i class="icon glyphicon glyphicon-eye-open"></i> <strong>Hidden</strong>: No
         {% endif %}
         </li>
@@ -110,7 +150,7 @@
                         <span class="progress">{{ project.overall_progress | round | int }}</span>
                     </div>
                 {% endif %}
-                
+
                 <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg padding-top-xs">
                     <a href="{{ url_for('blplugin.details', short_name = project.short_name) }}">
                         <div class="shadow shadow-inline">
@@ -118,7 +158,7 @@
                         </div>
                     </a>
                 </div>
-                
+
                 <div class="col-sm-6 col-xs-10 col-xs-offset-1 col-sm-offset-0">
                     <h2 class="text-center-xs"><a href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{ project.name }}</a></h2>
                     {% if project.overall_progress < 100 %}
@@ -134,11 +174,11 @@
                 </div>
             </div>
         </div>
-        
+
             <div class="col-md-1 hidden-sm hidden-xs">
                 <div class="meter inset-shadow-white pull-right"><span data-progress="{{ project.overall_progress | round | int }}" data-project="{{project.short_name}}"><span></span></span></div>
             </div>
-        
+
             <div class="col-sm-3 hidden-sm hidden-xs">
                 <div class="white-rounded inset-shadow-white project-info">
                     <div class="vcenter">
@@ -163,7 +203,7 @@
                     {% endif %}
                 </div>
             </div>
-            
+
     </div>
 </div>
 {%- endmacro %}
@@ -227,7 +267,7 @@ function imgError(image) {
                 <span class="pull-right-md"><strong>{{n_tasks}}</strong> Tasks</span>
             {% endif %}
         </div>
-        
+
     </div>
     <hr>
 {% endmacro %}
@@ -237,7 +277,7 @@ function imgError(image) {
         <div class="row text-center">
             <h3>{{title}}</h3>
         </div>
-        
+
             <div class="col-xs-12">
               <div class="polaroids">
                     {% for project in projects %}
@@ -290,11 +330,11 @@ function imgError(image) {
     <h1>Area restricted</h1>
         <p class="lead">Sorry, the creation and administration of projects is currently restricted.</p>
         <p class="lead">For access to this area please request admin rights.</p>
-                <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg"> 
+                <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg">
                     <i class="glyphicon glyphicon-home"></i>
                     Go Home
                 </a>
-                <a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()"> 
+                <a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()">
                     <i class="glyphicon glyphicon-arrow-left"></i>
                     Go Back</a>
 {% endmacro %}

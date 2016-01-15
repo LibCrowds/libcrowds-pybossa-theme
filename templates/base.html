@@ -1,133 +1,145 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    {% if brand == title %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title>{{ title | safe}} | {{ brand }}</title>
-    {% endif %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ description }}">
-    <meta name="author" content="Alexander Mendes">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    
-    {% if active_page == 'profile' or activate_page == 'account' %}
-      <meta name="robots" content="noindex,nofollow">
-    {% endif %}
-      
-    <link href="https://google.com/+LibcrowdsBL" rel="publisher">
+    <head>
+        <meta charset="utf-8">
+        {% if brand == title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>{{ title | safe}} | {{ brand }}</title>
+        {% endif %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{{ description }}">
+        <meta name="author" content="British Library">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}?v=2.6.8">
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400%7CPermanent+Marker">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='fonts/font-awesome-4.4.0/css/font-awesome.min.css')}}">
-    
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-      <style>.ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}
-      .ie-mid-vcenter{position:relative;top:25%;transform:translateY(-25%);}</style>
-    <![endif]-->
-    <!--[if IE 9]>
-      <style>
-      .ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}
-      #image_container{margin-top:0px!important;}
-      .ie-mid-vcenter{position:relative;top:25%;transform:translateY(-25%);}
-      </style>
-    <![endif]-->
+        <!-- Block robots from private pages -->
+        {% if active_page == 'profile' or activate_page == 'account' %}
+        <meta name="robots" content="noindex,nofollow">
+        {% endif %}
 
-    <link rel="shortcut icon" href="/static/img/favicon.png">
+        <link href="https://google.com/+LibcrowdsBL" rel="publisher">
+        <link rel="shortcut icon" href="/static/img/favicon.png">
 
-    {% if preload_js == "true" %}
-      {% assets "js_top" %}
-      <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.3"></script>
-      {% endassets %}
-    {% endif %}
-    
-    {% include '_ga.html' ignore missing %}
-    {% include '_gcs.html' ignore missing %}
-  </head>
+        <!-- Le styles -->
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.min.css')}}?v=1.0.0">
+        <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400%7CPermanent+Marker">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='fonts/font-awesome-4.4.0/css/font-awesome.min.css')}}">
 
-  <body>
-    <noscript>
-      <div id="error" class="alert alert-danger js-alert">  
-        <strong>Please enable JavaScript!</strong> This website will not work correctly with JavaScript disabled.
-      </div>
-    </noscript>
-        <div id="body-content">
-          <div id="main-body-content">
-          {% if not current_user.is_anonymous() %}
-          <!-- checkpoint::logged-in::{{current_user.name}} -->
-          {% endif %}
-          {% set active_page = active_page | default('index') -%}
-          {% set has_splash = has_splash | default('false') -%}
-          {% set preload_js = preload_js | default('false') -%}
-          {% set active_project  = active_project | default('none') -%}
-          {% include "_navbar.html" %}
+        <!--[if lt IE 9]>
+        <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <style>
+            .ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}
+            .ie-mid-vcenter{position:relative;top:25%;transform:translateY(-25%);}
+        </style>
+        <![endif]-->
+        <!--[if IE 9]>
+        <style>
+            .ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}
+            #image_container{margin-top:0px!important;}
+            .ie-mid-vcenter{position:relative;top:25%;transform:translateY(-25%);}
+        </style>
+        <![endif]-->
 
-            <div class="container-fluid">
-          
-              {% block content %}{% endblock %}
+        <!-- Le javascript -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery-2.1.3.min.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery.cookie.min.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery.xdomainrequest.min.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/vendor/browser-detection.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery-ui-1.11.4.custom/jquery-ui.min.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/vendor/history/scripts/bundled/html4+html5/jquery.history.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/vendor/modernizr.min.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='vendor/bootstrap-3.3.2/js/bootstrap.min.js')}}"></script>
 
-              {% if show_cookies_warning %}
-              <div id="cookies_warning" class="container">
-                <div class="col-md-12 text-center">
-                  <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button></span>
-                </div>
-              </div>
-            {% endif %}
-            
+        {% include '_ga.html' ignore missing %}
+        {% include '_gcs.html' ignore missing %}
+    </head>
+
+    <body>
+
+        <!-- Enable JS warning-->
+        <noscript>
+            <div id="error" class="alert alert-danger js-alert">
+                <strong>Please enable JavaScript!</strong> This website will not work correctly with JavaScript disabled.
             </div>
-          </div>
-          
+        </noscript>
+
+        <div id="body-content">
+            <div id="main-body-content">
+            {% if not current_user.is_anonymous() %}
+            <!-- checkpoint::logged-in::{{current_user.name}} -->
+            {% endif %}
+
+            {% set active_page = active_page | default('index') -%}
+            {% set has_splash = has_splash | default('false') -%}
+            {% set active_project  = active_project | default('none') -%}
+            {% include "_navbar.html" %}
+
+                <div class="container-fluid">
+
+                {% block content %}{% endblock %}
+
+                {% if show_cookies_warning %}
+                <div id="cookies_warning" class="container">
+                    <div class="col-md-12 text-center">
+                        <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button></span>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+
         <footer id="sticky-footer">
-          {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
+        {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
         </footer>
-      </div>
-      
-      {% if not preload_js == "true" %}
-        {% assets "js_top" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.3"></script>
-        {% endassets %}
-      {% endif %}
-      
-      {% assets "js_bottom" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}?v=2.0.3"></script>
-      {% endassets %}
-      
-      {% if current_user.is_authenticated() %}
-        <script>
-            var originalTitle = document.title;
-            var originalNavContent =  $('#discourse-nav').html();
-            $(function() {
-                $.ajax({ url: "/api/discourse/user/{{current_user.name}}/notifications/count",
+
+    </div>
+
+    <!-- Le javascript -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/scripts.min.js')}}" />
+
+    <!-- pybossa-discourse-plugin -->
+    {% if current_user.is_authenticated() %}
+    <script>
+        var originalTitle = document.title;
+        var originalNavContent = $('#discourse-nav').html();
+        $(function() {
+            $.ajax({
+                url: "/api/discourse/user/{{current_user.name}}/notifications/count",
+                success: function(data) {
+                    updateNotificationsPill(data);
+                }
+            });
+        });
+        (function poll() {
+            setTimeout(function() {
+                $.ajax({
+                    url: "/api/discourse/user/{{current_user.name}}/notifications/count",
                     success: function(data) {
                         updateNotificationsPill(data);
-                    }
+                    },
+                    dataType: "json",
+                    complete: poll
                 });
-            });
-            (function poll() {
-                setTimeout(function() {
-                    $.ajax({ url: "/api/discourse/user/{{current_user.name}}/notifications/count",
-                        success: function(data) {
-                            updateNotificationsPill(data);
-                        }, dataType: "json", complete: poll });
-                    }, 15000);
-            })();
-            function updateNotificationsPill(data) {
-                if (data !== 0 && $.isNumeric(data)) {
-                    $('#discourse-notifications').html(data);
-                    document.title = '(' + data + ') ' + originalTitle;
-                } else {
-                    $('#discourse-notifications').html('');
-                    document.title = originalTitle;
-                }
+            }, 15000);
+        })();
+
+        function updateNotificationsPill(data) {
+            if (data !== 0 && $.isNumeric(data)) {
+                $('#discourse-notifications').html(data);
+                document.title = '(' + data + ') ' + originalTitle;
+            } else {
+                $('#discourse-notifications').html('');
+                document.title = originalTitle;
             }
-        </script>
-        <script>
-          {% include 'cookies.js' %}
-        </script>
+        }
+    </script>
     {% endif %}
-  </body>
+
+    <script>
+    {% include 'cookies.js' %}
+    </script>
+
+    </body>
 </html>

@@ -2,7 +2,7 @@
 {% set active_page = "profile" %}
 {% from "admin/_helpers.html" import render_local_nav %}
 {% from "projects/_helpers.html" import render_project_admin_featured, broken_image %}
-{% set preload_js = "true" %}
+
 {% block content %}
     {{ render_local_nav(current_user, "featured") }}
     <div class="container-padded">
@@ -36,7 +36,7 @@
                             </table>
                         </div>
                         {% endfor %}
-                        
+
                     </div>
                 </div>
             </div>

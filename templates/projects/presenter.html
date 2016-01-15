@@ -1,17 +1,16 @@
 {% extends "/base.html" %}
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
-{% set preload_js = "true" %}
 {% block content %}
-    
+
 <script>
     Modernizr.load({
             test: window.JSON,
             nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
             });
 </script>
-<script src="{{url_for('static', filename="js/pybossa/pybossa.js")}}" type="text/javascript"></script>
-<script src="/static/vendor/jquery.serializejson.min.js" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/pybossa/pybossa.js')}}" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/vendor/jquery.serializejson.min.js')}}" type="text/javascript"></script>
     <div class="container-padded">
         <div class="container container-padded remove-padding-bottom">
         {% include "_flash_messages.html" %}

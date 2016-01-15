@@ -2,7 +2,6 @@
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
-{% set preload_js = "true" %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
@@ -12,10 +11,10 @@
             <div class="row">
                 <div class="col-sm-9 col-sm-offset-3">
                     {% include "_flash_messages.html" %}
-                    {{ helper.render_loading("Importing tasks, this may take a while, please wait...") }}
+                    {{ helper.render_loading(loading_text) }}
                     <h1><strong>{{project.name}}</strong>: Import tasks</h1>
                     <hr>
-                    <div class="row vcenter hcenter">  
+                    <div class="row vcenter hcenter">
                                 <div class="col-xs-10">
                                 <h3>From Flickr
                                 </div>
@@ -25,11 +24,11 @@
                               </div>
                               </div>
                             </div>
-                        
+
                     </h3>
                     <div id="grant">
                        <p> To select an album click below to grant access to your Flickr account</p></br>
-             
+
                     <p><a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-success">Log in to Flickr</a></p>
                     </div>
                     <h3>Select an album, then click import:</h3>

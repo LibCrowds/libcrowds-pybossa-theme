@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    
+
 <div class="container container-main">
 {% from "_formhelpers.html" import render_field %}
 
@@ -9,34 +9,34 @@
         <h4 class="text-center">Create an account</h4>
         <form method="post" role="form" action="{{ url_for('account.register') }}">
       {{ form.hidden_tag() }}
-      
+
             <fieldset>
       {{ render_field(form.fullname, placeholder="Full Name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters", autofocus="autofocus") }}
       {{ render_field(form.name, placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters") }}
       {{ render_field(form.email_addr, placeholder="Email", class="form-control", type="email", required="required") }}
       {{ render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
       {{ render_field(form.confirm, placeholder="Confirm Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-      
+
                 <div class="pull-right" role="group">
                     <input type="reset" value="Clear" class="btn btn-default" />
                     <input type="submit" value="Create Account" class="btn btn-success" />
                 </div>
-                <a href="{{url_for('account.signin')}}" class="btn btn-inverse" onclick="javascript:history.go(-1)"> 
+                <a href="{{url_for('account.signin')}}" class="btn btn-inverse" onclick="javascript:history.go(-1)">
                 <i class="glyphicon glyphicon-arrow-left"></i>
                 Go Back</a>
             </fieldset>
         </form>
         <div class="padding-top">
             <p class="text-center muted">
-                    By clicking the 
+                    By clicking the
                 <strong>Create Account</strong> button you are agreeing to
                     our
                 <a href={{url_for('help.tos')}}>terms of use</a>.
-                
+
             </p>
         </div>
     </div>
 </div>
-<script src="{{url_for('static', filename='vendor/jquery.textchange.min.js')}}" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/vendor/jquery.textchange.min.js')}}" type="text/javascript"></script>
 <script src="{{url_for('static', filename='js/forms.js')}}" type="text/javascript"></script>
 {% endblock %}
