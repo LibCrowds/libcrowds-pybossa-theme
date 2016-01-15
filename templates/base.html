@@ -22,7 +22,7 @@
 
         <!-- Le styles -->
         <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap.min.css')}}">
-          <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/browser-detection/browser-detection.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/browser-detection/browser-detection.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.min.css')}}?v=1.0.0">
         <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400%7CPermanent+Marker">
         <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='fonts/font-awesome-4.4.0/css/font-awesome.min.css')}}">
@@ -37,7 +37,6 @@
         <!--[if IE 9]>
         <style>
             .ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}
-            #image_container{margin-top:0px!important;}
             .ie-mid-vcenter{position:relative;top:25%;transform:translateY(-25%);}
         </style>
         <![endif]-->
@@ -60,35 +59,32 @@
 
         <!-- Enable JS warning-->
         <noscript>
-            <div id="error" class="alert alert-danger js-alert">
+            <div id="error" class="alert alert-danger">
                 <strong>Please enable JavaScript!</strong> This website will not work correctly with JavaScript disabled.
             </div>
         </noscript>
 
         <div id="body-content">
-            <div id="main-body-content">
-            {% if not current_user.is_anonymous() %}
-            <!-- checkpoint::logged-in::{{current_user.name}} -->
-            {% endif %}
+          {% if not current_user.is_anonymous() %}
+          <!-- checkpoint::logged-in::{{current_user.name}} -->
+          {% endif %}
 
-            {% set active_page = active_page | default('index') -%}
-            {% set has_splash = has_splash | default('false') -%}
-            {% set active_project  = active_project | default('none') -%}
-            {% include "_navbar.html" %}
+          {% set active_page = active_page | default('index') -%}
+          {% set has_splash = has_splash | default('false') -%}
+          {% set active_project  = active_project | default('none') -%}
+          {% include "_navbar.html" %}
 
-                <div class="container-fluid">
+              <div class="container-fluid">
 
-                {% block content %}{% endblock %}
+              {% block content %}{% endblock %}
 
-                {% if show_cookies_warning %}
-                <div id="cookies_warning" class="container">
-                    <div class="col-md-12 text-center">
-                        <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button></span>
-                    </div>
-                </div>
-                {% endif %}
-
-            </div>
+              {% if show_cookies_warning %}
+              <div id="cookies-warning" class="container">
+                  <div class="col-md-12 text-center">
+                      <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button></span>
+                  </div>
+              </div>
+              {% endif %}
         </div>
 
         <footer id="sticky-footer">

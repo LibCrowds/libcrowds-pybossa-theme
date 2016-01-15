@@ -8,10 +8,10 @@
 
 {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
     {{ privacy.render_lock_page() }}
-{% else %}   
+{% else %}
     <span class="set-main-bg" data-bg="pattern-white-wall"></span>
     <div class="container-padded remove-padding-bottom">
-        <section class="mid-grey pattern-brushed box-shadow-grey-bottom padding-bottom">
+        <section class="mid-grey pattern-brushed box-shadow-grey-bottom padding-bottom-md">
             <div class="container padding-top">
                 {% include "_flash_messages.html" %}
                 <section id="user-data">
@@ -19,13 +19,13 @@
                 </section>
             </div>
         </section>
-                            
-        {% if projects %}                     
+
+        {% if projects %}
             <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
                 {{render_grid_projects(projects, "Contributions", upload_method)}}
             </section>
         {% endif %}
-    </div>         
+    </div>
 {% endif %}
 
 {{ broken_image() }}

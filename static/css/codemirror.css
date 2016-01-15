@@ -1,0 +1,33 @@
+.CodeMirror {
+    width: 100%!important;
+    height: 100%!important;
+    font-size: 12px;
+    padding-top: 35px
+}
+
+#code-btns {
+    background-color: #F7F7F7;
+    padding-left: 30px;
+    border-bottom: 1px solid #DDD;
+    position: fixed;
+    width: 100%;
+    z-index: 5
+}
+
+.btn-code {
+    border-radius: 0;
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #BA0000;
+    transition: background-color .25s;
+    -webkit-transition: background-color .25s;
+    -moz-transition: background-color .25s;
+    -ms-transition: background-color .25s;
+    -o-transition: background-color .25s
+}
+
+.btn-code:hover,
+.btn-code:focus {
+    background-color: rgba(0, 0, 0, 0.05)
+}

@@ -25,8 +25,8 @@
          <div class="col-sm-offset-2 col-sm-8 text-center">
           <h2 class="inset-text-grey text-center">What's this all about?</h2>
             <p class="lead text-left">
-               {{brand}}, in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>, is a platform for 
-               hosting experimental crowdsourcing projects aimed at improving access to the diverse collections held at the 
+               {{brand}}, in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>, is a platform for
+               hosting experimental crowdsourcing projects aimed at improving access to the diverse collections held at the
                British Library. Your participation will have a direct impact on enabling future research conducted at the Library.
             </p>
             <a href="{{ url_for('home.about')}}" class="btn btn-default">Find Out More</a>
@@ -46,7 +46,7 @@
           {{ helper.show_project(project, "featured", current_user, upload_method) }}
         {% endfor %}
     </div>
-    <div class="col-xs-12 text-center padding-bottom">
+    <div class="col-xs-12 text-center padding-bottom-md">
       <a class="btn btn-default" href="{{url_for('project.index')}}">View All Projects</a>
     </div>
   </div>
@@ -81,7 +81,7 @@
     <div class="col-xs-12 text-center padding-top-sm text-center">
       <a class="btn btn-danger" href="{{url_for('leaderboard.index')}}">View Leaderboard</a>
       <hr class="padding-bottom-xs">
-        
+
         <!-- Social media-->
         <a data-content="Share on Facebook" class="btn btn-facebook btn-popover"
            onclick="popUp=window.open('http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.libcrowds.com',
@@ -89,7 +89,7 @@
                                    data-url="http://www.libcrowds.com">
             <i class="fa fa-facebook"></i>
         </a>
-        
+
         <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com
         &text=Participate%20in%20crowdsourcing%20projects%20and%20help%20improve%20access%20to%20the%20collections%20of%20the%20British%20Library.&tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com"
            data-content="Share on Twitter" class="btn btn-twitter btn-popover"
@@ -110,7 +110,7 @@
         </a>
         <div class="row">
           <div class="col-xs-12" id="total-share-count" data-count="0">
-            
+
           </div>
         </div>
     </div>

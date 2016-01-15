@@ -1,5 +1,5 @@
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
-<div class="row margin-bottom">
+<div class="row margin-bottom-md">
     <div class="col-sm-6 col-xs-12 text-center">
         <div class="inline-block">
             <div class="shadow shadow-circle">
@@ -8,8 +8,8 @@
         </div>
         <h1 class="inset-text-grey">{{user.fullname}}</h1>
     </div>
-    <div class="col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1 white-rounded inset-shadow">
-        
+    <div class="col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1 white-panel inset-shadow">
+
         <div class="row">
             <div class="col-xs-6 text-center">
                 {% if user.rank %}
@@ -26,7 +26,7 @@
                     <p class="score">0</p>
                 {% endif %}
             </div>
-            
+
             <div class="col-xs-6 text-center">
                 {% if user.score %}
                     <i class="fa fa-tasks fa-4x"></i>
@@ -35,24 +35,24 @@
                 {% else %}
                     <i class="fa fa-tasks fa-4x"></i>
                     <p>Contributions</p>
-                    <p class="score">0</p>  
+                    <p class="score">0</p>
                 {% endif %}
             </div>
         </div>
         <hr class="extra-margins">
-            
+
         <div class="col-sm-10 col-sm-offset-1 user-info">
             <p><i class="fa fa-user"></i> Username: {{ user.name }}</p>
             {% if private %}
                 <p><i class="fa fa-envelope"></i> E-mail: {{ user.email_addr }}</p>
             {% endif %}
-            
-        
-            
-            
+
+
+
+
             <p><i class="fa fa-clock-o"></i> Joined: {{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}</p>
             {% if private %}
-                
+
                 <div class="text-center">
                     <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-default btn-sm btn-padded"><i class="fa fa-pencil-square-o"></i> Edit</a>
                     {% if (user.valid_email == False) %}
@@ -101,7 +101,7 @@
             {% else %}
             <li class="active">
                 <a href="#">{{ page }}</a>
-            </li>  
+            </li>
             {% endif %}
           {% endif %}
         {%- endfor %}
@@ -114,4 +114,3 @@
     </ul>
   </div>
 {% endmacro %}
-

@@ -5,7 +5,8 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 <script src="{{url_for('static', filename='vendor/codemirror/codemirror.js')}}"></script>
-<link rel="stylesheet" href="{{url_for('static', filename='vendor/codemirror/codemirror.css')}}"/>
+<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/codemirror/codemirror.css')}}"/>
+<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/codemirror.css')}}">
 <script src="{{url_for('static', filename='vendor/codemirror/mode/xml/xml.js')}}"></script>
 <script src="{{url_for('static', filename='vendor/codemirror/mode/javascript/javascript.js')}}"></script>
 <script src="{{url_for('static', filename='vendor/codemirror/mode/css/css.js')}}"></script>

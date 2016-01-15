@@ -12,7 +12,7 @@
             {% include "_flash_messages.html" %}
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="white-rounded inset-shadow">
+                    <div class="white-panel inset-shadow">
                         {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
                         {{ privacy.render_lock_page() }}
                         {% else %}
