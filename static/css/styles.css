@@ -2395,12 +2395,12 @@ footer .container {
     padding-bottom: 20px
 }
 
-#sticky-footer li {
+footer li {
     text-align: center;
     display: inline-block
 }
 
-#sticky-footer li > a {
+footer li > a {
     color: #777;
     transition: color 100ms;
     -webkit-transition: color 100ms;
@@ -2409,12 +2409,12 @@ footer .container {
     -o-transition: color 100ms
 }
 
-#sticky-footer li > a:hover {
+footer li > a:hover {
     color: #D00000;
     text-decoration: none
 }
 
-#sticky-footer {
+footer {
     margin-top: 20px;
     width: 100%;
     position: absolute;
@@ -2425,7 +2425,7 @@ footer .container {
     z-index: 100
 }
 
-#sticky-footer ul {
+footer ul {
     color: #777;
     list-style: none;
     padding: 0;
@@ -2438,7 +2438,7 @@ footer .container {
     display: inline
 }
 
-.sticky-footer-col {
+footer.footer-col {
     padding-top: 10px
 }
 
@@ -2455,10 +2455,10 @@ footer .container {
     .footer-links {
         padding-top: 15px
     }
-    #sticky-footer {
+    footer {
         height: 60px
     }
-    #sticky-footer li {
+    footer li {
         font-size: 2.0em;
         padding-left: 20px;
         padding-right: 20px;
@@ -2466,7 +2466,7 @@ footer .container {
 }
 
 @media (min-width: 768px) {
-    #sticky-footer {
+    footer {
         height: 100px
     }
 }
