@@ -24,9 +24,15 @@
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='fonts/font-awesome-4.4.0/css/font-awesome.min.css')}}">
 
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-      <script type="text/javascript" src="{{url_for('static', filename='')}}"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/vendor/html-shiv.js')}}"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery-2.1.3.min.js')}}"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery.cookie.min.js')}}"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery.xdomainrequest.min.js')}}"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/vendor/browser-detection.js')}}"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery-ui-1.11.4.custom/jquery-ui.min.js')}}"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/vendor/history/scripts/bundled/html4+html5/jquery.history.js')}}"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='js/vendor/modernizr.min.js')}}"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='vendor/bootstrap-3.3.2/js/bootstrap.min.js')}}"></script>
 
 
       <style>.ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}
@@ -83,6 +89,7 @@
       </div>
 
       <!-- Le javascript -->
+      <script type="text/javascript" src="{{url_for('static', filename='js/scripts.min.js')}}"></script>
 
       {% if current_user.is_authenticated() %}
         {% if not current_user.info.avatar %}

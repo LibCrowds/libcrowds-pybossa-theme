@@ -6,15 +6,16 @@
         return text.toLowerCase().trim().replace(not_valid_chars, "").replace(/( )+/g, "");
     }
 
-    if ( resource === 'app' ) {
-        $("#name").bind('textchange', function (event, previousText) {
+    if ( resource === 'project' ) {
+        $("#name").on('keyup', function () {
+          var text = $(this).val();
           $('#short_name').val(makeSlug($(this).val()));
         });
-
     }
-    
+
     if ( resource === 'account' ) {
-        $("#fullname").bind('textchange', function (event, previousText) {
+        $("#fullname").on('keyup', function () {
+          var text = $(this).val();
           $('#name').val(makeSlug($(this).val()));
         });
     }
