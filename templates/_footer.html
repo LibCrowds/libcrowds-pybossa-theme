@@ -5,18 +5,19 @@
                 <img class="img-responsive center-block ie-mid-vcenter" src="{{url_for('static', filename='img/bl-logo.png')}}" alt="BL Labs logo">
             </a>
         </div>
+
         <div class="col-sm-6 vcenter hcenter sticky-footer-col">
         {% if not enforce_privacy %}
             <div class="row ie-vcenter">
                 <ul>
                     <li>
-                        <a href="mailto:{{contact_email}}"><i class="fa fa-envelope padding-sides-xs"></i></a>
-                    </li>
-                    <li>
                         <a href="http://twitter.com/{{contact_twitter}}" target="_blank"><i class="fa fa-twitter padding-sides-xs"></i></a>
                     </li>
                     <li>
-                        <a href="/about"><i class="fa fa-info-circle padding-sides-xs"></i></a>
+                        <a href="mailto:{{contact_email}}"><i class="fa fa-envelope padding-sides-xs"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/{{brand}}"><i class="fa fa-github padding-sides-xs"></i></a>
                     </li>
                 </ul>
             </div>
