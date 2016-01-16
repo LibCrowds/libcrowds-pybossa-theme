@@ -9,12 +9,11 @@
 {{ render_local_nav(current_user, "newproject") }}
 <div class="container-padded">
     <div class="container container-padded">
-        {% if current_user.admin %}
         <div id="project-form" class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-                    <h4 class="text-center">Create a new project</h4>
-                    <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
+                <h4 class="text-center">Create a new project</h4>
+                <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
                     {{ form.hidden_tag() }}
                     <fieldset>
                         {{ render_field(form.name, placeholder="Name", class="form-control", required="required", autofocus="autofocus") }}
@@ -32,14 +31,10 @@
                         </div>
                     </fieldset>
                 </form>
-                </div>
             </div>
-            {% else %}
-                {{ project_helper.render_project_restricted() }}
-            {% endif %}
         </div>
     </div>
-
+</div>
 <script>
     $("span[rel='tooltip']").tooltip();
     $("i[rel='tooltip']").tooltip();

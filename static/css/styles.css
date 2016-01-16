@@ -268,12 +268,12 @@ ul {
     -webkit-padding-start: 0;
     -moz-padding-start: 0;
     padding-left: 0;
-    list-style: none
 }
 
 ul.users {
     margin: 0 auto;
     display: table;
+    list-style: none
 }
 
 ul.users li {

@@ -3,10 +3,10 @@
 {% set active_project = project.short_name %}
 
 {% block content %}
-
 <div class="alert alert-danger">
     <strong>Error!</strong> This task does not belong to {{project.short_name}}.
-        <a class="btn-sm btn-danger" href={{url_for('project.presenter', short_name=project.short_name)}}> <i class="fa fa-random"></i> Try with another one</a>
+    <a class="btn-sm btn-danger" href={{url_for('project.presenter', short_name=project.short_name)}}>
+        <i class="fa fa-random"></i> Try with another one
+    </a>
 </div>
-
 {% endblock %}

@@ -4,12 +4,11 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    {{ render_local_nav(current_user, "projectsettings", project.short_name) }}
+{{ render_local_nav(current_user, "projectsettings", project.short_name) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
             {% if project %}
-            <!-- Project -->
             <div class="col-sm-9 col-sm-offset-3 xs-center">
                 {% include "_flash_messages.html" %}
                 <h1><strong>{{ project.name }}</strong>: Settings</h1>

@@ -1,75 +1,76 @@
-{% macro render_pagination(pagination, handle) %}
-  <div class="pagination pagination-centered">
-      <ul>
+{% macro render_pagination(pagination) %}
+<div class="pagination pagination-centered">
+    <ul>
         {% if pagination.has_prev %}
-          <li>
-          <a href="{{ url_for_other_page(pagination.page - 1)
-              }}">&laquo; Prev {{handle}}</a>
-          </li>
+        <li>
+            <a href="{{ url_for_other_page(pagination.page - 1)}}">&laquo; Prev | </a>
+        </li>
         {% endif %}
 
-        {%- for page in pagination.iter_pages() %}
-          {% if page %}
-            {% if page != pagination.page %}
-            <li>
-              <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
-             </li>
-            {% else %}
-            <li class="active">
-                <a href="#">{{ page }}</a>
-            </li>
+        {% for page in pagination.iter_pages() %}
+            {% if page %}
+                {% if page != pagination.page %}
+                <li>
+                    <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+                </li>
+                {% else %}
+                <li class="active">
+                    <a href="#">{{ page }}</a>
+                </li>
+                {% endif %}
             {% endif %}
-          {% endif %}
-        {%- endfor %}
+        {% endfor %}
+
         {% if pagination.has_next %}
-          <li>
-          <a href="{{ url_for_other_page(pagination.page + 1)
-              }}">Next {{handle}}&raquo;</a>
-          </li>
+        <li>
+            <a href="{{ url_for_other_page(pagination.page + 1)}}"> | Next &raquo;</a>
+        </li>
         {% endif %}
     </ul>
-  </div>
+</div>
 {% endmacro %}
-
 
 {% macro render_project_local_nav(project, active_link, current_user, pro_features) -%}
 <ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
-    {% if ( current_user.is_authenticated() and current_user.id == project.owner_id
-    and current_user.pro) or current_user.admin %}
-        <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
-        <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
-        <li class="divider"></li>
-        <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">Dashboard</a></li>
-        <li class="nav-link{% if active_link=="update"%} active{% endif %}">
-            <a href="{{url_for('project.update', short_name=active_project)}}"> Project Details</a>
-        </li>
+{% if ( current_user.is_authenticated() and current_user.id == project.owner_id
+and current_user.pro) or current_user.admin %}
+    <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
+    <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
+    <li class="divider"></li>
+    <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">Dashboard</a></li>
 
-        {% if pro_features.get('auditlog_enabled') %}
-        <li class="nav-link{% if active_link=="auditlog"%} active{% endif %}">
-            <a href="{{url_for('project.auditlog', short_name=project.short_name)}}"> Audit Logs</a>
-        </li>
-        {% endif %}
-        {% if pro_features.get('webhooks_enabled') %}
-        <li class="nav-link{% if active_link=="webhook"%} active{% endif %}">
-            <a href="{{url_for('project.webhook_handler', short_name=project.short_name)}}"> Webhooks</a>
-        </li>
-        {% endif %}
-        <li class="nav-link{% if active_link=="blog"%} active{% endif %}">
-            <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}"> Blog</a>
-        </li>
-        <li class="nav-link{% if active_link=="results"%} active{% endif %}">
-            <a href="{{url_for('project.results', short_name=active_project)}}"> Results</a>
-        </li>
-        <li class="nav-link{% if active_link=="statistics"%} active{% endif %}">
-            <a href="{{url_for('project.show_stats', short_name=active_project)}}"> Statistics</a>
-        </li>
+    <li class="nav-link{% if active_link=="update"%} active{% endif %}">
+        <a href="{{url_for('project.update', short_name=active_project)}}"> Project Details</a>
+    </li>
+
+    {% if pro_features.get('auditlog_enabled') %}
+    <li class="nav-link{% if active_link=="auditlog"%} active{% endif %}">
+        <a href="{{url_for('project.auditlog', short_name=project.short_name)}}"> Audit Logs</a>
+    </li>
     {% endif %}
+
+    {% if pro_features.get('webhooks_enabled') %}
+    <li class="nav-link{% if active_link=="webhook"%} active{% endif %}">
+        <a href="{{url_for('project.webhook_handler', short_name=project.short_name)}}"> Webhooks</a>
+    </li>
+    {% endif %}
+
+    <li class="nav-link{% if active_link=="blog"%} active{% endif %}">
+        <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}"> Blog</a>
+    </li>
+    <li class="nav-link{% if active_link=="results"%} active{% endif %}">
+        <a href="{{url_for('project.results', short_name=active_project)}}"> Results</a>
+    </li>
+    <li class="nav-link{% if active_link=="statistics"%} active{% endif %}">
+        <a href="{{url_for('project.show_stats', short_name=active_project)}}"> Statistics</a>
+    </li>
+    {% endif %}
+
     <li class="nav-link{% if active_link=="contribute"%} active{% endif %}">
         <a href="{{url_for('project.presenter', short_name=active_project)}}"> Contribute</a>
     </li>
 </ul>
 {% endmacro %}
-
 
 {% macro render_project_summary(project, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
 <div class="row">
@@ -101,27 +102,30 @@
 
 {% macro render_project_admin_featured(project, upload_method) -%}
 <tr>
-        <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
-        <td>{{ project.category.name }}</td>
+    <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
+    <td>{{ project.category.name }}</td>
 
-        {% if project.featured %}
-            <td style="text-align:center;"><a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})">
-                    <i id="project{{project.id}}" class="fa fa-remove"></i> Remove
-            </a>
-            <a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})" style="display:none;">
-                    <i id="project{{project.id}}" class="fa fa-plus"></i> Add
-            </a></td>
-        {% else %}
-            <td style="text-align:center;"><a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})">
-                    <i id="project{{project.id}}" class="fa fa-plus"></i> Add
-            </a>
-            <a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})" style="display:none;">
-                    <i id="project{{project.id}}" class="fa fa-remove"></i> Remove
-            </a></td>
-        {% endif %}
-    </tr>
+    {% if project.featured %}
+    <td style="text-align:center;">
+        <a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})">
+            <i id="project{{project.id}}" class="fa fa-remove"></i> Remove
+        </a>
+        <a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})" style="display:none;">
+                <i id="project{{project.id}}" class="fa fa-plus"></i> Add
+        </a>
+    </td>
+    {% else %}
+    <td style="text-align:center;">
+        <a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})">
+            <i id="project{{project.id}}" class="fa fa-plus"></i> Add
+        </a>
+        <a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})" style="display:none;">
+                <i id="project{{project.id}}" class="fa fa-remove"></i> Remove
+        </a>
+    </td>
+    {% endif %}
+</tr>
 {% endmacro %}
-
 
 {% macro show_project(project, active_cat, current_user, upload_method) %}
 <div class="project-item container container-padded">
@@ -134,14 +138,14 @@
                     </a>
                 </div>
                 {% if project.created %}
-                    <div class="project-data" hidden>
-                        <span class="date">{{ project.created[0:10] }}</span>
-                        <span class="project-name">{{ project.name}}</span>
-                        {% if project.last_activity_raw != None %}
-                        <span class="activity">{{project.last_activity_raw}}</span>
-                        {% endif %}
-                        <span class="progress">{{ project.overall_progress | round | int }}</span>
-                    </div>
+                <div class="project-data" hidden>
+                    <span class="date">{{ project.created[0:10] }}</span>
+                    <span class="project-name">{{ project.name}}</span>
+                    {% if project.last_activity_raw != None %}
+                    <span class="activity">{{project.last_activity_raw}}</span>
+                    {% endif %}
+                    <span class="progress">{{ project.overall_progress | round | int }}</span>
+                </div>
                 {% endif %}
 
                 <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg padding-top-xs">
@@ -168,38 +172,37 @@
             </div>
         </div>
 
-            <div class="col-md-1 hidden-sm hidden-xs">
-                <div class="meter inset-shadow-white pull-right"><span data-progress="{{ project.overall_progress | round | int }}" data-project="{{project.short_name}}"><span></span></span></div>
-            </div>
+        <div class="col-md-1 hidden-sm hidden-xs">
+            <div class="meter inset-shadow-white pull-right"><span data-progress="{{ project.overall_progress | round | int }}" data-project="{{project.short_name}}"><span></span></span></div>
+        </div>
 
-            <div class="col-sm-3 hidden-sm hidden-xs">
-                <div class="white-panel inset-shadow-white project-info">
-                    <div class="vcenter">
-                        <i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div>
-                    </div>
-                    <hr class="marc">
-                    <div class="vcenter">
-                        <i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block tasks-remaining" data-tasks="{{project.n_tasks}}" data-progress="{{ project.overall_progress | round | int }}">Tasks Remaining:</div>
-                    </div>
-                    <hr class="margin-top-xs margin-bottom-xs">
-                    <div class="vcenter">
-                        <i class="fa fa-users fa-2x"></i><div class="padding-left-xs inline-block">Volunteers: {{ project.n_volunteers}}</div>
-                    </div>
-                    <hr class="margin-top-xs margin-bottom-xs">
-                    <div class="vcenter">
-                        <i class="fa fa-clock-o fa-2x"></i><div class="padding-left-xs inline-block">Last Active: {{ project.last_activity}}</div>
-                    </div>
+        <div class="col-sm-3 hidden-sm hidden-xs">
+            <div class="white-panel inset-shadow-white project-info">
+                <div class="vcenter">
+                    <i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div>
                 </div>
-                <div class="text-center padding-top-sm">
-                    {% if active_cat != "draft" %}
-                        <p><a class="btn btn-danger" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">Contribute</a></p>
-                    {% endif %}
+                <hr class="marc">
+                <div class="vcenter">
+                    <i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block tasks-remaining" data-tasks="{{project.n_tasks}}" data-progress="{{ project.overall_progress | round | int }}">Tasks Remaining:</div>
+                </div>
+                <hr class="margin-top-xs margin-bottom-xs">
+                <div class="vcenter">
+                    <i class="fa fa-users fa-2x"></i><div class="padding-left-xs inline-block">Volunteers: {{ project.n_volunteers}}</div>
+                </div>
+                <hr class="margin-top-xs margin-bottom-xs">
+                <div class="vcenter">
+                    <i class="fa fa-clock-o fa-2x"></i><div class="padding-left-xs inline-block">Last Active: {{ project.last_activity}}</div>
                 </div>
             </div>
-
+            <div class="text-center padding-top-sm">
+                {% if active_cat != "draft" %}
+                    <p><a class="btn btn-danger" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">Contribute</a></p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
-{%- endmacro %}
+{% endmacro %}
 
 {% macro broken_image() %}
 <script>
@@ -238,47 +241,48 @@ function imgError(image) {
 
 {% macro render_project_title(project, upload_method, subtitle=None) %}
 <h1>
-    {% if subtitle %}
-    <strong>{{ project.name }}</strong>: {{subtitle}}</h1>
-    {% else %}
-    <strong>{{ project.name }}</strong></h1>
+{% if subtitle %}
+<strong>{{ project.name }}</strong>: {{subtitle}}
+{% else %}
+<strong>{{ project.name }}</strong>
 {% endif %}
+</h1>
 {% endmacro %}
 
 {% macro render_overall_progress(project, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
-    <div class="row vcenter-md hcenter">
-        <div class="col-md-8 col-xs-12 vcenter-sm text-center-xs">
-            <div class="col-sm-2 vcenter hcenter"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
-            <h3><strong> Overall progress</strong>: {{ overall_progress | round | int }}% completed</h3>
-        </div>
-        <div class="col-md-4 col-xs-12 text-center">
-            {% if show_contribute_btn %}
-                <div class="pull-right-md" role="group">
-                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> Contribute</a>
-                </div>
-            {% elif show_n_tasks %}
-                <span class="pull-right-md"><strong>{{n_tasks}}</strong> Tasks</span>
-            {% endif %}
-        </div>
-
+<div class="row vcenter-md hcenter">
+    <div class="col-md-8 col-xs-12 vcenter-sm text-center-xs">
+        <div class="col-sm-2 vcenter hcenter"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
+        <h3><strong> Overall progress</strong>: {{ overall_progress | round | int }}% completed</h3>
     </div>
-    <hr>
+    <div class="col-md-4 col-xs-12 text-center">
+        {% if show_contribute_btn %}
+        <div class="pull-right-md" role="group">
+            <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> Contribute</a>
+        </div>
+        {% elif show_n_tasks %}
+        <span class="pull-right-md"><strong>{{n_tasks}}</strong> Tasks</span>
+        {% endif %}
+    </div>
+
+</div>
+<hr>
 {% endmacro %}
 
 {% macro render_grid_projects(projects, title, upload_method) %}
-    <div class="container container-padded">
-        <div class="row text-center">
-            <h3>{{title}}</h3>
-        </div>
+<div class="container container-padded">
+    <div class="row text-center">
+        <h3>{{title}}</h3>
+    </div>
 
-            <div class="col-xs-12">
-              <div class="polaroids">
-                    {% for project in projects %}
-                        {{ show_project(project, "none", current_user, upload_method) }}
-                    {% endfor %}
-                </div>
-            </div>
+    <div class="col-xs-12">
+        <div class="polaroids">
+        {% for project in projects %}
+            {{ show_project(project, "none", current_user, upload_method) }}
+        {% endfor %}
         </div>
+    </div>
+</div>
 {% endmacro %}
 
 {% macro render_loading(text) %}
@@ -292,17 +296,17 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_project_thumbnail(project, upload_method, id, class, style, size="200x200") %}
-    {% if project.info.container and project.info.thumbnail %}
-        {% if upload_method == 'rackspace'%}
-        <img class="{{class}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
-        {% else %}
-        <img  class="{{class}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail)) }}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
-        {% endif %}
-    {% elif project.info.thumbnail %}
-        <img class="{{class}}" src="{{project.info.thumbnail}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
+{% if project.info.container and project.info.thumbnail %}
+    {% if upload_method == 'rackspace'%}
+    <img class="{{class}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
     {% else %}
-        <img class="{{class}}" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="{{style}}" alt="Project thumbnail">
+    <img  class="{{class}}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail)) }}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
     {% endif %}
+{% elif project.info.thumbnail %}
+    <img class="{{class}}" src="{{project.info.thumbnail}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
+{% else %}
+    <img class="{{class}}" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="{{style}}" alt="Project thumbnail">
+{% endif %}
 {% endmacro %}
 
 {% macro render_url_thumbnail(project, upload_method) %}
@@ -317,17 +321,4 @@ function imgError(image) {
 {% else %}
 {{url_for('static', filename='img/placeholder.project.png')}}"
 {% endif %}
-{% endmacro %}
-
-{% macro render_project_restricted() -%}
-    <h1>Area restricted</h1>
-        <p class="lead">Sorry, the creation and administration of projects is currently restricted.</p>
-        <p class="lead">For access to this area please request admin rights.</p>
-                <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg">
-                    <i class="fa fa-home"></i>
-                    Go Home
-                </a>
-                <a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()">
-                    <i class="fa fa-arrow-left"></i>
-                    Go Back</a>
 {% endmacro %}

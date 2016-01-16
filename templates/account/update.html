@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             {% endif %}
-                            {% if 'pybossa_gravatar' in plugins %}
+                            {% if 'pybossa-gravatar' in plugins|join(',', attribute='name') %}
                             <a href="{{ url_for('set_gravatar', name=current_user.name) }}" class="btn btn-default">Use Gravatar</a>
                             {% endif %}
                             {{ form_helper.render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}

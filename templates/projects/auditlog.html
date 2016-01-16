@@ -5,85 +5,85 @@
 
 {% block content %}
 
-    {% if project %}
-        {{ render_local_nav(current_user, 'auditlog', project.short_name) }}
-            <div class="container-padded">
-                <div class="container container-padded">
-                    <div class="row">
-                        <div class="col-sm-9 col-sm-offset-3">
-                            {% include "_flash_messages.html" %}
-                        {{ helper.render_project_title(project, upload_method) }}
-                        {% if logs %}
-                        <table class="table table-stripped table-condensed table-hover table-responsive">
-                            <thead>
-                            <tr>
-                                <th class="text-center">When</th>
-                                <th class="text-center">Who</th>
-                                <th class="hidden-sm hidden-xs text-center">Source</th>
-                                <th class="text-center">Action</th>
-                                <th class="text-center">Attribute</th>
-                            </tr>
-                            </thead>
-                        {% for log in logs | sort(reverse=True, attribute='created') %}
-                            <tr>
-                                <td class="text-center">
-                                    <a href="#" data-toggle="modal" data-target="#modal-log-{{log.id}}">
-                                        {{log.created[8:10]}}-{{log.created[5:7]}}-{{log.created[0:4]}}, {{log.created[11:16]}}
-                                    </a>
-                                </td>
-                                <td class="text-center">{% if current_user.name == log.user_name%}You{%else%}{{log.user_name}}{%endif%}</td>
-                                <td class="hidden-sm hidden-xs text-center">{{log.caller}}</td>
-                                <td class="text-center">{{log.action}}</td>
-                                <td class="text-center">{{log.attribute}}</td>
-                            </tr>
-                            <div id="modal-log-{{log.id}}" class="modal fade">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                                            <h3 class="text-center remove-margin-bottom"><strong>Audit log:</strong> {{log.created[8:10]}}-{{log.created[5:7]}}-{{log.created[0:4]}}, {{log.created[11:16]}}</h3>
-                                            <h4 class="text-center">{{log.user_name}} - {{log.action}} {{log.attribute}}</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-6 col-xs-12">
-                                                    <strong>Old Value</strong>
-                                                    {{(log.old_value or "Nothing")}}
-                                                </div>
-                                                <div class="col-md-6 col-xs-12">
-                                                    <strong>New Value</strong>
-                                                    {{(log.new_value or "Nothing")}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <div class="row text-center">
-                                                <button data-dismiss="modal" class="btn btn-success">OK</button>
-                                            </div>
-                                        </div>
+{% if project %}
+{{ render_local_nav(current_user, 'auditlog', project.short_name) }}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                {% include "_flash_messages.html" %}
+            {{ helper.render_project_title(project, upload_method) }}
+            {% if logs %}
+            <table class="table table-stripped table-condensed table-hover table-responsive">
+                <thead>
+                <tr>
+                    <th class="text-center">When</th>
+                    <th class="text-center">Who</th>
+                    <th class="hidden-sm hidden-xs text-center">Source</th>
+                    <th class="text-center">Action</th>
+                    <th class="text-center">Attribute</th>
+                </tr>
+                </thead>
+            {% for log in logs | sort(reverse=True, attribute='created') %}
+                <tr>
+                    <td class="text-center">
+                        <a href="#" data-toggle="modal" data-target="#modal-log-{{log.id}}">
+                            {{log.created[8:10]}}-{{log.created[5:7]}}-{{log.created[0:4]}}, {{log.created[11:16]}}
+                        </a>
+                    </td>
+                    <td class="text-center">{% if current_user.name == log.user_name%}You{%else%}{{log.user_name}}{%endif%}</td>
+                    <td class="hidden-sm hidden-xs text-center">{{log.caller}}</td>
+                    <td class="text-center">{{log.action}}</td>
+                    <td class="text-center">{{log.attribute}}</td>
+                </tr>
+                <div id="modal-log-{{log.id}}" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                <h3 class="text-center remove-margin-bottom"><strong>Audit log:</strong> {{log.created[8:10]}}-{{log.created[5:7]}}-{{log.created[0:4]}}, {{log.created[11:16]}}</h3>
+                                <h4 class="text-center">{{log.user_name}} - {{log.action}} {{log.attribute}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-12">
+                                        <strong>Old Value</strong>
+                                        {{(log.old_value or "Nothing")}}
+                                    </div>
+                                    <div class="col-md-6 col-xs-12">
+                                        <strong>New Value</strong>
+                                        {{(log.new_value or "Nothing")}}
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
-                        </table>
-                        {% else %}
-                            <h1>No logs so far.</h1>
-                        {% endif %}
-                        
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <div class="container-padded">
-                <div class="container container-padded">
-                    <div class="row">
-                        <div class="col-sm-9 col-sm-offset-3">
-                            <div class="page-header">
-                                <h1>This project does not exist.</h1>
+                            <div class="modal-footer">
+                                <div class="row text-center">
+                                    <button data-dismiss="modal" class="btn btn-success">OK</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
+            </table>
+            {% else %}
+                <h1>No logs so far.</h1>
             {% endif %}
+
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                <div class="page-header">
+                    <h1>This project does not exist.</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
