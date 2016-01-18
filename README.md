@@ -1,6 +1,6 @@
 # libcrowds-pybossa-theme
 
-A Bootstrap 3 [Pybossa](https://github.com/PyBossa/pybossa) theme for the [LibCrowds](http://www.libcrowds.com) platform.
+A Bootstrap 3 [Pybossa](https://github.com/PyBossa/pybossa) theme for the [LibCrowds](http://www.libcrowds.com) crowdsourcing platform.
 
 
 ## Installation
