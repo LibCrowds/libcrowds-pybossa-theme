@@ -16,3 +16,9 @@ THEME = {your-custom-theme}
 
 The theme is currently up-to-date with all features provided by
 [PyBossa](https://github.com/PyBossa/pybossa) v1.3.0.
+
+
+## Contributing
+
+For guidelines on how to suggest improvements, report bugs or submit pull
+requests please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
