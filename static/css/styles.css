@@ -289,6 +289,10 @@ ul.users li a {
     margin-left: 7px
 }
 
+ul.no-style {
+    list-style: none;
+}
+
 i.fa-trophy {
     color: #FFC041
 }
@@ -2418,7 +2422,6 @@ footer li > a:hover {
 footer {
     margin-top: 20px;
     width: 100%;
-    position: absolute;
     bottom: 0;
     background-color: #F9F9F9;
     font-family: sans-serif;
