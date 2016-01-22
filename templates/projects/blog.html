@@ -1,12 +1,48 @@
-<!DOCTYPE HTML>
- 
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="1; url={{ url_for('blog.index') }}">
- 
-<script>
-  window.location.href = "{{ url_for('blog.index') }}";
-</script>
- 
-<title>Page Redirection</title>
- 
-If you are not redirected automatically, follow the <a href="{{ url_for('blog.index') }}">link to the new page</a>
+{% extends "/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% import "projects/_helpers.html" as helper %}
+
+{% block content %}
+{{ render_local_nav(current_user, 'auditlog', project.short_name) }}
+{% if project %}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                {% include "_flash_messages.html" %}
+                {{ helper.render_project_title(project, upload_method) }}
+                <hr>
+                {% if blogposts %}
+                <hr>
+                    <ul>
+                        {% for blogpost in blogposts %}
+                          <li>
+                              <div>
+                                  <a href="{{url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id)}}">{{ blogpost.title }}</a>
+                              </div>
+                          </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <h1>Sorry! No posts so far.</h1>
+                {% endif %}
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container-padded remove-padding-bottom">
+    <section class="white">
+        <div class="container container-padded">
+            <div class="page-header padding-top container">
+                <h1>Sorry! This project does not exist.</h1>
+            </div>
+        </div>
+    </section>
+</div>
+{% endif %}
+{{ helper.broken_image() }}
+{{ helper.knob() }}
+{% endblock %}

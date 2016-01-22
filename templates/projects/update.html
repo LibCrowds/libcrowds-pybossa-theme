@@ -1,12 +1,96 @@
-<!DOCTYPE HTML>
- 
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="1; url={{ url_for('blplugin.update_project', short_name=project.short_name) }}">
- 
+{% extends "/base.html" %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+<script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
+{{ helper.render_project_local_nav(project, 'settings', current_user) }}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                    {% include "_flash_messages.html" %}
+                  <h1><strong>{{project.name}}</strong>: Project Details</h1>
+                  <hr>
+                  <!-- Update form for project thumbnail -->
+                  <form method="post" class="form-horizontal upload-img-form padding-top-xs" action="{{ url_for('blplugin.update_project', short_name=project.short_name) }}" enctype="multipart/form-data">
+                      <fieldset>
+                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                            <div class="col-xs-12 text-center">
+                                <div class="center-block img-overlay-container">
+                                     {{ helper.render_project_thumbnail(project, upload_method, class="img-thumbnail", id="project.id") }}
+                                    <div class="img-overlay edit-profile-image">
+                                            <i class="fa fa-pencil-square-o fa-3x"></i>
+                                            <span>Edit</span>
+                                    </div>
+                                </div>
+                            </div>
+                          {{ render_field(upload_avatar_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
+                          {{ upload_avatar_form.x1 }}
+                          {{ upload_avatar_form.y1 }}
+                          {{ upload_avatar_form.x2 }}
+                          {{ upload_avatar_form.y2 }}
+                          <div id="modal" class="modal fade">
+                            <div class="modal-dialog img-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <img id="uploadPreview">
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <div class="form-actions text-center">
+                                            <button type="submit" id="upload-btn" name='btn' value="Upload Avatar" class="btn btn-primary btn-lg" >Upload</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </fieldset>
+                  </form>
+                {{ helper.render_loading("Loading, please wait...") }}
+                  <!-- Update form for project data-->
+                <form class="visible-form" method="post" action="{{ url_for('blplugin.update_project', short_name = project.short_name) }}" enctype="multipart/form-data">
+                  <fieldset>
+                    {{ form.hidden_tag() }}
+
+                    {{ render_field(form.name, class="form-control", placeholder="Name", visible='true', required="required", autofocus="autofocus") }}
+                    {{ render_field(form.short_name, class="form-control", placeholder="Short name", visible='true', label_text="Short name:") }}
+                    {{ render_field(form.description, class="form-control", placeholder="Short description", visible='true', required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
+                    {{ render_field(form.long_description, rows="13", placeholder="Explain the project (use Markdown)!", class="form-control", required="required", visible='true') }}
+                    {{ render_field(form.category_id, class="form-control", visible='true') }}
+                    {{ render_field(form.allow_anonymous_contributors, class="form-control", visible='true') }}
+                    {{ render_field(form.protect, id='protect') }}
+                    <div id='password'>{{ render_field(form.password, class="form-control", visible='true') }}</div>
+                    {{ render_field(form.webhook, class="form-control", visible='true') }}
+                    <div role="group" class="pull-right">
+                        <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
+                      <button type="submit" name="btn" value="Save the changes" class="btn btn-danger">Save</button>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
 <script>
-  window.location.href = "{{ url_for('blplugin.update_project', short_name=project.short_name) }}";
+    $("i[rel='tooltip']").tooltip();
+    $(function() {
+        $('.control-label').addClass('remove-padding-left');
+    });
 </script>
- 
-<title>Page Redirection</title>
- 
-If you are not redirected automatically, follow the <a href="{{ url_for('blplugin.update_project', short_name=project.short_name) }}">link to the new page</a>
+<script src="{{url_for('static', filename='js/image_crop.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+$(function() {
+    var passProtected = document.getElementById('protect').checked;
+    if (!passProtected) {
+        $('#password').hide();
+    }
+    $('#protect').on('change', function() {
+        $('#password').toggle();
+    });
+});
+</script>
+{{ helper.broken_image() }}
+{% endblock %}
