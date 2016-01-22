@@ -24,7 +24,7 @@
 </div>
 {% endmacro %}
 
-{% macro render_label(field, tooltip, text) %}
+{% macro render_label(field, tooltip, text, show_label) %}
 {% if tooltip and text %}
         {% if show_label == 'false' %}
             {{ field.label(class="sr-only", style='width:148px', text=text) }}
@@ -48,10 +48,10 @@
             {{ field.label(class="control-label", text=text) }}
         {% endif %}
     {% else %}
-    {% if show_label == 'false' %}
-        {{ field.label(class="sr-only") }}
-    {% else %}
-        {{ field.label(class="control-label") }}
-    {% endif %}
+        {% if show_label == 'false' %}
+            {{ field.label(class="sr-only") }}
+        {% else %}
+            {{ field.label(class="control-label") }}
+        {% endif %}
 {% endif %}
 {% endmacro %}
