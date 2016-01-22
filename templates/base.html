@@ -57,7 +57,7 @@
 
     <body>
 
-        <!-- Enable JS warning-->
+        <!-- JS required warning-->
         <noscript>
             <div id="error" class="alert alert-danger">
                 <strong>Please enable JavaScript!</strong> This website will not work correctly with JavaScript disabled.
@@ -74,66 +74,28 @@
           {% set active_project  = active_project | default('none') -%}
           {% include "_navbar.html" %}
 
-              <div class="container-fluid">
+            <div class="container-fluid">
 
                 {% block content %}{% endblock %}
+            </div>
 
-              {% if show_cookies_warning %}
-              <div id="cookies-warning" class="container">
-                  <div class="col-md-12 text-center">
-                      <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button></span>
-                  </div>
-              </div>
-              {% endif %}
+            {% if show_cookies_warning %}
+            <div id="cookies-warning" class="container">
+                <div class="col-md-12 text-center">
+                    <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button></span>
+                </div>
+            </div>
+            {% endif %}
         </div>
 
-        <footer>
+        <div>
         {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
-        </footer>
+        </div>
 
     </div>
 
     <!-- Le javascript -->
     <script type="text/javascript" src="{{url_for('static', filename='js/scripts.min.js')}}" />
-
-    <!-- pybossa-discourse-plugin -->
-    {% if current_user.is_authenticated() %}
-    <script>
-        var originalTitle = document.title;
-        var originalNavContent = $('#discourse-nav').html();
-        $(function() {
-            $.ajax({
-                url: "/api/discourse/user/{{current_user.name}}/notifications/count",
-                success: function(data) {
-                    updateNotificationsPill(data);
-                }
-            });
-        });
-        (function poll() {
-            setTimeout(function() {
-                $.ajax({
-                    url: "/api/discourse/user/{{current_user.name}}/notifications/count",
-                    success: function(data) {
-                        updateNotificationsPill(data);
-                    },
-                    dataType: "json",
-                    complete: poll
-                });
-            }, 15000);
-        })();
-
-        function updateNotificationsPill(data) {
-            if (data !== 0 && $.isNumeric(data)) {
-                $('#discourse-notifications').html(data);
-                document.title = '(' + data + ') ' + originalTitle;
-            } else {
-                $('#discourse-notifications').html('');
-                document.title = originalTitle;
-            }
-        }
-    </script>
-    {% endif %}
-
     <script>
     {% include 'cookies.js' %}
     </script>
