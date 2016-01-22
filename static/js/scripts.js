@@ -4,7 +4,7 @@ $(function() {
     stylePolaroids();
     setBodyBackground();
     showHistoryButton();
-    makeLinkGlow();
+    startGlowingLinks();
     setTasksRemaining();
     animateProgress();
     sameSize();
@@ -23,6 +23,14 @@ function loadSplash(){
     }
 }
 
+
+/** Make any glowing links glow periodically. */
+function startGlowingLinks(){
+    var glow = $('.glowing-link');
+    setInterval(function(){
+        glow.hasClass('glow') ? glow.removeClass('glow') : glow.addClass('glow');
+    }, 2000);
+}
 
 /** Update social media share stats. */
 function getShareStats(){
