@@ -10,7 +10,7 @@
     {% include "_flash_messages_floating.html" %}
     <div class="splash" id="project-splash" data-splash="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.splash))}}">
         <div class="vcenter hcenter position-relative" style="height:100%;">
-            <div class="container text-center ie-mid-vcenter padding-top">
+            <div class="container text-center ie-mid-vcenter padding-top-lg">
                 <div class="container-padded">
                     <h1>{{ helper.render_project_title(project, upload_method) }}</h1>
                     <h2>{{ overall_progress | round | int }}% complete</h2>
