@@ -35,9 +35,9 @@
 </section>
 
 <a id="featured-projects"></a>
-{% if categories_projects['featured'] %}
 <section class="white pattern-white-wall box-shadow-white-bottom">
     <div class="container padding-top-sm">
+        {% if categories_projects['featured'] %}
         <div class="text-center col-xs-12 padding-bottom-sm">
             <h2>Featured Crowdsourcing Projects</h2>
         </div>
@@ -46,12 +46,19 @@
               {{ helper.show_project(project, "featured", current_user, upload_method) }}
             {% endfor %}
         </div>
+        {% else %}
+        <div class="col-xs-12 text-center">
+            <div class="row">
+                <h2>Get involved</h2>
+                <p>Your contributions will have a direct impact on enabling future reasearch at the British Library.<p>
+            </div>
+        </div>
+        {% endif %}
         <div class="col-xs-12 text-center padding-bottom-md">
             <a class="btn btn-default" href="{{url_for('project.index')}}">View All Projects</a>
         </div>
     </div>
-</section>
-{% endif %}
+</div>
 
 {% if top_users %}
 <section id="top_users">
