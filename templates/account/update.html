@@ -9,6 +9,8 @@
 <span class="set-main-bg" data-bg="pattern-white-wall"></span>
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 
 <div class="container-padded remove-padding-bottom">
     <section class="mid-grey pattern-brushed padding-bottom-sm">
@@ -39,9 +41,14 @@
                                 </div>
                             </div>
                             {% endif %}
-                            {% if 'pybossa-gravatar' in plugins|join(',', attribute='name') %}
-                            <a href="{{ url_for('set_gravatar', name=current_user.name) }}" class="btn btn-default">Use Gravatar</a>
+
+                            <!-- pybossa-gravatar -->
+                            {% if 'pybossa_gravatar' in plugins.keys() %}
+                                <a href="{{url_for('set_gravatar', name=current_user.name)}}" class="btn btn-default">
+                                    Import Gravatar
+                                </a>
                             {% endif %}
+
                             {{ form_helper.render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
                             {{ upload_form.x1 }}
                             {{ upload_form.y1 }}
@@ -76,7 +83,11 @@
                             {{ form_helper.render_field(form.fullname, show_label=True, placeholder="Full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                             {{ form_helper.render_field(form.name, show_label=True, placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                             {{ form_helper.render_field(form.email_addr, show_label=True, placeholder="Email", class="form-control", type="email" ) }}
-                            {{ form_helper.render_field_checkbox(form.subscribed, label_text="Subscribe to email notifications") }}
+                            <div class="form-group pull-right">
+                                <label for="subscribed" class="padding-right-sm">Email notifications</label>
+                                <input data-toggle="toggle" checked id="subscribed" name="subscribed" type="checkbox" value="y">
+                                    <span><small>&nbsp;</small></span>
+                            </div>
                             {{ form_helper.render_field(form.locale, class="hidden") }}
                             <div class="pull-right form-actions" role="group">
                                 <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">Cancel</a>
