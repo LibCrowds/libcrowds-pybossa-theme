@@ -2402,7 +2402,8 @@ footer .container {
 
 footer li {
     text-align: center;
-    display: inline-block
+    display: inline-block;
+    font-size: 1.5em;
 }
 
 footer li > a {
@@ -2436,14 +2437,6 @@ footer ul {
     margin: 0;
     width: 100%;
     text-align: center
-}
-
-.footer-links {
-    display: inline
-}
-
-footer.footer-col {
-    padding-top: 10px
 }
 
 @media (max-width: 767px) {
