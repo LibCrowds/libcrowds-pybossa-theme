@@ -21,40 +21,41 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="nav-link {% if active_page == 'about' %} active{% endif %}">
+                <li class="nav-link{% if active_page == 'about' %} active{% endif %}">
                     <a href="{{ url_for('home.about')}}">About</a>
                 </li>
-                <li class="nav-link {% if active_page == 'projects' %} active{% endif %}">
+                <li class="nav-link{% if active_page == 'projects' %} active{% endif %}">
                     <a href="{{ url_for('project.index') }}">Projects</a>
                 </li>
 
                 <!-- Plugin dependent links -->
-                {% for p in plugins %}
-
-                    {% if p.name == 'libcrowds-stats' %}
-                    <li class="nav-link {% if active_page == 'statistics' %} active{% endif %}">
-                        <a href="{{ url_for('stats.index')}}">Statistics</a>
+                {% if "libcrowds_statistics" in plugins.keys() %}
+                    <li class="nav-link{% if active_page == 'statistics' %} active{% endif %}">
+                        <a href="{{ url_for('statistics.index')}}">Statistics</a>
                     </li>
-                    {% elif p.name == 'pybossa-discourse' %}
-                    <li class="nav-link">
-                        <a href="{{ url_for('discourse.index')}}">Community
+                {% endif %}
 
-                        {% if current_user.info.notification_count and current_user.info.notification_count > 0 %}
-                        <span id="discourse-notifications" class="badge badge-danger">
-                            {{current_user.info.notification_count}}
-                        </span>
-                        {% else %}
-                        <span id="discourse-notifications" class="badge badge-danger"></span>
-                        {% endif %}
+                {% 'pybossa_discourse' in plugins.keys() %}
+                <li class="nav-link">
+                    <a href="{{ url_for('discourse.index')}}">Community
 
-                        </a>
-                    </li>
-                    {% elif p.name == 'libcrowds-data' %}
+                    {% if current_user.info.notification_count and current_user.info.notification_count > 0 %}
+                    <span id="discourse-notifications" class="badge badge-danger">
+                        {{current_user.info.notification_count}}
+                    </span>
+                    {% else %}
+                    <span id="discourse-notifications" class="badge badge-danger"></span>
+                    {% endif %}
+
+                    </a>
+                </li>
+                {% endif %}
+
+                {% if "libcrowds_data" in plugins.keys() %}
                     <li class="nav-link {% if active_page == 'data' %} active{% endif %}">
                         <a href="{{ url_for('data.index')}}">Data</a>
                     </li>
-                    {% endif %}
-                {% endfor %}
+                {% endif %}
             </ul>
 
             <!-- Optional search form -->
@@ -87,8 +88,8 @@
 
                     <li class="divider"></li>
 
-                    <!-- Also sign out from Discourse, if plugin is available -->
-                    {% if 'pybossa-discourse' in plugins|join(',', attribute='name') %}
+                    <!-- Also sign out from Discourse, if the plugin is available -->
+                    {% if 'pybossa_discourse' in plugins.keys() %}
                         <li class="nav-link">
                             <a href="{{ url_for('discourse.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
                         </li>
