@@ -29,13 +29,13 @@
                 </li>
 
                 <!-- Plugin dependent links -->
-                {% if "libcrowds_statistics" in plugins.keys() %}
+                {% if "libcrowds_statistics" in plugins %}
                     <li class="nav-link{% if active_page == 'statistics' %} active{% endif %}">
                         <a href="{{ url_for('statistics.index')}}">Statistics</a>
                     </li>
                 {% endif %}
 
-                {% 'pybossa_discourse' in plugins.keys() %}
+                {% if 'pybossa_discourse' in plugins %}
                 <li class="nav-link">
                     <a href="{{ url_for('discourse.index')}}">Community
 
@@ -51,7 +51,7 @@
                 </li>
                 {% endif %}
 
-                {% if "libcrowds_data" in plugins.keys() %}
+                {% if "libcrowds_data" in plugins %}
                     <li class="nav-link {% if active_page == 'data' %} active{% endif %}">
                         <a href="{{ url_for('data.index')}}">Data</a>
                     </li>
@@ -89,7 +89,7 @@
                     <li class="divider"></li>
 
                     <!-- Also sign out from Discourse, if the plugin is available -->
-                    {% if 'pybossa_discourse' in plugins.keys() %}
+                    {% if 'pybossa_discourse' in plugins %}
                         <li class="nav-link">
                             <a href="{{ url_for('discourse.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
                         </li>
