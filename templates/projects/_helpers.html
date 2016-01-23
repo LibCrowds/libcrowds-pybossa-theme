@@ -38,6 +38,7 @@
     and current_user.pro) or current_user.admin %}
         <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
         <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
+        {% if project %}
         <li class="divider"></li>
         <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">Dashboard</a></li>
         <li class="nav-link{% if active_link=="update"%} active{% endif %}">
@@ -63,10 +64,12 @@
         <li class="nav-link{% if active_link=="statistics"%} active{% endif %}">
             <a href="{{url_for('project.show_stats', short_name=active_project)}}"> Statistics</a>
         </li>
-    {% endif %}
+        {% endif %}
+    {% elif project %}
     <li class="nav-link{% if active_link=="contribute"%} active{% endif %}">
         <a href="{{url_for('project.presenter', short_name=active_project)}}"> Contribute</a>
     </li>
+   {% endif %}
 </ul>
 {% endmacro %}
 
