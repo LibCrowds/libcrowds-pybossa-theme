@@ -1,8 +1,8 @@
 {% extends "/base.html" %}
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
-{% block content %}
 
+{% block content %}
 <script>
     Modernizr.load({
             test: window.JSON,
@@ -10,13 +10,12 @@
             });
 </script>
 <script src="{{url_for('static', filename='js/pybossa/pybossa.js')}}" type="text/javascript"></script>
-<script src="{{url_for('static', filename='js/vendor/jquery.serializejson.min.js')}}" type="text/javascript"></script>
-    <div class="container-padded">
-        <div class="container container-padded remove-padding-bottom">
+<div class="container-padded">
+    <div class="container container-padded remove-padding-bottom">
         {% include "_flash_messages.html" %}
         {% if invite_new_volunteers %}
             <div class="row">
-                <div class="col-xs-12 text-center padding-top">
+                <div class="col-xs-12 text-center padding-top-lg">
                     <h1>Great, you've contributed to all the tasks for this project.</h1>
                     <h2>But this project still needs more volunteers, so please spread the word!</h2>
                     <a href="/"><i class="fa fa-home fa-3x"></i></a>

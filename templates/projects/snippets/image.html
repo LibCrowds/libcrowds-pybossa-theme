@@ -1,5 +1,5 @@
 <div class="row">
-    <!-- Success and Error Messages for the user --> 
+    <!-- Success and Error Messages for the user -->
     <div class="col-md-6 col-md-offset-2" style="height:50px">
         <div id="success" class="alert alert-success" style="display:none;">
             <a class="close">×</a>
@@ -14,7 +14,7 @@
         </div>
         <div id="finish" class="alert alert-success" style="display:none;">
             <strong id="i18n_congratulations">Congratulations!</strong> <span id="i18n_congratulations_text">You have participated in all available tasks!</span>
-            <br/>
+            <br>
             <div class="alert-actions">
                 <a class="btn small" href="/">Go back</a>
                 <a class="btn small" href="/project">or, Check other projects</a>
@@ -37,13 +37,13 @@
         <h1 id="question"><span id="i18n_question">Do you see a human face in this photo?</span></h1> <!-- The question will be loaded here -->
         <div id="answer"> <!-- Start DIV for the submission buttons -->
             <!-- If the user clicks this button, the saved answer will be value="yes"-->
-            <button class="btn btn-success btn-answer" value='Yes'><i class="icon glyphicon glyphicon-white icon-thumbs-up"></i> <span id="i18n_yes">Yes</span></button>
+            <button class="btn btn-success btn-answer" value='Yes'><i class="fa fa-thumbs-o-up"></i> <span id="i18n_yes">Yes</span></button>
             <!-- If the user clicks this button, the saved answer will be value="no"-->
-            <button class="btn btn-danger btn-answer" value='No'><i class="icon glyphicon glyphicon-white icon-thumbs-down"></i> No</button>
+            <button class="btn btn-danger btn-answer" value='No'><i class="fa fa-thumbs-o-down"></i> No</button>
             <!-- If the user clicks this button, the saved answer will be value="NoPhoto"-->
-            <button class="btn btn-answer" value='NoPhoto'><i class="icon glyphicon glyphicon-exclamation"></i> <span id="i18n_no_photo">No photo</span></button>
+            <button class="btn btn-answer" value='NoPhoto'><i class="fa fa-eclamation"></i> <span id="i18n_no_photo">No photo</span></button>
             <!-- If the user clicks this button, the saved answer will be value="NotKnown"-->
-            <button class="btn btn-answer" value='NotKnown'><i class="icon glyphicon glyphicon-white icon-question-sign"></i> <span id="i18n_i_dont_know">I don't know</span></button>
+            <button class="btn btn-answer" value='NotKnown'><i class="fa fa-question"></i> <span id="i18n_i_dont_know">I don't know</span></button>
         </div><!-- End of DIV for the submission buttons -->
         <!-- Feedback items for the user -->
         <p><span id="i18n_working_task">You are working now on task:</span> <span id="task-id" class="label label-warning">#</span></p>
@@ -53,14 +53,14 @@
         <div class="progress progress-striped">
             <div id="progress" rel="tooltip" title="#" class="bar" style="width: 0%;"></div>
         </div>
-        <!-- 
+        <!--
             This project uses Disqus to allow users to provide some feedback.
             The next section includes a button that when a user clicks on it will
             load the comments, if any, for the given task
         -->
         <div id="disqus_show_btn" style="margin-top:5px;">
-            <button class="btn btn-danger btn-lg btn-disqus" onclick="loadDisqus()"><i class="glyphicon glyphicon-comments"></i> <span id="i18n_show_comments">Show comments</span></button>
-            <button class="btn btn-lg btn-disqus" onclick="loadDisqus()" style="display:none"><i class="glyphicon glyphicon-comments"></i> <span id="i18n_hide_comments">Hide comments</span></button>
+            <button class="btn btn-danger btn-lg btn-disqus" onclick="loadDisqus()"><i class="fa fa-comments"></i> <span id="i18n_show_comments">Show comments</span></button>
+            <button class="btn btn-lg btn-disqus" onclick="loadDisqus()" style="display:none"><i class="fa fa-comments"></i> <span id="i18n_hide_comments">Hide comments</span></button>
         </div><!-- End of Disqus Button section -->
         <!-- Disqus thread for the given task -->
         <div id="disqus_thread" style="margin-top:5px;display:none"></div>
@@ -154,7 +154,7 @@ function loadUserProgress() {
         var pct = Math.round((data.done*100)/data.total);
         $("#progress").css("width", pct.toString() +"%");
         $("#progress").attr("title", pct.toString() + "% completed!");
-        $("#progress").tooltip({'placement': 'left'}); 
+        $("#progress").tooltip({'placement': 'left'});
         $("#total").text(data.total);
         $("#done").text(data.done);
     });

@@ -1,5 +1,12 @@
+{% macro render_account_local_nav(current_user, active_link) -%}
+<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
+    <li class="nav-link {% if active_link=="newproject"%}active"{% endif %}><a href="{{url_for('project.new')}}">New</a></li>
+    <li class="nav-link {% if active_link=="projects"%}active{% endif %}"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
+</ul>
+{% endmacro %}
+
 {% macro render_user_profile(user, upload_method, settings, private=True) %}
-<div class="row margin-bottom">
+<div class="row margin-bottom-md">
     <div class="col-sm-6 col-xs-12 text-center">
         <div class="inline-block">
             <div class="shadow shadow-circle">
@@ -8,60 +15,35 @@
         </div>
         <h1 class="inset-text-grey">{{user.fullname}}</h1>
     </div>
-    <div class="col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1 white-rounded inset-shadow">
-        
+    <div class="col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1 white-panel inset-shadow">
         <div class="row">
             <div class="col-xs-6 text-center">
-                {% if user.rank %}
-                    {% if private %}
-                    <a class="remove-colour" href="{{url_for('leaderboard.index')}}">
-                    {% endif %}
-                    <i class="fa fa-trophy fa-4x"></i>
-                    <p>Rank</p>
-                    <p class="score">{{ user.rank }}</p>
-                {% if private %}</a>{% endif %}
-                {% else %}
-                    <i class="fa fa-trophy fa-4x"></i>
-                    <p>Rank</p>
-                    <p class="score">0</p>
-                {% endif %}
+                <i class="fa fa-trophy fa-4x"></i>
+                <p>Rank</p>
+                <p class="score">{% if user.rank %}{{ user.rank }}{% else %}Unranked{% endif %}</p>
             </div>
-            
+
             <div class="col-xs-6 text-center">
-                {% if user.score %}
-                    <i class="fa fa-tasks fa-4x"></i>
-                    <p>Contributions</p>
-                    <p class="score">{{user.score}}</p>
-                {% else %}
-                    <i class="fa fa-tasks fa-4x"></i>
-                    <p>Contributions</p>
-                    <p class="score">0</p>  
-                {% endif %}
+                <i class="fa fa-tasks fa-4x"></i>
+                <p>Contributions</p>
+                <p class="score">{% if user.score %}{{user.score}}{% else %}0{% endif %}</p>
             </div>
         </div>
         <hr class="extra-margins">
-            
         <div class="col-sm-10 col-sm-offset-1 user-info">
             <p><i class="fa fa-user"></i> Username: {{ user.name }}</p>
+            <p><i class="fa fa-clock-o remove-colour"></i> Joined: {{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}</p>
             {% if private %}
                 <p><i class="fa fa-envelope"></i> E-mail: {{ user.email_addr }}</p>
-            {% endif %}
-            
-        
-            
-            
-            <p><i class="fa fa-clock-o"></i> Joined: {{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}</p>
-            {% if private %}
-                
                 <div class="text-center">
                     <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-default btn-sm btn-padded"><i class="fa fa-pencil-square-o"></i> Edit</a>
                     {% if (user.valid_email == False) %}
-                      {% if (user.confirmation_email_sent == False) %}
-                      <a href="{{ url_for('account.confirm_email')}}" class="btn btn-danger">Validate email</a>
-                      {% else %}
-                        <br />
+                        {% if (user.confirmation_email_sent == False) %}
+                        <a href="{{ url_for('account.confirm_email')}}" class="btn btn-danger">Validate email</a>
+                        {% else %}
+                        <br>
                         <p class="label label-danger">Email sent for validation</p>
-                      {% endif %}
+                        {% endif %}
                     {% endif %}
                 </div>
             {% endif %}
@@ -71,47 +53,45 @@
 {% endmacro %}
 
 {% macro render_user_thumbnail(user, upload_method, id, class, style, size='90x90') %}
-    {% if user.info.avatar %}
-        {% if upload_method == 'rackspace'%}
-        <img class="{{class}}" style="{{style}}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 'user');"  alt="User avatar">
-        {% else %}
-        <img class="{{class}}" style="{{style}}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar))|resize(size)}}" onerror="imgError(this, 'user');" alt="User avatar">
-        {% endif %}
+{% if user.info.avatar %}
+    {% if upload_method == 'rackspace'%}
+    <img class="{{class}}" style="{{style}}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 'user');"  alt="User avatar">
     {% else %}
-        <img class="{{class}}" style="{{style}}" src="{{ url_for('static', filename='img/placeholder.user.png')}}" alt="User avatar">
+    <img class="{{class}}" style="{{style}}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar)) }}" onerror="imgError(this, 'user');" alt="User avatar">
     {% endif %}
+{% else %}
+    <img class="{{class}}" style="{{style}}" src="{{ url_for('static', filename='img/placeholder.user.png')}}" alt="User avatar">
+{% endif %}
 {% endmacro %}
 
 {% macro render_pagination(pagination) %}
-  <div class="pagination pagination-centered">
-      <ul>
+<div class="pagination pagination-centered">
+    <ul>
         {% if pagination.has_prev %}
-          <li>
-          <a href="{{ url_for_other_page(pagination.page - 1)
-            }}">&laquo; Prev | </a>
-          </li>
+        <li>
+            <a href="{{ url_for_other_page(pagination.page - 1)}}">&laquo; Prev | </a>
+        </li>
         {% endif %}
 
-        {%- for page in pagination.iter_pages() %}
-          {% if page %}
-            {% if page != pagination.page %}
-            <li>
-              <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
-             </li>
-            {% else %}
-            <li class="active">
-                <a href="#">{{ page }}</a>
-            </li>  
+        {% for page in pagination.iter_pages() %}
+            {% if page %}
+                {% if page != pagination.page %}
+                <li>
+                    <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+                </li>
+                {% else %}
+                <li class="active">
+                    <a href="#">{{ page }}</a>
+                </li>
+                {% endif %}
             {% endif %}
-          {% endif %}
-        {%- endfor %}
+        {% endfor %}
+
         {% if pagination.has_next %}
-          <li>
-          <a href="{{ url_for_other_page(pagination.page + 1)
-            }}"> | Next &raquo;</a>
-          </li>
+        <li>
+            <a href="{{ url_for_other_page(pagination.page + 1)}}"> | Next &raquo;</a>
+        </li>
         {% endif %}
     </ul>
-  </div>
+</div>
 {% endmacro %}
-

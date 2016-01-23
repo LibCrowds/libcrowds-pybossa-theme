@@ -6,20 +6,12 @@
 
 {{ project.info.tutorial | safe}}
 
-<div class="row">
-    <div class="col-sm-12" style="text-align:center;padding-top:20px;">
+<div class="container-padded">
+    <div class="container container-padded padding-top-lg">
+        {% include "_flash_messages.html" %}
         <a id="start" href={{url_for('project.presenter', short_name = project.short_name)}}
-           class="btn btn-danger btn-lg"> 
-           <i class="glyphicon glyphicon-thumbs-up"></i> 
-           Contribute</a>
+           class="btn btn-danger"><i class="fa fa-thumbs-o-up"></i> Contribute
+        </a>
     </div>
 </div>
-<div id='PYBOSSA_USER_LOCALE' hidden>
-{% if current_user.is_anonymous() %}
-en
-{% else %}
-{{ current_user.locale }}
-{% endif %}
-</div>
-
 {% endblock %}

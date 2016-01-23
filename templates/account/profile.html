@@ -8,16 +8,16 @@
 <span class="set-main-bg" data-bg="pattern-white-wall"></span>
 <div class="container-padded  remove-padding-bottom">
     <section class="pattern-brushed box-shadow-grey">
-        <div class="container padding-top">
+        <div class="container padding-top-lg">
             {% include "_flash_messages.html" %}
-            {{ helper.render_user_profile(current_user, upload_method, "settings") }} 
+            {{ helper.render_user_profile(current_user, upload_method, "settings") }}
         </div>
     </section>
-    
+
     {% if projects_contrib %}
-        <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
-            {{project_helper.render_grid_projects(projects_contrib, "Your Contributions", upload_method)}}
-        </section>
+    <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
+        {{project_helper.render_grid_projects(projects_contrib, "Your Contributions", upload_method)}}
+    </section>
     {% endif %}
     {{ project_helper.broken_image() }}
 </div>

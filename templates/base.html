@@ -22,7 +22,8 @@
 
         <!-- Le styles -->
         <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap.min.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.min.css')}}?v=1.0.0">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/browser-detection/browser-detection.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.min.css')}}?v=1.1.4">
         <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400%7CPermanent+Marker">
         <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='fonts/font-awesome-4.4.0/css/font-awesome.min.css')}}">
 
@@ -36,7 +37,6 @@
         <!--[if IE 9]>
         <style>
             .ie-vcenter{position:relative;top:50%;transform:translateY(-50%);}
-            #image_container{margin-top:0px!important;}
             .ie-mid-vcenter{position:relative;top:25%;transform:translateY(-25%);}
         </style>
         <![endif]-->
@@ -45,10 +45,10 @@
         <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery-2.1.3.min.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery.cookie.min.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery.xdomainrequest.min.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/vendor/browser-detection.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery-ui-1.11.4.custom/jquery-ui.min.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/vendor/history/scripts/bundled/html4+html5/jquery.history.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/vendor/modernizr.min.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='vendor/browser-detection/browser-detection.min.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='vendor/bootstrap-3.3.2/js/bootstrap.min.js')}}"></script>
 
         {% include '_ga.html' ignore missing %}
@@ -57,88 +57,47 @@
 
     <body>
 
-        <!-- Enable JS warning-->
+        <!-- JS required warning-->
         <noscript>
-            <div id="error" class="alert alert-danger js-alert">
+            <div id="error" class="alert alert-danger">
                 <strong>Please enable JavaScript!</strong> This website will not work correctly with JavaScript disabled.
             </div>
         </noscript>
 
         <div id="body-content">
-            <div id="main-body-content">
-            {% if not current_user.is_anonymous() %}
-            <!-- checkpoint::logged-in::{{current_user.name}} -->
-            {% endif %}
+          {% if not current_user.is_anonymous() %}
+          <!-- checkpoint::logged-in::{{current_user.name}} -->
+          {% endif %}
 
-            {% set active_page = active_page | default('index') -%}
-            {% set has_splash = has_splash | default('false') -%}
-            {% set active_project  = active_project | default('none') -%}
-            {% include "_navbar.html" %}
+          {% set active_page = active_page | default('index') -%}
+          {% set has_splash = has_splash | default('false') -%}
+          {% set active_project  = active_project | default('none') -%}
+          {% include "_navbar.html" %}
 
-                <div class="container-fluid">
+            <div class="container-fluid">
 
                 {% block content %}{% endblock %}
-
-                {% if show_cookies_warning %}
-                <div id="cookies_warning" class="container">
-                    <div class="col-md-12 text-center">
-                        <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button></span>
-                    </div>
-                </div>
-                {% endif %}
-
             </div>
+
+            {% if show_cookies_warning %}
+            <div id="cookies-warning" class="container">
+                <div class="col-md-12 text-center">
+                    <span>Cookies help us deliver our services. By using our services, you agree to our use of cookies.<span id="btn-group-cookies" role="group"></span><button class="btn btn-xs btn-success" onclick="accept_cookies()"><i class="fa fa-thumbs-up"></i> OK</button></span>
+                </div>
+            </div>
+            {% endif %}
         </div>
 
-        <footer id="sticky-footer">
+        <footer>
         {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
         </footer>
 
     </div>
 
     <!-- Le javascript -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/scripts.min.js')}}" />
-
-    <!-- pybossa-discourse-plugin -->
-    {% if current_user.is_authenticated() %}
+    <script type="text/javascript" src="{{url_for('static', filename='js/scripts.min.js')}}"></script>
     <script>
-        var originalTitle = document.title;
-        var originalNavContent = $('#discourse-nav').html();
-        $(function() {
-            $.ajax({
-                url: "/api/discourse/user/{{current_user.name}}/notifications/count",
-                success: function(data) {
-                    updateNotificationsPill(data);
-                }
-            });
-        });
-        (function poll() {
-            setTimeout(function() {
-                $.ajax({
-                    url: "/api/discourse/user/{{current_user.name}}/notifications/count",
-                    success: function(data) {
-                        updateNotificationsPill(data);
-                    },
-                    dataType: "json",
-                    complete: poll
-                });
-            }, 15000);
-        })();
-
-        function updateNotificationsPill(data) {
-            if (data !== 0 && $.isNumeric(data)) {
-                $('#discourse-notifications').html(data);
-                document.title = '(' + data + ') ' + originalTitle;
-            } else {
-                $('#discourse-notifications').html('');
-                document.title = originalTitle;
-            }
-        }
-    </script>
-    {% endif %}
-
-    <script>
-    {% include 'cookies.js' %}
+        {% include 'cookies.js' %}
     </script>
 
     </body>

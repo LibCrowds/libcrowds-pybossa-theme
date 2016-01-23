@@ -14,9 +14,9 @@
                 {{ helper.render_loading(loading_text) }}
                 <h1><strong>{{project.name}}</strong>: Auto Importer Configured</h1>
                 <h3>You currently have the following auto-importer configured</h3>
-                
-                <hr />
-                
+
+                <hr>
+
                 {% if importer['type']=='epicollect' %}
                 <p><strong>Type: </strong>Epicollect</p>
                 <p><strong>Epicollect project: </strong>{{ importer['epicollect_project'] }}</p>
@@ -34,9 +34,9 @@
                 <p><strong>Type: </strong>Ambiguous Data importer</p>
                 <p><strong>Project: </strong>{{importer['project_name']}}</p>
                 {% endif %}
-                
-                <hr />
-                
+
+                <hr>
+
                 {% if not importer['type']=='ambiguous' %}
                 <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
                 {% else %}

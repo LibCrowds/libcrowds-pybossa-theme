@@ -8,24 +8,24 @@
 
 {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
     {{ privacy.render_lock_page() }}
-{% else %}   
-    <span class="set-main-bg" data-bg="pattern-white-wall"></span>
-    <div class="container-padded remove-padding-bottom">
-        <section class="mid-grey pattern-brushed box-shadow-grey-bottom padding-bottom">
-            <div class="container padding-top">
-                {% include "_flash_messages.html" %}
-                <section id="user-data">
-                    {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
-                </section>
-            </div>
-        </section>
-                            
-        {% if projects %}                     
-            <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
-                {{render_grid_projects(projects, "Contributions", upload_method)}}
+{% else %}
+<span class="set-main-bg" data-bg="pattern-white-wall"></span>
+<div class="container-padded remove-padding-bottom">
+    <section class="mid-grey pattern-brushed box-shadow-grey-bottom padding-bottom-md">
+        <div class="container padding-top-lg">
+            {% include "_flash_messages.html" %}
+            <section id="user-data">
+                {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
             </section>
-        {% endif %}
-    </div>         
+        </div>
+    </section>
+
+    {% if projects %}
+    <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
+         {{render_grid_projects(projects, "Contributions", upload_method)}}
+    </section>
+    {% endif %}
+</div>
 {% endif %}
 
 {{ broken_image() }}

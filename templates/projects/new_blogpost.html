@@ -1,12 +1,32 @@
-<!DOCTYPE HTML>
- 
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="1; url={{ url_for('blog.index') }}">
- 
-<script>
-  window.location.href = "{{ url_for('blog.index') }}";
-</script>
- 
-<title>Page Redirection</title>
- 
-If you are not redirected automatically, follow the <a href="{{ url_for('blog.index') }}">link to the new page</a>
+{% extends "/base.html" %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
+{% from "admin/_helpers.html" import render_local_nav %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+{{ render_local_nav(current_user, "blog") }}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3 col-xs-12">
+            {% include "_flash_messages.html" %}
+            <h2>Write a new blog post for {{ project.name }}</h2>
+                <form class="form-horizontal" method="post" action="{{ url_for('project.new_blogpost', short_name=project.short_name) }}">
+                    {{ form.hidden_tag() }}
+                    <fieldset>
+                        {{ render_field(form.title, class_="span9", placeholder="The title of your post" }}
+                        {{ render_field(form.body, class_="span9", placeholder="Write your post here. You can use Markdown!") }}
+                        <div class="form-actions">
+                            <input type="submit" value={{_('Create')}} class="btn btn-primary" />
+                            <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ helper.broken_image() }}
+{{ helper.knob() }}
+{% endblock %}

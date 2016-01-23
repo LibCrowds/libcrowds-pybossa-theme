@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% set active_page = "admin" %}
-{% from "admin/_helpers.html" import render_admin_user %}
-{% from "admin/_helpers.html" import render_local_nav %}
+{% set active_link = "administrators" %}
+{% import "admin/_helpers.html" as helper %}
 
 {% block content %}
-    {{ render_local_nav(current_user, "administrators") }}
+{{ helper.render_admin_local_nav(current_user, active_link) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
@@ -13,13 +13,13 @@
                 <h1><strong>Admin:</strong> Manage Administrators</h1>
                 {% from "_formhelpers.html" import render_field %}
                 <form class="form-search" method="POST">
-                {{ form.hidden_tag() }}
-                <div class="input-group">
-                <input id="user" name="user" type="text" class="search-query form-control" placeholder="Enter full name or username">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default form-control search-button"><i class="glyphicon glyphicon-search"></i></button>
-                </span>
-                </div>
+                    {{ form.hidden_tag() }}
+                    <div class="input-group">
+                        <input id="user" name="user" type="text" class="search-query form-control" placeholder="Enter full name or username">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default form-control search-button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
                 </form>
                 {% if found %}
                 <h2 class="padding-top-sm">Results</h2>
@@ -32,14 +32,14 @@
                             <th style="text-align:center;">Action</th>
                         </tr>
                     </thead>
-                
+
                 {% for user in found %}
-                    {{ render_admin_user(user) }}
+                    {{ helper.render_admin_user(user) }}
                 {% endfor %}
                 </table>
-                        
+
                 {% endif %}
-        
+
                 <h2 class="padding-top-sm">Current Administrators</h2>
                 <table class="table table-stripped table-condensed table-hover table-responsive">
                     <thead>
