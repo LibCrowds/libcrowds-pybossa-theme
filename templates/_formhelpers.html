@@ -1,5 +1,5 @@
 {% macro render_field(field, addon, prepend, tooltip, label_text, show_label='false') %}
-<div class="form-group {% if field.errors %} error {% endif %}">
+<div class="form-group{% if field.errors %} has-error{% endif %}">
     {{ render_label(field, tooltip, label_text, show_label) }}
     {% if addon %}
     <div class="input-group">
