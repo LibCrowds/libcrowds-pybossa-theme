@@ -64,7 +64,13 @@
                     LibCrowds is currently running the following plugins:
                     <ul class="no-style">
                     {% for p in plugins.values() %}
-                        <li><a href="{{ p.website }}"><strong>{{ p.name }}</a> (v{{ p.version }}):<strong> {{ p.description }}</li>
+                        <li>{% if p.website %}
+								<a href="{{ p.website }}">
+							{%endif %}
+								<strong>{{ p.name }}
+							{{ p.website }}</a>
+							{%endif %}
+							(v{{ p.version }}):<strong> {{ p.description }}</li>
                     {% endfor %}
                     </ul>
                 {% endif %}
