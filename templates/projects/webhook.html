@@ -36,7 +36,7 @@
                     <td id="response_status_code_{{response.id}}">{{response.response_status_code}}</td>
                     <td>
                         <button class="btn btn-info" onclick="run('{{project.short_name}}', {{response.id}})">
-                            <i class="icon-refresh"></i>
+                            <i class="fa fa-refresh"></i>
                         </button>
                     </td>
                 </tr>
@@ -45,9 +45,9 @@
         </div>
     </div>
 </div>
-    
+
 <script>
-    var url = "../{{project.short_name}}/privatestream"; 
+    var url = "../{{project.short_name}}/privatestream";
     var source = new EventSource(url);
     source.onmessage = function (event) {
         if (alert.data != 1) {

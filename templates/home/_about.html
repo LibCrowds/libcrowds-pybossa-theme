@@ -1,76 +1,100 @@
 {% include "_flash_messages_floating.html" %}
 <div class="splash" id="about-splash">
-  <div class="splash-overlay vcenter hcenter">
-  </div>
+    <div class="splash-overlay vcenter hcenter"></div>
 </div>
 
-    <section class="mid-grey pattern-brushed box-shadow-grey-bottom">
-        <p class="attribution"><small>Photo: &copy; <a href="http://www.lensintheface.com" target="_blank">Jon Ellis</a></small></p>
-        <div class="container container-padded">
-            <div class="col-md-11">
-                <h1 class="inset-text-grey">About</h1>
-                
-                <p class="lead">{{brand}}, in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>, 
+<section class="mid-grey pattern-brushed box-shadow-grey-bottom">
+    <p class="attribution"><small>Photo: &copy; <a href="http://www.lensintheface.com" target="_blank">Jon Ellis</a></small></p>
+    <div class="container container-padded">
+        <div class="col-md-11">
+            <h1 class="inset-text-grey">About</h1>
+            <p class="lead">
+                {{brand}}, in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>,
                 is a platform for hosting experimental crowdsourcing projects aimed at improving access to the diverse
-		collections held at the <a href="http://www.bl.uk" target="_blank">British Library</a>. By participating
-		in the crowdsourcing projects hosted here, you will have a direct impact on enabling future research at the
-		library.</p> 
-            </div>
+                collections held at the <a href="http://www.bl.uk" target="_blank">British Library</a>. By participating
+                in the crowdsourcing projects hosted here, you will have a direct impact on enabling future research at the
+                library.
+            </p>
         </div>
-    </section>
-    <section class="white">
-        <div class="container container-padded">
-            <div class="col-md-11 padding-bottom-sm">
-                <h2>Featured Project Series: Convert-a-Card</h2>
-			
+    </div>
+</section>
+
+<section class="white">
+    <div class="container container-padded">
+        <div class="col-md-11 padding-bottom-sm">
+            <h2>Featured Project Series: Convert-a-Card</h2>
+            <p>
                 In our first project series, Convert-a-Card, we're experimenting with a new method for transforming printed card
-                catalogues into electronic records for inclusion in our online catalogue <a href="http://explore.bl.uk/">Explore</a>.</p>
-                
-                <p>While the <a href="http://www.bl.uk/aboutus/quickinfo/facts/history/" target="_blank">British Library</a> is
+                catalogues into electronic records for inclusion in our online catalogue <a href="http://explore.bl.uk/">Explore</a>.
+            </p>
+            <p>
+                While the <a href="http://www.bl.uk/aboutus/quickinfo/facts/history/" target="_blank">British Library</a> is
                 relatively young for a national library, much of its vast historical collections were acquired long before computers
-                were used for cataloguing as standard. So, while the library's online catalogue, 
+                were used for cataloguing as standard. So, while the library's online catalogue,
                 <a href="http://explore.bl.uk/" target="_blank">Explore</a>, provides public access to nearly 57 million records,
-                there are still thousands of important research items that can only be found by searching the old physical card catalogues.</p>
-                                                                           
-                <p>Records matched, located, transcribed or translated as part of Convert-a-Card will be uploaded to the
+                there are still thousands of important research items that can only be found by searching the old physical card catalogues.
+            </p>
+            <p>
+                Records matched, located, transcribed or translated as part of Convert-a-Card will be uploaded to the
                 <a href="http://explore.bl.uk/" target="_blank">British Library's Explore catalogue</a> for anyone to search online.
                 By participating you will have a direct impact on the availability of research material to anyone interested in the
-                diverse collections available at the British Library. </p>
-                
-                <div class="text-center">
-		  <a href="http://www.libcrowds.com/project/category/convert-a-card/" class="btn btn-danger">Get Started</a>
-		</div>
+                diverse collections available at the British Library.
+            </p>
+            <div class="text-center">
+                <a href="{{url_for('project.index')}}" class="btn btn-danger">Get Started</a>
             </div>
         </div>
-    </section>
-                    
-    <section class="white pattern-white-wall box-shadow-white-bottom">
-        <div class="container container-padded">
-            <div class="col-md-11 padding-bottom-sm">
-                <h2>Technology</h2>
-                
-                <p>{{ brand }} is built on top of <a href="http://docs.pybossa.com/"> PyBossa </a>, an open-source Python framework for the creation of
-                crowdsourcing projects. To complement the PyBossa framework, custom Flask plugins are used to handle certain {{brand}} specific
-                features. The <a href="https://github.com/alexandermendes/libcrowds-pybossa-theme" target="_blank">{{brand}} theme</a> is written primarily
-                in HTML5, CSS3 and JavaScript, as are the individual crowdsourcing projects. Everything developed for the LibCrowds platform
-		is open-source and <a href="https://github.com/LibCrowds" target="_blank">available at GitHub</a>.</p>
-            
-                <div class="col-sm-6 col-sm-offset-3 col-xs-12 padding-top-sm">
-                  <div class="col-xs-4"><img src="{{url_for('static',filename='img/html-logo.png')}}" class="img-responsive web-badge" alt="HTML5 web badge"></div>
-                  <div class="col-xs-4"><img src="{{url_for('static',filename='img/css-logo.png')}}" class="img-responsive web-badge" alt="CSS3 web badge"></div>
-                  <div class="col-xs-4"><img src="{{url_for('static',filename='img/js-logo.png')}}" class="img-responsive web-badge" alt="JavaScript web badge"></div>
-                </div>
+    </div>
+</section>
+
+<section class="white pattern-white-wall box-shadow-white-bottom">
+    <div class="container container-padded">
+        <div class="col-md-11 padding-bottom-sm">
+            <h2>Technology</h2>
+            <p>
+                LibCrowds is built on top of <a href="http://docs.pybossa.com/"> PyBossa </a>, an open-source Python framework for the creation of
+                crowdsourcing projects. PyBossa is written in Python and uses the <a href="http://flask.pocoo.org/">Flask</a> micro-framework. Each
+                project on the platform is written in a combination of HTML, CSS and Javascript. {% if 'pybossa-discourse' in plugins.keys() %} The
+                community forum is powered by <a href="https://www.discourse.org/">Discourse</a>.{% endif %} The
+				<a href="https://github.com/LibCrowds/libcrowds-pybossa-theme" target="_blank">LibCrowds theme</a> and any plugins developed to
+				provide additional functionality are open-souce and available on GitHub.
+            </p>
+            <p>
+                {% if plugins %}
+                    LibCrowds is currently running the following plugins:
+                    <ul class="no-style">
+                    {% for p in plugins.values() %}
+                        <li>{% if p.website %}
+								<a href="{{ p.website }}">
+							{%endif %}
+								<strong>{{ p.name }}
+							{{ p.website }}</a>
+							{%endif %}
+							(v{{ p.version }}):<strong> {{ p.description }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </p>
+            <div class="col-sm-6 col-sm-offset-3 col-xs-12 padding-top-sm">
+                <div class="col-xs-4"><img src="{{url_for('static',filename='img/html-logo.png')}}" class="img-responsive web-badge" alt="HTML5 web badge"></div>
+                <div class="col-xs-4"><img src="{{url_for('static',filename='img/css-logo.png')}}" class="img-responsive web-badge" alt="CSS3 web badge"></div>
+                <div class="col-xs-4"><img src="{{url_for('static',filename='img/js-logo.png')}}" class="img-responsive web-badge" alt="JavaScript web badge"></div>
             </div>
         </div>
-    </section>
-                
-    <section class="white">
-        <div class="container container-padded">
-            <div class="col-md-11 padding-top-xs padding-bottom-sm">
-                <h2>Contact information</h2>
-                <ul>
-                    <li>Visit the <a href="{{url_for('discourse.index')}}">LibCrowds Community</a> for more information or to report any issues.</li>     
-                </ul>
-            </div>
+    </div>
+</section>
+
+<section class="white">
+    <div class="container container-padded">
+        <div class="col-md-11 padding-top-xs padding-bottom-sm">
+            <h2>Contact information</h2>
+            <ul class="no-style">
+                {% if 'pybossa-discourse' in plugins.keys() %}
+                <li>Visit the <a href="{{url_for('discourse.index')}}">LibCrowds Community</a> for more information or to report any issues.</li>
+                {% else %}
+                <li><a href="mailto:{{contact_email}}">Email us</a> for more information.</li>
+                {% endif %}
+            </ul>
         </div>
-    </section>
+    </div>
+</section>

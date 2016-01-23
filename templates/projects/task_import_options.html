@@ -18,18 +18,17 @@
                         <p class="lead">Use one of the following <strong>importers</strong> to import tasks</p>
                     </div>
                 </div>
-                    {% for row in available_importers|batch(3) %}
-                    <div class="row">
-                        {% for importer in row %}
-                        <div class="col-sm-4">
-                            {% include importer %}
-                        </div>
-                        {% endfor %}
+                {% for row in available_importers|batch(3) %}
+                <div class="row">
+                    {% for importer in row %}
+                    <div class="col-sm-4">
+                        {% include importer %}
                     </div>
+                    {% endfor %}
+                </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
-

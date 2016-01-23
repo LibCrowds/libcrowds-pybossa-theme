@@ -5,7 +5,8 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 <script src="{{url_for('static', filename='vendor/codemirror/codemirror.js')}}"></script>
-<link rel="stylesheet" href="{{url_for('static', filename='vendor/codemirror/codemirror.css')}}"/>
+<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/codemirror/codemirror.css')}}"/>
+<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/codemirror.css')}}">
 <script src="{{url_for('static', filename='vendor/codemirror/mode/xml/xml.js')}}"></script>
 <script src="{{url_for('static', filename='vendor/codemirror/mode/javascript/javascript.js')}}"></script>
 <script src="{{url_for('static', filename='vendor/codemirror/mode/css/css.js')}}"></script>
@@ -33,7 +34,7 @@
                         <div id="code-container">
                         {{ render_field(form.editor)}}
                         </div>
-                        <div id="preview-container" class="container padding-top" hidden>
+                        <div id="preview-container" class="container padding-top-lg" hidden>
                             <iframe id="preview" frameBorder="0" style="height: 500px"></iframe>
                         </div>
                     </fieldset>
@@ -52,6 +53,7 @@
         scrollbarStyle: null,
     });
 
+    /** Use stylesheets and JS in preview */
     function updatePreview() {
         var previewFrame = document.getElementById('preview');
         var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
@@ -67,6 +69,8 @@
         $head.append($("<script/>", { src: "{{url_for('static', filename='vendor/bootstrap-3.3.2/js/bootstrap.js')}}" }));
         $head.append($("<script/>", { src: "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" }));
     }
+
+    /** Toggle slide between code editor and preview */
     $(".btn-preview").off('click').on('click', function(e){
         if ($(this).text() == 'Preview'){
             updatePreview();
@@ -81,5 +85,10 @@
         $(window).scrollTop();
         $(this).blur();
     });
+
+    /** Fix gutter size */
+    if ($('.CodeMirror-gutter').length) {
+        $('#code-btns').attr('padding-left', $('.CodeMirror-gutter').attr('width'));
+    }
 </script>
 {% endblock %}

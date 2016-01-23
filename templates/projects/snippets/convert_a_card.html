@@ -1,6 +1,6 @@
 <!-- Project completed DIV -->
 <div id="completed-row" class="row" style="display:none;">
-   <div class="col-xs-12 text-center padding-top">
+   <div class="col-xs-12 text-center padding-top-lg">
        <h1>Success! This project has now been completed.</h1>
        <h2>Thank you for all of your contributions.</h2>
        <a href="/"><i class="fa fa-home fa-3x"></i></a>
@@ -19,8 +19,8 @@
 <!-- Start Skeleton Row-->
 <div class="row skeleton" id="answer-container">
    <div class="col-xs-12 col-sm-5 col-sm-pull-7 col-md-6 col-md-pull-6">
-      
-      <!-- Success and Error Messages for the user --> 
+
+      <!-- Success and Error Messages for the user -->
       <div id="alert-row">
          <div id="success" class="alert alert-success remove-margin-bottom" style="display:none;">
             <a class="close">x</a><span>Answer saved</span>
@@ -34,7 +34,7 @@
          </div>
          <div id="finish" class="alert alert-success remove-margin-bottom" style="display:none;">
             <strong id="i18n_congratulations">Congratulations!</strong> <span id="i18n_congratulations_text">You have participated in all available tasks!</span>
-            <br/>
+            <br>
             <div class="alert-actions">
                <a class="btn btn-small" href="/">Go Home</a>
                <a class="btn btn-small" href="/project">or, Check other projects</a>
@@ -42,32 +42,32 @@
          </div>
          <div id="error" class="alert alert-danger remove-margin-bottom" style="display:none;">
             <a class="close">x</a>
-            <strong>Something went wrong! </strong> Please report this via the 
+            <strong>Something went wrong! </strong> Please report this via the
             <a href="{{url_for('discourse.index')}}">LibCrowds Community</a>
            <br>
            <div id ="error-details"></div>
          </div>
          <div id="search_error" class="alert alert-info remove-margin-bottom" style="display:none;">
             <a class="close">x</a>
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="fa fa-exclamation" aria-hidden="true"></span>
 	    <span id ="search_error_text">No results returned.</span>
          </div>
       </div>
-      
+
       <!-- Start of Question and Submission DIV (column) -->
       <div class="row vcenter-md hcenter">
          <div class="col-md-8 col-xs-12">
             <h1 id="question"><span id="i18n_question">What is this item?</span></h1>
-            
+
 	    <!-- The question will be loaded here -->
          </div>
          <div class="col-md-4 hidden-xs hidden-sm">
-            <a href="#" class="btn btn-inverse pull-right" data-toggle="modal" data-target="#modal"><i class="fa fa-book"></i> Tutorial</a><br/>
+            <a href="#" class="btn btn-inverse pull-right" data-toggle="modal" data-target="#modal"><i class="fa fa-book"></i> Tutorial</a><br>
             <a href="#comments" id="comments_btn" class="btn btn-inverse pull-right" data-toggle="collapse" aria-expanded="false" aria-controls="comments">
             <i class="fa fa-plus"></i> Comment</a>
          </div>
       </div>
-      
+
       <!-- Start of answer DIV -->
       <div class="row">
          <div class="col-xs-12">
@@ -77,7 +77,7 @@
          </div>
       </div>
       <div id="contribution">
-	 
+
          <!-- The search form -->
          <form id="oclc_search_form" role="form">
             <div class="form-group">
@@ -108,17 +108,17 @@
             <a href="#comments" id="comments_btn" class="btn btn-inverse padding-left-xs" data-toggle="collapse" aria-expanded="false" aria-controls="comments">
             <i class="fa fa-plus"></i> Comment</a>
          </div>
-	 
-         <!-- The selected record will be loaded here --> 
+
+         <!-- The selected record will be loaded here -->
          <div class="row">
             <div class="col-xs-12">
                <div id="selected_record" class="padding-top-xs"></div>
             </div>
          </div>
-	 
+
          <!-- Search results will be loaded here -->
          <div class="col-xs-12" id="search_results"></div>
-	 
+
          <!-- Shelf mark form -->
          <form id="shelfmark_form" role="form" style="display:none;">
             <div class="form-group">
@@ -127,13 +127,13 @@
             </div>
             <a href="#" class="btn btn-success btn-answer pull-right" value="Done"><i class="fa fa-thumbs-o-up"></i> Done</a>
          </form>
-	 
+
          <!-- Feedback items for the user -->
          <div class="padding-top-sm text-center">
             <p><span id="i18n_working_task">You are working now on task:</span> <span id="task-id" class="label label-default">#</span></p>
             <p>
                <span id="i18n_tasks_completed">You contributed to</span> <span id="done" class="label label-danger"></span> <span id="i18n_tasks_from">tasks from </span>
-               
+
 	       <!-- Progress bar for the user -->
                <span id="total" class="label label-danger"></span>
             </p>
@@ -142,7 +142,7 @@
             </div>
          </div>
       </div>
-      
+
       <!-- Social media buttons -->
       <div class="row text-center">
          <a href="#" data-content="Share on Facebook" class="btn-popover btn btn-facebook"
@@ -199,8 +199,8 @@
          </div>
          <div id="1" class="modal-body" style="display:none;">
             <p><strong>Step 1:</strong></p>
-            <p>Next to the image of the card you will be provided with a set of search fields for the title, author, 
-               publication year and ISBN of the item. Once you have performed a search and retrieved some results, you 
+            <p>Next to the image of the card you will be provided with a set of search fields for the title, author,
+               publication year and ISBN of the item. Once you have performed a search and retrieved some results, you
                can choose the appropriate record by clicking on the select button to the right of that record.
             </p>
             <p>If you are unable to locate the correct record, please click the 'Skip / Not found' button.</p>
@@ -210,7 +210,7 @@
          </div>
          <div id="2" class="modal-body" style="display:none;">
             <p><strong>Step 2:</strong></p>
-            <p>If you managed to locate a matching record, the next stage is to transcribe the shelf mark, 
+            <p>If you managed to locate a matching record, the next stage is to transcribe the shelf mark,
                which is usually located at the top right of the image. Very occasionally the shelf mark will be in a different location but
                after you have completed a few tasks you should be able to recognise these shelf marks more easily.
             </p>
@@ -222,7 +222,7 @@
          <div class="modal-footer">
             <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn btn-default">Previous</a>
             <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
-            <button id="startContrib" data-dismiss="modal" class="btn btn-primary" style="display:none"><i class="glyphicon glyphicon-thumbs-up"></i> Start</button>
+            <button id="startContrib" data-dismiss="modal" class="btn btn-primary" style="display:none"><i class="fa fa-thumbs-o-up"></i> Start</button>
          </div>
       </div>
    </div>
@@ -287,7 +287,7 @@ function loadUserProgress() {
 $(document).delegate('#oclc_search_form', 'submit', function(e) {
     e.preventDefault();
     $(".alert").hide();
-    $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
+    $('#search_submit_btn').html('<span class="fa fa-refresh spinning"></span> Searching');
     $("#search_results").slideUp();
     $("#results_count").html('');
     $('#search_submit_btn').fadeTo(500, 0.3);
@@ -318,13 +318,13 @@ $(document).delegate('#oclc_search_form', 'submit', function(e) {
 function performSearch(searchQuery, page) {
     var startPos = (page - 1) * 5;
     var endPos = startPos + 5;
-  
+
   $.ajax({
     type: "get",
     url: 'http://www.libcrowds.com/api/z3950/zcat.oclc.org/OLUCWorldcat/search',
     data: {query: searchQuery, format: 'HTML', start: startPos, jsonify: 'True'},
     success: function(results) {
-      
+
       //Set result count
       count = String(results['count']);
       $("#search_results").attr("data-count", results['count']);
@@ -333,7 +333,7 @@ function performSearch(searchQuery, page) {
       } else {
 	  	$("#results_count").html('<small>' + humanise(count) + ' results</small>');
       }
-      
+
       //Set pagination
         var pageStr = '<div class="row text-center padding-top-xs" id="results-pagination"><p><small><span>';
         if (page > 1) {
@@ -348,8 +348,8 @@ function performSearch(searchQuery, page) {
             pageStr += humanise(count) + ' of ' + humanise(count) +
                 ' | Next &gt;</span></small></p></div>';
         }
-	
-	
+
+
         $("#search_results").html(results['results'] + pageStr);
         $("#search_results").attr("data-page", page);
         $("#search_results").attr("data-api", searchQuery);
@@ -437,7 +437,7 @@ $("#shelfmark_field").blur(function() {
 
 //Go to the next search result page
 $(document).delegate('#next', 'click', function(e) {
-    $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
+    $('#search_submit_btn').html('<span class="fa fa-refresh spinning"></span> Searching');
     $("#search_results").slideUp();
     $('#search_submit_btn').fadeTo(500, 0.3);
     performSearch($("#search_results").attr("data-api"), parseInt($("#search_results").attr("data-page")) + 1);
@@ -446,7 +446,7 @@ $(document).delegate('#next', 'click', function(e) {
 
 //Go to the previous search result page
 $(document).delegate('#previous', 'click', function(e) {
-    $('#search_submit_btn').html('<span class="glyphicon glyphicon-refresh spinning"></span> Searching');
+    $('#search_submit_btn').html('<span class="fa fa-refresh spinning"></span> Searching');
     $("#search_results").slideUp();
     $('#search_submit_btn').fadeTo(500, 0.3);
     performSearch($("#search_results").attr("data-api"), parseInt($("#search_results").attr("data-page")) - 1);

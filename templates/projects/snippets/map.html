@@ -13,7 +13,7 @@
     }
 </style>
 <div class="row">
-    <!-- Success and Error Messages for the user --> 
+    <!-- Success and Error Messages for the user -->
     <div class="col-md-8 col-md-offset-2" style="height:50px">
         <!-- Success alert box -->
         <div id="success" class="alert alert-success" style="display:none;">
@@ -30,7 +30,7 @@
         <!-- Task completed alert box -->
         <div id="finish" class="alert alert-success" style="display:none;">
             <strong>Congratulations!</strong> You have participated in all available tasks!
-            <br/>
+            <br>
             <div class="alert-actions">
                 <a class="btn small" href="/">Go back</a>
                 <a class="btn small" href="/project">or, Check other projects</a>
@@ -58,18 +58,18 @@
       <h1>Question</h1>
       <h3 id="city">City</h3>
       <button id="point" class="btn btn-inverse">
-          <i class="icon glyphicon glyphicon-white icon-map-marker"></i> Add an Urban Park Marker 
+          <i class="fa fa-map-marker"></i> Add an Urban Park Marker
       </button>
       <button id="noPark" class="btn btn-submit">I do not see an urban park</button>
       <button id="noCity" class="btn btn-submit" style="display:none;">City not found!</button>
 
       <p>Task: <span id="task-id" class="label label-warning">#</span></p>
       <div id="map"></div>
-      <i class="glyphicon glyphicon-map-marker"></i> Urban park position: <strong> Longitude:</strong> <span id="lon"></span>, 
+      <i class="fa fa-map-marker"></i> Urban park position: <strong> Longitude:</strong> <span id="lon"></span>,
       <strong>Latitude:</strong> <span id="lat"></span>
     </div>
     <div id="answer">
-        <button id="answerbtn" class="btn btn-success btn-submit"><i class="glyphicon glyphicon-check icon-white"></i> Save these coordinates for the urban park</button>
+        <button id="answerbtn" class="btn btn-success btn-submit"><i class="fa fa-check"></i> Save these coordinates for the urban park</button>
     </div>
   </div>
 </div>
@@ -181,7 +181,7 @@ pybossa.taskLoaded(function(task, deferred){
             externalGraphic: 'http://img225.imageshack.us/img225/5237/youarehere2.png'
         });
 
-        // Icon for the Urban Park Marker 
+        // Icon for the Urban Park Marker
         var styleMapUrbanPark = new OpenLayers.StyleMap({
             pointRadius: 15,
             externalGraphic: 'http://img594.imageshack.us/img594/1087/urbanpark.png'
@@ -206,7 +206,7 @@ pybossa.taskLoaded(function(task, deferred){
         // Function to allow only the addition of one urban park per city
         // The function gets the feature (point) and gets its location, transforms it to the right projection
         // loads the lon and at into the HTML skeleton and disables the toolbar, so no more points can be added
-        disablePoint = function(feature) { 
+        disablePoint = function(feature) {
             if ($("#answerbtn").hasClass("disabled")) {
                 $("#answerbtn").removeClass('disabled');
             }
@@ -217,8 +217,8 @@ pybossa.taskLoaded(function(task, deferred){
                     task.map.getProjectionObject(), // from Spherical Mercator Projection
                     new OpenLayers.Projection("EPSG:4326") // to transform from WGS 1984
             );
-            $("#lon").text(tmp.x);       
-            $("#lat").text(tmp.y);       
+            $("#lon").text(tmp.x);
+            $("#lat").text(tmp.y);
             task.lon = tmp.x;
             task.lat = tmp.y;
             task.drawControls['point'].deactivate();
@@ -241,12 +241,12 @@ pybossa.taskLoaded(function(task, deferred){
                         new OpenLayers.Projection("EPSG:4326") // to transform from WGS 1984
                 );
                 // When the marker has been dropped, update the lon & lat of the urban park
-                $("#lon").text(tmp.x);       
-                $("#lat").text(tmp.y);       
+                $("#lon").text(tmp.x);
+                $("#lat").text(tmp.y);
                 task.lon = tmp.x;
                 task.lat = tmp.y;
             }
-        
+
         });
         // Add the drag & drop control into the map
         map.addControl(drag);
@@ -254,7 +254,7 @@ pybossa.taskLoaded(function(task, deferred){
         drag.activate();
 
         var drawControls = {
-            point:      new OpenLayers.Control.DrawFeature(urbanParkLayer, OpenLayers.Handler.Point, 
+            point:      new OpenLayers.Control.DrawFeature(urbanParkLayer, OpenLayers.Handler.Point,
                         { 'featureAdded': disablePoint})
         }
 
@@ -331,7 +331,7 @@ pybossa.presentTask(function(task, deferred){
 
             pybossa.saveTask( task.id, {'city': task.info.city, 'urbanpark': urbanPark}).done( function(data) {
                 // Show the feedback div
-                $("#success").fadeIn(); 
+                $("#success").fadeIn();
                 $("#map_" + task.id).remove();
                 // Fade out the pop-up after a 2000 miliseconds
                 setTimeout(function() { $("#success").fadeOut() }, 2000);
@@ -347,4 +347,3 @@ pybossa.presentTask(function(task, deferred){
 
 pybossa.run('{{project.short_name}}');
 </script>
-

@@ -1,61 +1,55 @@
 {% extends "base.html" %}
 {% set active_page = "signin" %}
+{% from "_formhelpers.html" import render_field %}
 
 {% block content %}
-    <div class="container container-main text-center">
-      {% include "_flash_messages.html" %}
-      {% if next is not none%}
-          {% if auth.twitter %}
-          <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-info"><i class="fa fa-twitter"></i><span class="hidden-xs"> Sign in with Twitter</span></a>
-          {% endif %}
-          {% if auth.facebook %}
-          <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-primary"><i class="fa fa-facebook"></i><span class="hidden-xs"> Sign in with Facebook</span></a>
-          {% endif %}
-          {% if auth.google %}
-          <a href="{{ url_for('google.login') }}" class="btn btn-danger"><i class="fa fa-google-plus"></i><span class="hidden-xs"> Sign in with Google</span></a>
-          {% endif %}
-      {% else %}
-          {% if auth.twitter %}
-          <a href="{{ url_for('twitter.login') }}" class="btn btn-info"><i class="fa fa-twitter"></i><span class="hidden-xs"> Sign in with Twitter</span></a>
-          {% endif %}
-          {% if auth.facebook %}
-          <a href="{{ url_for('facebook.login') }}" class="btn btn-primary"><i class="fa fa-facebook"></i><span class="hidden-xs"> Sign in with Facebook</span></a>
-          {% endif %}
-          {% if auth.google %}
-          <a href="{{ url_for('google.login') }}" class="btn btn-danger"><i class="fa fa-google-plus"></i><span class="hidden-xs"> Sign in with Google</span></a>
+<div class="container container-main text-center">
+    {% include "_flash_messages.html" %}
+    {% if next is not none%}
+        {% if auth.twitter %}
+        <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-info"><i class="fa fa-twitter"></i><span class="hidden-xs"> Sign in with Twitter</span></a>
         {% endif %}
-      {% endif %}
-      <hr>
-      
-      {% from "_formhelpers.html" import render_field %}
-      
-            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-              <form id="signin" method="post" role="form" action="">
-                {{ form.hidden_tag() }}
-                <h3 class="text-center">Or sign in with your {{brand}} account</h3>
-                
-                {{ render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
-                {{ render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                  <a href="{{ url_for('account.forgot_password') }}" class="pull-left remove-padding-left">Forgotten password</a>  
-                  <div class="pull-right" role="group">
-                    <input type="reset" value="Cancel" class="btn btn-default" />
-                    <input type="submit" value="Sign in" class="btn btn-success" />
-                  </div>
-              </form>
-              <div class="padding-top">
-                <p class="text-center muted">By clicking the <strong>Sign in</strong> button you are agreeing to our <a href={{url_for('help.tos')}}>terms of use</a>.</p>
-              </div>
-              <hr>
+        {% if auth.facebook %}
+        <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-primary"><i class="fa fa-facebook"></i><span class="hidden-xs"> Sign in with Facebook</span></a>
+        {% endif %}
+        {% if auth.google %}
+        <a href="{{ url_for('google.login') }}" class="btn btn-danger"><i class="fa fa-google-plus"></i><span class="hidden-xs"> Sign in with Google</span></a>
+        {% endif %}
+        {% else %}
+        {% if auth.twitter %}
+        <a href="{{ url_for('twitter.login') }}" class="btn btn-info"><i class="fa fa-twitter"></i><span class="hidden-xs"> Sign in with Twitter</span></a>
+        {% endif %}
+        {% if auth.facebook %}
+        <a href="{{ url_for('facebook.login') }}" class="btn btn-primary"><i class="fa fa-facebook"></i><span class="hidden-xs"> Sign in with Facebook</span></a>
+        {% endif %}
+        {% if auth.google %}
+        <a href="{{ url_for('google.login') }}" class="btn btn-danger"><i class="fa fa-google-plus"></i><span class="hidden-xs"> Sign in with Google</span></a>
+        {% endif %}
+    {% endif %}
+    <hr>
+
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <form id="signin" method="post" role="form" action="">
+            {{ form.hidden_tag() }}
+            <h3 class="text-center">Or sign in with your {{brand}} account</h3>
+
+            {{ render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
+            {{ render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+            <a href="{{ url_for('account.forgot_password') }}" class="pull-left remove-padding-left">Forgotten password</a>
+            <div class="pull-right" role="group">
+                <input type="reset" value="Cancel" class="btn btn-default" />
+                <input type="submit" value="Sign in" class="btn btn-success" />
             </div>
-      
-      <br>
-      <br>
-      <div class="row">
-          <div class="col-xs-12 text-center">
-              <a href="{{ url_for('account.register') }}" class="btn btn-primary"><i class="icon glyphicon glyphicon-white icon-user"></i> Create a new account</a>
-          </div>
-      </div>
-  </div>
-    
-    
+        </form>
+        <div class="padding-top-lg">
+            <p class="text-center muted">By clicking the <strong>Sign in</strong> button you are agreeing to our <a href={{url_for('help.tos')}}>terms of use</a>.</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row padding-top-sm">
+        <div class="col-xs-12 text-center">
+            <a href="{{ url_for('account.register') }}" class="btn btn-primary"><i class="fa fa-user-plus"></i> Create a new account</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -5,30 +5,30 @@
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-    {{ render_local_nav(current_user, "tasks", project.short_name) }}
-    <div class="container-padded">
-        <div class="container container-padded">
-            <div class="row">
-                <div class="col-sm-9 col-sm-offset-3">
-                    {% include "_flash_messages.html" %}
-                    {{ helper.render_loading(loading_text) }}
-                    <h1><strong>{{project.name}}</strong>: Import tasks</h1>
-                    {% if form %}
-                        <hr>
-                    <h3>From a CSV file</h3>
-                    <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
-                        <fieldset>
-                            {{ form.hidden_tag() }}
-                            {{ render_field(form.csv_url, class_="input-block-level form-control", placeholder="The URL of the CSV file", required="required", autofocus="autofocus", type="url") }}
-                            <div class="pull-right" role="group">
-                                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
-                                <input id="import" type="submit" value="Import" class="btn btn-danger" />
-                            </div>
-                        </fieldset>
-                    </form>
-                    {% endif %}
-                </div>
+{{ render_local_nav(current_user, "tasks", project.short_name) }}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+                {% include "_flash_messages.html" %}
+                {{ helper.render_loading(loading_text) }}
+                <h1><strong>{{project.name}}</strong>: Import tasks</h1>
+                {% if form %}
+                    <hr>
+                <h3>From a CSV file</h3>
+                <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+                    <fieldset>
+                        {{ form.hidden_tag() }}
+                        {{ render_field(form.csv_url, class_="input-block-level form-control", placeholder="The URL of the CSV file", required="required", autofocus="autofocus", type="url") }}
+                        <div class="pull-right" role="group">
+                            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
+                            <input id="import" type="submit" value="Import" class="btn btn-danger" />
+                        </div>
+                    </fieldset>
+                </form>
+                {% endif %}
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

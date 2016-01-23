@@ -1,0 +1,4 @@
+static/vendor/* linguist-vendored
+static/js/vendor/* linguist-vendored
+static/js/pdf/* linguist-vendored
+static/fonts/* linguist-vendored

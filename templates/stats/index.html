@@ -12,7 +12,7 @@
             {% include "_flash_messages.html" %}
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="white-rounded inset-shadow">
+                    <div class="white-panel inset-shadow">
                         {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
                         {{ privacy.render_lock_page() }}
                         {% else %}
@@ -27,28 +27,28 @@
                             </thead>
                             <tbody>
                             {% for user in top_users %}
-                            {% if user.score|int > 0 and user.rank|int > 0 %} 
-                                {% if user.fullname == current_user.fullname %}
-                                    <tr class="success">
-                                        <td class="text-center"><strong>{{user.rank}}</strong></td>
-                                        <td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.name}}</a></strong></td>
-                                        <td class="text-center"><strong>{{user.score}}</strong></td>
-                                    </tr> 
-                                {% else %}
-                                    <tr>
-                                        <td class="text-center">{{user.rank}}</td>
-                                        <td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.name}}</a></strong></td>
-                                        <td class="text-center">{{user.score}}</td>
-                                    </tr> 
+                                {% if user.score|int > 0 and user.rank|int > 0 %}
+                                    {% if user.fullname == current_user.fullname %}
+                                        <tr class="success">
+                                            <td class="text-center"><strong>{{user.rank}}</strong></td>
+                                            <td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.name}}</a></strong></td>
+                                            <td class="text-center"><strong>{{user.score}}</strong></td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td class="text-center">{{user.rank}}</td>
+                                            <td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.name}}</a></strong></td>
+                                            <td class="text-center">{{user.score}}</td>
+                                        </tr>
+                                    {%endif%}
                                 {%endif%}
-                            {%endif%}
                             {% endfor %}
                             </tbody>
                         </table>
                         {% endif %}
                     </div>
                 </div>
-            </div>      
+            </div>
         </div>
     </section>
 </div>

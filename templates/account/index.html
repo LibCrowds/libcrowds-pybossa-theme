@@ -1,12 +1,59 @@
-<!DOCTYPE HTML>
- 
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="1; url={{url_for('discourse.index')}}">
- 
+{% extends "base.html" %}
+{% set active_page = "community"  %}
+{% import "privacy/locked.html" as privacy %}
+{% import "account/_helpers.html" as helper %}
+{% from "projects/_helpers.html" import broken_image %}
+
+{% block content %}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+                    {{ privacy.render_lock_page() }}
+                {% else %}
+                <h1>Community <small>{{total}} registered users</small><a class="pull-right btn btn-danger" href="{{url_for('leaderboard.index')}}"><i class="fa fa-trophy"></i> Leaderboard</a></h1>
+                    {% if accounts %}
+                    <ul class="thumbnails">
+                    {% for account in accounts %}
+                        <li>
+                            <a href="{{url_for('account.profile', name=account.name)}}" class="thumbnail" rel='popover' title="<strong>{{account['fullname']}}</strong>" data-content="
+                                <ul style='list-style-type:none; margin-left:0px;'>
+                                  <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
+                                  <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
+                                  {% if account.projects %}
+                                  <li><strong><i class='icon-certificate'></i> Owner of</strong>
+                                    <ul style='list-style-type:none'>
+                                        {% for project in account.projects %}
+                                        <li><i class='icon-chevron-right'></i> {{ project.name | truncate(18, true)}}</li>
+                                        {% endfor %}
+                                    </ul>
+                                  </li>
+                                  {% endif %}
+                                </ul>
+                                ">
+                              {{ helper.render_user_thumbnail(account, upload_method, style="height:90px; width:90px;") }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            <div class="col-sm-8 ">
+            {% if pagination.pages > 1 %}
+                {{ helper.render_pagination(pagination) }}
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
 <script>
-  window.location.href = "{{url_for('discourse.index')}}";
+$("a[rel=popover]").popover({
+        html: true,
+        animate: true,
+        trigger: 'hover',
+        placement: 'bottom'
+                });
 </script>
- 
-<title>Page Redirection</title>
- 
-If you are not redirected automatically, follow the <a href="{{url_for('discourse.index')}}">link to the new page</a>
+{{ broken_image() }}
+{% endblock %}

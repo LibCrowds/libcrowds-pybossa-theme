@@ -4,7 +4,7 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    
+
 {% if project %}
 {{ render_local_nav(current_user, "tasks", project.short_name) }}
 <div class="container-padded">
@@ -23,29 +23,29 @@
                         {% else %}
                         Task <span class="label label-info">#{{ t.id }}</span>
                         {% endif %}
-                        <br/>
+                        <br>
                          {{ t.n_task_runs }} of {{ t.n_answers }} contributions
                     </div>
                     {% if task_pct >= 100 %}
-                    <div class="progress progress-success progress-striped col-md-5 remove-margin-bottom remove-padding"> 
+                    <div class="progress progress-success progress-striped col-md-5 remove-margin-bottom remove-padding">
                         <div class="progress-bar remove-padding" role="progressbar"  style="width:{{ task_pct }}%;">
-                            
+
                         </div>
                     </div>
                     {% else %}
-                    <div class="progress progress-info progress-striped col-md-5 remove-margin-bottom remove-padding"> 
+                    <div class="progress progress-info progress-striped col-md-5 remove-margin-bottom remove-padding">
                         <div class="progress-bar remove-padding" role="progressbar" style="width:{{ task_pct }}%;">
-                            
+
                         </div>
                     </div>
                     {% endif %}
                     <div class="col-sm-4">
                     {% if task_pct >= 100 %}
-                        <a id="fulldownload" class="btn btn-success" href="{{ url_for('project.export', 
+                        <a id="fulldownload" class="btn btn-success" href="{{ url_for('project.export',
                             short_name=project.short_name,
                             task_id=t.id) }}"><i class="fa fa-download"></i> Download Results</a>
                     {% elif task_pct > 0 and task_pct < 100 %}
-                        <a id="partialdownload" class="btn btn-primary" href="{{ url_for('project.export', 
+                        <a id="partialdownload" class="btn btn-primary" href="{{ url_for('project.export',
                             short_name=project.short_name,
                             task_id=t.id) }}"><i class="fa fa-download"></i> Download Partial results</a>
 
@@ -60,12 +60,12 @@
         </div>
     </div>
 </div>
-               
+
 {% else %}
-    <div class="page-header padding-top container">
-        <h1>Sorry! This project does not exist.</h1>
-    </div>
+<div class="page-header padding-top container">
+    <h1>Sorry! This project does not exist.</h1>
+</div>
 {% endif %}
-        
+
 {{ helper.broken_image() }}
 {% endblock %}

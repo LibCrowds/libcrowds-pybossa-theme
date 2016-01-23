@@ -1,15 +1,195 @@
-<!DOCTYPE HTML>
-    
-    project.short_name
- 
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="1; url={{ url_for('blplugin.details', short_name = project.short_name) }}">
+{% extends "/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% from "admin/_helpers.html" import render_local_nav %}
+{% set has_splash = "true" %}
+{% set description = project.description %}
 
- 
+{% block content %}
+{% if project %}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div id="project-form" class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+
+                <section id="stats" class="white pattern-white-wall box-shadow-white-bottom">
+                    <a id="top5"></a>
+                    <div class="row text-center padding-top-sm padding-bottom">
+                        <div class="col-xs-12">
+                            <h2 class="remove-margin-bottom">Project Statistics</h2>
+                            <small>Updated daily</small>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row padding-bottom-sm">
+                            <div class="col-xs-12 padding-bottom-sm">
+                                <div class="white-rounded inset-shadow-white chart">
+                                    <h4 class="text-center padding-bottom-sm">Most Active Volunteers</h4>
+                                    <div id="top-users-chart">
+                                        <canvas id="top-users" width="500" height="500"></canvas>
+                                        <div id="top-users-legend" class="padding-top-sm legend">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row padding-bottom-sm">
+                            <div class="col-xs-12">
+                                <div class="white-rounded inset-shadow-white chart">
+                                    <h4 class="text-center padding-bottom-sm">Contributions per Day</h4>
+                                    <div id="daily-chart">
+                                        <canvas id="daily" style="max-height:300px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row padding-bottom-sm">
+                            <div class="col-xs-12">
+                                <div class="white-rounded inset-shadow-white chart">
+                                    <h4 class="text-center padding-bottom-sm">Hourly Activity</h4>
+                                    <div id="hourly-chart">
+                                        <canvas id="hourly" style="max-height:300px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+    <div class="container-padded remove-padding-bottom">
+        <section class="white">
+            <div class="container container-padded">
+                <div class="page-header padding-top container">
+                    <h1>Sorry! This project does not exist.</h1>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endif %}
+<script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.js')}}"></script>
+<script src="{{url_for('static', filename='js/chartconfig.js')}}"></script>
 <script>
-  window.location.href = "{{ url_for('blplugin.details', short_name = project.short_name) }}";
+    $(function(){
+
+        var projectstats = {{appStats|safe}};
+
+        //Hide charts of no data exists yet
+        if (typeof projectstats['userAuthStats']['top5'] == undefined || projectstats['userAuthStats']['top5'].length < 1) {
+            $('#stats').hide();
+        } else {
+
+            //Hourly chart
+            var houreyLabels = [];
+            var houreyData = [];
+            for(var i = 0; i < projectstats['hourStats']['0']['values'].length; i++) {
+                houreyLabels.push(formatHours(projectstats['hourStats']['0']['values'][i]['0']));
+                houreyData.push(projectstats['hourStats']['0']['values'][i]['1']);
+            }
+
+            var data = {
+                labels: houreyLabels,
+                datasets: [
+                    {
+                        label: "Hourly Activity",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: houreyData
+                    }
+                ]
+            };
+            $("#hourly").attr("width", $('#hourly-chart').width());
+            $("#hourly").attr("height", 300);
+            var ctx = $("#hourly")[0].getContext("2d");
+            var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+            var hourlyChart = new Chart(ctx).Line(data, opts);
+            hourlyChart.draw();
+
+            //Daily chart
+            var dailyLabels = [];
+            var dailyData = [];
+            for(var i = 0; i < projectstats['dayStats']['0']['values'].length; i++) {
+                var t = new Date(parseInt(projectstats['dayStats']['0']['values'][i]['0']));
+                dailyLabels.push($.datepicker.formatDate('dd M', t));
+                dailyData.push(projectstats['dayStats']['0']['values'][i]['1']);
+            }
+
+            var data = {
+                labels: dailyLabels,
+                datasets: [
+                    {
+                        label: "Daily Activity",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: dailyData
+                    }
+                ]
+            };
+            $("#daily").attr("width", $('#daily-chart').width());
+            $("#daily").attr("height", 300);
+            var ctx = $("#daily")[0].getContext("2d");
+            var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+            var dailyChart = new Chart(ctx).Line(data, opts);
+            dailyChart.draw();
+
+            //Top users
+            var users = [];
+            var tasks = [];
+            for(var i = 0; i < projectstats['userAuthStats']['top5'].length; i++) {
+                users.push(projectstats['userAuthStats']['top5'][i]['name']);
+                tasks.push(projectstats['userAuthStats']['top5'][i]['tasks']);
+            }
+            var highScore = tasks.indexOf(Math.max.apply(Math, tasks));
+            var data = {
+                labels: users,
+                datasets: [
+                    {
+                        label: "Most Active Users",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        highlightFill: "rgba(151,187,205,0.1)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: tasks
+                    }
+                ]
+            };
+            $("#top-users").attr("width", $('#top-users-chart').width());
+            $("#top-users").attr("height", 300);
+            var ctx = $("#top-users")[0].getContext("2d");
+            var opts = {labelLength:8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
+            var topUsersChart = new Chart(ctx).Bar(data, opts);
+            topUsersChart.draw();
+            topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
+            topUsersChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
+            topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
+            topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
+            topUsersChart.update();
+        }
+
+});
+function formatHours(str) {
+    str += ':00'
+    if (str.length < 5) {
+        str = '0' + str;
+    }
+    return str;
+}
 </script>
- 
-<title>Page Redirection</title>
- 
-If you are not redirected automatically, follow the <a href="{{ url_for('blplugin.details', short_name = project.short_name) }}">link to the new page</a>
+{{ helper.broken_image() }}
+{{ helper.knob() }}
+{% endblock %}
