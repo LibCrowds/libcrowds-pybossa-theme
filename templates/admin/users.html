@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% set active_page = "admin" %}
-{% from "admin/_helpers.html" import render_admin_user %}
-{% from "admin/_helpers.html" import render_local_nav %}
+{% set active_link = "administrators" %}
+{% import "admin/_helpers.html" as helper %}
 
 {% block content %}
-{{ render_local_nav(current_user, "administrators") }}
+{{ helper.render_admin_local_nav(current_user, active_link) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
@@ -34,7 +34,7 @@
                     </thead>
 
                 {% for user in found %}
-                    {{ render_admin_user(user) }}
+                    {{ helper.render_admin_user(user) }}
                 {% endfor %}
                 </table>
 

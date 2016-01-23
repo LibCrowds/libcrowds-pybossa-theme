@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% set active_page = "profile" %}
-{% from "admin/_helpers.html" import render_local_nav %}
+{% set active_page = "admin" %}
+{% set active_link = "categories" %}
+{% from "admin/_helpers.html" import render_admin_local_nav %}
 
 {% block content %}
-{{ render_local_nav(current_user, "categories") }}
+{{ render_admin_local_nav(current_user, active_link) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">

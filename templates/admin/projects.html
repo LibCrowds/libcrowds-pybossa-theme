@@ -1,10 +1,11 @@
 {% extends "/base.html" %}
-{% set active_page = "profile" %}
-{% from "admin/_helpers.html" import render_local_nav %}
-{% from "projects/_helpers.html" import render_project_admin_featured, broken_image %}
+{% set active_page = "admin" %}
+{% set active_link = "featured" %}
+{% from "admin/_helpers.html" import render_admin_local_nav %}
+{% import "projects/_helpers.html" as helper %}
 
 {% block content %}
-{{ render_local_nav(current_user, "featured") }}
+{{ render_admin_local_nav(current_user, active_link) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">
@@ -31,7 +32,7 @@
                                 </tr>
                             </thead>
                             {% for project in projects[c.short_name] %}
-                                {{ render_project_admin_featured(project, upload_method) }}
+                                {{ helper.render_project_admin_featured(project, upload_method) }}
                             {% endfor %}
                         </table>
                     </div>
@@ -41,5 +42,5 @@
         </div>
     </div>
 </div>
-{{ broken_image() }}
+{{ helper.broken_image() }}
 {% endblock %}
