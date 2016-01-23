@@ -1,20 +1,19 @@
 {% extends "/base.html" %}
-{% set active_page = "create" %}
+{% set active_page = "projects" %}
 {% import "account/_helpers.html" as helper %}
 {% import "projects/_helpers.html" as project_helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 {% from "_formhelpers.html" import render_field %}
 
 {% block content %}
-{{ render_local_nav(current_user, "newproject") }}
+{{ project_helper.render_project_local_nav(active_link="new", current_user=current_user) }}
 <div class="container-padded">
     <div class="container container-padded">
-        {% if current_user.admin %}
         <div id="project-form" class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-                    <h4 class="text-center">Create a new project</h4>
-                    <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
+                <h4 class="text-center">Create a new project</h4>
+                <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
                     {{ form.hidden_tag() }}
                     <fieldset>
                         {{ render_field(form.name, placeholder="Name", class="form-control", required="required", autofocus="autofocus") }}
@@ -33,13 +32,10 @@
                         </div>
                     </fieldset>
                 </form>
-                </div>
             </div>
-            {% else %}
-                {{ project_helper.render_project_restricted() }}
-            {% endif %}
         </div>
     </div>
+</div>
 
 <script>
     $("span[rel='tooltip']").tooltip();
