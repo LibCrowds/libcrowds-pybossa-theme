@@ -1,6 +1,5 @@
 $(function() {
     loadSplash();
-    getShareStats();
     stylePolaroids();
     setBodyBackground();
     showHistoryButton();
@@ -30,87 +29,6 @@ function startGlowingLinks(){
     setInterval(function(){
         glow.hasClass('glow') ? glow.removeClass('glow') : glow.addClass('glow');
     }, 2000);
-}
-
-/** Update social media share stats. */
-function getShareStats(){
-    $('.btn-facebook').each(function(){
-        var facebook = $(this);
-        $.getJSON('https://graph.facebook.com/?id=' + $(this).data('url') + '&callback=?', function(json) {
-            if (typeof json['shares'] != 'undefined') {
-                if (json['shares'] == 1) {
-                    facebook.attr('data-content', 'Shared once on Facebook');
-                } else {
-                    facebook.attr('data-content', 'Shared ' + json['shares'] + ' times on Facebook');
-                }
-                $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + json['shares']);
-            }
-        });
-    });
-    $('.btn-twitter').each(function(){
-        var twitter = $(this);
-        $.getJSON('http://urls.api.twitter.com/1/urls/count.json?url=' + $(this).data('url') + '&callback=?', function(json) {
-            if (json['count'] > 0) {
-                if (json['shares'] == 1) {
-                    twitter.attr('data-content', 'Shared once on Twitter');
-                } else {
-                    twitter.attr('data-content', 'Shared ' + json['count'] + ' times on Twitter');
-                }
-                $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + json['count']);
-            }
-        });
-    });
-    $('.btn-linkedin').each(function(){
-        var linkedin = $(this);
-        $.getJSON('https://www.linkedin.com/countserv/count/share?url=' + $(this).data('url') + '&callback=?', function(json) {
-            if (json['count'] > 0) {
-                if (json['shares'] == 1) {
-                    linkedin.attr('data-content', 'Shared once on LinkedIn');
-                } else {
-                    linkedin.attr('data-content', 'Shared ' + json['count'] + ' times on LinkedIn');
-                }
-                $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + json['count']);
-            }
-        });
-    });
-    $('.btn-googleplus').each(function(){
-        var googleplus = $(this);
-        var data = {
-            "method":"pos.plusones.get",
-            "id":$(this).data('url'),
-            "params":{
-                "nolog":true,
-                "id":$(this).data('url'),
-                "source":"widget",
-                "userId":"@viewer",
-                "groupId":"@self"
-            },
-            "jsonrpc":"2.0",
-            "key":"p",
-            "apiVersion":"v1"
-        };
-        $.ajax({
-            type: "POST",
-            url: "https://clients6.google.com/rpc",
-            processData: true,
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            success: function(r){
-                if (typeof(r.result) !== "undefined") {
-                    count = r.result.metadata.globalCounts.count;
-                    if (count > 0) {
-                        if (count == 1) {
-                            googleplus.attr('data-content', 'Shared once on Google+');
-                        } else {
-                            googleplus.attr('data-content', 'Shared ' + count + ' times on Google+');
-                        }
-                        $('#total-share-count').attr('data-count', parseInt($('#total-share-count').attr('data-count')) + count);
-                    }
-                }
-            }
-        });
-    });
-    $('#total-share-count').fadeIn('slow');
 }
 
 
