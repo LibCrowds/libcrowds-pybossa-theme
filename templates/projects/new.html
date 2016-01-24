@@ -1,30 +1,18 @@
 {% extends "/base.html" %}
-<<<<<<< HEAD
-{% set active_page = "projects" %}
-=======
 {% set active_page = "create" %}
 {% set active_link  = "newproject" %}
->>>>>>> master
 {% import "account/_helpers.html" as helper %}
 {% from "admin/_helpers.html" import render_local_nav %}
 {% from "_formhelpers.html" import render_field %}
 
 {% block content %}
-<<<<<<< HEAD
-{{ project_helper.render_project_local_nav(active_link="new", current_user=current_user) }}
-=======
 {{ helper.render_account_local_nav(current_user, active_link) }}
->>>>>>> master
 <div class="container-padded">
     <div class="container container-padded">
         <div id="project-form" class="row">
             <div class="col-sm-9 col-sm-offset-3">
                 {% include "_flash_messages.html" %}
-<<<<<<< HEAD
-                <h4 class="text-center">Create a new project</h4>
-=======
                 <h2 class="text-center">Create a new project</h2>
->>>>>>> master
                 <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
                     {{ form.hidden_tag() }}
                     <fieldset>
