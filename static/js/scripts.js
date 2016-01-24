@@ -165,13 +165,6 @@ function sameSize() {
 }
 
 
-/** Show loading icon while image form uploads */
-$('.upload-img-form').submit(function() {
-    $('#upload-btn').html('<i class="fa fa-refresh spinning"></i> Uploading');
-    $('#upload-btn').blur();
-});
-
-
 /** Display popover */
 $("a.avatar-popover").popover({
     html: true,
