@@ -28,32 +28,26 @@
                     <a href="{{ url_for('project.index') }}">Projects</a>
                 </li>
 
+                <!-- See https://github.com/LibCrowds/libcrowds-statistics -->
                 <li class="nav-link{% if active_page == 'statistics' %} active{% endif %}">
-
-                    <!-- See https://github.com/LibCrowds/libcrowds-statistics -->
                     {% if "libcrowds_statistics" in plugins %}
-                        <a href="{{ url_for('statistics.index')}}">Statistics</a>
+                    <a href="{{ url_for('statistics.index')}}">Statistics</a>
                     {% else %}
-                        <a href="{{ url_for('stats.index')}}">Statistics</a>
+                    <a href="{{ url_for('stats.index')}}">Statistics</a>
                     {% endif %}
                 </li>
 
-                {% if 'pybossa_discourse' in plugins %}
-                <li class="nav-link">
-                    <a href="{{ url_for('discourse.index')}}">Community
-
-                    {% if current_user.info.notification_count and current_user.info.notification_count > 0 %}
-                    <span id="discourse-notifications" class="badge badge-danger">
-                        {{current_user.info.notification_count}}
-                    </span>
-                    {% else %}
-                    <span id="discourse-notifications" class="badge badge-danger"></span>
+                <!-- See https://github.com/alexandermendes/pybossa-discourse -->
+                <li class="nav-link{% if active_page == 'community' %} active{% endif %}">
+                    {% if 'pybossa_discourse' in plugins %}
+                    <a href="{{ url_for('discourse.index')}}">Community</a>
                     {% endif %}
-
-                    </a>
+                    <a href="{{ url_for('account.index')}}">Community</a>
+                    {% endif %}
                 </li>
                 {% endif %}
 
+                <!-- See https://github.com/LibCrowds/libcrowds-data -->
                 {% if "libcrowds_data" in plugins %}
                     <li class="nav-link {% if active_page == 'data' %} active{% endif %}">
                         <a href="{{ url_for('data.index')}}">Data</a>
@@ -64,51 +58,53 @@
             <!-- Optional search form -->
             {% include '_gcs_form.html' ignore missing %}
 
-            {% if current_user.is_authenticated() %}
             <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated() %}
                 <li class="nav-link">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                         <i class="icon fa fa-user"></i> {{ current_user.name | truncate(10,true) }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                    <li class="nav-link">
-                        <a href="{{ url_for('account.profile', name=current_user.name) }}"><i class="fa fa-user"></i> Profile</a></li>
-                    <li class="nav-link">
-                        <a href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="fa fa-cog"></i> Settings</a></li>
-
-                    {% if current_user.admin %}
-                    <li class="divider" />
-                    <li class="nav-link">
-                        <a href="{{ url_for('admin.index') }}"><i class="fa fa-cog"></i> Admin</a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url_for('project.new') }}"><i class="fa fa-plus"></i> New Project</a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url_for('account.projects', name=current_user.name) }}"><i class="fa fa-folder-open"></i> Open Project</a>
-                    </li>
-                    {% endif %}
-
-                    <li class="divider"></li>
-
-                    <!-- Also sign out from Discourse, if the plugin is available -->
-                    {% if 'pybossa_discourse' in plugins %}
                         <li class="nav-link">
+                            <a href="{{ url_for('account.profile', name=current_user.name) }}"><i class="fa fa-user"></i> Profile</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="fa fa-cog"></i> Settings</a>
+                        </li>
+
+                        {% if current_user.admin or current_user.pro %}
+                        <li class="divider" />
+
+                        {% if current_user.admin %}
+                        <li class="nav-link">
+                            <a href="{{ url_for('admin.index') }}"><i class="fa fa-cog"></i> Admin</a>
+                        </li>
+                        {% endif %}
+
+                        <li class="nav-link">
+                            <a href="{{ url_for('project.new') }}"><i class="fa fa-plus"></i> New Project</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="{{ url_for('account.projects', name=current_user.name) }}"><i class="fa fa-folder-open"></i> Open Project</a>
+                        </li>
+                        {% endif %}
+                        <li class="divider"></li>
+
+                        <!-- See https://github.com/alexandermendes/pybossa-discourse -->
+                        <li class="nav-link">
+                            {% if 'pybossa_discourse' in plugins %}
                             <a href="{{ url_for('discourse.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-link">
+                            {% else %}
                             <a href="{{ url_for('account.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
+                            {% endif %}
                         </li>
-                    {% endif %}
-                  </ul>
+
+                    </ul>
                 </li>
-            </ul>
-            {% else %}
-            <ul class="nav navbar-nav navbar-right">
+                {% else %}
                 <li class="nav-link"><a href="{{ url_for('account.signin') }}">Sign in</a></li>
+                {% endif %}
             </ul>
-            {% endif %}
         </div>
     </div>
 </div>
