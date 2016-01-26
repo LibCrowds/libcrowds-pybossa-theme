@@ -1,11 +1,10 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-{{ render_local_nav(current_user, "import", project.short_name) }}
+{{ helper.render_project_local_nav(project, 'auditlog', current_user, pro_features) }}
 <span class="set-main-bg" data-bg="pattern-white-wall"></span>
 <div class="container container-main">
     <div class="row">

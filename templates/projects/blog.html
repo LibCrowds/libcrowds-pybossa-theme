@@ -4,7 +4,7 @@
 {% import "projects/_helpers.html" as helper %}
 
 {% block content %}
-{{ render_local_nav(current_user, 'auditlog', project.short_name) }}
+{{ helper.render_project_local_nav(project, 'auditlog', current_user, pro_features) }}
 {% if project %}
 <div class="container container-main">
     <div class="row">

@@ -1,12 +1,10 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
-{% set active_project  = "all" %}
-{% from "admin/_helpers.html" import render_local_nav %}
 {% import "project/_helpers.html" as helper %}
-{% set has_splash = "true" %}
 {% set description = project.description %}
 
 {% block content %}
+{{ helper.render_project_local_nav(project, 'stats', current_user, pro_features) }}
 {% if project %}
 <div class="container container-main">
     <div id="project-form" class="row">

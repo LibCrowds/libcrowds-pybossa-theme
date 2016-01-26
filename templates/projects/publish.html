@@ -1,10 +1,9 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-{{ render_local_nav(current_user, "tasks", project.short_name) }}
+{{ helper.render_project_local_nav(project, 'publish', current_user, pro_features) }}
 {% if project %}
 <div class="container container-main">
     <div class="row">
