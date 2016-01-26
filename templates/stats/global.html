@@ -4,670 +4,193 @@
 {% import "privacy/locked.html" as privacy %}
 
 {% block content %}
-<span class="set-main-bg" data-bg="pattern-white-wall"></span>
 <!-- Leaflet maps -->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
  <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
  <![endif]-->
 
+<link href="{{url_for('static', filename='css/stats/stats.css')}}" rel="stylesheet" type="text/css">
+<script src="{{url_for('static', filename='js/stats/flotr2.min.js')}}" type="text/javascript"></script>
 <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
 <link href="{{url_for('static', filename='css/stats/MarkerCluster.css')}}" rel="stylesheet" type="text/css">
 <link href="{{url_for('static', filename='css/stats/MarkerCluster.Default.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static', filename='css/stats/stats.css')}}" rel="stylesheet" type="text/css">
+<script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
+<script src="{{url_for('static', filename='js/stats/flotr2.min.js')}}" type="text/javascript"></script>
 <script src="{{url_for('static', filename='js/stats/leaflet.markercluster.js')}}" type="text/javascript"></script>
+
+<span class="set-main-bg" data-bg="pattern-brushed"></span>
 <div class="container container-main">
-    {% include "_flash_messages.html" %}
-    {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-                {{ privacy.render_lock_page() }}
-            {% else %}
-            <div class="row padding-bottom-sm" id="loading-stats">
-                <div class="col-xs-12">
-                    <div class="white-panel inset-shadow-white text-center">
-                        <h3><span class="fa fa-refresh spinning"></span> Loading Statistics</h3>
+    <div class="col-xs-12">
+        {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+        {{ privacy.render_lock_page() }}
+        {% else %}
+        <h1><strong>{{brand}}</strong>: Global Statistics</h1>
+        <br/>
+            <!-- Users Stats CARD -->
+            <div id="card" class="row-fluid">
+                <div id="userStats" class="col-xs-12 well">
+                    <h2>Users</h2>
+                    <div class="row-fluid">
+                        <div class="col-xs-6">
+                            <h3>Anonymous users: <small>{{stats.n_anon}}</small></h3>
+                            <h3>Authenticated users: <small>{{stats.n_auth}}</small></h3>
+                            <h3>Total: {{stats.n_total_users}}</h3>
+                            <a class="btn btn-primary btn-large" href="{{url_for('leaderboard.index')}}"><i class="icon-trophy"></i> Leaderboard</a>
+                            {% if top5_users_24_hours %}
+                            <hr>
+                            <h4><i class="icon-group"></i> Top 5 Users in the last 24 hours</h4>
+                                <ol>
+                                {% for user in top5_users_24_hours %}
+                                <li><a href="{{url_for('account.profile', name=user.name)}}" >{{user.fullname}}</a> with {{user.n_answers}} contributed answers</li>
+                                {% endfor %}
+                                </ol>
+                            {% else %}
+                            <hr>
+                            <h4>No active users in the last 24 hours</h4>
+                            {% endif %}
+                        </div>
+                        <div id="users" class="col-xs-6" style="height:400px;"></div>
+                        <script>
+                        (function(){
+                            var data = {{users|safe}};
+                            var container = document.getElementById('users');
+                            var graph = Flotr.draw(container, [
+                                {data:[data['values'][0]['value']], label:data['values'][0]['label']},
+                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
+                                {
+                                pie     : {show: true, explode: 2},
+                                grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
+                                HtmlText: false,
+                                xaxis   : {showLabels: false},
+                                yaxis   : {showLabels: false},
+                                legend  : {position: 'se'}
+                            });
+                        })();
+                        </script>
                     </div>
                 </div>
             </div>
+            <!-- END Users Stats CARD -->
 
-            <div id="all-stats" hidden>
-                <div class="row padding-bottom-sm">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h3 class="text-center"><span class="check-plural" data-num="{{stats.n_active}}" data-noun="volunteer"></span> have participated in <span class="check-plural" data-num="{{stats.n_published_projects}}" data-noun="project"></span>, made <span class="check-plural" data-num="{{stats.n_task_runs}}" data-noun="contribution"></span> and completed <span class="check-plural" data-num="{{stats.n_tasks_completed}}" data-noun="task"></span></h3>
+            <!-- Project Stats CARD -->
+            <div id="card" class="row-fluid">
+                <div id="projectStats" class="col-xs-12 well">
+                    <h2>Projects</h2>
+                    <div class="row-fluid">
+                        <div class="col-xs-6">
+                            <h3>Published Projects: <small>{{stats.n_published_projects}}</small></h3>
+                            <h3>Draft Projects: <small>{{stats.n_draft_projects}}</small></h3>
+                            <h3>Total: {{stats.n_total_projects}}</h3>
+                            {% if top5_projects_24_hours %}
+                            <hr>
+                            <h4><i class="icon-th-large"></i> Top 5 projects in the last 24 hours</h4>
+                                <ol>
+                                {% for project in top5_projects_24_hours %}
+                                <li><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></li>
+                                {% endfor %}
+                                </ol>
+                            {% else %}
+                            <hr>
+                            <h4>No active projects in the last 24 hours</h4>
+                            {% endif %}
                         </div>
+                        <div id="projects" class="col-xs-6" style="height:400px;"></div>
+                     <script>
+                        (function(){
+                            var data = {{projects|safe}};
+                            var container = document.getElementById('projects');
+                            var graph = Flotr.draw(container, [
+                                {data:[data['values'][0]['value']], label:data['values'][0]['label']},
+                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
+                                {
+                                pie     : {show: true, explode: 2},
+                                grid    : {verticalLines: false, horizontalLines: false, outlineWidth: 0},
+                                HtmlText: false,
+                                xaxis   : {showLabels: false},
+                                yaxis   : {showLabels: false},
+                                legend  : {position: 'se'}
+                            });
+                        })();
+
+                        </script>
                     </div>
                 </div>
+            </div>
+            <!-- END Users Stats CARD -->
 
-                <div class="row padding-bottom-sm" id="top-users-alltime-row">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Most Active Volunteers</h4>
-                            <div id="top-users-alltime-chart">
-                                <canvas id="top-users-alltime" style="max-height:300px;"></canvas>
-                            </div>
-                            <div class="text-center padding-top-xs">
-                                <a class="btn btn-danger" href="{{url_for('leaderboard.index')}}">View Leaderboard</a>
-                            </div>
+            <!-- Projects Task and TaskRuns CARD -->
+            <div id="card" class="row-fluid">
+                <div id="taskStats" class="col-xs-12 well">
+                    <h2>Tasks and Answers</h2>
+                    <div class="row-fluid">
+                        <div class="col-xs-6">
+                            <h3>Number of Tasks: <small>{{stats.n_tasks}}</small></h3>
+                            <h3>Number of Task Runs: <small>{{stats.n_task_runs}}</small></h3>
                         </div>
+                        <div id="tasks" class="col-xs-6" style="height:400px;"></div>
+                     <script>
+                        (function(){
+                            var data = {{tasks|safe}};
+                            var container = document.getElementById('tasks');
+                            var graph = Flotr.draw(container, [
+                                {data:[data['values'][0]['value']], label:data['values'][0]['label']},
+                                {data:[data['values'][1]['value']],  label:data['values'][1]['label']}],
+                                {
+                                bars : {show: true},
+                                grid    : {verticalLines: true, horizontalLines: true},
+                                xaxis   : {showLabels: false, autoscale: true, autoscaleMargin:1},
+                                yaxis   : {showLabels: true, min:0, autoscaleMargin:1},
+                                legend  : {position: 'ne'}
+                            });
+                        })();
+
+                        </script>
                     </div>
                 </div>
-
-                <div class="row padding-bottom-sm">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h3 class="text-center">Contributions have been made from {{stats.n_continents}} continents, {{stats.n_countries}} countries and {{stats.n_cities}} cities</h3>
-                        </div>
-                    </div>
+            </div>
+            <!-- END Users Stats CARD -->
+            <!-- START Anonymous Users Map CARD -->
+            {% if show_locs %}
+            <div id="card" class="row-fluid">
+                <div class="col-xs-12 well">
+                    <h2>Anonymous Volunteers</h2>
+                    <div id="map" style="height:250px;"></div>
+                    <p class="note">{{_('This page includes GeoLite data created by MaxMind, available from')}}
+                    <a href="http://www.maxmind.com">http://www.maxmind.com</a></p>
                 </div>
+                <script>
+                    (function(){
+                    var map = L.map('map');
+                    map.fitWorld();
+                    map.setZoom(1);
+                    var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                    L.tileLayer(url,
+                        {
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                        maxZoom: 18,
+                        minZoom:1
+                        }).addTo(map);
 
-                <div class="row padding-bottom-sm">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white text-center chart">
-                            <h4 class=" padding-bottom-sm">Locations of Active Volunteers</h4>
-                            <div id="map" style="height:480px;"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row padding-bottom-sm" id="top-countries-row">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Most Active Countries</h4>
-                            <div id="top-countries-chart">
-                                <canvas id="top-countries" style="max-height:300px;"></canvas>
-                            </div>
-                            <div class="text-center padding-top-xs padding-bottom-sm">
-                                <a class="btn btn-danger" href="#all-countries" data-toggle="collapse" aria-expanded="false" aria-controls="all-countries">View All Countries</a>
-                            </div>
-                            <div id="all-countries" class="collapse">
-                                <table class="table table-stripped table-condensed table-hover table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Country</th>
-                                            <th class="text-center">Contributions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="top-countries-table">
-                                        <!-- Insert from JavaScript-->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row padding-bottom-sm" id="task-date-row">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Contributions per Day</h4>
-                            <div id="task-date-chart">
-                                <canvas id="task-date" style="max-height:300px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" id="top-5-row">
-                    <div class="col-xs-12 padding-bottom-sm">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Top Volunteers This Week</h4>
-                            <div id="top-users-chart">
-                                <canvas id="top-users" width="500" height="500"></canvas>
-                                <div id="top-users-legend" class="padding-top-sm legend">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 padding-bottom-sm">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Top Projects This Week</h4>
-                            <div id="top-projects-chart">
-                                <canvas id="top-projects" width="500" height="500"></canvas>
-                                <div id="top-projects-legend" class="padding-top-sm legend">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row padding-bottom-sm" id="users-daily-row">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Number of Volunteers per Day</h4>
-                            <div id="users-daily-chart">
-                                <canvas id="users-daily" style="max-height:300px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" id="activity-progress-row">
-
-                    <div class="col-sm-4 col-xs-12 padding-bottom-sm">
-                        <div class="white-panel inset-shadow-white chart same-size">
-                            <h4 class="text-center padding-bottom-sm">Proportion of Authenticated Users</h4>
-                            <div id="user-chart">
-                                <canvas id="users" width="500" height="500"></canvas>
-                                <div id="users-legend" class="padding-top-sm legend">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-xs-12 padding-bottom-sm">
-                        <div class="white-panel inset-shadow-white chart same-size">
-                            <h4 class="text-center padding-bottom-sm">Contributions Per Day of the Week</h4>
-                            <div id="dow-chart">
-                                <canvas id="dow" width="500" height="500"></canvas>
-                                <div id="dow-legend" class="padding-top-sm legend">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-xs-12 padding-bottom-sm">
-                        <div class="white-panel inset-shadow-white chart same-size">
-                            <h4 class="text-center padding-bottom-sm">Most Active 10% of Volunteers</h4>
-                            <div id="top-10-percent-chart">
-                                <canvas id="top-10-percent" width="500" height="500"></canvas>
-                                <div id="top-10-percent-legend" class="padding-top-sm legend">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row padding-bottom-sm">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Percentage of Contributions per Authenticated User</h4>
-                            <div id="contributions-per-user-chart">
-                                <canvas id="contributions-per-user" style="max-height:300px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row padding-bottom-sm">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Number of Active Days per Authenticated User</h4>
-                            <div id="days-active-chart">
-                                <canvas id="days-active" style="max-height:300px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row padding-bottom-sm">
-                    <div class="col-xs-12">
-                        <div class="white-panel inset-shadow-white chart">
-                            <h4 class="text-center padding-bottom-sm">Total Hourly Activity</h4>
-                            <div id="hourly-chart">
-                                <canvas id="hourly" style="max-height:300px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    var i = 0;
+                    var locations = {{locs|safe}};
+                    var l = locations.length;
+                    var markers = new L.MarkerClusterGroup();
+                    for (i;i<l;i++) {
+                        if (locations[i].loc != null) {
+                            var lat = parseFloat(locations[i].loc.latitude);
+                            var lng = parseFloat(locations[i].loc.longitude);
+                            markers.addLayer(L.marker([lat,lng]));
+                        }
+                    }
+                    map.addLayer(markers);
+                    })();
+                </script>
             </div>
             {% endif %}
+            <!-- END Anonymous Users Map CARD -->
+        {% endif %}
+    </div>
 </div>
-<script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.js')}}"></script>
-<script src="{{url_for('static', filename='js/stats/chartconfig.js')}}"></script>
-<script>
-
-$(function(){
-    $('#loading-stats').slideUp();
-    $('#all-stats').slideDown();
-    $('.check-plural').each(function() {
-        var ret = $(this).attr('data-num') + ' ' + $(this).attr('data-noun');
-        if (parseInt($(this).attr('data-num')) != 1) {
-            ret += 's';
-        }
-        $(this).text(ret);
-    });
-
-    var userData = {{users|safe}};
-
-    //Locations map
-        var map = L.map('map', {scrollWheelZoom: false, minZoom:1});
-        map.fitWorld();
-        map.setZoom(2);
-        var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        L.tileLayer(url,
-            {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> &mdash; <a href="http://www.maxmind.com">MaxMind</a>',
-            maxZoom: 18
-            }).addTo(map);
-
-        var i = 0;
-        var locations = {{locs|safe}};
-        var l = locations.length;
-        var markers = new L.MarkerClusterGroup();
-        for (i;i<l;i++) {
-            if (locations[i].loc != null) {
-                var lat = parseFloat(locations[i].loc.latitude);
-                var lng = parseFloat(locations[i].loc.longitude);
-                markers.addLayer(L.marker([lat,lng]));
-            }
-        }
-        map.addLayer(markers);
-
-
-    //User proportions chart
-        var total = {{stats.n_active|safe}};
-        var label1 = userData['values'][0]['label'] + " : " + Math.round(userData['values'][0]['value'][1]/total*100) + "% (" + userData['values'][0]['value'][1] + " user";
-        if (userData['values'][0]['value'][1] != 1) {
-            label1 += "s"
-        }
-        label1 += ")";
-        var label2 = userData['values'][1]['label'] + " : " + Math.round(userData['values'][1]['value'][1]/total*100) + "% (" + userData['values'][1]['value'][1] + " user";
-        if (userData['values'][1]['value'][1] != 1) {
-            label2 += "s"
-        }
-        label2 += ")";
-        var data = [
-            {
-                value : userData['values'][1]['value'][1],
-                color:"#BA0000",
-                highlight: "#D00000",
-                label: label2
-            },
-            {
-                value: userData['values'][0]['value'][1],
-                color: "rgba(151,187,205,1)",
-                highlight: "rgba(151,187,205,0.8)",
-                label: label1
-            }
-        ];
-        var canvas = document.getElementById("users");
-        var ctx = canvas.getContext("2d");
-        var usersChart = new Chart(ctx).Doughnut(data);
-        var legendHolder = document.getElementById('users-legend')
-        canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
-        document.getElementById('users-legend').innerHTML = usersChart.generateLegend();
-
-
-        {% if stats.n_tasks_completed and dow %}
-            //Top 10 percent chart
-            var top10Percent = {{top_10_percent|safe}};
-            var total = {{stats.n_task_runs | safe}};
-
-            var remaining = total - top10Percent;
-
-            var label1 = "Most Active 10% : " + top10Percent + " task";
-            if (top10Percent != 1) {
-                label1 += "s";
-            }
-
-            var label2 = "Remaining 90%: " + remaining + " task";
-            if (remaining != 1) {
-                label2 += "s";
-            }
-
-            var data = [
-                {
-                    value : top10Percent,
-                    color:"#BA0000",
-                    highlight: "#D00000",
-                    label: label1
-                },
-                {
-                    value: remaining,
-                    color: "rgba(151,187,205,1)",
-                    highlight: "rgba(151,187,205,0.8)",
-                    label: label2
-                }
-            ];
-            var canvas = document.getElementById("top-10-percent");
-            var ctx = canvas.getContext("2d");
-            var Top10PercentChart = new Chart(ctx).Doughnut(data);
-            var legendHolder = document.getElementById('top-10-percent-legend')
-            canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
-            document.getElementById('top-10-percent-legend').innerHTML = Top10PercentChart.generateLegend();
-
-
-            //Daily Activity
-            var dowLabels = {{dow|safe}}['days'];
-            var dowData = {{dow|safe}}['percentages'];
-
-            var data = {
-                labels: dowLabels,
-                datasets: [
-                    {
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: dowData
-                    }
-                ]
-            };
-            var canvas = document.getElementById("dow");
-            var ctx = $("#dow")[0].getContext("2d");
-            var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%>%"};
-            var dowChart = new Chart(ctx).Radar(data, opts);
-            dowChart.draw();
-        {% else %}
-            $("#activity-progress-row").hide();
-        {% endif %}
-
-
-        {% if task_runs_daily %}
-            //Tasks completed per day
-            var tasksCompletedData = {{task_runs_daily|safe}}['days'];
-
-            var tasksCompletedLabels = [];
-            $.each(tasksCompletedData, function(i, date){
-                var dateObj = new Date(date);
-                tasksCompletedLabels.push($.datepicker.formatDate('dd M', dateObj));
-            });
-
-            var data = {
-                labels: tasksCompletedLabels,
-                datasets: [
-                    {
-                        label: "contribution",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: {{task_runs_daily|safe}}['tasks']
-                    }
-                ]
-            };
-            $("#task-date").attr("width", $('#task-date-chart').width());
-            $("#task-date").attr("height", 300);
-            var ctx = $("#task-date")[0].getContext("2d");
-            var opts = {populateSparseData:true, tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
-            var taskDateChart = new Chart(ctx).Line(data, opts);
-            taskDateChart.draw();
-        {% else %}
-            $("#top-date-row").hide();
-        {% endif %}
-
-
-        {% if users_daily %}
-            //Volunteers per day
-            var usersDailyData = {{users_daily|safe}};
-
-            var usersDailyLabels = [];
-            $.each(usersDailyData['days'], function(i, date){
-                var dateObj = new Date(date);
-                usersDailyLabels.push($.datepicker.formatDate('dd M', dateObj));
-            });
-
-
-            var data = {
-                labels: usersDailyLabels,
-                datasets: [
-                    {
-                        label: "Volunteers per Day",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: usersDailyData['users']
-                    }
-                ]
-            };
-            $("#users-daily").attr("width", $('#users-daily-chart').width());
-            $("#users-daily").attr("height", 300);
-            var ctx = $("#users-daily")[0].getContext("2d");
-            var opts = {tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>volunteers<%}else\u007B%>volunteer<%}%>"};
-            var usersDailyChart = new Chart(ctx).Line(data, opts);
-            usersDailyChart.draw();
-        {% else %}
-            $("#users-daily-row").hide();
-        {% endif %}
-
-
-        {% if top5_users_1_week %}
-            //Top users this week
-            var users = [];
-            var taskRuns = [];
-            {% for user in top5_users_1_week %}
-                users.push('{{user.name}}');
-                taskRuns.push(parseInt({{user.task_runs}}));
-            {% endfor %}
-            var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
-            var data = {
-                labels: users,
-                datasets: [
-                    {
-                        label: "Top 5 Users This Week",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        highlightFill: "rgba(151,187,205,0.1)",
-                        highlightStroke: "rgba(151,187,205,1)",
-                        data: taskRuns
-                    }
-                ]
-            };
-            $("#top-users").attr("width", $('#top-users-chart').width());
-            $("#top-users").attr("height", 300);
-            var ctx = $("#top-users")[0].getContext("2d");
-            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
-            var topUsersChart = new Chart(ctx).Bar(data, opts);
-            topUsersChart.draw();
-            topUsersChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
-            topUsersChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
-            topUsersChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,0.5)";
-            topUsersChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
-            topUsersChart.update();
-        {% else %}
-            $("#top-5-row").hide();
-        {% endif %}
-
-
-        {% if top5_projects_1_week %}
-            //Top 5 projects this week
-            var projects = [];
-            var taskRuns = [];
-            {% for project in top5_projects_1_week %}
-                projects.push('{{project.name}}');
-                taskRuns.push(parseInt({{project.task_runs}}));
-            {% endfor %}
-            var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
-            var data = {
-                labels: projects,
-                datasets: [
-                    {
-                        label: "Top Crowdsourcing Projects This Week",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        highlightFill: "rgba(151,187,205,0.1)",
-                        highlightStroke: "rgba(151,187,205,1)",
-                        data: taskRuns
-                    }
-                ]
-            };
-            $("#top-projects").attr("width", $('#top-projects-chart').width());
-            $("#top-projects").attr("height", 300);
-            var ctx = $("#top-projects")[0].getContext("2d");
-            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
-            var topProjectsChart = new Chart(ctx).Bar(data, opts);
-            topProjectsChart.draw();
-            topProjectsChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
-            topProjectsChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
-            topProjectsChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,5)";
-            topProjectsChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
-            topProjectsChart.update();
-        {% else %}
-            $("#top-5-row").hide();
-        {% endif %}
-
-
-        {% if top_users %}
-            //Top volunteers of all time
-            var users = [];
-            var taskRuns = [];
-            {% for user in top_users %}
-                users.push('{{user.name}}');
-                taskRuns.push(parseInt({{user.task_runs}}));
-            {% endfor %}
-            var highScore = taskRuns.indexOf(Math.max.apply(Math, taskRuns));
-            var data = {
-                labels: users,
-                datasets: [
-                    {
-                        label: "Top Volunteers of All Time",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        highlightFill: "rgba(151,187,205,0.1)",
-                        highlightStroke: "rgba(151,187,205,1)",
-                        data: taskRuns
-                    }
-                ]
-            };
-            $("#top-users-alltime").attr("width", $('#top-users-alltime-chart').width());
-            $("#top-users-alltime").attr("height", 300);
-            var ctx = $("#top-users-alltime")[0].getContext("2d");
-            var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
-            var topUsersAlltimeChart = new Chart(ctx).Bar(data, opts);
-            topUsersAlltimeChart.draw();
-            topUsersAlltimeChart.datasets[0].bars[highScore].fillColor = "rgba(186,0,0,0.1)";
-            topUsersAlltimeChart.datasets[0].bars[highScore].strokeColor = "rgba(186,0,0,0.5)";
-            topUsersAlltimeChart.datasets[0].bars[highScore].highlightStroke = "rgba(208,0,0,5)";
-            topUsersAlltimeChart.datasets[0].bars[highScore].highlightFill = "rgba(186,0,0,0.05)";
-            topUsersAlltimeChart.update();
-        {% else %}
-            $("#top-users-alltime-row").hide();
-        {% endif %}
-
-    {% if top_countries %}
-    //Top countries
-
-    var all_countries = {{top_countries|safe}}['countries'];
-    var all_contributions = {{top_countries|safe}}['n_task_runs'];
-    var table = '';
-    $.each(all_countries, function(i){
-        table = table + '<tr><td class="text-center">' + all_countries[i] +
-        '</td><td class="text-center">' + all_contributions[i] +
-        '</td></tr>';
-    });
-    $('#top-countries-table').html(table);
-
-    var data = {
-        labels: all_countries.slice(0,5),
-        datasets: [
-            {
-                label: "Top Countries of All Time",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                highlightFill: "rgba(151,187,205,0.1)",
-                highlightStroke: "rgba(151,187,205,1)",
-                data: all_contributions.slice(0,5)
-            }
-        ]
-    };
-    $("#top-countries").attr("width", $('#top-countries-chart').width());
-    $("#top-countries").attr("height", 300);
-    var ctx = $("#top-countries")[0].getContext("2d");
-    var opts = {labelLength: 8,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%> <%if(value != 1)\u007B%>contributions<%}else\u007B%>contribution<%}%>"};
-    var topCountriesChart = new Chart(ctx).Bar(data, opts);
-    topCountriesChart.draw();
-    topCountriesChart.datasets[0].bars[0].fillColor = "rgba(186,0,0,0.1)";
-    topCountriesChart.datasets[0].bars[0].strokeColor = "rgba(186,0,0,0.5)";
-    topCountriesChart.datasets[0].bars[0].highlightStroke = "rgba(208,0,0,5)";
-    topCountriesChart.datasets[0].bars[0].highlightFill = "rgba(186,0,0,0.05)";
-    topCountriesChart.update();
-    {% else %}
-        $("#top-countries-row").hide();
-    {% endif %}
-
-
-    //Hourly chart
-    var hourlyActivity = {{hourly_activity|safe}};
-    var hourlyLabels = [];
-    var hourlyCount = [];
-    for(var i = 0; i < hourlyActivity.length; i++) {
-        hourlyLabels.push(formatHours(hourlyActivity[i][0]));
-        hourlyCount.push(hourlyActivity[i][1]);
-    }
-
-    var data = {
-        labels: hourlyLabels,
-        datasets: [
-            {
-                label: "Hourly Activity",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: hourlyCount
-            }
-        ]
-    };
-    $("#hourly").attr("width", $('#hourly-chart').width());
-    $("#hourly").attr("height", 300);
-    var ctx = $("#hourly")[0].getContext("2d");
-    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> : <%}%><%=value%><%if(value != 1)\u007B%>% of contributions<%}else\u007B%>% of contribution<%}%>"};
-    var hourlyChart = new Chart(ctx).Line(data, opts);
-    hourlyChart.draw();
-
-    //Contributions per user
-   var data = {
-        labels: {{contributions_per_user|safe}}['increments'],
-        datasets: [
-            {
-                label: "Contributions Per User",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: {{contributions_per_user|safe}}['task_runs']
-            }
-        ]
-    };
-    $("#contributions-per-user").attr("width", $('#contributions-per-user-chart').width());
-    $("#contributions-per-user").attr("height", 300);
-    var ctx = $("#contributions-per-user")[0].getContext("2d");
-    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> of users made <%}%><%=value%><%if(value != 1)\u007B%>% of contributions<%}else\u007B%>% of contribution<%}%>"};
-    var contributionsPerUserChart = new Chart(ctx).Line(data, opts);
-    contributionsPerUserChart.draw();
-
-
-    //Active days per user
-   var data = {
-        labels: {{active_days_per_user|safe}}['increments'],
-        datasets: [
-            {
-                label: "Active Days Per User",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: {{active_days_per_user|safe}}['days']
-            }
-        ]
-    };
-    $("#days-active").attr("width", $('#days-active-chart').width());
-    $("#days-active").attr("height", 300);
-    var ctx = $("#days-active")[0].getContext("2d");
-    var opts = {pointHitDetectionRadius : 1,tooltipTemplate: "<%if(label)\u007B%><%=label%> of users were active for <%}%><%=value%> <%if(value != 1)\u007B%>days<%}else\u007B%>day<%}%>"};
-    var activeDaysChart = new Chart(ctx).Line(data, opts);
-    activeDaysChart.draw();
-
-
-    function formatHours(str) {
-        str += ':00'
-        if (str.length < 5) {
-            str = '0' + str;
-        }
-        return str;
-    }
-});
-</script>
 {% endblock %}

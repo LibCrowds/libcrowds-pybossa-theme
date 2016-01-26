@@ -28,12 +28,15 @@
                     <a href="{{ url_for('project.index') }}">Projects</a>
                 </li>
 
-                <!-- Plugin dependent links -->
-                {% if "libcrowds_statistics" in plugins %}
-                    <li class="nav-link{% if active_page == 'statistics' %} active{% endif %}">
+                <li class="nav-link{% if active_page == 'statistics' %} active{% endif %}">
+
+                    <!-- See https://github.com/LibCrowds/libcrowds-statistics -->
+                    {% if "libcrowds_statistics" in plugins %}
                         <a href="{{ url_for('statistics.index')}}">Statistics</a>
-                    </li>
-                {% endif %}
+                    {% else %}
+                        <a href="{{ url_for('stats.index')}}">Statistics</a>
+                    {% endif %}
+                </li>
 
                 {% if 'pybossa_discourse' in plugins %}
                 <li class="nav-link">
