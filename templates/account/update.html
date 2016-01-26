@@ -103,9 +103,9 @@
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             {{ password_form.id }}
                             {{ password_form.hidden_tag() }}
-                            {{ form_helper.render_field(password_form.current_password, placeholder="Current password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                            {{ form_helper.render_field(password_form.new_password, placeholder="New password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                            {{ form_helper.render_field(password_form.confirm, placeholder="Confirm new password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                            {{ form_helper.render_field(password_form.current_password, show_label=True, placeholder="Current password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                            {{ form_helper.render_field(password_form.new_password, show_label=True, placeholder="New password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                            {{ form_helper.render_field(password_form.confirm, show_label=True, placeholder="Confirm new password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
                             <div class="pull-right form-actions" role="group">
                                 <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">Cancel</a>
                                 <button type="submit" name="btn" value="Password" class="btn btn-success" >Save</button>
