@@ -1349,32 +1349,6 @@ h1 i, h2 i, h3 i {
     padding-right: 5px;
 }
 
-.legend {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    margin-top: 20px
-}
-
-.legend li {
-    margin-bottom: 4px
-}
-
-.legend li:first-letter {
-    text-transform: capitalize
-}
-
-.legend li span {
-    display: block;
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    float: left;
-    margin-top: 4px;
-    margin-right: 8px
-}
-
 .project-desc {
     height: 310px
 }
