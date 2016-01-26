@@ -12,36 +12,31 @@
                 {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
                     {{ privacy.render_lock_page() }}
                 {% else %}
-                <h1>Community <small>{{total}} registered users</small><a class="pull-right btn btn-danger" href="{{url_for('leaderboard.index')}}"><i class="fa fa-trophy"></i> Leaderboard</a></h1>
+                <h1>Community <small>{{total}} registered users</small><a class="pull-right btn btn-danger" href="{{url_for('leaderboard.index')}}">Leaderboard</a></h1>
                     {% if accounts %}
-                    <ul class="thumbnails">
+                    <ul class="users text-center">
                     {% for account in accounts %}
-                        <li>
-                            <a href="{{url_for('account.profile', name=account.name)}}" class="thumbnail" rel='popover' title="<strong>{{account['fullname']}}</strong>" data-content="
-                                <ul style='list-style-type:none; margin-left:0px;'>
-                                  <li><strong><i class='icon-calendar'></i> Joined</strong> {{account['created'][0:10]}}</li>
-                                  <li><strong><i class='icon-tasks'></i> Contributed Tasks</strong> {{ account.task_runs }}</li>
-                                  {% if account.projects %}
-                                  <li><strong><i class='icon-certificate'></i> Owner of</strong>
-                                    <ul style='list-style-type:none'>
-                                        {% for project in account.projects %}
-                                        <li><i class='icon-chevron-right'></i> {{ project.name | truncate(18, true)}}</li>
-                                        {% endfor %}
-                                    </ul>
-                                  </li>
-                                  {% endif %}
-                                </ul>
-                                ">
-                              {{ helper.render_user_thumbnail(account, upload_method, style="height:90px; width:90px;") }}
-                            </a>
+                        <li class="text-center">
+                        <a href="{{url_for('account.profile', name=account.name)}}" data-content="
+                            <strong>Joined:</strong> {{account.created[8:10]}}-{{account.created[5:7]}}-{{account.created[0:4]}}
+                            <br>
+                            <strong>Contributions:</strong> {{account.score}}
+                            " class="avatar-popover" data-original-title="<strong>{{account.name}}</strong>
+                             ">
+                            <div class="shadow img-circle shadow-circle">
+                                {{ helper.render_user_thumbnail(account, upload_method, class="img-circle") }}
+                            </div>
+                        </a>
                         </li>
                     {% endfor %}
                     </ul>
                 {% endif %}
-            <div class="col-sm-8 ">
-            {% if pagination.pages > 1 %}
-                {{ helper.render_pagination(pagination) }}
-            {% endif %}
+            <div class="row text-center">
+                <div class="col-sm-12">
+                {% if pagination.pages > 1 %}
+                    {{ helper.render_pagination(pagination) }}
+                {% endif %}
+            </div>
         </div>
         {% endif %}
     </div>
