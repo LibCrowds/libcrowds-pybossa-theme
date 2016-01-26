@@ -51,7 +51,8 @@
                                 {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
                                 <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn"><i class="fa fa-trash"></i> Delete Category</a>
                                 {% else %}
-                                <a href="#" class="btn disabled"><i class="fa fa-trash"></i> Delete Category</a>
+
+                                <a href="#" rel="tooltip" data-title="Only empty categories can be deleted and one category must always remain." class="btn disabled"><i class="fa fa-trash"></i> Delete Category</a>
                                 {% endif %}
                             </div>
                         </td>
