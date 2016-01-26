@@ -350,3 +350,12 @@ function imgError(image) {
     </a>
 </div>
 {% endmacro %}
+
+{% macro render_non_existant_project() %}
+<div class="container container-main">
+    <h1>Sorry, this project does not exist!</h1>
+    <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
+        <i class="fa fa-home"></i> Go Home
+    </a>
+</div>
+{% endmacro %}

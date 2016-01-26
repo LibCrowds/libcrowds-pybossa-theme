@@ -2,14 +2,12 @@
 {% set active_page = "support" %}
 
 {% block content %}
-<div class="container-padded">
-    <div class="container container-padded">
-        {% include "_flash_messages.html" %}
-        <h1>Page not found!</h1>
-        <p class="lead">We're sorry, but we can't find the page that you're looking for.</p>
-        <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
-            <i class="fa fa-home"></i> Go Home
-        </a>
-    </div>
+<div class="container container-main">
+    {% include "_flash_messages.html" %}
+    <h1>Page not found!</h1>
+    <p class="lead">We're sorry, but we can't find the page that you're looking for.</p>
+    <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
+        <i class="fa fa-home"></i> Go Home
+    </a>
 </div>
 {% endblock %}

@@ -2,77 +2,68 @@
 {% set active_page = "projects" %}
 {% set active_project  = "all" %}
 {% from "admin/_helpers.html" import render_local_nav %}
+{% import "project/_helpers.html" as helper %}
 {% set has_splash = "true" %}
 {% set description = project.description %}
 
 {% block content %}
 {% if project %}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div id="project-form" class="row">
-            <div class="col-sm-9 col-sm-offset-3">
+<div class="container container-main">
+    <div id="project-form" class="row">
+        <div class="col-sm-9 col-sm-offset-3">
 
-                <section id="stats" class="white pattern-white-wall box-shadow-white-bottom">
-                    <a id="top5"></a>
-                    <div class="row text-center padding-top-sm padding-bottom">
+            <section id="stats" class="white pattern-white-wall box-shadow-white-bottom">
+                <a id="top5"></a>
+                <div class="row text-center padding-top-sm padding-bottom">
+                    <div class="col-xs-12">
+                        <h2 class="remove-margin-bottom">Project Statistics</h2>
+                        <small>Updated daily</small>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row padding-bottom-sm">
+                        <div class="col-xs-12 padding-bottom-sm">
+                            <div class="white-rounded inset-shadow-white chart">
+                                <h4 class="text-center padding-bottom-sm">Most Active Volunteers</h4>
+                                <div id="top-users-chart">
+                                    <canvas id="top-users" width="500" height="500"></canvas>
+                                    <div id="top-users-legend" class="padding-top-sm legend">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row padding-bottom-sm">
                         <div class="col-xs-12">
-                            <h2 class="remove-margin-bottom">Project Statistics</h2>
-                            <small>Updated daily</small>
-                        </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="row padding-bottom-sm">
-                            <div class="col-xs-12 padding-bottom-sm">
-                                <div class="white-rounded inset-shadow-white chart">
-                                    <h4 class="text-center padding-bottom-sm">Most Active Volunteers</h4>
-                                    <div id="top-users-chart">
-                                        <canvas id="top-users" width="500" height="500"></canvas>
-                                        <div id="top-users-legend" class="padding-top-sm legend">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row padding-bottom-sm">
-                            <div class="col-xs-12">
-                                <div class="white-rounded inset-shadow-white chart">
-                                    <h4 class="text-center padding-bottom-sm">Contributions per Day</h4>
-                                    <div id="daily-chart">
-                                        <canvas id="daily" style="max-height:300px;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row padding-bottom-sm">
-                            <div class="col-xs-12">
-                                <div class="white-rounded inset-shadow-white chart">
-                                    <h4 class="text-center padding-bottom-sm">Hourly Activity</h4>
-                                    <div id="hourly-chart">
-                                        <canvas id="hourly" style="max-height:300px;"></canvas>
-                                    </div>
+                            <div class="white-rounded inset-shadow-white chart">
+                                <h4 class="text-center padding-bottom-sm">Contributions per Day</h4>
+                                <div id="daily-chart">
+                                    <canvas id="daily" style="max-height:300px;"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-            </div>
+
+                    <div class="row padding-bottom-sm">
+                        <div class="col-xs-12">
+                            <div class="white-rounded inset-shadow-white chart">
+                                <h4 class="text-center padding-bottom-sm">Hourly Activity</h4>
+                                <div id="hourly-chart">
+                                    <canvas id="hourly" style="max-height:300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </div>
 
 {% else %}
-    <div class="container-padded remove-padding-bottom">
-        <section class="white">
-            <div class="container container-padded">
-                <div class="page-header padding-top container">
-                    <h1>Sorry! This project does not exist.</h1>
-                </div>
-            </div>
-        </section>
-    </div>
+    {{ helper.render_non_existant_project() }}
 {% endif %}
 <script src="{{url_for('static', filename='js/vendor/Chart.js-master/Chart.js')}}"></script>
 <script src="{{url_for('static', filename='js/chartconfig.js')}}"></script>

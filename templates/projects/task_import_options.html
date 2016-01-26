@@ -7,27 +7,25 @@
 {% from "_formhelpers.html" import render_field %}
 {{ render_local_nav(current_user, "import", project.short_name) }}
 <span class="set-main-bg" data-bg="pattern-white-wall"></span>
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                {{ helper.render_project_title(project, subtitle="Import Tasks")}}
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="lead">Use one of the following <strong>importers</strong> to import tasks</p>
-                    </div>
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            {% include "_flash_messages.html" %}
+            {{ helper.render_project_title(project, subtitle="Import Tasks")}}
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="lead">Use one of the following <strong>importers</strong> to import tasks</p>
                 </div>
-                {% for row in available_importers|batch(3) %}
-                <div class="row">
-                    {% for importer in row %}
-                    <div class="col-sm-4">
-                        {% include importer %}
-                    </div>
-                    {% endfor %}
+            </div>
+            {% for row in available_importers|batch(3) %}
+            <div class="row">
+                {% for importer in row %}
+                <div class="col-sm-4">
+                    {% include importer %}
                 </div>
                 {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>

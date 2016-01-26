@@ -6,38 +6,36 @@
 
 {% block content %}
 {{ render_admin_local_nav(current_user, active_link) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                <h1><strong>Admin :</strong> Featured projects</h1>
-                {% include "admin/js/featured_projects.js" %}
-                <ul class="nav nav-pills nav-pills-dark">
-                    {% for c in categories %}
-                    <li {% if loop.first %}class="active"{% endif %}>
-                        <a href="#{{c.short_name}}" data-toggle="pill">{{c.name}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <div class="tab-content">
-                    {% for c in categories %}
-                    <div {% if loop.first %}class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="{{c.short_name}}">
-                         <table class="table table-stripped table-condensed table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Project</th>
-                                    <th>Category</th>
-                                    <th style="text-align:center;">Featured</th>
-                                </tr>
-                            </thead>
-                            {% for project in projects[c.short_name] %}
-                                {{ helper.render_project_admin_featured(project, upload_method) }}
-                            {% endfor %}
-                        </table>
-                    </div>
-                    {% endfor %}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            {% include "_flash_messages.html" %}
+            <h1><strong>Admin :</strong> Featured projects</h1>
+            {% include "admin/js/featured_projects.js" %}
+            <ul class="nav nav-pills nav-pills-dark">
+                {% for c in categories %}
+                <li {% if loop.first %}class="active"{% endif %}>
+                    <a href="#{{c.short_name}}" data-toggle="pill">{{c.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                {% for c in categories %}
+                <div {% if loop.first %}class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="{{c.short_name}}">
+                     <table class="table table-stripped table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Category</th>
+                                <th style="text-align:center;">Featured</th>
+                            </tr>
+                        </thead>
+                        {% for project in projects[c.short_name] %}
+                            {{ helper.render_project_admin_featured(project, upload_method) }}
+                        {% endfor %}
+                    </table>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

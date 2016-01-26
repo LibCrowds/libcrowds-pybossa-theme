@@ -4,182 +4,177 @@
 {% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-    
+
 {% if project %}
 {{ render_local_nav(current_user, "tasks", project.short_name) }}
 <span class="set-main-bg" data-bg="pattern-white-wall"></span>
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                <div class="col-xs-12 padding-bottom-xs">
-                    <h1 class="inset-text-grey"><strong>Project Options</strong></h1>
-                </div>
-                {% if project.owner_id == current_user.id or (current_user.is_authenticated() and current_user.admin)%}
-                
-                <div id="import_tasks" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.import_task', short_name=project.short_name)}}" rel="nofollow">
-                    <div class="well  ">
-                            <span class="fa fa-download fa-4x"></span> 
-                            <h3 class="margin-bottom-xs">Import Tasks</h3>
-                    </div>
-                    </a>
-                </div>
-                <div id="export_tasks" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.export_to', short_name=project.short_name)}}" rel="nofollow">
-                            <div class="well  ">
-                                    <span class="fa fa-upload fa-4x"></span>
-                                    <h3 class="margin-bottom-xs">Export Tasks</h3>
-                            </div>
-                    </a>
-                </div>
-                
-                <div id="autoimport_tasks" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.setup_autoimporter', short_name=project.short_name)}}" rel="nofollow">
-                            <div class="well  ">
-                                    <span class="fa fa-cogs fa-4x"></span>
-                                    <h3 class="margin-bottom-xs">Auto-import Tasks</h3>
-                            </div>
-                    </a>
-                </div>
-                
-                <div id="task_presenter" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.task_presenter_editor', short_name=project.short_name)}}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-edit fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Task Presenter</h3>
-                        </div>
-                    </a>
-                </div>
-            
-                <div id="task_browse" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.tasks_browse', short_name=project.short_name)}}" rel="nofollow">
-                    <div class="well">
-                            <span class="fa fa-list-alt fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Browse Tasks</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="task_delete" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.delete_tasks', short_name=project.short_name)}}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-trash-o fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Delete Tasks</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="task_redundancy" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.task_n_answers', short_name=project.short_name)}}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-repeat fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Task Redundancy</h3>
-                        </div>
-                    </a>
-                </div>
-            
-                <div id="task_priority" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.task_priority', short_name=project.short_name)}}" rel="nofollow">
-                    <div class="well">
-                            <span class="fa fa-sort-numeric-asc fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Task Priority</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="task_scheduler" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.task_scheduler', short_name=project.short_name)}}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-filter fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Task Scheduler</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="task_investigation" class="col-sm-6 col-md-4">
-                    <a href="{{ url_for('data/project.investigate', short_name=project.short_name) }}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-search fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Investigate Tasks</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                
-                <div id="ambiguous_autoimporter" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('data/project.ambiguous_autoimporter', type='ambiguous', short_name=project.short_name)}}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-cogs fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Auto-import Ambiguous Tasks</h3> 
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="task_investigators" class="col-sm-6 col-md-4">
-                    <a href="{{ url_for('data/project.investigators', short_name=project.short_name) }}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-users fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Investigators</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="grouped_data_criteria" class="col-sm-6 col-md-4">
-                    <a href="{{ url_for('data/project.criteria', short_name=project.short_name) }}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-balance-scale fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Grouped Data Criteria</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="delete_project" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.delete', short_name=project.short_name)}}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-trash fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Delete Project</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="project_details" class="col-sm-6 col-md-4">
-                    <a href="{{ url_for('project.update', short_name = project.short_name) }}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-file-text-o fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Project Details</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="audit_logs" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-calendar fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Audit Logs</h3>
-                        </div>
-                    </a>
-                </div>
-                
-                <div id="publish" class="col-sm-6 col-md-4">
-                    <a href="{{url_for('project.publish', short_name=project.short_name)}}" rel="nofollow">
-                        <div class="well">
-                            <span class="fa fa-thumbs-up fa-4x"></span>
-                            <h3 class="margin-bottom-xs">Publish</h3>
-                        </div>
-                    </a>
-                </div>
-                {% endif %}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            {% include "_flash_messages.html" %}
+            <div class="col-xs-12 padding-bottom-xs">
+                <h1 class="inset-text-grey"><strong>Project Options</strong></h1>
             </div>
+            {% if project.owner_id == current_user.id or (current_user.is_authenticated() and current_user.admin)%}
+
+            <div id="import_tasks" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.import_task', short_name=project.short_name)}}" rel="nofollow">
+                <div class="well  ">
+                        <span class="fa fa-download fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Import Tasks</h3>
+                </div>
+                </a>
+            </div>
+            <div id="export_tasks" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.export_to', short_name=project.short_name)}}" rel="nofollow">
+                        <div class="well  ">
+                                <span class="fa fa-upload fa-4x"></span>
+                                <h3 class="margin-bottom-xs">Export Tasks</h3>
+                        </div>
+                </a>
+            </div>
+
+            <div id="autoimport_tasks" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.setup_autoimporter', short_name=project.short_name)}}" rel="nofollow">
+                        <div class="well  ">
+                                <span class="fa fa-cogs fa-4x"></span>
+                                <h3 class="margin-bottom-xs">Auto-import Tasks</h3>
+                        </div>
+                </a>
+            </div>
+
+            <div id="task_presenter" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.task_presenter_editor', short_name=project.short_name)}}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-edit fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Task Presenter</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="task_browse" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.tasks_browse', short_name=project.short_name)}}" rel="nofollow">
+                <div class="well">
+                        <span class="fa fa-list-alt fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Browse Tasks</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="task_delete" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.delete_tasks', short_name=project.short_name)}}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-trash-o fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Delete Tasks</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="task_redundancy" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.task_n_answers', short_name=project.short_name)}}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-repeat fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Task Redundancy</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="task_priority" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.task_priority', short_name=project.short_name)}}" rel="nofollow">
+                <div class="well">
+                        <span class="fa fa-sort-numeric-asc fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Task Priority</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="task_scheduler" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.task_scheduler', short_name=project.short_name)}}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-filter fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Task Scheduler</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="task_investigation" class="col-sm-6 col-md-4">
+                <a href="{{ url_for('data/project.investigate', short_name=project.short_name) }}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-search fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Investigate Tasks</h3>
+                    </div>
+                </a>
+            </div>
+
+
+            <div id="ambiguous_autoimporter" class="col-sm-6 col-md-4">
+                <a href="{{url_for('data/project.ambiguous_autoimporter', type='ambiguous', short_name=project.short_name)}}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-cogs fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Auto-import Ambiguous Tasks</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="task_investigators" class="col-sm-6 col-md-4">
+                <a href="{{ url_for('data/project.investigators', short_name=project.short_name) }}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-users fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Investigators</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="grouped_data_criteria" class="col-sm-6 col-md-4">
+                <a href="{{ url_for('data/project.criteria', short_name=project.short_name) }}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-balance-scale fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Grouped Data Criteria</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="delete_project" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.delete', short_name=project.short_name)}}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-trash fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Delete Project</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="project_details" class="col-sm-6 col-md-4">
+                <a href="{{ url_for('project.update', short_name = project.short_name) }}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-file-text-o fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Project Details</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="audit_logs" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-calendar fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Audit Logs</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="publish" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.publish', short_name=project.short_name)}}" rel="nofollow">
+                    <div class="well">
+                        <span class="fa fa-thumbs-up fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Publish</h3>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
-
 {% else %}
-<div class="page-header padding-top container">
-    <h1>Sorry! This project does not exist.</h1>
-</div>
+    {{ helper.render_non_existant_project() }}
 {% endif %}
 
 {% endblock %}

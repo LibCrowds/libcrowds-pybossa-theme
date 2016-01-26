@@ -7,31 +7,29 @@
 
 {% block content %}
 {{ helper.render_account_local_nav(current_user, active_link) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div id="project-form" class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                <h2 class="text-center">Create a new project</h2>
-                <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
-                    {{ form.hidden_tag() }}
-                    <fieldset>
-                        {{ render_field(form.name, placeholder="Name", class="form-control", required="required", autofocus="autofocus") }}
-                        {{ render_field(form.short_name, placeholder="Abbreviated name for the project", label_text="Short name:", class="form-control", required="required") }}
-                        {{ render_field(form.long_description, class="form-control", rows="13", placeholder="Long description:
+<div class="container container-main">
+    <div id="project-form" class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            {% include "_flash_messages.html" %}
+            <h2 class="text-center">Create a new project</h2>
+            <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset>
+                    {{ render_field(form.name, placeholder="Name", class="form-control", required="required", autofocus="autofocus") }}
+                    {{ render_field(form.short_name, placeholder="Abbreviated name for the project", label_text="Short name:", class="form-control", required="required") }}
+                    {{ render_field(form.long_description, class="form-control", rows="13", placeholder="Long description:
 
-                        · Describe the purpose of the project and what it aims to achieve.
-                        · Explain how the project works and how volunteers can help.
-                        · Highlight the reasons why volunteers contributions are essential.
+                    · Describe the purpose of the project and what it aims to achieve.
+                    · Explain how the project works and how volunteers can help.
+                    · Highlight the reasons why volunteers contributions are essential.
 
-                        You can use Markdown to format your description.", required="required") }}
-                        <div class="pull-right" role="group">
-                            <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">Cancel</a>
-                            <input type="submit" value="Create" class="btn btn-success" />
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
+                    You can use Markdown to format your description.", required="required") }}
+                    <div class="pull-right" role="group">
+                        <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">Cancel</a>
+                        <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>

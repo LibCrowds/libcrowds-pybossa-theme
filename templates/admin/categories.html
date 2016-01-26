@@ -5,64 +5,62 @@
 
 {% block content %}
 {{ render_admin_local_nav(current_user, active_link) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div id="categories" class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                <h1><strong>Admin:</strong> Manage Categories</h1>
-                <hr>
-                <div class="row">
-                    <div id="add" class="col-sm-12">
-                        <h2>Add Category</h2>
-                        {% from "_formhelpers.html" import render_field %}
-                        <form role="form" method="POST" action="{{url_for('admin.categories')}}">
-                            {{form.hidden_tag()}}
-                            <fieldset>
-                            {{ render_field(form.name, placeholder="Category name", class="form-control", required="required") }}
-                            {{ render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
-                            <div class="pull-right" role="group">
-                                <button type="submit" class="btn btn-danger">Add</button>
-                            </div>
-                            </fieldset>
-                        </form>
-                    </div>
+<div class="container container-main">
+    <div class="row">
+        <div id="categories" class="col-sm-9 col-sm-offset-3">
+            {% include "_flash_messages.html" %}
+            <h1><strong>Admin:</strong> Manage Categories</h1>
+            <hr>
+            <div class="row">
+                <div id="add" class="col-sm-12">
+                    <h2>Add Category</h2>
+                    {% from "_formhelpers.html" import render_field %}
+                    <form role="form" method="POST" action="{{url_for('admin.categories')}}">
+                        {{form.hidden_tag()}}
+                        <fieldset>
+                        {{ render_field(form.name, placeholder="Category name", class="form-control", required="required") }}
+                        {{ render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
+                        <div class="pull-right" role="group">
+                            <button type="submit" class="btn btn-danger">Add</button>
+                        </div>
+                        </fieldset>
+                    </form>
                 </div>
-                {% if categories %}
-                <h2 class="padding-top-xs">Current Categories</h2>
-                <table class="table table-stripped table-condensed table-hover table-responsive">
-                    <col style="width:30%">
-                    <col style="width:30%">
-                    <col style="width:40%">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th style="text-align:center;">Projects</th>
-                            <th style="text-align:center;">Actions</th>
-                        </tr>
-                    </thead>
-                    {% for c in categories %}
-                    <tr>
-                        <td>{{c.name}}</td>
-                        <td style="text-align:center;">{{ n_projects_per_category[c.short_name]}}</td>
-                        <td style="text-align:center;">
-                            <div class="btn-group">
-                                <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn"><i class="fa fa-edit"></i> Edit Category</a>
-                                {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
-                                <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn"><i class="fa fa-trash"></i> Delete Category</a>
-                                {% else %}
-
-                                <a href="#" rel="tooltip" data-title="Only empty categories can be deleted and one category must always remain." class="btn disabled"><i class="fa fa-trash"></i> Delete Category</a>
-                                {% endif %}
-                            </div>
-                        </td>
-                    </tr>
-                        {% if not loop.last %}
-                        {% endif %}
-                    {% endfor %}
-                </table>
-                {% endif %}
             </div>
+            {% if categories %}
+            <h2 class="padding-top-xs">Current Categories</h2>
+            <table class="table table-stripped table-condensed table-hover table-responsive">
+                <col style="width:30%">
+                <col style="width:30%">
+                <col style="width:40%">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th style="text-align:center;">Projects</th>
+                        <th style="text-align:center;">Actions</th>
+                    </tr>
+                </thead>
+                {% for c in categories %}
+                <tr>
+                    <td>{{c.name}}</td>
+                    <td style="text-align:center;">{{ n_projects_per_category[c.short_name]}}</td>
+                    <td style="text-align:center;">
+                        <div class="btn-group">
+                            <a href="{{url_for('admin.update_category', id=c.id)}}" class="btn"><i class="fa fa-edit"></i> Edit Category</a>
+                            {% if n_projects_per_category[c.short_name] == 0 and (categories | count > 1) %}
+                            <a href="{{url_for('admin.del_category', id=c.id)}}" class="btn"><i class="fa fa-trash"></i> Delete Category</a>
+                            {% else %}
+
+                            <a href="#" rel="tooltip" data-title="Only empty categories can be deleted and one category must always remain." class="btn disabled"><i class="fa fa-trash"></i> Delete Category</a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                    {% if not loop.last %}
+                    {% endif %}
+                {% endfor %}
+            </table>
+            {% endif %}
         </div>
     </div>
 </div>
