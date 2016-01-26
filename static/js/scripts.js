@@ -6,7 +6,6 @@ $(function() {
     startGlowingLinks();
     setTasksRemaining();
     animateProgress();
-    sameSize();
     styleNavigation();
     addIEInputLabels();
 });
@@ -77,7 +76,6 @@ $(window).scroll(function() {
 
 /** Trigger refresh of certain elements on resize. */
 $(window).on("resize", function() {
-    sameSize();
     animateProgress();
     styleNavigation();
 }).resize();
@@ -140,28 +138,6 @@ function styleNavigation() {
     }
     $('.navbar-default')[0].offsetHeight; // Trigger a reflow, flushing the CSS
     $('.navbar-default').removeClass('notransition');
-}
-
-
-/** Sets all elements of class same-size to the same height. */
-function sameSize() {
-    var m2 = 0;
-    $(".row .same-size").height("");
-    $(".row .same-size").each(function(i, el) {
-        m2 = Math.max(m2, $(el).height());
-    });
-    if($(window).width() > 991){
-        $(".row .same-size").height(m2);
-    } else {
-        $(".row .same-size").height(m2 + 50);
-    }
-
-    var m = 0;
-    $(".well").height("");
-    $(".well").each(function(i, el) {
-        m = Math.max(m, $(el).height());
-    });
-    $(".well").height(m);
 }
 
 
