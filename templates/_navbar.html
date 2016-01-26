@@ -41,11 +41,10 @@
                 <li class="nav-link{% if active_page == 'community' %} active{% endif %}">
                     {% if 'pybossa_discourse' in plugins %}
                     <a href="{{ url_for('discourse.index')}}">Community</a>
-                    {% endif %}
+                    {% else %}
                     <a href="{{ url_for('account.index')}}">Community</a>
                     {% endif %}
                 </li>
-                {% endif %}
 
                 <!-- See https://github.com/LibCrowds/libcrowds-data -->
                 {% if "libcrowds_data" in plugins %}
@@ -75,11 +74,11 @@
                         {% if current_user.admin or current_user.pro %}
                         <li class="divider" />
 
-                        {% if current_user.admin %}
-                        <li class="nav-link">
-                            <a href="{{ url_for('admin.index') }}"><i class="fa fa-cog"></i> Admin</a>
-                        </li>
-                        {% endif %}
+                            {% if current_user.admin %}
+                            <li class="nav-link">
+                                <a href="{{ url_for('admin.index') }}"><i class="fa fa-cog"></i> Admin</a>
+                            </li>
+                            {% endif %}
 
                         <li class="nav-link">
                             <a href="{{ url_for('project.new') }}"><i class="fa fa-plus"></i> New Project</a>
