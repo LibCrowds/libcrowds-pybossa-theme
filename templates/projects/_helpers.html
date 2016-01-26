@@ -162,7 +162,7 @@
                         <p>Project complete! <i class="fa fa-smile-o padding-left-xs"></i></p>
                     {% endif %}
                     <div class="row hidden-md hidden-lg text-center">
-                    {% if active_cat != "draft" %}
+                    {% if active_cat != "draft" and project.overall_progress < 100 %}
                         <a class="btn btn-danger margin-top-sm margin-bottom-xs" href="{{ url_for('project.details', short_name = project.short_name) }}">Contribute</a>
                     {% endif %}
                     </div>
@@ -193,7 +193,7 @@
                 </div>
             </div>
             <div class="text-center padding-top-sm">
-                {% if active_cat != "draft" %}
+                {% if active_cat != "draft" and project.overall_progress < 100 %}
                     <p><a class="btn btn-danger" href="{{ url_for('project.details', short_name = project.short_name) }}">Contribute</a></p>
                 {% endif %}
             </div>
