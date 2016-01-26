@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% set active_page = "projects" %}
-{% import "account/_helpers.html" as helper %}
-{% import "projects/_helpers.html" as project_helper %}
+{% import "projects/_helpers.html" as helper %}
 
 {% block content %}
-{{ project_helper.render_project_local_nav(active_link="open", current_user=current_user) }}
 <div class="container container-main">
     <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
             {% include "_flash_messages.html" %}
             <div class="row vcenter hcenter">
                 <div class="col-md-8 col-xs-12">
@@ -18,29 +16,32 @@
                 </div>
             </div>
             <hr>
-            {% if all_projects %}
-            <div class="col-xs-12">
-                <h2>Published</h2>
-            </div>
-            <table class="table table-stripped table-condensed table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th class="text-center">Category</th>
-                        <th class="text-center">Created</th>
-                    </tr>
-                </thead>
-                {% for project in all_projects %}
-                  {{ project_helper.render_project_short_summary(project, upload_method) }}
+            {% if projects_published or projects_draft %}
+                {% for project in projects_published %}
+                    {% if project.overall_progress < 100 %}
+                        <h2>Active<h2>
+                        {{ helper.render_project_short_summary(project, upload_method) }}
+                    {% endif %}
                 {% endfor %}
-            </table>
+
+                {% for project in projects_published %}
+                    {% if project.overall_progress >= 100 %}
+                        <h2>Completed<h2>
+                        {{ helper.render_project_short_summary(project, upload_method) }}
+                    {% endif %}
+                {% endfor %}
+
+                {% for project in projects_draft %}
+                    <h2>Draft<h2>
+                    {{ helper.render_project_short_summary(project, upload_method) }}
+                {% endfor %}
             {% else %}
             <div class="col-xs-12">
-                <h2>No projects have been created</h2>
+                <h2>You have not created any projects.</h2>
             </div>
-           {% endif %}
+            {% endif %}
         </div>
     </div>
 </div>
-{{ project_helper.broken_image() }}
+{{ helper.broken_image() }}
 {% endblock %}
