@@ -10,7 +10,7 @@
     <div class="col-sm-6 col-xs-12 text-center">
         <div class="inline-block">
             <div class="shadow shadow-circle">
-                {{ render_user_thumbnail(user, upload_method, class="img-circle profile-image img-responsive center-block", size="200x200") }}
+                {{ render_user_avatar(user, upload_method, width="200") }}
             </div>
         </div>
         <h1 class="inset-text-grey">{{user.fullname}}</h1>
@@ -52,15 +52,15 @@
 </div>
 {% endmacro %}
 
-{% macro render_user_thumbnail(user, upload_method, id, class, style, size='90x90') %}
+{% macro render_user_avatar(user, upload_method, id, class, style, width='90') %}
 {% if user.info.avatar %}
     {% if upload_method == 'rackspace'%}
-    <img class="{{class}}" style="{{style}}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 'user');"  alt="User avatar">
+    <img class="img-circle {{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 'user');"  alt="User avatar">
     {% else %}
-    <img class="{{class}}" style="{{style}}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar)) }}" onerror="imgError(this, 'user');" alt="User avatar">
+    <img class="img-circle {{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar)) }}" onerror="imgError(this, 'user');" alt="User avatar">
     {% endif %}
 {% else %}
-    <img class="{{class}}" style="{{style}}" src="{{ url_for('static', filename='img/placeholder.user.png')}}" alt="User avatar">
+    <img class="img-circle {{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('static', filename='img/placeholder.user.png')}}" alt="User avatar">
 {% endif %}
 {% endmacro %}
 
