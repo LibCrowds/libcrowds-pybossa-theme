@@ -43,7 +43,7 @@
                             {% endif %}
 
                             <!-- pybossa-gravatar -->
-                            {% if 'pybossa_gravatar' in plugins.keys() %}
+                            {% if "pybossa_gravatar" in plugins %}
                                 <a href="{{url_for('set_gravatar', name=current_user.name)}}" class="btn btn-default">
                                     Import Gravatar
                                 </a>

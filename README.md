@@ -1,6 +1,6 @@
 # libcrowds-pybossa-theme
 
-A Bootstrap 3 [Pybossa](https://github.com/PyBossa/pybossa) theme for the [LibCrowds](http://www.libcrowds.com) crowdsourcing platform.
+A [Pybossa](https://github.com/PyBossa/pybossa) theme for the [LibCrowds](http://www.libcrowds.com) crowdsourcing platform.
 
 
 ## Installation
@@ -14,22 +14,21 @@ THEME = {your-custom-theme}
 
 ## Features
 
-The theme is currently up-to-date with all features provided by
-[PyBossa](https://github.com/PyBossa/pybossa) v1.3.0.
+The theme incorporates all features up to until [PyBossa](https://github.com/PyBossa/pybossa) v1.4.0.
 
 
 ## Plugins
 
-The theme supports a number of optional plugins. If installed these are integrated as follows:
+The theme supports a number of optional plugins, if installed these are integrated as follows:
 
 * [pybossa-gravatar](https://github.com/alexandermendes/pybossa-gravatar):
-Adds an **Import Gravatar** button to user profile settings pages.
+An **Import Gravatar** button will appear on user settings pages.
 
-* [libcrowds-statistics](https://github.com/alexandermendes/pybossa-gravatar): 
-Adds a **Statistics** link to the main navigation bar.
+* [libcrowds-statistics](https://github.com/alexandermendes/pybossa-gravatar):
+The **Statistics** link on the main navigation bar will now point to the updated statistics page.
 
 
 ## Contributing
 
-For guidelines on how to suggest improvements, report bugs or submit pull
-requests please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
+See the [CONTRIBUTING](CONTRIBUTING.md) file for guidelines on how to suggest improvements,
+report bugs or submit pull requests.

@@ -31,28 +31,17 @@
 {% endmacro %}
 
 {% macro render_project_local_nav(project, active_link, current_user, pro_features) -%}
-{% if ( current_user.is_authenticated() and current_user.id == project.owner_id
-    and current_user.pro) or current_user.admin %}
-<<<<<<< HEAD
-        <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
-        <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
-        {% if project %}
+<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
+{% if ( current_user.is_authenticated() and current_user.id == project.owner_id and current_user.pro) or current_user.admin %}
+    <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
+    <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
+
+    {% if project %}
         <li class="divider"></li>
         <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">Dashboard</a></li>
         <li class="nav-link{% if active_link=="update"%} active{% endif %}">
             <a href="{{url_for('project.update', short_name=active_project)}}"> Project Details</a>
         </li>
-=======
-<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
-    <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
-    <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
-    {% if project %}
-    <li class="divider"></li>
-    <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">Dashboard</a></li>
-    <li class="nav-link{% if active_link=="update"%} active{% endif %}">
-        <a href="{{url_for('project.update', short_name=active_project)}}"> Project Details</a>
-    </li>
->>>>>>> master
 
         {% if pro_features.get('auditlog_enabled') %}
         <li class="nav-link{% if active_link=="auditlog"%} active{% endif %}">
@@ -65,39 +54,20 @@
             <a href="{{url_for('project.webhook_handler', short_name=project.short_name)}}"> Webhooks</a>
         </li>
         {% endif %}
-<<<<<<< HEAD
-        <li class="nav-link{% if active_link=="blog"%} active{% endif %}">
-            <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}"> Blog</a>
-        </li>
+
         <li class="nav-link{% if active_link=="results"%} active{% endif %}">
             <a href="{{url_for('project.results', short_name=active_project)}}"> Results</a>
         </li>
         <li class="nav-link{% if active_link=="statistics"%} active{% endif %}">
             <a href="{{url_for('project.show_stats', short_name=active_project)}}"> Statistics</a>
         </li>
-        {% endif %}
-    {% elif project %}
-=======
-
-    <li class="nav-link{% if active_link=="blog"%} active{% endif %}">
-        <a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}"> Blog</a>
-    </li>
-    <li class="nav-link{% if active_link=="results"%} active{% endif %}">
-        <a href="{{url_for('project.results', short_name=active_project)}}"> Results</a>
-    </li>
-    <li class="nav-link{% if active_link=="statistics"%} active{% endif %}">
-        <a href="{{url_for('project.show_stats', short_name=active_project)}}"> Statistics</a>
-    </li>
     {% endif %}
 {% elif project %}
-<ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
->>>>>>> master
     <li class="nav-link{% if active_link=="contribute"%} active{% endif %}">
         <a href="{{url_for('project.presenter', short_name=active_project)}}"> Contribute</a>
     </li>
-   {% endif %}
-</ul>
 {% endif %}
+</ul>
 {% endmacro %}
 
 {% macro render_project_summary(project, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
@@ -161,7 +131,7 @@
         <div class="col-md-8 col-xs-12">
             <div class="white-panel inset-shadow-white project-desc">
                 <div class="col-sm-6 col-xs-12 hidden-xs project-polaroid">
-                    <a class="polaroid" href="{{ url_for('blplugin.details', short_name = project.short_name) }}" data-polaroid-title="{{ project.name }}">
+                    <a class="polaroid" href="{{ url_for('project.details', short_name = project.short_name) }}" data-polaroid-title="{{ project.name }}">
                         {{ render_project_thumbnail(project, upload_method, class='img-polaroid', id="project.id") }}
                     </a>
                 </div>
@@ -177,7 +147,7 @@
                 {% endif %}
 
                 <div class="col-xs-12 text-center hidden-sm hidden-md hidden-lg padding-top-xs">
-                    <a href="{{ url_for('blplugin.details', short_name = project.short_name) }}">
+                    <a href="{{ url_for('project.details', short_name = project.short_name) }}">
                         <div class="shadow shadow-inline">
                             {{ render_project_thumbnail(project, upload_method, class="img-polaroid", id="project.id") }}
                         </div>
@@ -185,7 +155,7 @@
                 </div>
 
                 <div class="col-sm-6 col-xs-10 col-xs-offset-1 col-sm-offset-0">
-                    <h2 class="text-center-xs"><a href="{{ url_for('blplugin.details', short_name = project.short_name) }}">{{ project.name }}</a></h2>
+                    <h2 class="text-center-xs"><a href="{{ url_for('project.details', short_name = project.short_name) }}">{{ project.name }}</a></h2>
                     {% if project.overall_progress < 100 %}
                         <p>{{ project.description }}</p>
                     {% else %}
@@ -193,7 +163,7 @@
                     {% endif %}
                     <div class="row hidden-md hidden-lg text-center">
                     {% if active_cat != "draft" %}
-                        <a class="btn btn-danger margin-top-sm margin-bottom-xs" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">Contribute</a>
+                        <a class="btn btn-danger margin-top-sm margin-bottom-xs" href="{{ url_for('project.details', short_name = project.short_name) }}">Contribute</a>
                     {% endif %}
                     </div>
                 </div>
@@ -224,7 +194,7 @@
             </div>
             <div class="text-center padding-top-sm">
                 {% if active_cat != "draft" %}
-                    <p><a class="btn btn-danger" href="{{ url_for('blplugin.details', short_name = project.short_name) }}">Contribute</a></p>
+                    <p><a class="btn btn-danger" href="{{ url_for('project.details', short_name = project.short_name) }}">Contribute</a></p>
                 {% endif %}
             </div>
         </div>
