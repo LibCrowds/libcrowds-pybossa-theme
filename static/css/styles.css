@@ -599,7 +599,8 @@ thead {
     display: flex;
     -webkit-flex-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center
+    -webkit-align-items: center;
+    align-items: center
 }
 
 .hcenter {
@@ -2228,7 +2229,9 @@ img.img-polaroid {
 
 .meter {
     height: 310px;
-    width: 50px;
+    width: 80%;
+    margin-left:10%;
+    margin-right:10%
     position: relative;
     background: #fff;
     -moz-border-radius-topright: 10px;

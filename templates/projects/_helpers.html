@@ -126,7 +126,7 @@
 {% endmacro %}
 
 {% macro show_project(project, active_cat, current_user, upload_method) %}
-<div class="project-item container container-padded">
+<div class="container-padded">
     <div class="row">
         <div class="col-md-8 col-xs-12">
             <div class="white-panel inset-shadow-white project-desc">
@@ -177,19 +177,19 @@
         <div class="col-sm-3 hidden-sm hidden-xs">
             <div class="white-panel inset-shadow-white project-info">
                 <div class="vcenter">
-                    <i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div>
+                    <i class="fa fa-check-square-o fa-2x fa-fw padding-right-xs"></i>Completed: {{ project.overall_progress | round | int }}%
                 </div>
-                <hr class="marc">
+                <hr>
                 <div class="vcenter">
-                    <i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block tasks-remaining" data-tasks="{{project.n_tasks}}" data-progress="{{ project.overall_progress | round | int }}">Tasks Remaining:</div>
-                </div>
-                <hr class="margin-top-xs margin-bottom-xs">
-                <div class="vcenter">
-                    <i class="fa fa-users fa-2x"></i><div class="padding-left-xs inline-block">Volunteers: {{ project.n_volunteers}}</div>
+                    <i class="fa fa-tasks fa-2x fa-fw padding-right-xs"></i><span class="tasks-remaining" data-tasks="{{project.n_tasks}}" data-progress="{{ project.overall_progress | round | int }}">Tasks Remaining:</span>
                 </div>
                 <hr class="margin-top-xs margin-bottom-xs">
                 <div class="vcenter">
-                    <i class="fa fa-clock-o fa-2x"></i><div class="padding-left-xs inline-block">Last Active: {{ project.last_activity}}</div>
+                    <i class="fa fa-users fa-2x fa-fw padding-right-xs"></i>Volunteers: {{ project.n_volunteers}}
+                </div>
+                <hr class="margin-top-xs margin-bottom-xs">
+                <div class="vcenter">
+                    <i class="fa fa-clock-o fa-2x fa-fw padding-right-xs"></i>Last Active: {{ project.last_activity}}
                 </div>
             </div>
             <div class="text-center padding-top-sm">

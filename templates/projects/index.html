@@ -6,59 +6,58 @@
 {% block content %}
 <script src="{{url_for('static', filename='js/vendor/isotope.pkgd.min.js')}}"></script>
 <span class="set-main-bg" data-bg="pattern-white-wall"></span>
-<div class="container-padded remove-padding-bottom">
-    <section class="dark-grey pattern-classy-fabric">
-        <div class="container padding-top-md">
-            <div class="col-xs-10 col-xs-offset-1">
-                <ul class="nav nav-pills">
-                    {% for c in categories %}
-                        {% if c.short_name == 'staff' %}
-                            {% if current_user.admin %}
-                            <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}>
-                                <a href="{{url_for('project.project_cat_index', category=c.short_name)}}">{{ c.name }}</a>
-                            </li>
-                            {% endif %}
-                        {% else %}
-                            <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}>
-                                <a href="{{url_for('project.project_cat_index', category=c.short_name)}}">{{ c.name }}</a>
-                            </li>
+<section class="pattern-classy-fabric">
+    <div class="container padding-top-lg">
+        <div class="col-xs-10 col-xs-offset-1">
+            <ul class="nav nav-pills">
+                {% for c in categories %}
+                    {% if c.short_name == 'staff' %}
+                        {% if current_user.admin %}
+                        <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}>
+                            <a href="{{url_for('project.project_cat_index', category=c.short_name)}}">{{ c.name }}</a>
+                        </li>
                         {% endif %}
-                    {% endfor %}
-                    {% if current_user.is_authenticated() and current_user.admin %}
-                            <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a href="{{url_for('project.draft')}}"> Draft</a></li>
+                    {% else %}
+                        <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}>
+                            <a href="{{url_for('project.project_cat_index', category=c.short_name)}}">{{ c.name }}</a>
+                        </li>
                     {% endif %}
-                </ul>
-            </div>
+                {% endfor %}
+                {% if current_user.is_authenticated() and current_user.admin %}
+                        <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a href="{{url_for('project.draft')}}"> Draft</a></li>
+                {% endif %}
+            </ul>
         </div>
-    </section>
+    </div>
+</section>
 
-    <div class="container">
-        <div class="col-xs-12 padding-top-xs">
-            {% include "_flash_messages.html" %}
-            <div id="sorts" class="btn-group pull-right">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Sort by <span id="order">Date</span> <span class="caret"></span></button>
-                <ul class="dropdown-menu" style="top:35px;">
-                  <li><a href="#" data-sort-value="original-order">date</a></li>
-                  <li><a href="#" data-sort-value="name">name</a></li>
-                  <li><a href="#" data-sort-value="activity">activity</a></li>
-                  <li><a href="#" data-sort-value="progress">progress</a></li>
-                </ul>
-            </div>
+<div class="container padding-bottom-md">
+    <div class="col-xs-12 padding-top-xs">
+        {% include "_flash_messages.html" %}
+        <div id="sorts" class="btn-group pull-right">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Sort by <span id="order">Date</span> <span class="caret"></span></button>
+            <ul class="dropdown-menu" style="top:35px;">
+              <li><a href="#" data-sort-value="original-order">date</a></li>
+              <li><a href="#" data-sort-value="name">name</a></li>
+              <li><a href="#" data-sort-value="activity">activity</a></li>
+              <li><a href="#" data-sort-value="progress">progress</a></li>
+            </ul>
+        </div>
 
         {% if projects %}
-            <div class="polaroids projects margin-top-sm">
-                {% for project in projects %}
-                    {{ helper.show_project(project, active_cat.short_name, current_user, upload_method) }}
-                {% endfor %}
-            </div>
-                {% if pagination.pages > 1 %}
+        <div class="polaroids projects margin-top-sm">
+            {% for project in projects %}
+                {{ helper.show_project(project, active_cat.short_name, current_user, upload_method) }}
+            {% endfor %}
+        </div>
+            {% if pagination.pages > 1 %}
                 {{ helper.render_pagination(pagination) }}
             {% endif %}
-            {% else %}
-                <div class="container container-padded">
-                    <h2 class="text-center inset-text-grey">Sorry, there are no published projects for this category yet.</h2>
-                </div>
-            {% endif %}
+        {% else %}
+            <div class="container container-padded">
+                <h2 class="text-center inset-text-grey">Sorry, there are no published projects for this category yet.</h2>
+            </div>
+        {% endif %}
         </div>
     </div>
 </div>
