@@ -14,8 +14,7 @@ THEME = {your-custom-theme}
 
 ## Features
 
-The theme is currently up-to-date with all features introduced until 
-[PyBossa](https://github.com/PyBossa/pybossa) v1.3.0.
+The theme incorporates all features up to until [PyBossa](https://github.com/PyBossa/pybossa) v1.4.0.
 
 
 ## Plugins
@@ -25,11 +24,11 @@ The theme supports a number of optional plugins, if installed these are integrat
 * [pybossa-gravatar](https://github.com/alexandermendes/pybossa-gravatar):
 An **Import Gravatar** button will appear on user settings pages.
 
-* [libcrowds-statistics](https://github.com/alexandermendes/pybossa-gravatar): 
-A **Statistics** link will appear on the main navigation bar.
+* [libcrowds-statistics](https://github.com/alexandermendes/pybossa-gravatar):
+The **Statistics** link on the main navigation bar will now point to the updated statistics page.
 
 
 ## Contributing
 
-See the [CONTRIBUTING](CONTRIBUTING.md) file for guidelines on how to suggest improvements, 
+See the [CONTRIBUTING](CONTRIBUTING.md) file for guidelines on how to suggest improvements,
 report bugs or submit pull requests.
