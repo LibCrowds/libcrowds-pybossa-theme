@@ -27,11 +27,11 @@
                               </div>
                           </div>
                       </div>
-                    {{ render_field(upload_avatar_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
-                    {{ upload_avatar_form.x1 }}
-                    {{ upload_avatar_form.y1 }}
-                    {{ upload_avatar_form.x2 }}
-                    {{ upload_avatar_form.y2 }}
+                    {{ render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
+                    {{ upload_form.x1 }}
+                    {{ upload_form.y1 }}
+                    {{ upload_form.x2 }}
+                    {{ upload_form.y2 }}
                     <div id="modal" class="modal fade">
                       <div class="modal-dialog img-dialog">
                           <div class="modal-content">
