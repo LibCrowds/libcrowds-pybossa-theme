@@ -41,35 +41,33 @@ as follows:
 Category themes
 ===============
 
-Each project has a main page that acts as a portal to that project, which can
-be located at:
+Each project has a main portal page located at:
 
 .. code-block:: http
 
     /project/short_name/
 
 
-The category for each project can be customised so that each project in that
-category has a unique appearance. The category short name mentioned in the
-customisation options below can be retrieved via the API:
+There are a few simple configuration options that can be used to customise each category,
+so that the projects it contains have a unique appearance:
 
-``` http
-GET http://www.libcrowds.com/api/category
-```
-
-Customisation options can be set as follows:
-
-* Splash images: Place a JPEG file in the folder `static/img/splash`_ with a
+* **Splash images:** Place a JPEG file in the folder `static/img/splash`_ with a
   filename matching the category short name.
 
-* Tutorial video: Place an MP4 file in the folder `static/video`_ with a
+* **Tutorial video:** Place an MP4 file in the folder `static/video`_ with a
   filename matching the category short name.
+
+The category short name mentioned above can be retrieved via the API:
+
+.. code-block:: http
+
+    GET http://www.libcrowds.com/api/category
 
 
 .. note::
 
     See the 'Convert-a-Card' category for an example of these customisation
-    options being applied.
+    settings being applied.
 
 
 
@@ -79,6 +77,7 @@ Customisation options can be set as follows:
 
 .. _LibCrowds: http://www.libcrowds.com
 .. _static/img/splash: https://github.com/LibCrowds/libcrowds-pybossa-theme/tree/master/static/img/splash
+.. _static/video: https://github.com/LibCrowds/libcrowds-pybossa-theme/tree/master/static/video
 
 .. _pybossa-gravatar: https://github.com/alexandermendes/pybossa-gravatar
 .. _libcrowds-statistics: https://github.com/LibCrowds/libcrowds-statistics
