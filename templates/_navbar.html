@@ -6,14 +6,14 @@
             </button>
 
             <!-- Set logo -->
-            <var id="logo-black" data-src="{{url_for('static',filename='img/logo-dark-plain.png')}}"></var>
-            <var id="logo-white" data-src="{{url_for('static',filename='img/logo-white-plain.png')}}"></var>
+            <var id="logo-black" data-src="{{url_for('static',filename='img/logo-dark.png')}}"></var>
+            <var id="logo-white" data-src="{{url_for('static',filename='img/logo-white.png')}}"></var>
             <a class="navbar-brand" href="{{ url_for('home.home') }}">
                 <img id="navbar-logo"
                 {% if not active_page == 'index' and not has_splash == 'true' %}
-                    src="{{url_for('static',filename='img/logo-dark-plain.png')}}"
+                    src="{{url_for('static',filename='img/logo-dark.png')}}"
                 {% else %}
-                    src="{{url_for('static',filename='img/logo-white-plain.png')}}"
+                    src="{{url_for('static',filename='img/logo-white.png')}}"
                 {% endif %} alt="{{brand}} logo" />
             </a>
 
