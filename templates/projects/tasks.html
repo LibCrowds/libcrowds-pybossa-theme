@@ -15,7 +15,7 @@
                 <h1 class="inset-text-grey"><strong>Project Options</strong></h1>
             </div>
 
-            {% if (current_user.is_authenticated() and project.owner_id == current_user.id) or current_user.admin)%}
+            {% if (current_user.is_authenticated() and project.owner_id == current_user.id) or current_user.admin %}
             <div id="import_tasks" class="col-sm-6 col-md-4">
                 <a href="{{url_for('project.import_task', short_name=project.short_name)}}" rel="nofollow">
                     <div class="well">
@@ -132,7 +132,7 @@
                     </div>
                 </a>
             </div>
-            
+
             <!-- See https://github.com/alexandermendes/pybossa-analyst -->
             {% if "pybossa_analyst" in plugins %}
             <div id="rules" class="col-sm-6 col-md-4">
