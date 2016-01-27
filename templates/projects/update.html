@@ -1,7 +1,7 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
-{% from "_formhelpers.html" import render_field %}
+{% import "_formhelpers.html" as formhelper %}
 
 {% block content %}
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
@@ -27,7 +27,7 @@
                               </div>
                           </div>
                       </div>
-                    {{ render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
+                    {{ formhelper.render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
                     {{ upload_form.x1 }}
                     {{ upload_form.y1 }}
                     {{ upload_form.x2 }}
@@ -57,16 +57,16 @@
               <fieldset>
                 {{ form.hidden_tag() }}
 
-                {{ render_field(form.name, class="form-control", placeholder="Name", show_label=True, required="required", autofocus="autofocus") }}
-                {{ render_field(form.short_name, class="form-control", placeholder="Short name", show_label=True, label_text="Short name:") }}
-                {{ render_field(form.description, class="form-control", placeholder="Short description", show_label=True, required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
-                {{ render_field(form.long_description, rows="13", placeholder="Explain the project (use Markdown)!", class="form-control", required="required", show_label=True) }}
-                {{ render_field(form.category_id, class="form-control", show_label=True) }}
+                {{ formhelper.render_field(form.name, class="form-control", placeholder="Name", show_label=True, required="required", autofocus="autofocus") }}
+                {{ formhelper.render_field(form.short_name, class="form-control", placeholder="Short name", show_label=True, label_text="Short name:") }}
+                {{ formhelper.render_field(form.description, class="form-control", placeholder="Short description", show_label=True, required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
+                {{ formhelper.render_field(form.long_description, rows="13", placeholder="Explain the project (use Markdown)!", class="form-control", required="required", show_label=True) }}
+                {{ formhelper.render_field(form.category_id, class="form-control", show_label=True) }}
                 {{ form_helper.render_toggle(form.allow_anonymous_contributors, label="Allow anonymous contributors") }}
 
                 {{ form_helper.render_toggle(form.protect, label="Password project") }}
-                <div id='password'>{{ render_field(form.password, class="form-control", show_label=True) }}</div>
-                {{ render_field(form.webhook, class="form-control", show_label=True) }}
+                <div id='password'>{{ formhelper.render_field(form.password, class="form-control", show_label=True) }}</div>
+                {{ formhelper.render_field(form.webhook, class="form-control", show_label=True) }}
 
                 <div role="group" class="pull-right">
                     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
