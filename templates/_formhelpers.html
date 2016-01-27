@@ -55,3 +55,20 @@
         {% endif %}
 {% endif %}
 {% endmacro %}
+
+{% macro render_toggle(field, label) %}
+<div class="row padding-top-xs vcenter">
+    <div class="onoffswitch-group">
+        <div class="onoffswitch">
+            {{field(class="onoffswitch-checkbox")}}
+            <label class="onoffswitch-label" for="{{field.name}}">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+    </div>
+    <div class="padding-left-sm onoffswitch-group">
+        <strong>{{ label }}</strong>
+    </div>
+</div>
+{% endmacro %}

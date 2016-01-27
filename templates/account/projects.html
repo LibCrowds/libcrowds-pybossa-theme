@@ -22,13 +22,13 @@
                     <h2>Published</h2>
                     {% for project in projects_published %}
                         {% if project.overall_progress < 100 %}
-                            {{ helper.render_project_short_summary(project, upload_method, append='Active') }}
+                            {{ helper.render_project_short_summary(project) }}
                         {% endif %}
                     {% endfor %}
 
                     {% for project in projects_published %}
                         {% if project.overall_progress >= 100 %}
-                            {{ helper.render_project_short_summary(project, upload_method, append='Completed') }}
+                            {{ helper.render_project_short_summary(project) }}
                         {% endif %}
                     {% endfor %}
                 {% endif %}
@@ -36,7 +36,7 @@
                 {% if projects_draft %}
                     <h2>Draft</h2>
                     {% for project in projects_draft %}
-                        {{ helper.render_project_short_summary(project, upload_method) }}
+                        {{ helper.render_project_short_summary(project) }}
                     {% endfor %}
                 {% endif %}
 

@@ -1877,6 +1877,88 @@ textarea {
 }
 
 
+/* Toggle */
+
+.onoffswitch {
+    position: relative;
+    width: 75px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    color: white;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #DDD;
+    border-radius: 3px;
+}
+
+.onoffswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 20px;
+    background-color: #357EBD;
+}
+
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 15px;
+    background-color: #ADADAD;
+    text-align: right;
+}
+
+.onoffswitch-switch {
+    display: block;
+    width: 12px;
+    margin: 0px;
+    background-color: #DDD;
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    right: 63px;
+    transition: all 0.3s ease-in 0s;
+    border-radius: 3px;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+
+.onoffswitch-group {
+    display: inline-block;
+}
+
 
 /* Badges */
 
