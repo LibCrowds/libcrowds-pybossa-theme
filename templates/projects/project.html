@@ -7,7 +7,7 @@
 {% block content %}
 {% if project %}
 {% include "_flash_messages_floating.html" %}
-<div id="#portal-splash" class="splash" data-src="{{ url_for('static', filename='img/splash/category_' + project.category_id|string + '.jpg') }}">
+<div id="portal-splash" class="splash" data-src="{{ url_for('static', filename='img/splash/category_' + project.category_id|string + '.jpg') }}">
     <div class="vcenter hcenter position-relative" style="height:100%;">
         <div class="container text-center ie-mid-vcenter padding-top-lg">
             <div class="container-padded">
@@ -34,11 +34,11 @@
 
 {% if overall_progress < 100 %}
 <section class="pattern-white-wall box-shadow-white-top">
-    <p id="#portal-attribution" class="attribution" data-category-id="{{ project.category_id }}"></p>
+    <p id="portal-attribution" class="attribution" data-category-id="{{ project.category_id }}"></p>
 
     <div class="container container-padded">
         <div class="col-xs-10 col-xs-offset-1">
-            <div id="#portal-video" data-src="{{ url_for('static', filename='video/category_' + project.category_id|string + '.mp4') }}">
+            <div id="portal-video" data-src="{{ url_for('static', filename='video/category_' + project.category_id|string + '.mp4') }}">
             </div>
             {% if project.long_description %}
                 {{ project.long_description | e | markdown }}

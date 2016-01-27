@@ -10,38 +10,30 @@
  * attributions[n] = '<a href="http://example.com">Somebody</a>'
  */
 var attributions = ['Splash image attributions'];
-attributions[1] = '<a href="http://www.lensintheface.com" target="_blank">Jon Ellis</a>'
-
-
-/** Return the attribution. */
-function getAttribution(id) {
-    return attributions[id];
-}
-
-splash-attribution
+attributions[1] = '<a href="http://www.lensintheface.com" target="_blank">Jon Ellis</a>';
 
 
 /** Load the attribution, if it exists. */
-function loadAttribution(){
+function loadAttribution() {
     var id = $('#portal-attribution').attr('data-category-id');
-    if (attributions.length >= id) {
-        $('#portal-attribution').html(attributions[id]);
+    if (attributions.length > id) {
+        $('#portal-attribution').html('Image: &copy; ' + attributions[id]);
     }
 }
 
 
 /** Load the tutorial video, if it exists. */
-function loadTutorialVideo(){
+function loadVideo() {
     var src = $('#portal-video').attr('data-src');
     if (typeof src !== typeof undefined && src !== false) {
         $.get(src)
         .done(function() {
             $('#portal-video').html(
-                '<div class="row text-center padding-top-md">'
-              + '  <video controls>'
-              + '    <source src="' + src + '" type="video/mp4">'
-              + '  </video>'
-              + '</div>'
+                    '<div class="row text-center padding-top-md">'
+                  + '  <video controls>'
+                  + '    <source src="' + src + '" type="video/mp4">'
+                  + '  </video>'
+                  + '</div>'
             );
         });
     }
@@ -49,9 +41,9 @@ function loadTutorialVideo(){
 
 
 /** Load the splash image, if it exists. */
-function loadSplash(){
-    var src = $('#project-splash').attr('data-src');
-    var splash = $('#project-splash');
+function loadSplash() {
+    var src = $('#portal-splash').attr('data-src');
+    var splash = $('#portal-splash');
 
     // Restyle the page.
     function removeSplash() {
@@ -62,9 +54,7 @@ function loadSplash(){
     if (typeof src !== typeof undefined && src !== false) {
         $.get(src)
         .done(function() {
-            $('.splash').css({
-                "background-image": 'url(' + src + ")"
-            });
+            splash.css({"background-image": 'url(' + src + ")"});
         }).fail(function() {
             removeSplash();
         });
@@ -76,5 +66,6 @@ function loadSplash(){
 
 $(function() {
     loadSplash();
-    loadTutorialVideo();
+    loadAttribution();
+    loadVideo();
 });
