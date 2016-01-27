@@ -21,6 +21,8 @@
 <script>
     var projectStats = {{projectStats|safe}};
 </script>
+{{ helper.render_project_local_nav(project, 'stats', current_user, pro_features) }}
+<span class="set-body-bg" data-bg="pattern-brushed"></span>
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
