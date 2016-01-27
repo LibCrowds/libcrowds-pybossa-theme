@@ -37,9 +37,9 @@
 
     {% if project %}
         <li class="divider"></li>
-        <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">Dashboard</a></li>
+        <li class="nav-link"><a href="{{url_for('project.tasks', short_name=project.short_name)}}">Dashboard</a></li>
         <li class="nav-link{% if active_link=="update"%} active{% endif %}">
-            <a href="{{url_for('project.update', short_name=active_project)}}"> Project Details</a>
+            <a href="{{url_for('project.update', short_name=project.short_name)}}"> Project Details</a>
         </li>
 
         {% if pro_features.get('auditlog_enabled') %}
@@ -55,15 +55,15 @@
         {% endif %}
 
         <li class="nav-link{% if active_link=="results"%} active{% endif %}">
-            <a href="{{url_for('project.results', short_name=active_project)}}"> Results</a>
+            <a href="{{url_for('project.results', short_name=project.short_name)}}"> Results</a>
         </li>
         <li class="nav-link{% if active_link=="statistics"%} active{% endif %}">
-            <a href="{{url_for('project.show_stats', short_name=active_project)}}"> Statistics</a>
+            <a href="{{url_for('project.show_stats', short_name=project.short_name)}}"> Statistics</a>
         </li>
     {% endif %}
 {% elif project %}
     <li class="nav-link{% if active_link=="contribute"%} active{% endif %}">
-        <a href="{{url_for('project.presenter', short_name=active_project)}}"> Contribute</a>
+        <a href="{{url_for('project.presenter', short_name=project.short_name)}}"> Contribute</a>
     </li>
 {% endif %}
 </ul>
