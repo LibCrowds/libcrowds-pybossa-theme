@@ -71,14 +71,8 @@
                             <a href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="fa fa-cog"></i> Settings</a>
                         </li>
 
-                        {% if current_user.admin or current_user.pro %}
+                        {% if (current_user.is_authenticated() and current_user.pro) or current_user.admin %}
                         <li class="divider" />
-
-                            {% if current_user.admin %}
-                            <li class="nav-link">
-                                <a href="{{ url_for('admin.index') }}"><i class="fa fa-cog"></i> Admin</a>
-                            </li>
-                            {% endif %}
 
                         <li class="nav-link">
                             <a href="{{ url_for('project.new') }}"><i class="fa fa-plus"></i> New Project</a>
@@ -86,6 +80,12 @@
                         <li class="nav-link">
                             <a href="{{ url_for('account.projects', name=current_user.name) }}"><i class="fa fa-folder-open"></i> Open Project</a>
                         </li>
+
+                            {% if current_user.admin %}
+                            <li class="nav-link">
+                                <a href="{{ url_for('admin.index') }}"><i class="fa fa-cog"></i> Admin</a>
+                            </li>
+                            {% endif %}
                         {% endif %}
                         <li class="divider"></li>
 

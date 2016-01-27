@@ -6,6 +6,7 @@
 {% from "_formhelpers.html" import render_field %}
 
 {% block content %}
+{% if (current_user.is_authenticated() and current_user.pro) or current_user.admin %}
 <div class="container container-main">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
@@ -28,7 +29,9 @@
         </div>
     </div>
 </div>
-
+{% else %}
+    {% include '401.html' %}
+{% endif %}
 <script>
     $("span[rel='tooltip']").tooltip();
     $("i[rel='tooltip']").tooltip();
