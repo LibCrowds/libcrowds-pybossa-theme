@@ -2239,13 +2239,13 @@ img.img-polaroid {
 }
 
 #home-splash {
-    background-image: url(../img/splash/crowd.png);
+    background-image: url(../img/splash/home.png);
     background-position: center;
     height: 100vh
 }
 
 #about-splash {
-    background-image: url(../img/splash/drawer_close_up.jpg);
+    background-image: url(../img/splash/about.jpg);
     height: 75vh
 }
 
