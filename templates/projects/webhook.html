@@ -1,6 +1,5 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
-{% set active_project  = "all" %}
 {% import "projects/_helpers.html" as helper %}
 
 {% block content %}
@@ -10,7 +9,7 @@
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
         {% include "_flash_messages.html" %}
-        {{ helper.render_project_title(project, upload_method) }}
+        {{ helper.render_project_title(project, subtitle="Webhooks") }}
         <div class="padding-bottom-sm">
             <a id="webhooks-refresh" href="#" class="btn btn-info" style="display:none;" onclick="document.location.reload(true);"> Refresh</a>
         </div>

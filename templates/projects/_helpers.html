@@ -247,7 +247,7 @@ function imgError(image) {
 </script>
 {% endmacro %}
 
-{% macro render_project_title(project, upload_method, subtitle=None) %}
+{% macro render_project_title(project, subtitle=None) %}
 <h1>
 {% if subtitle %}
 <strong>{{ project.name }}</strong>: {{subtitle}}
