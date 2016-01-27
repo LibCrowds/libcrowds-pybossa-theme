@@ -20,11 +20,11 @@
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                       <div class="col-xs-12 text-center">
                           <div class="center-block img-overlay-container">
-                               {{ helper.render_project_thumbnail(project, upload_method, class="img-thumbnail", id="project.id") }}
-                              <div class="img-overlay edit-profile-image">
-                                      <i class="fa fa-pencil-square-o fa-3x"></i>
-                                      <span>Edit</span>
-                              </div>
+                                {{ helper.render_project_thumbnail(project, upload_method, class="img-polaroid", id="project.id") }}
+                                <div class="img-overlay edit-profile-image">
+                                    <i class="fa fa-pencil-square-o fa-3x"></i>
+                                    <span>Edit</span>
+                                </div>
                           </div>
                       </div>
                     {{ form_helper.render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
