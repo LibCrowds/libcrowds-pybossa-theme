@@ -30,7 +30,16 @@
     </div>
 </div>
 {% else %}
-    {% include '401.html' %}
+<div class="container container-main">
+    {% include "_flash_messages.html" %}
+    <div class="col-xs-12">
+        <h1>Unauthorized</h1>
+        <p class="lead">You are not authorized to access the URL requested.</p>
+        <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
+            <i class="fa fa-home"></i> Go Home
+        </a>
+    </div>
+</div>
 {% endif %}
 <script>
     $("span[rel='tooltip']").tooltip();
