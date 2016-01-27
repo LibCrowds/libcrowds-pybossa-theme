@@ -20,7 +20,7 @@
 <script src="{{url_for('static', filename='js/stats/flotr2.min.js')}}" type="text/javascript"></script>
 <script src="{{url_for('static', filename='js/stats/leaflet.markercluster.js')}}" type="text/javascript"></script>
 
-<span class="set-main-bg" data-bg="pattern-brushed"></span>
+<span class="set-body-bg" data-bg="pattern-brushed"></span>
 <div class="container container-main">
     <div class="col-xs-12">
         {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}

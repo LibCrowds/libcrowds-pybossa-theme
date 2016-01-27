@@ -40,8 +40,8 @@ function stylePolaroids(){
 
 /** Add background class body allowing backgrounds to be set from templates. */
 function setBodyBackground(){
-    if ($(".set-main-bg").length > 0) {
-        $('body').addClass($(".set-main-bg").attr('data-bg'));
+    if ($(".set-body-bg").length > 0) {
+        $('body').addClass($(".set-body-bg").attr('data-bg'));
     }
 }
 
