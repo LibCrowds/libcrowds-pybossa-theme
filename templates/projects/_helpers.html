@@ -89,15 +89,20 @@
 </div>
 {% endmacro %}
 
-{% macro render_project_short_summary(project, upload_method) -%}
-<tr>
-    <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
-    <td style="text-align:center;">{{project.category}}</td>
-    <td style="text-align:center;">{{project.created[8:10]}}-{{project.created[5:7]}}-{{project.created[0:4]}}</td>
-</tr>
+{% macro render_project_short_summary(project, upload_method, append) %}
+<div class="row padding-bottom-sm">
+    <div class="col-xs-9">
+        <h4><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></h4>
+    </div>
+    <div class="text-center">
+        <div class="col-xs-3 text-center">
+            {{ append }}
+        </div>
+    </div>
+</div>
 {% endmacro %}
 
-{% macro render_project_admin_featured(project, upload_method) -%}
+{% macro render_project_admin_featured(project, upload_method) %}
 <tr>
     <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
     <td>{{ project.category.name }}</td>

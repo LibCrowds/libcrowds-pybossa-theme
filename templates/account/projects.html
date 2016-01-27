@@ -17,24 +17,29 @@
             </div>
             <hr>
             {% if projects_published or projects_draft %}
-                {% for project in projects_published %}
-                    {% if project.overall_progress < 100 %}
-                        <h2>Active<h2>
-                        {{ helper.render_project_short_summary(project, upload_method) }}
-                    {% endif %}
-                {% endfor %}
 
-                {% for project in projects_published %}
-                    {% if project.overall_progress >= 100 %}
-                        <h2>Completed<h2>
-                        {{ helper.render_project_short_summary(project, upload_method) }}
-                    {% endif %}
-                {% endfor %}
+                {% if projects_published %}
+                    <h2>Published</h2>
+                    {% for project in projects_published %}
+                        {% if project.overall_progress < 100 %}
+                            {{ helper.render_project_short_summary(project, upload_method, append='Active') }}
+                        {% endif %}
+                    {% endfor %}
 
-                {% for project in projects_draft %}
-                    <h2>Draft<h2>
-                    {{ helper.render_project_short_summary(project, upload_method) }}
-                {% endfor %}
+                    {% for project in projects_published %}
+                        {% if project.overall_progress >= 100 %}
+                            {{ helper.render_project_short_summary(project, upload_method, append='Completed') }}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% if projects_draft %}
+                    <h2>Draft</h2>
+                    {% for project in projects_draft %}
+                        {{ helper.render_project_short_summary(project, upload_method) }}
+                    {% endfor %}
+                {% endif %}
+
             {% else %}
             <div class="col-xs-12">
                 <h2>You have not created any projects.</h2>
