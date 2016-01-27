@@ -240,6 +240,14 @@ section.white:after {
     border: 1px solid rgba(255, 255, 255, 1)
 }
 
+.box-shadow-white-top {
+    box-shadow:0 -3px 4px -4px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 -3px 4px -4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 -3px 4px -4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 1)
+}
+
 .box-shadow-grey-bottom {
     box-shadow: 2px 4px 4px -4px rgba(0, 0, 0, .4);
     -webkit-box-shadow: 2px 4px 4px -4px rgba(0, 0, 0, .4);
@@ -1274,6 +1282,7 @@ h1 i, h2 i, h3 i {
 .attribution {
     float: right;
     padding-right: 10px;
+    font-size: 0.85em;
 }
 
 #sorts {
@@ -2210,19 +2219,27 @@ img.img-polaroid {
 
 .splash {
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #fff;
     text-align: center;
-    background-repeat: no-repeat;
+    height: 100vh;
 }
 
 .splash h1 {
-    font-size: 2.0em;
+    font-size: 3.0em;
     text-shadow: none;
-    color: #fff;
     font-weight: 300
 }
 
-.splash h2 {
+.splash h1 strong {
+    font-weight: 300
+}
+
+.splash h1,
+.splash h2,
+.splash h3,
+.splash h4 {
     color: #fff
 }
 
@@ -2239,26 +2256,12 @@ img.img-polaroid {
 }
 
 #home-splash {
+    font-size: 2.0em;
     background-image: url(../img/splash/home.png);
-    background-position: center;
-    height: 100vh
 }
 
 #about-splash {
     background-image: url(../img/splash/about.jpg);
-    height: 75vh
-}
-
-.splash {
-    height: 100vh
-}
-
-.splash h1 strong {
-    font-weight: 300
-}
-
-.splash h1 {
-    font-size: 3.0em;
 }
 
 @media (max-width: 767px) {
