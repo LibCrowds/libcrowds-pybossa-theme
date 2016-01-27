@@ -7,20 +7,26 @@
 {% block content %}
 {% if project %}
 {% include "_flash_messages_floating.html" %}
-<div class="splash" id="project-splash" data-splash="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.splash))}}">
+<div class="splash" data-src="{{ url_for('static', filename='img/splash/category_' + project.category_id|string + '.jpg') }}">
     <div class="vcenter hcenter position-relative" style="height:100%;">
         <div class="container text-center ie-mid-vcenter padding-top-lg">
             <div class="container-padded">
                 <h1>{{ helper.render_project_title(project, upload_method) }}</h1>
                 <h2>{{ overall_progress | round | int }}% complete</h2>
+
+                <!-- Contribute button -->
                 <div class="col-xs-12">
-                <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-circle btn-circle-large btn-circle-progress {% if overall_progress < 100 %}glowing-link{% endif %}" data-progress="{{ overall_progress | round | int }}">
-                    <div class="arc arc-q1"></div>
-                    <div class="arc arc-q2"></div>
-                    <div class="arc arc-q3"></div>
-                    <div class="arc arc-q4"></div>
-                    <p>Contribute<br>Now</p>
-                </a>
+                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}"
+                       data-progress="{{ overall_progress | round | int }}"
+                       class="btn btn-circle btn-circle-large btn-circle-progress {% if overall_progress < 100 %}glowing-link{% endif %}">
+                        <div class="arc arc-q1"></div>
+                        <div class="arc arc-q2"></div>
+                        <div class="arc arc-q3"></div>
+                        <div class="arc arc-q4"></div>
+                        <p>Contribute<br>Now</p>
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
@@ -48,22 +54,12 @@
                 <p class="lead-large">
                     Many thanks to all those who helped us complete this project.
                 </p>
-                <p id="volunteers"></p>
-                <p class="lead-large padding-top-sm">
-                    Special thanks go out to our
-                    <a class="anchor-btn" data-anchor="#top5">most active volunteers</a>
-                    for their extra efforts!
-                </p>
+                <p class="list-volunteers"></p>
             {% else %}
 
-                {% if project.info.video %}
-                    <div class="row text-center padding-bottom padding-top-sm">
-                        <video class="tutorial-video" controls>
-                            <source src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.video))}}" type="video/mp4">
-                            Your browser does not support HTML5 video.
-                        </video>
-                    </div>
-                {% endif %}
+            <div class="tutorial-video" data-src="{{ url_for('static', filename='video/category_' + project.category_id|string + '.mp4') }}">
+
+            </div>
 
                 {% if project.long_description %}
                     <div class="description">
@@ -89,30 +85,7 @@
                     <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> Contribute now</a>
                 </div>
                 <hr class="padding-bottom-xs">
-                <a href="#" data-content="Share on Facebook" class="btn-popover btn btn-facebook"
-                   onclick="popUp=window.open('http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
-                                           'popupwindow', 'scrollbars=yes,width=510,height=620');popUp.focus();return false"
-                                           data-url="http://www.libcrowds.com/blplugin/{{project.short_name}}">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}
-                &text={{project.description}}&tw_p=tweetbutton&url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}"
-                        data-content="Share on Twitter" class="btn-popover btn btn-twitter"
-                        data-url="http://www.libcrowds.com/blplugin/{{project.short_name}}">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a href="#" data-content="Share on Google+" class="btn-popover btn btn-googleplus"
-                onclick="popUp=window.open('https://plus.google.com/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
-                                           'popupwindow', 'scrollbars=yes,width=510,height=725');popUp.focus();return false"
-                                           data-url="http://www.libcrowds.com/blplugin/{{project.short_name}}">
-                    <i class="fa fa-google"></i>
-                </a>
-                <a href="#" data-content="Share on LinkedIn" class="btn-popover btn btn-linkedin"
-                onclick="popUp=window.open('https://www.linkedin.com/cws/share?url=http%3A%2F%2Fwww.libcrowds.com%2Fblplugin%2F{{project.short_name}}',
-                                           'popupwindow', 'scrollbars=yes,width=510,height=520');popUp.focus();return false"
-                                           data-url="http://www.libcrowds.com/blplugin/{{project.short_name}}">
-                    <i class="fa fa-linkedin"></i>
-                </a>
+                {{ helper.render_social_media_buttons("www.libcrowds.com/project/{{ project.short_name }}", "Come and give us a hand with {{ project.name }}!") }}
             </div>
         </div>
     </div>
@@ -122,28 +95,6 @@
 {% else %}
     {{ helper.render_non_existant_project() }}
 {% endif %}
-<script>
-$(function(){
 
-    //Provide usernames
-    if ($('#volunteers').length) {
-        $.ajax({
-            type: 'GET',
-            url: '/api/project/{{project.id}}/allusers',
-            success : function(text) {
-                $('#volunteers').html(commaSeperateJson(text) + ' and all of our anonymous volunteers');
-            }
-        });
-    }
-});
-
-function commaSeperateJson(json) {
-    formatted = JSON.stringify(json).replace('[', '').replace(']', ''); //remove brackets
-    formatted = formatted.split('"').join(''); //remove quotes
-    formatted = formatted.split(',').join(', '); //add a space after commas
-    return formatted;
-}
-</script>
 {{ helper.broken_image() }}
-{{ helper.knob() }}
 {% endblock %}

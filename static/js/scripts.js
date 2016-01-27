@@ -1,5 +1,6 @@
 $(function() {
     loadSplash();
+    loadTutorialVideo();
     stylePolaroids();
     setBodyBackground();
     showHistoryButton();
@@ -13,11 +14,32 @@ $(function() {
 
 /** Load any custom splash images. */
 function loadSplash(){
-    var customSplash = $('.splash').attr('data-splash');
-    if (typeof customSplash !== typeof undefined && customSplash !== false) {
+    var src = $('.splash').attr('data-src');
+    if (typeof src !== typeof undefined && src !== false) {
         $('.splash').css({
-            "background-image": 'url(' + customSplash + ")"
+            "background-image": 'url(' + src + ")"
         });
+
+    // Restyle the page if the splash image couldn't be found.
+    } else {
+         $('.splash').html();
+         $('.splash').removeClass('splash');
+         styleNavigation();
+    }
+}
+
+
+/** Load any custom tutorial videos. */
+function loadTutorialVideo(){
+    var src = $('.tutorial-video').attr('data-src');
+    if (typeof src !== typeof undefined && src !== false) {
+        $('.tutorial-video').html(
+              '<div class="row text-center padding-top-md">'
+            + '  <video controls>'
+            + '    <source src="' + src + '" type="video/mp4">'
+            + '  </video>'
+            + '</div>'
+        );
     }
 }
 
@@ -125,8 +147,10 @@ function animateCounter(elem) {
 }
 
 
-/** Toggle the main navigation between opaque and transparent. */
+/** Set the main navigation bar as opaque and transparent. */
 function styleNavigation() {
+
+    // If there is a splash image, the window is large enough and not scrolled to the top.
     if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
         $('.navbar').removeClass('opaque');
         $('.dropdown-menu').removeClass('opaque');
@@ -236,4 +260,27 @@ function addIEInputLabels() {
             }
         });
     }
+}
+
+/** Update the class .list-volunteers with all of a project's volunteers. */
+function loadProjectVolunteers() {
+    var projectId = $('.list-volunteers').attr('data-project-id');
+    $('.list-volunteers').each(function() {
+        $.ajax({
+            type: 'GET',
+            url: '/api/project/{{project.id}}/allusers',
+            success : function(text) {
+                $('.list-volunteers').html(commaSeperateJson(text) + ' and all of our anonymous volunteers.');
+            }
+        });
+    });
+}
+
+
+/** Return a comma seperated string derived from a JSON formatted string array. */
+function commaSeperateJsonArray(json) {
+    formatted = JSON.stringify(json).replace('[', '').replace(']', '');
+    formatted = formatted.split('"').join('');
+    formatted = formatted.split(',').join(', ');
+    return formatted;
 }

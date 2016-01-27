@@ -2249,15 +2249,15 @@ img.img-polaroid {
     height: 75vh
 }
 
-#project-splash {
+.splash {
     height: 100vh
 }
 
-#project-splash h1 strong {
+.splash h1 strong {
     font-weight: 300
 }
 
-#project-splash h1 {
+.splash h1 {
     font-size: 3.0em;
 }
 
@@ -2277,14 +2277,14 @@ img.img-polaroid {
         margin-bottom: 150px;
         margin-top: 0px
     }
-    #project-splash h1 {
+    .splash h1 {
         font-size: 1.2em;
         white-space: nowrap;
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    #project-splash h2 {
+    .splash h2 {
         display: none
     }
 }
