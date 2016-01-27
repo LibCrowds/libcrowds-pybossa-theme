@@ -19,6 +19,14 @@
             <div class="white-panel inset-shadow-white">
                 {% if projects %}
                     {{project_helper.render_grid_projects(projects, "Contributions", upload_method)}}
+                {% else %}
+                <div class="text-center">
+                    <h2>No contributions</h2>
+                    <p>Here's your chance for a headstart!</p>
+                    <div class="col-xs-12 text-center padding-bottom-md padding-top-sm">
+                        <a class="btn btn-default" href="{{url_for('project.index')}}">Get started</a>
+                    </div>
+                </div>
                 {% endif %}
             </div>
         </div>
