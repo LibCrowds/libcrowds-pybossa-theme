@@ -10,47 +10,50 @@
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-              <h1><strong>{{project.name}}</strong>: Project Details</h1>
-              <hr>
-              <!-- Update form for project thumbnail -->
-              <form method="post" class="form-horizontal upload-img-form padding-top-xs" action="{{ url_for('blplugin.update_project', short_name=project.short_name) }}" enctype="multipart/form-data">
-                  <fieldset>
-                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                        <div class="col-xs-12 text-center">
-                            <div class="center-block img-overlay-container">
-                                 {{ helper.render_project_thumbnail(project, upload_method, class="img-thumbnail", id="project.id") }}
-                                <div class="img-overlay edit-profile-image">
-                                        <i class="fa fa-pencil-square-o fa-3x"></i>
-                                        <span>Edit</span>
-                                </div>
-                            </div>
-                        </div>
-                      {{ render_field(upload_avatar_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
-                      {{ upload_avatar_form.x1 }}
-                      {{ upload_avatar_form.y1 }}
-                      {{ upload_avatar_form.x2 }}
-                      {{ upload_avatar_form.y2 }}
-                      <div id="modal" class="modal fade">
-                        <div class="modal-dialog img-dialog">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <img id="uploadPreview">
-                                </div>
+            {% include "_flash_messages.html" %}
+            <h1><strong>{{project.name}}</strong>: Project Details</h1>
+            <hr>
 
-                                <div class="modal-footer">
-                                    <div class="form-actions text-center">
-                                        <button type="submit" id="upload-btn" name='btn' value="Upload Avatar" class="btn btn-primary btn-lg" >Upload</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </fieldset>
-              </form>
+            <!-- Update form for project thumbnail -->
+            <form method="post" class="form-horizontal upload-img-form padding-top-xs" action="{{ url_for('project.update', short_name=project.short_name) }}" enctype="multipart/form-data">
+                <fieldset>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                      <div class="col-xs-12 text-center">
+                          <div class="center-block img-overlay-container">
+                               {{ helper.render_project_thumbnail(project, upload_method, class="img-thumbnail", id="project.id") }}
+                              <div class="img-overlay edit-profile-image">
+                                      <i class="fa fa-pencil-square-o fa-3x"></i>
+                                      <span>Edit</span>
+                              </div>
+                          </div>
+                      </div>
+                    {{ render_field(upload_avatar_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
+                    {{ upload_avatar_form.x1 }}
+                    {{ upload_avatar_form.y1 }}
+                    {{ upload_avatar_form.x2 }}
+                    {{ upload_avatar_form.y2 }}
+                    <div id="modal" class="modal fade">
+                      <div class="modal-dialog img-dialog">
+                          <div class="modal-content">
+                              <div class="modal-body">
+                                  <img id="uploadPreview">
+                              </div>
+
+                              <div class="modal-footer">
+                                  <div class="form-actions text-center">
+                                      <button type="submit" id="upload-btn" name='btn' value="Upload Avatar" class="btn btn-primary btn-lg" >Upload</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </fieldset>
+            </form>
+
             {{ helper.render_loading("Loading, please wait...") }}
-              <!-- Update form for project data-->
-            <form class="visible-form" method="post" action="{{ url_for('blplugin.update_project', short_name = project.short_name) }}" enctype="multipart/form-data">
+
+            <!-- Update form for project data-->
+            <form class="visible-form" method="post" action="{{ url_for('project.update', short_name = project.short_name) }}" enctype="multipart/form-data">
               <fieldset>
                 {{ form.hidden_tag() }}
 
@@ -69,6 +72,7 @@
                 </div>
               </fieldset>
             </form>
+
         </div>
     </div>
 </div>
