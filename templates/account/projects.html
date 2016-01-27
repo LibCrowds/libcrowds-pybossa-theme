@@ -3,7 +3,7 @@
 {% import "projects/_helpers.html" as helper %}
 
 {% block content %}
-{% if (current_user.is_authenticated() and current_user.pro) or current_user.admin %}
+{% if staff_or_admin }%}
 <div class="container container-main">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">

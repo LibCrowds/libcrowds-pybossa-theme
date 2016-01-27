@@ -9,7 +9,7 @@
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-                {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+                {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated() and not current_user.admin)) %}
                     {{ privacy.render_lock_page() }}
                 {% else %}
                 <h1>Community <small>{{total}} registered users</small><a class="pull-right btn btn-danger" href="{{url_for('leaderboard.index')}}">Leaderboard</a></h1>

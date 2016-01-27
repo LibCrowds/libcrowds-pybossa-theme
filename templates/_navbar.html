@@ -71,7 +71,7 @@
                             <a href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="fa fa-cog"></i> Settings</a>
                         </li>
 
-                        {% if (current_user.is_authenticated() and current_user.pro) or current_user.admin %}
+                        {% if staff_or_admin %}
                         <li class="divider" />
 
                         <li class="nav-link">
