@@ -81,8 +81,13 @@
                     {{ form_helper.render_field(form.name, show_label=True, placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                     {{ form_helper.render_field(form.email_addr, show_label=True, placeholder="Email", class="form-control", type="email" ) }}
                     <div class="form-group pull-right">
+                        <label for="privacy_mode" class="padding-right-sm">Privacy mode</label>
+                        <input data-toggle="toggle" checked id="privacy_mode" name="privacy_mode" type="checkbox">
+                            <span><small>&nbsp;</small></span>
+                    </div>
+                    <div class="form-group pull-right">
                         <label for="subscribed" class="padding-right-sm">Email notifications</label>
-                        <input data-toggle="toggle" checked id="subscribed" name="subscribed" type="checkbox" value="y">
+                        <input data-toggle="toggle" checked id="subscribed" name="subscribed" type="checkbox">
                             <span><small>&nbsp;</small></span>
                     </div>
                     {{ form_helper.render_field(form.locale, class="hidden") }}
