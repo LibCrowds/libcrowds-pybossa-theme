@@ -62,10 +62,12 @@
                 {{ render_field(form.description, class="form-control", placeholder="Short description", show_label=True, required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
                 {{ render_field(form.long_description, rows="13", placeholder="Explain the project (use Markdown)!", class="form-control", required="required", show_label=True) }}
                 {{ render_field(form.category_id, class="form-control", show_label=True) }}
-                {{ render_field(form.allow_anonymous_contributors, class="form-control", show_label=True) }}
-                {{ render_field(form.protect, id='protect') }}
+                {{ form_helper.render_toggle(form.allow_anonymous_contributors, label="Allow anonymous contributors") }}
+
+                {{ form_helper.render_toggle(form.protect, label="Password project") }}
                 <div id='password'>{{ render_field(form.password, class="form-control", show_label=True) }}</div>
                 {{ render_field(form.webhook, class="form-control", show_label=True) }}
+
                 <div role="group" class="pull-right">
                     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
                   <button type="submit" name="btn" value="Save the changes" class="btn btn-danger">Save</button>
