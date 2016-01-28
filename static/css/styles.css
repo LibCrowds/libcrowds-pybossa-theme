@@ -2257,9 +2257,12 @@ img.img-polaroid {
     height: 100%
 }
 
+#home-splash {
+    background-image: url(../img/splash/home.png);
+}
+
 #home-splash h1 {
     font-size: 2.0em;
-    background-image: url(../img/splash/home.png);
 }
 
 #about-splash {
