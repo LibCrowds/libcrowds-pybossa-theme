@@ -1002,7 +1002,7 @@ h1 i, h2 i, h3 i {
 }
 
 .nav{
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .bs-docs-sidenav {
@@ -2443,18 +2443,18 @@ img.img-polaroid {
 
 /* Footer */
 
-footer .container {
+#main-footer .container {
     padding-top: 20px;
     padding-bottom: 20px
 }
 
-footer li {
+#main-footer li {
     text-align: center;
     display: inline-block;
     font-size: 1.5em;
 }
 
-footer li > a {
+#main-footer li > a {
     color: #777;
     transition: color 100ms;
     -webkit-transition: color 100ms;
@@ -2463,12 +2463,12 @@ footer li > a {
     -o-transition: color 100ms
 }
 
-footer li > a:hover {
+#main-footer li > a:hover {
     color: #D00000;
     text-decoration: none
 }
 
-footer {
+#main-footer {
     margin-top: 20px;
     width: 100%;
     bottom: 0;
@@ -2479,7 +2479,7 @@ footer {
     position: relative;
 }
 
-footer ul {
+#main-footer ul {
     color: #777;
     list-style: none;
     padding: 0;
@@ -2489,22 +2489,19 @@ footer ul {
 }
 
 @media (max-width: 767px) {
-    body > footer {
+    #main-footer {
         margin-left: -20px;
         margin-right: -20px;
         text-align: center
     }
-    body > footer .container {
+    #main-footer .container {
         padding-left: 20px;
         padding-right: 20px
     }
-    .footer-links {
-        padding-top: 15px
-    }
-    footer {
+    #main-footer {
         height: 60px
     }
-    footer li {
+    #main-footer li {
         font-size: 2.0em;
         padding-left: 20px;
         padding-right: 20px;
@@ -2512,7 +2509,7 @@ footer ul {
 }
 
 @media (min-width: 768px) {
-    footer {
+    #main-footer {
         height: 100px
     }
 }
