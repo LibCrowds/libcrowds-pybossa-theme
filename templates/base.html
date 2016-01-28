@@ -71,7 +71,7 @@
 
             <!-- Check if staff or admin -->
             {% if current_user.is_authenticated() %}
-                  {% set staff_or_admin = (len(current_user.email_addr.split('@')) == 2 and current_user.email_addr.split('@')[1] == 'bl.uk') or current_user.admin %}
+                  {% set staff_or_admin = (current_user.email_addr.split('@')|length == 2 and current_user.email_addr.split('@')[1] == 'bl.uk') or current_user.admin %}
             {% else %}
                 {% set staff_or_admin = False %}
             {% endif %}
