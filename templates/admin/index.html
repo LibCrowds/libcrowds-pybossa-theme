@@ -15,7 +15,7 @@
             </div>
             <div id="projects" class="col-sm-6 col-md-4">
                 <a href="{{ url_for('account.projects', name=current_user.name) }}" rel="nofollow">
-                <div class="well">
+                <div class="well well-link">
                     <i class="fa fa-folder-open fa-4x"></i>
                     <h3  class="margin-bottom-xs">Projects</h3>
                 </div>
@@ -24,7 +24,7 @@
 
             <div id="featured-projects" class="col-sm-6 col-md-4">
                 <a href="{{url_for('admin.featured')}}" rel="nofollow">
-                <div class="well">
+                <div class="well well-link">
                     <i class="fa fa-star fa-4x"></i>
                     <h3  class="margin-bottom-xs">Featured</h3>
                 </div>
@@ -33,7 +33,7 @@
 
             <div id="categories" class="col-sm-6 col-md-4">
                 <a href="{{url_for('admin.categories')}}" rel="nofollow">
-                <div class="well">
+                <div class="well well-link">
                     <i class="fa fa-check fa-4x"></i>
                     <h3  class="margin-bottom-xs">Categories</h3>
                 </div>
@@ -42,7 +42,7 @@
 
             <div id="users" class="col-sm-6 col-md-4">
                 <a href="{{url_for('admin.users')}}" rel="nofollow">
-                <div class="well">
+                <div class="well well-link">
                     <i class="fa fa-user fa-4x"></i>
                     <h3  class="margin-bottom-xs">Administrators</h3>
                 </div>
@@ -51,7 +51,7 @@
 
             <div id="users-list" class="col-sm-6 col-md-4">
                 <a href="{{url_for('admin.export_users', format='csv')}}" rel="nofollow">
-                    <div class="well">
+                    <div class="well well-link">
                         <i class="fa fa-list fa-4x"></i>
                         <h3  class="margin-bottom-xs">Export Users</h3>
                     </div>
@@ -60,7 +60,7 @@
 
             <div id="dashboard" class="col-sm-6 col-md-4">
                 <a href="{{url_for('rq_dashboard.overview')}}" rel="nofollow">
-                <div class="well">
+                <div class="well well-link">
                     <i class="fa fa-dashboard fa-4x"></i>
                     <h3  class="margin-bottom-xs">Background Jobs</h3>
                 </div>

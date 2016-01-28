@@ -13,24 +13,24 @@
             {{ helper.render_project_title(project, subtitle="Task Settings")}}
             <hr>
             <div class="row">
-                <div id="task_scheduler" class="col-sm-6 well">
+                <div id="task_scheduler" class="col-sm-6 well well-link">
                     <h2><i class="fa fa-filter"></i> Task Scheduler</h2>
                     <p>Change how the tasks are delivered to volunteers</p>
                     <a href="{{url_for('project.task_scheduler', short_name=project.short_name)}}" class="btn btn-danger">Scheduler <i class="fa fa-chevron-right"></i></a>
                 </div>
-                <div id="task_priority" class="col-sm-6 well">
+                <div id="task_priority" class="col-sm-6 well well-link">
                     <h2><i class="fa fa-sort-numeric-asc"></i> Task Priority</h2>
                     <p>Change the priority of the tasks</p>
                     <a href="{{url_for('project.task_priority', short_name=project.short_name)}}" class="btn btn-danger">Priority <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
             <div class="row">
-                <div id="task_delete" class="col-sm-6 well">
+                <div id="task_delete" class="col-sm-6 well well-link">
                     <h2><i class="fa fa-remove"></i> Delete Tasks</h2>
                     <p>Delete all the tasks and associated contributions</p>
                     <a href="{{url_for('project.delete_tasks', short_name=project.short_name)}}" class="btn btn-danger">Delete <i class="fa fa-chevron-right"></i></a>
                 </div>
-                <div id="task_redundancy" class="col-sm-6 well">
+                <div id="task_redundancy" class="col-sm-6 well well-link">
                     <h2><i class="fa fa-repeat"></i> Task Redundancy</h2>
                     <p>Change the redundancy level for the tasks</p>
                     <a href="{{url_for('project.task_n_answers', short_name=project.short_name)}}" class="btn btn-danger">Redundancy <i class="fa fa-chevron-right"></i></a>
