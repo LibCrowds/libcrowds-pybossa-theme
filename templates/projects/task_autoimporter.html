@@ -1,56 +1,53 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-{{ render_local_nav(current_user, "import", project.short_name) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                {{ helper.render_loading(loading_text) }}
-                <h1><strong>{{project.name}}</strong>: Auto Importer Configured</h1>
-                <h3>You currently have the following auto-importer configured</h3>
+{{ helper.render_project_local_nav(project, 'autoimport', current_user, pro_features) }}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            {% include "_flash_messages.html" %}
+            {{ helper.render_loading(loading_text) }}
+            <h1><strong>{{project.name}}</strong>: Auto Importer Configured</h1>
+            <h3>You currently have the following auto-importer configured</h3>
 
-                <hr>
+            <hr>
 
-                {% if importer['type']=='epicollect' %}
-                <p><strong>Type: </strong>Epicollect</p>
-                <p><strong>Epicollect project: </strong>{{ importer['epicollect_project'] }}</p>
-                <p><strong>Epicollect form: </strong>{{ importer['epicollect_form'] }}</p>
-                {% elif importer['type']=='csv'%}
-                <p><strong>Type: </strong>CSV public file</p>
-                <p><a href="{{ importer['csv_url'] }}">Link to your CSV file</a></p>
-                {% elif importer['type']=='gdocs'%}
-                <p><strong>Type: </strong>Google Docs spreadsheet</p>
-                <p><a href="{{ importer['googledocs_url'] }}">Link to your spreadsheet</a></p>
-                {% elif importer['type']=='flickr'%}
-                <p><strong>Type: </strong>Flickr album importer</p>
-                <p><strong>Flickr album ID: </strong>{{ importer['album_id'] }}</p>
-                {% elif importer['type']=='ambiguous'%}
-                <p><strong>Type: </strong>Ambiguous Data importer</p>
-                <p><strong>Project: </strong>{{importer['project_name']}}</p>
-                {% endif %}
+            {% if importer['type']=='epicollect' %}
+            <p><strong>Type: </strong>Epicollect</p>
+            <p><strong>Epicollect project: </strong>{{ importer['epicollect_project'] }}</p>
+            <p><strong>Epicollect form: </strong>{{ importer['epicollect_form'] }}</p>
+            {% elif importer['type']=='csv'%}
+            <p><strong>Type: </strong>CSV public file</p>
+            <p><a href="{{ importer['csv_url'] }}">Link to your CSV file</a></p>
+            {% elif importer['type']=='gdocs'%}
+            <p><strong>Type: </strong>Google Docs spreadsheet</p>
+            <p><a href="{{ importer['googledocs_url'] }}">Link to your spreadsheet</a></p>
+            {% elif importer['type']=='flickr'%}
+            <p><strong>Type: </strong>Flickr album importer</p>
+            <p><strong>Flickr album ID: </strong>{{ importer['album_id'] }}</p>
+            {% elif importer['type']=='ambiguous'%}
+            <p><strong>Type: </strong>Ambiguous Data importer</p>
+            <p><strong>Project: </strong>{{importer['project_name']}}</p>
+            {% endif %}
 
-                <hr>
+            <hr>
 
-                {% if not importer['type']=='ambiguous' %}
-                <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
-                {% else %}
-                <form class="form-horizontal" method="post" action="{{ url_for('data/project.delete_ambiguous_autoimporter', short_name=project.short_name) }}">
-                {% endif %}
-                    <fieldset>
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                        <div class="pull-right form-actions" role="group">
-                            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Back</a>
-                            <input id="submit" type="submit" value="Delete" class="btn btn-danger" />
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
+            {% if not importer['type']=='ambiguous' %}
+            <form class="form-horizontal" method="post" action="{{ url_for('project.delete_autoimporter', short_name=project.short_name) }}">
+            {% else %}
+            <form class="form-horizontal" method="post" action="{{ url_for('data/project.delete_ambiguous_autoimporter', short_name=project.short_name) }}">
+            {% endif %}
+                <fieldset>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    <div class="pull-right form-actions" role="group">
+                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Back</a>
+                        <input id="submit" type="submit" value="Delete" class="btn btn-danger" />
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>

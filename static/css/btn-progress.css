@@ -1,3 +1,7 @@
+.btn-circle-progress {
+    cursor: pointer;
+}
+
 .arc {
     overflow: hidden;
     position: absolute;

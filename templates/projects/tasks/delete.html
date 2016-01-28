@@ -2,10 +2,9 @@
 {% set active_page = "projects" %}
 {% set active_link  = "settings" %}
 {% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-{{ render_local_nav(current_user, "tasks", project.short_name) }}
+{{ helper.render_project_local_nav(project, 'deletetasks', current_user, pro_features) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">

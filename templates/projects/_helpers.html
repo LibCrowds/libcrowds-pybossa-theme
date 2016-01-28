@@ -32,15 +32,23 @@
 
 {% macro render_project_local_nav(project, active_link, current_user, pro_features) -%}
 <ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
-{% if ( current_user.is_authenticated() and current_user.id == project.owner_id and current_user.pro) or current_user.admin %}
+{% if staff_or_admin %}
     <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
-    <li class="nav-link"><a href="{{ url_for('account.projects', name=current_user.name) }}">Open</a></li>
 
     {% if project %}
         <li class="divider"></li>
-        <li class="nav-link"><a href="{{url_for('project.tasks', short_name=active_project)}}">Dashboard</a></li>
+        <li class="nav-link"><a href="{{url_for('project.tasks', short_name=project.short_name)}}">Dashboard</a></li>
+        <li class="nav-link">
+            <a href="#" id="admin-options">Import/Export Options<i class="fa fa-angle-down pull-right"></i></a>
+            <ul class="nav nav-stacked inset-shadow remove-padding-top" id="admin-menu" hidden>
+                <li class="nav-link"><a href="{{url_for('admin.index')}}">Dashboard</a></li>
+                <li class="nav-link"><a href="{{url_for('admin.featured')}}">Featured</a></li>
+                <li class="nav-link"><a href="{{url_for('admin.categories')}}">Categories</a></li>
+            </ul>
+        </li>
+
         <li class="nav-link{% if active_link=="update"%} active{% endif %}">
-            <a href="{{url_for('project.update', short_name=active_project)}}"> Project Details</a>
+            <a href="{{url_for('project.update', short_name=project.short_name)}}"> Project Details</a>
         </li>
 
         {% if pro_features.get('auditlog_enabled') %}
@@ -56,15 +64,15 @@
         {% endif %}
 
         <li class="nav-link{% if active_link=="results"%} active{% endif %}">
-            <a href="{{url_for('project.results', short_name=active_project)}}"> Results</a>
+            <a href="{{url_for('project.results', short_name=project.short_name)}}"> Results</a>
         </li>
-        <li class="nav-link{% if active_link=="statistics"%} active{% endif %}">
-            <a href="{{url_for('project.show_stats', short_name=active_project)}}"> Statistics</a>
+        <li class="nav-link{% if active_link=="stats"%} active{% endif %}">
+            <a href="{{url_for('project.show_stats', short_name=project.short_name)}}"> Statistics</a>
         </li>
     {% endif %}
 {% elif project %}
     <li class="nav-link{% if active_link=="contribute"%} active{% endif %}">
-        <a href="{{url_for('project.presenter', short_name=active_project)}}"> Contribute</a>
+        <a href="{{url_for('project.presenter', short_name=project.short_name)}}"> Contribute</a>
     </li>
 {% endif %}
 </ul>
@@ -90,15 +98,26 @@
 </div>
 {% endmacro %}
 
-{% macro render_project_short_summary(project, upload_method) -%}
-<tr>
-    <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
-    <td style="text-align:center;">{{project.category}}</td>
-    <td style="text-align:center;">{{project.created[8:10]}}-{{project.created[5:7]}}-{{project.created[0:4]}}</td>
-</tr>
+{% macro render_project_short_summary(project) %}
+<div class="row padding-bottom-sm">
+    <div class="col-xs-9">
+        <h4><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></h4>
+    </div>
+    <div class="text-center">
+        <div class="col-xs-3 text-center">
+            {% if project.overall_progress >= 100 %}
+                <span class="fa fa-check-square-o"></span>
+            {% elif project.overall_progress > 0 or project.published %}
+                {{ project.overall_progress | round | int }}% complete
+            {% else %}
+                Unpublished
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endmacro %}
 
-{% macro render_project_admin_featured(project, upload_method) -%}
+{% macro render_project_admin_featured(project, upload_method) %}
 <tr>
     <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
     <td>{{ project.category.name }}</td>
@@ -126,7 +145,7 @@
 {% endmacro %}
 
 {% macro show_project(project, active_cat, current_user, upload_method) %}
-<div class="project-item container container-padded">
+<div class="container-padded">
     <div class="row">
         <div class="col-md-8 col-xs-12">
             <div class="white-panel inset-shadow-white project-desc">
@@ -162,7 +181,7 @@
                         <p>Project complete! <i class="fa fa-smile-o padding-left-xs"></i></p>
                     {% endif %}
                     <div class="row hidden-md hidden-lg text-center">
-                    {% if active_cat != "draft" %}
+                    {% if active_cat != "draft" and project.overall_progress < 100 %}
                         <a class="btn btn-danger margin-top-sm margin-bottom-xs" href="{{ url_for('project.details', short_name = project.short_name) }}">Contribute</a>
                     {% endif %}
                     </div>
@@ -177,23 +196,23 @@
         <div class="col-sm-3 hidden-sm hidden-xs">
             <div class="white-panel inset-shadow-white project-info">
                 <div class="vcenter">
-                    <i class="fa fa-check-square-o fa-2x"></i><div class="padding-left-xs inline-block" id="{{project.short_name}}Complete">Completed: {{ project.overall_progress | round | int }}%</div>
+                    <i class="fa fa-check-square-o fa-2x fa-fw padding-right-xs"></i>Completed: {{ project.overall_progress | round | int }}%
                 </div>
-                <hr class="marc">
+                <hr>
                 <div class="vcenter">
-                    <i class="fa fa-tasks fa-2x"></i><div class="padding-left-xs inline-block tasks-remaining" data-tasks="{{project.n_tasks}}" data-progress="{{ project.overall_progress | round | int }}">Tasks Remaining:</div>
-                </div>
-                <hr class="margin-top-xs margin-bottom-xs">
-                <div class="vcenter">
-                    <i class="fa fa-users fa-2x"></i><div class="padding-left-xs inline-block">Volunteers: {{ project.n_volunteers}}</div>
+                    <i class="fa fa-tasks fa-2x fa-fw padding-right-xs"></i><span class="tasks-remaining" data-tasks="{{project.n_tasks}}" data-progress="{{ project.overall_progress | round | int }}">Tasks Remaining:</span>
                 </div>
                 <hr class="margin-top-xs margin-bottom-xs">
                 <div class="vcenter">
-                    <i class="fa fa-clock-o fa-2x"></i><div class="padding-left-xs inline-block">Last Active: {{ project.last_activity}}</div>
+                    <i class="fa fa-users fa-2x fa-fw padding-right-xs"></i>Volunteers: {{ project.n_volunteers}}
+                </div>
+                <hr class="margin-top-xs margin-bottom-xs">
+                <div class="vcenter">
+                    <i class="fa fa-clock-o fa-2x fa-fw padding-right-xs"></i>Last Active: {{ project.last_activity}}
                 </div>
             </div>
             <div class="text-center padding-top-sm">
-                {% if active_cat != "draft" %}
+                {% if active_cat != "draft" and project.overall_progress < 100 %}
                     <p><a class="btn btn-danger" href="{{ url_for('project.details', short_name = project.short_name) }}">Contribute</a></p>
                 {% endif %}
             </div>
@@ -237,7 +256,7 @@ function imgError(image) {
 </script>
 {% endmacro %}
 
-{% macro render_project_title(project, upload_method, subtitle=None) %}
+{% macro render_project_title(project, subtitle=None) %}
 <h1>
 {% if subtitle %}
 <strong>{{ project.name }}</strong>: {{subtitle}}
@@ -268,26 +287,18 @@ function imgError(image) {
 {% endmacro %}
 
 {% macro render_grid_projects(projects, title, upload_method) %}
-<div class="container container-padded">
-    <div class="row text-center">
-        <h3>{{title}}</h3>
-    </div>
-
-    <div class="col-xs-12">
-        <div class="polaroids">
-        {% for project in projects %}
-            {{ show_project(project, "none", current_user, upload_method) }}
-        {% endfor %}
-        </div>
-    </div>
-</div>
+<h2>{{ title }}</h2>
+<hr>
+{% for project in projects %}
+    {{ render_project_short_summary(project) }}
+{% endfor %}
 {% endmacro %}
 
 {% macro render_loading(text) %}
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12">
         <div id="loading" class="alert alert-info" style="display:none;">
-            <span class="fa fa-refresh spinning"></span> {{text}}
+            <span class="fa fa-refresh fa-spin"></span> {{text}}
         </div>
     </div>
 </div>
@@ -347,6 +358,15 @@ function imgError(image) {
                                'popupwindow', 'scrollbars=yes,width=510,height=520');popUp.focus();return false"
                                data-url="{{ share_url }}">
         <i class="fa fa-linkedin"></i>
+    </a>
+</div>
+{% endmacro %}
+
+{% macro render_non_existant_project() %}
+<div class="container container-main">
+    <h1>Sorry, this project does not exist!</h1>
+    <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
+        <i class="fa fa-home"></i> Go Home
     </a>
 </div>
 {% endmacro %}

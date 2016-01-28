@@ -240,6 +240,14 @@ section.white:after {
     border: 1px solid rgba(255, 255, 255, 1)
 }
 
+.box-shadow-white-top {
+    box-shadow:0 -3px 4px -4px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 -3px 4px -4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 -3px 4px -4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 1)
+}
+
 .box-shadow-grey-bottom {
     box-shadow: 2px 4px 4px -4px rgba(0, 0, 0, .4);
     -webkit-box-shadow: 2px 4px 4px -4px rgba(0, 0, 0, .4);
@@ -495,7 +503,7 @@ hr.extra-margins {
 
 .container-main {
     padding-top: 100px;
-    padding-bottom: 50px
+    padding-bottom: 100px
 }
 
 .white-panel {
@@ -559,12 +567,6 @@ thead {
 }
 
 .well {
-    transition: color 1s, box-shadow 1s;
-    -webkit-transition: color 1s, box-shadow 1s;
-    -moz-transition: color 1s, box-shadow 1s;
-    -ms-transition: color 1s, box-shadow 1s;
-    -o-transition: color 1s, box-shadow 1s;
-    text-align: center;
     background-color: #fff;
     color: #777;
     z-index: 1;
@@ -577,12 +579,22 @@ thead {
     border: 1px solid #fff
 }
 
-.well:hover {
+.well.well-link {
+    text-align: center;
+    height: 190px;
+    transition: color 1s, box-shadow 1s;
+    -webkit-transition: color 1s, box-shadow 1s;
+    -moz-transition: color 1s, box-shadow 1s;
+    -ms-transition: color 1s, box-shadow 1s;
+    -o-transition: color 1s, box-shadow 1s;
+}
+
+.well.well-link:hover {
     box-shadow: inset 0 0px 3px 1px rgba(200, 0, 0, 0.8);
     color: #BA0000
 }
 
-.well .btn-dash {
+.well.well-link .btn-dash {
     position: absolute;
     bottom: 40px;
     right: 40px
@@ -599,7 +611,8 @@ thead {
     display: flex;
     -webkit-flex-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center
+    -webkit-align-items: center;
+    align-items: center
 }
 
 .hcenter {
@@ -655,6 +668,9 @@ thead {
 }
 
 @media (min-width: 992px) {
+    .well {
+        height: 220px;
+    }
     .pull-right-md {
         float: right
     }
@@ -985,6 +1001,10 @@ h1 i, h2 i, h3 i {
     border: 1px solid rgba(145, 145, 145, 0.5)
 }
 
+.nav{
+    font-weight: 400;
+}
+
 .bs-docs-sidenav {
     z-index: 99;
     padding: 0;
@@ -1141,14 +1161,7 @@ h1 i, h2 i, h3 i {
         padding-right: 15px!important
     }
     .bs-docs-sidenav.affix {
-
-    }
-    .bs-docs-sidenav {
-        width: auto;
-        margin-bottom: 20px
-    }
-    .bs-docs-sidenav.affix li:first-child {
-        padding-top: 20px
+        display: none;
     }
 }
 
@@ -1273,6 +1286,7 @@ h1 i, h2 i, h3 i {
 .attribution {
     float: right;
     padding-right: 10px;
+    font-size: 0.85em;
 }
 
 #sorts {
@@ -1876,6 +1890,89 @@ textarea {
 }
 
 
+/* Toggle */
+
+.onoffswitch {
+    position: relative;
+    width: 75px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    color: white;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #DDD;
+    border-radius: 3px;
+    margin-bottom: 0;
+}
+
+.onoffswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 20px;
+    background-color: #357EBD;
+}
+
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 15px;
+    background-color: #ADADAD;
+    text-align: right;
+}
+
+.onoffswitch-switch {
+    display: block;
+    width: 12px;
+    margin: 0px;
+    background-color: #DDD;
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    right: 63px;
+    transition: all 0.3s ease-in 0s;
+    border-radius: 3px;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+
+.onoffswitch-group {
+    display: inline-block;
+}
+
 
 /* Badges */
 
@@ -2127,19 +2224,27 @@ img.img-polaroid {
 
 .splash {
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #fff;
     text-align: center;
-    background-repeat: no-repeat;
+    height: 100vh;
 }
 
 .splash h1 {
-    font-size: 2.0em;
+    font-size: 3.0em;
     text-shadow: none;
-    color: #fff;
+    font-weight: 300;
+}
+
+.splash h1 strong {
     font-weight: 300
 }
 
-.splash h2 {
+.splash h1,
+.splash h2,
+.splash h3,
+.splash h4 {
     color: #fff
 }
 
@@ -2156,26 +2261,15 @@ img.img-polaroid {
 }
 
 #home-splash {
-    background-image: url(../img/splash/crowd.png);
-    background-position: center;
-    height: 100vh
+    background-image: url(../img/splash/home.png);
+}
+
+#home-splash h1 {
+    font-size: 2.0em;
 }
 
 #about-splash {
-    background-image: url(../img/splash/drawer_close_up.jpg);
-    height: 75vh
-}
-
-#project-splash {
-    height: 100vh
-}
-
-#project-splash h1 strong {
-    font-weight: 300
-}
-
-#project-splash h1 {
-    font-size: 3.0em;
+    background-image: url(../img/splash/about.jpg);
 }
 
 @media (max-width: 767px) {
@@ -2194,14 +2288,14 @@ img.img-polaroid {
         margin-bottom: 150px;
         margin-top: 0px
     }
-    #project-splash h1 {
+    .splash h1 {
         font-size: 1.2em;
         white-space: nowrap;
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    #project-splash h2 {
+    .splash h2 {
         display: none
     }
 }
@@ -2228,7 +2322,9 @@ img.img-polaroid {
 
 .meter {
     height: 310px;
-    width: 50px;
+    width: 80%;
+    margin-left:10%;
+    margin-right:10%
     position: relative;
     background: #fff;
     -moz-border-radius-topright: 10px;
@@ -2347,18 +2443,18 @@ img.img-polaroid {
 
 /* Footer */
 
-footer .container {
+#main-footer .container {
     padding-top: 20px;
     padding-bottom: 20px
 }
 
-footer li {
+#main-footer li {
     text-align: center;
     display: inline-block;
     font-size: 1.5em;
 }
 
-footer li > a {
+#main-footer li > a {
     color: #777;
     transition: color 100ms;
     -webkit-transition: color 100ms;
@@ -2367,22 +2463,23 @@ footer li > a {
     -o-transition: color 100ms
 }
 
-footer li > a:hover {
+#main-footer li > a:hover {
     color: #D00000;
     text-decoration: none
 }
 
-footer {
+#main-footer {
     margin-top: 20px;
     width: 100%;
     bottom: 0;
     background-color: #F9F9F9;
     font-family: sans-serif;
     font-size: 12px;
-    z-index: 100
+    z-index: 100;
+    position: relative;
 }
 
-footer ul {
+#main-footer ul {
     color: #777;
     list-style: none;
     padding: 0;
@@ -2392,22 +2489,19 @@ footer ul {
 }
 
 @media (max-width: 767px) {
-    body > footer {
+    #main-footer {
         margin-left: -20px;
         margin-right: -20px;
         text-align: center
     }
-    body > footer .container {
+    #main-footer .container {
         padding-left: 20px;
         padding-right: 20px
     }
-    .footer-links {
-        padding-top: 15px
-    }
-    footer {
+    #main-footer {
         height: 60px
     }
-    footer li {
+    #main-footer li {
         font-size: 2.0em;
         padding-left: 20px;
         padding-right: 20px;
@@ -2415,7 +2509,7 @@ footer ul {
 }
 
 @media (min-width: 768px) {
-    footer {
+    #main-footer {
         height: 100px
     }
 }

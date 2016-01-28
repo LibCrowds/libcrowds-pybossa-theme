@@ -10,15 +10,13 @@
             });
 </script>
 <script src="{{url_for('static', filename='js/pybossa/pybossa.js')}}" type="text/javascript"></script>
-<div class="container-padded">
-    <div class="container container-padded remove-padding-bottom">
-        {% include "_flash_messages.html" %}
-        {% if project.info.results and n_results > 0 %}
-        {{ project.info.results | safe}}
-        {% else %}
-        <h2>No results</h2>
-        <p class="lead">Sorry, we haven't published any results for this project yet.</p>
-        {% endif %}
-    </div>
+<div class="container container-main">
+    {% include "_flash_messages.html" %}
+    {% if project.info.results and n_results > 0 %}
+    {{ project.info.results | safe}}
+    {% else %}
+    <h2>No results</h2>
+    <p class="lead">Sorry, we haven't published any results for this project yet.</p>
+    {% endif %}
 </div>
 {% endblock %}

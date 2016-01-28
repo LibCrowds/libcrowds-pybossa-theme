@@ -1,32 +1,37 @@
 {% extends "base.html" %}
-{% set active_page = "account" %}
+{% set active_page = "profile" %}
 {% import "account/_helpers.html" as helper %}
-{% from "projects/_helpers.html" import render_grid_projects, broken_image %}
-{% import "privacy/locked.html" as privacy %}
+{% import "projects/_helpers.html" as project_helper %}
 
 {% block content %}
-
-{% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
+<span class="set-body-bg" data-bg="pattern-white-wall"></span>
+{% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated() and not current_user.admin)) %}
     {{ privacy.render_lock_page() }}
 {% else %}
-<span class="set-main-bg" data-bg="pattern-white-wall"></span>
-<div class="container-padded remove-padding-bottom">
-    <section class="mid-grey pattern-brushed box-shadow-grey-bottom padding-bottom-md">
-        <div class="container padding-top-lg">
-            {% include "_flash_messages.html" %}
-            <section id="user-data">
-                {{ helper.render_user_profile(user, upload_method, settings=False, private=False) }}
-            </section>
+<div class="container container-main">
+    {% include "_flash_messages.html" %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 text-center">
+            {{ helper.render_user_profile(user, upload_method, private=False) }}
         </div>
-    </section>
 
-    {% if projects %}
-    <section id="contributed-projects" class="white pattern-white-wall inset-shadow-top">
-         {{render_grid_projects(projects, "Contributions", upload_method)}}
-    </section>
-    {% endif %}
+        <div class="col-xs-12 col-sm-8">
+            <div class="white-panel inset-shadow-white">
+                {% if projects %}
+                    {{project_helper.render_grid_projects(projects, "Contributions", upload_method)}}
+                {% else %}
+                <div class="text-center">
+                    <h2>No contributions</h2>
+                    <p>Here's your chance for a headstart!</p>
+                    <div class="text-center padding-bottom-sm padding-top-sm">
+                        <a class="btn btn-danger" href="{{url_for('project.index')}}">View all projects</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endif %}
-
-{{ broken_image() }}
+{{ project_helper.broken_image() }}
 {% endblock %}

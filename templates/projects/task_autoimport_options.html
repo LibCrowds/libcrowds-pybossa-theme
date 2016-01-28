@@ -1,33 +1,30 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-{{ render_local_nav(current_user, "import", project.short_name) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                {{ helper.render_project_title(project, subtitle="Setup task autoimporter")}}
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p class="lead">Use one of the following available
-                        <strong>importers</strong> to setup as the autoimporter</p>
-                    </div>
+{{ helper.render_project_local_nav(project, 'autoimport', current_user, pro_features) }}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            {% include "_flash_messages.html" %}
+            {{ helper.render_project_title(project, subtitle="Auto-import tasks")}}
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="lead">Use one of the following available
+                    <strong>importers</strong> to setup as the autoimporter</p>
                 </div>
-                {% for row in available_importers|batch(2) %}
-                <div class="row">
-                    {% for importer in row %}
-                    <div class="col-sm-6">
-                        {% include importer %}
-                    </div>
-                    {% endfor %}
+            </div>
+            {% for row in available_importers|batch(2) %}
+            <div class="row">
+                {% for importer in row %}
+                <div class="col-sm-6">
+                    {% include importer %}
                 </div>
                 {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>

@@ -6,36 +6,41 @@
 {% from "_formhelpers.html" import render_field %}
 
 {% block content %}
-{{ helper.render_account_local_nav(current_user, active_link) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div id="project-form" class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                <h2 class="text-center">Create a new project</h2>
-                <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
-                    {{ form.hidden_tag() }}
-                    <fieldset>
-                        {{ render_field(form.name, placeholder="Name", class="form-control", required="required", autofocus="autofocus") }}
-                        {{ render_field(form.short_name, placeholder="Abbreviated name for the project", label_text="Short name:", class="form-control", required="required") }}
-                        {{ render_field(form.long_description, class="form-control", rows="13", placeholder="Long description:
+{% if staff_or_admin %}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            {% include "_flash_messages.html" %}
+            <h1>Create a new project</h1>
+            <hr>
 
-                        · Describe the purpose of the project and what it aims to achieve.
-                        · Explain how the project works and how volunteers can help.
-                        · Highlight the reasons why volunteers contributions are essential.
-
-                        You can use Markdown to format your description.", required="required") }}
-                        <div class="pull-right" role="group">
-                            <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">Cancel</a>
-                            <input type="submit" value="Create" class="btn btn-success" />
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
+            <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset>
+                    {{ render_field(form.name, placeholder="Title", label_text="Title", show_label=True, class="form-control", required="required", autofocus="autofocus") }}
+                    {{ render_field(form.short_name, placeholder="Abbreviated title", label_text="Abbreviated name", show_label=True, class="form-control", required="required") }}
+                    {{ render_field(form.long_description, class="form-control", rows="13", label_text="Long description", show_label=True, placeholder="Long description (use Markdown)!", required="required") }}
+                    <div class="pull-right" role="group">
+                        <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">Cancel</a>
+                        <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>
-
+{% else %}
+<div class="container container-main">
+    {% include "_flash_messages.html" %}
+    <div class="col-xs-12">
+        <h1>Unauthorized</h1>
+        <p class="lead">You are not authorized to access the URL requested.</p>
+        <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
+            <i class="fa fa-home"></i> Go Home
+        </a>
+    </div>
+</div>
+{% endif %}
 <script>
     $("span[rel='tooltip']").tooltip();
     $("i[rel='tooltip']").tooltip();

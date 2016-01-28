@@ -1,41 +1,38 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
-{{ render_local_nav(current_user, "tasks", project.short_name) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% if project %}
-                <h1><strong>{{project.name}}</strong>: Publish the project</h1>
-                <div class="alert alert-danger">
-                    <strong>Please read carefully!</strong>
-                    <p>
-                        You are about to publish your project. This CANNOT be undone! Once your project has been published,
-                        people will be able to contribute to it and answers will begin to be stored.
-                    </p>
-                    <p>
-                        That means that your project should be working properly, so please make sure that it does!
-                    </p>
+{{ helper.render_project_local_nav(project, 'publish', current_user, pro_features) }}
+{% if project %}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            <h1><strong>{{project.name}}</strong>: Publish the project</h1>
+            <div class="alert alert-danger">
+                <strong>Please read carefully!</strong>
+                <p>
+                    You are about to publish your project. This CANNOT be undone! Once your project has been published,
+                    people will be able to contribute to it and answers will begin to be stored.
+                </p>
+                <p>
+                    That means that your project should be working properly, so please make sure that it does!
+                </p>
+            </div>
+            <form class="form-horizontal" method="post" action="{{ url_for('project.publish', short_name = project.short_name) }}">
+            <fieldset>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <h3><strong>Are you sure you want to publish this project?</strong></h3>
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-danger" value="Yes, publish it"/>
+                    <a href="{{ url_for('project.settings', short_name = project.short_name) }}" class="btn btn-large btn-default">No, do not publish it!</a>
                 </div>
-                <form class="form-horizontal" method="post" action="{{ url_for('project.publish', short_name = project.short_name) }}">
-                <fieldset>
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                    <h3><strong>Are you sure you want to publish this project?</strong></h3>
-                    <div class="form-actions">
-                        <input type="submit" class="btn btn-danger" value="Yes, publish it"/>
-                        <a href="{{ url_for('project.settings', short_name = project.short_name) }}" class="btn btn-large btn-default">No, do not publish it!</a>
-                    </div>
-                </div>
-                {% else %}
-                <h1>Sorry! This project does not exist.</h1>
-                {% endif %}
             </div>
         </div>
     </div>
 </div>
+{% else %}
+    {{ helper.render_non_existant_project() }}
+{% endif %}
 {{ helper.broken_image() }}
 {% endblock %}

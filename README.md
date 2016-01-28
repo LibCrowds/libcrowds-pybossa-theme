@@ -1,5 +1,9 @@
 # libcrowds-pybossa-theme
 
+[![Documentation Status](https://readthedocs.org/projects/libcrowds-pybossa-theme/badge/?version=latest)
+](http://libcrowds-pybossa-theme.readthedocs.org/en/latest/?badge=latest)
+
+
 A [Pybossa](https://github.com/PyBossa/pybossa) theme for the [LibCrowds](http://www.libcrowds.com) crowdsourcing platform.
 
 
@@ -12,20 +16,11 @@ folder and add the following setting to your PyBossa configuration file:
 THEME = {your-custom-theme}
 ```
 
-## Features
 
-The theme incorporates all features up to until [PyBossa](https://github.com/PyBossa/pybossa) v1.4.0.
+## Documentation
 
-
-## Plugins
-
-The theme supports a number of optional plugins, if installed these are integrated as follows:
-
-* [pybossa-gravatar](https://github.com/alexandermendes/pybossa-gravatar):
-An **Import Gravatar** button will appear on user settings pages.
-
-* [libcrowds-statistics](https://github.com/alexandermendes/pybossa-gravatar):
-The **Statistics** link on the main navigation bar will now point to the updated statistics page.
+See the [libcrowds-pybossa-theme documentation](http://libcrowds-pybossa-theme.readthedocs.org/en/latest/)
+for more details about the theme's features.
 
 
 ## Contributing

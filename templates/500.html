@@ -2,17 +2,15 @@
 {% set active_page = "support" %}
 
 {% block content %}
-<div class="container-padded">
-    <div class="container container-padded">
-        {% include "_flash_messages.html" %}
-        <div class="col-md-12">
-            <h1>Ooops, Something's broken</h1>
-            <p class="lead">It looks as though there's a problem with our system.</p>
-            <p class="lead">We will try to fix it as soon as we can.</p>
-            <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
-                <i class="fa fa-home"></i> Go Home
-            </a>
-        </div>
+<div class="container container-main">
+    {% include "_flash_messages.html" %}
+    <div class="col-xs-12">
+        <h1>Ooops, Something's broken</h1>
+        <p class="lead">It looks as though there's a problem with our system.</p>
+        <p class="lead">We will try to fix it as soon as we can.</p>
+        <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
+            <i class="fa fa-home"></i> Go Home
+        </a>
     </div>
 </div>
 {% endblock %}

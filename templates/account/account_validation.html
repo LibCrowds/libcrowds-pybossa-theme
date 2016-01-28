@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<span class="set-main-bg" data-bg="pattern-white-wall"></span>
-<div class="container-padded">
-    <div class="container container-padded">
+<span class="set-body-bg" data-bg="pattern-white-wall"></span>
+<div class="container container-main">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
             {% include "_flash_messages.html" %}
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="white-panel inset-shadow-white">
@@ -18,6 +17,5 @@
             </div>
         </div>
     </div>
-  </div>
 </div>
 {% endblock %}

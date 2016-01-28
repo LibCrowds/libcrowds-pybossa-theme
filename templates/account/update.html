@@ -6,119 +6,112 @@
 {% import "_formhelpers.html" as form_helper %}
 
 {% block content %}
-<span class="set-main-bg" data-bg="pattern-white-wall"></span>
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
-<link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+<link href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" rel="stylesheet" type="text/css" />
+<span class="set-body-bg" data-bg="pattern-white-wall"></span>
+<div class="container container-main">
+    {% include "_flash_messages.html" %}
+    <div class="row">
 
-<div class="container-padded remove-padding-bottom">
-    <section class="mid-grey pattern-brushed padding-bottom-sm">
-        <div class="container padding-top-lg">
-            <div class="row margin-bottom-md">
-                <div class="col-sm-6 col-xs-12 text-center">
-                    <form method="post" role="form" class="upload-img-form" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
-                        <fieldset>
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                            <div class="center-block img-overlay-container">
-                                <div class="shadow shadow-circle">
-                                    {{ helper.render_user_thumbnail(current_user, upload_method, class="img-circle profile-image img-responsive center-block", size='200x200')}}
-                                </div>
-                                <div class="img-overlay img-circle edit-profile-image">
-                                    <i class="fa fa-pencil-square-o fa-3x"></i>
-                                    <span>Edit</span>
-                                </div>
+        <!-- Avatar upload -->
+        <div class="col-xs-12 col-sm-4 text-center">
+            <form method="post" role="form" class="upload-img-form" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
+                <fieldset>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    <div class="center-block img-overlay-container">
+                        <div class="shadow shadow-circle">
+                            {{ helper.render_user_avatar(current_user, upload_method, width="200")}}
+                        </div>
+                        <div class="img-overlay img-circle edit-profile-image">
+                            <i class="fa fa-pencil-square-o fa-3x"></i>
+                            <span>Edit</span>
+                        </div>
+                    </div>
+                    <br>
+                    <h1 class="inset-text-grey">{{current_user.fullname}}</h1>
+                    {{ project_helper.render_loading("Loading, please wait...") }}
+                    {%if not current_user.info.avatar %}
+                        <div class="row">
+                            <div class="col-xs-6 col-xs-offset-3 alert alert-info">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                Click above to choose your avatar.
                             </div>
-                            <br>
-                            <h1 class="inset-text-grey">{{current_user.fullname}}</h1>
-                            {% include "_flash_messages.html" %}
-                            {{ project_helper.render_loading("Loading, please wait...") }}
-                            {%if not current_user.info.avatar%}
-                            <div class="row">
-                                <div class="col-xs-6 col-xs-offset-3 alert alert-info">
-                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                    Click above to choose your avatar.
+                        </div>
+                    {% endif %}
+
+                    <!-- pybossa-gravatar -->
+                    {% if "pybossa_gravatar" in plugins %}
+                        <a href="{{url_for('set_gravatar', name=current_user.name)}}" class="btn btn-default">
+                            Import Gravatar
+                        </a>
+                    {% endif %}
+
+                    {{ form_helper.render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
+                    {{ upload_form.x1 }}
+                    {{ upload_form.y1 }}
+                    {{ upload_form.x2 }}
+                    {{ upload_form.y2 }}
+                    <div id="modal" class="modal fade">
+                        <div class="modal-dialog img-dialog img-circle">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <img id="uploadPreview">
                                 </div>
-                            </div>
-                            {% endif %}
 
-                            <!-- pybossa-gravatar -->
-                            {% if "pybossa_gravatar" in plugins %}
-                                <a href="{{url_for('set_gravatar', name=current_user.name)}}" class="btn btn-default">
-                                    Import Gravatar
-                                </a>
-                            {% endif %}
-
-                            {{ form_helper.render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
-                            {{ upload_form.x1 }}
-                            {{ upload_form.y1 }}
-                            {{ upload_form.x2 }}
-                            {{ upload_form.y2 }}
-                            <div id="modal" class="modal fade">
-                                <div class="modal-dialog img-dialog img-circle">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <img id="uploadPreview">
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <div class="form-actions text-center">
-                                                <button type="submit" id="upload-btn" name='btn' value="Upload" class="btn btn-primary btn-lg" >Upload</button>
-                                            </div>
-                                        </div>
+                                <div class="modal-footer">
+                                    <div class="form-actions text-center">
+                                        <button type="submit" id="upload-btn" name='btn' value="Upload" class="btn btn-primary btn-lg" >Upload</button>
                                     </div>
                                 </div>
                             </div>
-                        </fieldset>
-                    </form>
-                </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
 
-                <div class="col-sm-6 col-xs-12 white-panel inset-shadow">
+        <!-- Update details -->
+        <div class="col-sm-8 col-xs-12">
+            <div class="white-panel inset-shadow-white">
+                <form method="post" role="form" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                    <fieldset>
+                        <h2>Update your profile</h2>
+                        {{ form.id }}
+                        {{ form.hidden_tag() }}
+                        {{ form_helper.render_field(form.fullname, show_label=True, placeholder="Full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                        {{ form_helper.render_field(form.name, show_label=True, placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                        {{ form_helper.render_field(form.email_addr, show_label=True, placeholder="Email", class="form-control", type="email" ) }}
+                        {{ form_helper.render_toggle(form.subscribed, label="Email newsletter") }}
+                        {{ form_helper.render_toggle(form.privacy_mode, label="Privacy mode") }}
 
-                    <form method="post" role="form" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
-                        <fieldset>
-                            <h2>Update your profile</h2>
-                            {{ form.id }}
-                            {{ form.hidden_tag() }}
-                            {{ form_helper.render_field(form.fullname, show_label=True, placeholder="Full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
-                            {{ form_helper.render_field(form.name, show_label=True, placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
-                            {{ form_helper.render_field(form.email_addr, show_label=True, placeholder="Email", class="form-control", type="email" ) }}
-                            <div class="form-group pull-right">
-                                <label for="subscribed" class="padding-right-sm">Email notifications</label>
-                                <input data-toggle="toggle" checked id="subscribed" name="subscribed" type="checkbox" value="y">
-                                    <span><small>&nbsp;</small></span>
-                            </div>
-                            {{ form_helper.render_field(form.locale, class="hidden") }}
-                            <div class="pull-right form-actions" role="group">
-                                <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">Cancel</a>
-                                <button type="submit" name="btn" value="Profile" class="btn btn-success" >Save</button>
-                            </div>
-                        </fieldset>
-                    </form>
-                    {% if show_passwd_form %}
-                    <hr class="extra-margins">
-                    <h2 {% if password_form.errors %} name="password" {%endif%}>Change your Password</h2>
-                    <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
-                        <fieldset>
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                            {{ password_form.id }}
-                            {{ password_form.hidden_tag() }}
-                            {{ form_helper.render_field(password_form.current_password, placeholder="Current password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                            {{ form_helper.render_field(password_form.new_password, placeholder="New password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                            {{ form_helper.render_field(password_form.confirm, placeholder="Confirm new password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                            <div class="pull-right form-actions" role="group">
-                                <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">Cancel</a>
-                                <button type="submit" name="btn" value="Password" class="btn btn-success" >Save</button>
-                            </div>
-                        </fieldset>
-                    </form>
-                    {% endif %}
-                </div>
+                        {{ form_helper.render_field(form.locale, class="hidden") }}
+                        <div class="pull-right form-actions" role="group">
+                            <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">Cancel</a>
+                            <button type="submit" name="btn" value="Profile" class="btn btn-success" >Save</button>
+                        </div>
+                    </fieldset>
+                </form>
+                {% if show_passwd_form %}
+                <hr class="extra-margins">
+                <h2 {% if password_form.errors %} name="password" {%endif%}>Change your Password</h2>
+                <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                    <fieldset>
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        {{ password_form.id }}
+                        {{ password_form.hidden_tag() }}
+                        {{ form_helper.render_field(password_form.current_password, show_label=True, placeholder="Current password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                        {{ form_helper.render_field(password_form.new_password, show_label=True, placeholder="New password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                        {{ form_helper.render_field(password_form.confirm, show_label=True, placeholder="Confirm new password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                        <div class="pull-right form-actions" role="group">
+                            <a href="{{ url_for('account.update_profile', name=current_user.name) }}" class="btn btn-default">Cancel</a>
+                            <button type="submit" name="btn" value="Password" class="btn btn-success" >Save</button>
+                        </div>
+                    </fieldset>
+                </form>
+                {% endif %}
             </div>
         </div>
-    </section>
-</div>
+    </div>
 <script src="{{url_for('static', filename='js/image_crop.js')}}" type="text/javascript"></script>
-
 {{ project_helper.broken_image() }}
 {% endblock %}

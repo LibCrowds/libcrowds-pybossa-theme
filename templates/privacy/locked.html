@@ -1,5 +1,12 @@
 {% macro render_lock_page() %}
-<p id="enforce_privacy" style="font-size:36px; line-height:200px; text-align:center;">
-    <i class="fa fa-lock"></i> Page locked! Privacy mode enabled
-</p>
+<div class="container container-main">
+    {% include "_flash_messages.html" %}
+    <div class="col-xs-12">
+        <h1>Page locked!</h1>
+        <p class="lead">Privacy mode enabled.</p>
+        <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
+            <i class="fa fa-home"></i> Go Home
+        </a>
+    </div>
+</div>
 {% endmacro %}

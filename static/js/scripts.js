@@ -1,5 +1,4 @@
 $(function() {
-    loadSplash();
     stylePolaroids();
     setBodyBackground();
     showHistoryButton();
@@ -9,17 +8,6 @@ $(function() {
     styleNavigation();
     addIEInputLabels();
 });
-
-
-/** Load any custom splash images. */
-function loadSplash(){
-    var customSplash = $('.splash').attr('data-splash');
-    if (typeof customSplash !== typeof undefined && customSplash !== false) {
-        $('.splash').css({
-            "background-image": 'url(' + customSplash + ")"
-        });
-    }
-}
 
 
 /** Make any glowing links glow periodically. */
@@ -40,8 +28,8 @@ function stylePolaroids(){
 
 /** Add background class body allowing backgrounds to be set from templates. */
 function setBodyBackground(){
-    if ($(".set-main-bg").length > 0) {
-        $('body').addClass($(".set-main-bg").attr('data-bg'));
+    if ($(".set-body-bg").length > 0) {
+        $('body').addClass($(".set-body-bg").attr('data-bg'));
     }
 }
 
@@ -125,8 +113,10 @@ function animateCounter(elem) {
 }
 
 
-/** Toggle the main navigation between opaque and transparent. */
+/** Set the main navigation bar as opaque and transparent. */
 function styleNavigation() {
+
+    // If there is a splash image, the window is large enough and not scrolled to the top.
     if ($(".splash").length > 0 && $(window).width() > 991 && $(this).scrollTop() < 100) {
         $('.navbar').removeClass('opaque');
         $('.dropdown-menu').removeClass('opaque');

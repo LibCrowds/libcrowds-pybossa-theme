@@ -2,40 +2,37 @@
 {% set active_page = "projects" %}
 {% set active_project  = project.short_name %}
 {% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 {% from "_formhelpers.html" import render_field %}
 
 {% block content %}
 {{ helper.render_loading(loading_text) }}
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-project-key="{{ config.get('DROPBOX_project_KEY') }}"></script>
-{{ render_local_nav(current_user, "tasks", project.short_name) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                {{ helper.render_loading(loading_text) }}
-                <h1><strong>{{project.name}}</strong>: Import tasks</h1>
-                <hr>
-                <h3>From Dropbox</h3>
-                <div id="dropbox-chooser">
+{{ helper.render_project_local_nav(project, 'dropboximporter', current_user, pro_features) }}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            {% include "_flash_messages.html" %}
+            {{ helper.render_loading(loading_text) }}
+            <h1><strong>{{project.name}}</strong>: Import tasks</h1>
+            <hr>
+            <h3>From Dropbox</h3>
+            <div id="dropbox-chooser">
 
-                </div>
-                <br>
-                {% if form %}
-                <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
-                    <fieldset>
-                        {{ form.hidden_tag() }}
-                        <p id="message" style="display: none;">You are about to import <span id="numFiles"></span> files.</p>
-                        {{ form.files(style="display: none;") }}
-                        <div class="pull-right" role="group">
-                            <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
-                            <input id="submit" type="submit" value="Import" class="btn btn-danger" />
-                        </div>
-                    </fieldset>
-                </form>
-               {% endif %}
             </div>
+            <br>
+            {% if form %}
+            <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+                <fieldset>
+                    {{ form.hidden_tag() }}
+                    <p id="message" style="display: none;">You are about to import <span id="numFiles"></span> files.</p>
+                    {{ form.files(style="display: none;") }}
+                    <div class="pull-right" role="group">
+                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
+                        <input id="submit" type="submit" value="Import" class="btn btn-danger" />
+                    </div>
+                </fieldset>
+            </form>
+           {% endif %}
         </div>
     </div>
 </div>

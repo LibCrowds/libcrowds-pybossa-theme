@@ -1,11 +1,10 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 {% from "_formhelpers.html" import render_field %}
 
 {% block content %}
-{{ render_local_nav(current_user, "blog") }}
+{{ helper.render_project_local_nav(project, 'blog', current_user, pro_features) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">

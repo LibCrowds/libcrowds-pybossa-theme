@@ -1,58 +1,55 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
 {% import "projects/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-{{ render_local_nav(current_user, "tasks", project.short_name) }}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-9 col-sm-offset-3">
-                {% include "_flash_messages.html" %}
-                {{ helper.render_loading(loading_text) }}
-                <h1><strong>{{project.name}}</strong>: Import tasks</h1>
-                <hr>
-                <div class="row vcenter hcenter">
-                    <div class="col-xs-10">
-                        <h3>From Flickr
-                    </div>
-                    <div class="col-xs-2">
-                        <div id="revoke" style="display:none;">
-                            <a href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right">Revoke access</a>
-                        </div>
+{{ helper.render_project_local_nav(project, 'flickrimporter', current_user, pro_features) }}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            {% include "_flash_messages.html" %}
+            {{ helper.render_loading(loading_text) }}
+            <h1><strong>{{project.name}}</strong>: Import tasks</h1>
+            <hr>
+            <div class="row vcenter hcenter">
+                <div class="col-xs-10">
+                    <h3>From Flickr
+                </div>
+                <div class="col-xs-2">
+                    <div id="revoke" style="display:none;">
+                        <a href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right">Revoke access</a>
                     </div>
                 </div>
-
-                </h3>
-                <div id="grant">
-                    <p> To select an album click below to grant access to your Flickr account</p></br>
-
-                    <p>
-                        <a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-success">Log in to Flickr</a>
-                    </p>
-                </div>
-                <h3>Select an album, then click import:</h3>
-                <div class="row">
-                    <ul id="albums">
-                    </ul>
-                </div>
-                <br>
-                {% if form %}
-                <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
-                    <fieldset>
-                        {{ form.hidden_tag() }}
-                        <span class="help-block"> Alteratively, you can manually provide the ID of a Flickr album</span>
-                        {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album", required="required", autofocus="autofocus") }}
-                        <div class="pull-right" role="group">
-                            <a href="{{url_for('project.import_task', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
-                            <input id="import" type="submit" value="Import" class="btn btn-danger" />
-                        </div>
-                     </fieldset>
-                 </form>
-                 {% endif %}
             </div>
+
+            </h3>
+            <div id="grant">
+                <p> To select an album click below to grant access to your Flickr account</p></br>
+
+                <p>
+                    <a href="{{ url_for('flickr.login', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-success">Log in to Flickr</a>
+                </p>
+            </div>
+            <h3>Select an album, then click import:</h3>
+            <div class="row">
+                <ul id="albums">
+                </ul>
+            </div>
+            <br>
+            {% if form %}
+            <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+                <fieldset>
+                    {{ form.hidden_tag() }}
+                    <span class="help-block"> Alteratively, you can manually provide the ID of a Flickr album</span>
+                    {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album", required="required", autofocus="autofocus") }}
+                    <div class="pull-right" role="group">
+                        <a href="{{url_for('project.import_task', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
+                        <input id="import" type="submit" value="Import" class="btn btn-danger" />
+                    </div>
+                 </fieldset>
+             </form>
+             {% endif %}
         </div>
     </div>
 </div>
@@ -67,7 +64,7 @@
             if (albums.hasOwnProperty('length') && albums.length > 0) {
                 $('#revoke').show();
                 $('#grant').hide();
-                $('#albums-container').prepend('<p>'+"{{ _('Select one of your albums:') }}"+'</p>');
+                $('#albums-container').prepend('<p>'+"Select one of your albums:"+'</p>');
                 albums.forEach(function(album){
                     var albumElement = $('<li class="col-md-3 col-sm-4 col-xs-12 text-center-xs flickr-thumbnails"><h4><strong>'+album.title+'</strong></h4><img src="'+album.thumbnail_url+'" class="grey-border" alt="Flickr album thumbnail"><p class="small">'+album.photos+' photos</p><button id="'+album.id+'" class="btn btn-success btn-album">Select</button></li>');
                     $('#albums').append(albumElement);
