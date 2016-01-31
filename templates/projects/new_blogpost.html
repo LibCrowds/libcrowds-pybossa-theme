@@ -4,7 +4,7 @@
 {% from "_formhelpers.html" import render_field %}
 
 {% block content %}
-{{ helper.render_project_local_nav(project, 'blog', current_user, pro_features) }}
+{{ helper.render_project_local_nav(project, 'blog', current_user, pro_features, staff_or_admin) }}
 <div class="container-padded">
     <div class="container container-padded">
         <div class="row">

@@ -30,7 +30,7 @@
 </div>
 {% endmacro %}
 
-{% macro render_project_local_nav(project, active_link, current_user, pro_features) -%}
+{% macro render_project_local_nav(project, active_link, current_user, pro_features, staff_or_admin) -%}
 <ul data-spy="affix" data-offset-top="200px" class="nav nav-list bs-docs-sidenav affix-top">
 {% if staff_or_admin %}
     <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>

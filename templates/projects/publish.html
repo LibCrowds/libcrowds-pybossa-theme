@@ -3,7 +3,7 @@
 {% import "projects/_helpers.html" as helper %}
 
 {% block content %}
-{{ helper.render_project_local_nav(project, 'publish', current_user, pro_features) }}
+{{ helper.render_project_local_nav(project, 'publish', current_user, pro_features, staff_or_admin) }}
 {% if project %}
 <div class="container container-main">
     <div class="row">

@@ -6,7 +6,7 @@
 
 {% block content %}
 <span class="set-body-bg" data-bg="pattern-white-wall"></span>
-{{ helper.render_project_local_nav(project, 'export', current_user, pro_features) }}
+{{ helper.render_project_local_nav(project, 'export', current_user, pro_features, staff_or_admin) }}
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
