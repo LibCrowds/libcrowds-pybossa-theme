@@ -176,19 +176,6 @@ $('.anchor-btn').click(function(evt) {
 });
 
 
-/** Toggle slide of admin options menu */
-$('#admin-options').click(function(evt) {
-    evt.preventDefault();
-    var current = $(this).attr("class");
-    $('.bs-docs-sidenav .nav-link > a').removeClass('active');
-    $(this).attr("class", current);
-    $(this).toggleClass("active");
-    $('#project-menu').slideUp();
-    $('#web-service-menu').slideUp();
-    $('#admin-menu').slideToggle("fast", function() {});
-});
-
-
 /** Toggle slide of project options menu */
 $('#project-options').click(function(evt) {
     evt.preventDefault();
@@ -196,7 +183,6 @@ $('#project-options').click(function(evt) {
     $('.bs-docs-sidenav .nav-link > a').removeClass('active');
     $(this).attr("class", current);
     $(this).toggleClass("active");
-    $('#admin-menu').slideUp();
     $('#project-menu').slideToggle("fast", function() {});
 });
 
