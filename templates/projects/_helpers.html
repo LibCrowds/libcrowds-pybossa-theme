@@ -41,10 +41,10 @@
         <li class="nav-link">
             <a href="#" id="import-export-menu">Import/Export Options<i class="fa fa-angle-down pull-right"></i></a>
             <ul class="nav nav-stacked inset-shadow remove-padding-top" id="import-export-menu" hidden>
-                <li class="nav-link"><a href="{{url_for('project.import')}}">Import</a></li>
-                <li class="nav-link"><a href="{{url_for('project.export')}}">Export</a></li>
-                {% if pro_features.get('auditlog_enabled') %}
-                    <li class="nav-link"><a href="{{url_for('project.autoimporter')}}">Auto-import</a></li>
+                <li class="nav-link"><a href="{{url_for('project.import_task', short_name=project.short_name)}}">Import</a></li>
+                <li class="nav-link"><a href="{{url_for('project.export_to', short_name=project.short_name)}}">Export</a></li>
+                {% if pro_features.get('autoimporter') %}
+                    <li class="nav-link"><a href="{{url_for('project.setup_autoimporter, short_name=project.short_name')}}">Auto-import</a></li>
                 {% endif %}
             </ul>
         </li>
