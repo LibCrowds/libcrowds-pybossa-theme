@@ -2451,7 +2451,7 @@ img.img-polaroid {
     font-family: sans-serif;
     font-size: 12px;
     z-index: 100;
-    position: absolute;
+    position: relative;
 }
 
 #main-footer .container {
