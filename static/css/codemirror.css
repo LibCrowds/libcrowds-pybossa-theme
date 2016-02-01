@@ -10,6 +10,7 @@
     padding-left: 30px;
     border-bottom: 1px solid #DDD;
     position: fixed;
+    padding-top: 11px;
     width: 100%;
     z-index: 5
 }
