@@ -7,12 +7,17 @@ A `PyBossa`_ theme for the `LibCrowds`_ crowdsourcing platform.
 Installation
 ============
 
-Clone this repository into your `PyBossa themes`_ folder and add the following
-setting to your main PyBossa configuration file:
+Clone this repository recursively into your `PyBossa themes`_ folder:
 
 .. code-block:: python
 
-    THEME = {your-custom-theme}
+    git clone --recursive https://github.com/LibCrowds/libcrowds-pybossa-theme
+
+Then add the following setting to your main PyBossa configuration file:
+
+.. code-block:: python
+
+    THEME = "libcrowds-pybossa-theme"
 
 
 Features
