@@ -40,6 +40,8 @@ If installed, the plugins are integrated as follows:
 * `libcrowds-statistics`_: The **Statistics** link on the main navigation bar will now
   point to an updated global statistics page.
 
+* `libcrowds-data`_: A link to the **Data** page will appear on the main navigation bar.
+
 * `pybossa-analyst`_: A **Rules** link will appear on project settings pages.
 
 * `pybossa-gravatar`_: An **Import Gravatar** button will appear on user settings pages.
@@ -106,6 +108,7 @@ full range of admin features.
 .. _static/video: https://github.com/LibCrowds/libcrowds-pybossa-theme/tree/master/static/video
 .. _js/portal.js: https://github.com/LibCrowds/libcrowds-pybossa-theme/tree/master/static/js/portal.js
 
-.. _pybossa-gravatar: https://github.com/alexandermendes/pybossa-gravatar
 .. _libcrowds-statistics: https://github.com/LibCrowds/libcrowds-statistics
+.. _libcrowds-data: https://github.com/LibCrowds/libcrowds-data
+.. _pybossa-gravatar: https://github.com/alexandermendes/pybossa-gravatar
 .. _pybossa-analyst: https://github.com/alexandermendes/pybossa-analyst
