@@ -94,12 +94,10 @@
             </div>
             {% endif %}
         </div>
-
-        <footer id="main-footer">
-        {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
-        </footer>
-
     </div>
+    <footer id="main-footer">
+        {% include ['custom/_footer.html', '_footer.html'] ignore missing %}
+    </footer>
 
     <!-- Le javascript -->
     <script type="text/javascript" src="{{url_for('static', filename='js/scripts.min.js')}}"></script>
