@@ -12,7 +12,7 @@
         <div class="col-sm-9 col-sm-offset-3">
             {% include "_flash_messages.html" %}
             <div class="col-xs-12 padding-bottom-xs">
-                <h1 class="inset-text-grey"><strong>Project Options</strong></h1>
+                <h1 class="inset-text-grey"><strong>Project Dashboard</strong></h1>
             </div>
 
             {% if (current_user.is_authenticated() and project.owner_id == current_user.id) or current_user.admin %}
@@ -34,6 +34,7 @@
                 </a>
             </div>
 
+            {% if pro_features.get('autoimporter_enabled') %}
             <div id="autoimport_tasks" class="col-sm-6 col-md-4">
                 <a href="{{url_for('project.setup_autoimporter', short_name=project.short_name)}}" rel="nofollow">
                     <div class="well well-link">
@@ -42,6 +43,7 @@
                     </div>
                 </a>
             </div>
+            {% endif %}
 
             <div id="task_presenter" class="col-sm-6 col-md-4">
                 <a href="{{url_for('project.task_presenter_editor', short_name=project.short_name)}}" rel="nofollow">
@@ -115,6 +117,7 @@
                 </a>
             </div>
 
+            {% if pro_features.get('auditlog_enabled') %}
             <div id="audit_logs" class="col-sm-6 col-md-4">
                 <a href="{{url_for('project.auditlog', short_name=project.short_name)}}" rel="nofollow">
                     <div class="well well-link">
@@ -123,6 +126,18 @@
                     </div>
                 </a>
             </div>
+            {% endif %}
+
+            {% if pro_features.get('webhooks_enabled') %}
+            <div id="audit_logs" class="col-sm-6 col-md-4">
+                <a href="{{url_for('project.webhook_handler', short_name=project.short_name)}}" rel="nofollow">
+                    <div class="well well-link">
+                        <span class="fa fa-link fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Webhooks</h3>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
 
             <div id="publish" class="col-sm-6 col-md-4">
                 <a href="{{url_for('project.publish', short_name=project.short_name)}}" rel="nofollow">
