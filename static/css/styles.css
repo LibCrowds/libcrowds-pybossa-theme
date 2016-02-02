@@ -1263,7 +1263,6 @@ h1 i, h2 i, h3 i {
     height: auto;
     min-height: 100%;
     position: relative;
-    padding-bottom: 100px;
 }
 
 .glowing-link {
