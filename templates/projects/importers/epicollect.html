@@ -22,7 +22,7 @@
                     {{ render_field(form.epicollect_form, class_="input-block-level form-control", placeholder="The name of the project\'s form", required="required") }}
                     <div class="pull-right" role="group">
                         <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
-                        <input type="import" value="Import" class="btn btn-danger" />
+                        <input id="submit" type="submit" value="Import" class="btn btn-danger" />
                     </div>
                 </fieldset>
             </form>
