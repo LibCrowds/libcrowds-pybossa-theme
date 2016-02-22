@@ -66,13 +66,13 @@
                     {% for p in plugins.values() %}
 						{% if p.name %}
                         <li>{% if p.website and p.version %}
-								<a href="{{ p.website }}"><strong>{{ p.name }}</a>, (v{{ p.version }})</strong>
+								<a href="{{ p.website }}"><strong>{{ p.name }}</a> (v{{ p.version }})</strong>
 							{% elif p.website %}
 								<a href="{{ p.website }}"><strong>{{ p.name }}</a></strong>
 							{% else %}
 								<strong>{{ p.name }}</strong>
 							{% endif %}
-							{% if p.description %}: {{ p.description }}{% endif %}
+							{% if p.description %}<strong>:</strong> {{ p.description }}{% endif %}
 						</li>
 						{% endif %}
                     {% endfor %}
