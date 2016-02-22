@@ -23,7 +23,7 @@ Then add the following setting to your main PyBossa configuration file:
 Features
 ========
 
-The theme incorporates all features introduced up to and including `PyBossa v1.4.0`_
+The theme incorporates all features introduced up to and including `PyBossa v1.5.1`_
 and the theme's functionality is best understood alongside the PyBossa code. The
 following sections contain a few more details about some of the more unique features:
 
