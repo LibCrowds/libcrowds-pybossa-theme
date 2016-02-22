@@ -22,7 +22,7 @@
                     {{ render_field(form.source, class_="input-block-level form-control", placeholder='#hashtag or @user or something else') }}
                     {{ render_field(form.max_tweets, class_="input-block-level form-control") }}
                     <div class="pull-right" role="group">
-                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
                         <input id="import" type="submit" value="Import" class="btn btn-danger" />
                     </div>
                 </fieldset>

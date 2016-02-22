@@ -26,7 +26,7 @@
                 {{ form.hidden_tag() }}
                 {{ render_field(form.googledocs_url, class_="input-block-level form-control", placeholder="The URL of the Google Docs Spreadsheet", required="required", autofocus="autofocus", type="url") }}
                     <div class="pull-right" role="group">
-                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
                         <input id="import" type="submit" value="Import" class="btn btn-danger" />
                     </div>
                 </fieldset>

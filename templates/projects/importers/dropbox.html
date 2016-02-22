@@ -27,7 +27,7 @@
                     <p id="message" style="display: none;">You are about to import <span id="numFiles"></span> files.</p>
                     {{ form.files(style="display: none;") }}
                     <div class="pull-right" role="group">
-                        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
                         <input id="submit" type="submit" value="Import" class="btn btn-danger" />
                     </div>
                 </fieldset>

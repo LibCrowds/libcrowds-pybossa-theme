@@ -25,9 +25,11 @@
                     {{ form.files(style="display: none;") }}
                     {{ render_field(form.bucket, class_="input-block-level  form-control", placeholder="Name of the S3 bucket") }}
                 </fieldset>
-                <a id="get-bucket" class="btn btn-success">Search in bucket</a>
-                <input id="submit" type="submit" value="Import" class="btn btn-danger" />
-                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
+                <div class="pull-right" role="group">
+                    <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
+                    <a id="get-bucket" class="btn btn-success">Search in bucket</a>
+                    <input id="submit" type="submit" value="Import" class="btn btn-danger" />
+                </div>
             </form>
             {% endif %}
         </div>
