@@ -1,24 +1,19 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
-{% set active_project = project.short_name %}
 {% import "projects/_helpers.html" as helper %}
 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-{{ helper.render_loading(loading_text) }}
-{{ helper.render_project_local_nav(project, 'twitterimporter', current_user, pro_features, staff_or_admin) }}
+{{ helper.render_project_local_nav(project, 's3importer', current_user, pro_features, staff_or_admin) }}
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
             {% include "_flash_messages.html" %}
             {{ helper.render_loading(loading_text) }}
             <h1><strong>{{project.name}}</strong>: Import tasks</h1>
-            {% if form %}
             <hr>
-            <div class="row vcenter">
-                <h3>From a Twitter hashtag or account</h3>
-            </div>
-            <span class="help-inline">{{_('For more information, please look at')}} <a href="http://docs.pybossa.com/en/latest/user/overview.html#importing-the-tasks-from-an-amazon-s3-bucket" target="_blank">{{_('the documentation')}}.</a></span>
+            <h3>From a Twitter hashtag or account</h3>
+            <span class="help-inline">For more information see <a href="http://docs.pybossa.com/en/latest/user/overview.html#importing-the-tasks-from-an-amazon-s3-bucket" target="_blank">the documentation</a>.</span>
             <br>
             <div id="objects-container" class="row">
                 <ul id="objects"></ul>
@@ -28,11 +23,11 @@
                 <fieldset>
                     {{ form.hidden_tag() }}
                     {{ form.files(style="display: none;") }}
-                    {{ render_field(form.bucket, class_="input-block-level", placeholder=_("Name of the S3 bucket")) }}
+                    {{ render_field(form.bucket, class_="input-block-level  form-control", placeholder="Name of the S3 bucket") }}
                 </fieldset>
-                <a id="get-bucket" class="btn">{{ _('Search in bucket') }}</a>
-                <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-primary" />
-                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn">{{_('Cancel')}}</a>
+                <a id="get-bucket" class="btn btn-success">Search in bucket</a>
+                <input id="submit" type="submit" value="Import" class="btn btn-danger" />
+                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
             </form>
             {% endif %}
         </div>
