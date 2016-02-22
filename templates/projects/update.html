@@ -20,7 +20,7 @@
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     <div class="col-xs-12 text-center">
                         <div class="center-block img-overlay-container">
-                            {{ helper.render_project_thumbnail(project, upload_method, class="img-polaroid", id="project.id") }}
+                            {{ helper.render_project_thumbnail(project, upload_method, class="img-polaroid", id="project.id", style="max-width: 300px") }}
                             <div class="img-overlay edit-profile-image">
                                 <i class="fa fa-pencil-square-o fa-3x"></i>
                                 <span>Edit</span>

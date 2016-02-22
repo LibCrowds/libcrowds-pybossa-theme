@@ -299,7 +299,7 @@ function imgError(image) {
 </div>
 {% endmacro %}
 
-{% macro render_project_thumbnail(project, upload_method, id, class, style, size="200x200") %}
+{% macro render_project_thumbnail(project, upload_method, id, class, style) %}
 {% if project.info.container and project.info.thumbnail %}
     {% if upload_method == 'rackspace'%}
     <img class="{{class}}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}" style="{{style}}" onerror="imgError(this);" alt="Project thumbnail">
