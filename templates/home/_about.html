@@ -54,7 +54,7 @@
             <p>
                 LibCrowds is built on top of <a href="http://docs.pybossa.com/"> PyBossa </a>, an open-source Python framework for the creation of
                 crowdsourcing projects. PyBossa is written in Python and uses the <a href="http://flask.pocoo.org/">Flask</a> micro-framework. Each
-                project on the platform is written in a combination of HTML, CSS and Javascript. {% if 'pybossa-discourse' in plugins.keys() %} The
+                project on the platform is written in a combination of HTML, CSS and Javascript. {% if 'pybossa_discourse' in plugins %} The
                 community forum is powered by <a href="https://www.discourse.org/">Discourse</a>.{% endif %} The
 				<a href="https://github.com/LibCrowds/libcrowds-pybossa-theme" target="_blank">LibCrowds theme</a> and any plugins developed to
 				provide additional functionality are open-souce and available on GitHub.
@@ -93,7 +93,7 @@
         <div class="col-md-11 padding-top-xs padding-bottom-sm">
             <h2>Contact information</h2>
             <ul class="no-style">
-                {% if 'pybossa-discourse' in plugins.keys() %}
+                {% if 'pybossa_discourse' in plugins %}
                 <li>Visit the <a href="{{url_for('discourse.index')}}">LibCrowds Community</a> for more information or to report any issues.</li>
                 {% else %}
                 <li><a href="mailto:{{contact_email}}">Email us</a> for more information.</li>
