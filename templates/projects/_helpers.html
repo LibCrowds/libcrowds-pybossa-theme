@@ -100,12 +100,11 @@
     </div>
     <div class="text-center">
         <div class="col-xs-3 text-center">
+            {{ project.published }}
             {% if project.overall_progress >= 100 %}
                 <span class="fa fa-check-square-o"></span>
-            {% elif project.overall_progress > 0 or project.published == 't' %}
-                {{ project.overall_progress | round | int }}% complete
             {% else %}
-                Unpublished
+                {{ project.overall_progress | round | int }}% complete
             {% endif %}
         </div>
     </div>
