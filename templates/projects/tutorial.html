@@ -4,12 +4,14 @@
 
 {% block content %}
 
-{{ project.info.tutorial | safe}}
-
-<div class="container container-main padding-top-lg">
-    {% include "_flash_messages.html" %}
-    <a id="start" href={{url_for('project.presenter', short_name = project.short_name)}}
-       class="btn btn-danger"><i class="fa fa-thumbs-o-up"></i> Contribute
-    </a>
+<div class="container container-main padding-top-lg text-center">
+    {{ project.info.tutorial | safe}}
+    <div class="row">
+        <div class="col-xs-12">
+            <a id="start" href={{url_for('project.presenter', short_name=project.short_name)}}
+               class="btn btn-danger"><i class="fa fa-thumbs-o-up"></i> Contribute
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}
