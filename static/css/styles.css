@@ -1393,8 +1393,8 @@ h1 i, h2 i, h3 i {
 }
 
 @media (max-width: 767px) {
-    #main-body-content {
-        padding-bottom: 60px;
+    #body-content {
+        min-height: calc(100% - 60px);
     }
     .project-desc {
         height: 100%;
@@ -1402,6 +1402,12 @@ h1 i, h2 i, h3 i {
     }
     #cookies-warning {
         padding: 2px 10px
+    }
+}
+
+@media (min-width: 768px) {
+    #body-content {
+        min-height: calc(100% - 100px);
     }
 }
 
