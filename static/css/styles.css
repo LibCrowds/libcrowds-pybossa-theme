@@ -1393,7 +1393,7 @@ h1 i, h2 i, h3 i {
 
 @media (max-width: 767px) {
     #body-content {
-        min-height: calc(100% - 80px);
+        min-height: calc(100vh - 80px);
     }
     .project-desc {
         height: 100%;
@@ -1406,7 +1406,7 @@ h1 i, h2 i, h3 i {
 
 @media (min-width: 768px) {
     #body-content {
-        min-height: calc(100% - 120px);
+        min-height: calc(100vh - 120px);
     }
 }
 
@@ -2459,7 +2459,7 @@ img.img-polaroid {
 }
 
 #main-footer .container {
-    padding-top: 15px;
+    padding-top: 20px;
 }
 
 #main-footer li {
@@ -2496,6 +2496,7 @@ img.img-polaroid {
         text-align: center
     }
     #main-footer .container {
+        padding-top: 20px;
         padding-left: 20px;
         padding-right: 20px
     }
