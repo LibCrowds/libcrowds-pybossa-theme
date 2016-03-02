@@ -7,10 +7,9 @@ html {
 }
 
 body {
-    height: 100%;
+    min-height: 100%;
     font-weight: 300;
     background-color: #fff;
-    min-height: 800px;
     width: 100%;
     font-family: 'Source Sans Pro', sans-serif;
     color: #666;
@@ -1394,7 +1393,7 @@ h1 i, h2 i, h3 i {
 
 @media (max-width: 767px) {
     #body-content {
-        min-height: calc(100% - 60px);
+        min-height: calc(100% - 80px);
     }
     .project-desc {
         height: 100%;
@@ -1407,7 +1406,7 @@ h1 i, h2 i, h3 i {
 
 @media (min-width: 768px) {
     #body-content {
-        min-height: calc(100% - 100px);
+        min-height: calc(100% - 120px);
     }
 }
 
@@ -2460,8 +2459,7 @@ img.img-polaroid {
 }
 
 #main-footer .container {
-    padding-top: 20px;
-    padding-bottom: 20px
+    padding-top: 15px;
 }
 
 #main-footer li {
@@ -2495,8 +2493,6 @@ img.img-polaroid {
 
 @media (max-width: 767px) {
     #main-footer {
-        margin-left: -20px;
-        margin-right: -20px;
         text-align: center
     }
     #main-footer .container {
@@ -2504,7 +2500,7 @@ img.img-polaroid {
         padding-right: 20px
     }
     #main-footer {
-        height: 60px
+        height: 80px
     }
     #main-footer li {
         font-size: 2.0em;
