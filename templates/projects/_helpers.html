@@ -93,7 +93,7 @@
 </div>
 {% endmacro %}
 
-{% macro render_project_short_summary(project) %}
+{% macro render_project_short_summary(current_user, project) %}
 <div class="row padding-bottom-sm">
     <div class="col-xs-9">
         {% if current_user.id == project.owner_id %}
@@ -287,7 +287,7 @@ function imgError(image) {
 <h2>{{ title }}</h2>
 <hr>
 {% for project in projects %}
-    {{ render_project_short_summary(project) }}
+    {{ render_project_short_summary(current_user, project) }}
 {% endfor %}
 {% endmacro %}
 
