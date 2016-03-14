@@ -4,7 +4,6 @@
 {% set description = "Participate in crowdsourcing projects and help improve access to collections of the British Library." %}
 
 {% block content %}
-<script src="{{url_for('static', filename='js/vendor/isotope.pkgd.min.js')}}"></script>
 <span class="set-body-bg" data-bg="pattern-white-wall"></span>
 <section class="pattern-classy-fabric">
     <div class="container padding-top-lg">
@@ -34,22 +33,13 @@
 <div class="container padding-bottom-md">
     <div class="col-xs-12 padding-top-xs">
         {% include "_flash_messages.html" %}
-        <div id="sorts" class="btn-group pull-right">
-            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-sort-value="original-order">Sort by <span id="order">Date</span> <span class="caret"></span></button>
-            <ul class="dropdown-menu" style="top:35px;">
-              <li><a href="#" data-sort-value="original-order">date</a></li>
-              <li><a href="#" data-sort-value="name">name</a></li>
-              <li><a href="#" data-sort-value="activity">activity</a></li>
-              <li><a href="#" data-sort-value="progress">progress</a></li>
-            </ul>
-        </div>
 
         {% if projects %}
-        <div class="polaroids projects margin-top-sm">
-            {% for project in projects %}
-                {{ helper.show_project(project, active_cat.short_name, current_user, upload_method) }}
-            {% endfor %}
-        </div>
+            <div class="polaroids projects margin-top-sm">
+                {% for project in projects %}
+                    {{ helper.show_project(project, active_cat.short_name, current_user, upload_method) }}
+                {% endfor %}
+            </div>
             {% if pagination.pages > 1 %}
                 {{ helper.render_pagination(pagination) }}
             {% endif %}
@@ -62,42 +52,4 @@
     </div>
 </div>
 {{ helper.broken_image() }}
-<script>
-$( function() {
-  // init Isotope
-  var $container = $('.projects').isotope({
-    itemSelector: '.project-item',
-    layoutMode: 'fitRows',
-    sortAscending: true,
-    getSortData: {
-      date: '.date',
-      name: '.project-name',
-      activity: '.activity',
-      progress: '.progress parseInt',
-    }
-  });
-
-  // bind sort button click
-  $('#sorts').on( 'click', 'a', function() {
-    var sortValue = $(this).attr('data-sort-value');
-    $container.isotope({ sortBy: sortValue });
-    if (sortValue == 'original-order') {
-        $("#order").text('date');
-    }
-    else {
-        $("#order").text(sortValue);
-    }
-  });
-
-  // change is-checked class on buttons
-  $('.dropdown-toggle').each( function( i, buttonGroup ) {
-    var $buttonGroup = $( buttonGroup );
-    $buttonGroup.on( 'click', 'button', function() {
-      $buttonGroup.find('.is-checked').removeClass('is-checked');
-      $( this ).addClass('is-checked');
-    });
-  });
-
-});
-</script>
 {% endblock %}
