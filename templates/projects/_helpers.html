@@ -96,7 +96,11 @@
 {% macro render_project_short_summary(project) %}
 <div class="row padding-bottom-sm">
     <div class="col-xs-9">
-        <h4><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></h4>
+        {% if current_user.id == project.owner_id %}
+            <h4><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></h4>
+        {% else %}
+            <h4><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></h4>
+        {% endif %}
     </div>
     <div class="text-center">
         <div class="col-xs-3 text-center">
