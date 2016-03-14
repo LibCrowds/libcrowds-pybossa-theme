@@ -18,10 +18,8 @@
             </div>
             <hr>
             {% if projects_published or projects_draft %}
-
-                {{ helper.render_grid_projects(project, "Published", current_user) }}
-                {{ helper.render_grid_projects(project, "Draft", current_user) }}
-
+                {{ helper.render_grid_projects(projects_published, "Published", current_user) }}
+                {{ helper.render_grid_projects(projects_draft, "Draft", current_user) }}
             {% else %}
             <div class="col-xs-12">
                 <h2>You have not created any projects.</h2>
