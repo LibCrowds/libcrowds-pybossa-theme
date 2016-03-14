@@ -93,28 +93,6 @@
 </div>
 {% endmacro %}
 
-{% macro render_project_short_summary(current_user, project) %}
-<div class="row padding-bottom-sm">
-    <div class="col-xs-9">
-        {% if current_user.id == project.owner_id %}
-            <h4><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></h4>
-        {% else %}
-            <h4><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></h4>
-        {% endif %}
-    </div>
-    <div class="text-center">
-        <div class="col-xs-3 text-center">
-            {{ project.published }}
-            {% if project.overall_progress >= 100 %}
-                <span class="fa fa-check-square-o"></span>
-            {% else %}
-                {{ project.overall_progress | round | int }}% complete
-            {% endif %}
-        </div>
-    </div>
-</div>
-{% endmacro %}
-
 {% macro render_project_admin_featured(project, upload_method) %}
 <tr>
     <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
@@ -283,12 +261,30 @@ function imgError(image) {
 <hr>
 {% endmacro %}
 
-{% macro render_grid_projects(projects, title, upload_method) %}
+{% macro render_grid_projects(projects, title, current_user) %}
 <h2>{{ title }}</h2>
 <hr>
-{% for project in projects %}
-    {{ render_project_short_summary(current_user, project) }}
-{% endfor %}
+    {% for project in projects %}
+    <div class="row padding-bottom-sm">
+        <div class="col-xs-9">
+            {% if current_user.id == project.owner_id %}
+                <h4><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></h4>
+            {% else %}
+                <h4><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.name}}</a></h4>
+            {% endif %}
+        </div>
+        <div class="text-center">
+            <div class="col-xs-3 text-center">
+                {{ project.published }}
+                {% if project.overall_progress >= 100 %}
+                    <span class="fa fa-check-square-o"></span>
+                {% else %}
+                    {{ project.overall_progress | round | int }}% complete
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 {% endmacro %}
 
 {% macro render_loading(text) %}
