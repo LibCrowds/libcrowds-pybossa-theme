@@ -158,6 +158,24 @@
                     </div>
                 </a>
             </div>
+
+            <div id="rules" class="col-sm-6 col-md-4">
+                <a href="{{ url_for('analyst.presenter_editor', short_name=project.short_name) }}" rel="nofollow">
+                    <div class="well well-link">
+                        <span class="fa fa-search fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Analyst Presenter</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div id="rules" class="col-sm-6 col-md-4">
+                <a href="{{ url_for('analyst.analyse', short_name=project.short_name) }}" rel="nofollow">
+                    <div class="well well-link">
+                        <span class="fa fa-indent fa-4x"></span>
+                        <h3 class="margin-bottom-xs">Analyse</h3>
+                    </div>
+                </a>
+            </div>
             {% endif %}
 
             {% endif %}
