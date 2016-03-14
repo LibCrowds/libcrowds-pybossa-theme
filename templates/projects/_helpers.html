@@ -64,11 +64,6 @@
         <li class="nav-link{% if active_link=="contribute"%} active{% endif %}">
             <a href="{{url_for('project.presenter', short_name=project.short_name)}}"> Contribute</a>
         </li>
-        {% if "pybossa_analyst" in plugins %}
-        <li class="nav-link{% if active_link=="analyse"%} active{% endif %}">
-            <a href="{{url_for('analyst.analyse', short_name=project.short_name)}}"> Analyse</a>
-        </li>
-        {% endif %}
     {% endif %}
 {% elif project %}
     <li class="nav-link{% if active_link=="contribute"%} active{% endif %}">
