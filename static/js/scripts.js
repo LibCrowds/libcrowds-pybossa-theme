@@ -154,7 +154,7 @@ $(".question-popover").popover({
     html: true,
     animation: true,
     trigger: 'hover',
-    placement: 'top',
+    placement: 'bottom',
     container: 'body'
 });
 
