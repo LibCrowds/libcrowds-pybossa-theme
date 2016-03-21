@@ -40,7 +40,8 @@ a:hover {
     text-decoration: none
 }
 
-a[rel="popover"] {
+a[rel="popover"],
+span[rel="popover"]{
     cursor: pointer
 }
 

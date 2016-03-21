@@ -149,6 +149,15 @@ $("a.btn-popover").popover({
     container: 'body'
 });
 
+/** Display popover */
+$(".question-popover").popover({
+    html: true,
+    animation: true,
+    trigger: 'hover',
+    placement: 'top',
+    container: 'body'
+});
+
 
 /** Display popover */
 $(".input-popover").popover({
