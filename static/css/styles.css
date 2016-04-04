@@ -511,6 +511,12 @@ hr.extra-margins {
     border-radius: 15px
 }
 
+.alert-messages {
+    position: relative;
+    z-index: 999999;
+
+}
+
 .alert-messages.floating {
     position: fixed;
     top: 100px;
