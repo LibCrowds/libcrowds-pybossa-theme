@@ -1431,9 +1431,35 @@ h1 i, h2 i, h3 i {
     background-color: #fff
 }
 
-.form-control {
+.form-control,
+.select2-container--bootstrap .select2-selection--single[role=combobox],
+.select2-container--bootstrap .select2-selection--multiple[role=combobox] {
     padding: 12px 15px;
     height: 47px;
+}
+
+input.select2-search__field[type=search] {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field {
+    margin-top: -4px !important;
+    padding: 0px !important;
+}
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
+    margin: 0px !important;
+    margin-right: 10px !important;
+}
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__clear {
+    margin-top: 2px !important;
+}
+
+.select2-container--bootstrap .select2-selection--single .select2-selection__placeholder {
+    font-size: 0.9em !important;
+    color: #999 !important;
 }
 
 .form-horizontal .form-group {
