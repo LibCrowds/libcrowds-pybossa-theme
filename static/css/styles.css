@@ -1361,10 +1361,30 @@ h1 i, h2 i, h3 i {
     -ms-flex-align: center;
 }
 
+.pagination ul {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
 .pagination li {
     display: inline;
-    padding-left: 5px;
-    padding-right: 5px;
+}
+
+.pagination li a {
+    display: inline;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.pagination li.active a {
+    background-color: #357ebd;
+    color: white;
+    font-weight: 400;
+}
+
+.pagination li:hover:not(.active) a {
+    background-color: #FAFAFA;
 }
 
 .project-desc {
