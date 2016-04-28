@@ -151,7 +151,7 @@
                 <!-- See https://github.com/alexandermendes/libcrowds-analyst -->
                 {% if "libcrowds_analyst" in plugins %}
                 <div id="rules" class="col-sm-6 col-md-4">
-                    <a href="{{ url_for('analyst.browse', short_name=project.short_name, page='1', analysed='all') }}" rel="nofollow">
+                    <a href="{{ url_for('analyst.browse', short_name=project.short_name) }}" rel="nofollow">
                         <div class="well well-link">
                             <span class="fa fa-balance-scale fa-4x"></span>
                             <h3 class="margin-bottom-xs">Analyse</h3>
