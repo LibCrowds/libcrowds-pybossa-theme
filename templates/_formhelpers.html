@@ -16,7 +16,7 @@
         {% endif %}
     {% if field.errors %}
         {% for error in field.errors %}
-        <span class="help-block"><small>{{ error }}<small></span>
+        <span class="help-block"><small>{{ error }}</small></span>
         {% endfor %}
     {% else %}
     <span><small>&nbsp;</small></span>
