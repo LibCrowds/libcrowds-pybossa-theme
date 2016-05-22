@@ -10,7 +10,8 @@
  * { 1 : '<a href="http://example.com">Somebody</a>',
      2 : '<a href="http://example.com">Somebody</a>' };
  */
-var attributions = { 1: '<a href="http://www.lensintheface.com" target="_blank">Jon Ellis</a>' };
+var attributions = { 1: '<a href="http://www.lensintheface.com" target="_blank">Jon Ellis</a>',
+                     6: '<a href="http://www.lensintheface.com" target="_blank">Jon Ellis</a>' };
 
 
 /** Load the attribution, if it exists. */
