@@ -1,4 +1,5 @@
 var languageCodeSequence = [
+    {id: '', text: ''},
     {id: 'aar', text: 'Afar'},
     {id: 'abk', text: 'Abkhaz'},
     {id: 'ace', text: 'Achinese'},
@@ -516,7 +517,9 @@ var languageCodeSequence = [
     {id: 'zza', text: 'Zaza'}
 ];
 
-var countryCodeSequence = [{id: 'aa', text: 'Albania'},
+var countryCodeSequence = [
+    {id: '', text: ''},
+    {id: 'aa', text: 'Albania'},
     {id: 'abc', text: 'Alberta'},
     {id: '-ac', text: 'Ashmore and Cartier Islands'},
     {id: 'aca', text: 'Australian Capital Territory'},
