@@ -59,10 +59,14 @@
         <li class="nav-link{% if active_link=="results"%} active{% endif %}">
             <a href="{{url_for('project.results', short_name=project.short_name)}}"> Results</a>
         </li>
+
         <li class="nav-link{% if active_link=="stats"%} active{% endif %}">
             <a href="{{url_for('project.show_stats', short_name=project.short_name)}}"> Statistics</a>
         </li>
-        <li class="nav-link{% if active_link=="contribute"%} active{% endif %}">
+        <li class="nav-link">
+            <a href="{{ config['LIBCROWDS_ANALYST_URL]' }}/{{ project.short_name }}"> Analysis</a>
+        </li>
+        <li class="nav-link">
             <a href="{{url_for('project.presenter', short_name=project.short_name)}}"> Contribute</a>
         </li>
     {% endif %}
