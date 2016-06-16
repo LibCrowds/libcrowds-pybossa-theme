@@ -65,9 +65,9 @@
         </li>
         {% if config.get('LIBCROWDS_ANALYST_URL') %}
         <li class="nav-link">
-            <a href="{{ config['LIBCROWDS_ANALYST_URL]' }}/{{ project.short_name }}"> Analysis</a>
+            <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/{{ project.short_name }}"> Analysis</a>
         </li>
-    {% endif %}
+        {% endif %}
         <li class="nav-link">
             <a href="{{url_for('project.presenter', short_name=project.short_name)}}"> Contribute</a>
         </li>
