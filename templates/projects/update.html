@@ -1,12 +1,13 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
+{% set active_page = "update" %}
 {% import "projects/_helpers.html" as helper %}
 {% import "_formhelpers.html" as form_helper %}
 
 {% block content %}
 <script src="{{url_for('static', filename='js/vendor/jquery.Jcrop.min.js')}}"></script>
 <link rel="stylesheet" href="{{url_for('static', filename='css/jquery.Jcrop.min.css')}}" type="text/css" />
-{{ helper.render_project_local_nav(project, 'settings', current_user, pro_features, staff_or_admin) }}
+{{ helper.render_project_local_nav(project, active_link, current_user, pro_features, staff_or_admin) }}
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">

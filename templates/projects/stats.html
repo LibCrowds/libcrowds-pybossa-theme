@@ -1,6 +1,6 @@
 {% extends "/base.html" %}
 {% set active_page = "projects" %}
-{% set active_project  = "all" %}
+{% set active_link = "stats" %}
 {% import "projects/_helpers.html" as helper %}
 {% import "privacy/locked.html" as privacy %}
 
@@ -15,7 +15,7 @@
 <script>
     var projectStats = {{projectStats|safe}};
 </script>
-{{ helper.render_project_local_nav(project, 'stats', current_user, pro_features, staff_or_admin) }}
+{{ helper.render_project_local_nav(project, active_link, current_user, pro_features, staff_or_admin) }}
 <span class="set-body-bg" data-bg="pattern-brushed"></span>
 <div class="container container-main">
     <div class="row">
