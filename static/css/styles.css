@@ -1568,6 +1568,14 @@ textarea {
     resize: none
 }
 
+input[type="radio"] + label {
+    font-weight: inherit;
+}
+
+.form-group > ul {
+    list-style: none;
+}
+
 @media (min-width: 768px) {
     .form-horizontal .control-label {
         padding-top: 13px
