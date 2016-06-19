@@ -24,7 +24,7 @@
             {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
             {{ privacy.render_lock_page() }}
             {% else %}
-            {{ helper.render_project_title(project, subtitle="Webhooks") }}
+            {{ helper.render_project_title(project, subtitle="Statistics") }}
             <br/>
 
             {% if private %}
