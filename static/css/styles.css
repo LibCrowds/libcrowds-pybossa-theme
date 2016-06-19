@@ -2051,8 +2051,8 @@ input[type="radio"] + label {
 }
 
 .badge-danger {
-    color: #BA0000;
-    background-color: #fff
+    color: #fff
+    background-color: #BA0000;
 }
 
 .badge-warning {

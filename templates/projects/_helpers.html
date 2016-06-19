@@ -65,7 +65,9 @@
         </li>
         {% if config.get('LIBCROWDS_ANALYST_URL') %}
         <li class="nav-link">
-            <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/{{ project.short_name }}"> Analysis</a>
+            <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/{{ project.short_name }}"> Analysis
+                <span id="unanalysed" class="badge badge-info"></span>
+            </a>
         </li>
         {% endif %}
         <li class="nav-link">
@@ -78,6 +80,19 @@
     </li>
 {% endif %}
 </ul>
+<script>
+    $.ajax({
+        url: "https://www.libcrowds.com/api/result?project_id=" + {{ project.id }} + "&limit=100&info=Unanalysed",
+        dataType: "json",
+    }).done(function( results ) {
+        var count = results.length;
+        if (count == 100) {
+            $("#unanalysed").html('100+');
+        } else if (count > 0){
+            $("#unanalysed").html(count);
+        }
+    });
+</script>
 {% endmacro %}
 
 {% macro render_project_summary(project, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
