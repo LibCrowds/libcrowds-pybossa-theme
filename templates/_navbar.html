@@ -44,7 +44,7 @@
                     <script>
                         var notifications = {{ discourse.user_unread_notifications_count() }};
                         if (notifications > 0) {
-                            $('#notifications').html(notifications)
+                            $('#notifications').html(notifications);
                         }
                     </script>
                     {% else %}
