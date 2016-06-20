@@ -9,26 +9,25 @@
 {% include "_flash_messages_floating.html" %}
 <div id="portal-splash" class="splash" data-src="{{ url_for('static', filename='img/splash/category_' + project.category_id|string + '.jpg') }}">
     <div class="vcenter hcenter position-relative" style="height:100%;">
-        <div class="container text-center ie-mid-vcenter padding-top-lg">
-            <div class="container-padded">
-                <h1>{{ helper.render_project_title(project) }}</h1>
-                <h2>{{ overall_progress | round | int }}% complete</h2>
+        <div class="container text-center ie-mid-vcenter padding-top-sm">
+            <h1>{{ helper.render_project_title(project) }}</h1>
+            <h2>{{ overall_progress | round | int }}% complete</h2>
 
-                <!-- Contribute button -->
-                <div class="col-xs-12 splash-dependant">
-                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}"
-                       data-progress="{{ overall_progress | round | int }}"
-                       class="btn btn-circle btn-circle-large btn-circle-progress {% if overall_progress < 100 %}glowing-link{% endif %}">
-                        <div class="arc arc-q1"></div>
-                        <div class="arc arc-q2"></div>
-                        <div class="arc arc-q3"></div>
-                        <div class="arc arc-q4"></div>
-                        <p>Contribute<br>Now</p>
-                    </a>
-                </div>
-                {% if current_user.is_authenticated and (current_user.id = project.owner_id or current_user.admin) %}
-                    <a href="{{ url_for('project.tasks', short_name=project.short_name) }}">Project Dashboard</a>
-                {% endif %}
+            {% if current_user.is_authenticated and (current_user.id == project.owner_id or current_user.admin) %}
+                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Dashboard</a>
+            {% endif %}
+
+            <!-- Contribute button -->
+            <div class="col-xs-12 splash-dependant">
+                <a href="{{ url_for('project.presenter', short_name=project.short_name)}}"
+                   data-progress="{{ overall_progress | round | int }}"
+                   class="btn btn-circle btn-circle-large btn-circle-progress {% if overall_progress < 100 %}glowing-link{% endif %}">
+                    <div class="arc arc-q1"></div>
+                    <div class="arc arc-q2"></div>
+                    <div class="arc arc-q3"></div>
+                    <div class="arc arc-q4"></div>
+                    <p>Contribute<br>Now</p>
+                </a>
             </div>
         </div>
     </div>
