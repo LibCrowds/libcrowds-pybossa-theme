@@ -11,8 +11,10 @@
     {% if project.info.results and n_results > 0 %}
     {{ project.info.results | safe}}
     {% else %}
-    <h2>No results</h2>
-    <p class="lead">Sorry, we haven't published any results for this project yet.</p>
+    <div class="col-sm-9 col-sm-offset-3">
+        <h2>No results</h2>
+        <p class="lead">Sorry, we haven't published any results for this project yet.</p>
+    </div>
     {% endif %}
 </div>
 {% endblock %}
