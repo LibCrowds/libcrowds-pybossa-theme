@@ -1,8 +1,6 @@
 {% extends "/base.html" %}
 {% set active_page = "create" %}
 {% set active_link  = "newproject" %}
-{% import "account/_helpers.html" as helper %}
-{% from "admin/_helpers.html" import render_local_nav %}
 {% from "_formhelpers.html" import render_field %}
 
 {% block content %}
@@ -11,10 +9,16 @@
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
             {% include "_flash_messages.html" %}
-            <h1>Create a new project</h1>
+            <div class="row vcenter hcenter">
+                <div class="col-xs-10">
+                    <h1>Create a new project</h1>
+                </div>
+                <div class="col-xs-2">
+                    <a href="{{ url_for('github.new_project') }}" class="btn btn-warning pull-right">Create from GitHub</a>
+                </div>
+            </div>
             <hr>
-
-            <form role="form" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data">
+            <form role="form" method="post" action="{{ url_for('project.new') }}" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <fieldset>
                     {{ render_field(form.name, placeholder="The name of the project.", show_label=True, class="form-control", required="required", autofocus="autofocus") }}
