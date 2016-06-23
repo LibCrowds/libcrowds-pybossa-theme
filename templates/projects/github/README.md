@@ -1,0 +1,1 @@
+# Template pages for [pybossa-github-builder](https://github.com/alexandermendes/pybossa-github-builder)

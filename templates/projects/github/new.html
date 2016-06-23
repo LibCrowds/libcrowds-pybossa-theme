@@ -1,0 +1,37 @@
+{% extends "/base.html" %}
+{% set active_page = "create" %}
+{% set active_link  = "newproject" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+{% if 'pybossa_github_builder' in plugins %}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            {% include "_flash_messages.html" %}
+            <h1>Create a Project from GitHub</h1>
+            <hr>
+            <form role="form" method="post" action="{{ url_for('github.new') }}" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset>
+                    {{ render_field(form.github_url, class_="form-control", placeholder="Search for a GitHub repository.", required="required", autofocus="autofocus") }}
+                    <div class="text-right" role="group">
+                        <a href="{{url_for('project.new', name=current_user.name)}}" class="btn btn-default">Cancel</a>
+                        <button type="submit" value="Search" class="btn btn-danger">Search</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container container-main">
+    {% include "_flash_messages.html" %}
+    <h1>Page not found!</h1>
+    <p class="lead">We're sorry, but we can't find the page that you're looking for.</p>
+    <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
+        <i class="fa fa-home"></i> Go Home
+    </a>
+</div>
+{% endif %}
+{% endblock %}
