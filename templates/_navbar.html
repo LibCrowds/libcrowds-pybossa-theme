@@ -42,10 +42,12 @@
                     {% if 'pybossa_discourse' in plugins %}
                     <a href="{{ url_for('discourse.index')}}">Community <span id="notifications" class="badge badge-info"></span></a>
                     <script>
-                        var notifications = {{ discourse.user_unread_notifications_count() }};
-                        if (notifications > 0) {
-                            $('#notifications').html(notifications);
-                        }
+                        {% if discourse.user_unread_notifications_count() %}
+                            var notifications = {{ discourse.user_unread_notifications_count() }};
+                            if (notifications > 0) {
+                                $('#notifications').html(notifications);
+                            }
+                        {% endif %}
                     </script>
                     {% else %}
                     <a href="{{ url_for('account.index')}}">Community</a>
