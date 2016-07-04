@@ -2,3 +2,5 @@ _build
 _static
 _templates
 .DS_STORE
+static/gen
+static/.webassets-cache
