@@ -29,11 +29,9 @@
             {% if categories %}
             <h2 class="padding-top-xs">Current Categories</h2>
             <table class="table table-stripped table-condensed table-hover table-responsive">
-                <col style="width:30%">
-                <col style="width:30%">
-                <col style="width:40%">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Title</th>
                         <th style="text-align:center;">Projects</th>
                         <th style="text-align:center;">Actions</th>
@@ -41,6 +39,7 @@
                 </thead>
                 {% for c in categories %}
                 <tr>
+                    <td>{{c.id}}</td>
                     <td>{{c.name}}</td>
                     <td style="text-align:center;">{{ n_projects_per_category[c.short_name]}}</td>
                     <td style="text-align:center;">
