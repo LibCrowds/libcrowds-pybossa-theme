@@ -511,17 +511,12 @@ hr.extra-margins {
     border-radius: 15px
 }
 
-.alert-messages {
-    position: relative;
-
-}
-
-.alert-messages.floating {
+#alert-messages {
     position: fixed;
     top: 100px;
-    width: 50%;
-    margin-left: 25%;
-    z-index: 110
+    right: 50px;
+    width: 25%;
+    z-index: 9999;
 }
 
 .alert-error {
@@ -534,11 +529,6 @@ hr.extra-margins {
     color: #31708f;
     background-color: #d9edf7;
     border-color: #bce8f1
-}
-
-.js-alert {
-    margin: 80px 0px 80px;
-    z-index: 9999999
 }
 
 .modal-dialog {
@@ -634,9 +624,9 @@ thead {
         margin-left: auto;
         text-align: center
     }
-    .alert-messages {
+    #alert-messages {
         width: 90%;
-        margin-left: 5%
+        right: 5%;
     }
 }
 

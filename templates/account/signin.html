@@ -4,7 +4,6 @@
 
 {% block content %}
 <div class="container container-main text-center">
-    {% include "_flash_messages.html" %}
     {% if next is not none%}
         {% if auth.twitter %}
         <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-info"><i class="fa fa-twitter"></i><span class="hidden-xs"> Sign in with Twitter</span></a>

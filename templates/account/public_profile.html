@@ -9,7 +9,6 @@
     {{ privacy.render_lock_page() }}
 {% else %}
 <div class="container container-main">
-    {% include "_flash_messages.html" %}
     <div class="row">
         <div class="col-xs-12 col-sm-4 text-center">
             {{ helper.render_user_profile(user, upload_method, private=False) }}

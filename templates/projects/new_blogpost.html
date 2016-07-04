@@ -9,7 +9,6 @@
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-9 col-sm-offset-3 col-xs-12">
-            {% include "_flash_messages.html" %}
             <h2>Write a new blog post for {{ project.name }}</h2>
                 <form class="form-horizontal" method="post" action="{{ url_for('project.new_blogpost', short_name=project.short_name) }}">
                     {{ form.hidden_tag() }}

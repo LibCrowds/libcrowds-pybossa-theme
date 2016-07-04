@@ -7,7 +7,6 @@
 
 {% block content %}
 <div class="container container-main">
-    {% include "_flash_messages.html" %}
     <div class="row">
         {{helper.render_blog_post(current_user, blogpost, form)}}
         {{helper.render_blog_menu(current_user, dates)}}

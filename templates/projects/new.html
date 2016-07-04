@@ -8,7 +8,6 @@
 <div class="container container-main">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-            {% include "_flash_messages.html" %}
             <div class="row vcenter hcenter">
                 {% if 'pybossa_github_builder' in plugins %}
                     <div class="col-sm-8 col-xs-12">
@@ -41,7 +40,6 @@
 </div>
 {% else %}
 <div class="container container-main">
-    {% include "_flash_messages.html" %}
     <div class="col-xs-12">
         <h1>Unauthorized</h1>
         <p class="lead">You are not authorized to access the URL requested.</p>

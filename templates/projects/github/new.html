@@ -8,7 +8,6 @@
 <div class="container container-main">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-            {% include "_flash_messages.html" %}
             <h1>Create a Project from GitHub</h1>
             <hr>
             <form role="form" method="post" action="{{ url_for('github.new') }}" enctype="multipart/form-data">
@@ -26,7 +25,6 @@
 </div>
 {% else %}
 <div class="container container-main">
-    {% include "_flash_messages.html" %}
     <h1>Page not found!</h1>
     <p class="lead">We're sorry, but we can't find the page that you're looking for.</p>
     <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">

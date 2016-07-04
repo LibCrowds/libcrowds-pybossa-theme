@@ -8,7 +8,6 @@
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-xs-12">
-            {% include "_flash_messages.html" %}
             <h2>Edit the blog post</h2>
             <form class="form-horizontal" method="post" action="{{ url_for('blog.update_blogpost', id=blogpost.id) }}">
                 {{ form.hidden_tag() }}

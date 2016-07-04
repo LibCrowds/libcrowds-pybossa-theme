@@ -7,7 +7,6 @@
 {% block content %}
 {{ helper.render_project_local_nav(project, active_link, current_user, pro_features, staff_or_admin) }}
 <div class="container container-main">
-    {% include "_flash_messages.html" %}
     {% if project.info.results and n_results > 0 %}
     {{ project.info.results | safe}}
     {% else %}

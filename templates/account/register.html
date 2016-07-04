@@ -5,7 +5,6 @@
 {% from "_formhelpers.html" import render_field %}
 
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-        {% include "_flash_messages.html" %}
         <h2 class="text-center">Create an account</h2>
         <form method="post" role="form" action="{{ url_for('account.register') }}">
             {{ form.hidden_tag() }}
