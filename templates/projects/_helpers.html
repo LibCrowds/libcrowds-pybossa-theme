@@ -82,7 +82,7 @@
 </ul>
 <script>
     $.ajax({
-        url: "https://www.libcrowds.com/api/result?project_id=" + {{ project.id }} + "&limit=100&info=Unanalysed",
+        url: "https://www.libcrowds.com/api/result?project_id=" + {{ project.id }} + "&limit=100&info=Unanalysed&all=1",
         dataType: "json",
     }).done(function( results ) {
         var count = results.length;
