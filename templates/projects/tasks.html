@@ -160,6 +160,18 @@
                 </div>
                 {% endif %}
 
+                <!-- See https://github.com/alexandermendes/pybossa-github-builder -->
+                {% if "pybossa_github_builder" in plugins %}
+                <div id="rules" class="col-sm-6 col-md-4">
+                    <a href="{{ url_for('github.sync', short_name=project.short_name) }}" rel="nofollow">
+                        <div class="well well-link">
+                            <span class="fa fa-github fa-4x"></span>
+                            <h3 class="margin-bottom-xs">Sync with Github</h3>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+
             {% endif %}
         </div>
     </div>
