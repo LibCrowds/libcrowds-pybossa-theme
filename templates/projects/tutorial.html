@@ -1,13 +1,26 @@
 {% extends "/base.html" %}
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
+{% import "projects/_helpers.html" as helper %}
 
 {% block content %}
 
-<div class="container container-main padding-top-lg text-center">
+<div class="container container-main">
+    <div class="row vcenter hcenter">
+        <div class="col-sm-8 col-xs-12">
+            {{ helper.render_project_title(project, subtitle="Tutorial") }}
+        </div>
+        <div class="col-sm-4 col-xs-12">
+            <a href="{{url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger pull-right">
+                <i class="fa fa-thumbs-o-up"></i> Contribute
+            </a>
+        </div>
+    </div>
+    <hr>
     {{ project.info.tutorial | safe}}
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 text-center">
+            <hr>
             <a id="start" href={{url_for('project.presenter', short_name=project.short_name)}}
                class="btn btn-danger"><i class="fa fa-thumbs-o-up"></i> Contribute
             </a>
