@@ -1155,6 +1155,13 @@ h1 i, h2 i, h3 i {
         padding-right: 15px!important
     }
     .bs-docs-sidenav.affix {
+        position: relative;
+        width: 100%;
+    }
+    .bs-docs-sidenav li.nav-link {
+        display: inline-block;
+    }
+    .bs-docs-sidenav li.divider {
         display: none;
     }
 }
