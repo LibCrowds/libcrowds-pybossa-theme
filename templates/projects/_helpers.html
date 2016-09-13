@@ -36,7 +36,6 @@
     <li class="nav-link"><a href="{{url_for('project.new')}}">New</a></li>
 
     {% if project %}
-        <li class="divider"></li>
         <li class="nav-link{% if active_link=="dashboard"%} active{% endif %}">
             <a href="{{url_for('project.tasks', short_name=project.short_name)}}">Dashboard</a></li>
 

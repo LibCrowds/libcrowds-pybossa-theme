@@ -1016,7 +1016,8 @@ h1 i, h2 i, h3 i {
 }
 
 .bs-docs-sidenav li.nav-link {
-    margin-bottom: 5px
+    margin-bottom: 5px;
+    display: block;
 }
 
 .bs-docs-sidenav li > a {
@@ -1160,9 +1161,6 @@ h1 i, h2 i, h3 i {
     }
     .bs-docs-sidenav li.nav-link {
         display: inline-block;
-    }
-    .bs-docs-sidenav li.divider {
-        display: none;
     }
 }
 
