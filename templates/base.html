@@ -21,15 +21,13 @@
         <link rel="shortcut icon" href="/static/img/favicon.png">
 
         <!-- Le styles -->
-        {% assets output="gen/packed.css",
-            "vendor/bootstrap-3.3.2/css/bootstrap.min.css",
-            "vendor/browser-detection/browser-detection.min.css",
-            "vendor/select2/css/select2.min.css",
-            "vendor/select2/css/select2-bootstrap.min.css",
-            "css/styles.css" %}
-            <link type="text/css" rel="stylesheet" href="{{ ASSET_URL }}">
-        {% endassets %}
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/bootstrap-3.3.2/css/bootstrap.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/browser-detection/browser-detection.min.css')}}">
         <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400%7CPermanent+Marker">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='fonts/font-awesome-4.4.0/css/font-awesome.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/select2/css/select2.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='vendor/select2/css/select2-bootstrap.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}?v=1.6.0">
 
         <!--[if lt IE 9]>
         <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -56,7 +54,6 @@
         <script type="text/javascript" src="{{url_for('static', filename='vendor/bootstrap-3.3.2/js/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='vendor/select2/js/select2.min.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/flash-messages.js')}}"></script>
-        <script src="https://use.fontawesome.com/9082ec517a.js"></script>
 
         {% include '_ga.html' ignore missing %}
         {% include '_gcs.html' ignore missing %}
