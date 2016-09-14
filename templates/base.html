@@ -105,6 +105,15 @@
     </footer>
 
     <!-- Le javascript -->
+    {% if config.get('SENTRY_DSN') %}
+    <script src="https://cdn.ravenjs.com/3.7.0/raven.min.js"></script>
+    <script>
+        // Setup Sentry logging for JS
+        var dsn = '{{ config["SENTRY_DSN"] }}';
+        var publicDsn = dsn.replace(/:[A-z0-9]*@sentry.io/i, '@sentry.io');
+        Raven.config(publicDsn).install();
+    </script>
+    {% endif %}
     <script type="text/javascript" src="{{url_for('static', filename='js/scripts.min.js')}}"></script>
     <script>
         {% include 'cookies.js' %}
