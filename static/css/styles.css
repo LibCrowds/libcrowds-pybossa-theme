@@ -539,6 +539,15 @@ hr.extra-margins {
     z-index: 9999;
 }
 
+.sentry-error-embed.clearfix {
+    margin-top: 100px;
+    padding: 20px;
+}
+
+.sentry-error-embed .form-submit .close {
+    padding: 15px 0;
+}
+
 thead {
     background: rgba(0, 0, 0, 0.15)
 }
