@@ -544,8 +544,15 @@ hr.extra-margins {
     padding: 20px;
 }
 
-.sentry-error-embed .form-submit .close {
-    padding: 15px 0;
+.sentry-error-embed .message-success:before {
+    content: "Thanks for the feedback! ";
+    color: #a2c098;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.sentry-error-embed .message-success {
+    padding: 15px 30px;
 }
 
 thead {
