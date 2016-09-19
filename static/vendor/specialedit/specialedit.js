@@ -58,6 +58,7 @@
       var toolbar = $('<ul/>')
           .css('display', 'none')
           .css('border', '1px solid #cccccc')
+          .css('background', '#fff')
           .mouseover(function() {
               hover = true;
           })
