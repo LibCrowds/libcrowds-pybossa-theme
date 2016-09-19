@@ -9,24 +9,42 @@
  * Edited to fit the LibCrowds theme!
  */
 (function($) {
-  $.fn.specialedit = function(chars, options) {
+  $.fn.specialedit = function(charset) {
 
     var KEYCODE_SHIFT = 16;
     var ESZETT = '&#223;';
+    var chars = [];
 
-    var settings = {
-      toolbarBgColor: '#fff',
-      toolbarBorderColor: '#cccccc',
-      buttonBgColor: '#b2bbd0',
-      buttonBorderColor: '#000000',
-      buttonTextColor: '#000000',
-      buttonWidth: 30,
-      buttonHeight: 30,
-      buttonMargin: 3
-    };
-
-    if (options) {
-      $.extend(settings, options);
+    switch(charset) {
+        case 'latin':
+            chars = ['&Agrave;', '&Aacute;', '&Acirc;', '&Atilde;', '&Auml;',
+                     '&Aring;', '&AElig;', '&Ccedil;', '&Egrave;', '&Eacute;',
+                     '&Ecirc;', '&Euml;', '&Igrave;', '&Iacute;', '&Icirc;',
+                     '&Iuml;', '&ETH;', '&Ntilde;', '&Ograve;', '&Oacute;',
+                     '&Ocirc;', '&Otilde;', '&Ouml;', '&Oslash;', '&Ugrave;',
+                     '&Uacute;', '&Ucirc;', '&Uuml;', '&Yacute;', '&THORN;',
+                     '&szlig;', '&agrave;', '&aacute;', '&acirc;', '&atilde;',
+                     '&auml;', '&aring;', '&aelig;', '&ccedil;', '&egrave;',
+                     '&eacute;', '&ecirc;', '&euml;', '&igrave;', '&iacute;',
+                     '&icirc;', '&iuml;', '&eth;', '&ntilde;', '&ograve;',
+                     '&oacute;', '&ocirc;', '&otilde;', '&ouml;', '&oslash;',
+                     '&ugrave;', '&uacute;', '&ucirc;', '&uuml;', '&yacute;',
+                     '&thorn;', '&yuml;'];
+            break;
+        default: // Latin
+            chars = ['&Agrave;', '&Aacute;', '&Acirc;', '&Atilde;', '&Auml;',
+                     '&Aring;', '&AElig;', '&Ccedil;', '&Egrave;', '&Eacute;',
+                     '&Ecirc;', '&Euml;', '&Igrave;', '&Iacute;', '&Icirc;',
+                     '&Iuml;', '&ETH;', '&Ntilde;', '&Ograve;', '&Oacute;',
+                     '&Ocirc;', '&Otilde;', '&Ouml;', '&Oslash;', '&Ugrave;',
+                     '&Uacute;', '&Ucirc;', '&Uuml;', '&Yacute;', '&THORN;',
+                     '&szlig;', '&agrave;', '&aacute;', '&acirc;', '&atilde;',
+                     '&auml;', '&aring;', '&aelig;', '&ccedil;', '&egrave;',
+                     '&eacute;', '&ecirc;', '&euml;', '&igrave;', '&iacute;',
+                     '&icirc;', '&iuml;', '&eth;', '&ntilde;', '&ograve;',
+                     '&oacute;', '&ocirc;', '&otilde;', '&ouml;', '&oslash;',
+                     '&ugrave;', '&uacute;', '&ucirc;', '&uuml;', '&yacute;',
+                     '&thorn;', '&yuml;'];
     }
 
     return this.each(function() {
@@ -37,15 +55,9 @@
       var buttons = new Array();
       var button_top = $this.offset().top + $this.outerHeight() + 5;
       var button_right = $this.offset().left + $this.outerWidth() - 2;
-      var toolbar = $('<div/>').css('position', 'absolute')
+      var toolbar = $('<ul/>')
           .css('display', 'none')
-          .css('border', '1px solid ' + settings.toolbarBorderColor)
-          .css('width', ((chars.length *
-              (settings.buttonWidth + settings.buttonMargin + 2)) +
-              settings.buttonMargin) + 'px')
-          .css('height', ((settings.buttonHeight +
-              (2 * (settings.buttonMargin + 1))) + 'px'))
-          .css('background', settings.toolbarBgColor)
+          .css('border', '1px solid #cccccc')
           .mouseover(function() {
               hover = true;
           })
@@ -56,30 +68,24 @@
               $this.focus();
           });
 
+
       // Create each of the buttons on the toolbar.
       $.each(chars, function(i, c) {
-        buttons[i] = $('<div/>').html(c)
-            .css('width', settings.buttonWidth + 'px')
-            .css('height', (settings.buttonHeight -
-                (settings.buttonHeight / 2) + 9) + 'px')
-            .css('color', (settings.buttonTextColor))
+        buttons[i] = $('<li/>').html(c)
+            .css('padding', '0px 5px')
+            .css('color', '#000000')
             .css('border', '0')
             .css('text-align', 'center')
             .css('cursor', 'pointer')
-            .css('top', settings.buttonMargin + 'px')
-            .css('left', (((settings.buttonWidth + settings.buttonMargin + 2) *
-                i) + settings.buttonMargin)  + 'px')
-            .css('border', '1px solid ' + settings.toolbarBgColor)
-            .css('padding-top', ((settings.buttonHeight / 2) - 8) + 'px')
-            .css('position', 'absolute')
+            .css('display', 'inline-block')
+            .css('border', '1px solid #fff')
             .mouseover(function() {
-                $(this).css('border', '1px solid ' +
-                    settings.buttonBorderColor)
-                       .css('background', settings.buttonBgColor);
+                $(this).css('border', '1px solid #000000')
+                       .css('background', '#b2bbd0');
             })
             .mouseout(function() {
-                $(this).css('border', '1px solid ' + settings.toolbarBgColor)
-                       .css('background', settings.toolbarBgColor);
+                $(this).css('border', '1px solid #fff')
+                       .css('background', '#fff');
             })
             .mousedown(function() {
                 var input = $this[0];
