@@ -2140,6 +2140,7 @@ a.anchor {
 .bs-callout h4 {
     margin-top: 0;
     margin-bottom: 5px;
+    font-weight: 400;
 }
 .bs-callout p:last-child {
     margin-bottom: 0;
