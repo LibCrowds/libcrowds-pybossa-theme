@@ -35,7 +35,7 @@
             </div>
 
             <div id="albums-container" style="display:none;">
-                <h3>Select an album, then click import:</h3>
+                <h3>Select an album to import:</h3>
                 <ul id="albums" class="no-style">
                 </ul>
             </div>
@@ -81,7 +81,7 @@
         });
     });
 
-    $(".btn-album").off('click').on('click', function(evt){
+    $(document).on('click', '.btn-album', function(evt){
         evt.preventDefault();
         $('#album_id').val($(this).attr('id'));
         $("#import-form").submit();
