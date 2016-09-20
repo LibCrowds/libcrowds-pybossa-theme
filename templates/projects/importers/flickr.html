@@ -45,7 +45,7 @@
             <form id="import-form" role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
                 <fieldset>
                     {{ form.hidden_tag() }}
-                    <span class="help-block"> Alteratively, you can manually provide the ID of a Flickr album</span>
+                    <span class="help-block">Alternatively, you can manually provide the ID of a Flickr album</span>
                     {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album", required="required") }}
                     <div class="pull-right" role="group">
                         <a href="{{url_for('project.import_task', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
@@ -81,9 +81,10 @@
         });
     });
 
-    $(document).on('click', '.btn-album', function(evt){
+    $(document).on('click', '.btn-album', function(evt) {
         evt.preventDefault();
         $('#album_id').val($(this).attr('id'));
+        $('#albums-container').hide();
         $("#import-form").submit();
     });
 </script>
