@@ -8,21 +8,18 @@
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
+            {{ helper.render_project_title(project, subtitle="Import tasks") }}
             {{ helper.render_loading(loading_text) }}
-            <h1><strong>{{project.name}}</strong>: Import tasks</h1>
-            <hr>
             <div class="row vcenter hcenter">
-                <div class="col-xs-10">
-                    <h3>From Flickr
+                <div class="col-xs-8">
+                    <h3>From Flickr</h3>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-4">
                     <div id="revoke" style="display:none;">
                         <a href="{{ url_for('flickr.logout', next=url_for(target, short_name=project.short_name, type='flickr')) }}" class="btn btn-warning pull-right">Revoke access</a>
                     </div>
                 </div>
             </div>
-
-            </h3>
 
             <div id="connecting">
                 <p>Attempting to connect to Flickr, please wait...</p>
@@ -39,19 +36,17 @@
 
             <div id="albums-container" style="display:none;">
                 <h3>Select an album, then click import:</h3>
-                <div class="row">
-                    <ul id="albums" class="no-style">
-                    </ul>
-                </div>
+                <ul id="albums" class="no-style">
+                </ul>
             </div>
 
             <br>
             {% if form %}
-            <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+            <form id="import-form" role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
                 <fieldset>
                     {{ form.hidden_tag() }}
                     <span class="help-block"> Alteratively, you can manually provide the ID of a Flickr album</span>
-                    {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album", required="required", autofocus="autofocus") }}
+                    {{ render_field(form.album_id, class_="input-block-level form-control", placeholder="The ID of the Flickr album", required="required") }}
                     <div class="pull-right" role="group">
                         <a href="{{url_for('project.import_task', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
                         <input id="import" type="submit" value="Import" class="btn btn-danger" />
@@ -63,11 +58,10 @@
     </div>
 </div>
 <script>
-    $("#submit").off('click').on('click', function(){
+    $("#import-form").on('submit', function(){
         $("#loading").show();
     });
-</script>
-<script>
+
     $(function() {
         $.get('/flickr/albums').done(function(albums) {
             $('#connecting').hide();
@@ -75,23 +69,22 @@
                 $('#albums-container').show();
                 $('#revoke').show();
                 albums.forEach(function(album){
-                    var albumElement = $('<li><strong>' + album.title + ':</strong> '
-                                         + album.photos + ' photos <button id="'
-                                         + album.id + '" class="btn btn-success btn-sm">'
-                                         + 'Select</button></li>');
+                    var albumElement = $('<li><a href="#" class="btn-album" '
+                                         + 'id=' + album.id + '>'
+                                         + '<strong>' + album.title + ':</strong></a> '
+                                         + album.photos + ' photos</li>');
                     $('#albums').append(albumElement);
                 });
             } else {
                 $('#grant').show();
             }
-            $(".btn-album").each(function(){
-                $(this).off('click').on('click', function(evt){
-                    evt.preventDefault();
-                    document.getElementById('album_id').value = $(this).attr('id');
-                    document.location.href = "#album_id";
-                });
-            });
         });
+    });
+
+    $(".btn-album").off('click').on('click', function(evt){
+        evt.preventDefault();
+        $('#album_id').val($(this).attr('id'));
+        $("#import-form").submit();
     });
 </script>
 {% endblock %}
