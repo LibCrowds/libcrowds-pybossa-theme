@@ -14,13 +14,13 @@
             <ul class="nav nav-pills nav-pills-dark">
                 {% for c in categories %}
                 <li {% if loop.first %}class="active"{% endif %}>
-                    <a href="#{{c.short_name}}" data-toggle="pill">{{c.name}}</a>
+                    <a href="#category_{{c.id}}" data-toggle="pill">{{c.name}}</a>
                 </li>
                 {% endfor %}
             </ul>
             <div class="tab-content">
                 {% for c in categories %}
-                <div {% if loop.first %}class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="{{c.short_name}}">
+                <div {% if loop.first %}class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="category_{{c.id}}">
                      <table class="table table-stripped table-condensed table-hover">
                         <thead>
                             <tr>
