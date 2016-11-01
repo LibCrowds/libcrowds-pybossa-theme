@@ -2,7 +2,7 @@ function pybossaNotify(msg, category, fadeOut=false){
     if (category === undefined) {
         category = "info";
     }
-    var html = $(`<div class="alert" alert-${category} fade">` 
+    var html = $(`<div class="alert alert-${category} fade">` 
                  + `<a class="close" data-dismiss="alert" href="#">&times;</a>${msg}` 
                  + `</div>`);
     $('#alert-messages').append(html);
