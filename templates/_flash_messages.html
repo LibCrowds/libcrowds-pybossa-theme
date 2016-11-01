@@ -3,7 +3,7 @@
         {% if messages %}
             {% for category, message in messages %}
                 <script>
-                   pybossaNotify("{{ message|tojson }}", "{{ category }}");
+                   pybossaNotify({{ message|tojson }}, "{{ category }}");
                 </script>
             {% endfor %}
         {% endif %}
