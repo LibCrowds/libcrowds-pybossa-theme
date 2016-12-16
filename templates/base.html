@@ -2,11 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        {% if brand == title %}
-        <title>{{ title }}</title>
-        {% else %}
-        <title>{{ title | safe}} | {{ brand }}</title>
-        {% endif %}
+        <title>{{ brand }}{% if title and brand != title %} | {{ title }}{% endif %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="{{ description }}">
         <meta name="author" content="British Library">
