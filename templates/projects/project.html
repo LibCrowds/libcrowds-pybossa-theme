@@ -78,15 +78,14 @@
                 </div>
                 {% endif %}
 
-                <hr class="padding-bottom-xs">
+                <hr class="padding-bottom-sm">
+                {{ helper.render_social_media_buttons("www.libcrowds.com/project/{{ project.short_name }}", "Come and give us a hand with {{ project.name }}!") }}
 
                 {% if 'pybossa_discourse' in plugins %}
                 <div class="col-xs-12 col-md-6 col-md-offset-3 padding-top-md">
                     {{ discourse.comments() }}
                 </div>
                 {% endif %}
-                
-                {{ helper.render_social_media_buttons("www.libcrowds.com/project/{{ project.short_name }}", "Come and give us a hand with {{ project.name }}!") }}
             </div>
         </div>
 </section>
