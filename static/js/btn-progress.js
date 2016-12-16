@@ -5,7 +5,6 @@ $(function() {
 	var btn = $(this);
 
     function fillArc(quarter) {
-	console.log(btn);
         btn.children('.arc-q' + quarter).addClass('full');
     }
 
