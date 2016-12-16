@@ -90,7 +90,13 @@
         </div>
 </section>
 
-{% if 'pybossa_discourse' in plugins %}
+<ul>
+        {% for topic in discourse.api.latest_topics() %}
+        <li>{{ topic.title() }}</li>
+        {% endfor %}
+    </ul>
+
+{% if 'pybossa_discourse' in plugins and project.published %}
     <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
         <hr class="padding-bottom-xs">
         {{ discourse.comments() }}
