@@ -64,12 +64,12 @@
         </li>
         {% if config.get('LIBCROWDS_ANALYST_URL') %}
         <li class="nav-link">
-            <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/{{ project.short_name }}"> Analysis
+            <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/projects/{{ project.short_name }}?api_key={{ current_user.api_key }}"> Analysis
                 <span id="unanalysed" class="badge badge-info"></span>
             </a>
         </li>
         <li class="nav-link">
-            <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/{{ project.short_name }}/download"> Download Input</a>
+            <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/download/{{ project.short_name }}?api_key={{ current_user.api_key }}"> Download Input</a>
         </li>
         {% endif %}
         <li class="nav-link">
