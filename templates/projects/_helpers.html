@@ -65,7 +65,7 @@
         {% if config.get('LIBCROWDS_ANALYST_URL') %}
         <li class="nav-link">
             <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/projects/{{ project.short_name }}?api_key={{ current_user.api_key }}"> Analysis
-                <span id="unanalysed" class="badge badge-info"></span>
+                <span id="unverified" class="badge badge-info"></span>
             </a>
         </li>
         <li class="nav-link">
@@ -84,14 +84,14 @@
 </ul>
 <script>
     $.ajax({
-        url: "https://www.libcrowds.com/api/result?project_id=" + {{ project.id }} + "&limit=100&info=Unanalysed&all=1",
+        url: "https://www.libcrowds.com/api/result?project_id=" + {{ project.id }} + "&limit=100&info=Unverified&all=1",
         dataType: "json",
     }).done(function( results ) {
         var count = results.length;
         if (count == 100) {
-            $("#unanalysed").html('99+');
+            $("#unverified").html('99+');
         } else if (count > 0){
-            $("#unanalysed").html(count);
+            $("#unverified").html(count);
         }
     });
 </script>
