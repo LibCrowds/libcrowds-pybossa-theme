@@ -22,4 +22,32 @@
     {% endif %}
     {{ project.info.task_presenter|safe }}
 </div>
+<script>
+// Temp fix for HTML entities being returned by Z39.50 API
+var decodeEntities = (function() {
+  // this prevents any overhead from creating the object each time
+  var element = document.createElement('div');
+
+  function decodeHTMLEntities (str) {
+    if(str && typeof str === 'string') {
+      // strip script/html tags
+      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+      element.innerHTML = str;
+      str = element.textContent;
+      element.textContent = '';
+    }
+
+    return str;
+  }
+
+  return decodeHTMLEntities;
+})();
+    
+$('.z3950-record .title a').each(function() { $(this).html(decodeEntities($(this).html())) });
+$('.z3950-record .author').each(function() { $(this).html(decodeEntities($(this).html())) });
+$('.z3950-record .publisher').each(function() { $(this).html(decodeEntities($(this).html())) });
+$('.z3950-record .pubyear').each(function() { $(this).html(decodeEntities($(this).html())) });
+$('.z3950-record .physdesc').each(function() { $(this).html(decodeEntities($(this).html())) });
+</script>
 {% endblock %}
