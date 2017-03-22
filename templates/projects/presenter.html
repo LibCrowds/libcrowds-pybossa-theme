@@ -43,11 +43,13 @@ var decodeEntities = (function() {
 
   return decodeHTMLEntities;
 })();
-    
-$('.z3950-record .title a').each(function() { $(this).html(decodeEntities($(this).html())) });
-$('.z3950-record .author').each(function() { $(this).html(decodeEntities($(this).html())) });
-$('.z3950-record .publisher').each(function() { $(this).html(decodeEntities($(this).html())) });
-$('.z3950-record .pubyear').each(function() { $(this).html(decodeEntities($(this).html())) });
-$('.z3950-record .physdesc').each(function() { $(this).html(decodeEntities($(this).html())) });
+
+$('#search_results').on('DOMSubtreeModified', function() {
+    $('.z3950-record .title a').each(function() { $(this).html(decodeEntities($(this).html())) });
+    $('.z3950-record .author').each(function() { $(this).html(decodeEntities($(this).html())) });
+    $('.z3950-record .publisher').each(function() { $(this).html(decodeEntities($(this).html())) });
+    $('.z3950-record .pubyear').each(function() { $(this).html(decodeEntities($(this).html())) });
+    $('.z3950-record .physdesc').each(function() { $(this).html(decodeEntities($(this).html())) });
+ });
 </script>
 {% endblock %}
