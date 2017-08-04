@@ -2,6 +2,8 @@
 
 A [Pybossa](https://github.com/PyBossa/pybossa) theme for the [LibCrowds](http://www.libcrowds.com) crowdsourcing platform.
 
+**:warning: UNSUPPORTED: Replaced by [vue-pybossa-frontend](https://github.com/LibCrowds/vue-pybossa-frontend)**
+
 
 ## Installation
 
