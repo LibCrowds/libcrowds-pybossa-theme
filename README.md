@@ -1,5 +1,7 @@
 # libcrowds-pybossa-theme
 
+[![DOI](https://zenodo.org/badge/30672740.svg)](https://zenodo.org/badge/latestdoi/30672740)
+
 A [Pybossa](https://github.com/PyBossa/pybossa) theme for the [LibCrowds](http://www.libcrowds.com) crowdsourcing platform.
 
 
